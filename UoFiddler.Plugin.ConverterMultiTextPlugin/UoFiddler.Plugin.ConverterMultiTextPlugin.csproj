@@ -1,0 +1,56 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<AssemblyName>ConverterMultiTextPlugin</AssemblyName>
+		<TargetFramework>net7.0-windows</TargetFramework>
+		<UseWindowsForms>true</UseWindowsForms>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AssemblyTitle>FiddlerPlugin</AssemblyTitle>
+		<Product>FiddlerPlugin</Product>
+		<Copyright>Copyright © 2023</Copyright>
+	</PropertyGroup>
+	<PropertyGroup>
+		<EnableNETAnalyzers>true</EnableNETAnalyzers>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<DebugType>portable</DebugType>
+		<OutputPath>..\UoFiddler\bin\$(Configuration)\plugins\</OutputPath>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<DebugType>none</DebugType>
+		<OutputPath>..\UoFiddler\bin\$(Configuration)\plugins\</OutputPath>
+		<GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+	</PropertyGroup>
+	<ItemGroup>
+		<Compile Update="Forms\ConverterMultiTextForm.cs" />
+		<Compile Update="Forms\ConverterMultiTextForm.Designer.cs">
+			<DependentUpon>ConverterMultiTextForm.cs</DependentUpon>
+		</Compile>
+		<Compile Update="UserControls\ConverterMultiTextControl.cs" />
+		<Compile Update="UserControls\ConverterMultiTextControl.Designer.cs">
+			<DependentUpon>ConverterMultiTextControl.cs</DependentUpon>
+		</Compile>
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Ultima\Ultima.csproj">
+			<Private>false</Private>
+			<ExcludeAssets>runtime</ExcludeAssets>
+		</ProjectReference>
+		<ProjectReference Include="..\UoFiddler.Controls\UoFiddler.Controls.csproj">
+			<Private>false</Private>
+			<ExcludeAssets>runtime</ExcludeAssets>
+		</ProjectReference>
+	</ItemGroup>
+	<ItemGroup>
+	  <Reference Include="ConverterMultiTextPlugin">
+	    <HintPath>..\UoFiddler\bin\Debug\plugins\ConverterMultiTextPlugin.dll</HintPath>
+	  </Reference>
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Update="Forms\ConverterMultiTextForm.resx">
+			<DependentUpon>ConverterMultiTextForm.cs</DependentUpon>
+		</EmbeddedResource>
+		<EmbeddedResource Update="UserControls\ConverterMultiTextControl.resx">
+			<DependentUpon>ConverterMultiTextControl.cs</DependentUpon>
+		</EmbeddedResource>
+	</ItemGroup>
+</Project>
