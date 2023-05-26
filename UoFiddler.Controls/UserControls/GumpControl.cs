@@ -817,5 +817,37 @@ namespace UoFiddler.Controls.UserControls
                 }
             }
         }
+
+        #region Copy clipboard
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            if (listBox.SelectedIndex != -1)
+            {
+                int i = int.Parse(listBox.Items[listBox.SelectedIndex].ToString());
+                if (Gumps.IsValidIndex(i))
+                {
+                    Bitmap bmp = Gumps.GetGump(i);
+                    if (bmp != null)
+                    {
+                        Clipboard.SetImage(bmp);
+                        MessageBox.Show("The image has been copied to the clipboard!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("No image to copy!");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No image to copy!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("No image to copy!");
+            }
+        }
+        #endregion
     }
 }

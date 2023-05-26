@@ -740,5 +740,27 @@ namespace UoFiddler.Controls.UserControls
                 Reload();
             }
         }
+        #region Copy clipboard
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Check if a texture is selected and if it is valid
+            if (_selectedTextureId >= 0 && Textures.TestTexture(_selectedTextureId))
+            {
+                // Get the selected texture as a Bitmap
+                using (Bitmap bmp = new Bitmap(Textures.GetTexture(_selectedTextureId)))
+                {
+                    // Copy the Bitmap to the clipboard
+                    Clipboard.SetImage(bmp);
+                    // Show a MessageBox indicating that the image has been successfully copied to the clipboard
+                    MessageBox.Show("The image has been copied to the clipboard!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
+                // If no texture is selected or if it is invalid, show a MessageBox indicating that there is no image to copy
+                MessageBox.Show("No image to copy!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        #endregion
     }
 }

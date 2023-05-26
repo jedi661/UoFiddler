@@ -51,13 +51,13 @@ namespace UoFiddler.Controls.UserControls
             _xmlDocument.Load(_multiXmlFileName);
             _xmlElementMultis = _xmlDocument["Multis"];
 
-            // Initialisiere die selectedId-Variable
+            // Initialize the selectedId variable.
             if (TreeViewMulti.SelectedNode != null)
             {
                 selectedId = int.Parse(TreeViewMulti.SelectedNode.Name);
             }
 
-            // Initialisiere die selectedMultiName-Variable
+            // Initialize the selectedMultiName variable.
             if (TreeViewMulti.SelectedNode != null)
             {
                 selectedMultiName = TreeViewMulti.SelectedNode.Text;
@@ -1039,44 +1039,45 @@ namespace UoFiddler.Controls.UserControls
 
         #endregion
 
-        // Reload Multilist.xml
+        #region copy Multilist.xml
+        // Reload the Multilist.xml file.
         private void reloadToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Überprüfen, ob die Multilist.xml Datei existiert
+            // Check if the Multilist.xml file exists.
             if (!File.Exists(_multiXmlFileName))
             {
                 return;
             }
 
-            // Die Multilist.xml Datei erneut einlesen
+            // Reload the Multilist.xml file.
             _xmlDocument.Load(_multiXmlFileName);
             _xmlElementMultis = _xmlDocument["Multis"];
 
-            // Aktualisieren Sie die Anzeige
+            // Update the display.
             Reload();
         }
 
-        // copy Multilist.xml to order OLDScript
+        // Copy the Multilist.xml file to the OLDScript directory.
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Überprüfen, ob die Multilist.xml Datei existiert
+            // Check if the Multilist.xml file exists.
             if (!File.Exists(_multiXmlFileName))
             {
                 return;
             }
 
-            // Überprüfen, ob das OLDScript-Verzeichnis existiert
+            // Check if the OLDScript directory exists.
             string oldScriptDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "OLDScript");
             if (!Directory.Exists(oldScriptDirectory))
             {
-                // Erstellen Sie das OLDScript-Verzeichnis
+                // Create the OLDScript directory.
                 Directory.CreateDirectory(oldScriptDirectory);
             }
 
-            // Kopieren Sie die Multilist.xml Datei in das OLDScript-Verzeichnis
+            // Copy the Multilist.xml file to the OLDScript directory.
             string destinationFileName = Path.Combine(oldScriptDirectory, "Multilist.xml");
             File.Copy(_multiXmlFileName, destinationFileName, true);
         }
-
+        #endregion
     }
 }

@@ -849,5 +849,28 @@ namespace UoFiddler.Controls.UserControls
                 Reload();
             }
         }
+        #region Copy clipboard - Event handler for the click event of the copyToolStripMenuItem control
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Check if a graphic is selected
+            if (_selectedGraphicId >= 0)
+            {
+                // Get the bitmap of the selected graphic using the Art class
+                Bitmap bitmap = Art.GetLand(_selectedGraphicId);
+                if (bitmap != null)
+                {
+                    // Copy the bitmap to the clipboard
+                    Clipboard.SetImage(bitmap);
+                    // Show a message box indicating success
+                    MessageBox.Show("The image has been copied to the clipboard!");
+                }
+                else
+                {
+                    // Show a message box indicating failure
+                    MessageBox.Show("No image to copy!");
+                }
+            }
+        }
+        #endregion
     }
 }

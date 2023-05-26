@@ -118,7 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>Version 4.10.4
+    <value>Version 4.10.5
+- A copy function has been added to the Controls, Items, LandTiles, Textures, and Gumps, allowing the graphics to be copied to the clipboard for direct use with copy and paste.
+
+Version 4.10.4
 - Added a new ConverterMultiText to convert Decimal to Hex. This allows for converting old Sphere Multitexts, enabling their import into the Multi.mul file in UoFiddler. Additionally, for the sake of preserving the old scripts, they are automatically placed in a folder named "Oldscript".
 - The Tiledata has received a copy button that copies the selected settings from the selected location. You can now place them at any location by pressing again, save and you’re done.
 - An XML editor has been added to the multis that edits, saves and recreates the Multilist.xml. A reload button has been added that reads in the Multilist.xml again without having to restart the program. A save button that copies the Multilist.xml and stores it in the OLDScript directory.

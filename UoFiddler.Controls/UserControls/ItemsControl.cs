@@ -1183,5 +1183,34 @@ namespace UoFiddler.Controls.UserControls
         {
             return index >= 0 && index <= Art.GetMaxItemId();
         }
+
+        #region Copy clipboard
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Check if an item is selected in the ItemsTileView
+            if (ItemsTileView.SelectedIndices.Count == 0)
+            {
+                return;
+            }
+
+            // Get the selected item
+            int selectedIndex = ItemsTileView.SelectedIndices[0];
+            // Get the graphic for the selected item
+            Bitmap bitmap = Art.GetStatic(_itemList[selectedIndex]);
+            // Check if the graphic exists
+            if (bitmap != null)
+            {
+                // Copy the graphic to the clipboard
+                Clipboard.SetImage(bitmap);
+                MessageBox.Show("The image has been copied to the clipboard!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                // Show a MessageBox to inform the user that the image was successfully copied
+                MessageBox.Show("No image to copy!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+        #endregion
     }
 }
