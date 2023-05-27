@@ -58,6 +58,7 @@ namespace UoFiddler.Controls.UserControls
             InsertText = new System.Windows.Forms.ToolStripTextBox();
             toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            importFromClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStrip1 = new System.Windows.Forms.ToolStrip();
             GraphicLabel = new System.Windows.Forms.ToolStripLabel();
             MiscToolStripDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
@@ -78,9 +79,9 @@ namespace UoFiddler.Controls.UserControls
             // 
             // contextMenuStrip1
             // 
-            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { showFreeSlotsToolStripMenuItem, toolStripSeparator5, exportImageToolStripMenuItem, toolStripSeparator2, findNextFreeSlotToolStripMenuItem, removeToolStripMenuItem, replaceToolStripMenuItem, replaceStartingFromToolStripMenuItem, insertAtToolStripMenuItem, toolStripSeparator6, copyToolStripMenuItem });
+            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { showFreeSlotsToolStripMenuItem, toolStripSeparator5, exportImageToolStripMenuItem, toolStripSeparator2, findNextFreeSlotToolStripMenuItem, removeToolStripMenuItem, replaceToolStripMenuItem, replaceStartingFromToolStripMenuItem, insertAtToolStripMenuItem, toolStripSeparator6, copyToolStripMenuItem, importFromClipboardToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new System.Drawing.Size(194, 220);
+            contextMenuStrip1.Size = new System.Drawing.Size(194, 242);
             // 
             // showFreeSlotsToolStripMenuItem
             // 
@@ -195,6 +196,14 @@ namespace UoFiddler.Controls.UserControls
             copyToolStripMenuItem.Text = "Copy";
             copyToolStripMenuItem.ToolTipText = "Copy the graphic to the clipboard.";
             copyToolStripMenuItem.Click += copyToolStripMenuItem_Click;
+            // 
+            // importFromClipboardToolStripMenuItem
+            // 
+            importFromClipboardToolStripMenuItem.Name = "importFromClipboardToolStripMenuItem";
+            importFromClipboardToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            importFromClipboardToolStripMenuItem.Text = "Import";
+            importFromClipboardToolStripMenuItem.ToolTipText = "Import from clipboard";
+            importFromClipboardToolStripMenuItem.Click += importFromClipboardToolStripMenuItem_Click;
             // 
             // toolStrip1
             // 
@@ -376,5 +385,6 @@ namespace UoFiddler.Controls.UserControls
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importFromClipboardToolStripMenuItem;
     }
 }

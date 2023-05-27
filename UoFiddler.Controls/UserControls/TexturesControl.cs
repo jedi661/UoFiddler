@@ -762,5 +762,184 @@ namespace UoFiddler.Controls.UserControls
             }
         }
         #endregion
+
+        private void importFromClipboardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (_selectedTextureId < 0)
+            {
+                return;
+            }
+
+            if (Clipboard.ContainsImage())
+            {
+                using (Bitmap bmpTemp = new Bitmap(Clipboard.GetImage()))
+                {
+                    Bitmap bitmap = new Bitmap(bmpTemp);
+                    // Check the size of the image.
+                    if ((bitmap.Width == 64 && bitmap.Height == 64) ||
+                        (bitmap.Width == 128 && bitmap.Height == 128) ||
+                        (bitmap.Width == 256 && bitmap.Height == 256))
+                    {
+                        using (SelectImageFormatForm form = new SelectImageFormatForm(bitmap, _selectedTextureId))
+                        {
+                            if (form.ShowDialog() != DialogResult.OK)
+                            {
+                                return;
+                            }
+
+                            string appDirectory = Application.StartupPath;
+                            string tempDirectory = Path.Combine(appDirectory, "tempGrafik");
+                            if (!Directory.Exists(tempDirectory))
+                            {
+                                Directory.CreateDirectory(tempDirectory);
+                            }
+
+                            string fileExtension = form.SelectedImageFormat;
+                            string fileName = Path.Combine(tempDirectory, $"Texture 0x{_selectedTextureId:X4}.{fileExtension}");
+
+                            bitmap.Save(fileName);
+
+                            Textures.Replace(_selectedTextureId, bitmap);
+
+                            ControlEvents.FireTextureChangeEvent(this, _selectedTextureId);
+
+                            TextureTileView.Invalidate();
+
+                            Options.ChangedUltimaClass["Texture"] = true;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("The image must have a size of 64x64, 128x128, or 256x256", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
+        public class SelectImageFormatForm : Form
+        {
+            private ComboBox _comboBox;
+            private Button _okButton;
+            private Button _cancelButton;
+            private Button _clearDirectoryButton;
+            private PictureBox _pictureBox;
+            private Label _indexLabel;
+            private Bitmap _image;
+
+            public string SelectedImageFormat => _comboBox.SelectedItem.ToString();
+
+            public SelectImageFormatForm(Bitmap image, int index)
+            {
+                // Save image.
+                _image = image;
+
+                // Create ComboBox.
+                _comboBox = new ComboBox
+                {
+                    DropDownStyle = ComboBoxStyle.DropDownList,
+                    Location = new Point(10, 10),
+                    Width = 200
+                };
+                _comboBox.Items.Add("bmp");
+                _comboBox.Items.Add("tif");
+                _comboBox.Items.Add("tiff");
+                _comboBox.SelectedIndex = 0;
+                Controls.Add(_comboBox);
+
+                // Create PictureBox.
+                _pictureBox = new PictureBox
+                {
+                    Image = image,
+                    SizeMode = PictureBoxSizeMode.AutoSize,
+                    Location = new Point(10, 40)
+                };
+                Controls.Add(_pictureBox);
+
+                // Create index label.
+                int labelYPosition = 40 + image.Height + 10;
+                _indexLabel = new Label
+                {
+                    Text = $"Index: {index} (0x{index:X})",
+                    Location = new Point(10, labelYPosition)
+                };
+                Controls.Add(_indexLabel);
+
+                // Create OK button.
+                int buttonYPosition = labelYPosition + 30;
+                _okButton = new Button
+                {
+                    Text = "Okay",
+                    DialogResult = DialogResult.OK,
+                    Location = new Point(10, buttonYPosition) // Changed position.
+                };
+                Controls.Add(_okButton);
+
+                // Create cancel button.
+                _cancelButton = new Button
+                {
+                    Text = "Cancel",
+                    DialogResult = DialogResult.Cancel,
+                    Location = new Point(100, buttonYPosition) // Changed position.
+                };
+                Controls.Add(_cancelButton);
+
+                // Create clear directory button.
+                _clearDirectoryButton = new Button
+                {
+                    Text = "Clear Directory",
+                    Location = new Point(190, buttonYPosition) // Changed position.
+                };
+                _clearDirectoryButton.Click += ClearDirectoryButton_Click;
+                Controls.Add(_clearDirectoryButton);
+
+                // Set form properties.
+                AcceptButton = _okButton;
+                CancelButton = _cancelButton;
+                ClientSize = new Size(300, buttonYPosition + 40); // Resized size.
+                FormBorderStyle = FormBorderStyle.FixedDialog;
+                MaximizeBox = false;
+                MinimizeBox = false;
+                ShowInTaskbar = false;
+                StartPosition = FormStartPosition.CenterParent;
+                Text = "Select image format";
+
+                // Check if the directory exists and create it if it doesn't exist
+                string directoryName = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "tempGrafik");
+                if (!Directory.Exists(directoryName))
+                {
+                    Directory.CreateDirectory(directoryName);
+                }
+
+                // Save image in temporary directory.
+                string fileName = $"Texture 0x{index:X4}.{SelectedImageFormat}";
+                string tempFileName = Path.Combine(directoryName, fileName);
+                ImageFormat format;
+
+                switch (SelectedImageFormat.ToLower())
+                {
+                    case "bmp":
+                        format = ImageFormat.Bmp;
+                        break;
+                    case "tif":
+                    case "tiff":
+                        format = ImageFormat.Tiff;
+                        break;
+                    default:
+                        throw new ArgumentException("Invalid file format.");
+                }
+
+                image.Save(tempFileName, format);
+            }
+
+            private void ClearDirectoryButton_Click(object sender, EventArgs e)
+            {
+                string directoryName = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "tempGrafik");
+                if (Directory.Exists(directoryName))
+                {
+                    Directory.Delete(directoryName, true);
+                }
+            }
+        }
+
     }
 }
