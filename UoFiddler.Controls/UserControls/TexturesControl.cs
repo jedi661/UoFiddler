@@ -763,7 +763,70 @@ namespace UoFiddler.Controls.UserControls
         }
         #endregion
 
+        #region Import clipboard Image an Temp
+
+        //Imports graphics from the clipboard
         private void importFromClipboardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Check if the clipboard contains an image
+            if (Clipboard.ContainsImage())
+            {
+                // Retrieve the image from the clipboard
+                using (Bitmap bmp = new Bitmap(Clipboard.GetImage()))
+                {
+                    // Check if the image has a valid size
+                    if ((bmp.Width == 64 && bmp.Height == 64) || (bmp.Width == 128 && bmp.Height == 128) || (bmp.Width == 256 && bmp.Height == 256))
+                    {
+                        // Get the selected index from the TextureTileView
+                        int index = SelectedTextureId;
+
+                        if (index >= 0 && index < Textures.GetIdxLength())
+                        {
+                            // Create a new bitmap with the same size as the image from the clipboard
+                            Bitmap newBmp = new Bitmap(bmp.Width, bmp.Height);
+
+                            // Copy the image from the clipboard to the new bitmap
+                            using (Graphics g = Graphics.FromImage(newBmp))
+                            {
+                                g.DrawImage(bmp, 0, 0);
+                            }
+
+                            // Replace the image at the specified index
+                            Textures.Replace(index, newBmp);
+                            ControlEvents.FireTextureChangeEvent(this, index);
+
+                            // Update the _textureList to insert the index only once
+                            if (!_textureList.Contains(index))
+                            {
+                                _textureList.Add(index);
+                                _textureList.Sort();
+                            }
+
+                            // Update the VirtualListSize of the TextureTileView and invalidate the view
+                            TextureTileView.VirtualListSize = _textureList.Count;
+                            TextureTileView.Invalidate();
+                            SelectedTextureId = index;
+                            Options.ChangedUltimaClass["Texture"] = true;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Invalid index.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid image size. The image must be 64x64, 128x128, or 256x256.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("No image in the clipboard.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        //Imports graphics from the clipboard into a temporary directory and the SelectImageFormatForm class is started.
+        private void importByTempToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (_selectedTextureId < 0)
             {
@@ -788,7 +851,7 @@ namespace UoFiddler.Controls.UserControls
                             }
 
                             string appDirectory = Application.StartupPath;
-                            string tempDirectory = Path.Combine(appDirectory, "tempGrafik");
+                            string tempDirectory = Path.Combine(appDirectory, "tempGrafic");
                             if (!Directory.Exists(tempDirectory))
                             {
                                 Directory.CreateDirectory(tempDirectory);
@@ -816,6 +879,7 @@ namespace UoFiddler.Controls.UserControls
             }
         }
 
+        // Class SelectImageFormatForm
         public class SelectImageFormatForm : Form
         {
             private ComboBox _comboBox;
@@ -904,7 +968,7 @@ namespace UoFiddler.Controls.UserControls
                 Text = "Select image format";
 
                 // Check if the directory exists and create it if it doesn't exist
-                string directoryName = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "tempGrafik");
+                string directoryName = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "tempGrafic");
                 if (!Directory.Exists(directoryName))
                 {
                     Directory.CreateDirectory(directoryName);
@@ -933,13 +997,13 @@ namespace UoFiddler.Controls.UserControls
 
             private void ClearDirectoryButton_Click(object sender, EventArgs e)
             {
-                string directoryName = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "tempGrafik");
+                string directoryName = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "tempGrafic");
                 if (Directory.Exists(directoryName))
                 {
                     Directory.Delete(directoryName, true);
                 }
             }
         }
-
+        #endregion
     }
 }
