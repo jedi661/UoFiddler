@@ -872,5 +872,97 @@ namespace UoFiddler.Controls.UserControls
             }
         }
         #endregion
+
+        #region Cliport LandTiles - The graphics are imported from the clipboard.        
+        private void importToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Check if the clipboard contains an image
+            if (Clipboard.ContainsImage())
+            {
+                // Retrieve the image from the clipboard
+                using (Bitmap bmp = new Bitmap(Clipboard.GetImage()))
+                {
+                    // Define the size of the desired graphic
+                    int graphicSize = 44;
+
+                    // Calculate the offset to center the graphic
+                    int offsetX = (bmp.Width - graphicSize) / 2;
+                    int offsetY = (bmp.Height - graphicSize) / 2;
+
+                    // Determine the position of the selected graphic in the _tileList.
+                    int index = _tileList.IndexOf(_selectedGraphicId);
+
+                    if (index >= 0 && index < _tileList.Count)
+                    {
+                        // Create a new bitmap with the same size as the image from the clipboard
+                        Bitmap newBmp = new Bitmap(bmp.Width, bmp.Height);
+
+                        // Define the colors to ignore
+                        Color[] colorsToIgnore = new Color[]
+                        {
+                    Color.FromArgb(211, 211, 211), // #D3D3D3
+                    Color.FromArgb(0, 0, 0),       // #000000
+                    Color.FromArgb(255, 255, 255)  // #FFFFFF
+                        };
+
+                        // Iterate through each pixel of the image
+                        for (int x = 0; x < bmp.Width; x++)
+                        {
+                            for (int y = 0; y < bmp.Height; y++)
+                            {
+                                // Check if the current pixel is within the desired graphic bounds
+                                if (x >= offsetX && x < offsetX + graphicSize && y >= offsetY && y < offsetY + graphicSize)
+                                {
+                                    // Get the color of the current pixel
+                                    Color pixelColor = bmp.GetPixel(x, y);
+
+                                    // Check if the color of the current pixel is one of the colors to ignore
+                                    if (colorsToIgnore.Contains(pixelColor))
+                                    {
+                                        // Set the color of the current pixel to transparent
+                                        newBmp.SetPixel(x, y, Color.Transparent);
+                                    }
+                                    else
+                                    {
+                                        // Set the color of the current pixel to the color of the original image
+                                        newBmp.SetPixel(x, y, pixelColor);
+                                    }
+                                }
+                                else
+                                {
+                                    // Set the color of pixels outside the desired graphic bounds to transparent
+                                    newBmp.SetPixel(x, y, Color.Transparent);
+                                }
+                            }
+                        }
+
+                        // Call the OnClickReplace method with the selected graphic ID and the new bitmap
+                        Art.ReplaceLand(index, newBmp);
+                        ControlEvents.FireLandTileChangeEvent(this, index);
+
+                        // Update the _tileList to insert the index only once
+                        if (!_tileList.Contains(index))
+                        {
+                            _tileList.Add(index);
+                            _tileList.Sort();
+                        }
+
+                        LandTilesTileView.VirtualListSize = _tileList.Count;
+                        LandTilesTileView.Invalidate();
+                        SelectedGraphicId = index;
+                        Options.ChangedUltimaClass["Land Tiles"] = true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid index.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("No image in the clipboard.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        #endregion
     }
 }

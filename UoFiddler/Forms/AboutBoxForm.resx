@@ -120,6 +120,8 @@
   <data name="richTextBox1.Text" xml:space="preserve">
     <value>Version 4.10.5
 - A copy function has been added to the Controls, Items, LandTiles, Textures, and Gumps, allowing the graphics to be copied to the clipboard for direct use with copy and paste.
+- Import function revised again, direct import through buffer added, existing SelectImageFormatForm class retained for outsourcing to Temp to store the graphics there and addressed this with new importByTempToolStripMenuItem.
+- Import clipboard - Import graphics from clipboard (Items, LandTile, Gumps, Texture)
 
 Version 4.10.4
 - Added a new ConverterMultiText to convert Decimal to Hex. This allows for converting old Sphere Multitexts, enabling their import into the Multi.mul file in UoFiddler. Additionally, for the sake of preserving the old scripts, they are automatically placed in a folder named "Oldscript".

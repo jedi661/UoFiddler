@@ -74,6 +74,7 @@ namespace UoFiddler.Controls.UserControls
             saveToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator4 = new ToolStripSeparator();
             copyToolStripMenuItem = new ToolStripMenuItem();
+            importToolStripclipboardMenuItem = new ToolStripMenuItem();
             StatusStrip = new StatusStrip();
             NameLabel = new ToolStripStatusLabel();
             GraphicLabel = new ToolStripStatusLabel();
@@ -210,7 +211,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             // TileViewContextMenuStrip
             // 
-            TileViewContextMenuStrip.Items.AddRange(new ToolStripItem[] { showFreeSlotsToolStripMenuItem, findNextFreeSlotToolStripMenuItem, ChangeBackgroundColorToolStripMenuItem, toolStripSeparator3, selectInTileDataTabToolStripMenuItem, selectInRadarColorTabToolStripMenuItem, selectInGumpsTabMaleToolStripMenuItem, selectInGumpsTabFemaleToolStripMenuItem, toolStripSeparator2, extractToolStripMenuItem, replaceToolStripMenuItem, replaceStartingFromToolStripMenuItem, removeToolStripMenuItem, insertAtToolStripMenuItem, toolStripSeparator1, saveToolStripMenuItem, toolStripSeparator4, copyToolStripMenuItem });
+            TileViewContextMenuStrip.Items.AddRange(new ToolStripItem[] { showFreeSlotsToolStripMenuItem, findNextFreeSlotToolStripMenuItem, ChangeBackgroundColorToolStripMenuItem, toolStripSeparator3, selectInTileDataTabToolStripMenuItem, selectInRadarColorTabToolStripMenuItem, selectInGumpsTabMaleToolStripMenuItem, selectInGumpsTabFemaleToolStripMenuItem, toolStripSeparator2, extractToolStripMenuItem, replaceToolStripMenuItem, replaceStartingFromToolStripMenuItem, removeToolStripMenuItem, insertAtToolStripMenuItem, toolStripSeparator1, saveToolStripMenuItem, toolStripSeparator4, copyToolStripMenuItem, importToolStripclipboardMenuItem });
             TileViewContextMenuStrip.Name = "contextMenuStrip1";
             TileViewContextMenuStrip.Size = new System.Drawing.Size(213, 358);
             TileViewContextMenuStrip.Opening += TileViewContextMenuStrip_Opening;
@@ -377,6 +378,14 @@ namespace UoFiddler.Controls.UserControls
             copyToolStripMenuItem.Text = "Copy";
             copyToolStripMenuItem.ToolTipText = "Copy the graphic to the clipboard.";
             copyToolStripMenuItem.Click += copyToolStripMenuItem_Click;
+            // 
+            // importToolStripclipboardMenuItem
+            // 
+            importToolStripclipboardMenuItem.Name = "importToolStripclipboardMenuItem";
+            importToolStripclipboardMenuItem.Size = new System.Drawing.Size(212, 22);
+            importToolStripclipboardMenuItem.Text = "Import";
+            importToolStripclipboardMenuItem.ToolTipText = "Import clipbord image";
+            importToolStripclipboardMenuItem.Click += importToolStripclipboardMenuItem_Click;
             // 
             // StatusStrip
             // 
@@ -591,5 +600,6 @@ namespace UoFiddler.Controls.UserControls
         private ToolStripTextBox ReplaceStartingFromText;
         private ToolStripSeparator toolStripSeparator4;
         private ToolStripMenuItem copyToolStripMenuItem;
+        private ToolStripMenuItem importToolStripclipboardMenuItem;
     }
 }

@@ -849,5 +849,74 @@ namespace UoFiddler.Controls.UserControls
             }
         }
         #endregion
+
+        #region Import Import clipboard - Import graphics from clipboard.
+        private void importToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Überprüfen, ob die Zwischenablage ein Bild enthält
+            if (Clipboard.ContainsImage())
+            {
+                // Retrieve the image from the clipboard
+                using (Bitmap bmp = new Bitmap(Clipboard.GetImage()))
+                {
+                    // Determine the position of the selected graphic in the listBox.
+                    int index = int.Parse(listBox.Items[listBox.SelectedIndex].ToString());
+
+                    if (index >= 0 && index < Gumps.GetCount())
+                    {
+                        // Create a new bitmap with the same size as the image from the clipboard
+                        Bitmap newBmp = new Bitmap(bmp.Width, bmp.Height);
+
+                        // Define the colors to ignore
+                        Color[] colorsToIgnore = new Color[]
+                        {
+                    Color.FromArgb(211, 211, 211), // #D3D3D3
+                    Color.FromArgb(0, 0, 0),       // #000000
+                    Color.FromArgb(255, 255, 255)  // #FFFFFF
+                        };
+
+                        // Iterate through each pixel of the image
+                        for (int x = 0; x < bmp.Width; x++)
+                        {
+                            for (int y = 0; y < bmp.Height; y++)
+                            {
+                                // Get the color of the current pixel
+                                Color pixelColor = bmp.GetPixel(x, y);
+
+                                // Check if the color of the current pixel is one of the colors to ignore
+                                if (colorsToIgnore.Contains(pixelColor))
+                                {
+                                    // Set the color of the current pixel to transparent
+                                    newBmp.SetPixel(x, y, Color.Transparent);
+                                }
+                                else
+                                {
+                                    // Set the color of the current pixel to the color of the original image
+                                    newBmp.SetPixel(x, y, pixelColor);
+                                }
+                            }
+                        }
+
+                        // Call the ReplaceGump method with the selected graphic ID and the new bitmap
+                        Gumps.ReplaceGump(index, newBmp);
+                        ControlEvents.FireGumpChangeEvent(this, index);
+
+                        listBox.Invalidate();
+                        ListBox_SelectedIndexChanged(this, EventArgs.Empty);
+
+                        Options.ChangedUltimaClass["Gumps"] = true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid index.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("No image in the clipboard.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        #endregion
     }
 }

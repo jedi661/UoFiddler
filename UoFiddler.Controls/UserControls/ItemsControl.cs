@@ -1212,5 +1212,82 @@ namespace UoFiddler.Controls.UserControls
 
         }
         #endregion
+
+        #region Import clipbord image
+        private void importToolStripclipboardMenuItem_Click(object sender, EventArgs e)
+        {
+            // Check if the clipboard contains an image
+            if (Clipboard.ContainsImage())
+            {
+                // Retrieve the image from the clipboard
+                using (Bitmap bmp = new Bitmap(Clipboard.GetImage()))
+                {
+                    // Get the selected index from the ItemsTileView
+                    int index = SelectedGraphicId;
+
+                    if (index >= 0 && index < Art.GetMaxItemId())
+                    {
+                        // Create a new bitmap with the same size as the image from the clipboard
+                        Bitmap newBmp = new Bitmap(bmp.Width, bmp.Height);
+
+                        // Define the colors to ignore
+                        Color[] colorsToIgnore = new Color[]
+                        {
+                    Color.FromArgb(211, 211, 211), // #D3D3D3
+                    Color.FromArgb(0, 0, 0),       // #000000
+                    Color.FromArgb(255, 255, 255)  // #FFFFFF
+                        };
+
+                        // Iterate through each pixel of the image
+                        for (int x = 0; x < bmp.Width; x++)
+                        {
+                            for (int y = 0; y < bmp.Height; y++)
+                            {
+                                // Get the color of the current pixel
+                                Color pixelColor = bmp.GetPixel(x, y);
+
+                                // Check if the color of the current pixel is one of the colors to ignore
+                                if (colorsToIgnore.Contains(pixelColor))
+                                {
+                                    // Set the color of the current pixel to transparent
+                                    newBmp.SetPixel(x, y, Color.Transparent);
+                                }
+                                else
+                                {
+                                    // Set the color of the current pixel to the color of the original image
+                                    newBmp.SetPixel(x, y, pixelColor);
+                                }
+                            }
+                        }
+
+                        // Replace the image at the specified index
+                        Art.ReplaceStatic(index, newBmp);
+                        ControlEvents.FireItemChangeEvent(this, index);
+
+                        // Update the _itemList to insert the index only once
+                        if (!_itemList.Contains(index))
+                        {
+                            _itemList.Add(index);
+                            _itemList.Sort();
+                        }
+
+                        // Update the VirtualListSize of the ItemsTileView and invalidate the view
+                        ItemsTileView.VirtualListSize = _itemList.Count;
+                        ItemsTileView.Invalidate();
+                        SelectedGraphicId = index;
+                        Options.ChangedUltimaClass["Art"] = true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid index.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("No image in the clipboard.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        #endregion
     }
 }

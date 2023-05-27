@@ -64,6 +64,7 @@ namespace UoFiddler.Controls.UserControls
             InsertText = new System.Windows.Forms.ToolStripTextBox();
             toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             LandTilesToolStrip = new System.Windows.Forms.ToolStrip();
             NameLabel = new System.Windows.Forms.ToolStripLabel();
             GraphicLabel = new System.Windows.Forms.ToolStripLabel();
@@ -86,7 +87,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             // LandTilesContextMenuStrip
             // 
-            LandTilesContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { showFreeSlotsToolStripMenuItem, toolStripSeparator6, exportImageToolStripMenuItem, toolStripSeparator3, selectInTileDataTabToolStripMenuItem, selectInRadarColorTabToolStripMenuItem, toolStripSeparator2, findNextFreeSlotToolStripMenuItem, removeToolStripMenuItem, replaceToolStripMenuItem, replaceStartingFromToolStripMenuItem, insertAtToolStripMenuItem, toolStripSeparator7, copyToolStripMenuItem });
+            LandTilesContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { showFreeSlotsToolStripMenuItem, toolStripSeparator6, exportImageToolStripMenuItem, toolStripSeparator3, selectInTileDataTabToolStripMenuItem, selectInRadarColorTabToolStripMenuItem, toolStripSeparator2, findNextFreeSlotToolStripMenuItem, removeToolStripMenuItem, replaceToolStripMenuItem, replaceStartingFromToolStripMenuItem, insertAtToolStripMenuItem, toolStripSeparator7, copyToolStripMenuItem, importToolStripMenuItem });
             LandTilesContextMenuStrip.Name = "contextMenuStrip1";
             LandTilesContextMenuStrip.Size = new System.Drawing.Size(201, 270);
             // 
@@ -222,6 +223,14 @@ namespace UoFiddler.Controls.UserControls
             copyToolStripMenuItem.Text = "Copy";
             copyToolStripMenuItem.ToolTipText = "Copy the graphic to the clipboard.";
             copyToolStripMenuItem.Click += copyToolStripMenuItem_Click;
+            // 
+            // importToolStripMenuItem
+            // 
+            importToolStripMenuItem.Name = "importToolStripMenuItem";
+            importToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            importToolStripMenuItem.Text = "Import";
+            importToolStripMenuItem.ToolTipText = "Import the graphic from the clipboard.";
+            importToolStripMenuItem.Click += importToolStripMenuItem_Click;
             // 
             // LandTilesToolStrip
             // 
@@ -423,5 +432,6 @@ namespace UoFiddler.Controls.UserControls
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
     }
 }

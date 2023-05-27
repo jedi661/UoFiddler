@@ -59,7 +59,9 @@ namespace UoFiddler.Controls.UserControls
             InsertStartingFromTb = new System.Windows.Forms.ToolStripTextBox();
             toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStrip2 = new System.Windows.Forms.ToolStrip();
             toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
@@ -77,7 +79,6 @@ namespace UoFiddler.Controls.UserControls
             Preload = new System.Windows.Forms.ToolStripButton();
             toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             PreLoader = new System.ComponentModel.BackgroundWorker();
-            toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -129,9 +130,9 @@ namespace UoFiddler.Controls.UserControls
             // 
             // contextMenuStrip1
             // 
-            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { extractImageToolStripMenuItem, toolStripSeparator2, findNextFreeSlotToolStripMenuItem, jumpToMaleFemale, replaceGumpToolStripMenuItem, removeToolStripMenuItem, insertToolStripMenuItem, toolStripMenuItem1, toolStripSeparator1, saveToolStripMenuItem, toolStripSeparator4, copyToolStripMenuItem });
+            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { extractImageToolStripMenuItem, toolStripSeparator2, findNextFreeSlotToolStripMenuItem, jumpToMaleFemale, replaceGumpToolStripMenuItem, removeToolStripMenuItem, insertToolStripMenuItem, toolStripMenuItem1, toolStripSeparator1, saveToolStripMenuItem, toolStripSeparator4, copyToolStripMenuItem, importToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new System.Drawing.Size(190, 242);
+            contextMenuStrip1.Size = new System.Drawing.Size(190, 264);
             // 
             // extractImageToolStripMenuItem
             // 
@@ -240,6 +241,11 @@ namespace UoFiddler.Controls.UserControls
             saveToolStripMenuItem.Text = "Save";
             saveToolStripMenuItem.Click += OnClickSave;
             // 
+            // toolStripSeparator4
+            // 
+            toolStripSeparator4.Name = "toolStripSeparator4";
+            toolStripSeparator4.Size = new System.Drawing.Size(186, 6);
+            // 
             // copyToolStripMenuItem
             // 
             copyToolStripMenuItem.Name = "copyToolStripMenuItem";
@@ -247,6 +253,14 @@ namespace UoFiddler.Controls.UserControls
             copyToolStripMenuItem.Text = "Copy";
             copyToolStripMenuItem.ToolTipText = "The graphic is being saved to the clipboard.";
             copyToolStripMenuItem.Click += copyToolStripMenuItem_Click;
+            // 
+            // importToolStripMenuItem
+            // 
+            importToolStripMenuItem.Name = "importToolStripMenuItem";
+            importToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            importToolStripMenuItem.Text = "Import";
+            importToolStripMenuItem.ToolTipText = "Paste graphic from clipboard.";
+            importToolStripMenuItem.Click += importToolStripMenuItem_Click;
             // 
             // toolStrip2
             // 
@@ -390,11 +404,6 @@ namespace UoFiddler.Controls.UserControls
             PreLoader.ProgressChanged += PreLoaderProgressChanged;
             PreLoader.RunWorkerCompleted += PreLoaderCompleted;
             // 
-            // toolStripSeparator4
-            // 
-            toolStripSeparator4.Name = "toolStripSeparator4";
-            toolStripSeparator4.Size = new System.Drawing.Size(186, 6);
-            // 
             // GumpControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -459,5 +468,6 @@ namespace UoFiddler.Controls.UserControls
         private System.Windows.Forms.ToolStripTextBox InsertStartingFromTb;
         private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
     }
 }
