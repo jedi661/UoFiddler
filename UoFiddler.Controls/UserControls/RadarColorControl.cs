@@ -30,6 +30,15 @@ namespace UoFiddler.Controls.UserControls
 
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint, true);
             _refMarker = this;
+
+            // Link the event method to the AfterSelect event.
+            treeViewItem.AfterSelect += treeViewItem_AfterSelect;
+            treeViewLand.AfterSelect += treeViewLand_AfterSelect;
+
+            //this.treeViewLand = new UoFiddler.Controls.UserControls.RadarColorControl.ColorTreeView();
+
+            // Label Colorcode
+            LabelColorCode.Text = "";
         }
 
         private int _selectedIndex = -1;
@@ -113,6 +122,9 @@ namespace UoFiddler.Controls.UserControls
             }
         }
 
+        #region Onload        
+        private BackgroundWorker _worker = new BackgroundWorker();
+
         public void OnLoad(object sender, EventArgs e)
         {
             if (IsAncestorSiteInDesignMode || FormsDesignerHelper.IsInDesignMode())
@@ -125,11 +137,25 @@ namespace UoFiddler.Controls.UserControls
                 return;
             }
 
-            Cursor.Current = Cursors.WaitCursor;
+            // Configure the background worker.
+            _worker.DoWork += Worker_DoWork;
+            _worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
+
+            // Start the background worker.
+            _worker.RunWorkerAsync();
+        }
+
+        private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            // Load the data here.
             Options.LoadedUltimaClass["TileData"] = true;
             Options.LoadedUltimaClass["Art"] = true;
             Options.LoadedUltimaClass["RadarColor"] = true;
+        }
 
+        private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            // Update the user control here.
             treeViewItem.BeginUpdate();
             try
             {
@@ -139,9 +165,12 @@ namespace UoFiddler.Controls.UserControls
                     TreeNode[] nodes = new TreeNode[Art.GetMaxItemId()];
                     for (int i = 0; i < Art.GetMaxItemId(); ++i)
                     {
+                        ushort color = RadarCol.GetItemColor(i);
+                        Color foreColor = HueHelpers.HueToColor(color);
                         nodes[i] = new TreeNode(string.Format("0x{0:X4} ({0}) {1}", i, TileData.ItemTable[i].Name))
                         {
-                            Tag = i
+                            Tag = i,
+                            ForeColor = foreColor
                         };
                     }
                     treeViewItem.Nodes.AddRange(nodes);
@@ -152,6 +181,7 @@ namespace UoFiddler.Controls.UserControls
                 treeViewItem.EndUpdate();
             }
 
+            // Load treeViewLand when the control is loaded
             treeViewLand.BeginUpdate();
             try
             {
@@ -161,9 +191,12 @@ namespace UoFiddler.Controls.UserControls
                     TreeNode[] nodes = new TreeNode[TileData.LandTable.Length];
                     for (int i = 0; i < TileData.LandTable.Length; ++i)
                     {
+                        ushort color = RadarCol.GetLandColor(i);
+                        Color foreColor = HueHelpers.HueToColor(color);
                         nodes[i] = new TreeNode(string.Format("0x{0:X4} ({0}) {1}", i, TileData.LandTable[i].Name))
                         {
-                            Tag = i
+                            Tag = i,
+                            ForeColor = foreColor
                         };
                     }
                     treeViewLand.Nodes.AddRange(nodes);
@@ -180,8 +213,77 @@ namespace UoFiddler.Controls.UserControls
             }
 
             IsLoaded = true;
-            Cursor.Current = Cursors.Default;
         }
+
+
+        #endregion
+
+
+        #region  New ColorTree erstellt Grafikbalken
+        public class ColorTreeView : TreeView
+        {
+            public ColorTreeView()
+            {
+                DrawMode = TreeViewDrawMode.OwnerDrawText;
+            }
+
+            protected override void OnDrawNode(DrawTreeNodeEventArgs e)
+            {
+                // Draw a colored bar.
+                int colorBoxWidth = 16;
+                int colorBoxHeight = 16;
+                int colorBoxOffset = 2;
+                Rectangle colorBoxRect = new Rectangle(e.Bounds.X + colorBoxOffset, e.Bounds.Y + colorBoxOffset, colorBoxWidth, colorBoxHeight);
+
+                Color color = e.Node.ForeColor; // Use the predefined foreground color of the node.
+
+                e.Graphics.FillRectangle(new SolidBrush(color), colorBoxRect);
+
+                // Draw the node text.
+                int textOffset = colorBoxWidth + 2 * colorBoxOffset;
+                Rectangle textRect = new Rectangle(e.Bounds.X + textOffset, e.Bounds.Y, e.Bounds.Width - textOffset, e.Bounds.Height);
+                TextRenderer.DrawText(e.Graphics, e.Node.Text, this.Font, textRect, this.ForeColor, TextFormatFlags.GlyphOverhangPadding);
+            }
+        }
+        #endregion
+
+        #region Click farbcode
+        private void treeViewItem_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (!checkBoxHexCode.Checked)
+            {
+                return;
+            }
+
+            // Get the selected element.
+            TreeNode selectedNode = e.Node;
+
+            // Get the color code of the selected element.
+            ushort color = RadarCol.GetItemColor((int)selectedNode.Tag);
+            string colorCode = $"0x{color:X4}";
+
+            // Copy the color code to the clipboard.
+            Clipboard.SetText(colorCode);
+        }
+
+        private void treeViewLand_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (!checkBoxHexCode.Checked) //Checkbox checkBoxHexCode
+            {
+                return;
+            }
+
+            // Get the selected element.
+            TreeNode selectedNode = e.Node;
+
+            // Get the color code of the selected element.
+            ushort color = RadarCol.GetLandColor((int)selectedNode.Tag);
+            string colorCode = $"0x{color:X4}";
+
+            // Copy the color code to the clipboard.
+            Clipboard.SetText(colorCode);
+        }
+        #endregion
 
         private void OnFilePathChangeEvent()
         {
@@ -267,11 +369,21 @@ namespace UoFiddler.Controls.UserControls
             if (tabControl2.SelectedIndex == 0)
             {
                 RadarCol.SetItemColor(_selectedIndex, CurrentColor);
+                if (treeViewItem.SelectedNode != null) //Colors the index directly
+                {
+                    treeViewItem.SelectedNode.ForeColor = HueHelpers.HueToColor(CurrentColor);
+                }
             }
             else
             {
                 RadarCol.SetLandColor(_selectedIndex, CurrentColor);
+                if (treeViewLand.SelectedNode != null) //Colors the index directly
+                {
+                    treeViewLand.SelectedNode.ForeColor = HueHelpers.HueToColor(CurrentColor);
+                }
             }
+
+            LabelColorCode.Text = $"Index {_selectedIndex}, Color Code: 0x{CurrentColor:X4}"; // LabelColorCode
 
             Options.ChangedUltimaClass["RadarCol"] = true;
         }
@@ -314,8 +426,47 @@ namespace UoFiddler.Controls.UserControls
             if (!_updating)
             {
                 CurrentColor = (ushort)numericUpDownShortCol.Value;
+
+                int value = (int)numericUpDownShortCol.Value;
+                string hexValue = value.ToString("X4");
+                textBoxHexCode.Text = hexValue;
             }
         }
+
+        public class HexNumericUpDown : NumericUpDown
+        {
+            public HexNumericUpDown()
+            {
+                // Set the minimum and maximum values to meaningful values for hexadecimal values.
+                Minimum = 0;
+                Maximum = ushort.MaxValue;
+            }
+
+            protected override void UpdateEditText()
+            {
+                // Display the current value in hexadecimal format.
+                Text = ((int)Value).ToString("X4");
+            }
+
+            protected override void ValidateEditText()
+            {
+                // Try to interpret the text as a hexadecimal value.
+                if (int.TryParse(Text, System.Globalization.NumberStyles.HexNumber, null, out int value))
+                {
+                    // Ensure that the value is within the allowable range.
+                    value = Math.Max((int)Minimum, Math.Min((int)Maximum, value));
+
+                    // Set the value.
+                    Value = value;
+                }
+                else
+                {
+                    // If the text does not represent a valid hexadecimal value, reset it to the current value.
+                    UpdateEditText();
+                }
+            }
+        }
+
 
         private void OnClickMeanColorFromTo(object sender, EventArgs e)
         {
@@ -600,5 +751,99 @@ namespace UoFiddler.Controls.UserControls
 
             return Color.FromArgb(meanR, meanG, meanB);
         }
+
+        #region Hex and Photoshop
+        private void textBoxHexCode_TextChanged(object sender, EventArgs e)
+        {
+
+            string hexValue = textBoxHexCode.Text;
+
+            // Check if the entered value is a valid hexadecimal value.
+
+
+            if (int.TryParse(hexValue, System.Globalization.NumberStyles.HexNumber, null, out int value))
+            {
+                // Ensure that the value stays within the valid range of numericUpDownShortCol.
+                value = Math.Max((int)numericUpDownShortCol.Minimum, value);
+                value = Math.Min((int)numericUpDownShortCol.Maximum, value);
+
+                // Update numericUpDownShortCol.
+                numericUpDownShortCol.Value = value;
+
+                // Update the color code for Photoshop.
+                UpdatePhotoshopCode();
+            }
+            else
+            {
+                // If the value is invalid, reset textBoxHexCode to the current value of numericUpDownShortCol.
+                int currentValue = (int)numericUpDownShortCol.Value;
+                string currentHexValue = currentValue.ToString("X4");
+                textBoxHexCode.Text = currentHexValue;
+            }
+        }
+        private void textBoxHexCode_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Allow control characters (e.g., Backspace).
+            if (char.IsControl(e.KeyChar))
+            {
+                return;
+            }
+
+            // Allow only hexadecimal characters (0-9, a-f, A-F).
+            if (!Uri.IsHexDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private string ConvertToHexColor(int value)
+        {
+            // Ensure that the value stays within the valid range of 0 to 32767.
+            value = Math.Max(0, value);
+            value = Math.Min(32767, value);
+
+            // Extract the intensities of the red, green, and blue color channels.
+            int red = (value >> 10) & 0x1F;
+            int green = (value >> 5) & 0x1F;
+            int blue = value & 0x1F;
+
+            // Scale the intensities to the range of 0 to 255.
+            red = (red * 255) / 31;
+            green = (green * 255) / 31;
+            blue = (blue * 255) / 31;
+
+            // Convert the intensities to a hexadecimal value.
+            string hexValue = string.Format("{0:X2}{1:X2}{2:X2}", red, green, blue);
+
+            return hexValue;
+        }
+        private void UpdatePhotoshopCode()
+        {
+            // Get the current value from numericUpDownShortCol.
+            int value = (int)numericUpDownShortCol.Value;
+
+            // Convert the value to a valid 6-digit hexadecimal color code.
+            string hexValue = ConvertToHexColor(value);
+
+            // Display the calculated color code in the textBoxPhotoshopCode.
+            textBoxPhotoshopCode.Text = hexValue;
+        }
+
+        private void textBoxPhotoshopCode_Click(object sender, EventArgs e)
+        {
+            // Create a new ToolTip control.
+            ToolTip toolTip = new ToolTip();
+
+            // Copy the text from the textBoxPhotoshopCode to the clipboard.
+            Clipboard.SetText(textBoxPhotoshopCode.Text);
+
+            // Get the text from the textBoxPhotoshopCode.
+            string text = textBoxPhotoshopCode.Text;
+
+            // Display a message using the ToolTip control.
+            toolTip.Show($"Copied '{text}' to clipboard", textBoxPhotoshopCode);
+        }
+
+        #endregion
     }
 }

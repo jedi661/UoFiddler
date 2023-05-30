@@ -263,9 +263,7 @@
 			<DesignTime>True</DesignTime>
 			<DependentUpon>Resources.resx</DependentUpon>
 		</Compile>
-		<Compile Update="UserControls\RadarColorControl.cs">
-			<SubType>UserControl</SubType>
-		</Compile>
+		<Compile Update="UserControls\RadarColorControl.cs" />
 		<Compile Update="UserControls\RadarColorControl.Designer.cs">
 			<DependentUpon>RadarColorControl.cs</DependentUpon>
 		</Compile>
