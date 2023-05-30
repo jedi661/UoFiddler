@@ -118,7 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>Version 4.10.6
+    <value>Version 4.10.7
+-Enable multiple selection for saving in Items and LandTiles by pressing the Ctrl key, then selecting the desired items, and finally clicking on the Save button with the respective format.
+
+Version 4.10.6
 -Multiple functions have been added to Radarcolor, expanding the graphical representation. Loading of data now utilizes ColorTreeView for graphical display. When saving the Color Palette, it is also displayed with colors. 
 By activating the checkbox, the Color Palette's hex code is copied to the clipboard. Another textbox lists the hex codes, and there is a textbox for the 15-bit color depth per channel. In this case, the color code represents the intensities of the red, 
 green, and blue color channels, each with 5 bits, making it compatible with Photoshop's color code. Additionally, the Photoshop textbox has a clipboard function that stores the color code when clicked.

@@ -697,7 +697,8 @@ namespace UoFiddler.Controls.UserControls
             }
         }
 
-        private void Extract_Image_ClickBmp(object sender, EventArgs e)
+        //old
+        /*private void Extract_Image_ClickBmp(object sender, EventArgs e)
         {
             if (_selectedGraphicId == -1)
             {
@@ -705,36 +706,95 @@ namespace UoFiddler.Controls.UserControls
             }
 
             ExportItemImage(_selectedGraphicId, ImageFormat.Bmp);
-        }
+        }*/
 
-        private void Extract_Image_ClickTiff(object sender, EventArgs e)
+        private void Extract_Image_ClickBmp(object sender, EventArgs e)
         {
-            if (_selectedGraphicId == -1)
+            // Check if any items are selected in the ItemsTileView
+            if (ItemsTileView.SelectedIndices.Count == 0)
             {
                 return;
             }
 
-            ExportItemImage(_selectedGraphicId, ImageFormat.Tiff);
+            // Iterate through the selected indices
+            foreach (int selectedIndex in ItemsTileView.SelectedIndices)
+            {
+                // Get the graphics for the selected item
+                Bitmap bitmap = Art.GetStatic(_itemList[selectedIndex]);
+                // Check if the graphics exist
+                if (bitmap != null)
+                {
+                    // Save the graphics
+                    ExportItemImage(_itemList[selectedIndex], ImageFormat.Bmp);
+                }
+            }
+        }
+
+
+        private void Extract_Image_ClickTiff(object sender, EventArgs e)
+        {
+            // Check if any items are selected in the ItemsTileView
+            if (ItemsTileView.SelectedIndices.Count == 0)
+            {
+                return;
+            }
+
+            // Iterate through the selected indices
+            foreach (int selectedIndex in ItemsTileView.SelectedIndices)
+            {
+                // Get the graphics for the selected item
+                Bitmap bitmap = Art.GetStatic(_itemList[selectedIndex]);
+                // Check if the graphics exist
+                if (bitmap != null)
+                {
+                    // Save the graphics
+                    ExportItemImage(_itemList[selectedIndex], ImageFormat.Tiff);
+                }
+            }
         }
 
         private void Extract_Image_ClickJpg(object sender, EventArgs e)
         {
-            if (_selectedGraphicId == -1)
+            // Check if any items are selected in the ItemsTileView
+            if (ItemsTileView.SelectedIndices.Count == 0)
             {
                 return;
             }
 
-            ExportItemImage(_selectedGraphicId, ImageFormat.Jpeg);
+            // Iterate through the selected indices
+            foreach (int selectedIndex in ItemsTileView.SelectedIndices)
+            {
+                // Get the graphics for the selected item
+                Bitmap bitmap = Art.GetStatic(_itemList[selectedIndex]);
+                // Check if the graphics exist
+                if (bitmap != null)
+                {
+                    // Save the graphics
+                    ExportItemImage(_itemList[selectedIndex], ImageFormat.Jpeg);
+                }
+            }
         }
 
         private void Extract_Image_ClickPng(object sender, EventArgs e)
         {
-            if (_selectedGraphicId == -1)
+            // Check if any items are selected in the ItemsTileView
+            if (ItemsTileView.SelectedIndices.Count == 0)
             {
                 return;
             }
 
-            ExportItemImage(_selectedGraphicId, ImageFormat.Png);
+            // Iterate through the selected indices
+            foreach (int selectedIndex in ItemsTileView.SelectedIndices)
+            {
+                // Get the graphics for the selected item
+                Bitmap bitmap = Art.GetStatic(_itemList[selectedIndex]);
+                // Check if the graphics exist
+                if (bitmap != null)
+                {
+                    // Save the graphics
+                    ExportItemImage(_itemList[selectedIndex], ImageFormat.Png);
+                }
+            }
         }
 
         private static void ExportItemImage(int index, ImageFormat imageFormat)

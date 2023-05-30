@@ -507,25 +507,50 @@ namespace UoFiddler.Controls.UserControls
 
         private void OnClickExportBmp(object sender, EventArgs e)
         {
-            if (_selectedGraphicId < 0)
+            // Check if any items are selected
+            if (LandTilesTileView.SelectedIndices.Count == 0)
             {
                 return;
             }
 
-            ExportLandTileImage(_selectedGraphicId, ImageFormat.Bmp);
+            // Iterate through the selected graphic IDs
+            foreach (int selectedIndex in LandTilesTileView.SelectedIndices)
+            {
+                // Get the graphic for the selected item
+                Bitmap bitmap = Art.GetLand(_tileList[selectedIndex]);
+                // Check if the graphic exists
+                if (bitmap != null)
+                {
+                    // Save the graphic                    
+                    ExportLandTileImage(_tileList[selectedIndex], ImageFormat.Bmp);
+                }
+            }
         }
 
         private void OnClickExportTiff(object sender, EventArgs e)
         {
-            if (_selectedGraphicId < 0)
+            // Check if any items are selected
+            if (LandTilesTileView.SelectedIndices.Count == 0)
             {
                 return;
             }
 
-            ExportLandTileImage(_selectedGraphicId, ImageFormat.Tiff);
+            // Iterate through the selected graphic IDs
+            foreach (int selectedIndex in LandTilesTileView.SelectedIndices)
+            {
+                // Get the graphic for the selected item
+                Bitmap bitmap = Art.GetLand(_tileList[selectedIndex]);
+                // Check if the graphic exists
+                if (bitmap != null)
+                {
+                    // Save the graphic                 
+                    ExportLandTileImage(_tileList[selectedIndex], ImageFormat.Tiff);
+                }
+            }
         }
 
-        private void OnClickExportJpg(object sender, EventArgs e)
+        //Old version
+        /*private void OnClickExportJpg(object sender, EventArgs e)
         {
             if (_selectedGraphicId < 0)
             {
@@ -533,17 +558,52 @@ namespace UoFiddler.Controls.UserControls
             }
 
             ExportLandTileImage(_selectedGraphicId, ImageFormat.Jpeg);
-        }
+        }*/
 
-        private void OnClickExportPng(object sender, EventArgs e)
+        private void OnClickExportJpg(object sender, EventArgs e)
         {
-            if (_selectedGraphicId < 0)
+            // Check if any items are selected
+            if (LandTilesTileView.SelectedIndices.Count == 0)
             {
                 return;
             }
 
-            ExportLandTileImage(_selectedGraphicId, ImageFormat.Png);
+            // Iterate through the selected graphic IDs
+            foreach (int selectedIndex in LandTilesTileView.SelectedIndices)
+            {
+                // Get the graphic for the selected item
+                Bitmap bitmap = Art.GetLand(_tileList[selectedIndex]);
+                // Check if the graphic exists
+                if (bitmap != null)
+                {
+                    // Save the graphic                    
+                    ExportLandTileImage(_tileList[selectedIndex], ImageFormat.Jpeg);
+                }
+            }
         }
+
+        private void OnClickExportPng(object sender, EventArgs e)
+        {
+            // Check if any items are selected
+            if (LandTilesTileView.SelectedIndices.Count == 0)
+            {
+                return;
+            }
+
+            // Iterate through the selected graphic IDs
+            foreach (int selectedIndex in LandTilesTileView.SelectedIndices)
+            {
+                // Get the graphic for the selected item
+                Bitmap bitmap = Art.GetLand(_tileList[selectedIndex]);
+                // Check if the graphic exists
+                if (bitmap != null)
+                {
+                    // Save the graphic                    
+                    ExportLandTileImage(_tileList[selectedIndex], ImageFormat.Png);
+                }
+            }
+        }
+
 
         private static void ExportLandTileImage(int index, ImageFormat imageFormat)
         {
@@ -681,8 +741,12 @@ namespace UoFiddler.Controls.UserControls
             }
         }
 
+       
+
         private void LandTilesTileView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
+            LandTilesTileView.MultiSelect = true;
+
             if (!e.IsSelected)
             {
                 return;
