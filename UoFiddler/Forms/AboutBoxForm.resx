@@ -120,6 +120,7 @@
   <data name="richTextBox1.Text" xml:space="preserve">
     <value>Version 4.10.7
 -Enable multiple selection for saving in Items and LandTiles by pressing the Ctrl key, then selecting the desired items, and finally clicking on the Save button with the respective format.
+-Light has received the functions of copying and importing from the clipboard, as well as copying from the clipboard to the ID slot.
 
 Version 4.10.6
 -Multiple functions have been added to Radarcolor, expanding the graphical representation. Loading of data now utilizes ColorTreeView for graphical display. When saving the Color Palette, it is also displayed with colors. 

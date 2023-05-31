@@ -505,6 +505,7 @@ namespace UoFiddler.Controls.UserControls
             Options.ChangedUltimaClass["Art"] = false;
         }
 
+        #region Save Format
         private void OnClickExportBmp(object sender, EventArgs e)
         {
             // Check if any items are selected
@@ -623,6 +624,8 @@ namespace UoFiddler.Controls.UserControls
             MessageBox.Show($"Landtile saved to {fileName}", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information,
                 MessageBoxDefaultButton.Button1);
         }
+
+        #endregion
 
         private void OnClickSelectTiledata(object sender, EventArgs e)
         {

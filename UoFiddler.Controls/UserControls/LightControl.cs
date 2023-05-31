@@ -10,9 +10,11 @@
  ***************************************************************************/
 
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using UoFiddler.Controls.Classes;
 using UoFiddler.Controls.Helpers;
@@ -96,7 +98,6 @@ namespace UoFiddler.Controls.UserControls
         {
             Reload();
         }
-
         private unsafe Bitmap GetImage()
         {
             if (treeView1.SelectedNode == null)
@@ -106,7 +107,18 @@ namespace UoFiddler.Controls.UserControls
 
             if (!iGPreviewToolStripMenuItem.Checked)
             {
-                return Ultima.Light.GetLight((int)treeView1.SelectedNode.Tag);
+                Bitmap image = Ultima.Light.GetLight((int)treeView1.SelectedNode.Tag);
+                // Check if the image is valid
+                if (image != null && image.Width > 0 && image.Height > 0)
+                {
+                    return image;
+                }
+                else
+                {
+                    // Show an error message if the image is invalid
+                    MessageBox.Show("Error: Invalid image!");
+                    return null;
+                }
             }
 
             Bitmap bit = new Bitmap(pictureBox1.Width, pictureBox1.Height);
@@ -197,7 +209,19 @@ namespace UoFiddler.Controls.UserControls
         private void AfterSelect(object sender, TreeViewEventArgs e)
         {
             pictureBox1.Image?.Dispose();
-            pictureBox1.Image = GetImage();
+            // Get the image from the GetImage method
+            Bitmap image = GetImage();
+            // Check if the image is valid
+            if (image != null && image.Width > 0 && image.Height > 0)
+            {
+                // Display the image in the pictureBox1
+                pictureBox1.Image = image;
+            }
+            else
+            {
+                // Show an error message if the image is invalid
+                MessageBox.Show("Error: Invalid image!");
+            }
         }
 
         private void OnClickRemove(object sender, EventArgs e)
@@ -467,5 +491,199 @@ namespace UoFiddler.Controls.UserControls
                 }
             }
         }
+
+        #region Copy Clipbord     
+        // Aktuelle
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Check if an item is selected in the treeView1
+            if (treeView1.SelectedNode == null)
+            {
+                MessageBox.Show("Please select an item first.");
+                return;
+            }
+
+            // Get the selected item
+            int selectedIndex = (int)treeView1.SelectedNode.Tag;
+            // Get the bitmap for the selected item
+            Bitmap bitmap = Ultima.Light.GetLight(selectedIndex);
+            // Check if the bitmap exists
+            if (bitmap != null)
+            {
+                // Change the color #D3D3D3 to #FFFFFF
+                for (int x = 0; x < bitmap.Width; x++)
+                {
+                    for (int y = 0; y < bitmap.Height; y++)
+                    {
+                        Color pixelColor = bitmap.GetPixel(x, y);
+                        if (pixelColor.R == 211 && pixelColor.G == 211 && pixelColor.B == 211)
+                        {
+                            bitmap.SetPixel(x, y, Color.FromArgb(255, 255, 255));
+                        }
+                    }
+                }
+
+                // Convert the image to a 16-bit color depth
+                Bitmap bmp16bit = new Bitmap(bitmap.Width, bitmap.Height, System.Drawing.Imaging.PixelFormat.Format16bppRgb555);
+                using (Graphics g = Graphics.FromImage(bmp16bit))
+                {
+                    g.DrawImage(bitmap, new Rectangle(0, 0, bmp16bit.Width, bmp16bit.Height));
+                }
+
+                // Copy the graphic to the clipboard
+                Clipboard.SetImage(bmp16bit);
+                MessageBox.Show("The image has been copied to the clipboard!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                // Show a MessageBox to inform the user that the image was successfully copied
+                MessageBox.Show("No image to copy!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        #endregion
+
+        #region Import Clipborad 
+        /*private void importToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Retrieve the image from the clipboard
+            if (Clipboard.ContainsImage())
+            {
+                Bitmap clipboardImage = new Bitmap(Clipboard.GetImage());
+
+                // Check if an item is selected in the treeView1
+                if (treeView1.SelectedNode != null)
+                {
+                    // Get the selected item
+                    int index = (int)treeView1.SelectedNode.Tag;
+
+                    // Define the colors to replace
+                    Dictionary<Color, Color> colorsToReplace = new Dictionary<Color, Color>
+            {
+                { Color.FromArgb(211, 211, 211), Color.FromArgb(255, 255, 255) }, // Replace #D3D3D3 with #ffffff
+                { Color.FromArgb(255, 255, 247), Color.FromArgb(255, 255, 255) }  // Replace #fffff7 with #ffffff
+            };
+
+                    // Iterate through each pixel of the image
+                    for (int x = 0; x < clipboardImage.Width; x++)
+                    {
+                        for (int y = 0; y < clipboardImage.Height; y++)
+                        {
+                            // Get the color of the current pixel
+                            Color pixelColor = clipboardImage.GetPixel(x, y);
+
+                            // Check if the color of the current pixel is one of the colors to replace
+                            if (colorsToReplace.ContainsKey(pixelColor))
+                            {
+                                // Set the color of the current pixel to the replacement color
+                                clipboardImage.SetPixel(x, y, colorsToReplace[pixelColor]);
+                            }
+                        }
+                    }
+
+                    // Save the image from the clipboard to a temporary file in BMP format
+                    string tempFile = Path.GetTempFileName();
+                    clipboardImage.Save(tempFile, ImageFormat.Bmp);
+
+                    // Load the image from the temporary file
+                    Bitmap bmp = new Bitmap(tempFile);
+
+                    // Convert the image to 16-bit
+                    Bitmap newBmp = bmp.Clone(new Rectangle(0, 0, bmp.Width, bmp.Height), PixelFormat.Format16bppRgb565);
+
+                    // Replace the selected image with the image from the clipboard
+                    Ultima.Light.Replace(index, newBmp);
+
+                    // Refresh the image in the pictureBox1
+                    pictureBox1.Image = GetImage();
+
+                    // Show a MessageBox to inform the user that the image was successfully imported
+                    MessageBox.Show("Image imported successfully!");
+                }
+            }
+        }*/
+        private void importToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Retrieve the image from the clipboard
+            if (Clipboard.ContainsImage())
+            {
+                Bitmap clipboardImage = new Bitmap(Clipboard.GetImage());
+
+                // Check if the text in the InsertText2 control can be converted to an integer
+                if (Utils.ConvertStringToInt(InsertText2.Text, out int index, 0, 99))
+                {
+                    // Define the colors to replace
+                    Dictionary<Color, Color> colorsToReplace = new Dictionary<Color, Color>
+            {
+                { Color.FromArgb(211, 211, 211), Color.FromArgb(255, 255, 255) }, // Replace #D3D3D3 with #ffffff
+                { Color.FromArgb(255, 255, 247), Color.FromArgb(255, 255, 255) }  // Replace #fffff7 with #ffffff
+            };
+
+                    // Iterate through each pixel of the image
+                    for (int x = 0; x < clipboardImage.Width; x++)
+                    {
+                        for (int y = 0; y < clipboardImage.Height; y++)
+                        {
+                            // Get the color of the current pixel
+                            Color pixelColor = clipboardImage.GetPixel(x, y);
+
+                            // Check if the color of the current pixel is one of the colors to replace
+                            if (colorsToReplace.ContainsKey(pixelColor))
+                            {
+                                // Set the color of the current pixel to the replacement color
+                                clipboardImage.SetPixel(x, y, colorsToReplace[pixelColor]);
+                            }
+                        }
+                    }
+
+                    // Save the image from the clipboard to a temporary file in BMP format
+                    string tempFile = Path.GetTempFileName();
+                    clipboardImage.Save(tempFile, ImageFormat.Bmp);
+
+                    // Load the image from the temporary file
+                    Bitmap bmp = new Bitmap(tempFile);
+
+                    // Convert the image to 16-bit
+                    Bitmap newBmp = bmp.Clone(new Rectangle(0, 0, bmp.Width, bmp.Height), PixelFormat.Format16bppRgb565);
+
+                    // Replace the selected image with the image from the clipboard
+                    Ultima.Light.Replace(index, newBmp);
+
+                    // Refresh the image in the pictureBox1
+                    pictureBox1.Image = GetImage();
+
+                    // Show a MessageBox to inform the user that the image was successfully imported
+                    MessageBox.Show("Image imported successfully!");
+                }
+            }
+        }
+
+        private void InsertText2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Check if the key pressed is not a control key and not a digit
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                // Set the Handled property to true to cancel the key press
+                e.Handled = true;
+            }
+        }
+
+        private void InsertText2_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Check if the key pressed is the Enter key
+            if (e.KeyCode == Keys.Enter)
+            {
+                // Call the importToolStripMenuItem_Click method
+                importToolStripMenuItem_Click(sender, e);
+            }
+        }
+
+        private void InsertText2_Click(object sender, EventArgs e)
+        {
+            // Call the importToolStripMenuItem_Click method
+            importToolStripMenuItem_Click(sender, e);
+        }
+
+
+        #endregion
     }
 }

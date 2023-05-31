@@ -697,6 +697,8 @@ namespace UoFiddler.Controls.UserControls
             }
         }
 
+        #region Save format
+
         //old
         /*private void Extract_Image_ClickBmp(object sender, EventArgs e)
         {
@@ -795,7 +797,7 @@ namespace UoFiddler.Controls.UserControls
                     ExportItemImage(_itemList[selectedIndex], ImageFormat.Png);
                 }
             }
-        }
+        }             
 
         private static void ExportItemImage(int index, ImageFormat imageFormat)
         {
@@ -815,6 +817,8 @@ namespace UoFiddler.Controls.UserControls
             MessageBox.Show($"Item saved to {fileName}", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information,
                 MessageBoxDefaultButton.Button1);
         }
+
+        #endregion
 
         private void OnClickSelectTiledata(object sender, EventArgs e)
         {
