@@ -60,6 +60,12 @@ namespace UoFiddler.Controls.UserControls
             toolStripComboBox1.Items.Add("Chair-Wood-8"); //27
             toolStripComboBox1.Items.Add("Chair-Throne-15"); //28
 
+            // checkedListBox2
+
+            toolStripComboBox1.Items.Add("LandTile Land"); //29
+            toolStripComboBox1.Items.Add("LandTile Water"); //30
+            toolStripComboBox1.Items.Add("LandTile Mountain"); //31
+
             // Add an event handler for toolStripComboBox1's SelectedIndexChanged event
             toolStripComboBox1.SelectedIndexChanged += ToolStripComboBox1_SelectedIndexChanged;
 
@@ -1785,6 +1791,11 @@ namespace UoFiddler.Controls.UserControls
                 checkedListBox1.SetItemChecked(i, false);
             }
 
+            for (int i = 0; i < checkedListBox2.Items.Count; i++)
+            {
+                checkedListBox2.SetItemChecked(i, false);
+            }
+
             // Update the Checked items and the Weight and Height values ​​based on the selected preset
             switch (toolStripComboBox1.SelectedItem.ToString())
             {
@@ -1983,19 +1994,19 @@ namespace UoFiddler.Controls.UserControls
                     textBoxHeigth.Text = "1";
                     checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Background"), true);
                     break;
-                case "Chair-Small-5": //24
+                case "Chair-Small-5": //25
                     textBoxWeight.Text = "20";
                     textBoxHeigth.Text = "1";
                     textBoxStackOff.Text = "5"; //StackOff
                     checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("ArticleA"), true);
                     break;
-                case "Chair-35": //24
+                case "Chair-35": //26
                     textBoxWeight.Text = "20";
                     textBoxHeigth.Text = "1";
                     textBoxStackOff.Text = "35"; //StackOff
                     checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("ArticleA"), true);
                     break;
-                case "Chair-Wood-8": //24
+                case "Chair-Wood-8": //27
                     textBoxWeight.Text = "20";
                     textBoxHeigth.Text = "1";
                     textBoxStackOff.Text = "8"; //StackOff
@@ -2003,12 +2014,25 @@ namespace UoFiddler.Controls.UserControls
                     checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("PartialHue"), true);
                     checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoDiagonal"), true);
                     break;
-                case "Chair-Throne-15": //24
+                case "Chair-Throne-15": //27
                     textBoxWeight.Text = "20";
                     textBoxHeigth.Text = "1";
-                    textBoxStackOff.Text = "15"; //StackOff
+                    textBoxStackOff.Text = "8"; //StackOff
                     checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("ArticleA"), true);
+                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("PartialHue"), true);
+                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoDiagonal"), true);
                     break;
+                case "LandTile Land": //29
+                    checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("Background"), true);
+                    checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("Surface"), true);
+                    break;
+                case "LandTile Water": //30
+                    checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("Translucent"), true);
+                    break;
+                case "LandTile Mountain": //31
+                    checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("Impassable"), true);
+                    break;
+
                     // Add more presets here
             }
         }
