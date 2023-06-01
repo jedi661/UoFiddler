@@ -744,7 +744,7 @@ namespace UoFiddler.Controls.UserControls
             }
         }
 
-       
+
 
         private void LandTilesTileView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
@@ -1029,7 +1029,200 @@ namespace UoFiddler.Controls.UserControls
             {
                 MessageBox.Show("No image in the clipboard.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }        
+
+        //Ingnore to temp.
+        /*private void importToTempToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Clipboard.ContainsImage())
+            {
+                using (Bitmap bmp = new Bitmap(Clipboard.GetImage()))
+                {
+                    int graphicSize = 44;
+
+                    int offsetX = (bmp.Width - graphicSize) / 2;
+                    int offsetY = (bmp.Height - graphicSize) / 2;
+
+                    int index = _tileList.IndexOf(_selectedGraphicId);
+
+                    if (index >= 0 && index < _tileList.Count)
+                    {
+                        Bitmap newBmp = new Bitmap(bmp.Width, bmp.Height);
+
+                        Color[] colorsToIgnore = new Color[]
+                        {
+                    Color.FromArgb(211, 211, 211), // #D3D3D3
+                    Color.FromArgb(0, 0, 0),       // #000000
+                    Color.FromArgb(255, 255, 255)  // #FFFFFF
+                        };
+
+                        for (int x = 0; x < bmp.Width; x++)
+                        {
+                            for (int y = 0; y < bmp.Height; y++)
+                            {
+                                if (x >= offsetX && x < offsetX + graphicSize && y >= offsetY && y < offsetY + graphicSize)
+                                {
+                                    Color pixelColor = bmp.GetPixel(x, y);
+
+                                    if (colorsToIgnore.Contains(pixelColor))
+                                    {
+                                        // Set the color of the current pixel to transparent
+                                        newBmp.SetPixel(x, y, Color.Transparent);
+                                    }
+                                    else
+                                    {
+                                        newBmp.SetPixel(x, y, pixelColor);
+                                    }
+                                }
+                                else
+                                {
+                                    newBmp.SetPixel(x, y, Color.Transparent);
+                                }
+                            }
+                        }
+
+                        // Create the "clipboardTemp" directory in the same directory as the main program
+                        string directoryPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "clipboardTemp");
+                        Directory.CreateDirectory(directoryPath);
+
+                        // Save the final bitmap to a file in the "clipboardTemp" directory with the selected index and an additional name "LandTiles"
+                        string fileName = $"LandTiles_{index:X}.bmp";
+                        string filePath = Path.Combine(directoryPath, fileName);
+                        newBmp.Save(filePath);
+
+                        // Import the saved bitmap
+                        using (var bmpTemp = new Bitmap(filePath))
+                        {
+                            Bitmap bitmap = new Bitmap(bmpTemp);
+
+                            Art.ReplaceLand(index, bitmap);
+
+                            ControlEvents.FireLandTileChangeEvent(this, index);
+
+                            if (!_tileList.Contains(index))
+                            {
+                                _tileList.Add(index);
+                                _tileList.Sort();
+                            }
+
+                            LandTilesTileView.VirtualListSize = _tileList.Count;
+                            LandTilesTileView.Invalidate();
+                            SelectedGraphicId = index;
+                            Options.ChangedUltimaClass["Land Tiles"] = true;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid index.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("No image in the clipboard.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }*/
+
+        private void importToTempToolStripMenuItem_Click(object sender, EventArgs e)
+        {   
+            // Check if the clipboard contains an image
+            if (Clipboard.ContainsImage())
+            {   
+                // Retrieve the image from the clipboard
+                using (Bitmap bmp = new Bitmap(Clipboard.GetImage()))
+                {
+                    // Define the size of the desired graphic
+                    int graphicSize = 44;
+                    // Calculate the offset to center the graphic
+                    int offsetX = (bmp.Width - graphicSize) / 2;
+                    int offsetY = (bmp.Height - graphicSize) / 2;
+                    // Determine the position of the selected graphic in the _tileList.
+                    int index = _tileList.IndexOf(_selectedGraphicId);
+
+                    if (index >= 0 && index < _tileList.Count)
+                    {
+                        // Create a new bitmap with the same size as the image from the clipboard
+                        Bitmap newBmp = new Bitmap(bmp.Width, bmp.Height);
+
+                        // Define the colors to Convert
+                        Color[] colorsToConvert = new Color[]
+                        {
+                            Color.FromArgb(211, 211, 211), // #D3D3D3 => #000000
+                            Color.FromArgb(0, 0, 0),       // #000000 => #000000
+                            Color.FromArgb(255, 255, 255), // #FFFFFF => #000000
+                            Color.FromArgb(254, 254, 254)  // #FEFEFE => #000000
+                        };
+
+                        // Iterate through each pixel of the image
+                        for (int x = 0; x < bmp.Width; x++)
+                        {
+                            for (int y = 0; y < bmp.Height; y++)
+                            {
+                                // Check if the current pixel is within the desired graphic bounds
+                                if (x >= offsetX && x < offsetX + graphicSize && y >= offsetY && y < offsetY + graphicSize)
+                                {   
+                                    // Get the color of the current pixel
+                                    Color pixelColor = bmp.GetPixel(x, y);
+                                    // Check if the color of the current pixel is one of the colors to Convert
+                                    if (colorsToConvert.Contains(pixelColor))
+                                    {   // Set the color of the current pixel to Convert
+                                        newBmp.SetPixel(x, y, Color.FromArgb(0, 0, 0));
+                                    }
+                                    else
+                                    {
+                                        // Set the color of the current pixel to the color of the original image
+                                        newBmp.SetPixel(x, y, pixelColor);
+                                    }
+                                }
+                                else
+                                {
+                                    // Set the color of pixels outside the desired graphic bounds to transparent
+                                    newBmp.SetPixel(x, y, Color.Transparent);
+                                }
+                            }
+                        }
+
+                        // Create the "clipboardTemp" directory in the same directory as the main program
+                        string directoryPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "clipboardTemp");
+                        Directory.CreateDirectory(directoryPath);
+
+                        // Save the final bitmap to a file in the "clipboardTemp" directory with the selected index and an additional name "LandTiles"
+                        string fileName = $"LandTiles_{index:X}.bmp";
+                        string filePath = Path.Combine(directoryPath, fileName);
+                        newBmp.Save(filePath);
+
+                        // Import the saved bitmap
+                        using (var bmpTemp = new Bitmap(filePath))
+                        {
+                            Bitmap bitmap = new Bitmap(bmpTemp);
+
+                            Art.ReplaceLand(index, bitmap);
+
+                            ControlEvents.FireLandTileChangeEvent(this, index);
+
+                            if (!_tileList.Contains(index))
+                            {
+                                _tileList.Add(index);
+                                _tileList.Sort();
+                            }
+
+                            LandTilesTileView.VirtualListSize = _tileList.Count;
+                            LandTilesTileView.Invalidate();
+                            SelectedGraphicId = index;
+                            Options.ChangedUltimaClass["Land Tiles"] = true;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid index.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("No image in the clipboard.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         #endregion
     }
 }
+
