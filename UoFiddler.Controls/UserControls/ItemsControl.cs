@@ -1467,6 +1467,7 @@ namespace UoFiddler.Controls.UserControls
 
         private void importToolStripclipboardMenuItem_Click(object sender, EventArgs e)
         {
+            // Check if the clipboard contains an image
             if (Clipboard.ContainsImage())
             {
                 using (Image image = Clipboard.GetImage())
@@ -1475,16 +1476,17 @@ namespace UoFiddler.Controls.UserControls
                     int bytesPerPixel = 4; // assuming 32-bit image
                     int imageSizeInBytes = imageSize.Width * imageSize.Height * bytesPerPixel;
                 }
-
+                // Retrieve the image from the clipboard
                 using (Bitmap bmp = new Bitmap(Clipboard.GetImage()))
-                {
+                {   // Get the selected index from the ItemsTileView
                     int index = SelectedGraphicId;
 
                     if (index >= 0 && index < Art.GetMaxItemId())
-                    {
+                    {   // Create a new bitmap with the same size as the image from the clipboard
                         Bitmap newBmp = new Bitmap(bmp.Width, bmp.Height);
+                        // Set the resolution of the new bitmap to 96 DPI
                         newBmp.SetResolution(96, 96);
-
+                        // Define the colors to Convert
                         Color[] colorsToConvert = new Color[]
                         {
                             Color.FromArgb(211, 211, 211), // #D3D3D3 => #000000
@@ -1492,10 +1494,11 @@ namespace UoFiddler.Controls.UserControls
                             Color.FromArgb(255, 255, 255), // #FFFFFF => #000000
                             Color.FromArgb(254, 254, 254)  // #FEFEFE => #000000
                         };
+                        // Iterate through each pixel of the image
                         for (int x = 0; x < bmp.Width; x++)
                         {
                             for (int y = 0; y < bmp.Height; y++)
-                            {
+                            {   // Get the color of the current pixel
                                 Color pixelColor = bmp.GetPixel(x, y);
                                 if (colorsToConvert.Contains(pixelColor))
                                 {
@@ -1507,7 +1510,7 @@ namespace UoFiddler.Controls.UserControls
                                 }
                             }
                         }
-
+                        // Create a new bitmap with the specified pixel format (32-bit)
                         Bitmap finalBmp = newBmp.Clone(new Rectangle(0, 0, newBmp.Width, newBmp.Height), System.Drawing.Imaging.PixelFormat.Format32bppArgb);
 
                         // Create the "clipboardTemp" directory in the same directory as the main program
