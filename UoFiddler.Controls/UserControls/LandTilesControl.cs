@@ -1186,7 +1186,7 @@ namespace UoFiddler.Controls.UserControls
                         Directory.CreateDirectory(directoryPath);
 
                         // Save the final bitmap to a file in the "clipboardTemp" directory with the selected index and an additional name "LandTiles"
-                        string fileName = $"LandTiles_{index:X}.bmp";
+                        string fileName = $"LandTiles_Hex_Adress_{index:X}.bmp";
                         string filePath = Path.Combine(directoryPath, fileName);
                         newBmp.Save(filePath);
 
