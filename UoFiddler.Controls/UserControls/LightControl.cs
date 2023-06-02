@@ -223,7 +223,6 @@ namespace UoFiddler.Controls.UserControls
                 MessageBox.Show("Error: Invalid image!");
             }
         }
-
         private void OnClickRemove(object sender, EventArgs e)
         {
             if (treeView1.SelectedNode == null)
@@ -244,7 +243,6 @@ namespace UoFiddler.Controls.UserControls
             treeView1.Invalidate();
             Options.ChangedUltimaClass["Light"] = true;
         }
-
         private void OnClickReplace(object sender, EventArgs e)
         {
             if (treeView1.SelectedNode == null)
@@ -283,7 +281,6 @@ namespace UoFiddler.Controls.UserControls
                 }
             }
         }
-
         private void OnTextChangedInsert(object sender, EventArgs e)
         {
             if (Utils.ConvertStringToInt(InsertText.Text, out int index, 0, 99))
@@ -295,7 +292,6 @@ namespace UoFiddler.Controls.UserControls
                 InsertText.ForeColor = Color.Red;
             }
         }
-
         private void OnKeyDownInsert(object sender, KeyEventArgs e)
         {
             if (e.KeyCode != Keys.Enter)
@@ -353,7 +349,6 @@ namespace UoFiddler.Controls.UserControls
                 Options.ChangedUltimaClass["Light"] = true;
             }
         }
-
         private void OnClickSave(object sender, EventArgs e)
         {
             Ultima.Light.Save(Options.OutputPath);
@@ -391,7 +386,6 @@ namespace UoFiddler.Controls.UserControls
             MessageBox.Show($"Light saved to {fileName}", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information,
                 MessageBoxDefaultButton.Button1);
         }
-
         private void OnClickExportJpg(object sender, EventArgs e)
         {
             if (treeView1.SelectedNode == null)
@@ -417,7 +411,6 @@ namespace UoFiddler.Controls.UserControls
         {
             pictureBox1.Image = GetImage();
         }
-
         private void LandTileTextChanged(object sender, EventArgs e)
         {
             if (!_loaded)
@@ -425,9 +418,22 @@ namespace UoFiddler.Controls.UserControls
                 return;
             }
 
+            // Keep the contextMenuStrip2 menu open false ist open true is close
+            contextMenuStrip2.AutoClose = true;
+
             if (Utils.ConvertStringToInt(LandTileText.Text, out int index, 0, 0x3FFF))
             {
                 LandTileText.ForeColor = !Ultima.Art.IsValidLand(index) ? Color.Red : Color.Black;
+
+                // Show preview of selected land tile image
+                Bitmap landTileImage = Ultima.Art.GetLand(index);
+                if (landTileImage != null)
+                {
+                    ShowPreviewPopup(landTileImage);
+                }
+
+                // Set the current image index to the entered index
+                _currentImageIndex = index;
             }
             else
             {
@@ -435,6 +441,264 @@ namespace UoFiddler.Controls.UserControls
             }
         }
 
+        #region ShowPreviewPopu 1-2 and Next 1-2 and prev 1-2 and Update 1-2
+
+        // Instance variable to store the current image index
+        private int _currentImageIndex;
+        private int _currentImageIndex2;
+
+        // Instance variable to store the preview form
+        private Form _previewForm;
+        private Form _previewForm2;
+
+        //Form LandTiles
+        private void ShowPreviewPopup(Bitmap image)
+        {
+            // Get the parent ToolStrip control of the LandTileText control
+            ToolStrip parentToolStrip = LandTileText.GetCurrentParent();
+
+            // Convert the position of the LandTileText control to screen coordinates
+            Point screenLocation = parentToolStrip.PointToScreen(LandTileText.Bounds.Location);
+
+            // Move the screen location below the LandTileText control
+            screenLocation.Offset(0, LandTileText.Height);
+
+            // Check if the preview form has already been created
+            if (_previewForm == null || _previewForm.IsDisposed)
+            {
+                // Create a new form to display the image
+                _previewForm = new Form
+                {
+                    FormBorderStyle = FormBorderStyle.SizableToolWindow,
+                    StartPosition = FormStartPosition.Manual,
+                    Size = new Size(image.Width + 20, image.Height + 120), // Add space for the buttons and form border
+                    Location = screenLocation,
+                    TopMost = true // Keep the form on top of other windows
+                };
+
+                // Create a new picture box to display the image
+                PictureBox pictureBox = new PictureBox
+                {
+                    Dock = DockStyle.Top,
+                    Image = image,
+                    SizeMode = PictureBoxSizeMode.AutoSize,
+                    Height = image.Height
+                };
+
+                // Add the picture box to the form
+                _previewForm.Controls.Add(pictureBox);
+
+                // Create new buttons to navigate through the images
+                Button nextButton = new Button { Text = "Next", Dock = DockStyle.Bottom, Height = 30 };
+                Button prevButton = new Button { Text = "Prev", Dock = DockStyle.Bottom, Height = 30 };
+
+                // Add event handlers for the buttons
+                nextButton.Click += (s, e) => ShowNextImage();
+                prevButton.Click += (s, e) => ShowPrevImage();
+
+                // Add the buttons to the form
+                _previewForm.Controls.Add(nextButton);
+                _previewForm.Controls.Add(prevButton);
+
+                // Create a new button to close the form
+                Button closeButton = new Button { Text = "Close", Dock = DockStyle.Bottom, Height = 30 };
+                closeButton.Click += (s, e) => _previewForm.Close();
+
+                // Add the button to the form
+                _previewForm.Controls.Add(closeButton);
+            }
+            else
+            {
+                // Update the size of the existing form
+                _previewForm.Size = new Size(image.Width + 20, image.Height + 120); // Add space for the buttons and form border
+
+                // Update the image displayed in the picture box
+                PictureBox pictureBox = (PictureBox)_previewForm.Controls[0];
+                pictureBox.Image = image;
+            }
+
+            // Show the preview form
+            _previewForm.Show();
+        }
+
+        //Form StaticItems
+        private void ShowPreviewPopup2(Bitmap image)
+        {
+            // Get the parent ToolStrip control of the LightTileText control
+            ToolStrip parentToolStrip = LightTileText.GetCurrentParent();
+
+            // Convert the position of the LightTileText control to screen coordinates
+            Point screenLocation = parentToolStrip.PointToScreen(LightTileText.Bounds.Location);
+
+            // Move the screen location below the LightTileText control
+            screenLocation.Offset(0, LightTileText.Height);
+
+            // Check if the preview form has already been created
+            if (_previewForm2 == null || _previewForm2.IsDisposed)
+            {
+                // Create a new form to display the image
+                _previewForm2 = new Form
+                {
+                    FormBorderStyle = FormBorderStyle.SizableToolWindow,
+                    StartPosition = FormStartPosition.Manual,
+                    Size = new Size(image.Width + 20, image.Height + 120), // Add space for the buttons and form border
+                    Location = screenLocation,
+                    TopMost = true // Keep the form on top of other windows
+                };
+
+                // Create a new picture box to display the image
+                PictureBox pictureBox = new PictureBox
+                {
+                    Dock = DockStyle.Top,
+                    Image = image,
+                    SizeMode = PictureBoxSizeMode.AutoSize,
+                    Height = image.Height
+                };
+
+                // Add the picture box to the form
+                _previewForm2.Controls.Add(pictureBox);
+
+                // Create new buttons to navigate through the images
+                Button nextButton = new Button { Text = "Next", Dock = DockStyle.Bottom, Height = 30 };
+                Button prevButton = new Button { Text = "Prev", Dock = DockStyle.Bottom, Height = 30 };
+
+                // Add event handlers for the buttons
+                nextButton.Click += (s, e) => ShowNextImage2();
+                prevButton.Click += (s, e) => ShowPrevImage2();
+
+                // Add the buttons to the form
+                _previewForm2.Controls.Add(nextButton);
+                _previewForm2.Controls.Add(prevButton);
+
+                // Create a new button to close the form
+                Button closeButton = new Button { Text = "Close", Dock = DockStyle.Bottom, Height = 30 };
+                closeButton.Click += (s, e) => _previewForm2.Close();
+
+                // Add the button to the form 
+                _previewForm2.Controls.Add(closeButton);
+            }
+            else
+            {
+                // Update size of existing form 
+                _previewForm2.Size = new Size(image.Width + 20, image.Height + 120);
+                PictureBox pictureBox = (PictureBox)_previewForm2.Controls[0];
+                pictureBox.Image = image;
+            }
+
+            _previewForm2.Show();
+        }
+
+        // Method to show the next image
+        private void ShowNextImage()
+        {
+            // Increase the current image index.
+            do
+            {
+                _currentImageIndex++;
+            } while (!Ultima.Art.IsValidLand(_currentImageIndex) && _currentImageIndex <= Ultima.Art.GetMaxItemId());
+
+            // Check if the index is valid.
+            if (_currentImageIndex > Ultima.Art.GetMaxItemId())
+            {
+                _currentImageIndex = 0;
+            }
+
+            // Display the next image.
+            ShowPreviewPopup(Ultima.Art.GetLand(_currentImageIndex));
+
+            // Update the display.
+            UpdateDisplay();
+        }
+
+        // Method to show the previous image
+        private void ShowPrevImage()
+        {
+            // Decrease the current image index.
+            do
+            {
+                _currentImageIndex--;
+            } while (!Ultima.Art.IsValidLand(_currentImageIndex) && _currentImageIndex >= 0);
+
+
+            // Check if the index is valid.
+            if (_currentImageIndex < 0)
+            {
+                //_currentImageIndex = Ultima.Art.GetMaxItemId();
+                _currentImageIndex = 0;
+                return;
+            }
+
+            // Display the previous image.
+            ShowPreviewPopup(Ultima.Art.GetLand(_currentImageIndex));
+
+            // Update the display.
+            UpdateDisplay();
+        }
+
+        // Method to show the next image for items
+        private void ShowNextImage2()
+        {
+            // Increase the current image index for items
+            do
+            {
+                _currentImageIndex2++;
+            } while (!Ultima.Art.IsValidStatic(_currentImageIndex2) && _currentImageIndex2 <= Ultima.Art.GetMaxItemId());
+
+            // Check if the index is valid for items
+            if (_currentImageIndex2 > Ultima.Art.GetMaxItemId())
+            {
+                _currentImageIndex2 = 0;
+            }
+
+            // Update the display for items
+            UpdateDisplay2();
+        }
+
+        // Method to show the previous image for items
+        private void ShowPrevImage2()
+        {
+            // Decrease the current image index for items
+            do
+            {
+                _currentImageIndex2--;
+            } while (!Ultima.Art.IsValidStatic(_currentImageIndex2) && _currentImageIndex2 >= 0);
+
+            // Check if the index is valid for items
+            if (_currentImageIndex2 < 0)
+            {
+                _currentImageIndex2 = 0;
+                return;
+            }
+
+            // Update the display for items
+            UpdateDisplay2();
+        }
+
+        // Method to update the display.
+        private void UpdateDisplay()
+        {
+            // Display the image.
+            ShowPreviewPopup(Ultima.Art.GetLand(_currentImageIndex));
+
+            // Aktualisiere _landTile
+            _landTile = _currentImageIndex;
+
+            pictureBox1.Image = GetImage();
+            LandTileText.Text = _currentImageIndex.ToString();
+        }
+
+        // Method to update the display for items
+        private void UpdateDisplay2()
+        {
+            // Show the image for items
+            ShowPreviewPopup2(Ultima.Art.GetStatic(_currentImageIndex2));
+
+            // Update _lightTile and pictureBox1.Image and LightTileText.Text for items
+            _lightTile = _currentImageIndex2;
+            pictureBox1.Image = GetImage();
+            LightTileText.Text = _currentImageIndex2.ToString();
+        }
+        #endregion
         private void LandTileKeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode != Keys.Enter)
@@ -455,8 +719,17 @@ namespace UoFiddler.Controls.UserControls
             contextMenuStrip2.Close();
             _landTile = index;
             pictureBox1.Image = GetImage();
-        }
 
+            // Show the selected land tile image in the ShowPreviewPopup form
+            Bitmap landTileImage = Ultima.Art.GetLand(index);
+            if (landTileImage != null)
+            {
+                ShowPreviewPopup(landTileImage);
+            }
+
+            // Update the current image index for land tiles
+            _currentImageIndex = index;
+        }
         private void LightTileTextChanged(object sender, EventArgs e)
         {
             if (!_loaded)
@@ -464,9 +737,22 @@ namespace UoFiddler.Controls.UserControls
                 return;
             }
 
+            // Keep the contextMenuStrip2 menu open
+            contextMenuStrip2.AutoClose = true;
+
             if (Utils.ConvertStringToInt(LightTileText.Text, out int index, 0, Ultima.Art.GetMaxItemId()))
             {
                 LightTileText.ForeColor = !Ultima.Art.IsValidStatic(index) ? Color.Red : Color.Black;
+
+                // Show preview of selected item image
+                Bitmap itemImage = Ultima.Art.GetStatic(index);
+                if (itemImage != null)
+                {
+                    ShowPreviewPopup2(itemImage);
+                }
+
+                // Set the current image index for items to the entered index
+                _currentImageIndex2 = index;
             }
             else
             {
@@ -485,10 +771,25 @@ namespace UoFiddler.Controls.UserControls
                         return;
                     }
 
-                    contextMenuStrip2.Close();
                     _lightTile = index;
                     pictureBox1.Image = GetImage();
+
+                    // Show the selected item image in the ShowPreviewPopup2 form
+                    Bitmap itemImage = Ultima.Art.GetStatic(index);
+                    if (itemImage != null)
+                    {
+                        ShowPreviewPopup2(itemImage);
+                    }
+
+                    // Update the current image index for items
+                    _currentImageIndex2 = index;
                 }
+
+                // Close the contextMenuStrip2 menu when the user presses the Enter key
+                contextMenuStrip2.Close();
+
+                // Close the preview form when the user presses the Enter key
+                _previewForm2?.Close();
             }
         }
 
@@ -656,7 +957,6 @@ namespace UoFiddler.Controls.UserControls
                 }
             }
         }
-
         private void InsertText2_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Check if the key pressed is not a control key and not a digit
@@ -666,7 +966,6 @@ namespace UoFiddler.Controls.UserControls
                 e.Handled = true;
             }
         }
-
         private void InsertText2_KeyDown(object sender, KeyEventArgs e)
         {
             // Check if the key pressed is the Enter key
@@ -682,8 +981,6 @@ namespace UoFiddler.Controls.UserControls
             // Call the importToolStripMenuItem_Click method
             importToolStripMenuItem_Click(sender, e);
         }
-
-
         #endregion
     }
 }
