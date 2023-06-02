@@ -118,7 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>Version 4.10.7
+    <value>Version 4.10.8
+-The Light has received another extension. It now includes two forms, each containing LandTiles and StaticItems, allowing for browsing and previewing them in advance. The forms can be positioned flexibly and function across tabs, enabling scrolling up and down.
+
+Version 4.10.7
 -Enable multiple selection for saving in Items and LandTiles by pressing the Ctrl key, then selecting the desired items, and finally clicking on the Save button with the respective format.
 -Light has received the functions of copying and importing from the clipboard, as well as copying from the clipboard to the ID slot.
 
