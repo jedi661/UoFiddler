@@ -834,15 +834,20 @@ namespace UoFiddler.Controls.UserControls
             // Create a new ToolTip control.
             ToolTip toolTip = new ToolTip();
 
-            // Copy the text from the textBoxPhotoshopCode to the clipboard.
-            Clipboard.SetText(textBoxPhotoshopCode.Text);
-
             // Get the text from the textBoxPhotoshopCode.
             string text = textBoxPhotoshopCode.Text;
 
-            // Display a message using the ToolTip control.
-            toolTip.Show($"Copied '{text}' to clipboard", textBoxPhotoshopCode);
+            // Check if the text is not empty.
+            if (!string.IsNullOrEmpty(text))
+            {
+                // Copy the text from the textBoxPhotoshopCode to the clipboard.
+                Clipboard.SetText(text);
+
+                // Display a message using the ToolTip control.
+                toolTip.Show($"Copied '{text}' to clipboard", textBoxPhotoshopCode);
+            }
         }
+
 
         #endregion
     }
