@@ -10,6 +10,7 @@
  ***************************************************************************/
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
@@ -27,6 +28,33 @@ namespace UoFiddler.Forms
         public MainForm()
         {
             InitializeComponent();
+
+            // Please define the desired order of the tabs.
+            string[] tabOrder = new string[] { "StartTab", "ItemsTab","GumpsTab", "DressTab", "TileDataTab", "LandTilesTab", "TextureTab", "MapTab" , "MultiMapTab", "MultisTab", "RadarColTab", "HuesTab", "AnimationTab", "AnimDataTab", "LightTab", "SoundsTab", "SkillsTab", "SkillGrpTab", "SpeechTab", "ClilocTab", "FontsTab", };
+
+            // Create a new list of TabPages.
+            List<TabPage> orderedPages = new List<TabPage>();
+
+            // Add the TabPages to the list in the desired order.
+            foreach (string tabName in tabOrder)
+            {
+                TabPage tabPage = TabPanel.TabPages[tabName];
+                orderedPages.Add(tabPage);
+            }
+
+            // Remove all TabPages from the TabPanel.
+            TabPanel.TabPages.Clear();
+
+            // Add the newly ordered TabPages to the TabPanel.
+            foreach (TabPage tabPage in orderedPages)
+            {
+                TabPanel.TabPages.Add(tabPage);
+            }
+
+            // Set the DrawMode property of the TabPanel control
+            TabPanel.DrawMode = TabDrawMode.OwnerDrawFixed;
+            // Register the TabPanel_DrawItem method as an event handler for the DrawItem event of the TabPanel control
+            TabPanel.DrawItem += TabPanel_DrawItem;
 
             if (FiddlerOptions.StoreFormState)
             {
@@ -79,6 +107,71 @@ namespace UoFiddler.Forms
                 }
             }
         }
+
+        #region TabPanel_DrawItem => tab design
+        // The TabPanel_DrawItem method is an event handler for the DrawItem event of the TabPanel control
+        private void TabPanel_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            // Get the Graphics object to draw the tabs
+            Graphics g = e.Graphics;
+            // Create a brush to draw the text of the tabs
+            Brush textBrush = new SolidBrush(TabPanel.ForeColor);
+            // Get the current TabPage
+            TabPage tabPage = TabPanel.TabPages[e.Index];
+            // Get the bounds of the current TabPage
+            Rectangle tabBounds = TabPanel.GetTabRect(e.Index);
+            // Select the background color based on the name of the tab
+            Color backColor;
+            switch (tabPage.Name)
+            {
+                case "MapTab":
+                case "TextureTab":
+                case "LandTilesTab":
+                case "MultiMapTab":
+                    backColor = Color.LightGreen;
+                    break;
+                case "ItemsTab":
+                case "GumpsTab":
+                case "DressTab":
+                case "TileDataTab":
+                    backColor = Color.LightBlue;
+                    break;
+                case "MultisTab":
+                case "RadarColTab":
+                case "HuesTab":
+                    backColor = Color.Orange;
+                    break;
+                case "AnimationTab":
+                case "AnimDataTab":
+                    backColor = Color.LightCoral;
+                    break;
+                case "SoundsTab":
+                case "LightTab":
+                case "SkillsTab":
+                case "SkillGrpTab":
+                case "ClilocTab":
+                case "FontsTab":
+                case "SpeechTab":
+                    backColor = Color.White;
+                    break;
+                default:
+                    backColor = TabPanel.BackColor;
+                    break;
+            }
+            // Fill the background of the current TabPage with the selected color
+            g.FillRectangle(new SolidBrush(backColor), e.Bounds);
+            // Create a StringFormat object to center the text in the TabPage
+            StringFormat stringFlags = new StringFormat
+            {
+                Alignment = StringAlignment.Center,
+                LineAlignment = StringAlignment.Center
+            };
+            // Draw the text of the current TabPage
+            g.DrawString(tabPage.Text, TabPanel.Font, textBrush, tabBounds, stringFlags);
+            // Dispose of the brush
+            textBrush.Dispose();
+        }
+        #endregion
 
         private PathSettingsForm _pathSettingsForm = new PathSettingsForm();
 
