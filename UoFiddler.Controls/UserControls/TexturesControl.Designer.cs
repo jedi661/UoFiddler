@@ -60,6 +60,8 @@ namespace UoFiddler.Controls.UserControls
             copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             importFromClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             importByTempToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            um90GradToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStrip1 = new System.Windows.Forms.ToolStrip();
             GraphicLabel = new System.Windows.Forms.ToolStripLabel();
             MiscToolStripDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
@@ -74,16 +76,15 @@ namespace UoFiddler.Controls.UserControls
             SaveButton = new System.Windows.Forms.ToolStripButton();
             toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             TextureTileView = new TileView.TileViewControl();
-            toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             contextMenuStrip1.SuspendLayout();
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // contextMenuStrip1
             // 
-            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { showFreeSlotsToolStripMenuItem, toolStripSeparator5, exportImageToolStripMenuItem, toolStripSeparator2, findNextFreeSlotToolStripMenuItem, removeToolStripMenuItem, replaceToolStripMenuItem, replaceStartingFromToolStripMenuItem, insertAtToolStripMenuItem, toolStripSeparator6, copyToolStripMenuItem, importFromClipboardToolStripMenuItem, importByTempToolStripMenuItem, toolStripSeparator7 });
+            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { showFreeSlotsToolStripMenuItem, toolStripSeparator5, exportImageToolStripMenuItem, toolStripSeparator2, findNextFreeSlotToolStripMenuItem, removeToolStripMenuItem, replaceToolStripMenuItem, replaceStartingFromToolStripMenuItem, insertAtToolStripMenuItem, toolStripSeparator6, copyToolStripMenuItem, importFromClipboardToolStripMenuItem, importByTempToolStripMenuItem, toolStripSeparator7, um90GradToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new System.Drawing.Size(194, 248);
+            contextMenuStrip1.Size = new System.Drawing.Size(194, 292);
             // 
             // showFreeSlotsToolStripMenuItem
             // 
@@ -215,6 +216,19 @@ namespace UoFiddler.Controls.UserControls
             importByTempToolStripMenuItem.ToolTipText = "Imports the graphic via Temp directory";
             importByTempToolStripMenuItem.Click += importByTempToolStripMenuItem_Click;
             // 
+            // toolStripSeparator7
+            // 
+            toolStripSeparator7.Name = "toolStripSeparator7";
+            toolStripSeparator7.Size = new System.Drawing.Size(190, 6);
+            // 
+            // um90GradToolStripMenuItem
+            // 
+            um90GradToolStripMenuItem.Name = "um90GradToolStripMenuItem";
+            um90GradToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            um90GradToolStripMenuItem.Text = "Rotate by 90 degrees.";
+            um90GradToolStripMenuItem.ToolTipText = "Rotate by 90 degrees.";
+            um90GradToolStripMenuItem.Click += um90GradToolStripMenuItem_Click;
+            // 
             // toolStrip1
             // 
             toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
@@ -343,11 +357,6 @@ namespace UoFiddler.Controls.UserControls
             TextureTileView.ItemSelectionChanged += TextureTileView_ItemSelectionChanged;
             TextureTileView.DrawItem += TextureTileView_DrawItem;
             // 
-            // toolStripSeparator7
-            // 
-            toolStripSeparator7.Name = "toolStripSeparator7";
-            toolStripSeparator7.Size = new System.Drawing.Size(190, 6);
-            // 
             // TexturesControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -403,5 +412,6 @@ namespace UoFiddler.Controls.UserControls
         private System.Windows.Forms.ToolStripMenuItem importFromClipboardToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importByTempToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripMenuItem um90GradToolStripMenuItem;
     }
 }

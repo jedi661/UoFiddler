@@ -1005,5 +1005,43 @@ namespace UoFiddler.Controls.UserControls
             }
         }
         #endregion
+
+        #region a 90-degree rotation
+        private void um90GradToolStripMenuItem_Click(object sender, EventArgs e)
+        { // Check if a valid index is selected
+            if (_selectedTextureId < 0)
+            {
+                return;
+            }
+            // Get the texture at the selected index
+            Bitmap originalBmp = Textures.GetTexture(_selectedTextureId);
+            if (originalBmp == null)
+            {
+                return;
+            }
+
+            /// Create a new Bitmap with the same size as the original texture
+            Bitmap rotatedBmp = new Bitmap(originalBmp.Height, originalBmp.Width);
+            // Use the Graphics class to rotate the image 90 degrees to the left
+            using (Graphics g = Graphics.FromImage(rotatedBmp))
+            {
+                // Move the origin to the center of the Bitmap
+                g.TranslateTransform((float)rotatedBmp.Width / 2, (float)rotatedBmp.Height / 2);
+                // Rotate the image 90 degrees to the left
+                g.RotateTransform(-90);
+                // Move the origin back to the top left corner
+                g.TranslateTransform(-(float)originalBmp.Width / 2, -(float)originalBmp.Height / 2);
+                // Draw the original image onto the new Bitmap
+                g.DrawImage(originalBmp, new Point(0, 0));
+            }
+
+            // Replace the texture at the selected index with the rotated image
+            Textures.Replace(_selectedTextureId, rotatedBmp);
+            ControlEvents.FireTextureChangeEvent(this, _selectedTextureId);
+
+            // Update the view
+            TextureTileView.Invalidate();
+        }
+        #endregion
     }
 }
