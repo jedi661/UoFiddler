@@ -30,7 +30,7 @@ namespace UoFiddler.Forms
             InitializeComponent();
 
             // Please define the desired order of the tabs.
-            string[] tabOrder = new string[] { "StartTab", "ItemsTab","GumpsTab", "DressTab", "TileDataTab", "LandTilesTab", "TextureTab", "MapTab" , "MultiMapTab", "MultisTab", "RadarColTab", "HuesTab", "AnimationTab", "AnimDataTab", "LightTab", "SoundsTab", "SkillsTab", "SkillGrpTab", "SpeechTab", "ClilocTab", "FontsTab", };
+            string[] tabOrder = new string[] { "StartTab", "ItemsTab", "GumpsTab", "DressTab", "TileDataTab", "LandTilesTab", "TextureTab", "MapTab", "MultiMapTab", "MultisTab", "RadarColTab", "HuesTab", "AnimationTab", "AnimDataTab", "LightTab", "SoundsTab", "SkillsTab", "SkillGrpTab", "SpeechTab", "ClilocTab", "FontsTab", };
 
             // Create a new list of TabPages.
             List<TabPage> orderedPages = new List<TabPage>();
@@ -734,6 +734,14 @@ namespace UoFiddler.Forms
             using (AboutBoxForm aboutBoxForm = new AboutBoxForm())
             {
                 aboutBoxForm.ShowDialog(this);
+            }
+        }
+
+        private void changelogToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (ChangeLogForm changelogForm = new ChangeLogForm())
+            {
+                changelogForm.ShowDialog(this);
             }
         }
     }
