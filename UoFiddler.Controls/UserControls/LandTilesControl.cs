@@ -1029,7 +1029,7 @@ namespace UoFiddler.Controls.UserControls
             {
                 MessageBox.Show("No image in the clipboard.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }        
+        }
 
         //Ingnore to temp.
         /*private void importToTempToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1123,10 +1123,10 @@ namespace UoFiddler.Controls.UserControls
             }*/
 
         private void importToTempToolStripMenuItem_Click(object sender, EventArgs e)
-        {   
+        {
             // Check if the clipboard contains an image
             if (Clipboard.ContainsImage())
-            {   
+            {
                 // Retrieve the image from the clipboard
                 using (Bitmap bmp = new Bitmap(Clipboard.GetImage()))
                 {
@@ -1159,7 +1159,7 @@ namespace UoFiddler.Controls.UserControls
                             {
                                 // Check if the current pixel is within the desired graphic bounds
                                 if (x >= offsetX && x < offsetX + graphicSize && y >= offsetY && y < offsetY + graphicSize)
-                                {   
+                                {
                                     // Get the color of the current pixel
                                     Color pixelColor = bmp.GetPixel(x, y);
                                     // Check if the color of the current pixel is one of the colors to Convert
@@ -1221,6 +1221,45 @@ namespace UoFiddler.Controls.UserControls
             {
                 MessageBox.Show("No image in the clipboard.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+        #endregion
+
+        #region Bitmap graphic 90 degrees to the left
+        private void rotateBy90DegreesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Check if a valid index is selected
+            if (_selectedGraphicId < 0)
+            {
+                return;
+            }
+            // Get the graphic at the selected index
+            Bitmap originalBmp = Art.GetLand(_selectedGraphicId);
+            if (originalBmp == null)
+            {
+                return;
+            }
+
+            // Create a new Bitmap with the same size as the original graphic
+            Bitmap rotatedBmp = new Bitmap(originalBmp.Height, originalBmp.Width);
+            // Use the Graphics class to rotate the image 90 degrees to the left
+            using (Graphics g = Graphics.FromImage(rotatedBmp))
+            {
+                // Move the origin to the center of the Bitmap
+                g.TranslateTransform((float)rotatedBmp.Width / 2, (float)rotatedBmp.Height / 2);
+                // Rotate the image 90 degrees to the left
+                g.RotateTransform(-90);
+                // Move the origin back to the top left corner
+                g.TranslateTransform(-(float)originalBmp.Width / 2, -(float)originalBmp.Height / 2);
+                // Draw the original image onto the new Bitmap
+                g.DrawImage(originalBmp, new Point(0, 0));
+            }
+
+            // Replace the graphic at the selected index with the rotated image
+            Art.ReplaceLand(_selectedGraphicId, rotatedBmp);
+            ControlEvents.FireLandTileChangeEvent(this, _selectedGraphicId);
+
+            // Update the view
+            LandTilesTileView.Invalidate();
         }
         #endregion
     }
