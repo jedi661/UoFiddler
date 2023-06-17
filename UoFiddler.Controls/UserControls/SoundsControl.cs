@@ -752,9 +752,9 @@ namespace UoFiddler.Controls.UserControls
             using (OpenFileDialog dialog = new OpenFileDialog())
             {
                 dialog.Multiselect = false;
-                dialog.Title = "Choose wave file";
+                dialog.Title = "Choose audio file";
                 dialog.CheckFileExists = true;
-                dialog.Filter = "wav file (*.wav)|*.wav";
+                dialog.Filter = "Audio files (*.wav)|*.wav";
 
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
@@ -766,7 +766,14 @@ namespace UoFiddler.Controls.UserControls
 
         private void AddInsertReplaceButton_Click(object sender, EventArgs e)
         {
-            OnClickReplace(null, e);
+            if (!string.IsNullOrEmpty(WavFileInsertTextbox.Text))
+            {
+                OnClickReplace(null, e);
+            }
+            else
+            {
+                MessageBox.Show("Please select a file.");
+            }
         }
 
         private void SearchByIdButton_Click(object sender, EventArgs e)

@@ -203,7 +203,7 @@ namespace UoFiddler.Forms
             // 
             StartTab.BackColor = System.Drawing.Color.White;
             StartTab.BackgroundImage = Properties.Resources.UOFiddler;
-            StartTab.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            StartTab.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             StartTab.Controls.Add(Versionlabel);
             StartTab.Location = new System.Drawing.Point(4, 24);
             StartTab.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -990,26 +990,26 @@ namespace UoFiddler.Forms
             // toolStripMenuItemHelp
             // 
             toolStripMenuItemHelp.Name = "toolStripMenuItemHelp";
-            toolStripMenuItemHelp.Size = new System.Drawing.Size(180, 22);
+            toolStripMenuItemHelp.Size = new System.Drawing.Size(132, 22);
             toolStripMenuItemHelp.Text = "Help";
             toolStripMenuItemHelp.Click += ToolStripMenuItemHelp_Click;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            toolStripSeparator1.Size = new System.Drawing.Size(129, 6);
             // 
             // toolStripMenuItemAbout
             // 
             toolStripMenuItemAbout.Name = "toolStripMenuItemAbout";
-            toolStripMenuItemAbout.Size = new System.Drawing.Size(180, 22);
+            toolStripMenuItemAbout.Size = new System.Drawing.Size(132, 22);
             toolStripMenuItemAbout.Text = "About";
             toolStripMenuItemAbout.Click += ToolStripMenuItemAbout_Click;
             // 
             // changelogToolStripMenuItem
             // 
             changelogToolStripMenuItem.Name = "changelogToolStripMenuItem";
-            changelogToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            changelogToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             changelogToolStripMenuItem.Text = "Changelog";
             changelogToolStripMenuItem.Click += changelogToolStripMenuItem_Click;
             // 

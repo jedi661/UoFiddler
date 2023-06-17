@@ -40,7 +40,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin
         /// <summary>
         /// Description of the Plugin's purpose
         /// </summary>
-        public override string Description { get; } = "This is ConverterMultiText plugin.";
+        public override string Description { get; } = "This is ConverterMultiText plugin and AdminTool.";
 
         /// <summary>
         /// Author of the plugin
@@ -82,7 +82,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin
         {
             ToolStripMenuItem item = new ToolStripMenuItem
             {
-                Text = "ConverterMultiText"
+                Text = "AdminTool" //ConverterMultiText
             };
             item.Click += ItemClick;
             toolStrip.DropDownItems.Add(item);

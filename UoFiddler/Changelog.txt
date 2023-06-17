@@ -2,6 +2,11 @@ Version : 4.10.11 #XG1
 - Changelog added.
 - Changelog.txt added.
 - Changelog Search feature added.
+- System.NullReferenceException: Sound Button Add\Replace is fixed (If no file is selected).
+- AdminTool Added a ping and tracert button.
+
+Version : 4.10.10 #XG1
+- LandTile added: a 90-degree rotation to the left.
 
 Version : 4.10.9 #XG1
 - For the MainForm, a TabPanel_DrawItem event was added. The tabs are being reloaded and sorted differently. Additionally, the tabs have been assigned their own colors for identification purposes.
