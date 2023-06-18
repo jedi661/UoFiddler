@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using Ultima;
@@ -722,11 +723,16 @@ namespace UoFiddler.Forms
 
         private void ToolStripMenuItemHelp_Click(object sender, EventArgs e)
         {
-            Process.Start(new ProcessStartInfo
+            /*Process.Start(new ProcessStartInfo
             {
                 FileName = "http://uofiddler.polserver.com/help.html",
                 UseShellExecute = true
-            });
+            });*/
+
+            using (HelpDokuForm helpDokuForm = new HelpDokuForm())
+            {
+                helpDokuForm.ShowDialog();
+            }
         }
 
         private void ToolStripMenuItemAbout_Click(object sender, EventArgs e)
@@ -742,6 +748,20 @@ namespace UoFiddler.Forms
             using (ChangeLogForm changelogForm = new ChangeLogForm())
             {
                 changelogForm.ShowDialog(this);
+            }
+        }
+
+        private void HelpDokuForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            // Get the path to the %LOCALAPPDATA% directory
+            string localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            // Create the path to the UoFiddler.exe.WebView2 folder in the %LOCALAPPDATA% directory
+            string userDataFolder = Path.Combine(localAppData, "UoFiddler.exe.WebView2");
+            // Check if the UoFiddler.exe.WebView2 folder exists
+            if (Directory.Exists(userDataFolder))
+            {
+                // Delete the UoFiddler.exe.WebView2 folder
+                Directory.Delete(userDataFolder, true);
             }
         }
     }

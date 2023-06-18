@@ -1026,6 +1026,7 @@ namespace UoFiddler.Forms
             Name = "MainForm";
             Text = "UOFiddler";
             FormClosing += OnClosing;
+            FormClosed += HelpDokuForm_FormClosed;
             TabPanel.ResumeLayout(false);
             contextMenuStripMainForm.ResumeLayout(false);
             StartTab.ResumeLayout(false);

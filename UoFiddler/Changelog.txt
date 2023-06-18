@@ -4,6 +4,7 @@ Version : 4.10.11 #XG1
 - Changelog Search feature added.
 - System.NullReferenceException: Sound Button Add\Replace is fixed (If no file is selected).
 - AdminTool Added a ping and tracert button.
+- Help link removed, a documentation form created with Help Doku so that the application description is local, the whole thing is made possible with WebView, the cache is stored in %LOCALAPPDATA%, and when UOFiddler is closed, the UoFiddler.exe.WebView2 folder is deleted.
 
 Version : 4.10.10 #XG1
 - LandTile added: a 90-degree rotation to the left.
