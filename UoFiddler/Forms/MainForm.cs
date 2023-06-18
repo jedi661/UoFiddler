@@ -751,6 +751,7 @@ namespace UoFiddler.Forms
             }
         }
 
+        #region Delete WebView Cache
         private void HelpDokuForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             // Get the path to the %LOCALAPPDATA% directory
@@ -764,5 +765,6 @@ namespace UoFiddler.Forms
                 Directory.Delete(userDataFolder, true);
             }
         }
+        #endregion
     }
 }
