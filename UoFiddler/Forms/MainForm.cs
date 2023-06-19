@@ -836,5 +836,25 @@ namespace UoFiddler.Forms
             }
         }
         #endregion
+
+        #region Links
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://uo-freeshards.de",
+                UseShellExecute = true
+            });
+        }        
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "http://www.uo-pixel.de",
+                UseShellExecute = true
+            });
+        }
+        #endregion
     }
 }

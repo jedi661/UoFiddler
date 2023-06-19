@@ -2,6 +2,7 @@ Version : 4.10.12 #XG1
 - Documentation now available.
 - Added logo selection in the main menu under the context menu, with multiple graphics to choose from.
 - The logo selection is now being saved, and it will be displayed again upon restarting with the selected logo.
+- Two links to the German community focusing on development, graphics, and design have been added.
 
 Version : 4.10.11 #XG1
 - Changelog added.
