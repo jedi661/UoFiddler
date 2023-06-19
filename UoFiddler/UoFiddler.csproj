@@ -174,97 +174,97 @@
 	  <None Update="Sound.wav">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
-	  <None Update="UOFiddlerHelp\images\animationsfindnew.jpg">
+	  <None Update="UOFiddlerHelp\images\animationsfindnew.webp">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="UOFiddlerHelp\images\animationsmain.jpg">
+	  <None Update="UOFiddlerHelp\images\animationsmain.webp">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="UOFiddlerHelp\images\animationsremove.jpg">
+	  <None Update="UOFiddlerHelp\images\animationsremove.webp">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="UOFiddlerHelp\images\animationssettings.jpg">
+	  <None Update="UOFiddlerHelp\images\animationssettings.webp">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="UOFiddlerHelp\images\animdata.jpg">
+	  <None Update="UOFiddlerHelp\images\animdata.webp">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="UOFiddlerHelp\images\clilocmain.jpg">
+	  <None Update="UOFiddlerHelp\images\clilocmain.webp">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="UOFiddlerHelp\images\ComponentList.jpg">
+	  <None Update="UOFiddlerHelp\images\ComponentList.webp">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="UOFiddlerHelp\images\dressanim.jpg">
+	  <None Update="UOFiddlerHelp\images\dressanim.webp">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="UOFiddlerHelp\images\dresspaper.jpg">
+	  <None Update="UOFiddlerHelp\images\dresspaper.webp">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="UOFiddlerHelp\images\fonts.jpg">
+	  <None Update="UOFiddlerHelp\images\fonts.webp">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="UOFiddlerHelp\images\gumps.jpg">
+	  <None Update="UOFiddlerHelp\images\gumps.webp">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
 	  <None Update="UOFiddlerHelp\images\header_bg.jpg">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="UOFiddlerHelp\images\hueedit.jpg">
+	  <None Update="UOFiddlerHelp\images\hueedit.webp">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="UOFiddlerHelp\images\huemain.jpg">
+	  <None Update="UOFiddlerHelp\images\huemain.webp">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="UOFiddlerHelp\images\itemsdetail.jpg">
+	  <None Update="UOFiddlerHelp\images\itemsdetail.webp">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="UOFiddlerHelp\images\itemsmain.jpg">
+	  <None Update="UOFiddlerHelp\images\itemsmain.webp">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="UOFiddlerHelp\images\landtiles.jpg">
+	  <None Update="UOFiddlerHelp\images\landtiles.webp">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="UOFiddlerHelp\images\light.jpg">
+	  <None Update="UOFiddlerHelp\images\light.webp">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="UOFiddlerHelp\images\mainoptions.jpg">
+	  <None Update="UOFiddlerHelp\images\mainoptions.webp">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="UOFiddlerHelp\images\mainpathsettings.jpg">
+	  <None Update="UOFiddlerHelp\images\mainpathsettings.webp">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="UOFiddlerHelp\images\mainplugins.jpg">
+	  <None Update="UOFiddlerHelp\images\mainplugins.webp">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="UOFiddlerHelp\images\maintools.jpg">
+	  <None Update="UOFiddlerHelp\images\maintools.webp">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="UOFiddlerHelp\images\mainundock.jpg">
+	  <None Update="UOFiddlerHelp\images\mainundock.webp">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="UOFiddlerHelp\images\mapclient.jpg">
+	  <None Update="UOFiddlerHelp\images\mapclient.webp">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="UOFiddlerHelp\images\mapmain.jpg">
+	  <None Update="UOFiddlerHelp\images\mapmain.webp">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
 	  <None Update="UOFiddlerHelp\images\miniheader_bg.jpg">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="UOFiddlerHelp\images\multimap.jpg">
+	  <None Update="UOFiddlerHelp\images\multimap.webp">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="UOFiddlerHelp\images\multisedit.jpg">
+	  <None Update="UOFiddlerHelp\images\multisedit.webp">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="UOFiddlerHelp\images\multisgraphic.jpg">
+	  <None Update="UOFiddlerHelp\images\multisgraphic.webp">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="UOFiddlerHelp\images\multisimport.jpg">
+	  <None Update="UOFiddlerHelp\images\multisimport.webp">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="UOFiddlerHelp\images\MutliEdit.jpg">
+	  <None Update="UOFiddlerHelp\images\MutliEdit.webp">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
 	  <None Update="UOFiddlerHelp\images\sectionheader_bg.jpg">
@@ -279,22 +279,22 @@
 	  <None Update="UOFiddlerHelp\images\sectionheader_small_gold_bg.jpg">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="UOFiddlerHelp\images\skills.jpg">
+	  <None Update="UOFiddlerHelp\images\skills.webp">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="UOFiddlerHelp\images\sounds.jpg">
+	  <None Update="UOFiddlerHelp\images\sounds.webp">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="UOFiddlerHelp\images\speech.jpg">
+	  <None Update="UOFiddlerHelp\images\speech.webp">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="UOFiddlerHelp\images\start.jpg">
+	  <None Update="UOFiddlerHelp\images\start.webp">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="UOFiddlerHelp\images\texture.jpg">
+	  <None Update="UOFiddlerHelp\images\texture.webp">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="UOFiddlerHelp\images\tiledata.jpg">
+	  <None Update="UOFiddlerHelp\images\tiledata.webp">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
 	  <None Update="UOFiddlerHelp\js\png.js">
