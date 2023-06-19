@@ -108,33 +108,33 @@ namespace UoFiddler.Forms
                 }
             }
 
-            // Füge die verfügbaren Bilder zur toolStripComboBoxImage hinzu
+            // Add the available images to the toolStripComboBoxImage.
             toolStripComboBoxImage.Items.AddRange(new[] { "UOFiddler", "UOFiddler1", "UOFiddler2", "UOFiddler3", "UOFiddler4", "UOFiddler5" });
 
-            // Registriere den Ereignishandler für das SelectedIndexChanged-Ereignis der toolStripComboBoxImage
+            // Register the event handler for the SelectedIndexChanged event of the toolStripComboBoxImage.
             toolStripComboBoxImage.SelectedIndexChanged += ImageSwitcher_SelectedIndexChanged;
 
-            // Lade die gespeicherte Auswahl des Benutzers und setze das Hintergrundbild entsprechend
+            // Load the saved user selection and set the background image accordingly.
             var selectedImage = Properties.Settings.Default.SelectedImage;
             switch (selectedImage)
             {
                 case "UOFiddler":
-                    StartTab.BackgroundImage = Properties.Resources.UOFiddler; // Setze das Hintergrundbild der StartTab auf UOFiddler
+                    StartTab.BackgroundImage = Properties.Resources.UOFiddler; // Set the background image of the StartTab to UOFiddler.
                     break;
                 case "UOFiddler1":
-                    StartTab.BackgroundImage = Properties.Resources.UOFiddler1; // Setze das Hintergrundbild der StartTab auf UOFiddler1
+                    StartTab.BackgroundImage = Properties.Resources.UOFiddler1; // Set the background image of the StartTab to UOFiddler1
                     break;
                 case "UOFiddler2":
-                    StartTab.BackgroundImage = Properties.Resources.UOFiddler2; // Setze das Hintergrundbild der StartTab auf UOFiddler2
+                    StartTab.BackgroundImage = Properties.Resources.UOFiddler2; // Set the background image of the StartTab to UOFiddler2
                     break;
                 case "UOFiddler3":
-                    StartTab.BackgroundImage = Properties.Resources.UOFiddler3; // Setze das Hintergrundbild der StartTab auf UOFiddler3
+                    StartTab.BackgroundImage = Properties.Resources.UOFiddler3; // Set the background image of the StartTab to UOFiddler3
                     break;
                 case "UOFiddler4":
-                    StartTab.BackgroundImage = Properties.Resources.UOFiddler4; // Setze das Hintergrundbild der StartTab auf UOFiddler4
+                    StartTab.BackgroundImage = Properties.Resources.UOFiddler4; // Set the background image of the StartTab to UOFiddler4
                     break;
                 case "UOFiddler5":
-                    StartTab.BackgroundImage = Properties.Resources.UOFiddler5; // Setze das Hintergrundbild der StartTab auf UOFiddler5
+                    StartTab.BackgroundImage = Properties.Resources.UOFiddler5; // Set the background image of the StartTab to UOFiddler5
                     break;
             }
         }
@@ -800,38 +800,38 @@ namespace UoFiddler.Forms
         #region Image Switch
         private void toolStripComboBoxImage_Click(object sender, EventArgs e)
         {
-            // Füge die verfügbaren Bilder zur toolStripComboBoxImage hinzu
+            // Add the available images to the toolStripComboBoxImage.
             toolStripComboBoxImage.Items.AddRange(new[] { "UOFiddler", "UOFiddler1", "UOFiddler2", "UOFiddler3", "UOFiddler4", "UOFiddler5" });
         }
 
-        // Ereignishandler für das SelectedIndexChanged-Ereignis
+        // Event handler for the SelectedIndexChanged event.
         private void ImageSwitcher_SelectedIndexChanged(object sender, EventArgs e)
         {
             var selectedImage = ((ToolStripComboBox)sender).SelectedItem.ToString();
 
-            // Speichere die Auswahl des Benutzers in den Benutzereinstellungen
+            // Save the user's selection in the user settings.
             Properties.Settings.Default.SelectedImage = selectedImage;
             Properties.Settings.Default.Save();
 
             switch (selectedImage)
             {
                 case "UOFiddler":
-                    StartTab.BackgroundImage = Properties.Resources.UOFiddler; // Setze das Hintergrundbild der StartTab auf UOFiddler
+                    StartTab.BackgroundImage = Properties.Resources.UOFiddler; // Set the background image of the StartTab to UOFiddler
                     break;
                 case "UOFiddler1":
-                    StartTab.BackgroundImage = Properties.Resources.UOFiddler1; // Setze das Hintergrundbild der StartTab auf UOFiddler1
+                    StartTab.BackgroundImage = Properties.Resources.UOFiddler1; // Set the background image of the StartTab to UOFiddler1
                     break;
                 case "UOFiddler2":
-                    StartTab.BackgroundImage = Properties.Resources.UOFiddler2; // Setze das Hintergrundbild der StartTab auf UOFiddler2
+                    StartTab.BackgroundImage = Properties.Resources.UOFiddler2; // Set the background image of the StartTab to UOFiddler2
                     break;
                 case "UOFiddler3":
-                    StartTab.BackgroundImage = Properties.Resources.UOFiddler3; // Setze das Hintergrundbild der StartTab auf UOFiddler3
+                    StartTab.BackgroundImage = Properties.Resources.UOFiddler3; // Set the background image of the StartTab to UOFiddler3
                     break;
                 case "UOFiddler4":
-                    StartTab.BackgroundImage = Properties.Resources.UOFiddler4; // Setze das Hintergrundbild der StartTab auf UOFiddler4
+                    StartTab.BackgroundImage = Properties.Resources.UOFiddler4; // Set the background image of the StartTab to UOFiddler4
                     break;
                 case "UOFiddler5":
-                    StartTab.BackgroundImage = Properties.Resources.UOFiddler5; // Setze das Hintergrundbild der StartTab auf UOFiddler5
+                    StartTab.BackgroundImage = Properties.Resources.UOFiddler5; // Set the background image of the StartTab to UOFiddler5.
                     break;
             }
         }
