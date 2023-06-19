@@ -9,9 +9,9 @@
 		<AssemblyTitle>UoFiddler</AssemblyTitle>
 		<Product>UoFiddler</Product>
 		<Copyright>Copyright © 2023</Copyright>
-		<AssemblyVersion>4.10.11</AssemblyVersion>
-		<FileVersion>4.10.11</FileVersion>
-		<Version>4.10.11</Version>
+		<AssemblyVersion>4.10.12</AssemblyVersion>
+		<FileVersion>4.10.12</FileVersion>
+		<Version>4.10.12</Version>
 		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
 	</PropertyGroup>
 	<PropertyGroup>
@@ -29,6 +29,8 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<None Remove="Resources\UOFiddler.jpg" />
+		<None Remove="Resources\UOFiddler1.jpg" />
+		<None Remove="Resources\UOFiddler2.jpg" />
 		<None Remove="Resources\UOFiddlerIcon.ico" />
 	</ItemGroup>
 	<ItemGroup>
@@ -80,11 +82,14 @@
 		<Compile Update="Forms\UnDockedForm.Designer.cs">
 			<DependentUpon>UnDockedForm.cs</DependentUpon>
 		</Compile>
-		<Compile Update="Forms\MainForm.cs">
-			<SubType>Form</SubType>
-		</Compile>
+		<Compile Update="Forms\MainForm.cs" />
 		<Compile Update="Forms\MainForm.Designer.cs">
 			<DependentUpon>MainForm.cs</DependentUpon>
+		</Compile>
+		<Compile Update="Properties\Settings.Designer.cs">
+		  <DesignTimeSharedInput>True</DesignTimeSharedInput>
+		  <AutoGen>True</AutoGen>
+		  <DependentUpon>Settings.settings</DependentUpon>
 		</Compile>
 		<EmbeddedResource Update="Forms\AboutBoxForm.resx">
 			<DependentUpon>AboutBoxForm.cs</DependentUpon>
@@ -141,6 +146,8 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<EmbeddedResource Include="Resources\UOFiddler.jpg" />
+		<EmbeddedResource Include="Resources\UOFiddler1.jpg" />
+		<EmbeddedResource Include="Resources\UOFiddler2.jpg" />
 		<EmbeddedResource Include="Resources\UOFiddlerIcon.ico" />
 		<None Include="Options_default.xml">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -159,6 +166,10 @@
 	<ItemGroup>
 	  <None Update="Changelog.txt">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Properties\Settings.settings">
+	    <Generator>SettingsSingleFileGenerator</Generator>
+	    <LastGenOutput>Settings.Designer.cs</LastGenOutput>
 	  </None>
 	  <None Update="Sound.wav">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>

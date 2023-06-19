@@ -107,6 +107,36 @@ namespace UoFiddler.Forms
                     ToggleView(tab);
                 }
             }
+
+            // Füge die verfügbaren Bilder zur toolStripComboBoxImage hinzu
+            toolStripComboBoxImage.Items.AddRange(new[] { "UOFiddler", "UOFiddler1", "UOFiddler2", "UOFiddler3", "UOFiddler4", "UOFiddler5" });
+
+            // Registriere den Ereignishandler für das SelectedIndexChanged-Ereignis der toolStripComboBoxImage
+            toolStripComboBoxImage.SelectedIndexChanged += ImageSwitcher_SelectedIndexChanged;
+
+            // Lade die gespeicherte Auswahl des Benutzers und setze das Hintergrundbild entsprechend
+            var selectedImage = Properties.Settings.Default.SelectedImage;
+            switch (selectedImage)
+            {
+                case "UOFiddler":
+                    StartTab.BackgroundImage = Properties.Resources.UOFiddler; // Setze das Hintergrundbild der StartTab auf UOFiddler
+                    break;
+                case "UOFiddler1":
+                    StartTab.BackgroundImage = Properties.Resources.UOFiddler1; // Setze das Hintergrundbild der StartTab auf UOFiddler1
+                    break;
+                case "UOFiddler2":
+                    StartTab.BackgroundImage = Properties.Resources.UOFiddler2; // Setze das Hintergrundbild der StartTab auf UOFiddler2
+                    break;
+                case "UOFiddler3":
+                    StartTab.BackgroundImage = Properties.Resources.UOFiddler3; // Setze das Hintergrundbild der StartTab auf UOFiddler3
+                    break;
+                case "UOFiddler4":
+                    StartTab.BackgroundImage = Properties.Resources.UOFiddler4; // Setze das Hintergrundbild der StartTab auf UOFiddler4
+                    break;
+                case "UOFiddler5":
+                    StartTab.BackgroundImage = Properties.Resources.UOFiddler5; // Setze das Hintergrundbild der StartTab auf UOFiddler5
+                    break;
+            }
         }
 
         #region TabPanel_DrawItem => tab design
@@ -763,6 +793,46 @@ namespace UoFiddler.Forms
             {
                 // Delete the UoFiddler.exe.WebView2 folder
                 Directory.Delete(userDataFolder, true);
+            }
+        }
+        #endregion
+
+        #region Image Switch
+        private void toolStripComboBoxImage_Click(object sender, EventArgs e)
+        {
+            // Füge die verfügbaren Bilder zur toolStripComboBoxImage hinzu
+            toolStripComboBoxImage.Items.AddRange(new[] { "UOFiddler", "UOFiddler1", "UOFiddler2", "UOFiddler3", "UOFiddler4", "UOFiddler5" });
+        }
+
+        // Ereignishandler für das SelectedIndexChanged-Ereignis
+        private void ImageSwitcher_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var selectedImage = ((ToolStripComboBox)sender).SelectedItem.ToString();
+
+            // Speichere die Auswahl des Benutzers in den Benutzereinstellungen
+            Properties.Settings.Default.SelectedImage = selectedImage;
+            Properties.Settings.Default.Save();
+
+            switch (selectedImage)
+            {
+                case "UOFiddler":
+                    StartTab.BackgroundImage = Properties.Resources.UOFiddler; // Setze das Hintergrundbild der StartTab auf UOFiddler
+                    break;
+                case "UOFiddler1":
+                    StartTab.BackgroundImage = Properties.Resources.UOFiddler1; // Setze das Hintergrundbild der StartTab auf UOFiddler1
+                    break;
+                case "UOFiddler2":
+                    StartTab.BackgroundImage = Properties.Resources.UOFiddler2; // Setze das Hintergrundbild der StartTab auf UOFiddler2
+                    break;
+                case "UOFiddler3":
+                    StartTab.BackgroundImage = Properties.Resources.UOFiddler3; // Setze das Hintergrundbild der StartTab auf UOFiddler3
+                    break;
+                case "UOFiddler4":
+                    StartTab.BackgroundImage = Properties.Resources.UOFiddler4; // Setze das Hintergrundbild der StartTab auf UOFiddler4
+                    break;
+                case "UOFiddler5":
+                    StartTab.BackgroundImage = Properties.Resources.UOFiddler5; // Setze das Hintergrundbild der StartTab auf UOFiddler5
+                    break;
             }
         }
         #endregion

@@ -45,6 +45,8 @@ namespace UoFiddler.Forms
             TabPanel = new System.Windows.Forms.TabControl();
             contextMenuStripMainForm = new System.Windows.Forms.ContextMenuStrip(components);
             unDockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            switchLogoImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripComboBoxImage = new System.Windows.Forms.ToolStripComboBox();
             StartTab = new System.Windows.Forms.TabPage();
             Versionlabel = new System.Windows.Forms.Label();
             MultisTab = new System.Windows.Forms.TabPage();
@@ -188,16 +190,29 @@ namespace UoFiddler.Forms
             // 
             // contextMenuStripMainForm
             // 
-            contextMenuStripMainForm.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { unDockToolStripMenuItem });
+            contextMenuStripMainForm.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { unDockToolStripMenuItem, switchLogoImageToolStripMenuItem });
             contextMenuStripMainForm.Name = "contextMenuStrip1";
-            contextMenuStripMainForm.Size = new System.Drawing.Size(117, 26);
+            contextMenuStripMainForm.Size = new System.Drawing.Size(176, 48);
             // 
             // unDockToolStripMenuItem
             // 
             unDockToolStripMenuItem.Name = "unDockToolStripMenuItem";
-            unDockToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            unDockToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             unDockToolStripMenuItem.Text = "UnDock";
             unDockToolStripMenuItem.Click += OnClickUnDock;
+            // 
+            // switchLogoImageToolStripMenuItem
+            // 
+            switchLogoImageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripComboBoxImage });
+            switchLogoImageToolStripMenuItem.Name = "switchLogoImageToolStripMenuItem";
+            switchLogoImageToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            switchLogoImageToolStripMenuItem.Text = "Switch Logo Image";
+            // 
+            // toolStripComboBoxImage
+            // 
+            toolStripComboBoxImage.Name = "toolStripComboBoxImage";
+            toolStripComboBoxImage.Size = new System.Drawing.Size(121, 23);
+            toolStripComboBoxImage.SelectedIndexChanged += ImageSwitcher_SelectedIndexChanged;
             // 
             // StartTab
             // 
@@ -218,6 +233,8 @@ namespace UoFiddler.Forms
             // 
             Versionlabel.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
             Versionlabel.AutoSize = true;
+            Versionlabel.BackColor = System.Drawing.Color.Transparent;
+            Versionlabel.ForeColor = System.Drawing.SystemColors.Info;
             Versionlabel.Location = new System.Drawing.Point(846, 576);
             Versionlabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             Versionlabel.Name = "Versionlabel";
@@ -1144,6 +1161,8 @@ namespace UoFiddler.Forms
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemAbout;
         private System.Windows.Forms.ToolStripMenuItem changelogToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem switchLogoImageToolStripMenuItem;
+        private System.Windows.Forms.ToolStripComboBox toolStripComboBoxImage;
     }
 }
 
