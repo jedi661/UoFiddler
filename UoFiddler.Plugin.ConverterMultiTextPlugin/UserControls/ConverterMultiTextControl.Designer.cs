@@ -49,13 +49,14 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
             textBox2 = new System.Windows.Forms.TextBox();
             openFileDialog = new System.Windows.Forms.OpenFileDialog();
             label3 = new System.Windows.Forms.Label();
+            buttonGraficCutterForm = new System.Windows.Forms.Button();
             SuspendLayout();
             // 
             // BtnMultiOpen
             // 
-            BtnMultiOpen.Location = new System.Drawing.Point(18, 421);
+            BtnMultiOpen.Location = new System.Drawing.Point(358, 301);
             BtnMultiOpen.Name = "BtnMultiOpen";
-            BtnMultiOpen.Size = new System.Drawing.Size(50, 23);
+            BtnMultiOpen.Size = new System.Drawing.Size(76, 23);
             BtnMultiOpen.TabIndex = 0;
             BtnMultiOpen.Text = "Open";
             BtnMultiOpen.UseVisualStyleBackColor = true;
@@ -140,10 +141,21 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
             label3.TabIndex = 8;
             label3.Text = "to HexCode :";
             // 
+            // buttonGraficCutterForm
+            // 
+            buttonGraficCutterForm.Location = new System.Drawing.Point(350, 330);
+            buttonGraficCutterForm.Name = "buttonGraficCutterForm";
+            buttonGraficCutterForm.Size = new System.Drawing.Size(92, 23);
+            buttonGraficCutterForm.TabIndex = 9;
+            buttonGraficCutterForm.Text = "Grafik Cutter";
+            buttonGraficCutterForm.UseVisualStyleBackColor = true;
+            buttonGraficCutterForm.Click += buttonGraficCutterForm_Click;
+            // 
             // ConverterMultiTextControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(buttonGraficCutterForm);
             Controls.Add(label3);
             Controls.Add(textBox2);
             Controls.Add(textBox1);
@@ -173,5 +185,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button buttonGraficCutterForm;
     }
 }

@@ -11,7 +11,7 @@
 
 namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
 {
-    partial class ConverterMultiTextForm
+    partial class AdminToolForm
     {
         /// <summary>
         /// Required designer variable.
@@ -39,7 +39,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConverterMultiTextForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminToolForm));
             btnPing = new System.Windows.Forms.Button();
             label1 = new System.Windows.Forms.Label();
             textBoxAdress = new System.Windows.Forms.TextBox();

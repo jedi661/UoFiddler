@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<AssemblyName>ConverterMultiTextPlugin</AssemblyName>
+		<AssemblyName>ConverterMultiText</AssemblyName>
 		<TargetFramework>net7.0-windows</TargetFramework>
 		<UseWindowsForms>true</UseWindowsForms>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
@@ -21,9 +21,24 @@
 		<GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
 	</PropertyGroup>
 	<ItemGroup>
-		<Compile Update="Forms\ConverterMultiTextForm.cs" />
-		<Compile Update="Forms\ConverterMultiTextForm.Designer.cs">
-			<DependentUpon>ConverterMultiTextForm.cs</DependentUpon>
+		<Compile Update="Forms\AdminToolForm.cs" />
+		<Compile Update="Forms\AdminToolForm.Designer.cs">
+			<DependentUpon>AdminToolForm.cs</DependentUpon>
+		</Compile>
+		<Compile Update="Properties\Resources.Designer.cs">
+		  <DesignTime>True</DesignTime>
+		  <AutoGen>True</AutoGen>
+		  <DependentUpon>Resources.resx</DependentUpon>
+		</Compile>
+		<Compile Update="Properties\Settings.Designer.cs">
+		  <DesignTimeSharedInput>True</DesignTimeSharedInput>
+		  <AutoGen>True</AutoGen>
+		  <DependentUpon>Settings.settings</DependentUpon>
+		</Compile>
+		<Compile Update="ResourceGraficCutter.Designer.cs">
+		  <DesignTime>True</DesignTime>
+		  <AutoGen>True</AutoGen>
+		  <DependentUpon>ResourceGraficCutter.resx</DependentUpon>
 		</Compile>
 		<Compile Update="UserControls\ConverterMultiTextControl.cs" />
 		<Compile Update="UserControls\ConverterMultiTextControl.Designer.cs">
@@ -41,16 +56,25 @@
 		</ProjectReference>
 	</ItemGroup>
 	<ItemGroup>
-	  <Reference Include="ConverterMultiTextPlugin">
-	    <HintPath>..\UoFiddler\bin\Debug\plugins\ConverterMultiTextPlugin.dll</HintPath>
-	  </Reference>
-	</ItemGroup>
-	<ItemGroup>
-		<EmbeddedResource Update="Forms\ConverterMultiTextForm.resx">
-			<DependentUpon>ConverterMultiTextForm.cs</DependentUpon>
+		<EmbeddedResource Update="Forms\AdminToolForm.resx">
+			<DependentUpon>AdminToolForm.cs</DependentUpon>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Properties\Resources.resx">
+		  <Generator>ResXFileCodeGenerator</Generator>
+		  <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+		<EmbeddedResource Update="ResourceGraficCutter.resx">
+		  <Generator>ResXFileCodeGenerator</Generator>
+		  <LastGenOutput>ResourceGraficCutter.Designer.cs</LastGenOutput>
 		</EmbeddedResource>
 		<EmbeddedResource Update="UserControls\ConverterMultiTextControl.resx">
 			<DependentUpon>ConverterMultiTextControl.cs</DependentUpon>
 		</EmbeddedResource>
+	</ItemGroup>
+	<ItemGroup>
+	  <None Update="Properties\Settings.settings">
+	    <Generator>SettingsSingleFileGenerator</Generator>
+	    <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+	  </None>
 	</ItemGroup>
 </Project>

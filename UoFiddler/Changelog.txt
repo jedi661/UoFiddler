@@ -1,3 +1,7 @@
+Version : 4.10.13 #XG1
+- A new link has been added to uodev.uo-freeshards.de.
+- A new tool has been added: a graphic cutter for arts.
+
 Version : 4.10.12 #XG1
 - Documentation now available.
 - Added logo selection in the main menu under the context menu, with multiple graphics to choose from.

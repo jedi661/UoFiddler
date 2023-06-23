@@ -845,7 +845,7 @@ namespace UoFiddler.Forms
                 FileName = "https://uo-freeshards.de",
                 UseShellExecute = true
             });
-        }        
+        }
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
@@ -855,6 +855,16 @@ namespace UoFiddler.Forms
                 UseShellExecute = true
             });
         }
+
+        private void uodevuofreeshardsdeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://uodev.uo-freeshards.de/",
+                UseShellExecute = true
+            });
+        }
+
         #endregion
     }
 }

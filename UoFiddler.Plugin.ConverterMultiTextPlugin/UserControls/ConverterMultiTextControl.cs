@@ -14,6 +14,7 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using Ultima;
+using UoFiddler.Plugin.ConverterMultiTextPlugin.Forms;
 
 namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
 {
@@ -146,6 +147,12 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
         private void btnCopyTBox2_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(textBox2.Text);
+        }
+
+        private void buttonGraficCutterForm_Click(object sender, EventArgs e)
+        {
+            GraphicCutterForm form = new GraphicCutterForm();
+            form.Show();
         }
     }
 }

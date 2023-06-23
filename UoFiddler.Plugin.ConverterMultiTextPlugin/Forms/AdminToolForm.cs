@@ -21,9 +21,9 @@ using System.Net.Sockets;
 
 namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
 {
-    public partial class ConverterMultiTextForm : Form
+    public partial class AdminToolForm : Form
     {
-        public ConverterMultiTextForm()
+        public AdminToolForm()
         {
             InitializeComponent();
 
