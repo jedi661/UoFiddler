@@ -106,6 +106,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             // openImageToolStripMenuItem
             // 
+            openImageToolStripMenuItem.Image = Properties.Resources.Load;
             openImageToolStripMenuItem.Name = "openImageToolStripMenuItem";
             openImageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             openImageToolStripMenuItem.Text = "Open Image";
@@ -119,6 +120,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // colorToolStripMenuItem
             // 
             colorToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripTextBoxColors });
+            colorToolStripMenuItem.Image = Properties.Resources.Color;
             colorToolStripMenuItem.Name = "colorToolStripMenuItem";
             colorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             colorToolStripMenuItem.Text = "BackGrundColor";
