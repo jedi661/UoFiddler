@@ -53,7 +53,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             toggleGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             showBorderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             pictureBox1 = new System.Windows.Forms.PictureBox();
             btnUp = new System.Windows.Forms.Button();
@@ -88,7 +87,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             // toolStrip1
             // 
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripDropDownButton1, toolStripButton1 });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripDropDownButton1 });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new System.Drawing.Size(700, 25);
@@ -171,15 +170,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             showBorderToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             showBorderToolStripMenuItem.Text = "Show Border";
             showBorderToolStripMenuItem.Click += showBorderToolStripMenuItem_Click;
-            // 
-            // toolStripButton1
-            // 
-            toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            toolStripButton1.Image = (System.Drawing.Image)resources.GetObject("toolStripButton1.Image");
-            toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            toolStripButton1.Name = "toolStripButton1";
-            toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            toolStripButton1.Text = "toolStripButton1";
             // 
             // openFileDialog1
             // 
@@ -468,7 +458,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         private System.Windows.Forms.Button btnDown;
         private System.Windows.Forms.Button btnLeft;
         private System.Windows.Forms.Button btnRight;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.Timer moveTimer;
         private System.Windows.Forms.ToolStripMenuItem colorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem spiegelnToolStripMenuItem;
