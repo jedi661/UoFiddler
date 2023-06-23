@@ -132,6 +132,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             // PaintPictureToolStripMenuItem
             // 
+            PaintPictureToolStripMenuItem.Image = Properties.Resources.createDesign;
             PaintPictureToolStripMenuItem.Name = "PaintPictureToolStripMenuItem";
             PaintPictureToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             PaintPictureToolStripMenuItem.Text = "Grafic Paint";
