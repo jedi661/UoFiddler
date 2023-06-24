@@ -108,21 +108,21 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             openImageToolStripMenuItem.Image = Properties.Resources.Load;
             openImageToolStripMenuItem.Name = "openImageToolStripMenuItem";
-            openImageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            openImageToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             openImageToolStripMenuItem.Text = "Open Image";
             openImageToolStripMenuItem.Click += openImageToolStripMenuItem_Click;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            toolStripSeparator1.Size = new System.Drawing.Size(158, 6);
             // 
             // colorToolStripMenuItem
             // 
             colorToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripTextBoxColors });
             colorToolStripMenuItem.Image = Properties.Resources.Color;
             colorToolStripMenuItem.Name = "colorToolStripMenuItem";
-            colorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            colorToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             colorToolStripMenuItem.Text = "BackGrundColor";
             colorToolStripMenuItem.Click += colorToolStripMenuItem_Click;
             // 
@@ -136,33 +136,33 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             PaintPictureToolStripMenuItem.Image = Properties.Resources.createDesign;
             PaintPictureToolStripMenuItem.Name = "PaintPictureToolStripMenuItem";
-            PaintPictureToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            PaintPictureToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             PaintPictureToolStripMenuItem.Text = "Grafic Paint";
             PaintPictureToolStripMenuItem.Click += PaintGridToolStripMenuItem_Click;
             // 
             // toolStripSeparator2
             // 
             toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
+            toolStripSeparator2.Size = new System.Drawing.Size(158, 6);
             // 
             // spiegelnToolStripMenuItem
             // 
             spiegelnToolStripMenuItem.Image = Properties.Resources.Mirror;
             spiegelnToolStripMenuItem.Name = "spiegelnToolStripMenuItem";
-            spiegelnToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            spiegelnToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             spiegelnToolStripMenuItem.Text = "Mirror";
             spiegelnToolStripMenuItem.Click += spiegelnToolStripMenuItem_Click;
             // 
             // toolStripSeparator3
             // 
             toolStripSeparator3.Name = "toolStripSeparator3";
-            toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
+            toolStripSeparator3.Size = new System.Drawing.Size(158, 6);
             // 
             // toggleGridToolStripMenuItem
             // 
             toggleGridToolStripMenuItem.Image = Properties.Resources.Schablone;
             toggleGridToolStripMenuItem.Name = "toggleGridToolStripMenuItem";
-            toggleGridToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            toggleGridToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             toggleGridToolStripMenuItem.Text = "ToggleGrid";
             toggleGridToolStripMenuItem.Click += toggleGridToolStripMenuItem_Click;
             // 
@@ -170,7 +170,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             showBorderToolStripMenuItem.Image = Properties.Resources.Rahmen;
             showBorderToolStripMenuItem.Name = "showBorderToolStripMenuItem";
-            showBorderToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            showBorderToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             showBorderToolStripMenuItem.Text = "Show Border";
             showBorderToolStripMenuItem.Click += showBorderToolStripMenuItem_Click;
             // 
@@ -190,15 +190,12 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             pictureBox1.TabIndex = 3;
             pictureBox1.TabStop = false;
             pictureBox1.Paint += pictureBox1_Paint;
-            pictureBox1.MouseDown += pictureBox1_MouseDown;
-            pictureBox1.MouseMove += pictureBox1_MouseMove;
-            pictureBox1.MouseUp += pictureBox1_MouseUp;
             // 
             // btnUp
             // 
             btnUp.BackColor = System.Drawing.SystemColors.ActiveBorder;
             btnUp.Image = Properties.Resources.up;
-            btnUp.Location = new System.Drawing.Point(60, 3);
+            btnUp.Location = new System.Drawing.Point(58, 3);
             btnUp.Name = "btnUp";
             btnUp.Size = new System.Drawing.Size(49, 46);
             btnUp.TabIndex = 4;
@@ -211,7 +208,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             btnDown.BackColor = System.Drawing.SystemColors.ActiveBorder;
             btnDown.BackgroundImage = Properties.Resources.down;
-            btnDown.Location = new System.Drawing.Point(60, 64);
+            btnDown.Location = new System.Drawing.Point(58, 64);
             btnDown.Name = "btnDown";
             btnDown.Size = new System.Drawing.Size(49, 43);
             btnDown.TabIndex = 5;
@@ -224,7 +221,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             btnLeft.BackColor = System.Drawing.SystemColors.ActiveBorder;
             btnLeft.BackgroundImage = Properties.Resources.left;
-            btnLeft.Location = new System.Drawing.Point(3, 30);
+            btnLeft.Location = new System.Drawing.Point(1, 30);
             btnLeft.Name = "btnLeft";
             btnLeft.Size = new System.Drawing.Size(50, 49);
             btnLeft.TabIndex = 6;
@@ -237,7 +234,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             btnRight.BackColor = System.Drawing.SystemColors.ActiveBorder;
             btnRight.BackgroundImage = Properties.Resources.right;
-            btnRight.Location = new System.Drawing.Point(115, 30);
+            btnRight.Location = new System.Drawing.Point(113, 30);
             btnRight.Name = "btnRight";
             btnRight.Size = new System.Drawing.Size(48, 49);
             btnRight.TabIndex = 7;
@@ -262,11 +259,13 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             // panel1
             // 
+            panel1.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             panel1.Controls.Add(btnDown);
             panel1.Controls.Add(btnUp);
             panel1.Controls.Add(btnLeft);
             panel1.Controls.Add(btnRight);
-            panel1.Location = new System.Drawing.Point(433, 28);
+            panel1.Location = new System.Drawing.Point(436, 28);
             panel1.Name = "panel1";
             panel1.Size = new System.Drawing.Size(166, 113);
             panel1.TabIndex = 10;
@@ -274,6 +273,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // pictureBox2
             // 
             pictureBox2.BackColor = System.Drawing.SystemColors.ControlDark;
+            pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             pictureBox2.Location = new System.Drawing.Point(436, 156);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new System.Drawing.Size(166, 224);
@@ -289,6 +289,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             textBoxWidth.TabIndex = 12;
             textBoxWidth.Text = "44";
             textBoxWidth.TextChanged += textBoxWidth_TextChanged;
+            textBoxWidth.KeyPress += textBox_KeyPress;
             // 
             // textBoxHeight
             // 
@@ -298,6 +299,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             textBoxHeight.TabIndex = 13;
             textBoxHeight.Text = "105";
             textBoxHeight.TextChanged += textBoxHeight_TextChanged;
+            textBoxHeight.KeyPress += textBox_KeyPress;
             // 
             // textBoxStartX
             // 
@@ -307,6 +309,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             textBoxStartX.TabIndex = 14;
             textBoxStartX.Text = "174";
             textBoxStartX.TextChanged += textBoxStartX_TextChanged;
+            textBoxStartX.KeyPress += textBox_KeyPress;
             // 
             // textBoxStartY
             // 
@@ -316,6 +319,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             textBoxStartY.TabIndex = 15;
             textBoxStartY.Text = "247";
             textBoxStartY.TextChanged += textBoxStartY_TextChanged;
+            textBoxStartY.KeyPress += textBox_KeyPress;
             // 
             // Width
             // 
@@ -463,7 +467,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         private System.Windows.Forms.Button btnRight;
         private System.Windows.Forms.Timer moveTimer;
         private System.Windows.Forms.ToolStripMenuItem colorToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem spiegelnToolStripMenuItem;
         private System.Windows.Forms.ToolStripTextBox toolStripTextBoxColors;
         private System.Windows.Forms.ToolStripMenuItem toggleGridToolStripMenuItem;
         private System.Windows.Forms.Label label1;
@@ -488,5 +491,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem spiegelnToolStripMenuItem;
     }
 }

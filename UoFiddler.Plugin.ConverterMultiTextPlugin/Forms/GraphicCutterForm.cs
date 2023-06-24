@@ -71,6 +71,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
 
         }
 
+        // Keys to Textbox
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             // Check which key was pressed
@@ -95,6 +96,18 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             }
         }
 
+        //Disables character input.
+        private void textBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Check if the pressed key is a number.
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                // Discard the input.
+                e.Handled = true;
+            }
+        }
+
+
         #region Opendialog
 
         private void openImageToolStripMenuItem_Click(object sender, EventArgs e)
@@ -108,12 +121,12 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                     pictureBox1.Image = image;
                     pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
 
-                    pictureBox1.Refresh(); // Neues Bild anzeigen
+                    pictureBox1.Refresh(); // Display a new image.
 
-                    // Setze die Position des Bildes in der PictureBox1
+                    // Set the position of the image in PictureBox1.
                     SetImagePosition(0, 0);
 
-                    // Setze die Werte in den TextBoxen
+                    // Set the values in the text boxes.
                     textBoxWidth.Text = image.Width.ToString();
                     textBoxHeight.Text = image.Height.ToString();
                     textBoxStartX.Text = ((pictureBox1.Width - image.Width) / 2).ToString();
@@ -124,43 +137,44 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         #endregion
 
         #region  Picture Paint
+        //Paint Grid
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            // Überprüfen Sie, ob das Gitter angezeigt werden soll
+            // Check if the grid should be displayed.
             if (showGrid)
             {
-                int kachelBreite = 32; // Breite der Kachel
-                int gridSize = 8; // Anzahl der Kacheln
+                int kachelBreite = 32; // Tile width.
+                int gridSize = 8; // Number of tiles.
                 float scaleFactor = 250f / (gridSize * kachelBreite);
                 Pen pen = new Pen(Color.Red, 1f);
                 Brush brush = new SolidBrush(Color.Black);
 
-                // Größe des Gitters berechnen
+                // Calculate grid size.
                 int gridSizeInPixels = gridSize * kachelBreite;
 
-                int dx = 0; // Verschieben Sie die Grafiken um 10 Pixel nach rechts
-                int dy = -178; // Verschieben Sie die Grafiken um 20 Pixel nach oben
+                int dx = 0; // Move the graphics 10 pixels to the right.
+                int dy = -178; // Move the graphics 20 pixels upwards.
 
-                // Ursprung auf die Mitte der PictureBox verschieben
+                // Move the origin to the center of the PictureBox.
                 e.Graphics.TranslateTransform(pictureBox1.Width / 2 + dx, pictureBox1.Height / 2 + dy);
 
-                // Grafiken skalieren
+                // Scale the graphics.
                 e.Graphics.ScaleTransform(scaleFactor, scaleFactor);
 
-                // Grafiken um 45 Grad drehen
+                // Rotate the graphics by 45 degrees.
                 e.Graphics.RotateTransform(45);
 
                 for (int i = gridSize; i >= 0; i--)
                 {
-                    // Horizontale Linien zeichnen
+                    // Draw horizontal lines.
                     e.Graphics.DrawLine(pen, new Point(0, i * kachelBreite), new Point(gridSize * kachelBreite, i * kachelBreite));
 
-                    // Vertikale Linien zeichnen
+                    // Draw vertical lines.
                     e.Graphics.DrawLine(pen, new Point(i * kachelBreite, 0), new Point(i * kachelBreite, gridSize * kachelBreite));
                 }
             }
 
-            // Zeichnen Sie das Auswahlrechteck auf die PictureBox
+            // Draw the selection rectangle on the PictureBox
             using (Pen selectionPen = new Pen(Color.Yellow))
             {
                 e.Graphics.DrawRectangle(selectionPen, cropArea);
@@ -369,13 +383,13 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
 
         private void LoadAndCropImage(string imagePath, Rectangle cropArea)
         {
-            // Laden Sie das Bild von der angegebenen Datei
+            // Load the image from the specified file.
             Bitmap image = new Bitmap(imagePath);
 
-            // Schneiden Sie das Bild auf den angegebenen Bereich zu
+            // Crop the image to the specified region.
             Bitmap croppedImage = image.Clone(cropArea, image.PixelFormat);
 
-            // Laden Sie das zugeschnittene Bild in die PictureBox
+            // Load the cropped image into the PictureBox.
             pictureBox1.Image = croppedImage;
         }
 
@@ -383,65 +397,72 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
 
         private void CropImage(Rectangle cropArea)
         {
-            // Überprüfen Sie, ob ein Bild in der PictureBox geladen ist
+            // Check if an image is loaded in the PictureBox.
             if (pictureBox1.Image != null)
             {
-                // Konvertieren Sie das Bild in der PictureBox in ein Bitmap-Objekt
+                // Convert the image in the PictureBox to a Bitmap object.
                 Bitmap image = new Bitmap(pictureBox1.Image);
 
-                // Schneiden Sie das Bild auf den angegebenen Bereich zu
+                // Crop the image to the specified area.
                 Bitmap croppedImage = image.Clone(cropArea, image.PixelFormat);
 
-                // Laden Sie das zugeschnittene Bild in die PictureBox
+                // Load the cropped image into the PictureBox.
                 pictureBox1.Image = croppedImage;
             }
         }
+
+        //Not yet implemented.
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            // Überprüfen Sie, ob die linke Maustaste gedrückt wird
+            // Check if the left mouse button is pressed.
             if (e.Button == MouseButtons.Left)
             {
-                // Setze den Startpunkt des Zuschneidens
+                // Set the starting point of the crop.
                 textBoxStartX.Text = e.X.ToString();
                 textBoxStartY.Text = e.Y.ToString();
             }
         }
 
+        //Not yet implemented.
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            // Überprüfen Sie, ob die linke Maustaste gedrückt wird
+            // Check if the left mouse button is pressed.
             if (e.Button == MouseButtons.Left)
             {
-                // Berechne die Größe des Zuschneidebereichs
+                // Calculate the size of the cropping area.
                 int width = e.X - int.Parse(textBoxStartX.Text);
                 int height = e.Y - int.Parse(textBoxStartY.Text);
 
-                // Setze die Größe des Zuschneidebereichs
+                // Set the size of the cropping area.
                 textBoxWidth.Text = width.ToString();
                 textBoxHeight.Text = height.ToString();
             }
 
-            // Ändern Sie den Mauszeiger in ein Fadenkreuz
+            // Change the mouse cursor to a crosshair.
             pictureBox1.Cursor = Cursors.Cross;
         }
 
+        //Not yet implemented.
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-            // Überprüfen Sie, ob die linke Maustaste losgelassen wurde
+            // Check if the left mouse button has been released.
             if (e.Button == MouseButtons.Left)
             {
-                // Rufe die CropImage-Methode auf
+                // Call the CropImage method.
                 CropImage();
             }
         }
         #endregion
 
+        #region funktions Menu
+
+        //Create a screenshot image.
         private void PaintGridToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Blenden Sie das Gitter aus
+            // Hide the grid.
             // showGrid = false;
 
-            // Aktualisieren Sie die PictureBox1
+            // Update the PictureBox1.
             pictureBox1.Invalidate();
             pictureBox1.Update();
 
@@ -460,41 +481,44 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             CropImage();
         }
 
+        // Mouse cursor.
         private void ChangeCursorToCross()
         {
-            // Ändern Sie den Mauszeiger in ein Fadenkreuz
+            // Change the mouse cursor to a crosshair.
             pictureBox2.Cursor = Cursors.Cross;
         }
 
+        // Color Black and White
         private void colorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Überprüfen Sie die aktuelle Hintergrundfarbe der PictureBox
+            // Check the current background color of the PictureBox
             if (pictureBox1.BackColor == Color.FromArgb(0, 0, 0))
             {
-                // Wenn die aktuelle Hintergrundfarbe Schwarz ist, ändern Sie sie in Weiß
+                // If the current background color is black, change it to white.
                 pictureBox1.BackColor = Color.FromArgb(255, 255, 255);
             }
             else
             {
-                // Andernfalls ändern Sie die Hintergrundfarbe in Schwarz
+                // Otherwise, change the background color to black.
                 pictureBox1.BackColor = Color.FromArgb(0, 0, 0);
             }
         }
 
+        //Mirror
         private void spiegelnToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (image != null)
             {
-                // Spiegeln Sie das Bild horizontal
+                // Mirror the image horizontally.
                 image.RotateFlip(RotateFlipType.RotateNoneFlipX);
 
-                // Setzen Sie das gespiegelte Bild als neues Bild der PictureBox
+                // Set the mirrored image as the new image of the PictureBox.
                 pictureBox1.Image = image;
 
-                // Behalten Sie die aktuelle Position des Bildes bei
+                // Keep the current position of the image.
                 SetImagePosition(imageX, imageY);
 
-                // Aktualisieren Sie das Bild in der PictureBox
+                // Update the image in the PictureBox.
                 pictureBox1.Refresh();
             }
         }
@@ -502,49 +526,52 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         // Color
         private void toolStripTextBoxColors_KeyDown(object sender, KeyEventArgs e)
         {
-            // Überprüfen Sie, ob die Eingabetaste gedrückt wurde
+            // Check if the Enter key was pressed.
             if (e.KeyCode == Keys.Enter)
             {
-                // Versuchen Sie, den eingegebenen Text als Farbcode zu interpretieren
+                // Try to interpret the entered text as a color code.
                 try
                 {
-                    // Entfernen Sie das '#' aus dem eingegebenen Text, falls vorhanden
+                    // Remove the '#' from the entered text, if present.
                     string colorCode = toolStripTextBoxColors.Text.TrimStart('#');
 
-                    // Überprüfen Sie, ob der Farbcode 6 Zeichen lang ist
+                    // Check if the color code is 6 characters long.
                     if (colorCode.Length == 6)
                     {
-                        // Konvertieren Sie den Farbcode in eine Farbe
+                        // Convert the color code to a color.
                         int argb = Int32.Parse(colorCode, System.Globalization.NumberStyles.HexNumber);
                         Color color = Color.FromArgb(255, Color.FromArgb(argb));
 
-                        // Setzen Sie die Hintergrundfarbe der PictureBox
+                        // Set the background color of the PictureBox.
                         pictureBox1.BackColor = color;
                     }
                     else
                     {
-                        // Zeigen Sie eine Fehlermeldung an, wenn der eingegebene Text kein gültiger Farbcode ist
-                        MessageBox.Show("Bitte geben Sie einen gültigen 6-stelligen Farbcode ein. Beispiel: FF0000 für Rot.", "Ungültiger Farbcode", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        // Display an error message if the entered text is not a valid color code.
+                        MessageBox.Show("Please enter a valid 6-digit color code. Example: FF0000 for red.", "Invalid color code.", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 catch
                 {
                     // Zeigen Sie eine Fehlermeldung an, wenn der eingegebene Text kein gültiger Farbcode ist
-                    MessageBox.Show("Bitte geben Sie einen gültigen 6-stelligen Farbcode ein. Beispiel: FF0000 für Rot.", "Ungültiger Farbcode", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Please enter a valid 6-digit color code. Example: FF0000 for red.", "Invalid color code.", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
 
+        // Grid on and off
         private void toggleGridToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Schalten Sie das Gitter ein oder aus
+            // Toggle the grid on or off.
             showGrid = !showGrid;
 
-            // Aktualisieren Sie die PictureBox1
+            // Refresh the PictureBox1.
             pictureBox1.Invalidate();
         }
 
-        //
+        #endregion
+
+        // Imput 
 
         private void textBoxWidth_TextChanged(object sender, EventArgs e)
         {
@@ -566,38 +593,48 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             CropImage();
         }
 
+        #region CromImage        
+
         private void CropImage()
         {
-            // Überprüfen Sie, ob ein Bild in der PictureBox1 geladen ist
+            // Check if an image is loaded in PictureBox1.
             if (pictureBox1.Image != null && !string.IsNullOrEmpty(textBoxWidth.Text) && !string.IsNullOrEmpty(textBoxHeight.Text) && !string.IsNullOrEmpty(textBoxStartX.Text) && !string.IsNullOrEmpty(textBoxStartY.Text))
             {
-                // Lesen Sie die Breite und Höhe aus den TextBoxen
+                // Read the width and height from the text boxes.
                 int width = int.Parse(textBoxWidth.Text);
                 int height = int.Parse(textBoxHeight.Text);
 
-                // Lesen Sie den Startpunkt aus den TextBoxen
-                int startX = int.Parse(textBoxStartX.Text);
-                int startY = int.Parse(textBoxStartY.Text);
-
-                // Schneiden Sie das Bild aus der PictureBox1 auf die angegebene Größe zu
-                Bitmap croppedImage = new Bitmap(width, height);
-                using (Graphics g = Graphics.FromImage(croppedImage))
+                // Check if the width and height are greater than 0.
+                if (width > 0 && height > 0)
                 {
-                    g.DrawImage(pictureBox1.Image, new Rectangle(0, 0, width, height), new Rectangle(startX, startY, width, height), GraphicsUnit.Pixel);
-                }
+                    // Read the starting point from the text boxes.
+                    int startX = int.Parse(textBoxStartX.Text);
+                    int startY = int.Parse(textBoxStartY.Text);
 
-                // Laden Sie das zugeschnittene Bild in die PictureBox2
-                pictureBox2.Image = croppedImage;
-                pictureBox2.SizeMode = PictureBoxSizeMode.AutoSize;
+                    // Crop the image from PictureBox1 to the specified size.
+                    Bitmap croppedImage = new Bitmap(width, height);
+                    using (Graphics g = Graphics.FromImage(croppedImage))
+                    {
+                        g.DrawImage(pictureBox1.Image, new Rectangle(0, 0, width, height), new Rectangle(startX, startY, width, height), GraphicsUnit.Pixel);
+                    }
+
+                    // Load the cropped image into PictureBox2.
+                    pictureBox2.Image = croppedImage;
+                    pictureBox2.SizeMode = PictureBoxSizeMode.AutoSize;
+                }
             }
         }
 
+        #endregion
+
+        // Show Border Image und die Sichtbarkeit des Rahmens zu aktualisieren.
         private void showBorderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             showBorder = !showBorder;
             MoveImage(0, 0); // Redraw the image to update the border visibility
         }
 
+        #region Save
         private void saveImageToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Check if an image is loaded in the pictureBox2
@@ -664,7 +701,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 contextMenuStrip1.Show(pictureBox2, e.Location);
             }
         }
-
-
+        #endregion
     }
 }
