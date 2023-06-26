@@ -53,6 +53,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             toggleGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             showBorderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            unloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             pictureBox1 = new System.Windows.Forms.PictureBox();
             btnUp = new System.Windows.Forms.Button();
@@ -76,13 +77,24 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             button3 = new System.Windows.Forms.Button();
             button4 = new System.Windows.Forms.Button();
             contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
+            openToolStrip2MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             saveImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
+            unloadimageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            gridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            mirror2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripMenuItemrotate90degrees = new System.Windows.Forms.ToolStripMenuItem();
+            cutImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            fillTextureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            panel2 = new System.Windows.Forms.Panel();
+            button5 = new System.Windows.Forms.Button();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             contextMenuStrip1.SuspendLayout();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // toolStrip1
@@ -90,14 +102,14 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripDropDownButton1 });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new System.Drawing.Size(700, 25);
+            toolStrip1.Size = new System.Drawing.Size(793, 25);
             toolStrip1.TabIndex = 2;
             toolStrip1.Text = "toolStrip1";
             // 
             // toolStripDropDownButton1
             // 
             toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { openImageToolStripMenuItem, toolStripSeparator1, colorToolStripMenuItem, PaintPictureToolStripMenuItem, toolStripSeparator2, spiegelnToolStripMenuItem, toolStripSeparator3, toggleGridToolStripMenuItem, showBorderToolStripMenuItem });
+            toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { openImageToolStripMenuItem, toolStripSeparator1, colorToolStripMenuItem, PaintPictureToolStripMenuItem, toolStripSeparator2, spiegelnToolStripMenuItem, toolStripSeparator3, toggleGridToolStripMenuItem, showBorderToolStripMenuItem, unloadToolStripMenuItem });
             toolStripDropDownButton1.Image = Properties.Resources.Shild;
             toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             toolStripDropDownButton1.Name = "toolStripDropDownButton1";
@@ -108,21 +120,21 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             openImageToolStripMenuItem.Image = Properties.Resources.Load;
             openImageToolStripMenuItem.Name = "openImageToolStripMenuItem";
-            openImageToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            openImageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             openImageToolStripMenuItem.Text = "Open Image";
             openImageToolStripMenuItem.Click += openImageToolStripMenuItem_Click;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new System.Drawing.Size(158, 6);
+            toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // colorToolStripMenuItem
             // 
             colorToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripTextBoxColors });
             colorToolStripMenuItem.Image = Properties.Resources.Color;
             colorToolStripMenuItem.Name = "colorToolStripMenuItem";
-            colorToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            colorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             colorToolStripMenuItem.Text = "BackGrundColor";
             colorToolStripMenuItem.Click += colorToolStripMenuItem_Click;
             // 
@@ -136,33 +148,33 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             PaintPictureToolStripMenuItem.Image = Properties.Resources.createDesign;
             PaintPictureToolStripMenuItem.Name = "PaintPictureToolStripMenuItem";
-            PaintPictureToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            PaintPictureToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             PaintPictureToolStripMenuItem.Text = "Grafic Paint";
             PaintPictureToolStripMenuItem.Click += PaintGridToolStripMenuItem_Click;
             // 
             // toolStripSeparator2
             // 
             toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new System.Drawing.Size(158, 6);
+            toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
             // 
             // spiegelnToolStripMenuItem
             // 
-            spiegelnToolStripMenuItem.Image = Properties.Resources.Mirror;
+            spiegelnToolStripMenuItem.Image = Properties.Resources.Mirror1;
             spiegelnToolStripMenuItem.Name = "spiegelnToolStripMenuItem";
-            spiegelnToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            spiegelnToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             spiegelnToolStripMenuItem.Text = "Mirror";
             spiegelnToolStripMenuItem.Click += spiegelnToolStripMenuItem_Click;
             // 
             // toolStripSeparator3
             // 
             toolStripSeparator3.Name = "toolStripSeparator3";
-            toolStripSeparator3.Size = new System.Drawing.Size(158, 6);
+            toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
             // 
             // toggleGridToolStripMenuItem
             // 
             toggleGridToolStripMenuItem.Image = Properties.Resources.Schablone;
             toggleGridToolStripMenuItem.Name = "toggleGridToolStripMenuItem";
-            toggleGridToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            toggleGridToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             toggleGridToolStripMenuItem.Text = "ToggleGrid";
             toggleGridToolStripMenuItem.Click += toggleGridToolStripMenuItem_Click;
             // 
@@ -170,9 +182,17 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             showBorderToolStripMenuItem.Image = Properties.Resources.Rahmen;
             showBorderToolStripMenuItem.Name = "showBorderToolStripMenuItem";
-            showBorderToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            showBorderToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             showBorderToolStripMenuItem.Text = "Show Border";
             showBorderToolStripMenuItem.Click += showBorderToolStripMenuItem_Click;
+            // 
+            // unloadToolStripMenuItem
+            // 
+            unloadToolStripMenuItem.Image = Properties.Resources.Leeren;
+            unloadToolStripMenuItem.Name = "unloadToolStripMenuItem";
+            unloadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            unloadToolStripMenuItem.Text = "unloadImage";
+            unloadToolStripMenuItem.Click += unloadToolStripMenuItem_Click;
             // 
             // openFileDialog1
             // 
@@ -184,7 +204,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             pictureBox1.Enabled = false;
             pictureBox1.ErrorImage = null;
             pictureBox1.InitialImage = null;
-            pictureBox1.Location = new System.Drawing.Point(57, 28);
+            pictureBox1.Location = new System.Drawing.Point(11, 28);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new System.Drawing.Size(352, 352);
             pictureBox1.TabIndex = 3;
@@ -251,7 +271,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(57, 383);
+            label1.Location = new System.Drawing.Point(11, 383);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(38, 15);
             label1.TabIndex = 9;
@@ -265,7 +285,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             panel1.Controls.Add(btnUp);
             panel1.Controls.Add(btnLeft);
             panel1.Controls.Add(btnRight);
-            panel1.Location = new System.Drawing.Point(436, 28);
+            panel1.Location = new System.Drawing.Point(197, 386);
             panel1.Name = "panel1";
             panel1.Size = new System.Drawing.Size(166, 113);
             panel1.TabIndex = 10;
@@ -274,16 +294,20 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             pictureBox2.BackColor = System.Drawing.SystemColors.ControlDark;
             pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            pictureBox2.Location = new System.Drawing.Point(436, 156);
+            pictureBox2.Location = new System.Drawing.Point(381, 28);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new System.Drawing.Size(166, 224);
+            pictureBox2.Size = new System.Drawing.Size(352, 352);
             pictureBox2.TabIndex = 11;
             pictureBox2.TabStop = false;
+            pictureBox2.Paint += pictureBox2_Paint;
             pictureBox2.MouseClick += pictureBox2_MouseClick;
+            pictureBox2.MouseDown += pictureBox2_MouseDown;
+            pictureBox2.MouseMove += pictureBox2_MouseMove;
+            pictureBox2.MouseUp += pictureBox2_MouseUp;
             // 
             // textBoxWidth
             // 
-            textBoxWidth.Location = new System.Drawing.Point(93, 428);
+            textBoxWidth.Location = new System.Drawing.Point(47, 428);
             textBoxWidth.Name = "textBoxWidth";
             textBoxWidth.Size = new System.Drawing.Size(52, 23);
             textBoxWidth.TabIndex = 12;
@@ -293,7 +317,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             // textBoxHeight
             // 
-            textBoxHeight.Location = new System.Drawing.Point(181, 428);
+            textBoxHeight.Location = new System.Drawing.Point(135, 428);
             textBoxHeight.Name = "textBoxHeight";
             textBoxHeight.Size = new System.Drawing.Size(52, 23);
             textBoxHeight.TabIndex = 13;
@@ -303,7 +327,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             // textBoxStartX
             // 
-            textBoxStartX.Location = new System.Drawing.Point(93, 465);
+            textBoxStartX.Location = new System.Drawing.Point(47, 465);
             textBoxStartX.Name = "textBoxStartX";
             textBoxStartX.Size = new System.Drawing.Size(52, 23);
             textBoxStartX.TabIndex = 14;
@@ -313,7 +337,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             // textBoxStartY
             // 
-            textBoxStartY.Location = new System.Drawing.Point(181, 465);
+            textBoxStartY.Location = new System.Drawing.Point(135, 465);
             textBoxStartY.Name = "textBoxStartY";
             textBoxStartY.Size = new System.Drawing.Size(52, 23);
             textBoxStartY.TabIndex = 15;
@@ -324,7 +348,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // Width
             // 
             Width.AutoSize = true;
-            Width.Location = new System.Drawing.Point(94, 408);
+            Width.Location = new System.Drawing.Point(48, 408);
             Width.Name = "Width";
             Width.Size = new System.Drawing.Size(45, 15);
             Width.TabIndex = 16;
@@ -333,7 +357,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // Height
             // 
             Height.AutoSize = true;
-            Height.Location = new System.Drawing.Point(181, 408);
+            Height.Location = new System.Drawing.Point(135, 408);
             Height.Name = "Height";
             Height.Size = new System.Drawing.Size(49, 15);
             Height.TabIndex = 17;
@@ -342,7 +366,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(67, 468);
+            label2.Location = new System.Drawing.Point(21, 468);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(20, 15);
             label2.TabIndex = 18;
@@ -351,7 +375,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(158, 468);
+            label3.Location = new System.Drawing.Point(112, 468);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(17, 15);
             label3.TabIndex = 19;
@@ -360,16 +384,16 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // button1
             // 
             button1.BackgroundImage = Properties.Resources.up1;
-            button1.Location = new System.Drawing.Point(308, 392);
+            button1.Location = new System.Drawing.Point(57, 5);
             button1.Name = "button1";
-            button1.Size = new System.Drawing.Size(51, 46);
+            button1.Size = new System.Drawing.Size(49, 46);
             button1.TabIndex = 20;
             button1.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
             button2.BackgroundImage = Properties.Resources.down;
-            button2.Location = new System.Drawing.Point(308, 444);
+            button2.Location = new System.Drawing.Point(57, 57);
             button2.Name = "button2";
             button2.Size = new System.Drawing.Size(49, 46);
             button2.TabIndex = 21;
@@ -378,32 +402,41 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // button3
             // 
             button3.BackgroundImage = Properties.Resources.left;
-            button3.Location = new System.Drawing.Point(257, 442);
+            button3.Location = new System.Drawing.Point(6, 57);
             button3.Name = "button3";
-            button3.Size = new System.Drawing.Size(49, 48);
+            button3.Size = new System.Drawing.Size(49, 46);
             button3.TabIndex = 22;
             button3.UseVisualStyleBackColor = true;
             // 
             // button4
             // 
             button4.BackgroundImage = Properties.Resources.right;
-            button4.Location = new System.Drawing.Point(358, 442);
+            button4.Location = new System.Drawing.Point(107, 57);
             button4.Name = "button4";
-            button4.Size = new System.Drawing.Size(51, 48);
+            button4.Size = new System.Drawing.Size(51, 46);
             button4.TabIndex = 23;
             button4.UseVisualStyleBackColor = true;
             // 
             // contextMenuStrip1
             // 
-            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { saveImageToolStripMenuItem });
+            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { openToolStrip2MenuItem, saveImageToolStripMenuItem, unloadimageToolStripMenuItem, toolStripSeparator4, gridToolStripMenuItem, mirror2ToolStripMenuItem, toolStripMenuItemrotate90degrees, cutImageToolStripMenuItem, fillTextureToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new System.Drawing.Size(135, 26);
+            contextMenuStrip1.Size = new System.Drawing.Size(181, 208);
+            // 
+            // openToolStrip2MenuItem
+            // 
+            openToolStrip2MenuItem.Image = Properties.Resources.Load;
+            openToolStrip2MenuItem.Name = "openToolStrip2MenuItem";
+            openToolStrip2MenuItem.Size = new System.Drawing.Size(167, 22);
+            openToolStrip2MenuItem.Text = "Open";
+            openToolStrip2MenuItem.Click += openToolStrip2MenuItem_Click;
             // 
             // saveImageToolStripMenuItem
             // 
             saveImageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripComboBox1 });
+            saveImageToolStripMenuItem.Image = Properties.Resources.Save;
             saveImageToolStripMenuItem.Name = "saveImageToolStripMenuItem";
-            saveImageToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            saveImageToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             saveImageToolStripMenuItem.Text = "Save Image";
             saveImageToolStripMenuItem.Click += saveImageToolStripMenuItem_Click;
             // 
@@ -416,15 +449,90 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             toolStripComboBox1.Size = new System.Drawing.Size(121, 23);
             toolStripComboBox1.Click += saveImageToolStripMenuItem_Click;
             // 
+            // unloadimageToolStripMenuItem
+            // 
+            unloadimageToolStripMenuItem.Image = Properties.Resources.Leeren;
+            unloadimageToolStripMenuItem.Name = "unloadimageToolStripMenuItem";
+            unloadimageToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            unloadimageToolStripMenuItem.Text = "Unload Image";
+            unloadimageToolStripMenuItem.Click += unloadimageToolStripMenuItem_Click;
+            // 
+            // toolStripSeparator4
+            // 
+            toolStripSeparator4.Name = "toolStripSeparator4";
+            toolStripSeparator4.Size = new System.Drawing.Size(164, 6);
+            // 
+            // gridToolStripMenuItem
+            // 
+            gridToolStripMenuItem.Image = Properties.Resources.Schablone;
+            gridToolStripMenuItem.Name = "gridToolStripMenuItem";
+            gridToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            gridToolStripMenuItem.Text = "Grid";
+            gridToolStripMenuItem.Click += gridToolStripMenuItem_Click;
+            gridToolStripMenuItem.Paint += pictureBox3_Paint;
+            // 
+            // mirror2ToolStripMenuItem
+            // 
+            mirror2ToolStripMenuItem.Image = Properties.Resources.Mirror1;
+            mirror2ToolStripMenuItem.Name = "mirror2ToolStripMenuItem";
+            mirror2ToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            mirror2ToolStripMenuItem.Text = "Mirror";
+            mirror2ToolStripMenuItem.Click += mirror2ToolStripMenuItem_Click_1;
+            // 
+            // toolStripMenuItemrotate90degrees
+            // 
+            toolStripMenuItemrotate90degrees.Image = Properties.Resources.Rotate;
+            toolStripMenuItemrotate90degrees.Name = "toolStripMenuItemrotate90degrees";
+            toolStripMenuItemrotate90degrees.Size = new System.Drawing.Size(167, 22);
+            toolStripMenuItemrotate90degrees.Text = "Rotate 90 degrees";
+            toolStripMenuItemrotate90degrees.Click += toolStripMenuItemrotate90degrees_Click;
+            // 
+            // cutImageToolStripMenuItem
+            // 
+            cutImageToolStripMenuItem.Image = Properties.Resources.Cut;
+            cutImageToolStripMenuItem.Name = "cutImageToolStripMenuItem";
+            cutImageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            cutImageToolStripMenuItem.Text = "Cut Image";
+            cutImageToolStripMenuItem.Click += cutImageToolStripMenuItem_Click;
+            // 
+            // fillTextureToolStripMenuItem
+            // 
+            fillTextureToolStripMenuItem.Image = Properties.Resources.fill;
+            fillTextureToolStripMenuItem.Name = "fillTextureToolStripMenuItem";
+            fillTextureToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            fillTextureToolStripMenuItem.Text = "Fill Texture";
+            fillTextureToolStripMenuItem.Click += fillTextureToolStripMenuItem_Click;
+            // 
+            // panel2
+            // 
+            panel2.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            panel2.Controls.Add(button2);
+            panel2.Controls.Add(button5);
+            panel2.Controls.Add(button1);
+            panel2.Controls.Add(button4);
+            panel2.Controls.Add(button3);
+            panel2.Location = new System.Drawing.Point(389, 386);
+            panel2.Name = "panel2";
+            panel2.Size = new System.Drawing.Size(170, 113);
+            panel2.TabIndex = 24;
+            // 
+            // button5
+            // 
+            button5.Image = Properties.Resources.Save;
+            button5.Location = new System.Drawing.Point(107, 5);
+            button5.Name = "button5";
+            button5.Size = new System.Drawing.Size(51, 46);
+            button5.TabIndex = 25;
+            button5.UseVisualStyleBackColor = true;
+            button5.Click += buttonCrop_Click;
+            // 
             // GraphicCutterForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(700, 502);
-            Controls.Add(button4);
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            ClientSize = new System.Drawing.Size(793, 502);
+            Controls.Add(panel2);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(Height);
@@ -443,13 +551,14 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "GraphicCutterForm";
-            Text = "GraphicCutterForm";
+            Text = "Graphic Cutter";
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             contextMenuStrip1.ResumeLayout(false);
+            panel2.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -492,5 +601,16 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem spiegelnToolStripMenuItem;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.ToolStripMenuItem openToolStrip2MenuItem;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.ToolStripMenuItem gridToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mirror2ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemrotate90degrees;
+        private System.Windows.Forms.ToolStripMenuItem cutImageToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fillTextureToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem unloadimageToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem unloadToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
     }
 }

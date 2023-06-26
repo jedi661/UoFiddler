@@ -12,6 +12,8 @@ using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using Microsoft.Win32;
 using Ultima;
+using System.Drawing.Drawing2D;
+
 
 namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
 {
@@ -28,16 +30,19 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         private int moveX = 0;
         private int moveY = 0;
 
-
+        //PictureBox2
         private Point startPoint;
         private Rectangle cropArea;
+        private bool isDragging = false;
+        private bool showGrid2 = false;
+        private Rectangle selectedRectangle; // Der ausgewählte Bereich
 
         public GraphicCutterForm()
         {
             InitializeComponent();
 
             // Verknüpfen Sie das MouseMove-Ereignis der PictureBox1 mit dem Ereignishandler
-            pictureBox1.MouseMove += pictureBox1_MouseMove;
+            pictureBox1.MouseMove += pictureBox2_MouseMove;
 
             // Setze die Werte in den TextBoxen
             textBoxWidth.Text = "44";
@@ -50,7 +55,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
 
             // Link the KeyDown event of the form to the event handler
             this.KeyDown += Form1_KeyDown;
-
 
             // Rufe die CropImage-Methode auf
             CropImage();
@@ -68,6 +72,9 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             toolStripComboBox1.SelectedIndex = 0;
 
             label1.Text = "";
+
+            // Register the Paint event handler for the PictureBox2 control.
+            pictureBox2.Paint += pictureBox3_Paint;
 
         }
 
@@ -107,7 +114,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             }
         }
 
-
         #region Opendialog
 
         private void openImageToolStripMenuItem_Click(object sender, EventArgs e)
@@ -120,6 +126,10 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                     image = new Bitmap(openFileDialog.FileName);
                     pictureBox1.Image = image;
                     pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
+
+                    // Display the image in PictureBox2 as well.
+                    pictureBox2.Image = image;
+                    pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
 
                     pictureBox1.Refresh(); // Display a new image.
 
@@ -134,6 +144,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 }
             }
         }
+
         #endregion
 
         #region  Picture Paint
@@ -173,19 +184,11 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                     e.Graphics.DrawLine(pen, new Point(i * kachelBreite, 0), new Point(i * kachelBreite, gridSize * kachelBreite));
                 }
             }
-
-            // Draw the selection rectangle on the PictureBox
-            using (Pen selectionPen = new Pen(Color.Yellow))
-            {
-                e.Graphics.DrawRectangle(selectionPen, cropArea);
-            }
         }
 
         #endregion
 
         #region Move
-
-
         private void MoveImage(int dx, int dy)
         {
             if (image != null)
@@ -233,9 +236,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
             }
         }
-
-
-
         private void btnUp_Click(object sender, EventArgs e)
         {
             MoveImage(0, -1);
@@ -321,9 +321,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // Stoppen Sie den Timer
             moveTimer.Stop();
         }
-
-
-
         #endregion
 
         #region Position
@@ -381,81 +378,63 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
 
         #endregion
 
-        private void LoadAndCropImage(string imagePath, Rectangle cropArea)
-        {
-            // Load the image from the specified file.
-            Bitmap image = new Bitmap(imagePath);
-
-            // Crop the image to the specified region.
-            Bitmap croppedImage = image.Clone(cropArea, image.PixelFormat);
-
-            // Load the cropped image into the PictureBox.
-            pictureBox1.Image = croppedImage;
-        }
-
-        #region Paint
-
-        private void CropImage(Rectangle cropArea)
-        {
-            // Check if an image is loaded in the PictureBox.
-            if (pictureBox1.Image != null)
-            {
-                // Convert the image in the PictureBox to a Bitmap object.
-                Bitmap image = new Bitmap(pictureBox1.Image);
-
-                // Crop the image to the specified area.
-                Bitmap croppedImage = image.Clone(cropArea, image.PixelFormat);
-
-                // Load the cropped image into the PictureBox.
-                pictureBox1.Image = croppedImage;
-            }
-        }
-
-        //Not yet implemented.
-        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        #region Paint 
+        private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
         {
             // Check if the left mouse button is pressed.
             if (e.Button == MouseButtons.Left)
             {
                 // Set the starting point of the crop.
-                textBoxStartX.Text = e.X.ToString();
-                textBoxStartY.Text = e.Y.ToString();
+                startPoint = e.Location;
+                isDragging = true;
             }
         }
 
-        //Not yet implemented.
-        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        private void pictureBox2_MouseMove(object sender, MouseEventArgs e)
         {
-            // Check if the left mouse button is pressed.
-            if (e.Button == MouseButtons.Left)
+            // Check if the left mouse button is pressed and the user is dragging the mouse.
+            if (e.Button == MouseButtons.Left && isDragging)
             {
                 // Calculate the size of the cropping area.
-                int width = e.X - int.Parse(textBoxStartX.Text);
-                int height = e.Y - int.Parse(textBoxStartY.Text);
+                int width = e.X - startPoint.X;
+                int height = e.Y - startPoint.Y;
 
                 // Set the size of the cropping area.
                 textBoxWidth.Text = width.ToString();
                 textBoxHeight.Text = height.ToString();
-            }
 
-            // Change the mouse cursor to a crosshair.
-            pictureBox1.Cursor = Cursors.Cross;
+                // Set the starting point of the crop.
+                textBoxStartX.Text = startPoint.X.ToString();
+                textBoxStartY.Text = startPoint.Y.ToString();
+
+                // Update the cropping area.
+                cropArea = new Rectangle(startPoint.X, startPoint.Y, width, height);
+
+                // Redraw the PictureBox to show the cropping area.
+                pictureBox2.Invalidate();
+            }
         }
 
-        //Not yet implemented.
-        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        private void pictureBox2_MouseUp(object sender, MouseEventArgs e)
         {
             // Check if the left mouse button has been released.
             if (e.Button == MouseButtons.Left)
             {
-                // Call the CropImage method.
-                CropImage();
+                isDragging = false;
+            }
+        }
+        private void pictureBox2_Paint(object sender, PaintEventArgs e)
+        {
+            // Draw a dashed line around the cropping area.
+            using (Pen pen = new Pen(Color.Yellow))
+            {
+                pen.DashStyle = DashStyle.Dash;
+                e.Graphics.DrawRectangle(pen, cropArea);
             }
         }
         #endregion
 
         #region funktions Menu
-
         //Create a screenshot image.
         private void PaintGridToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -568,6 +547,19 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // Refresh the PictureBox1.
             pictureBox1.Invalidate();
         }
+        private void unloadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Überprüfen, ob ein Bild geladen ist
+            if (pictureBox1.Image == null)
+            {
+                MessageBox.Show("Es wurde kein Bild geladen.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // PictureBox leeren
+            pictureBox1.Image = null;
+            pictureBox1.Refresh();
+        }
 
         #endregion
 
@@ -600,6 +592,10 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // Check if an image is loaded in PictureBox1.
             if (pictureBox1.Image != null && !string.IsNullOrEmpty(textBoxWidth.Text) && !string.IsNullOrEmpty(textBoxHeight.Text) && !string.IsNullOrEmpty(textBoxStartX.Text) && !string.IsNullOrEmpty(textBoxStartY.Text))
             {
+                // Load the image from PictureBox1 into PictureBox2.
+                pictureBox2.Image = pictureBox1.Image;
+                pictureBox2.SizeMode = PictureBoxSizeMode.AutoSize;
+
                 // Read the width and height from the text boxes.
                 int width = int.Parse(textBoxWidth.Text);
                 int height = int.Parse(textBoxHeight.Text);
@@ -611,11 +607,11 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                     int startX = int.Parse(textBoxStartX.Text);
                     int startY = int.Parse(textBoxStartY.Text);
 
-                    // Crop the image from PictureBox1 to the specified size.
+                    // Crop the image from PictureBox2 to the specified size.
                     Bitmap croppedImage = new Bitmap(width, height);
                     using (Graphics g = Graphics.FromImage(croppedImage))
                     {
-                        g.DrawImage(pictureBox1.Image, new Rectangle(0, 0, width, height), new Rectangle(startX, startY, width, height), GraphicsUnit.Pixel);
+                        g.DrawImage(pictureBox2.Image, new Rectangle(0, 0, width, height), new Rectangle(startX, startY, width, height), GraphicsUnit.Pixel);
                     }
 
                     // Load the cropped image into PictureBox2.
@@ -626,7 +622,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         }
 
         #endregion
-
         // Show Border Image und die Sichtbarkeit des Rahmens zu aktualisieren.
         private void showBorderToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -701,6 +696,344 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 contextMenuStrip1.Show(pictureBox2, e.Location);
             }
         }
+        #endregion
+
+        #region Picturebox2
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (System.Windows.Forms.OpenFileDialog openFileDialog = new System.Windows.Forms.OpenFileDialog())
+            {
+                openFileDialog.Filter = "Image Files(*.BMP;*.JPG;*.GIF)|*.BMP;*.JPG;*.GIF";
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    Bitmap image = new Bitmap(openFileDialog.FileName);
+                    pictureBox2.Image = image;
+                    pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
+                    pictureBox2.Refresh();
+                }
+            }
+
+        }
+
+        private void openToolStrip2MenuItem_Click(object sender, EventArgs e)
+        {
+            using (System.Windows.Forms.OpenFileDialog openFileDialog = new System.Windows.Forms.OpenFileDialog())
+            {
+                openFileDialog.Filter = "Image Files(*.BMP;*.JPG;*.GIF)|*.BMP;*.JPG;*.GIF";
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    Bitmap image = new Bitmap(openFileDialog.FileName);
+                    pictureBox2.Image = image;
+                    // Change the size of the PictureBox2 to match the size of the image.
+                    pictureBox2.Size = pictureBox2.Image.Size;
+                    pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
+                    pictureBox2.Refresh();
+                }
+            }
+        }
+
+        private void buttonCrop_Click(object sender, EventArgs e)
+        {
+            // Check if an image is loaded in PictureBox1 or PictureBox2.
+            if (pictureBox1.Image != null || pictureBox2.Image != null)
+            {
+                // Load the image from PictureBox2 into PictureBox2 if it is not null, otherwise load the image from PictureBox1.
+                Bitmap image = pictureBox2.Image != null ? new Bitmap(pictureBox2.Image) : new Bitmap(pictureBox1.Image);
+
+                // Declare variables for the width, height, startX and startY values.
+                int width, height, startX, startY;
+
+                // Check if the text boxes are empty.
+                if (string.IsNullOrEmpty(textBoxWidth.Text) || string.IsNullOrEmpty(textBoxHeight.Text) || string.IsNullOrEmpty(textBoxStartX.Text) || string.IsNullOrEmpty(textBoxStartY.Text))
+                {
+                    // Use the entire image if the text boxes are empty.
+                    width = image.Width;
+                    height = image.Height;
+                    startX = 0;
+                    startY = 0;
+                }
+                else
+                {
+                    // Read the width and height from the text boxes.
+                    width = int.Parse(textBoxWidth.Text);
+                    height = int.Parse(textBoxHeight.Text);
+
+                    // Check if the width and height are greater than 0.
+                    if (width <= 0 || height <= 0)
+                    {
+                        // Display an error message or perform a different action for invalid width or height value
+                        // For example: MessageBox.Show("Invalid width or height value.");
+                        return;
+                    }
+
+                    // Read the starting point from the text boxes.
+                    startX = int.Parse(textBoxStartX.Text);
+                    startY = int.Parse(textBoxStartY.Text);
+                }
+
+                // Crop the image to the specified size.
+                Bitmap croppedImage = new Bitmap(width, height);
+                using (Graphics g = Graphics.FromImage(croppedImage))
+                {
+                    g.DrawImage(image, new Rectangle(0, 0, width, height), new Rectangle(startX, startY, width, height), GraphicsUnit.Pixel);
+                }
+
+                // Create the directory if it doesn't exist
+                string directory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tempGrafic");
+                Directory.CreateDirectory(directory);
+
+                // Create the file name with a timestamp
+                string fileName = "ArtItem_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+
+                // Combine the directory and file name
+                string filePath = Path.Combine(directory, fileName);
+
+                // Save the cropped image as a BMP file
+                croppedImage.Save(filePath, ImageFormat.Bmp);
+
+                // Show a message box to indicate that the image was saved
+                MessageBox.Show("Das Bild wurde gespeichert in: " + filePath);
+            }
+        }
+
+        private void gridToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Toggle the value of the showGrid field.
+            showGrid2 = !showGrid2;
+
+            // Redraw the PictureBox2.
+            pictureBox2.Invalidate();
+        }
+
+        private void pictureBox3_Paint(object sender, PaintEventArgs e)
+        {
+            // Check if the grid should be displayed.
+            if (showGrid2)
+            {
+                int kachelBreite = 32; // Tile width.
+                int gridSize = 8; // Number of tiles.
+                float scaleFactor = 250f / (gridSize * kachelBreite);
+                Pen pen = new Pen(Color.Red, 1f);
+                Brush brush = new SolidBrush(Color.Black);
+
+                // Calculate grid size.
+                int gridSizeInPixels = gridSize * kachelBreite;
+
+                int dx = 0; // Move the graphics 10 pixels to the right.
+                int dy = -178; // Move the graphics 20 pixels upwards.
+
+                // Move the origin to the center of the PictureBox.
+                e.Graphics.TranslateTransform(pictureBox2.Width / 2 + dx, pictureBox2.Height / 2 + dy);
+
+                // Scale the graphics.
+                e.Graphics.ScaleTransform(scaleFactor, scaleFactor);
+
+                // Rotate the graphics by 45 degrees.
+                e.Graphics.RotateTransform(45);
+
+                for (int i = gridSize; i >= 0; i--)
+                {
+                    // Draw horizontal lines.
+                    e.Graphics.DrawLine(pen, new Point(0, i * kachelBreite), new Point(gridSize * kachelBreite, i * kachelBreite));
+
+                    // Draw vertical lines.
+                    e.Graphics.DrawLine(pen, new Point(i * kachelBreite, 0), new Point(i * kachelBreite, gridSize * kachelBreite));
+                }
+            }
+        }
+        private void mirror2ToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            // Überprüfen Sie, ob ein Bild in PictureBox2 vorhanden ist
+            if (pictureBox2.Image != null)
+            {
+                // Erstellen Sie eine Kopie des aktuellen Bildes
+                Bitmap originalImage = new Bitmap(pictureBox2.Image);
+
+                // Spiegeln Sie das Bild horizontal
+                originalImage.RotateFlip(RotateFlipType.RotateNoneFlipX);
+
+                // Setzen Sie das gespiegelte Bild zurück in PictureBox2
+                pictureBox2.Image = originalImage;
+            }
+        }
+        private void toolStripMenuItemrotate90degrees_Click(object sender, EventArgs e)
+        {
+            // Überprüfen Sie, ob ein Bild in PictureBox2 vorhanden ist
+            if (pictureBox2.Image != null)
+            {
+                // Erstellen Sie eine Kopie des aktuellen Bildes
+                Bitmap originalImage = new Bitmap(pictureBox2.Image);
+
+                // Drehen Sie das Bild um 90 Grad nach links
+                originalImage.RotateFlip(RotateFlipType.Rotate270FlipNone);
+
+                // Setzen Sie das gedrehte Bild zurück in PictureBox2
+                pictureBox2.Image = originalImage;
+            }
+        }
+
+        private void cutImageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Überprüfen, ob ein Bild ausgewählt ist
+            if (pictureBox2.Image == null)
+            {
+                MessageBox.Show("Es wurde kein Bild ausgewählt.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            Bitmap originalImage = new Bitmap(pictureBox2.Image);
+            int width = originalImage.Width;
+            int height = originalImage.Height;
+            int count = (int)Math.Ceiling((double)width / 44);
+            int lastImageWidth = width % 44;
+            Color fillColor = Color.White; // Beispiel: Weiße Farbe (FFFFFF)
+
+            // Überprüfen, ob das Bild schmaler als 44 Pixel ist
+            if (width < 44)
+            {
+                MessageBox.Show("Das Bild ist schmaler als 44 Pixel.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Erstellen Sie das Verzeichnis, wenn es nicht existiert
+            string directory = "tempGrafic";
+            Directory.CreateDirectory(directory);
+
+            // Schneiden und speichern Sie die Teilbilder
+            for (int i = 0; i < count; i++)
+            {
+                int cropWidth = (i == count - 1 && lastImageWidth > 0) ? lastImageWidth : 44;
+                int offsetX = i * 44;
+
+                // Ausschnitt erstellen
+                Rectangle cropRect = new Rectangle(offsetX, 0, cropWidth, height);
+                Bitmap croppedImage = originalImage.Clone(cropRect, originalImage.PixelFormat);
+
+                // Überprüfen, ob das letzte Bild geschnitten wird
+                if (i == count - 1 && lastImageWidth < 44)
+                {
+                    // Fehlenden Bereich mit der angegebenen Farbe auffüllen
+                    int missingWidth = 44 - lastImageWidth;
+                    Bitmap lastImage = new Bitmap(44, height);
+                    using (Graphics g = Graphics.FromImage(lastImage))
+                    {
+                        // Transparenten Hintergrund zeichnen
+                        g.Clear(Color.Transparent);
+
+                        // Letztes Bild am linken Rand platzieren
+                        int x = 0;
+                        g.DrawImage(croppedImage, x, 0);
+
+                        // Fehlenden Bereich mit der angegebenen Farbe auffüllen
+                        FillMissingArea(lastImage, missingWidth, height, fillColor);
+                    }
+                    croppedImage = lastImage;
+                }
+
+                // Inhalt auffüllen
+                FillContent(croppedImage, fillColor);
+
+                // Dateinamen generieren
+                string fileName = Path.Combine(directory, "art" + (i + 1) + ".bmp");
+
+                // Bild speichern
+                croppedImage.Save(fileName, ImageFormat.Bmp);
+
+                // Freigabe von Ressourcen
+                croppedImage.Dispose();
+            }
+
+            // Erfolgsmeldung anzeigen
+            MessageBox.Show("Das Bild wurde erfolgreich geschnitten und gespeichert.", "Erfolg", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        // Fehlenden Bereich mit der angegebenen Farbe auffüllen
+        private void FillMissingArea(Bitmap image, int width, int height, Color color)
+        {
+            using (Graphics g = Graphics.FromImage(image))
+            {
+                Rectangle missingAreaRect = new Rectangle(image.Width - width, 0, width, height);
+                using (Brush brush = new SolidBrush(color))
+                {
+                    g.FillRectangle(brush, missingAreaRect);
+                }
+            }
+        }
+
+        // Bildinhalt mit der angegebenen Farbe auffüllen
+        private void FillContent(Bitmap image, Color color)
+        {
+            for (int x = 0; x < image.Width; x++)
+            {
+                for (int y = 0; y < image.Height; y++)
+                {
+                    if (image.GetPixel(x, y) == Color.Transparent || image.GetPixel(x, y).A == 0)
+                    {
+                        image.SetPixel(x, y, color);
+                    }
+                }
+            }
+        }
+
+        private void fillTextureToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Überprüfen, ob ein Bild geladen ist
+            if (pictureBox2.Image == null)
+            {
+                MessageBox.Show("Es wurde kein Bild geladen.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Überprüfen, ob ein Bereich ausgewählt wurde
+            int width = int.Parse(textBoxWidth.Text);
+            int height = int.Parse(textBoxHeight.Text);
+            int startX = int.Parse(textBoxStartX.Text);
+            int startY = int.Parse(textBoxStartY.Text);
+            if (width <= 0 || height <= 0)
+            {
+                MessageBox.Show("Es wurde kein Bereich ausgewählt.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Den Benutzer auffordern, eine neue Textur auszuwählen
+            using (System.Windows.Forms.OpenFileDialog openFileDialog = new System.Windows.Forms.OpenFileDialog())
+            {
+                openFileDialog.Filter = "Bilddateien|*.bmp;*.jpg;*.jpeg;*.png";
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    // Die neue Textur laden
+                    Bitmap newTexture = new Bitmap(openFileDialog.FileName);
+
+                    // Eine Kopie des aktuellen Bildes in der PictureBox erstellen
+                    Bitmap imageCopy = (Bitmap)pictureBox2.Image.Clone();
+
+                    // Den ausgewählten Bereich mit der neuen Textur füllen
+                    using (Graphics g = Graphics.FromImage(imageCopy))
+                    {
+                        // Den ausgewählten Bereich mit der neuen Textur auffüllen
+                        g.DrawImage(newTexture, new Rectangle(startX, startY, width, height));
+                    }
+
+                    // Die PictureBox aktualisieren
+                    pictureBox2.Image = imageCopy;
+                    pictureBox2.Refresh();
+                }
+            }
+        }
+        private void unloadimageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Überprüfen, ob ein Bild geladen ist
+            if (pictureBox2.Image == null)
+            {
+                MessageBox.Show("Es wurde kein Bild geladen.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // PictureBox leeren
+            pictureBox2.Image = null;
+            pictureBox2.Refresh();
+        }
+
         #endregion
     }
 }

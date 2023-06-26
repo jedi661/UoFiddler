@@ -54,9 +54,9 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
             // 
             // BtnMultiOpen
             // 
-            BtnMultiOpen.Location = new System.Drawing.Point(358, 301);
+            BtnMultiOpen.Location = new System.Drawing.Point(350, 301);
             BtnMultiOpen.Name = "BtnMultiOpen";
-            BtnMultiOpen.Size = new System.Drawing.Size(76, 23);
+            BtnMultiOpen.Size = new System.Drawing.Size(92, 23);
             BtnMultiOpen.TabIndex = 0;
             BtnMultiOpen.Text = "Open";
             BtnMultiOpen.UseVisualStyleBackColor = true;
@@ -64,9 +64,9 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
             // 
             // btnSpeichernTxt
             // 
-            btnSpeichernTxt.Location = new System.Drawing.Point(358, 265);
+            btnSpeichernTxt.Location = new System.Drawing.Point(350, 272);
             btnSpeichernTxt.Name = "btnSpeichernTxt";
-            btnSpeichernTxt.Size = new System.Drawing.Size(75, 23);
+            btnSpeichernTxt.Size = new System.Drawing.Size(92, 23);
             btnSpeichernTxt.TabIndex = 1;
             btnSpeichernTxt.Text = "Save";
             btnSpeichernTxt.UseVisualStyleBackColor = true;
@@ -74,9 +74,9 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
             // 
             // btnUmwandeln
             // 
-            btnUmwandeln.Location = new System.Drawing.Point(358, 41);
+            btnUmwandeln.Location = new System.Drawing.Point(350, 41);
             btnUmwandeln.Name = "btnUmwandeln";
-            btnUmwandeln.Size = new System.Drawing.Size(75, 23);
+            btnUmwandeln.Size = new System.Drawing.Size(92, 23);
             btnUmwandeln.TabIndex = 2;
             btnUmwandeln.Text = "Convert";
             btnUmwandeln.UseVisualStyleBackColor = true;

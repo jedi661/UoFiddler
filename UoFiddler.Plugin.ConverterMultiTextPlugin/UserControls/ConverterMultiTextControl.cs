@@ -21,6 +21,10 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
     public partial class ConverterMultiTextControl : UserControl
     {
         private string originalFileName;
+
+        //One Form
+        private bool isFormOpen = false;
+
         public ConverterMultiTextControl()
         {
             InitializeComponent();
@@ -151,8 +155,23 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
 
         private void buttonGraficCutterForm_Click(object sender, EventArgs e)
         {
+            if (isFormOpen)
+            {
+                return; // Beendet die Methode, wenn die Form bereits geöffnet ist
+            }
+
             GraphicCutterForm form = new GraphicCutterForm();
+            form.FormClosed += GraphicCutterForm_FormClosed; // Abonniere das FormClosed-Ereignis
             form.Show();
+            isFormOpen = true;
+
+            buttonGraficCutterForm.Enabled = false; // Deaktiviert den Button
         }
+        private void GraphicCutterForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            isFormOpen = false;
+            buttonGraficCutterForm.Enabled = true; // Aktiviert den Button wieder
+        }
+
     }
 }
