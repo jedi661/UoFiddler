@@ -1,3 +1,7 @@
+Version : 4.10.14 #XG1
+- Added a mirror function to items.
+- Added tooltips to items.
+
 Version : 4.10.13 #XG1
 - A new link has been added to uodev.uo-freeshards.de.
 - A new tool has been added: a graphic cutter for arts.

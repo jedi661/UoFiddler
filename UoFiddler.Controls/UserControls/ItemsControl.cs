@@ -797,7 +797,7 @@ namespace UoFiddler.Controls.UserControls
                     ExportItemImage(_itemList[selectedIndex], ImageFormat.Png);
                 }
             }
-        }             
+        }
 
         private static void ExportItemImage(int index, ImageFormat imageFormat)
         {
@@ -1390,6 +1390,40 @@ namespace UoFiddler.Controls.UserControls
             {
                 MessageBox.Show("No image in the clipboard.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+        #endregion
+
+        #region Mirror
+        private void mirrorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Check if any items are selected in the ItemsTileView.
+            if (ItemsTileView.SelectedIndices.Count == 0)
+            {
+                return;
+            }
+
+            // Iterating through the selected indices.
+            foreach (int selectedIndex in ItemsTileView.SelectedIndices)
+            {
+                // Getting the image for the selected item.
+                Bitmap bitmap = Art.GetStatic(_itemList[selectedIndex]);
+
+                // Checking if the image is available.
+                if (bitmap != null)
+                {
+                    // Mirroring the image horizontally.
+                    bitmap.RotateFlip(RotateFlipType.RotateNoneFlipX);
+
+                    // Replacing the original image with the mirrored image.
+                    Art.ReplaceStatic(_itemList[selectedIndex], bitmap);
+                }
+            }
+
+            // Updating the DetailPictureBox.
+            UpdateDetail(_selectedGraphicId);
+
+            // Updating the ItemsTileView.
+            ItemsTileView.Invalidate();
         }
         #endregion
     }
