@@ -35,16 +35,22 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         private Rectangle cropArea;
         private bool isDragging = false;
         private bool showGrid2 = false;
-        private Rectangle selectedRectangle; // Der ausgewählte Bereich
+        private Rectangle selectedRectangle; // The selected range.
+
+        //imageColorClearToolStripMenuItem
+        private Bitmap originalImage;
+        private bool isImageTransparent = false; // Variable to track the current state of the image.
+
+        private Color gridColor = Color.Red; // Setze die Standardfarbe des Gitters auf Rot PictureBox1.
 
         public GraphicCutterForm()
         {
             InitializeComponent();
 
-            // Verknüpfen Sie das MouseMove-Ereignis der PictureBox1 mit dem Ereignishandler
+            // VAssociate the MouseMove event of PictureBox1 with the event handler.
             pictureBox1.MouseMove += pictureBox2_MouseMove;
 
-            // Setze die Werte in den TextBoxen
+            // Set the values in the text boxes.
             textBoxWidth.Text = "44";
             textBoxHeight.Text = "105";
             textBoxStartX.Text = "174";
@@ -75,6 +81,9 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
 
             // Register the Paint event handler for the PictureBox2 control.
             pictureBox2.Paint += pictureBox3_Paint;
+
+            // Associate the SelectedIndexChanged event handler with the SelectedIndexChanged event of toolStripComboBox2
+            toolStripComboBox2.SelectedIndexChanged += toolStripComboBox2_SelectedIndexChanged;
 
         }
 
@@ -114,7 +123,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             }
         }
 
-        #region Opendialog
+        #region Opendialog        
 
         private void openImageToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -124,6 +133,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     image = new Bitmap(openFileDialog.FileName);
+                    originalImage = new Bitmap(image); // Save a copy of the original image.
                     pictureBox1.Image = image;
                     pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
 
@@ -141,15 +151,19 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                     textBoxHeight.Text = image.Height.ToString();
                     textBoxStartX.Text = ((pictureBox1.Width - image.Width) / 2).ToString();
                     textBoxStartY.Text = (pictureBox1.Height - image.Height).ToString();
+
+                    isImageTransparent = false; // Set the state of the image to non-transparent.
                 }
             }
         }
+
+
 
         #endregion
 
         #region  Picture Paint
         //Paint Grid
-        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        /*private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             // Check if the grid should be displayed.
             if (showGrid)
@@ -157,7 +171,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 int kachelBreite = 32; // Tile width.
                 int gridSize = 8; // Number of tiles.
                 float scaleFactor = 250f / (gridSize * kachelBreite);
-                Pen pen = new Pen(Color.Red, 1f);
+                Pen pen = new Pen(Color.Red, 1f); // Verwende die ausgewählte Farbe für den Stift.
                 Brush brush = new SolidBrush(Color.Black);
 
                 // Calculate grid size.
@@ -184,7 +198,66 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                     e.Graphics.DrawLine(pen, new Point(i * kachelBreite, 0), new Point(i * kachelBreite, gridSize * kachelBreite));
                 }
             }
+        }*/
+
+        //Paint Grid
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            // Check if the grid should be displayed. Überprüfe, ob das Gitter angezeigt werden soll.
+            if (showGrid)
+            {
+                int kachelBreite = 32; // Tile width.
+                int gridSize = 8; // Number of tiles.
+                float scaleFactor = 250f / (gridSize * kachelBreite);
+                Pen pen = new Pen(gridColor, 1f); // Verwende die ausgewählte Farbe für den Stift.
+                Brush brush = new SolidBrush(Color.Black);
+
+                // Calculate grid size.
+                int gridSizeInPixels = gridSize * kachelBreite;
+
+                int dx = 0; // Move the graphics 10 pixels to the right.
+                int dy = -178; // Move the graphics 20 pixels upwards.
+
+                // Move the origin to the center of the PictureBox.
+                e.Graphics.TranslateTransform(pictureBox1.Width / 2 + dx, pictureBox1.Height / 2 + dy);
+
+                // Scale the graphics.
+                e.Graphics.ScaleTransform(scaleFactor, scaleFactor);
+
+                // Drehe die Grafik um 45 Grad.
+                e.Graphics.RotateTransform(45);
+
+                for (int i = gridSize; i >= 0; i--)
+                {
+                    // Draw horizontal lines.
+                    e.Graphics.DrawLine(pen, new Point(0, i * kachelBreite), new Point(gridSize * kachelBreite, i * kachelBreite));
+
+                    // Draw vertical lines.
+                    e.Graphics.DrawLine(pen, new Point(i * kachelBreite, 0), new Point(i * kachelBreite, gridSize * kachelBreite));
+                }
+            }
         }
+
+
+        private void toolStripMenuItem1_Click_1(object sender, EventArgs e)
+        {
+            // Create a new ColorDialog control.
+            ColorDialog colorDialog = new ColorDialog();
+
+            // Set the custom colors of the ColorDialog control.
+            colorDialog.CustomColors = new int[] { Color.Yellow.ToArgb(), Color.Blue.ToArgb(), Color.Orange.ToArgb(), Color.Pink.ToArgb(), Color.White.ToArgb(), Color.DarkBlue.ToArgb(), Color.DarkRed.ToArgb(), Color.Brown.ToArgb() };
+
+            // Show the ColorDialog control and check if the user clicked OK.
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                // Set the color of the grid to the color selected by the user.
+                gridColor = colorDialog.Color;
+
+                // Update the PictureBox control to redraw the grid.
+                pictureBox1.Invalidate();
+            }
+        }
+
 
         #endregion
 
@@ -813,7 +886,8 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 int kachelBreite = 32; // Tile width.
                 int gridSize = 8; // Number of tiles.
                 float scaleFactor = 250f / (gridSize * kachelBreite);
-                Pen pen = new Pen(Color.Red, 1f);
+                //Pen pen = new Pen(Color.Red, 1f);
+                Pen pen = new Pen(gridColor, 1f); // Verwende die ausgewählte Farbe für den Stift.
                 Brush brush = new SolidBrush(Color.Black);
 
                 // Calculate grid size.
@@ -841,43 +915,68 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 }
             }
         }
+
+        //Grid Color PictureBox2
+        private void toolStripComboBox3_Click(object sender, EventArgs e)
+        {
+            // Create a new ColorDialog control.
+            ColorDialog colorDialog = new ColorDialog();
+
+            // Set the custom colors of the ColorDialog control.
+            colorDialog.CustomColors = new int[] { Color.Yellow.ToArgb(), Color.Blue.ToArgb(), Color.Orange.ToArgb(), Color.Pink.ToArgb(), Color.White.ToArgb(), Color.DarkBlue.ToArgb(), Color.DarkRed.ToArgb(), Color.Brown.ToArgb() };
+
+            // Show the ColorDialog control and check if the user clicked OK.
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                // Set the color of the grid to the color selected by the user.
+                gridColor = colorDialog.Color;
+
+                // Update the PictureBox control to redraw the grid.
+                pictureBox2.Invalidate();
+            }
+        }
+
+        // Mirror
         private void mirror2ToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            // Überprüfen Sie, ob ein Bild in PictureBox2 vorhanden ist
+            // Check if there is an image in PictureBox2.
             if (pictureBox2.Image != null)
             {
-                // Erstellen Sie eine Kopie des aktuellen Bildes
+                // Create a copy of the current image.
                 Bitmap originalImage = new Bitmap(pictureBox2.Image);
 
-                // Spiegeln Sie das Bild horizontal
+                // Mirror the image horizontally.
                 originalImage.RotateFlip(RotateFlipType.RotateNoneFlipX);
 
-                // Setzen Sie das gespiegelte Bild zurück in PictureBox2
+                // Reset the mirrored image back to PictureBox2.
                 pictureBox2.Image = originalImage;
             }
         }
+
+        //Rotate 90 Degress
         private void toolStripMenuItemrotate90degrees_Click(object sender, EventArgs e)
         {
-            // Überprüfen Sie, ob ein Bild in PictureBox2 vorhanden ist
+            // Check if there is an image in PictureBox2.
             if (pictureBox2.Image != null)
             {
-                // Erstellen Sie eine Kopie des aktuellen Bildes
+                // Create a copy of the current image.
                 Bitmap originalImage = new Bitmap(pictureBox2.Image);
 
-                // Drehen Sie das Bild um 90 Grad nach links
+                // Rotate the image 90 degrees to the left.
                 originalImage.RotateFlip(RotateFlipType.Rotate270FlipNone);
 
-                // Setzen Sie das gedrehte Bild zurück in PictureBox2
+                // Reset the rotated image back to PictureBox2.
                 pictureBox2.Image = originalImage;
             }
         }
 
+        //Cut Image
         private void cutImageToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Überprüfen, ob ein Bild ausgewählt ist
+            // Check if an image is selected.
             if (pictureBox2.Image == null)
             {
-                MessageBox.Show("Es wurde kein Bild ausgewählt.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("No image has been selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -886,68 +985,68 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             int height = originalImage.Height;
             int count = (int)Math.Ceiling((double)width / 44);
             int lastImageWidth = width % 44;
-            Color fillColor = Color.White; // Beispiel: Weiße Farbe (FFFFFF)
+            Color fillColor = Color.White; // Example: White color. (FFFFFF)
 
-            // Überprüfen, ob das Bild schmaler als 44 Pixel ist
+            // Check if the image is narrower than 44 pixels.
             if (width < 44)
             {
-                MessageBox.Show("Das Bild ist schmaler als 44 Pixel.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("The image is narrower than 44 pixels.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            // Erstellen Sie das Verzeichnis, wenn es nicht existiert
+            // Create the directory if it doesn't exist.
             string directory = "tempGrafic";
             Directory.CreateDirectory(directory);
 
-            // Schneiden und speichern Sie die Teilbilder
+            // Crop and save the sub-images.
             for (int i = 0; i < count; i++)
             {
                 int cropWidth = (i == count - 1 && lastImageWidth > 0) ? lastImageWidth : 44;
                 int offsetX = i * 44;
 
-                // Ausschnitt erstellen
+                // Create a crop
                 Rectangle cropRect = new Rectangle(offsetX, 0, cropWidth, height);
                 Bitmap croppedImage = originalImage.Clone(cropRect, originalImage.PixelFormat);
 
-                // Überprüfen, ob das letzte Bild geschnitten wird
+                // Check if the last image is being cropped.
                 if (i == count - 1 && lastImageWidth < 44)
                 {
-                    // Fehlenden Bereich mit der angegebenen Farbe auffüllen
+                    // Fill the missing area with the specified color.
                     int missingWidth = 44 - lastImageWidth;
                     Bitmap lastImage = new Bitmap(44, height);
                     using (Graphics g = Graphics.FromImage(lastImage))
                     {
-                        // Transparenten Hintergrund zeichnen
+                        // Draw a transparent background.
                         g.Clear(Color.Transparent);
 
-                        // Letztes Bild am linken Rand platzieren
+                        // Place the last image on the left edge.
                         int x = 0;
                         g.DrawImage(croppedImage, x, 0);
 
-                        // Fehlenden Bereich mit der angegebenen Farbe auffüllen
+                        // Fill the missing area with the specified color.
                         FillMissingArea(lastImage, missingWidth, height, fillColor);
                     }
                     croppedImage = lastImage;
                 }
 
-                // Inhalt auffüllen
+                // Fill the content.
                 FillContent(croppedImage, fillColor);
 
-                // Dateinamen generieren
+                // Generate a file name
                 string fileName = Path.Combine(directory, "art" + (i + 1) + ".bmp");
 
-                // Bild speichern
+                // Save the image
                 croppedImage.Save(fileName, ImageFormat.Bmp);
 
-                // Freigabe von Ressourcen
+                // Release of resources.
                 croppedImage.Dispose();
             }
 
-            // Erfolgsmeldung anzeigen
-            MessageBox.Show("Das Bild wurde erfolgreich geschnitten und gespeichert.", "Erfolg", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            // Display a success message.
+            MessageBox.Show("The image has been successfully cropped and saved.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        // Fehlenden Bereich mit der angegebenen Farbe auffüllen
+        // Fill the missing area with the specified color.
         private void FillMissingArea(Bitmap image, int width, int height, Color color)
         {
             using (Graphics g = Graphics.FromImage(image))
@@ -960,7 +1059,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             }
         }
 
-        // Bildinhalt mit der angegebenen Farbe auffüllen
+        // Fill the image content with the specified color.
         private void FillContent(Bitmap image, Color color)
         {
             for (int x = 0; x < image.Width; x++)
@@ -974,47 +1073,46 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 }
             }
         }
-
         private void fillTextureToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Überprüfen, ob ein Bild geladen ist
+            // Check if an image is loaded.
             if (pictureBox2.Image == null)
             {
-                MessageBox.Show("Es wurde kein Bild geladen.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("No image has been loaded.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            // Überprüfen, ob ein Bereich ausgewählt wurde
+            // Check if a region has been selected.
             int width = int.Parse(textBoxWidth.Text);
             int height = int.Parse(textBoxHeight.Text);
             int startX = int.Parse(textBoxStartX.Text);
             int startY = int.Parse(textBoxStartY.Text);
             if (width <= 0 || height <= 0)
             {
-                MessageBox.Show("Es wurde kein Bereich ausgewählt.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("No area has been selected..", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            // Den Benutzer auffordern, eine neue Textur auszuwählen
+            // Prompt the user to select a new texture.
             using (System.Windows.Forms.OpenFileDialog openFileDialog = new System.Windows.Forms.OpenFileDialog())
             {
                 openFileDialog.Filter = "Bilddateien|*.bmp;*.jpg;*.jpeg;*.png";
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    // Die neue Textur laden
+                    // Load the new texture.
                     Bitmap newTexture = new Bitmap(openFileDialog.FileName);
 
-                    // Eine Kopie des aktuellen Bildes in der PictureBox erstellen
+                    // Create a copy of the current image in the PictureBox.
                     Bitmap imageCopy = (Bitmap)pictureBox2.Image.Clone();
 
-                    // Den ausgewählten Bereich mit der neuen Textur füllen
+                    // Fill the selected area with the new texture
                     using (Graphics g = Graphics.FromImage(imageCopy))
                     {
-                        // Den ausgewählten Bereich mit der neuen Textur auffüllen
+                        // Fill the selected area with the new texture.
                         g.DrawImage(newTexture, new Rectangle(startX, startY, width, height));
                     }
 
-                    // Die PictureBox aktualisieren
+                    // Update the PictureBox.
                     pictureBox2.Image = imageCopy;
                     pictureBox2.Refresh();
                 }
@@ -1022,18 +1120,133 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         }
         private void unloadimageToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Überprüfen, ob ein Bild geladen ist
+            // Check if an image is loaded.
             if (pictureBox2.Image == null)
             {
-                MessageBox.Show("Es wurde kein Bild geladen.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("No image has been loaded.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            // PictureBox leeren
+            // Clear the PictureBox.
             pictureBox2.Image = null;
             pictureBox2.Refresh();
         }
 
+        #endregion
+
+        #region Background Image PictureBox1
+        private void toolStripComboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (toolStripComboBox2.SelectedItem != null)
+            {
+                string selectedOption = toolStripComboBox2.SelectedItem.ToString();
+
+                if (selectedOption == "green")
+                {
+                    pictureBox1.BackgroundImage = Properties.Resources.green; // Change the background image to "water".
+                }
+                if (selectedOption == "water")
+                {
+                    pictureBox1.BackgroundImage = Properties.Resources.water; // Hintergrundbild ändern water
+                }
+                else if (selectedOption == "clear")
+                {
+                    pictureBox1.BackgroundImage = null; // Delete the background image.
+                }
+                // Additional options for other images can be added here.
+                // else if (selectedOption == "blue")
+                // {
+                //     pictureBox1.BackgroundImage = Properties.Resources.blue; // Change the background image.
+                // }
+                // ...
+            }
+        }
+
+        private void ReplaceColors(Bitmap image, Color replacementColor, int threshold, params Color[] colorsToReplace)
+        {
+            for (int x = 0; x < image.Width; x++)
+            {
+                for (int y = 0; y < image.Height; y++)
+                {
+                    Color pixelColor = image.GetPixel(x, y);
+                    foreach (Color colorToReplace in colorsToReplace)
+                    {
+                        int rDiff = Math.Abs(pixelColor.R - colorToReplace.R);
+                        int gDiff = Math.Abs(pixelColor.G - colorToReplace.G);
+                        int bDiff = Math.Abs(pixelColor.B - colorToReplace.B);
+                        if (rDiff <= threshold && gDiff <= threshold && bDiff <= threshold)
+                        {
+                            image.SetPixel(x, y, replacementColor);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void imageColorClearToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (image != null)
+            {
+                if (isImageTransparent)
+                {
+                    image = new Bitmap(originalImage); // Restore the original image.
+                    pictureBox1.Image = image;
+                    pictureBox1.Refresh();
+                    SetImagePosition(0, 0); // Set the position of the image.
+                    isImageTransparent = false; // Set the state of the image to non-transparent.
+
+                    pictureBox2.Image = new Bitmap(originalImage); // Restore the original image in pictureBox2.
+                }
+                else
+                {
+                    // Convert the loaded image to a PNG image.
+                    using (MemoryStream stream = new MemoryStream())
+                    {
+                        image.Save(stream, ImageFormat.Png);
+                        stream.Position = 0;
+                        image = new Bitmap(stream);
+                    }
+
+                    int threshold = 10; // Colors within this threshold will be replaced.
+                    ReplaceColors(image, Color.Transparent, threshold, Color.FromArgb(255, 255, 255), Color.FromArgb(0, 0, 0));
+                    Bitmap croppedImage = CropImage2(image);
+                    pictureBox1.Image = croppedImage;
+                    pictureBox1.Refresh();
+                    SetImagePosition(0, 0); // Set the position of the image.
+                    isImageTransparent = true; // Set the state of the image to transparent.
+
+                    pictureBox2.Image = new Bitmap(croppedImage); // Display the cropped image in pictureBox2.
+                }
+            }
+        }
+        private Bitmap CropImage2(Bitmap image)
+        {
+            int topmost = 0;
+            int bottommost = image.Height;
+            int leftmost = 0;
+            int rightmost = image.Width;
+
+            for (int x = 0; x < image.Width; x++)
+            {
+                for (int y = 0; y < image.Height; y++)
+                {
+                    Color pixelColor = image.GetPixel(x, y);
+                    if (pixelColor.A != 0)
+                    {
+                        if (x < leftmost) leftmost = x;
+                        if (x > rightmost) rightmost = x;
+                        if (y < topmost) topmost = y;
+                        if (y > bottommost) bottommost = y;
+                    }
+                }
+            }
+
+            int width = rightmost - leftmost;
+            int height = bottommost - topmost;
+
+            return new Bitmap(image).Clone(new Rectangle(leftmost, topmost, width, height), image.PixelFormat);
+        }
         #endregion
     }
 }

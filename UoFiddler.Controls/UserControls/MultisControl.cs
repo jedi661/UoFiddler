@@ -63,6 +63,7 @@ namespace UoFiddler.Controls.UserControls
                 selectedMultiName = TreeViewMulti.SelectedNode.Text;
             }
 
+
         }
 
         private bool _loaded;
@@ -363,7 +364,6 @@ namespace UoFiddler.Controls.UserControls
                 }
             }
         }
-
         private void Extract_Image_ClickBmp(object sender, EventArgs e)
         {
             ExtractMultiImage(ImageFormat.Bmp, _backgroundImageColor);
@@ -1077,6 +1077,28 @@ namespace UoFiddler.Controls.UserControls
             // Copy the Multilist.xml file to the OLDScript directory.
             string destinationFileName = Path.Combine(oldScriptDirectory, "Multilist.xml");
             File.Copy(_multiXmlFileName, destinationFileName, true);
+        }
+        #endregion
+
+        #region Copy tabPage6 contextMenuStrip3
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(MultiComponentBox.Text))
+            {
+                Clipboard.SetText(MultiComponentBox.Text);
+            }
+        }
+
+        private void TabControl3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl3.SelectedTab == tabPage5)
+            {
+                MultiComponentBox.ContextMenuStrip = contextMenuStrip1;
+            }
+            else if (tabControl3.SelectedTab == tabPage6)
+            {
+                MultiComponentBox.ContextMenuStrip = contextMenuStrip3;
+            }
         }
         #endregion
     }

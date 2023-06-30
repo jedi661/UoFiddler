@@ -74,6 +74,8 @@ namespace UoFiddler.Controls.UserControls
             toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             saveToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             tabControl3 = new System.Windows.Forms.TabControl();
+            contextMenuStrip3 = new System.Windows.Forms.ContextMenuStrip(components);
+            copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             tabPage5 = new System.Windows.Forms.TabPage();
             splitContainer3 = new System.Windows.Forms.SplitContainer();
             HeightChangeMulti = new System.Windows.Forms.TrackBar();
@@ -98,6 +100,7 @@ namespace UoFiddler.Controls.UserControls
             contextMenuStrip2.SuspendLayout();
             toolStrip1.SuspendLayout();
             tabControl3.SuspendLayout();
+            contextMenuStrip3.SuspendLayout();
             tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer3).BeginInit();
             splitContainer3.Panel1.SuspendLayout();
@@ -373,6 +376,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             // tabControl3
             // 
+            tabControl3.ContextMenuStrip = contextMenuStrip3;
             tabControl3.Controls.Add(tabPage5);
             tabControl3.Controls.Add(tabPage6);
             tabControl3.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -382,6 +386,20 @@ namespace UoFiddler.Controls.UserControls
             tabControl3.SelectedIndex = 0;
             tabControl3.Size = new System.Drawing.Size(505, 442);
             tabControl3.TabIndex = 1;
+            tabControl3.SelectedIndexChanged += TabControl3_SelectedIndexChanged;
+            // 
+            // contextMenuStrip3
+            // 
+            contextMenuStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { copyToolStripMenuItem });
+            contextMenuStrip3.Name = "contextMenuStrip3";
+            contextMenuStrip3.Size = new System.Drawing.Size(103, 26);
+            // 
+            // copyToolStripMenuItem
+            // 
+            copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            copyToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            copyToolStripMenuItem.Text = "Copy";
+            copyToolStripMenuItem.Click += copyToolStripMenuItem_Click;
             // 
             // tabPage5
             // 
@@ -564,6 +582,7 @@ namespace UoFiddler.Controls.UserControls
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             tabControl3.ResumeLayout(false);
+            contextMenuStrip3.ResumeLayout(false);
             tabPage5.ResumeLayout(false);
             splitContainer3.Panel1.ResumeLayout(false);
             splitContainer3.Panel1.PerformLayout();
@@ -637,5 +656,7 @@ namespace UoFiddler.Controls.UserControls
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reloadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip3;
+        private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
     }
 }
