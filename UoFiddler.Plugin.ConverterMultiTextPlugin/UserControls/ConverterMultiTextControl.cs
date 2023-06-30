@@ -157,20 +157,20 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
         {
             if (isFormOpen)
             {
-                return; // Beendet die Methode, wenn die Form bereits geöffnet ist
+                return; // Exit the method if the form is already open.
             }
 
             GraphicCutterForm form = new GraphicCutterForm();
-            form.FormClosed += GraphicCutterForm_FormClosed; // Abonniere das FormClosed-Ereignis
+            form.FormClosed += GraphicCutterForm_FormClosed; // Subscribe to the FormClosed event.
             form.Show();
             isFormOpen = true;
 
-            buttonGraficCutterForm.Enabled = false; // Deaktiviert den Button
+            buttonGraficCutterForm.Enabled = false; // Disable the button.
         }
         private void GraphicCutterForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             isFormOpen = false;
-            buttonGraficCutterForm.Enabled = true; // Aktiviert den Button wieder
+            buttonGraficCutterForm.Enabled = true; // Enable the button again.
         }
 
     }
