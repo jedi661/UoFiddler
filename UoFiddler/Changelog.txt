@@ -3,8 +3,6 @@ Version : 4.10.15 #XG1
 - #XC1 Admin tool form set up to be opened only once.
 - #XC6 ChangeLog extended to #XC1 display #XC2 colors #XC7 when I define them with #XC5 abbreviations in the #XC3 colors. Here you now set the #XC4 colors with the text.
 
-
-
 Version : 4.10.14 #XG1
 - Added a mirror function to items.
 - Added #XC5 tooltips to items.
