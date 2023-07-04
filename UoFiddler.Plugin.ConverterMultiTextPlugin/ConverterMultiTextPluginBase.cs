@@ -90,7 +90,9 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin
 
         private static void ItemClick(object sender, EventArgs e)
         {
-            new AdminToolForm().Show();
+            //new AdminToolForm().Show();
+            AdminToolForm form = AdminToolForm.GetInstance();
+            form.Show();
         }
 
         private void EventsModifyItemsControlContextMenuEvent(ContextMenuStrip strip)

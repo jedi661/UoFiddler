@@ -87,6 +87,7 @@ namespace UoFiddler.Controls.UserControls
             asTiffToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             asJpgToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             asPngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            copyclipboardToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             statusMulti = new System.Windows.Forms.StatusStrip();
             StatusMultiText = new System.Windows.Forms.ToolStripStatusLabel();
             tabPage6 = new System.Windows.Forms.TabPage();
@@ -481,15 +482,16 @@ namespace UoFiddler.Controls.UserControls
             // 
             // contextMenuStrip1
             // 
-            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { extractImageToolStripMenuItem });
+            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { extractImageToolStripMenuItem, copyclipboardToolStripMenuItem1 });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new System.Drawing.Size(153, 26);
+            contextMenuStrip1.Size = new System.Drawing.Size(181, 70);
+            toolTip.SetToolTip(contextMenuStrip1, "Copied multi-graphic to clipboard.");
             // 
             // extractImageToolStripMenuItem
             // 
             extractImageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { asBmpToolStripMenuItem, asTiffToolStripMenuItem, asJpgToolStripMenuItem1, asPngToolStripMenuItem });
             extractImageToolStripMenuItem.Name = "extractImageToolStripMenuItem";
-            extractImageToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            extractImageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             extractImageToolStripMenuItem.Text = "extract Image..";
             // 
             // asBmpToolStripMenuItem
@@ -519,6 +521,13 @@ namespace UoFiddler.Controls.UserControls
             asPngToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             asPngToolStripMenuItem.Text = "As Png";
             asPngToolStripMenuItem.Click += Extract_Image_ClickPng;
+            // 
+            // copyclipboardToolStripMenuItem1
+            // 
+            copyclipboardToolStripMenuItem1.Name = "copyclipboardToolStripMenuItem1";
+            copyclipboardToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            copyclipboardToolStripMenuItem1.Text = "Copy";
+            copyclipboardToolStripMenuItem1.Click += copyclipboardToolStripMenuItem1_Click;
             // 
             // statusMulti
             // 
@@ -658,5 +667,6 @@ namespace UoFiddler.Controls.UserControls
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip3;
         private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem copyclipboardToolStripMenuItem1;
     }
 }

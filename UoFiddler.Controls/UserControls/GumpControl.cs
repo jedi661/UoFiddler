@@ -26,6 +26,7 @@ namespace UoFiddler.Controls.UserControls
 {
     public partial class GumpControl : UserControl
     {
+
         public GumpControl()
         {
             InitializeComponent();
@@ -918,5 +919,6 @@ namespace UoFiddler.Controls.UserControls
             }
         }
         #endregion
+
     }
 }

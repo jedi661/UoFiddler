@@ -23,11 +23,56 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
 {
     public partial class AdminToolForm : Form
     {
+        private static AdminToolForm instance; // Statische Variable zur Speicherung der Instanz
+        private AdminToolForm adminToolForm;
+
+
         public AdminToolForm()
         {
+            // Überprüfen, ob bereits eine Instanz der Form geöffnet ist
+            if (instance != null && !instance.IsDisposed)
+            {
+                // Eine Instanz ist bereits geöffnet, also die vorhandene Instanz anzeigen und die neue Instanz schließen
+                instance.Focus();
+                Close();
+                return;
+            }
+
+            // Es wurde keine andere Instanz gefunden, also diese Instanz speichern
+            instance = this;
+
             InitializeComponent();
 
             label1.Text = "";
+        }
+
+        public void ÖffneAdminToolForm()
+        {
+            // Überprüfen, ob das AdminToolForm bereits verworfen wurde oder null ist
+            if (adminToolForm == null || adminToolForm.IsDisposed)
+            {
+                // Eine neue Instanz des AdminToolForm erstellen
+                adminToolForm = new AdminToolForm();
+                // Das Formular anzeigen
+                adminToolForm.Show();
+            }
+            else
+            {
+                // Das bereits vorhandene Formular anzeigen
+                adminToolForm.Focus();
+            }
+        }
+
+        // Methode zum Abrufen der bereits geöffneten Instanz
+        public static AdminToolForm GetInstance()
+        {
+            if (instance == null || instance.IsDisposed)
+            {
+                // Wenn keine Instanz vorhanden ist oder die Instanz verworfen wurde, erstelle eine neue Instanz
+                instance = new AdminToolForm();
+            }
+
+            return instance;
         }
 
         private void btnPing_Click(object sender, System.EventArgs e)
@@ -171,6 +216,14 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         private bool IsValidDomainNameTracert(string address)
         {
             return Uri.CheckHostName(address) != UriHostNameType.Unknown;
+        }
+
+        // Methode zum Schließen der Form
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            // Setze die Instanzvariable auf null, um das erneute Öffnen der Form zu ermöglichen
+            instance = null;
+            Close();
         }
     }
 }

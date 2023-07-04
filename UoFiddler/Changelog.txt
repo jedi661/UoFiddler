@@ -1,11 +1,18 @@
+Version : 4.10.15 #XG1
+- Added Multis contextMenuStrip1 #XC2 Copy Image to clipboard.
+- #XC1 Admin tool form set up to be opened only once.
+- #XC6 ChangeLog extended to #XC1 display #XC2 colors #XC7 when I define them with #XC5 abbreviations in the #XC3 colors. Here you now set the #XC4 colors with the text.
+
+
+
 Version : 4.10.14 #XG1
 - Added a mirror function to items.
-- Added tooltips to items.
-- GraficCutter: toolStrip ComboBox Added green, water, clear.
+- Added #XC5 tooltips to items.
+- GraficCutter: toolStrip ComboBox Added #XC6 green, water clear.
 - GraficCutter: Added the "changeBorder" function that makes the graphics transparent.
 - GraficCutter: Added graphics.
 - GraficCutter: Added Color selection added for grid
-- MultiControl tabPage6 add contextMenuStrip3 and Copy Text
+- MultiControl #XC6 tabPage6 add contextMenuStrip3 and Copy Text
 
 Version : 4.10.13 #XG1
 - A new link has been added to uodev.uo-freeshards.de.

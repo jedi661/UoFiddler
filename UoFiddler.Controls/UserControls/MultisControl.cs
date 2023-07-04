@@ -1101,5 +1101,40 @@ namespace UoFiddler.Controls.UserControls
             }
         }
         #endregion
+
+        #region Copy Image Clipboard
+
+        private void copyclipboardToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (TreeViewMulti.SelectedNode != null)
+            {
+                MultiComponentList selectedComponent = (MultiComponentList)TreeViewMulti.SelectedNode.Tag;
+                if (selectedComponent != MultiComponentList.Empty)
+                {
+                    Bitmap image = selectedComponent.GetImage(HeightChangeMulti.Maximum - HeightChangeMulti.Value);
+                    if (image != null)
+                    {
+                        try
+                        {
+                            Clipboard.SetImage(image);
+                            MessageBox.Show("The image was successfully copied to the clipboard.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("An error occurred while copying the image to the clipboard.: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        finally
+                        {
+                            image.Dispose(); // Release the image to free up resources.
+                        }
+                        return;
+                    }
+                }
+            }
+
+            MessageBox.Show("There is no image available to copy to the clipboard.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+        }
+        #endregion
     }
 }
