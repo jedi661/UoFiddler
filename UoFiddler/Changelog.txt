@@ -2,7 +2,7 @@ Version : 4.10.15 #XG1
 - Added Multis contextMenuStrip1 #XC2 Copy Image to clipboard.
 - #XC1 Admin tool form set up to be opened only once.
 - #XC6 ChangeLog extended to #XC1 display #XC2 colors #XC7 when I define them with #XC5 abbreviations in the #XC3 colors. Here you now set the #XC4 colors with the text.
-- Graphics added and replaced, function added for selection
+- #XC1 Graphics added and replaced, function added for selection
 
 Version : 4.10.14 #XG1
 - Added a mirror function to items.
