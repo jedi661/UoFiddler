@@ -109,7 +109,7 @@ namespace UoFiddler.Forms
             }
 
             // Add the available images to the toolStripComboBoxImage.
-            toolStripComboBoxImage.Items.AddRange(new[] { "UOFiddler", "UOFiddler1", "UOFiddler2", "UOFiddler3", "UOFiddler4", "UOFiddler5" });
+            toolStripComboBoxImage.Items.AddRange(new[] { "UOFiddler", "UOFiddler1", "UOFiddler2", "UOFiddler3", "UOFiddler4", "UOFiddler5", "UOFiddler6" });
 
             // Register the event handler for the SelectedIndexChanged event of the toolStripComboBoxImage.
             toolStripComboBoxImage.SelectedIndexChanged += ImageSwitcher_SelectedIndexChanged;
@@ -135,6 +135,9 @@ namespace UoFiddler.Forms
                     break;
                 case "UOFiddler5":
                     StartTab.BackgroundImage = Properties.Resources.UOFiddler5; // Set the background image of the StartTab to UOFiddler5
+                    break;
+                case "UOFiddler6":
+                    StartTab.BackgroundImage = Properties.Resources.UOFiddler6; // Set the background image of the StartTab to UOFiddler5
                     break;
             }
         }
