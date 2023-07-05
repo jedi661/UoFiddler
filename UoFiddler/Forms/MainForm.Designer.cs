@@ -130,9 +130,9 @@ namespace UoFiddler.Forms
             toolStripMenuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
             changelogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            uodevuofreeshardsdeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            uodevuofreeshardsdeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             TabPanel.SuspendLayout();
             contextMenuStripMainForm.SuspendLayout();
             StartTab.SuspendLayout();
@@ -196,12 +196,12 @@ namespace UoFiddler.Forms
             // 
             contextMenuStripMainForm.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { unDockToolStripMenuItem, switchLogoImageToolStripMenuItem });
             contextMenuStripMainForm.Name = "contextMenuStrip1";
-            contextMenuStripMainForm.Size = new System.Drawing.Size(176, 48);
+            contextMenuStripMainForm.Size = new System.Drawing.Size(181, 70);
             // 
             // unDockToolStripMenuItem
             // 
             unDockToolStripMenuItem.Name = "unDockToolStripMenuItem";
-            unDockToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            unDockToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             unDockToolStripMenuItem.Text = "UnDock";
             unDockToolStripMenuItem.Click += OnClickUnDock;
             // 
@@ -209,7 +209,7 @@ namespace UoFiddler.Forms
             // 
             switchLogoImageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripComboBoxImage });
             switchLogoImageToolStripMenuItem.Name = "switchLogoImageToolStripMenuItem";
-            switchLogoImageToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            switchLogoImageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             switchLogoImageToolStripMenuItem.Text = "Switch Logo Image";
             // 
             // toolStripComboBoxImage
@@ -1039,6 +1039,14 @@ namespace UoFiddler.Forms
             toolStripSeparator2.Name = "toolStripSeparator2";
             toolStripSeparator2.Size = new System.Drawing.Size(196, 6);
             // 
+            // uodevuofreeshardsdeToolStripMenuItem
+            // 
+            uodevuofreeshardsdeToolStripMenuItem.Image = Properties.Resources.pngegg;
+            uodevuofreeshardsdeToolStripMenuItem.Name = "uodevuofreeshardsdeToolStripMenuItem";
+            uodevuofreeshardsdeToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            uodevuofreeshardsdeToolStripMenuItem.Text = "uodev.uo-freeshards.de";
+            uodevuofreeshardsdeToolStripMenuItem.Click += uodevuofreeshardsdeToolStripMenuItem_Click;
+            // 
             // toolStripMenuItem1
             // 
             toolStripMenuItem1.Image = Properties.Resources.pngegg;
@@ -1054,14 +1062,6 @@ namespace UoFiddler.Forms
             toolStripMenuItem2.Size = new System.Drawing.Size(199, 22);
             toolStripMenuItem2.Text = "uo-pixel.de";
             toolStripMenuItem2.Click += toolStripMenuItem2_Click;
-            // 
-            // uodevuofreeshardsdeToolStripMenuItem
-            // 
-            uodevuofreeshardsdeToolStripMenuItem.Image = Properties.Resources.pngegg;
-            uodevuofreeshardsdeToolStripMenuItem.Name = "uodevuofreeshardsdeToolStripMenuItem";
-            uodevuofreeshardsdeToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
-            uodevuofreeshardsdeToolStripMenuItem.Text = "uodev.uo-freeshards.de";
-            uodevuofreeshardsdeToolStripMenuItem.Click += uodevuofreeshardsdeToolStripMenuItem_Click;
             // 
             // MainForm
             // 
