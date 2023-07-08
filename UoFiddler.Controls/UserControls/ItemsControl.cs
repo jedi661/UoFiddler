@@ -660,15 +660,21 @@ namespace UoFiddler.Controls.UserControls
                 MessageBoxDefaultButton.Button1);
         }
 
+        // This method is an event handler for a button or control click
         private void OnClickShowFreeSlots(object sender, EventArgs e)
         {
+            // Toggle the value of the _showFreeSlots variable
             _showFreeSlots = !_showFreeSlots;
+            // If _showFreeSlots is true
             if (_showFreeSlots)
             {
+                // Loop through all possible item IDs up to the maximum item ID
                 for (int j = 0; j <= Art.GetMaxItemId(); ++j)
                 {
+                    // Check if the item is already in the _itemList
                     if (_itemList.Count > j)
                     {
+                        // If the item is not in the _itemList, insert it at the current position
                         if (_itemList[j] != j)
                         {
                             _itemList.Insert(j, j);
@@ -676,23 +682,29 @@ namespace UoFiddler.Controls.UserControls
                     }
                     else
                     {
+                        // If the item is not in the _itemList, insert it at the current position
                         _itemList.Insert(j, j);
                     }
                 }
 
+                // Store the previously selected item ID
                 var prevSelected = SelectedGraphicId;
 
+                // Update the VirtualListSize property of the ItemsTileView control to reflect the new number of items
                 ItemsTileView.VirtualListSize = _itemList.Count;
 
+                // If there was a previously selected item, try to reselect it
                 if (prevSelected >= 0)
                 {
                     SelectedGraphicId = prevSelected;
                 }
 
+                // Force the ItemsTileView control to redraw
                 ItemsTileView.Invalidate();
             }
             else
             {
+                // If _showFreeSlots is false, call the Reload method
                 Reload();
             }
         }
@@ -836,6 +848,7 @@ namespace UoFiddler.Controls.UserControls
             }
         }
 
+        #region Misc Save
         private void OnClick_SaveAllBmp(object sender, EventArgs e)
         {
             ExportAllItemImages(ImageFormat.Bmp);
@@ -856,10 +869,13 @@ namespace UoFiddler.Controls.UserControls
             ExportAllItemImages(ImageFormat.Png);
         }
 
+        // This method exports all item images in a specified image format
         private void ExportAllItemImages(ImageFormat imageFormat)
         {
+            // Get the file extension for the specified image format
             string fileExtension = Utils.GetFileExtensionFor(imageFormat);
 
+            // Create a new FolderBrowserDialog to prompt the user to select a directory
             using (FolderBrowserDialog dialog = new FolderBrowserDialog())
             {
                 dialog.Description = "Select directory";
@@ -869,12 +885,16 @@ namespace UoFiddler.Controls.UserControls
                     return;
                 }
 
+                // Set the cursor to the wait cursor
                 Cursor.Current = Cursors.WaitCursor;
 
+                // Create a new ProgressBarDialog to show the progress of the export
                 using (new ProgressBarDialog(_itemList.Count, $"Export to {fileExtension}", false))
                 {
+                    // Loop through all items in the _itemList
                     foreach (var artItemIndex in _itemList)
                     {
+                        // Update the progress bar
                         ControlEvents.FireProgressChangeEvent();
                         Application.DoEvents();
 
@@ -884,20 +904,23 @@ namespace UoFiddler.Controls.UserControls
                             continue;
                         }
 
+                        // Create the file name for the image
                         string fileName = Path.Combine(dialog.SelectedPath, $"Item 0x{index:X4}.{fileExtension}");
+                        // Save the image to the specified file
                         using (Bitmap bit = new Bitmap(Art.GetStatic(index)))
                         {
                             bit.Save(fileName, imageFormat);
                         }
                     }
                 }
-
+                // Reset the cursor to the default cursor
                 Cursor.Current = Cursors.Default;
-
+                // Show a message that all items have been saved
                 MessageBox.Show($"All items saved to {dialog.SelectedPath}", "Saved", MessageBoxButtons.OK,
                     MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
             }
         }
+        #endregion
 
         private void OnClickPreLoad(object sender, EventArgs e)
         {

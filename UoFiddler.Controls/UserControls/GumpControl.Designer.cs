@@ -62,6 +62,7 @@ namespace UoFiddler.Controls.UserControls
             toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            AddShowAllFreeSlotsButton = new System.Windows.Forms.ToolStripMenuItem();
             toolStrip2 = new System.Windows.Forms.ToolStrip();
             toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
@@ -130,9 +131,9 @@ namespace UoFiddler.Controls.UserControls
             // 
             // contextMenuStrip1
             // 
-            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { extractImageToolStripMenuItem, toolStripSeparator2, findNextFreeSlotToolStripMenuItem, jumpToMaleFemale, replaceGumpToolStripMenuItem, removeToolStripMenuItem, insertToolStripMenuItem, toolStripMenuItem1, toolStripSeparator1, saveToolStripMenuItem, toolStripSeparator4, copyToolStripMenuItem, importToolStripMenuItem });
+            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { extractImageToolStripMenuItem, toolStripSeparator2, AddShowAllFreeSlotsButton, findNextFreeSlotToolStripMenuItem, jumpToMaleFemale, replaceGumpToolStripMenuItem, removeToolStripMenuItem, insertToolStripMenuItem, toolStripMenuItem1, toolStripSeparator1, saveToolStripMenuItem, toolStripSeparator4, copyToolStripMenuItem, importToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new System.Drawing.Size(190, 242);
+            contextMenuStrip1.Size = new System.Drawing.Size(190, 286);
             // 
             // extractImageToolStripMenuItem
             // 
@@ -261,6 +262,13 @@ namespace UoFiddler.Controls.UserControls
             importToolStripMenuItem.Text = "Import";
             importToolStripMenuItem.ToolTipText = "Paste graphic from clipboard.";
             importToolStripMenuItem.Click += importToolStripMenuItem_Click;
+            // 
+            // AddShowAllFreeSlotsButton
+            // 
+            AddShowAllFreeSlotsButton.Name = "AddShowAllFreeSlotsButton";
+            AddShowAllFreeSlotsButton.Size = new System.Drawing.Size(189, 22);
+            AddShowAllFreeSlotsButton.Text = "Show all Free Slots";
+            AddShowAllFreeSlotsButton.Click += AddShowAllFreeSlotsButton_Click;
             // 
             // toolStrip2
             // 
@@ -469,5 +477,6 @@ namespace UoFiddler.Controls.UserControls
         private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem AddShowAllFreeSlotsButton;
     }
 }

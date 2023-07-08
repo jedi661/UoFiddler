@@ -89,15 +89,15 @@ namespace UoFiddler.Controls.UserControls
             Cursor.Current = Cursors.Default;
         }
 
-        private void PopulateListBox(bool showOnlyValid)
+        //old
+        /*private void PopulateListBox(bool showOnlyValid)
         {
             listBox.BeginUpdate();
             listBox.Items.Clear();
-
             List<object> cache = new List<object>();
             for (int i = 0; i < Gumps.GetCount(); ++i)
             {
-                if (showOnlyValid)
+                if (showOnlyValid && !_showFreeSlots)
                 {
                     if (Gumps.IsValidIndex(i))
                     {
@@ -105,6 +105,55 @@ namespace UoFiddler.Controls.UserControls
                     }
                 }
                 else
+                {
+                    cache.Add(i);
+                }
+            }
+            listBox.Items.AddRange(cache.ToArray());
+            listBox.EndUpdate();
+            if (listBox.Items.Count > 0)
+            {
+                listBox.SelectedIndex = 0;
+            }
+        }*/
+
+        private void PopulateListBox(bool showOnlyValid)
+        {
+            listBox.BeginUpdate();
+            listBox.Items.Clear();
+            List<object> cache = new List<object>();
+
+            int maxGumpID = 0; // Variable für die maximale Gump-ID
+
+            // Ermitteln der maximalen Gump-ID
+            for (int i = 0; i < Gumps.GetCount(); i++)
+            {
+                if (Gumps.IsValidIndex(i))
+                {
+                    maxGumpID = i; // Aktualisieren der maximalen Gump-ID
+                }
+            }
+
+            // Hinzufügen der vorhandenen Gump-IDs zur ListBox
+            for (int i = 0; i <= maxGumpID; i++)
+            {
+                if (showOnlyValid && !_showFreeSlots)
+                {
+                    if (Gumps.IsValidIndex(i))
+                    {
+                        cache.Add(i);
+                    }
+                }
+                else
+                {
+                    cache.Add(i);
+                }
+            }
+
+            // Falls _showFreeSlots aktiviert ist, werden auch leere IDs zur ListBox hinzugefügt
+            if (_showFreeSlots)
+            {
+                for (int i = maxGumpID + 1; i <= Gumps.GetCount(); i++)
                 {
                     cache.Add(i);
                 }
@@ -118,6 +167,8 @@ namespace UoFiddler.Controls.UserControls
                 listBox.SelectedIndex = 0;
             }
         }
+
+
 
         private void OnFilePathChangeEvent()
         {
@@ -397,6 +448,23 @@ namespace UoFiddler.Controls.UserControls
                     break;
                 }
             }
+
+            // Falls keine leere ID gefunden wurde und _showFreeSlots aktiviert ist,
+            // wird eine neue ID am Ende der ListBox hinzugefügt
+            if (listBox.SelectedIndex == -1 && _showFreeSlots)
+            {
+                int newId = Gumps.GetCount();
+                listBox.Items.Add(newId);
+                listBox.SelectedIndex = listBox.Items.Count - 1;
+            }
+        }
+
+        //Show all free slots
+        private void AddShowAllFreeSlotsButton_Click(object sender, EventArgs e)
+        {
+
+            _showFreeSlots = !_showFreeSlots;
+            PopulateListBox(!_showFreeSlots);
         }
 
         private void OnTextChanged_InsertAt(object sender, EventArgs e)
@@ -919,6 +987,7 @@ namespace UoFiddler.Controls.UserControls
             }
         }
         #endregion
+
 
     }
 }
