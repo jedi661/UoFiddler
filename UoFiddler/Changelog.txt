@@ -4,6 +4,7 @@ Version : 4.10.15 #XG1
 - #XC6 ChangeLog extended to #XC1 display #XC2 colors #XC7 when I define them with #XC5 abbreviations in the #XC3 colors. Here you now set the #XC4 colors with the text.
 - #XC1 Graphics added and replaced, function added for selection
 - Gumps: I have added a button "Show all Free Slots" that displays all empty IDs in the Gump.mul. I have also modified the method "PopulateListBox" accordingly.
+- ToolTip Text added
 
 Version : 4.10.14 #XG1
 - Added a mirror function to items.

@@ -49,6 +49,7 @@ namespace UoFiddler.Controls.UserControls
             asJpgToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             asPngToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            AddShowAllFreeSlotsButton = new System.Windows.Forms.ToolStripMenuItem();
             findNextFreeSlotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             jumpToMaleFemale = new System.Windows.Forms.ToolStripMenuItem();
             replaceGumpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -62,7 +63,6 @@ namespace UoFiddler.Controls.UserControls
             toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            AddShowAllFreeSlotsButton = new System.Windows.Forms.ToolStripMenuItem();
             toolStrip2 = new System.Windows.Forms.ToolStrip();
             toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
@@ -141,6 +141,7 @@ namespace UoFiddler.Controls.UserControls
             extractImageToolStripMenuItem.Name = "extractImageToolStripMenuItem";
             extractImageToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             extractImageToolStripMenuItem.Text = "Export Image..";
+            extractImageToolStripMenuItem.ToolTipText = "Exports the graphic to the respective format.";
             // 
             // asBmpToolStripMenuItem
             // 
@@ -175,11 +176,20 @@ namespace UoFiddler.Controls.UserControls
             toolStripSeparator2.Name = "toolStripSeparator2";
             toolStripSeparator2.Size = new System.Drawing.Size(186, 6);
             // 
+            // AddShowAllFreeSlotsButton
+            // 
+            AddShowAllFreeSlotsButton.Name = "AddShowAllFreeSlotsButton";
+            AddShowAllFreeSlotsButton.Size = new System.Drawing.Size(189, 22);
+            AddShowAllFreeSlotsButton.Text = "Show all Free Slots";
+            AddShowAllFreeSlotsButton.ToolTipText = "Displays all available IDs in the list.";
+            AddShowAllFreeSlotsButton.Click += AddShowAllFreeSlotsButton_Click;
+            // 
             // findNextFreeSlotToolStripMenuItem
             // 
             findNextFreeSlotToolStripMenuItem.Name = "findNextFreeSlotToolStripMenuItem";
             findNextFreeSlotToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             findNextFreeSlotToolStripMenuItem.Text = "Find Next Free Slot";
+            findNextFreeSlotToolStripMenuItem.ToolTipText = "Finds the next available ID position.";
             findNextFreeSlotToolStripMenuItem.Click += OnClickFindFree;
             // 
             // jumpToMaleFemale
@@ -187,6 +197,7 @@ namespace UoFiddler.Controls.UserControls
             jumpToMaleFemale.Name = "jumpToMaleFemale";
             jumpToMaleFemale.Size = new System.Drawing.Size(189, 22);
             jumpToMaleFemale.Text = "Jump to Male/Female";
+            jumpToMaleFemale.ToolTipText = "Jumps to the male or female position.";
             jumpToMaleFemale.Click += JumpToMaleFemale_Click;
             // 
             // replaceGumpToolStripMenuItem
@@ -194,6 +205,7 @@ namespace UoFiddler.Controls.UserControls
             replaceGumpToolStripMenuItem.Name = "replaceGumpToolStripMenuItem";
             replaceGumpToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             replaceGumpToolStripMenuItem.Text = "Replace";
+            replaceGumpToolStripMenuItem.ToolTipText = "Replaces the graphic at the ID position.";
             replaceGumpToolStripMenuItem.Click += OnClickReplace;
             // 
             // removeToolStripMenuItem
@@ -201,6 +213,7 @@ namespace UoFiddler.Controls.UserControls
             removeToolStripMenuItem.Name = "removeToolStripMenuItem";
             removeToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             removeToolStripMenuItem.Text = "Remove";
+            removeToolStripMenuItem.ToolTipText = "Removes the graphic from the ID position.";
             removeToolStripMenuItem.Click += OnClickRemove;
             // 
             // insertToolStripMenuItem
@@ -209,6 +222,7 @@ namespace UoFiddler.Controls.UserControls
             insertToolStripMenuItem.Name = "insertToolStripMenuItem";
             insertToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             insertToolStripMenuItem.Text = "Insert At..";
+            insertToolStripMenuItem.ToolTipText = "Imports the graphic at the specified decimal position.";
             // 
             // InsertText
             // 
@@ -223,6 +237,7 @@ namespace UoFiddler.Controls.UserControls
             toolStripMenuItem1.Name = "toolStripMenuItem1";
             toolStripMenuItem1.Size = new System.Drawing.Size(189, 22);
             toolStripMenuItem1.Text = "Insert Starting From";
+            toolStripMenuItem1.ToolTipText = "Imports the graphics at the specified ID positions from the given position.";
             // 
             // InsertStartingFromTb
             // 
@@ -240,6 +255,7 @@ namespace UoFiddler.Controls.UserControls
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             saveToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             saveToolStripMenuItem.Text = "Save";
+            saveToolStripMenuItem.ToolTipText = "Saves the Gump.mul file.";
             saveToolStripMenuItem.Click += OnClickSave;
             // 
             // toolStripSeparator4
@@ -262,13 +278,6 @@ namespace UoFiddler.Controls.UserControls
             importToolStripMenuItem.Text = "Import";
             importToolStripMenuItem.ToolTipText = "Paste graphic from clipboard.";
             importToolStripMenuItem.Click += importToolStripMenuItem_Click;
-            // 
-            // AddShowAllFreeSlotsButton
-            // 
-            AddShowAllFreeSlotsButton.Name = "AddShowAllFreeSlotsButton";
-            AddShowAllFreeSlotsButton.Size = new System.Drawing.Size(189, 22);
-            AddShowAllFreeSlotsButton.Text = "Show all Free Slots";
-            AddShowAllFreeSlotsButton.Click += AddShowAllFreeSlotsButton_Click;
             // 
             // toolStrip2
             // 
