@@ -89,53 +89,29 @@ namespace UoFiddler.Controls.UserControls
             Cursor.Current = Cursors.Default;
         }
 
-        //old
-        /*private void PopulateListBox(bool showOnlyValid)
-        {
-            listBox.BeginUpdate();
-            listBox.Items.Clear();
-            List<object> cache = new List<object>();
-            for (int i = 0; i < Gumps.GetCount(); ++i)
-            {
-                if (showOnlyValid && !_showFreeSlots)
-                {
-                    if (Gumps.IsValidIndex(i))
-                    {
-                        cache.Add(i);
-                    }
-                }
-                else
-                {
-                    cache.Add(i);
-                }
-            }
-            listBox.Items.AddRange(cache.ToArray());
-            listBox.EndUpdate();
-            if (listBox.Items.Count > 0)
-            {
-                listBox.SelectedIndex = 0;
-            }
-        }*/
-
         private void PopulateListBox(bool showOnlyValid)
         {
+            //The update of the ListBox begins.
             listBox.BeginUpdate();
+            // Deletes all elements from the ListBox.
             listBox.Items.Clear();
+            // Creates a new list to store the elements to be added to the ListBox.
             List<object> cache = new List<object>();
-
+            // Variable für die maximale Gump-ID
             int maxGumpID = 0; // Variable für die maximale Gump-ID
 
-            // Ermitteln der maximalen Gump-ID
+            // Determining the maximum Gump ID.
             for (int i = 0; i < Gumps.GetCount(); i++)
             {
                 if (Gumps.IsValidIndex(i))
                 {
-                    maxGumpID = i; // Aktualisieren der maximalen Gump-ID
+                    // Updating the maximum Gump ID.
+                    maxGumpID = i;
                 }
             }
 
-            // Hinzufügen der vorhandenen Gump-IDs zur ListBox
-            for (int i = 0; i <= maxGumpID; i++)
+            // Adding the existing Gump IDs to the ListBox.
+            for (int i = 0; i < maxGumpID; i++)
             {
                 if (showOnlyValid && !_showFreeSlots)
                 {
@@ -150,7 +126,7 @@ namespace UoFiddler.Controls.UserControls
                 }
             }
 
-            // Falls _showFreeSlots aktiviert ist, werden auch leere IDs zur ListBox hinzugefügt
+            // If _showFreeSlots is enabled, empty IDs will also be added to the ListBox.
             if (_showFreeSlots)
             {
                 for (int i = maxGumpID + 1; i <= Gumps.GetCount(); i++)
@@ -158,17 +134,18 @@ namespace UoFiddler.Controls.UserControls
                     cache.Add(i);
                 }
             }
-
+            // Adds all elements from the list to the ListBox.
             listBox.Items.AddRange(cache.ToArray());
+
+            // Completes the update of the ListBox.
             listBox.EndUpdate();
 
+            // Sets the selection to the first element if the ListBox contains any elements.
             if (listBox.Items.Count > 0)
             {
                 listBox.SelectedIndex = 0;
             }
         }
-
-
 
         private void OnFilePathChangeEvent()
         {
