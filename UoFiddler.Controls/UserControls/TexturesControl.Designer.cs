@@ -84,7 +84,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { showFreeSlotsToolStripMenuItem, toolStripSeparator5, exportImageToolStripMenuItem, toolStripSeparator2, findNextFreeSlotToolStripMenuItem, removeToolStripMenuItem, replaceToolStripMenuItem, replaceStartingFromToolStripMenuItem, insertAtToolStripMenuItem, toolStripSeparator6, copyToolStripMenuItem, importFromClipboardToolStripMenuItem, importByTempToolStripMenuItem, toolStripSeparator7, um90GradToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new System.Drawing.Size(194, 292);
+            contextMenuStrip1.Size = new System.Drawing.Size(194, 270);
             // 
             // showFreeSlotsToolStripMenuItem
             // 
@@ -356,6 +356,7 @@ namespace UoFiddler.Controls.UserControls
             TextureTileView.VirtualListSize = 1;
             TextureTileView.ItemSelectionChanged += TextureTileView_ItemSelectionChanged;
             TextureTileView.DrawItem += TextureTileView_DrawItem;
+            TextureTileView.KeyDown += TexturesControl_KeyDown;
             // 
             // TexturesControl
             // 

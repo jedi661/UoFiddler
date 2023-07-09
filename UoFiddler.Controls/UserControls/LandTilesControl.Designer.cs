@@ -66,6 +66,8 @@ namespace UoFiddler.Controls.UserControls
             copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             importToTempToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            rotateBy90DegreesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             LandTilesToolStrip = new System.Windows.Forms.ToolStrip();
             NameLabel = new System.Windows.Forms.ToolStripLabel();
             GraphicLabel = new System.Windows.Forms.ToolStripLabel();
@@ -82,8 +84,6 @@ namespace UoFiddler.Controls.UserControls
             SaveButton = new System.Windows.Forms.ToolStripButton();
             toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             LandTilesTileView = new TileViewControl();
-            toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
-            rotateBy90DegreesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             LandTilesContextMenuStrip.SuspendLayout();
             LandTilesToolStrip.SuspendLayout();
             SuspendLayout();
@@ -92,7 +92,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             LandTilesContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { showFreeSlotsToolStripMenuItem, toolStripSeparator6, exportImageToolStripMenuItem, toolStripSeparator3, selectInTileDataTabToolStripMenuItem, selectInRadarColorTabToolStripMenuItem, toolStripSeparator2, findNextFreeSlotToolStripMenuItem, removeToolStripMenuItem, replaceToolStripMenuItem, replaceStartingFromToolStripMenuItem, insertAtToolStripMenuItem, toolStripSeparator7, copyToolStripMenuItem, importToolStripMenuItem, importToTempToolStripMenuItem, toolStripSeparator8, rotateBy90DegreesToolStripMenuItem });
             LandTilesContextMenuStrip.Name = "contextMenuStrip1";
-            LandTilesContextMenuStrip.Size = new System.Drawing.Size(201, 342);
+            LandTilesContextMenuStrip.Size = new System.Drawing.Size(201, 320);
             // 
             // showFreeSlotsToolStripMenuItem
             // 
@@ -242,6 +242,18 @@ namespace UoFiddler.Controls.UserControls
             importToTempToolStripMenuItem.Text = "Import to Temp";
             importToTempToolStripMenuItem.Click += importToTempToolStripMenuItem_Click;
             // 
+            // toolStripSeparator8
+            // 
+            toolStripSeparator8.Name = "toolStripSeparator8";
+            toolStripSeparator8.Size = new System.Drawing.Size(197, 6);
+            // 
+            // rotateBy90DegreesToolStripMenuItem
+            // 
+            rotateBy90DegreesToolStripMenuItem.Name = "rotateBy90DegreesToolStripMenuItem";
+            rotateBy90DegreesToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            rotateBy90DegreesToolStripMenuItem.Text = "Rotate by 90 degrees.";
+            rotateBy90DegreesToolStripMenuItem.Click += rotateBy90DegreesToolStripMenuItem_Click;
+            // 
             // LandTilesToolStrip
             // 
             LandTilesToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
@@ -384,18 +396,7 @@ namespace UoFiddler.Controls.UserControls
             LandTilesTileView.VirtualListSize = 1;
             LandTilesTileView.ItemSelectionChanged += LandTilesTileView_ItemSelectionChanged;
             LandTilesTileView.DrawItem += LandTilesTileView_DrawItem;
-            // 
-            // toolStripSeparator8
-            // 
-            toolStripSeparator8.Name = "toolStripSeparator8";
-            toolStripSeparator8.Size = new System.Drawing.Size(197, 6);
-            // 
-            // rotateBy90DegreesToolStripMenuItem
-            // 
-            rotateBy90DegreesToolStripMenuItem.Name = "rotateBy90DegreesToolStripMenuItem";
-            rotateBy90DegreesToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
-            rotateBy90DegreesToolStripMenuItem.Text = "Rotate by 90 degrees.";
-            rotateBy90DegreesToolStripMenuItem.Click += rotateBy90DegreesToolStripMenuItem_Click;
+            LandTilesTileView.KeyDown += LandTilesControl_KeyDown;
             // 
             // LandTilesControl
             // 

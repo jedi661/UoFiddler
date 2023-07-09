@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -1073,7 +1074,20 @@ namespace UoFiddler.Controls.UserControls
 
         private void ItemsTileView_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyData == Keys.PageDown || e.KeyData == Keys.PageUp)
+            // Check if the Ctrl+V key combination has been pressed
+            if (e.Control && e.KeyCode == Keys.V)
+            {
+                // Calling the importToolStripclipboardMenuItem_Click method to import the graphic from the clipboard.
+                importToolStripclipboardMenuItem_Click(sender, e);
+            }
+            // Checking if the Ctrl+X key combination has been pressed.
+            else if (e.Control && e.KeyCode == Keys.X)
+            {
+                // Calling the cutToolStripclipboardMenuItem_Click method to cut the selected area.
+                copyToolStripMenuItem_Click(sender, e);
+            }
+            // Checking if the Page Down or Page Up key combination has been pressed.
+            else if (e.KeyData == Keys.PageDown || e.KeyData == Keys.PageUp)
             {
                 _scrolling = true;
             }
@@ -1414,6 +1428,8 @@ namespace UoFiddler.Controls.UserControls
                 MessageBox.Show("No image in the clipboard.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
         #endregion
 
         #region Mirror

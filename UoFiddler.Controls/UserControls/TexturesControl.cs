@@ -1004,6 +1004,23 @@ namespace UoFiddler.Controls.UserControls
                 }
             }
         }
+        // Import und Export Strg+V and Strg+X
+        private void TexturesControl_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Check if the Ctrl+V key combination has been pressed
+            if (e.Control && e.KeyCode == Keys.V)
+            {
+                // Calling the importFromClipboardToolStripMenuItem_Click method to import the graphic from the clipboard.
+                importFromClipboardToolStripMenuItem_Click(sender, e);
+            }
+            // Checking if the Ctrl+X key combination has been pressed
+            else if (e.Control && e.KeyCode == Keys.X)
+            {
+                // Calling the copyToolStripMenuItem_Click method to import the graphic from the clipboard.
+                copyToolStripMenuItem_Click(sender, e);
+            }
+        }
+
         #endregion
 
         #region a 90-degree rotation

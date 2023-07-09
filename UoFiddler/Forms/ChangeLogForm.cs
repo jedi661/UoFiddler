@@ -98,6 +98,15 @@ namespace UoFiddler.Forms
         * table information to the StringBuilder. The color table defines the  *
         * colors for the #XC1 to #XC7 tags.                                    *
         *                                                                      *
+        * The color abbreviations for #XC1 to #XC7 are:                         *
+        * #XC1 = Orange                                                         *
+        * #XC2 = Red                                                            *
+        * #XC3 = Blue                                                           *
+        * #XC4 = Yellow                                                         *
+        * #XC5 = Green                                                          *
+        * #XC6 = Purple                                                         *
+        * #XC7 = Pink                                                           *
+        *                                                                      *
         * The method then splits the input text into an array of lines and     *
         * loops through each line. If a line starts with "Version :", it       *
         * appends the RTF code to make the text bold, appends the line, and    *
@@ -113,6 +122,7 @@ namespace UoFiddler.Forms
         * After processing all lines, the method appends the RTF footer and    *
         * returns the RTF text as a string.                                    *
         ***********************************************************************/
+
         private string ConvertToRtf(string text)
         {
             // Create a new StringBuilder to build the RTF text
