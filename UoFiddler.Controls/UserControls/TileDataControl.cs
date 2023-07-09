@@ -875,7 +875,7 @@ namespace UoFiddler.Controls.UserControls
                         string.Format(
                             "Edits of 0x{0:X4} ({0}) saved to memory. Click 'Save Tiledata' to write to file.", index),
                         "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
-                }                
+                }
             }
         }
 

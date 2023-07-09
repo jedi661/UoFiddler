@@ -855,7 +855,7 @@ namespace UoFiddler.Controls.UserControls
             // toolStripButton6
             // 
             toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            toolStripButton6.Image = Properties.Resources.fullSquare;
+            toolStripButton6.Image = Properties.Resources.volume;
             toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
             toolStripButton6.Name = "toolStripButton6";
             toolStripButton6.Size = new System.Drawing.Size(23, 22);
@@ -877,7 +877,7 @@ namespace UoFiddler.Controls.UserControls
             // toolStripPushMarkedButton8
             // 
             toolStripPushMarkedButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            toolStripPushMarkedButton8.Image = (System.Drawing.Image)resources.GetObject("toolStripPushMarkedButton8.Image");
+            toolStripPushMarkedButton8.Image = Properties.Resources.Copy;
             toolStripPushMarkedButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
             toolStripPushMarkedButton8.Name = "toolStripPushMarkedButton8";
             toolStripPushMarkedButton8.Size = new System.Drawing.Size(23, 22);
