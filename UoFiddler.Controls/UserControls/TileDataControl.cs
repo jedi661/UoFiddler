@@ -15,6 +15,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Media;
+using System.Runtime.ConstrainedExecution;
 using System.Windows.Forms;
 using Ultima;
 using UoFiddler.Controls.Classes;
@@ -860,7 +861,8 @@ namespace UoFiddler.Controls.UserControls
                 Options.ChangedUltimaClass["TileData"] = true;
                 ControlEvents.FireTileDataChangeEvent(this, index);
                 treeViewLand.SelectedNode.ForeColor = Color.Red;
-                if (memorySaveWarningToolStripMenuItem.Checked)
+
+                if (toolStripButton7IsActive && memorySaveWarningToolStripMenuItem.Checked)
                 {
                     if (playCustomSound) //Land Tiles no MessageBox 
                     {
@@ -873,9 +875,7 @@ namespace UoFiddler.Controls.UserControls
                         string.Format(
                             "Edits of 0x{0:X4} ({0}) saved to memory. Click 'Save Tiledata' to write to file.", index),
                         "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
-
-
-                }
+                }                
             }
         }
 
@@ -2117,6 +2117,29 @@ namespace UoFiddler.Controls.UserControls
 
                 // Update toolStripButton7IsActive
                 toolStripButton7IsActive = false;
+            }
+        }
+
+        private void toolStripPushMarkedButton8_Click(object sender, EventArgs e)
+        {
+            if (toolStripButton7IsActive)
+            {
+                // Transferring the saved settings to the selected location.
+
+                // Transferring the checked indices.
+                foreach (int index in savedCheckedIndices)
+                {
+                    checkedListBox1.SetItemChecked(index, true);
+                }
+
+                // Transferring the textbox texts.
+                foreach (KeyValuePair<TextBox, string> pair in savedTextBoxTexts)
+                {
+                    pair.Key.Text = pair.Value;
+                }
+
+                // Saving the changes (without MessageBox).
+                OnClickSaveChanges(null, EventArgs.Empty);
             }
         }
 

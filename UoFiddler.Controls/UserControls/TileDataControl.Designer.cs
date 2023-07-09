@@ -111,6 +111,7 @@ namespace UoFiddler.Controls.UserControls
             toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
             toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             toolStripButton7 = new System.Windows.Forms.ToolStripButton();
+            toolStripPushMarkedButton8 = new System.Windows.Forms.ToolStripButton();
             tabcontrol.SuspendLayout();
             tabPageItems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -732,7 +733,7 @@ namespace UoFiddler.Controls.UserControls
             // MainToolStrip
             // 
             MainToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            MainToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripDropDownButton1, toolStripButton2, toolStripSeparator1, toolStripButton1, toolStripButton5, toolStripSeparator2, toolStripButton4, toolStripButton3, toolStripComboBox1, toolStripButton6, toolStripButton7 });
+            MainToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripDropDownButton1, toolStripButton2, toolStripSeparator1, toolStripButton1, toolStripButton5, toolStripSeparator2, toolStripButton4, toolStripButton3, toolStripComboBox1, toolStripButton6, toolStripButton7, toolStripPushMarkedButton8 });
             MainToolStrip.Location = new System.Drawing.Point(0, 0);
             MainToolStrip.Name = "MainToolStrip";
             MainToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -873,6 +874,16 @@ namespace UoFiddler.Controls.UserControls
             toolStripButton7.ToolTipText = "Copy setting";
             toolStripButton7.Click += toolStripButton7_Click;
             // 
+            // toolStripPushMarkedButton8
+            // 
+            toolStripPushMarkedButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            toolStripPushMarkedButton8.Image = (System.Drawing.Image)resources.GetObject("toolStripPushMarkedButton8.Image");
+            toolStripPushMarkedButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
+            toolStripPushMarkedButton8.Name = "toolStripPushMarkedButton8";
+            toolStripPushMarkedButton8.Size = new System.Drawing.Size(23, 22);
+            toolStripPushMarkedButton8.Text = "toolStripButton8";
+            toolStripPushMarkedButton8.Click += toolStripPushMarkedButton8_Click;
+            // 
             // TileDataControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -998,5 +1009,6 @@ namespace UoFiddler.Controls.UserControls
         private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
         private System.Windows.Forms.ToolStripButton toolStripButton6;
         private System.Windows.Forms.ToolStripButton toolStripButton7;
+        private System.Windows.Forms.ToolStripButton toolStripPushMarkedButton8;
     }
 }
