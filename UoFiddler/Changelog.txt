@@ -2,6 +2,7 @@ Version : 4.10.16 #XG1
 - #XC3 LandTiles has received another function, which allows importing using the keyboard shortcut Ctrl+V and to copy using Ctrl+X.
 - The #XC3 items have gained the function to import using the keyboard shortcut Ctrl+V and to copy using Ctrl+X.
 - The #XC5 textures have also gained the function to import graphics using the keyboard shortcut Ctrl+V and to copy graphics using Ctrl+X.
+- #XC3 Gumps has also received the keyboard shortcut Ctrl+V for importing and Ctrl+X for copying.
 
 Version : 4.10.15 #XG1
 - Added Multis contextMenuStrip1 #XC2 Copy Image to clipboard.

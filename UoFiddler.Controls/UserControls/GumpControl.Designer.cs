@@ -127,13 +127,14 @@ namespace UoFiddler.Controls.UserControls
             listBox.DrawItem += ListBox_DrawItem;
             listBox.MeasureItem += ListBox_MeasureItem;
             listBox.SelectedIndexChanged += ListBox_SelectedIndexChanged;
+            listBox.KeyDown += GumpControl_KeyDown;
             listBox.KeyUp += Gump_KeyUp;
             // 
             // contextMenuStrip1
             // 
             contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { extractImageToolStripMenuItem, toolStripSeparator2, AddShowAllFreeSlotsButton, findNextFreeSlotToolStripMenuItem, jumpToMaleFemale, replaceGumpToolStripMenuItem, removeToolStripMenuItem, insertToolStripMenuItem, toolStripMenuItem1, toolStripSeparator1, saveToolStripMenuItem, toolStripSeparator4, copyToolStripMenuItem, importToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new System.Drawing.Size(190, 286);
+            contextMenuStrip1.Size = new System.Drawing.Size(190, 264);
             // 
             // extractImageToolStripMenuItem
             // 

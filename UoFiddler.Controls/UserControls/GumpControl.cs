@@ -963,8 +963,23 @@ namespace UoFiddler.Controls.UserControls
                 MessageBox.Show("No image in the clipboard.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        // Import und Export Strg+V and Strg+X
+        private void GumpControl_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Check if the Ctrl+V key combination has been pressed
+            if (e.Control && e.KeyCode == Keys.V)
+            {
+                // Calling the importToolStripMenuItem_Click method to import the graphic from the clipboard.
+                importToolStripMenuItem_Click(sender, e);
+            }
+            // Checking if the Ctrl+X key combination has been pressed
+            else if (e.Control && e.KeyCode == Keys.X)
+            {
+                // Calling the copyToolStripMenuItem_Click method to import the graphic from the clipboard.
+                copyToolStripMenuItem_Click(sender, e);
+            }
+        }
         #endregion
-
-
     }
 }
