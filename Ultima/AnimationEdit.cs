@@ -477,7 +477,7 @@ namespace Ultima
             return bits;
         }
 
-        public void AddFrame(Bitmap bit, int centerX = 0, int centerY = 0 )
+        public void AddFrame(Bitmap bit, int centerX = 0, int centerY = 0)
         {
             if (Frames == null)
             {
@@ -550,7 +550,7 @@ namespace Ultima
             {
                 BitmapData bd = bmp.LockBits(
                     new Rectangle(0, 0, 0x100, 20), ImageLockMode.WriteOnly, PixelFormat.Format16bppArgb1555);
-                var line = (ushort*) bd.Scan0;
+                var line = (ushort*)bd.Scan0;
                 int delta = bd.Stride >> 1;
 
                 for (int y = 0; y < bd.Height; ++y, line += delta)
