@@ -69,7 +69,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { saveToolStripMenuItem, replaceToolStripMenuItem, exportToolStripMenuItem, importToolStripMenuItem, ExportAllHueNamesListToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new System.Drawing.Size(203, 136);
+            contextMenuStrip1.Size = new System.Drawing.Size(203, 114);
             // 
             // saveToolStripMenuItem
             // 
@@ -77,6 +77,7 @@ namespace UoFiddler.Controls.UserControls
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             saveToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             saveToolStripMenuItem.Text = "Save";
+            saveToolStripMenuItem.ToolTipText = "Saving colors.";
             saveToolStripMenuItem.Click += OnClickSave;
             // 
             // replaceToolStripMenuItem
@@ -86,6 +87,7 @@ namespace UoFiddler.Controls.UserControls
             replaceToolStripMenuItem.Name = "replaceToolStripMenuItem";
             replaceToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             replaceToolStripMenuItem.Text = "Replace With..";
+            replaceToolStripMenuItem.ToolTipText = "Replacing with";
             // 
             // ReplaceText
             // 
@@ -100,6 +102,7 @@ namespace UoFiddler.Controls.UserControls
             exportToolStripMenuItem.Name = "exportToolStripMenuItem";
             exportToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             exportToolStripMenuItem.Text = "Export..";
+            exportToolStripMenuItem.ToolTipText = "Exporting colors.";
             exportToolStripMenuItem.Click += OnExport;
             // 
             // importToolStripMenuItem
@@ -108,6 +111,7 @@ namespace UoFiddler.Controls.UserControls
             importToolStripMenuItem.Name = "importToolStripMenuItem";
             importToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             importToolStripMenuItem.Text = "Import..";
+            importToolStripMenuItem.ToolTipText = "Importing colors.";
             importToolStripMenuItem.Click += OnImport;
             // 
             // ExportAllHueNamesListToolStripMenuItem
