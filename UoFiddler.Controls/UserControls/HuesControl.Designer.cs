@@ -73,6 +73,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             // saveToolStripMenuItem
             // 
+            saveToolStripMenuItem.Image = Properties.Resources.save;
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             saveToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             saveToolStripMenuItem.Text = "Save";
@@ -81,6 +82,7 @@ namespace UoFiddler.Controls.UserControls
             // replaceToolStripMenuItem
             // 
             replaceToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { ReplaceText });
+            replaceToolStripMenuItem.Image = Properties.Resources.replace;
             replaceToolStripMenuItem.Name = "replaceToolStripMenuItem";
             replaceToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             replaceToolStripMenuItem.Text = "Replace With..";
@@ -94,6 +96,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             // exportToolStripMenuItem
             // 
+            exportToolStripMenuItem.Image = Properties.Resources.Export;
             exportToolStripMenuItem.Name = "exportToolStripMenuItem";
             exportToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             exportToolStripMenuItem.Text = "Export..";
@@ -101,6 +104,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             // importToolStripMenuItem
             // 
+            importToolStripMenuItem.Image = Properties.Resources.import;
             importToolStripMenuItem.Name = "importToolStripMenuItem";
             importToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             importToolStripMenuItem.Text = "Import..";
@@ -108,6 +112,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             // ExportAllHueNamesListToolStripMenuItem
             // 
+            ExportAllHueNamesListToolStripMenuItem.Image = Properties.Resources.Text;
             ExportAllHueNamesListToolStripMenuItem.Name = "ExportAllHueNamesListToolStripMenuItem";
             ExportAllHueNamesListToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             ExportAllHueNamesListToolStripMenuItem.Text = "Export all hue names list";
