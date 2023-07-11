@@ -111,6 +111,7 @@ namespace UoFiddler.Controls.UserControls
             ExportAllHueNamesListToolStripMenuItem.Name = "ExportAllHueNamesListToolStripMenuItem";
             ExportAllHueNamesListToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             ExportAllHueNamesListToolStripMenuItem.Text = "Export all hue names list";
+            ExportAllHueNamesListToolStripMenuItem.ToolTipText = "Exporting the entire list of Hue names into a list.";
             ExportAllHueNamesListToolStripMenuItem.Click += ExportAllHueNamesListToolStripMenuItem_Click;
             // 
             // toolStripContainer
