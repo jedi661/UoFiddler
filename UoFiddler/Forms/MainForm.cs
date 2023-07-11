@@ -872,5 +872,16 @@ namespace UoFiddler.Forms
         }
 
         #endregion
+
+        #region Directory
+        private void directoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Get the output path from the Options class
+            string path = Options.OutputPath;
+            // Start the Windows Explorer process and pass the path as an argument
+            // Enclose the path in quotation marks to handle paths with spaces
+            System.Diagnostics.Process.Start("explorer.exe", $"\"{path}\"");
+        }
+        #endregion
     }
 }

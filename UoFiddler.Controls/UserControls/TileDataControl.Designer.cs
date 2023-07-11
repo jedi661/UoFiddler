@@ -860,7 +860,7 @@ namespace UoFiddler.Controls.UserControls
             toolStripButton6.Name = "toolStripButton6";
             toolStripButton6.Size = new System.Drawing.Size(23, 22);
             toolStripButton6.Text = "toolStripButton6";
-            toolStripButton6.ToolTipText = "Message box disabled";
+            toolStripButton6.ToolTipText = "Message  box disabled and new Sound";
             toolStripButton6.Click += toolStripButton6_Click;
             // 
             // toolStripButton7
@@ -882,6 +882,7 @@ namespace UoFiddler.Controls.UserControls
             toolStripPushMarkedButton8.Name = "toolStripPushMarkedButton8";
             toolStripPushMarkedButton8.Size = new System.Drawing.Size(23, 22);
             toolStripPushMarkedButton8.Text = "toolStripButton8";
+            toolStripPushMarkedButton8.ToolTipText = "Copying the settings one by one.";
             toolStripPushMarkedButton8.Click += toolStripPushMarkedButton8_Click;
             // 
             // TileDataControl

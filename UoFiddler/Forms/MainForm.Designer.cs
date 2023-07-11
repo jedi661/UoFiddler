@@ -47,6 +47,7 @@ namespace UoFiddler.Forms
             unDockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             switchLogoImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripComboBoxImage = new System.Windows.Forms.ToolStripComboBox();
+            directoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             StartTab = new System.Windows.Forms.TabPage();
             Versionlabel = new System.Windows.Forms.Label();
             MultisTab = new System.Windows.Forms.TabPage();
@@ -194,9 +195,9 @@ namespace UoFiddler.Forms
             // 
             // contextMenuStripMainForm
             // 
-            contextMenuStripMainForm.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { unDockToolStripMenuItem, switchLogoImageToolStripMenuItem });
+            contextMenuStripMainForm.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { unDockToolStripMenuItem, switchLogoImageToolStripMenuItem, directoryToolStripMenuItem });
             contextMenuStripMainForm.Name = "contextMenuStrip1";
-            contextMenuStripMainForm.Size = new System.Drawing.Size(181, 70);
+            contextMenuStripMainForm.Size = new System.Drawing.Size(181, 92);
             // 
             // unDockToolStripMenuItem
             // 
@@ -208,6 +209,7 @@ namespace UoFiddler.Forms
             // switchLogoImageToolStripMenuItem
             // 
             switchLogoImageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripComboBoxImage });
+            switchLogoImageToolStripMenuItem.Image = Properties.Resources._32x32;
             switchLogoImageToolStripMenuItem.Name = "switchLogoImageToolStripMenuItem";
             switchLogoImageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             switchLogoImageToolStripMenuItem.Text = "Switch Logo Image";
@@ -217,6 +219,15 @@ namespace UoFiddler.Forms
             toolStripComboBoxImage.Name = "toolStripComboBoxImage";
             toolStripComboBoxImage.Size = new System.Drawing.Size(121, 23);
             toolStripComboBoxImage.SelectedIndexChanged += ImageSwitcher_SelectedIndexChanged;
+            // 
+            // directoryToolStripMenuItem
+            // 
+            directoryToolStripMenuItem.Image = Properties.Resources.Directory;
+            directoryToolStripMenuItem.Name = "directoryToolStripMenuItem";
+            directoryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            directoryToolStripMenuItem.Text = "Open Directory";
+            directoryToolStripMenuItem.ToolTipText = "Opens the directory in Explorer that was specified in Options.";
+            directoryToolStripMenuItem.Click += directoryToolStripMenuItem_Click;
             // 
             // StartTab
             // 
@@ -1200,6 +1211,7 @@ namespace UoFiddler.Forms
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem uodevuofreeshardsdeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem directoryToolStripMenuItem;
     }
 }
 
