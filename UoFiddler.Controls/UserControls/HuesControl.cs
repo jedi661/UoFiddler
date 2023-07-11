@@ -382,18 +382,18 @@ namespace UoFiddler.Controls.UserControls
                 hue.Name.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0 && hue.Index > currentIndex);
         }
 
-        private void ExportHueList_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        #region ExportAllHueNamesListTool
         private void ExportAllHueNamesListToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // Set the fileName variable to the path of the output file
             string fileName = Path.Combine(Options.OutputPath, "Hue names list.txt");
 
+            // Call the ExportHueList method of the Hues class to export the hue list to the specified file
             Hues.ExportHueList(fileName);
 
+            // Show a message box to inform the user that the hue names list has been saved
             MessageBox.Show($"Hue names list saved to {fileName}", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
         }
+        #endregion
     }
 }
