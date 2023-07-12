@@ -5,6 +5,8 @@ Version : 4.11.14 #XG1
 - #XC3 Gumps has also received the keyboard shortcut Ctrl+V for importing and Ctrl+X for copying.
 - #XC3 TileData has received a button that saves the settings on the selected ID repeatedly with each click. This function is only active when there are settings loaded from memory.
 - MainForm has received a new function that opens the selected directory, specified in the options path, in Explorer.
+- Added tooltips Tab Hues.mul
+- Added Icons and to Contextmenu
 
 Version : 4.11.13 #XG1
 - Added Multis contextMenuStrip1 #XC2 Copy Image to clipboard.

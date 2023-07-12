@@ -1044,7 +1044,7 @@ namespace UoFiddler.Controls.UserControls
             else if (e.Control && e.KeyCode == Keys.X)
             {
                 // Calling the copyToolStripMenuItem_Click method to import the graphic from the clipboard.
-                copyToolStripMenuItem_Click(sender, e);              
+                copyToolStripMenuItem_Click(sender, e);
             }
         }
 

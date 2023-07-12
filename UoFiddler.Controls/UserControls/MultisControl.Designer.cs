@@ -160,23 +160,26 @@ namespace UoFiddler.Controls.UserControls
             // toolStripMenuItem4
             // 
             toolStripMenuItem4.CheckOnClick = true;
+            toolStripMenuItem4.Image = Properties.Resources.Search;
             toolStripMenuItem4.Name = "toolStripMenuItem4";
-            toolStripMenuItem4.Size = new System.Drawing.Size(156, 22);
+            toolStripMenuItem4.Size = new System.Drawing.Size(180, 22);
             toolStripMenuItem4.Text = "Show Free Slots";
             toolStripMenuItem4.Click += OnClickFreeSlots;
             // 
             // importToolStripMenuItem
             // 
+            importToolStripMenuItem.Image = Properties.Resources.import;
             importToolStripMenuItem.Name = "importToolStripMenuItem";
-            importToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            importToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             importToolStripMenuItem.Text = "Import..";
             importToolStripMenuItem.Click += OnClickImport;
             // 
             // exportToolStripMenuItem
             // 
             exportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toTextfileToolStripMenuItem, toUOAToolStripMenuItem, toWscToolStripMenuItem, toCsvToolStripMenuItem, toUOX3ToolStripMenuItem });
+            exportToolStripMenuItem.Image = Properties.Resources.Export;
             exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            exportToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            exportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             exportToolStripMenuItem.Text = "Export..";
             // 
             // toTextfileToolStripMenuItem
@@ -216,29 +219,33 @@ namespace UoFiddler.Controls.UserControls
             // 
             // removeToolStripMenuItem
             // 
+            removeToolStripMenuItem.Image = Properties.Resources.Remove;
             removeToolStripMenuItem.Name = "removeToolStripMenuItem";
-            removeToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            removeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             removeToolStripMenuItem.Text = "Remove";
             removeToolStripMenuItem.Click += OnClickRemove;
             // 
             // editToolStripMenuItem
             // 
+            editToolStripMenuItem.Image = Properties.Resources.Text;
             editToolStripMenuItem.Name = "editToolStripMenuItem";
-            editToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            editToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             editToolStripMenuItem.Text = "Edit";
             editToolStripMenuItem.Click += editToolStripMenuItem_Click;
             // 
             // reloadToolStripMenuItem
             // 
+            reloadToolStripMenuItem.Image = Properties.Resources.reload;
             reloadToolStripMenuItem.Name = "reloadToolStripMenuItem";
-            reloadToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            reloadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             reloadToolStripMenuItem.Text = "Reload";
             reloadToolStripMenuItem.Click += reloadToolStripMenuItem_Click;
             // 
             // saveToolStripMenuItem
             // 
+            saveToolStripMenuItem.Image = Properties.Resources.save;
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            saveToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             saveToolStripMenuItem.Text = "Save";
             saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
             // 
@@ -393,12 +400,13 @@ namespace UoFiddler.Controls.UserControls
             // 
             contextMenuStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { copyToolStripMenuItem });
             contextMenuStrip3.Name = "contextMenuStrip3";
-            contextMenuStrip3.Size = new System.Drawing.Size(103, 26);
+            contextMenuStrip3.Size = new System.Drawing.Size(181, 48);
             // 
             // copyToolStripMenuItem
             // 
+            copyToolStripMenuItem.Image = Properties.Resources.Copy;
             copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            copyToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            copyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             copyToolStripMenuItem.Text = "Copy";
             copyToolStripMenuItem.Click += copyToolStripMenuItem_Click;
             // 
@@ -484,48 +492,50 @@ namespace UoFiddler.Controls.UserControls
             // 
             contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { extractImageToolStripMenuItem, copyclipboardToolStripMenuItem1 });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new System.Drawing.Size(181, 70);
+            contextMenuStrip1.Size = new System.Drawing.Size(153, 48);
             toolTip.SetToolTip(contextMenuStrip1, "Copied multi-graphic to clipboard.");
             // 
             // extractImageToolStripMenuItem
             // 
             extractImageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { asBmpToolStripMenuItem, asTiffToolStripMenuItem, asJpgToolStripMenuItem1, asPngToolStripMenuItem });
+            extractImageToolStripMenuItem.Image = Properties.Resources.Export;
             extractImageToolStripMenuItem.Name = "extractImageToolStripMenuItem";
-            extractImageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            extractImageToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             extractImageToolStripMenuItem.Text = "extract Image..";
             // 
             // asBmpToolStripMenuItem
             // 
             asBmpToolStripMenuItem.Name = "asBmpToolStripMenuItem";
-            asBmpToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            asBmpToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             asBmpToolStripMenuItem.Text = "As Bmp";
             asBmpToolStripMenuItem.Click += Extract_Image_ClickBmp;
             // 
             // asTiffToolStripMenuItem
             // 
             asTiffToolStripMenuItem.Name = "asTiffToolStripMenuItem";
-            asTiffToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            asTiffToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             asTiffToolStripMenuItem.Text = "As Tiff";
             asTiffToolStripMenuItem.Click += Extract_Image_ClickTiff;
             // 
             // asJpgToolStripMenuItem1
             // 
             asJpgToolStripMenuItem1.Name = "asJpgToolStripMenuItem1";
-            asJpgToolStripMenuItem1.Size = new System.Drawing.Size(115, 22);
+            asJpgToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             asJpgToolStripMenuItem1.Text = "As Jpg";
             asJpgToolStripMenuItem1.Click += Extract_Image_ClickJpg;
             // 
             // asPngToolStripMenuItem
             // 
             asPngToolStripMenuItem.Name = "asPngToolStripMenuItem";
-            asPngToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            asPngToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             asPngToolStripMenuItem.Text = "As Png";
             asPngToolStripMenuItem.Click += Extract_Image_ClickPng;
             // 
             // copyclipboardToolStripMenuItem1
             // 
+            copyclipboardToolStripMenuItem1.Image = Properties.Resources.Copy;
             copyclipboardToolStripMenuItem1.Name = "copyclipboardToolStripMenuItem1";
-            copyclipboardToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            copyclipboardToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             copyclipboardToolStripMenuItem1.Text = "Copy";
             copyclipboardToolStripMenuItem1.Click += copyclipboardToolStripMenuItem1_Click;
             // 

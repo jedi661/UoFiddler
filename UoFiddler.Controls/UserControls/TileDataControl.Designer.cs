@@ -232,6 +232,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             // selectInItemsToolStripMenuItem
             // 
+            selectInItemsToolStripMenuItem.Image = Properties.Resources.Select;
             selectInItemsToolStripMenuItem.Name = "selectInItemsToolStripMenuItem";
             selectInItemsToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             selectInItemsToolStripMenuItem.Text = "Select In Items tab";
@@ -239,6 +240,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             // selectRadarColorToolStripMenuItem
             // 
+            selectRadarColorToolStripMenuItem.Image = Properties.Resources.Select;
             selectRadarColorToolStripMenuItem.Name = "selectRadarColorToolStripMenuItem";
             selectRadarColorToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             selectRadarColorToolStripMenuItem.Text = "Select In RadarColor tab";
@@ -251,6 +253,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             // selectInGumpsTabMaleToolStripMenuItem
             // 
+            selectInGumpsTabMaleToolStripMenuItem.Image = Properties.Resources.Select;
             selectInGumpsTabMaleToolStripMenuItem.Name = "selectInGumpsTabMaleToolStripMenuItem";
             selectInGumpsTabMaleToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             selectInGumpsTabMaleToolStripMenuItem.Text = "Select in Gumps (M)";
@@ -258,6 +261,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             // selectInGumpsTabFemaleToolStripMenuItem
             // 
+            selectInGumpsTabFemaleToolStripMenuItem.Image = Properties.Resources.Select;
             selectInGumpsTabFemaleToolStripMenuItem.Name = "selectInGumpsTabFemaleToolStripMenuItem";
             selectInGumpsTabFemaleToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             selectInGumpsTabFemaleToolStripMenuItem.Text = "Select in Gumps (F)";
@@ -629,10 +633,11 @@ namespace UoFiddler.Controls.UserControls
             // 
             LandTilesContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { selectInLandtilesToolStripMenuItem, selToolStripMenuItem });
             LandTilesContextMenuStrip.Name = "contextMenuStrip2";
-            LandTilesContextMenuStrip.Size = new System.Drawing.Size(201, 48);
+            LandTilesContextMenuStrip.Size = new System.Drawing.Size(201, 70);
             // 
             // selectInLandtilesToolStripMenuItem
             // 
+            selectInLandtilesToolStripMenuItem.Image = Properties.Resources.Select;
             selectInLandtilesToolStripMenuItem.Name = "selectInLandtilesToolStripMenuItem";
             selectInLandtilesToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             selectInLandtilesToolStripMenuItem.Text = "Select In Land Tiles tab";
@@ -640,6 +645,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             // selToolStripMenuItem
             // 
+            selToolStripMenuItem.Image = Properties.Resources.Select;
             selToolStripMenuItem.Name = "selToolStripMenuItem";
             selToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             selToolStripMenuItem.Text = "Select In RadarColor tab";

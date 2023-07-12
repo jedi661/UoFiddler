@@ -134,11 +134,12 @@ namespace UoFiddler.Controls.UserControls
             // 
             contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { extractImageToolStripMenuItem, toolStripSeparator2, AddShowAllFreeSlotsButton, findNextFreeSlotToolStripMenuItem, jumpToMaleFemale, replaceGumpToolStripMenuItem, removeToolStripMenuItem, insertToolStripMenuItem, toolStripMenuItem1, toolStripSeparator1, saveToolStripMenuItem, toolStripSeparator4, copyToolStripMenuItem, importToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new System.Drawing.Size(190, 264);
+            contextMenuStrip1.Size = new System.Drawing.Size(190, 286);
             // 
             // extractImageToolStripMenuItem
             // 
             extractImageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { asBmpToolStripMenuItem, asTiffToolStripMenuItem, asJpgToolStripMenuItem1, asPngToolStripMenuItem1 });
+            extractImageToolStripMenuItem.Image = Properties.Resources.Export;
             extractImageToolStripMenuItem.Name = "extractImageToolStripMenuItem";
             extractImageToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             extractImageToolStripMenuItem.Text = "Export Image..";
@@ -147,28 +148,28 @@ namespace UoFiddler.Controls.UserControls
             // asBmpToolStripMenuItem
             // 
             asBmpToolStripMenuItem.Name = "asBmpToolStripMenuItem";
-            asBmpToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            asBmpToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             asBmpToolStripMenuItem.Text = "As Bmp";
             asBmpToolStripMenuItem.Click += Extract_Image_ClickBmp;
             // 
             // asTiffToolStripMenuItem
             // 
             asTiffToolStripMenuItem.Name = "asTiffToolStripMenuItem";
-            asTiffToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            asTiffToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             asTiffToolStripMenuItem.Text = "As Tiff";
             asTiffToolStripMenuItem.Click += Extract_Image_ClickTiff;
             // 
             // asJpgToolStripMenuItem1
             // 
             asJpgToolStripMenuItem1.Name = "asJpgToolStripMenuItem1";
-            asJpgToolStripMenuItem1.Size = new System.Drawing.Size(115, 22);
+            asJpgToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             asJpgToolStripMenuItem1.Text = "As Jpg";
             asJpgToolStripMenuItem1.Click += Extract_Image_ClickJpg;
             // 
             // asPngToolStripMenuItem1
             // 
             asPngToolStripMenuItem1.Name = "asPngToolStripMenuItem1";
-            asPngToolStripMenuItem1.Size = new System.Drawing.Size(115, 22);
+            asPngToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             asPngToolStripMenuItem1.Text = "As Png";
             asPngToolStripMenuItem1.Click += Extract_Image_ClickPng;
             // 
@@ -179,6 +180,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             // AddShowAllFreeSlotsButton
             // 
+            AddShowAllFreeSlotsButton.Image = Properties.Resources.Search;
             AddShowAllFreeSlotsButton.Name = "AddShowAllFreeSlotsButton";
             AddShowAllFreeSlotsButton.Size = new System.Drawing.Size(189, 22);
             AddShowAllFreeSlotsButton.Text = "Show all Free Slots";
@@ -187,6 +189,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             // findNextFreeSlotToolStripMenuItem
             // 
+            findNextFreeSlotToolStripMenuItem.Image = Properties.Resources.Search;
             findNextFreeSlotToolStripMenuItem.Name = "findNextFreeSlotToolStripMenuItem";
             findNextFreeSlotToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             findNextFreeSlotToolStripMenuItem.Text = "Find Next Free Slot";
@@ -195,6 +198,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             // jumpToMaleFemale
             // 
+            jumpToMaleFemale.Image = Properties.Resources.jump;
             jumpToMaleFemale.Name = "jumpToMaleFemale";
             jumpToMaleFemale.Size = new System.Drawing.Size(189, 22);
             jumpToMaleFemale.Text = "Jump to Male/Female";
@@ -203,6 +207,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             // replaceGumpToolStripMenuItem
             // 
+            replaceGumpToolStripMenuItem.Image = Properties.Resources.replace;
             replaceGumpToolStripMenuItem.Name = "replaceGumpToolStripMenuItem";
             replaceGumpToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             replaceGumpToolStripMenuItem.Text = "Replace";
@@ -211,6 +216,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             // removeToolStripMenuItem
             // 
+            removeToolStripMenuItem.Image = Properties.Resources.Remove;
             removeToolStripMenuItem.Name = "removeToolStripMenuItem";
             removeToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             removeToolStripMenuItem.Text = "Remove";
@@ -220,6 +226,7 @@ namespace UoFiddler.Controls.UserControls
             // insertToolStripMenuItem
             // 
             insertToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { InsertText });
+            insertToolStripMenuItem.Image = Properties.Resources.import;
             insertToolStripMenuItem.Name = "insertToolStripMenuItem";
             insertToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             insertToolStripMenuItem.Text = "Insert At..";
@@ -235,6 +242,7 @@ namespace UoFiddler.Controls.UserControls
             // toolStripMenuItem1
             // 
             toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { InsertStartingFromTb });
+            toolStripMenuItem1.Image = Properties.Resources.import;
             toolStripMenuItem1.Name = "toolStripMenuItem1";
             toolStripMenuItem1.Size = new System.Drawing.Size(189, 22);
             toolStripMenuItem1.Text = "Insert Starting From";
@@ -253,6 +261,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             // saveToolStripMenuItem
             // 
+            saveToolStripMenuItem.Image = Properties.Resources.save;
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             saveToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             saveToolStripMenuItem.Text = "Save";
@@ -266,6 +275,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             // copyToolStripMenuItem
             // 
+            copyToolStripMenuItem.Image = Properties.Resources.Copy;
             copyToolStripMenuItem.Name = "copyToolStripMenuItem";
             copyToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             copyToolStripMenuItem.Text = "Copy";
@@ -274,6 +284,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             // importToolStripMenuItem
             // 
+            importToolStripMenuItem.Image = Properties.Resources.import;
             importToolStripMenuItem.Name = "importToolStripMenuItem";
             importToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             importToolStripMenuItem.Text = "Import";
