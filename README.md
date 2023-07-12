@@ -6,23 +6,26 @@ UOFiddler based on Ultima SDK it's a tool to view and alter almost every UO 2D c
 
 ## Changelog
 
-Version : 4.10.16 
-- LandTiles has received another function, which allows importing using the keyboard shortcut Ctrl+V and to copy using Ctrl+X.
-- The  items have gained the function to import using the keyboard shortcut Ctrl+V and to copy using Ctrl+X.
-- The  textures have also gained the function to import graphics using the keyboard shortcut Ctrl+V and to copy graphics using Ctrl+X.
+Version : 4.11.14 
+-  LandTiles has received another function, which allows importing using the keyboard shortcut Ctrl+V and to copy using Ctrl+X.
+- The items have gained the function to import using the keyboard shortcut Ctrl+V and to copy using Ctrl+X.
+- The textures have also gained the function to import graphics using the keyboard shortcut Ctrl+V and to copy graphics using Ctrl+X.
 - Gumps has also received the keyboard shortcut Ctrl+V for importing and Ctrl+X for copying.
 - TileData has received a button that saves the settings on the selected ID repeatedly with each click. This function is only active when there are settings loaded from memory.
 - MainForm has received a new function that opens the selected directory, specified in the options path, in Explorer.
+- Added tooltips Tab Hues.mul
+- Added Icons and to Contextmenu
+- Updated to net 8 release.
 
-Version : 4.10.15 
+Version : 4.11.13 
 - Added Multis contextMenuStrip1 Copy Image to clipboard.
 - Admin tool form set up to be opened only once.
-- ChangeLog extended to display colors when I define them with abbreviations in the colors. Here you now set the colors with the text.
+- ChangeLog extended to display colors when I define them with  abbreviations in the  colors. Here you now set the colors with the text.
 - Graphics added and replaced, function added for selection
 - Gumps: I have added a button "Show all Free Slots" that displays all empty IDs in the Gump.mul. I have also modified the method "PopulateListBox" accordingly.
 - ToolTip Text added
 
-Version : 4.10.14 
+Version : 4.11.12 
 - Added a mirror function to items.
 - Added tooltips to items.
 - GraficCutter: toolStrip ComboBox Added green, water clear.
@@ -31,17 +34,17 @@ Version : 4.10.14
 - GraficCutter: Added Color selection added for grid
 - MultiControl:  tabPage6 add contextMenuStrip3 and Copy Text
 
-Version : 4.10.13 
+Version : 4.11.11 
 - A new link has been added to uodev.uo-freeshards.de.
 - A new tool has been added: a graphic cutter for arts.
 
-Version : 4.10.12 
+Version : 4.11.10 
 - Documentation now available.
 - Added logo selection in the main menu under the context menu, with multiple graphics to choose from.
 - The logo selection is now being saved, and it will be displayed again upon restarting with the selected logo.
 - Two links to the German community focusing on development, graphics, and design have been added.
 
-Version : 4.10.11 
+Version : 4.11.9 
 - Changelog added.
 - Changelog.txt added.
 - Changelog Search feature added.
@@ -49,36 +52,36 @@ Version : 4.10.11
 - AdminTool Added a ping and tracert button.
 - Help link removed, a documentation form created with Help Doku so that the application description is local, the whole thing is made possible with WebView, the cache is stored in %LOCALAPPDATA%, and when UOFiddler is closed, the UoFiddler.exe.WebView2 folder is deleted.
 
-Version : 4.10.10 
+Version : 4.11.8 
 - LandTile added: a 90-degree rotation to the left.
 
-Version : 4.10.9 
+Version : 4.11.7 
 - For the MainForm, a TabPanel_DrawItem event was added. The tabs are being reloaded and sorted differently. Additionally, the tabs have been assigned their own colors for identification purposes.
 - Texture - Another function added: a 90-degree rotation to the left. It works with all sizes, such as 64x64, 128x128, or larger.
 
-Version : 4.10.8 
+Version : 4.11.6 
 - The Light has received another extension. It now includes two forms, each containing LandTiles and StaticItems, allowing for browsing and previewing them in advance. The forms can be positioned flexibly and function across tabs, enabling scrolling up and down.
 
-Version : 4.10.7 
+Version : 4.11.5 
 - Enable multiple selection for saving in Items and LandTiles by pressing the Ctrl key, then selecting the desired items, and finally clicking on the Save button with the respective format.
 - Light has received the functions of copying and importing from the clipboard, as well as copying from the clipboard to the ID slot.
 
-Version : 4.10.6 
+Version : 4.11.4 
 - Multiple functions have been added to Radarcolor, expanding the graphical representation. Loading of data now utilizes ColorTreeView for graphical display. When saving the Color Palette, it is also displayed with colors. 
 By activating the checkbox, the Color Palette's hex code is copied to the clipboard. Another textbox lists the hex codes, and there is a textbox for the 15-bit color depth per channel. In this case, the color code represents the intensities of the red, 
 green, and blue color channels, each with 5 bits, making it compatible with Photoshop's color code. Additionally, the Photoshop textbox has a clipboard function that stores the color code when clicked.
 
-Version : 4.10.5 
+Version : 4.11.3 
 - A copy function has been added to the Controls, Items, LandTiles, Textures, and Gumps, allowing the graphics to be copied to the clipboard for direct use with copy and paste.
 - Import function revised again, direct import through buffer added, existing SelectImageFormatForm class retained for outsourcing to Temp to store the graphics there and addressed this with new importByTempToolStripMenuItem.
 - Import clipboard - Import graphics from clipboard (Items, LandTile, Gumps, Texture)
 
-Version : 4.10.4 
+Version : 4.11.2 
 - Added a new ConverterMultiText to convert Decimal to Hex. This allows for converting old Sphere Multitexts, enabling their import into the Multi.mul file in UoFiddler. Additionally, for the sake of preserving the old scripts, they are automatically placed in a folder named "Oldscript".
 - The Tiledata has received a copy button that copies the selected settings from the selected location. You can now place them at any location by pressing again, save and you’re done.
 - An XML editor has been added to the multis that edits, saves and recreates the Multilist.xml. A reload button has been added that reads in the Multilist.xml again without having to restart the program. A save button that copies the Multilist.xml and stores it in the OLDScript directory.
 
-Version : 4.10.3 
+Version : 4.11.1 
 - CompareItems expanded.
 - Multi-selection added for saving images (Bmp, Tiff).
 - Graphics can now be placed at any hexadecimal address.
@@ -88,6 +91,18 @@ Version : 4.10.3
 - Added combo box for multiple selection of directories to quickly switch between them.
 - Tiledata now has a ToolStripComboBox that sets predefined patterns for selecting settings.
 - Tiledata now has a sound button that disables and enables the message box and plays a sound located in the main directory. This feature works for both items and land tiles, so no more messages and the Windows sound.
+
+Version : 4.10.5 
+- Added option to export hue names and ids to file - in case you need all hues list for some reason.
+- Updated nuget packages to latest.
+
+Version : 4.10.4 
+- Updated map file unpacking process in UOP Packer plugin. When unpacking maps plugin will remove extra bytes from end of the mul files as some of the UOP maps contain additional 196 bytes. This extra bytes break some of the tooling
+- Extracting maps no longer requires setting index file path.
+
+Version : 4.10.3 
+- Fixed art.mul/idx unpacking in UOP Packer plugin.
+
 
 Version : 4.10.2 
 - Fixed preview coloring in hue editor.
@@ -214,15 +229,15 @@ Version : 4.8
 
 Starting from version 4.10.0:
 
-- Requires .NET Desktop Runtime 7.0.x (or SDK) installed to run the application.
-- You can download .NET 7.0 at: <https://dotnet.microsoft.com/en-us/download/dotnet/7.0>
+- Requires .NET Desktop Runtime 8.0.x (or SDK) installed to run the application.
+- You can download .NET 8.0 at: <https://dotnet.microsoft.com/en-us/download/dotnet/8.0>
 - Minimum supported Windows version is Windows 10.
 
 Older versions, 4.9.28 and lower use .Net Framework 4.8
 
 ## Building
 
-You'll need Visual Studio 2022 v17.4, .NET 7.0 and .NET desktop development workload.
+You'll need Visual Studio 2022 v17.4, .NET 8.0 and .NET desktop development workload.
 
 ## Reporting bugs and issues
 
