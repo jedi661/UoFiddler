@@ -7,6 +7,7 @@ Version : 4.11.14 #XG1
 - MainForm has received a new function that opens the selected directory, specified in the options path, in Explorer.
 - Added tooltips Tab Hues.mul
 - Added Icons and to Contextmenu
+- Updated to net 8 release.
 
 Version : 4.11.13 #XG1
 - Added Multis contextMenuStrip1 #XC2 Copy Image to clipboard.

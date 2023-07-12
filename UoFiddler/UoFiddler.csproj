@@ -3,7 +3,7 @@
 		<OutputType>WinExe</OutputType>
 		<ApplicationIcon>Resources\UOFiddlerIcon.ico</ApplicationIcon>
 		<StartupObject>UoFiddler.Program</StartupObject>
-		<TargetFramework>net7.0-windows</TargetFramework>
+		<TargetFramework>net8.0-windows8.0</TargetFramework>
 		<UseWindowsForms>true</UseWindowsForms>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<AssemblyTitle>UoFiddler</AssemblyTitle>

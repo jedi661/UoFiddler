@@ -115,9 +115,11 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
         private void btnUmwandeln_Click(object sender, EventArgs e)
         {
             string inputText = textBox1.Text.Trim(); // Retrieve the text from TextBox1 and remove leading/trailing whitespace.
-            if (inputText.StartsWith("0x")) // Check if the text has already been converted.
+            if (string.IsNullOrEmpty(inputText)) // Check if textBox1 is empty.
             {
-                textBox2.Text = inputText; // Copy the text from TextBox1 to TextBox2.
+                // Handle the case where textBox1 is empty.
+                // For example, display an error message to the user.
+                MessageBox.Show("Please enter text into the field.");
                 return; // Exit the method.
             }
 
