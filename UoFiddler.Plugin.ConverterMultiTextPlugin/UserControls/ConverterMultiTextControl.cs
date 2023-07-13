@@ -175,5 +175,25 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
             buttonGraficCutterForm.Enabled = true; // Enable the button again.
         }
 
+        private void TextureCutter_Click(object sender, EventArgs e)
+        {
+            if (isFormOpen)
+            {
+                return; // Exit the method if the form is already open.
+            }
+
+            TextureCutter form = new TextureCutter();
+            form.FormClosed += TextureCutter_FormClosed;
+            form.Show();
+            isFormOpen = true;
+
+            TextureCutter.Enabled = false;
+        }
+
+        private void TextureCutter_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            isFormOpen = false;
+            TextureCutter.Enabled = true; // Enable the button again.
+        }
     }
 }

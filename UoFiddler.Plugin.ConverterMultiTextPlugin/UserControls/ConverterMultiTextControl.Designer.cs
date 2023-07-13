@@ -50,6 +50,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
             openFileDialog = new System.Windows.Forms.OpenFileDialog();
             label3 = new System.Windows.Forms.Label();
             buttonGraficCutterForm = new System.Windows.Forms.Button();
+            TextureCutter = new System.Windows.Forms.Button();
             SuspendLayout();
             // 
             // BtnMultiOpen
@@ -151,10 +152,21 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
             buttonGraficCutterForm.UseVisualStyleBackColor = true;
             buttonGraficCutterForm.Click += buttonGraficCutterForm_Click;
             // 
+            // TextureCutter
+            // 
+            TextureCutter.Location = new System.Drawing.Point(350, 359);
+            TextureCutter.Name = "TextureCutter";
+            TextureCutter.Size = new System.Drawing.Size(92, 23);
+            TextureCutter.TabIndex = 10;
+            TextureCutter.Text = "Texture Cutter";
+            TextureCutter.UseVisualStyleBackColor = true;
+            TextureCutter.Click += TextureCutter_Click;
+            // 
             // ConverterMultiTextControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(TextureCutter);
             Controls.Add(buttonGraficCutterForm);
             Controls.Add(label3);
             Controls.Add(textBox2);
@@ -186,5 +198,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button buttonGraficCutterForm;
+        private System.Windows.Forms.Button TextureCutter;
     }
 }
