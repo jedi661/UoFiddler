@@ -50,6 +50,11 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             checkBox256x256 = new System.Windows.Forms.CheckBox();
             panel1 = new System.Windows.Forms.Panel();
             labelImageSize = new System.Windows.Forms.Label();
+            textBoxSizeH = new System.Windows.Forms.TextBox();
+            textBoxSizeW = new System.Windows.Forms.TextBox();
+            label1 = new System.Windows.Forms.Label();
+            label2 = new System.Windows.Forms.Label();
+            checkBox1 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -145,11 +150,58 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             labelImageSize.TabIndex = 10;
             labelImageSize.Text = "label1";
             // 
+            // textBoxSizeH
+            // 
+            textBoxSizeH.Location = new System.Drawing.Point(549, 12);
+            textBoxSizeH.Name = "textBoxSizeH";
+            textBoxSizeH.Size = new System.Drawing.Size(67, 23);
+            textBoxSizeH.TabIndex = 11;
+            // 
+            // textBoxSizeW
+            // 
+            textBoxSizeW.Location = new System.Drawing.Point(549, 55);
+            textBoxSizeW.Name = "textBoxSizeW";
+            textBoxSizeW.Size = new System.Drawing.Size(67, 23);
+            textBoxSizeW.TabIndex = 12;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(622, 19);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(41, 15);
+            label1.TabIndex = 13;
+            label1.Text = "height";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(626, 62);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(37, 15);
+            label2.TabIndex = 14;
+            label2.Text = "width";
+            // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new System.Drawing.Point(678, 14);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new System.Drawing.Size(78, 19);
+            checkBox1.TabIndex = 15;
+            checkBox1.Text = "Allow size";
+            checkBox1.UseVisualStyleBackColor = true;
+            // 
             // TextureCutter
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(800, 450);
+            Controls.Add(checkBox1);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Controls.Add(textBoxSizeW);
+            Controls.Add(textBoxSizeH);
             Controls.Add(labelImageSize);
             Controls.Add(panel1);
             Controls.Add(checkBox256x256);
@@ -158,6 +210,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             Controls.Add(checkBox44x44);
             Controls.Add(buttonTextureCutter);
             Controls.Add(buttonLoadImage);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Name = "TextureCutter";
             Text = "TextureCutter";
@@ -180,5 +233,10 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         private System.Windows.Forms.CheckBox checkBox256x256;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label labelImageSize;
+        private System.Windows.Forms.TextBox textBoxSizeH;
+        private System.Windows.Forms.TextBox textBoxSizeW;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

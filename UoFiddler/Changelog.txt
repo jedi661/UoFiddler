@@ -1,5 +1,6 @@
 Version : 4.11.15 #XG1
-- TextureCutter I have added a texture cutter that trims textures to the respective size of an image, such as 44x44, 64x64, 128x128, and 256x256, all in a sequence of multiple images.
+- TextureCutter: I have added a texture cutter that trims textures to the respective size of an image, such as 44x44, 64x64, 128x128, and 256x256, all in a sequence of multiple images.
+- TextureCutter: Added that it is allowed to crop only smaller than 5x5 by enabling the checkbox, but it is at your own risk as it can easily create over 1000+ images from a single image.
 
 Version : 4.11.14 #XG1
 - #XC3 LandTiles has received another function, which allows importing using the keyboard shortcut Ctrl+V and to copy using Ctrl+X.

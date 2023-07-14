@@ -63,19 +63,24 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 labelImageSize.Text = $"Bildgröße: {imageSize.Width} x {imageSize.Height} Pixel";
             }
         }
-
         private void buttonTextureCutter_Click(object sender, EventArgs e)
         {
+            // Check if an image has been loaded into the picture box
             if (pictureBox1.Image == null)
             {
+                // Display a message to the user and exit the method
                 MessageBox.Show("Es wurde keine Grafik geladen.");
                 return;
             }
 
+            // Create a temporary directory to store the output images
             string directory = "tempGrafic";
             Directory.CreateDirectory(directory);
 
-            // Kachelgrößen
+            int counter = 1;
+            string timestamp = DateTime.Now.ToString("yyyyMMddHHmmss");
+
+            // Define a dictionary of tile sizes and their corresponding checkbox names
             Dictionary<string, Size> tileSizes = new Dictionary<string, Size>
     {
         { "checkBox44x44", new Size(44, 44) },
@@ -84,36 +89,98 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         { "checkBox256x256", new Size(256, 256) }
     };
 
-            int counter = 1; // Zählervariable für die Nummerierung der Dateien
-
+            // Iterate through the dictionary
             foreach (var kvp in tileSizes)
             {
+                // Find the corresponding checkbox control
                 CheckBox checkBox = Controls.Find(kvp.Key, true).FirstOrDefault() as CheckBox;
 
+                // Check if the checkbox is not null and is checked
                 if (checkBox != null && checkBox.Checked)
                 {
-                    Size tileSize = kvp.Value; // Aktuelle Kachelgröße
+                    // Get the tile size from the dictionary value
+                    Size tileSize = kvp.Value;
+
+                    // Calculate the number of tiles needed to cover the image in both the x and y directions
                     int tileCountX = (int)Math.Ceiling((double)pictureBox1.Image.Width / tileSize.Width);
                     int tileCountY = (int)Math.Ceiling((double)pictureBox1.Image.Height / tileSize.Height);
 
-                    string timestamp = DateTime.Now.ToString("yyyyMMddHHmmss"); // Zeitstempel für den Dateinamen
-
+                    // Use nested loops to iterate through each tile position
                     for (int y = 0; y < tileCountY; y++)
                     {
                         for (int x = 0; x < tileCountX; x++)
                         {
-                            string outputFileName = $"TextureImage{counter:D2}_{timestamp}.bmp"; // Dateiname mit fortlaufender Nummer und Zeitstempel
+                            // Define the output file name and path
+                            string outputFileName = $"TextureImage{counter:D2}_{timestamp}.bmp";
                             string outputPath = Path.Combine(directory, outputFileName);
 
+                            // Call the CropImage method to crop the image and save it to the temporary directory
                             CropImage(pictureBox1.Image, tileSize.Width, tileSize.Height, outputPath, x * tileSize.Width, y * tileSize.Height);
-
                             counter++;
                         }
                     }
                 }
             }
 
-            MessageBox.Show("Die Grafik wurde erfolgreich geschnitten und im temporären Verzeichnis gespeichert.");
+            int customTileSizeW, customTileSizeH;
+
+            // Check if custom tile sizes have been entered by the user
+            if (int.TryParse(textBoxSizeW.Text, out customTileSizeW) && int.TryParse(textBoxSizeH.Text, out customTileSizeH))
+            {
+                // Ensure that the custom tile size does not exceed the size of the image
+                customTileSizeW = Math.Min(customTileSizeW, pictureBox1.Image.Width);
+                customTileSizeH = Math.Min(customTileSizeH, pictureBox1.Image.Height);
+
+                // Find the checkBox1 control
+                CheckBox checkBox1 = Controls.Find("checkBox1", true).FirstOrDefault() as CheckBox;
+
+                // Check if checkBox1 is not checked
+                if (checkBox1 == null || !checkBox1.Checked)
+                {
+                    // Define a list of disallowed custom tile sizes
+                    List<Size> disallowedCustomTileSizes = new List<Size>
+            {
+                new Size(1, 1),
+                new Size(1, 2),
+                new Size(2, 1),
+                new Size(2, 2),
+                new Size(3, 3),
+                new Size(3, 4),
+                new Size(4, 4),
+                new Size(5, 5)
+            };
+
+                    // Check if the custom tile size is in the list of disallowed custom tile sizes
+                    if (disallowedCustomTileSizes.Contains(new Size(customTileSizeW, customTileSizeH)))
+                    {
+                        // Display a message to the user and exit the method
+                        MessageBox.Show("This tile size is only allowed at your own risk by enabling checkBox.");
+                        return;
+                    }
+                }
+
+                // Calculate the number of tiles needed to cover the image in both the x and y directions based on the custom tile size
+                int customTileCountX = (int)Math.Ceiling((double)pictureBox1.Image.Width / customTileSizeW);
+                int customTileCountY = (int)Math.Ceiling((double)pictureBox1.Image.Height / customTileSizeH);
+
+                // Use nested loops to iterate through each tile position
+                for (int y = 0; y < customTileCountY; y++)
+                {
+                    for (int x = 0; x < customTileCountX; x++)
+                    {
+                        // Define the output file name and path
+                        string outputFileName = $"TextureImageCustom{counter:D2}_{timestamp}.bmp";
+                        string outputPath = Path.Combine(directory, outputFileName);
+
+                        // Call the CropImage method to crop the image and save it to the temporary directory
+                        CropImage(pictureBox1.Image, customTileSizeW, customTileSizeH, outputPath, x * customTileSizeW, y * customTileSizeH);
+                        counter++;
+                    }
+                }
+            }
+
+            // Display a message to the user indicating that the graphic was successfully cropped and saved in the temporary directory.
+            MessageBox.Show("The graphic has been successfully cropped and saved in the temporary directory.");
         }
 
         private void CropImage(Image image, int width, int height, string outputPath, int x, int y)
@@ -124,8 +191,10 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 {
                     graphics.DrawImage(image, new Rectangle(0, 0, width, height), new Rectangle(x, y, width, height), GraphicsUnit.Pixel);
                 }
+
                 bitmap.Save(outputPath, ImageFormat.Bmp);
             }
         }
+
     }
 }
