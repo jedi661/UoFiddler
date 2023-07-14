@@ -43,24 +43,24 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             {
                 string selectedImagePath = openFileDialog1.FileName;
 
-                // Setzen Sie das Bild der PictureBox auf null und entfernen Sie es aus dem Controls-Collection des Panels
+                // Set the image of the PictureBox to null and remove it from the Controls collection of the Panel.
                 pictureBox1.Image = null;
                 panel1.Controls.Remove(pictureBox1);
                 pictureBox1.Dispose();
 
-                // Erstellen Sie eine neue PictureBox und fügen Sie sie dem Panel hinzu
+                // Create a new PictureBox and add it to the Panel.
                 pictureBox1 = new PictureBox();
                 pictureBox1.Location = originalImageLocation;
                 pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
                 pictureBox1.Image = Image.FromFile(selectedImagePath);
                 panel1.Controls.Add(pictureBox1);
 
-                // Zurücksetzen der Scrollposition
+                // Resetting the scroll position.
                 panel1.AutoScrollPosition = new Point(0, 0);
 
-                // Anzeigen der Bildgröße im Label
+                // Displaying the image size in the label.
                 Size imageSize = pictureBox1.Image.Size;
-                labelImageSize.Text = $"Bildgröße: {imageSize.Width} x {imageSize.Height} Pixel";
+                labelImageSize.Text = $"Image size: {imageSize.Width} x {imageSize.Height} Pixel";
             }
         }
         private void buttonTextureCutter_Click(object sender, EventArgs e)
@@ -69,7 +69,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             if (pictureBox1.Image == null)
             {
                 // Display a message to the user and exit the method
-                MessageBox.Show("Es wurde keine Grafik geladen.");
+                MessageBox.Show("No image was loaded.");
                 return;
             }
 
