@@ -9,6 +9,10 @@ Version : 4.11.15
 - TextureCutter: I have added a texture cutter that trims textures to the respective size of an image, such as 44x44, 64x64, 128x128, and 256x256, all in a sequence of multiple images.
 - TextureCutter: Added that it is allowed to crop only smaller than 5x5 by enabling the checkbox, but it is at your own risk as it can easily create over 1000+ images from a single image.
 - TextureCutter: has added a new feature to create tiles for LandTiles from textures. It also includes a resolution function to enhance graphics, a sharp function, color enhancement, white balance, and a save button.
+- Tiledata: The idea Taken over with the search directly from #XG2, The design here was set to graphics. (The old search forms have been kept and not removed.)
+- Soundmultab Great job on incorporating the Sound tab from version 4.10.8 
+- Removed color definition from the "draw default" for background tabs.
+
 
 Version : 4.11.14 
 -  LandTiles has received another function, which allows importing using the keyboard shortcut Ctrl+V and to copy using Ctrl+X.
@@ -95,6 +99,16 @@ Version : 4.11.1
 - Added combo box for multiple selection of directories to quickly switch between them.
 - Tiledata now has a ToolStripComboBox that sets predefined patterns for selecting settings.
 - Tiledata now has a sound button that disables and enables the message box and plays a sound located in the main directory. This feature works for both items and land tiles, so no more messages and the Windows sound.
+
+Version : 4.10.8 
+- Tiledata: Tiledata: Search has been added to the control screen.
+- Removed obsolete setting to collapse right panel in sounds tab.
+
+Version : 4.10.7 
+- Fixed search ranges. Updated land tiles control layout. #XG1 (The old search forms have been kept and not removed.)
+
+Version : 4.10.6 
+- The search functionality has been moved to the Item Tabs control screen. #XG1 (The old search forms have been kept and not removed.)
 
 Version : 4.10.5 
 - Added option to export hue names and ids to file - in case you need all hues list for some reason.
