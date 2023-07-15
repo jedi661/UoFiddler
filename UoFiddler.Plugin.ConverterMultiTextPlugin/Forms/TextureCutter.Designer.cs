@@ -55,8 +55,21 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             label1 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
             checkBox1 = new System.Windows.Forms.CheckBox();
+            buttonOpenTempGrafic = new System.Windows.Forms.Button();
+            ButtonShrinkTexture = new System.Windows.Forms.Button();
+            buttonsharp = new System.Windows.Forms.Button();
+            buttonSaveImage = new System.Windows.Forms.Button();
+            panel2 = new System.Windows.Forms.Panel();
+            button45Degrees = new System.Windows.Forms.Button();
+            buttonWhite = new System.Windows.Forms.Button();
+            ButtonRotateTexture = new System.Windows.Forms.Button();
+            ButtonAutoTexture = new System.Windows.Forms.Button();
+            textBoxBorderWidth = new System.Windows.Forms.TextBox();
+            buttonResize = new System.Windows.Forms.Button();
+            checkBox33x33 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // pictureBox1
@@ -95,7 +108,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // checkBox44x44
             // 
             checkBox44x44.AutoSize = true;
-            checkBox44x44.Location = new System.Drawing.Point(456, 12);
+            checkBox44x44.Location = new System.Drawing.Point(456, 36);
             checkBox44x44.Name = "checkBox44x44";
             checkBox44x44.Size = new System.Drawing.Size(62, 19);
             checkBox44x44.TabIndex = 3;
@@ -105,7 +118,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // checkBox64x64
             // 
             checkBox64x64.AutoSize = true;
-            checkBox64x64.Location = new System.Drawing.Point(456, 37);
+            checkBox64x64.Location = new System.Drawing.Point(456, 61);
             checkBox64x64.Name = "checkBox64x64";
             checkBox64x64.Size = new System.Drawing.Size(62, 19);
             checkBox64x64.TabIndex = 4;
@@ -115,7 +128,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // checkBox128x128
             // 
             checkBox128x128.AutoSize = true;
-            checkBox128x128.Location = new System.Drawing.Point(456, 62);
+            checkBox128x128.Location = new System.Drawing.Point(456, 86);
             checkBox128x128.Name = "checkBox128x128";
             checkBox128x128.Size = new System.Drawing.Size(71, 19);
             checkBox128x128.TabIndex = 5;
@@ -125,7 +138,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // checkBox256x256
             // 
             checkBox256x256.AutoSize = true;
-            checkBox256x256.Location = new System.Drawing.Point(456, 87);
+            checkBox256x256.Location = new System.Drawing.Point(456, 111);
             checkBox256x256.Name = "checkBox256x256";
             checkBox256x256.Size = new System.Drawing.Size(74, 19);
             checkBox256x256.TabIndex = 6;
@@ -144,7 +157,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // labelImageSize
             // 
             labelImageSize.AutoSize = true;
-            labelImageSize.Location = new System.Drawing.Point(456, 123);
+            labelImageSize.Location = new System.Drawing.Point(578, 125);
             labelImageSize.Name = "labelImageSize";
             labelImageSize.Size = new System.Drawing.Size(38, 15);
             labelImageSize.TabIndex = 10;
@@ -192,11 +205,139 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             checkBox1.Text = "Allow size";
             checkBox1.UseVisualStyleBackColor = true;
             // 
+            // buttonOpenTempGrafic
+            // 
+            buttonOpenTempGrafic.Location = new System.Drawing.Point(456, 398);
+            buttonOpenTempGrafic.Name = "buttonOpenTempGrafic";
+            buttonOpenTempGrafic.Size = new System.Drawing.Size(74, 23);
+            buttonOpenTempGrafic.TabIndex = 16;
+            buttonOpenTempGrafic.Text = "Open Dir";
+            buttonOpenTempGrafic.UseVisualStyleBackColor = true;
+            buttonOpenTempGrafic.Click += buttonOpenTempGrafic_Click;
+            // 
+            // ButtonShrinkTexture
+            // 
+            ButtonShrinkTexture.Location = new System.Drawing.Point(13, 9);
+            ButtonShrinkTexture.Name = "ButtonShrinkTexture";
+            ButtonShrinkTexture.Size = new System.Drawing.Size(75, 23);
+            ButtonShrinkTexture.TabIndex = 17;
+            ButtonShrinkTexture.Text = "Resolution";
+            ButtonShrinkTexture.UseVisualStyleBackColor = true;
+            ButtonShrinkTexture.Click += ButtonShrinkTexture_Click;
+            // 
+            // buttonsharp
+            // 
+            buttonsharp.Location = new System.Drawing.Point(13, 38);
+            buttonsharp.Name = "buttonsharp";
+            buttonsharp.Size = new System.Drawing.Size(75, 23);
+            buttonsharp.TabIndex = 18;
+            buttonsharp.Text = "Sharp";
+            buttonsharp.UseVisualStyleBackColor = true;
+            buttonsharp.Click += buttonsharp_Click;
+            // 
+            // buttonSaveImage
+            // 
+            buttonSaveImage.Location = new System.Drawing.Point(91, 67);
+            buttonSaveImage.Name = "buttonSaveImage";
+            buttonSaveImage.Size = new System.Drawing.Size(57, 23);
+            buttonSaveImage.TabIndex = 19;
+            buttonSaveImage.Text = "Save";
+            buttonSaveImage.UseVisualStyleBackColor = true;
+            buttonSaveImage.Click += buttonSaveImage_Click;
+            // 
+            // panel2
+            // 
+            panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            panel2.Controls.Add(button45Degrees);
+            panel2.Controls.Add(buttonWhite);
+            panel2.Controls.Add(ButtonRotateTexture);
+            panel2.Controls.Add(ButtonAutoTexture);
+            panel2.Controls.Add(textBoxBorderWidth);
+            panel2.Controls.Add(buttonResize);
+            panel2.Controls.Add(buttonsharp);
+            panel2.Controls.Add(buttonSaveImage);
+            panel2.Controls.Add(ButtonShrinkTexture);
+            panel2.Location = new System.Drawing.Point(456, 154);
+            panel2.Name = "panel2";
+            panel2.Size = new System.Drawing.Size(332, 100);
+            panel2.TabIndex = 20;
+            // 
+            // button45Degrees
+            // 
+            button45Degrees.Location = new System.Drawing.Point(13, 67);
+            button45Degrees.Name = "button45Degrees";
+            button45Degrees.Size = new System.Drawing.Size(75, 23);
+            button45Degrees.TabIndex = 25;
+            button45Degrees.Text = "Create Tiles";
+            button45Degrees.UseVisualStyleBackColor = true;
+            button45Degrees.Click += button45Degrees_Click;
+            // 
+            // buttonWhite
+            // 
+            buttonWhite.Location = new System.Drawing.Point(180, 67);
+            buttonWhite.Name = "buttonWhite";
+            buttonWhite.Size = new System.Drawing.Size(124, 23);
+            buttonWhite.TabIndex = 24;
+            buttonWhite.Text = "white balance";
+            buttonWhite.UseVisualStyleBackColor = true;
+            buttonWhite.Click += buttonWhite_Click;
+            // 
+            // ButtonRotateTexture
+            // 
+            ButtonRotateTexture.Location = new System.Drawing.Point(91, 38);
+            ButtonRotateTexture.Name = "ButtonRotateTexture";
+            ButtonRotateTexture.Size = new System.Drawing.Size(57, 23);
+            ButtonRotateTexture.TabIndex = 23;
+            ButtonRotateTexture.Text = "Rotate";
+            ButtonRotateTexture.UseVisualStyleBackColor = true;
+            ButtonRotateTexture.Click += ButtonRotateTexture_Click;
+            // 
+            // ButtonAutoTexture
+            // 
+            ButtonAutoTexture.Location = new System.Drawing.Point(180, 37);
+            ButtonAutoTexture.Name = "ButtonAutoTexture";
+            ButtonAutoTexture.Size = new System.Drawing.Size(124, 23);
+            ButtonAutoTexture.TabIndex = 22;
+            ButtonAutoTexture.Text = "color enhancement";
+            ButtonAutoTexture.UseVisualStyleBackColor = true;
+            ButtonAutoTexture.Click += ButtonAutoTexture_Click;
+            // 
+            // textBoxBorderWidth
+            // 
+            textBoxBorderWidth.Location = new System.Drawing.Point(154, 8);
+            textBoxBorderWidth.Name = "textBoxBorderWidth";
+            textBoxBorderWidth.Size = new System.Drawing.Size(42, 23);
+            textBoxBorderWidth.TabIndex = 21;
+            textBoxBorderWidth.Text = "0";
+            // 
+            // buttonResize
+            // 
+            buttonResize.Location = new System.Drawing.Point(91, 9);
+            buttonResize.Name = "buttonResize";
+            buttonResize.Size = new System.Drawing.Size(57, 23);
+            buttonResize.TabIndex = 20;
+            buttonResize.Text = "Resize";
+            buttonResize.UseVisualStyleBackColor = true;
+            buttonResize.Click += buttonResize_Click;
+            // 
+            // checkBox33x33
+            // 
+            checkBox33x33.AutoSize = true;
+            checkBox33x33.Location = new System.Drawing.Point(456, 14);
+            checkBox33x33.Name = "checkBox33x33";
+            checkBox33x33.Size = new System.Drawing.Size(62, 19);
+            checkBox33x33.TabIndex = 21;
+            checkBox33x33.Text = "33 x 33";
+            checkBox33x33.UseVisualStyleBackColor = true;
+            // 
             // TextureCutter
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(800, 450);
+            Controls.Add(checkBox33x33);
+            Controls.Add(panel2);
+            Controls.Add(buttonOpenTempGrafic);
             Controls.Add(checkBox1);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -217,6 +358,8 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -238,5 +381,17 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Button buttonOpenTempGrafic;
+        private System.Windows.Forms.Button ButtonShrinkTexture;
+        private System.Windows.Forms.Button buttonsharp;
+        private System.Windows.Forms.Button buttonSaveImage;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button buttonResize;
+        private System.Windows.Forms.TextBox textBoxBorderWidth;
+        private System.Windows.Forms.Button ButtonAutoTexture;
+        private System.Windows.Forms.Button ButtonRotateTexture;
+        private System.Windows.Forms.Button buttonWhite;
+        private System.Windows.Forms.CheckBox checkBox33x33;
+        private System.Windows.Forms.Button button45Degrees;
     }
 }
