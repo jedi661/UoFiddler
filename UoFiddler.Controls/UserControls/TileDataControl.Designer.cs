@@ -41,17 +41,55 @@ namespace UoFiddler.Controls.UserControls
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TileDataControl));
-            tabcontrol = new System.Windows.Forms.TabControl();
-            tabPageItems = new System.Windows.Forms.TabPage();
-            splitContainer1 = new System.Windows.Forms.SplitContainer();
-            splitContainer2 = new System.Windows.Forms.SplitContainer();
-            treeViewItem = new System.Windows.Forms.TreeView();
             ItemsContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(components);
             selectInItemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             selectRadarColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             selectInGumpsTabMaleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             selectInGumpsTabFemaleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            LandTilesContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(components);
+            selectInLandtilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            selToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            MainToolStrip = new System.Windows.Forms.ToolStrip();
+            toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            searchByIdToolStripTextBox = new System.Windows.Forms.ToolStripTextBox();
+            toolStripLabelName = new System.Windows.Forms.ToolStripLabel();
+            searchByNameToolStripTextBox = new System.Windows.Forms.ToolStripTextBox();
+            searchByNameToolStripButton = new System.Windows.Forms.ToolStripButton();
+            toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            memorySaveWarningToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            saveDirectlyOnChangesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            setFilterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            setTextureOnDoubleClickToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            setTexturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+            toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
+            toolStripButton6 = new System.Windows.Forms.ToolStripButton();
+            toolStripButton7 = new System.Windows.Forms.ToolStripButton();
+            toolStripPushMarkedButton8 = new System.Windows.Forms.ToolStripButton();
+            tabPageLand = new System.Windows.Forms.TabPage();
+            splitContainer5 = new System.Windows.Forms.SplitContainer();
+            splitContainer6 = new System.Windows.Forms.SplitContainer();
+            treeViewLand = new System.Windows.Forms.TreeView();
+            pictureBoxLand = new System.Windows.Forms.PictureBox();
+            label23 = new System.Windows.Forms.Label();
+            textBoxNameLand = new System.Windows.Forms.TextBox();
+            splitContainer7 = new System.Windows.Forms.SplitContainer();
+            textBoxTexID = new System.Windows.Forms.TextBox();
+            label24 = new System.Windows.Forms.Label();
+            checkedListBox2 = new System.Windows.Forms.CheckedListBox();
+            tabPageItems = new System.Windows.Forms.TabPage();
+            splitContainer1 = new System.Windows.Forms.SplitContainer();
+            splitContainer2 = new System.Windows.Forms.SplitContainer();
+            treeViewItem = new System.Windows.Forms.TreeView();
             pictureBoxItem = new System.Windows.Forms.PictureBox();
             splitContainer3 = new System.Windows.Forms.SplitContainer();
             textBoxName = new System.Windows.Forms.TextBox();
@@ -79,55 +117,11 @@ namespace UoFiddler.Controls.UserControls
             textBoxAnim = new System.Windows.Forms.TextBox();
             label2 = new System.Windows.Forms.Label();
             checkedListBox1 = new System.Windows.Forms.CheckedListBox();
-            tabPageLand = new System.Windows.Forms.TabPage();
-            splitContainer5 = new System.Windows.Forms.SplitContainer();
-            splitContainer6 = new System.Windows.Forms.SplitContainer();
-            treeViewLand = new System.Windows.Forms.TreeView();
-            LandTilesContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(components);
-            selectInLandtilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            selToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            pictureBoxLand = new System.Windows.Forms.PictureBox();
-            label23 = new System.Windows.Forms.Label();
-            textBoxNameLand = new System.Windows.Forms.TextBox();
-            splitContainer7 = new System.Windows.Forms.SplitContainer();
-            textBoxTexID = new System.Windows.Forms.TextBox();
-            label24 = new System.Windows.Forms.Label();
-            checkedListBox2 = new System.Windows.Forms.CheckedListBox();
-            MainToolStrip = new System.Windows.Forms.ToolStrip();
-            toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
-            memorySaveWarningToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            saveDirectlyOnChangesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            setFilterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            setTextureOnDoubleClickToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            setTexturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            toolStripButton5 = new System.Windows.Forms.ToolStripButton();
-            toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            toolStripButton4 = new System.Windows.Forms.ToolStripButton();
-            toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
-            toolStripButton6 = new System.Windows.Forms.ToolStripButton();
-            toolStripButton7 = new System.Windows.Forms.ToolStripButton();
-            toolStripPushMarkedButton8 = new System.Windows.Forms.ToolStripButton();
-            tabcontrol.SuspendLayout();
-            tabPageItems.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
-            splitContainer1.Panel1.SuspendLayout();
-            splitContainer1.Panel2.SuspendLayout();
-            splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)splitContainer2).BeginInit();
-            splitContainer2.Panel1.SuspendLayout();
-            splitContainer2.Panel2.SuspendLayout();
-            splitContainer2.SuspendLayout();
+            tabcontrol = new System.Windows.Forms.TabControl();
+            toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             ItemsContextMenuStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBoxItem).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)splitContainer3).BeginInit();
-            splitContainer3.Panel1.SuspendLayout();
-            splitContainer3.Panel2.SuspendLayout();
-            splitContainer3.SuspendLayout();
+            LandTilesContextMenuStrip.SuspendLayout();
+            MainToolStrip.SuspendLayout();
             tabPageLand.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer5).BeginInit();
             splitContainer5.Panel1.SuspendLayout();
@@ -137,26 +131,442 @@ namespace UoFiddler.Controls.UserControls
             splitContainer6.Panel1.SuspendLayout();
             splitContainer6.Panel2.SuspendLayout();
             splitContainer6.SuspendLayout();
-            LandTilesContextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxLand).BeginInit();
             ((System.ComponentModel.ISupportInitialize)splitContainer7).BeginInit();
             splitContainer7.Panel1.SuspendLayout();
             splitContainer7.Panel2.SuspendLayout();
             splitContainer7.SuspendLayout();
-            MainToolStrip.SuspendLayout();
+            tabPageItems.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
+            splitContainer1.Panel1.SuspendLayout();
+            splitContainer1.Panel2.SuspendLayout();
+            splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer2).BeginInit();
+            splitContainer2.Panel1.SuspendLayout();
+            splitContainer2.Panel2.SuspendLayout();
+            splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxItem).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)splitContainer3).BeginInit();
+            splitContainer3.Panel1.SuspendLayout();
+            splitContainer3.Panel2.SuspendLayout();
+            splitContainer3.SuspendLayout();
+            tabcontrol.SuspendLayout();
             SuspendLayout();
             // 
-            // tabcontrol
+            // ItemsContextMenuStrip
             // 
-            tabcontrol.Controls.Add(tabPageItems);
-            tabcontrol.Controls.Add(tabPageLand);
-            tabcontrol.Dock = System.Windows.Forms.DockStyle.Fill;
-            tabcontrol.Location = new System.Drawing.Point(0, 25);
-            tabcontrol.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            tabcontrol.Name = "tabcontrol";
-            tabcontrol.SelectedIndex = 0;
-            tabcontrol.Size = new System.Drawing.Size(733, 359);
-            tabcontrol.TabIndex = 0;
+            ItemsContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { selectInItemsToolStripMenuItem, selectRadarColorToolStripMenuItem, toolStripSeparator3, selectInGumpsTabMaleToolStripMenuItem, selectInGumpsTabFemaleToolStripMenuItem });
+            ItemsContextMenuStrip.Name = "contextMenuStrip1";
+            ItemsContextMenuStrip.Size = new System.Drawing.Size(201, 98);
+            ItemsContextMenuStrip.Opening += ItemsContextMenuStrip_Opening;
+            // 
+            // selectInItemsToolStripMenuItem
+            // 
+            selectInItemsToolStripMenuItem.Image = Properties.Resources.Select;
+            selectInItemsToolStripMenuItem.Name = "selectInItemsToolStripMenuItem";
+            selectInItemsToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            selectInItemsToolStripMenuItem.Text = "Select In Items tab";
+            selectInItemsToolStripMenuItem.Click += OnClickSelectItem;
+            // 
+            // selectRadarColorToolStripMenuItem
+            // 
+            selectRadarColorToolStripMenuItem.Image = Properties.Resources.Select;
+            selectRadarColorToolStripMenuItem.Name = "selectRadarColorToolStripMenuItem";
+            selectRadarColorToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            selectRadarColorToolStripMenuItem.Text = "Select In RadarColor tab";
+            selectRadarColorToolStripMenuItem.Click += OnClickSelectRadarItem;
+            // 
+            // toolStripSeparator3
+            // 
+            toolStripSeparator3.Name = "toolStripSeparator3";
+            toolStripSeparator3.Size = new System.Drawing.Size(197, 6);
+            // 
+            // selectInGumpsTabMaleToolStripMenuItem
+            // 
+            selectInGumpsTabMaleToolStripMenuItem.Image = Properties.Resources.Select;
+            selectInGumpsTabMaleToolStripMenuItem.Name = "selectInGumpsTabMaleToolStripMenuItem";
+            selectInGumpsTabMaleToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            selectInGumpsTabMaleToolStripMenuItem.Text = "Select in Gumps (M)";
+            selectInGumpsTabMaleToolStripMenuItem.Click += SelectInGumpsTabMaleToolStripMenuItem_Click;
+            // 
+            // selectInGumpsTabFemaleToolStripMenuItem
+            // 
+            selectInGumpsTabFemaleToolStripMenuItem.Image = Properties.Resources.Select;
+            selectInGumpsTabFemaleToolStripMenuItem.Name = "selectInGumpsTabFemaleToolStripMenuItem";
+            selectInGumpsTabFemaleToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            selectInGumpsTabFemaleToolStripMenuItem.Text = "Select in Gumps (F)";
+            selectInGumpsTabFemaleToolStripMenuItem.Click += SelectInGumpsTabFemaleToolStripMenuItem_Click;
+            // 
+            // LandTilesContextMenuStrip
+            // 
+            LandTilesContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { selectInLandtilesToolStripMenuItem, selToolStripMenuItem });
+            LandTilesContextMenuStrip.Name = "contextMenuStrip2";
+            LandTilesContextMenuStrip.Size = new System.Drawing.Size(201, 48);
+            // 
+            // selectInLandtilesToolStripMenuItem
+            // 
+            selectInLandtilesToolStripMenuItem.Image = Properties.Resources.Select;
+            selectInLandtilesToolStripMenuItem.Name = "selectInLandtilesToolStripMenuItem";
+            selectInLandtilesToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            selectInLandtilesToolStripMenuItem.Text = "Select In Land Tiles tab";
+            selectInLandtilesToolStripMenuItem.Click += OnClickSelectInLandTiles;
+            // 
+            // selToolStripMenuItem
+            // 
+            selToolStripMenuItem.Image = Properties.Resources.Select;
+            selToolStripMenuItem.Name = "selToolStripMenuItem";
+            selToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            selToolStripMenuItem.Text = "Select In RadarColor tab";
+            selToolStripMenuItem.Click += OnClickSelectRadarLand;
+            // 
+            // MainToolStrip
+            // 
+            MainToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            MainToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripLabel1, searchByIdToolStripTextBox, toolStripLabelName, searchByNameToolStripTextBox, searchByNameToolStripButton, toolStripButton2, toolStripSeparator5, toolStripDropDownButton1, toolStripSeparator1, toolStripButton1, toolStripButton5, toolStripSeparator2, toolStripButton4, toolStripButton3, toolStripSeparator6, toolStripComboBox1, toolStripButton6, toolStripButton7, toolStripPushMarkedButton8 });
+            MainToolStrip.Location = new System.Drawing.Point(0, 0);
+            MainToolStrip.Name = "MainToolStrip";
+            MainToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            MainToolStrip.Size = new System.Drawing.Size(733, 25);
+            MainToolStrip.TabIndex = 1;
+            MainToolStrip.Text = "toolStrip1";
+            // 
+            // toolStripLabel1
+            // 
+            toolStripLabel1.Name = "toolStripLabel1";
+            toolStripLabel1.Size = new System.Drawing.Size(39, 22);
+            toolStripLabel1.Text = "Index:";
+            // 
+            // searchByIdToolStripTextBox
+            // 
+            searchByIdToolStripTextBox.Name = "searchByIdToolStripTextBox";
+            searchByIdToolStripTextBox.Size = new System.Drawing.Size(50, 25);
+            searchByIdToolStripTextBox.KeyUp += SearchByIdToolStripTextBox_KeyUp;
+            // 
+            // toolStripLabelName
+            // 
+            toolStripLabelName.Name = "toolStripLabelName";
+            toolStripLabelName.Size = new System.Drawing.Size(42, 22);
+            toolStripLabelName.Text = "Name:";
+            // 
+            // searchByNameToolStripTextBox
+            // 
+            searchByNameToolStripTextBox.Name = "searchByNameToolStripTextBox";
+            searchByNameToolStripTextBox.Size = new System.Drawing.Size(80, 25);
+            searchByNameToolStripTextBox.KeyUp += SearchByNameToolStripTextBox_KeyUp;
+            // 
+            // searchByNameToolStripButton
+            // 
+            searchByNameToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            searchByNameToolStripButton.Image = Properties.Resources.Search;
+            searchByNameToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            searchByNameToolStripButton.Name = "searchByNameToolStripButton";
+            searchByNameToolStripButton.Size = new System.Drawing.Size(23, 22);
+            searchByNameToolStripButton.Text = "Find next";
+            searchByNameToolStripButton.Click += SearchByNameToolStripButton_Click;
+            // 
+            // toolStripButton2
+            // 
+            toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            toolStripButton2.Name = "toolStripButton2";
+            toolStripButton2.Size = new System.Drawing.Size(46, 22);
+            toolStripButton2.Text = "Search";
+            toolStripButton2.Click += OnClickSearch;
+            // 
+            // toolStripSeparator5
+            // 
+            toolStripSeparator5.Name = "toolStripSeparator5";
+            toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripDropDownButton1
+            // 
+            toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { memorySaveWarningToolStripMenuItem, saveDirectlyOnChangesToolStripMenuItem, setFilterToolStripMenuItem, toolStripSeparator4, setTextureOnDoubleClickToolStripMenuItem, setTexturesToolStripMenuItem });
+            toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+            toolStripDropDownButton1.Size = new System.Drawing.Size(45, 22);
+            toolStripDropDownButton1.Text = "Misc";
+            // 
+            // memorySaveWarningToolStripMenuItem
+            // 
+            memorySaveWarningToolStripMenuItem.Checked = true;
+            memorySaveWarningToolStripMenuItem.CheckOnClick = true;
+            memorySaveWarningToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            memorySaveWarningToolStripMenuItem.Name = "memorySaveWarningToolStripMenuItem";
+            memorySaveWarningToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            memorySaveWarningToolStripMenuItem.Text = "Memory save warning";
+            // 
+            // saveDirectlyOnChangesToolStripMenuItem
+            // 
+            saveDirectlyOnChangesToolStripMenuItem.CheckOnClick = true;
+            saveDirectlyOnChangesToolStripMenuItem.Name = "saveDirectlyOnChangesToolStripMenuItem";
+            saveDirectlyOnChangesToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            saveDirectlyOnChangesToolStripMenuItem.Text = "Save directly on changes";
+            // 
+            // setFilterToolStripMenuItem
+            // 
+            setFilterToolStripMenuItem.Name = "setFilterToolStripMenuItem";
+            setFilterToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            setFilterToolStripMenuItem.Text = "Set Filter";
+            setFilterToolStripMenuItem.Click += OnClickSetFilter;
+            // 
+            // toolStripSeparator4
+            // 
+            toolStripSeparator4.Name = "toolStripSeparator4";
+            toolStripSeparator4.Size = new System.Drawing.Size(202, 6);
+            // 
+            // setTextureOnDoubleClickToolStripMenuItem
+            // 
+            setTextureOnDoubleClickToolStripMenuItem.CheckOnClick = true;
+            setTextureOnDoubleClickToolStripMenuItem.Name = "setTextureOnDoubleClickToolStripMenuItem";
+            setTextureOnDoubleClickToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            setTextureOnDoubleClickToolStripMenuItem.Text = "Set TexID on double click";
+            // 
+            // setTexturesToolStripMenuItem
+            // 
+            setTexturesToolStripMenuItem.Name = "setTexturesToolStripMenuItem";
+            setTexturesToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            setTexturesToolStripMenuItem.Text = "Set Textures";
+            setTexturesToolStripMenuItem.Click += SetTextureMenuItem_Click;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripButton1
+            // 
+            toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            toolStripButton1.Image = Properties.Resources.ExportCSV;
+            toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            toolStripButton1.Name = "toolStripButton1";
+            toolStripButton1.Size = new System.Drawing.Size(23, 22);
+            toolStripButton1.Text = "Export To CSV";
+            toolStripButton1.Click += OnClickExport;
+            // 
+            // toolStripButton5
+            // 
+            toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            toolStripButton5.Image = Properties.Resources.InportCSV;
+            toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
+            toolStripButton5.Name = "toolStripButton5";
+            toolStripButton5.Size = new System.Drawing.Size(23, 22);
+            toolStripButton5.Text = "Import From CSV";
+            toolStripButton5.Click += OnClickImport;
+            // 
+            // toolStripSeparator2
+            // 
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripButton4
+            // 
+            toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            toolStripButton4.Image = Properties.Resources.save;
+            toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
+            toolStripButton4.Name = "toolStripButton4";
+            toolStripButton4.Size = new System.Drawing.Size(23, 22);
+            toolStripButton4.Text = "Save Changes";
+            toolStripButton4.Click += OnClickSaveChanges;
+            // 
+            // toolStripButton3
+            // 
+            toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            toolStripButton3.Image = Properties.Resources.Save2;
+            toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            toolStripButton3.Name = "toolStripButton3";
+            toolStripButton3.Size = new System.Drawing.Size(23, 22);
+            toolStripButton3.Text = "Save Tiledata";
+            toolStripButton3.Click += OnClickSaveTiledata;
+            // 
+            // toolStripComboBox1
+            // 
+            toolStripComboBox1.Name = "toolStripComboBox1";
+            toolStripComboBox1.Size = new System.Drawing.Size(121, 25);
+            // 
+            // toolStripButton6
+            // 
+            toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            toolStripButton6.Image = Properties.Resources.volume;
+            toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
+            toolStripButton6.Name = "toolStripButton6";
+            toolStripButton6.Size = new System.Drawing.Size(23, 22);
+            toolStripButton6.Text = "toolStripButton6";
+            toolStripButton6.ToolTipText = "Message  box disabled and new Sound";
+            toolStripButton6.Click += toolStripButton6_Click;
+            // 
+            // toolStripButton7
+            // 
+            toolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            toolStripButton7.Image = (System.Drawing.Image)resources.GetObject("toolStripButton7.Image");
+            toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
+            toolStripButton7.Name = "toolStripButton7";
+            toolStripButton7.Size = new System.Drawing.Size(23, 22);
+            toolStripButton7.Text = "toolStripButton7";
+            toolStripButton7.ToolTipText = "Copy setting";
+            toolStripButton7.Click += toolStripButton7_Click;
+            // 
+            // toolStripPushMarkedButton8
+            // 
+            toolStripPushMarkedButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            toolStripPushMarkedButton8.Image = Properties.Resources.Copy;
+            toolStripPushMarkedButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
+            toolStripPushMarkedButton8.Name = "toolStripPushMarkedButton8";
+            toolStripPushMarkedButton8.Size = new System.Drawing.Size(23, 22);
+            toolStripPushMarkedButton8.Text = "toolStripButton8";
+            toolStripPushMarkedButton8.ToolTipText = "Copying the settings one by one.";
+            toolStripPushMarkedButton8.Click += toolStripPushMarkedButton8_Click;
+            // 
+            // tabPageLand
+            // 
+            tabPageLand.Controls.Add(splitContainer5);
+            tabPageLand.Location = new System.Drawing.Point(4, 24);
+            tabPageLand.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabPageLand.Name = "tabPageLand";
+            tabPageLand.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabPageLand.Size = new System.Drawing.Size(725, 331);
+            tabPageLand.TabIndex = 1;
+            tabPageLand.Text = "Land Tiles";
+            tabPageLand.UseVisualStyleBackColor = true;
+            // 
+            // splitContainer5
+            // 
+            splitContainer5.Dock = System.Windows.Forms.DockStyle.Fill;
+            splitContainer5.Location = new System.Drawing.Point(4, 3);
+            splitContainer5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            splitContainer5.Name = "splitContainer5";
+            // 
+            // splitContainer5.Panel1
+            // 
+            splitContainer5.Panel1.Controls.Add(splitContainer6);
+            // 
+            // splitContainer5.Panel2
+            // 
+            splitContainer5.Panel2.Controls.Add(label23);
+            splitContainer5.Panel2.Controls.Add(textBoxNameLand);
+            splitContainer5.Panel2.Controls.Add(splitContainer7);
+            splitContainer5.Size = new System.Drawing.Size(717, 325);
+            splitContainer5.SplitterDistance = 235;
+            splitContainer5.SplitterWidth = 5;
+            splitContainer5.TabIndex = 1;
+            // 
+            // splitContainer6
+            // 
+            splitContainer6.Dock = System.Windows.Forms.DockStyle.Fill;
+            splitContainer6.Location = new System.Drawing.Point(0, 0);
+            splitContainer6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            splitContainer6.Name = "splitContainer6";
+            splitContainer6.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer6.Panel1
+            // 
+            splitContainer6.Panel1.Controls.Add(treeViewLand);
+            // 
+            // splitContainer6.Panel2
+            // 
+            splitContainer6.Panel2.Controls.Add(pictureBoxLand);
+            splitContainer6.Size = new System.Drawing.Size(235, 325);
+            splitContainer6.SplitterDistance = 195;
+            splitContainer6.SplitterWidth = 5;
+            splitContainer6.TabIndex = 0;
+            // 
+            // treeViewLand
+            // 
+            treeViewLand.ContextMenuStrip = LandTilesContextMenuStrip;
+            treeViewLand.Dock = System.Windows.Forms.DockStyle.Fill;
+            treeViewLand.HideSelection = false;
+            treeViewLand.Location = new System.Drawing.Point(0, 0);
+            treeViewLand.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            treeViewLand.Name = "treeViewLand";
+            treeViewLand.Size = new System.Drawing.Size(235, 195);
+            treeViewLand.TabIndex = 0;
+            treeViewLand.AfterSelect += AfterSelectTreeViewLand;
+            treeViewLand.KeyUp += TileData_KeyUp;
+            // 
+            // pictureBoxLand
+            // 
+            pictureBoxLand.Dock = System.Windows.Forms.DockStyle.Fill;
+            pictureBoxLand.Location = new System.Drawing.Point(0, 0);
+            pictureBoxLand.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            pictureBoxLand.Name = "pictureBoxLand";
+            pictureBoxLand.Size = new System.Drawing.Size(235, 125);
+            pictureBoxLand.TabIndex = 0;
+            pictureBoxLand.TabStop = false;
+            // 
+            // label23
+            // 
+            label23.AutoSize = true;
+            label23.Location = new System.Drawing.Point(4, 7);
+            label23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label23.Name = "label23";
+            label23.Size = new System.Drawing.Size(39, 15);
+            label23.TabIndex = 1;
+            label23.Text = "Name";
+            // 
+            // textBoxNameLand
+            // 
+            textBoxNameLand.Location = new System.Drawing.Point(51, 3);
+            textBoxNameLand.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            textBoxNameLand.MaxLength = 20;
+            textBoxNameLand.Name = "textBoxNameLand";
+            textBoxNameLand.Size = new System.Drawing.Size(143, 23);
+            textBoxNameLand.TabIndex = 0;
+            textBoxNameLand.TextChanged += OnTextChangedLandName;
+            // 
+            // splitContainer7
+            // 
+            splitContainer7.Dock = System.Windows.Forms.DockStyle.Fill;
+            splitContainer7.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            splitContainer7.IsSplitterFixed = true;
+            splitContainer7.Location = new System.Drawing.Point(0, 0);
+            splitContainer7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            splitContainer7.Name = "splitContainer7";
+            splitContainer7.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer7.Panel1
+            // 
+            splitContainer7.Panel1.Controls.Add(textBoxTexID);
+            splitContainer7.Panel1.Controls.Add(label24);
+            // 
+            // splitContainer7.Panel2
+            // 
+            splitContainer7.Panel2.Controls.Add(checkedListBox2);
+            splitContainer7.Size = new System.Drawing.Size(477, 325);
+            splitContainer7.SplitterDistance = 27;
+            splitContainer7.SplitterWidth = 2;
+            splitContainer7.TabIndex = 25;
+            // 
+            // textBoxTexID
+            // 
+            textBoxTexID.Location = new System.Drawing.Point(251, 3);
+            textBoxTexID.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            textBoxTexID.Name = "textBoxTexID";
+            textBoxTexID.Size = new System.Drawing.Size(67, 23);
+            textBoxTexID.TabIndex = 2;
+            textBoxTexID.TextChanged += OnTextChangedLandTexID;
+            textBoxTexID.DoubleClick += TextBoxTexID_DoubleClick;
+            // 
+            // label24
+            // 
+            label24.AutoSize = true;
+            label24.Location = new System.Drawing.Point(202, 7);
+            label24.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label24.Name = "label24";
+            label24.Size = new System.Drawing.Size(35, 15);
+            label24.TabIndex = 3;
+            label24.Text = "TexID";
+            // 
+            // checkedListBox2
+            // 
+            checkedListBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            checkedListBox2.FormattingEnabled = true;
+            checkedListBox2.Location = new System.Drawing.Point(0, 0);
+            checkedListBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            checkedListBox2.MultiColumn = true;
+            checkedListBox2.Name = "checkedListBox2";
+            checkedListBox2.Size = new System.Drawing.Size(477, 296);
+            checkedListBox2.TabIndex = 0;
+            checkedListBox2.ItemCheck += OnFlagItemCheckLandTiles;
             // 
             // tabPageItems
             // 
@@ -222,50 +632,6 @@ namespace UoFiddler.Controls.UserControls
             treeViewItem.BeforeExpand += OnItemDataNodeExpanded;
             treeViewItem.AfterSelect += AfterSelectTreeViewItem;
             treeViewItem.KeyUp += TileData_KeyUp;
-            // 
-            // ItemsContextMenuStrip
-            // 
-            ItemsContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { selectInItemsToolStripMenuItem, selectRadarColorToolStripMenuItem, toolStripSeparator3, selectInGumpsTabMaleToolStripMenuItem, selectInGumpsTabFemaleToolStripMenuItem });
-            ItemsContextMenuStrip.Name = "contextMenuStrip1";
-            ItemsContextMenuStrip.Size = new System.Drawing.Size(201, 98);
-            ItemsContextMenuStrip.Opening += ItemsContextMenuStrip_Opening;
-            // 
-            // selectInItemsToolStripMenuItem
-            // 
-            selectInItemsToolStripMenuItem.Image = Properties.Resources.Select;
-            selectInItemsToolStripMenuItem.Name = "selectInItemsToolStripMenuItem";
-            selectInItemsToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
-            selectInItemsToolStripMenuItem.Text = "Select In Items tab";
-            selectInItemsToolStripMenuItem.Click += OnClickSelectItem;
-            // 
-            // selectRadarColorToolStripMenuItem
-            // 
-            selectRadarColorToolStripMenuItem.Image = Properties.Resources.Select;
-            selectRadarColorToolStripMenuItem.Name = "selectRadarColorToolStripMenuItem";
-            selectRadarColorToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
-            selectRadarColorToolStripMenuItem.Text = "Select In RadarColor tab";
-            selectRadarColorToolStripMenuItem.Click += OnClickSelectRadarItem;
-            // 
-            // toolStripSeparator3
-            // 
-            toolStripSeparator3.Name = "toolStripSeparator3";
-            toolStripSeparator3.Size = new System.Drawing.Size(197, 6);
-            // 
-            // selectInGumpsTabMaleToolStripMenuItem
-            // 
-            selectInGumpsTabMaleToolStripMenuItem.Image = Properties.Resources.Select;
-            selectInGumpsTabMaleToolStripMenuItem.Name = "selectInGumpsTabMaleToolStripMenuItem";
-            selectInGumpsTabMaleToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
-            selectInGumpsTabMaleToolStripMenuItem.Text = "Select in Gumps (M)";
-            selectInGumpsTabMaleToolStripMenuItem.Click += SelectInGumpsTabMaleToolStripMenuItem_Click;
-            // 
-            // selectInGumpsTabFemaleToolStripMenuItem
-            // 
-            selectInGumpsTabFemaleToolStripMenuItem.Image = Properties.Resources.Select;
-            selectInGumpsTabFemaleToolStripMenuItem.Name = "selectInGumpsTabFemaleToolStripMenuItem";
-            selectInGumpsTabFemaleToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
-            selectInGumpsTabFemaleToolStripMenuItem.Text = "Select in Gumps (F)";
-            selectInGumpsTabFemaleToolStripMenuItem.Click += SelectInGumpsTabFemaleToolStripMenuItem_Click;
             // 
             // pictureBoxItem
             // 
@@ -563,333 +929,22 @@ namespace UoFiddler.Controls.UserControls
             checkedListBox1.TabIndex = 0;
             checkedListBox1.ItemCheck += OnFlagItemCheckItems;
             // 
-            // tabPageLand
-            // 
-            tabPageLand.Controls.Add(splitContainer5);
-            tabPageLand.Location = new System.Drawing.Point(4, 24);
-            tabPageLand.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            tabPageLand.Name = "tabPageLand";
-            tabPageLand.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            tabPageLand.Size = new System.Drawing.Size(725, 331);
-            tabPageLand.TabIndex = 1;
-            tabPageLand.Text = "Land Tiles";
-            tabPageLand.UseVisualStyleBackColor = true;
-            // 
-            // splitContainer5
-            // 
-            splitContainer5.Dock = System.Windows.Forms.DockStyle.Fill;
-            splitContainer5.Location = new System.Drawing.Point(4, 3);
-            splitContainer5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            splitContainer5.Name = "splitContainer5";
-            // 
-            // splitContainer5.Panel1
-            // 
-            splitContainer5.Panel1.Controls.Add(splitContainer6);
-            // 
-            // splitContainer5.Panel2
-            // 
-            splitContainer5.Panel2.Controls.Add(label23);
-            splitContainer5.Panel2.Controls.Add(textBoxNameLand);
-            splitContainer5.Panel2.Controls.Add(splitContainer7);
-            splitContainer5.Size = new System.Drawing.Size(717, 325);
-            splitContainer5.SplitterDistance = 235;
-            splitContainer5.SplitterWidth = 5;
-            splitContainer5.TabIndex = 1;
-            // 
-            // splitContainer6
-            // 
-            splitContainer6.Dock = System.Windows.Forms.DockStyle.Fill;
-            splitContainer6.Location = new System.Drawing.Point(0, 0);
-            splitContainer6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            splitContainer6.Name = "splitContainer6";
-            splitContainer6.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer6.Panel1
-            // 
-            splitContainer6.Panel1.Controls.Add(treeViewLand);
-            // 
-            // splitContainer6.Panel2
-            // 
-            splitContainer6.Panel2.Controls.Add(pictureBoxLand);
-            splitContainer6.Size = new System.Drawing.Size(235, 325);
-            splitContainer6.SplitterDistance = 195;
-            splitContainer6.SplitterWidth = 5;
-            splitContainer6.TabIndex = 0;
-            // 
-            // treeViewLand
-            // 
-            treeViewLand.ContextMenuStrip = LandTilesContextMenuStrip;
-            treeViewLand.Dock = System.Windows.Forms.DockStyle.Fill;
-            treeViewLand.HideSelection = false;
-            treeViewLand.Location = new System.Drawing.Point(0, 0);
-            treeViewLand.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            treeViewLand.Name = "treeViewLand";
-            treeViewLand.Size = new System.Drawing.Size(235, 195);
-            treeViewLand.TabIndex = 0;
-            treeViewLand.AfterSelect += AfterSelectTreeViewLand;
-            treeViewLand.KeyUp += TileData_KeyUp;
-            // 
-            // LandTilesContextMenuStrip
-            // 
-            LandTilesContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { selectInLandtilesToolStripMenuItem, selToolStripMenuItem });
-            LandTilesContextMenuStrip.Name = "contextMenuStrip2";
-            LandTilesContextMenuStrip.Size = new System.Drawing.Size(201, 70);
-            // 
-            // selectInLandtilesToolStripMenuItem
-            // 
-            selectInLandtilesToolStripMenuItem.Image = Properties.Resources.Select;
-            selectInLandtilesToolStripMenuItem.Name = "selectInLandtilesToolStripMenuItem";
-            selectInLandtilesToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
-            selectInLandtilesToolStripMenuItem.Text = "Select In Land Tiles tab";
-            selectInLandtilesToolStripMenuItem.Click += OnClickSelectInLandTiles;
-            // 
-            // selToolStripMenuItem
-            // 
-            selToolStripMenuItem.Image = Properties.Resources.Select;
-            selToolStripMenuItem.Name = "selToolStripMenuItem";
-            selToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
-            selToolStripMenuItem.Text = "Select In RadarColor tab";
-            selToolStripMenuItem.Click += OnClickSelectRadarLand;
-            // 
-            // pictureBoxLand
-            // 
-            pictureBoxLand.Dock = System.Windows.Forms.DockStyle.Fill;
-            pictureBoxLand.Location = new System.Drawing.Point(0, 0);
-            pictureBoxLand.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            pictureBoxLand.Name = "pictureBoxLand";
-            pictureBoxLand.Size = new System.Drawing.Size(235, 125);
-            pictureBoxLand.TabIndex = 0;
-            pictureBoxLand.TabStop = false;
-            // 
-            // label23
-            // 
-            label23.AutoSize = true;
-            label23.Location = new System.Drawing.Point(4, 7);
-            label23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            label23.Name = "label23";
-            label23.Size = new System.Drawing.Size(39, 15);
-            label23.TabIndex = 1;
-            label23.Text = "Name";
-            // 
-            // textBoxNameLand
-            // 
-            textBoxNameLand.Location = new System.Drawing.Point(51, 3);
-            textBoxNameLand.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            textBoxNameLand.MaxLength = 20;
-            textBoxNameLand.Name = "textBoxNameLand";
-            textBoxNameLand.Size = new System.Drawing.Size(143, 23);
-            textBoxNameLand.TabIndex = 0;
-            textBoxNameLand.TextChanged += OnTextChangedLandName;
-            // 
-            // splitContainer7
-            // 
-            splitContainer7.Dock = System.Windows.Forms.DockStyle.Fill;
-            splitContainer7.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            splitContainer7.IsSplitterFixed = true;
-            splitContainer7.Location = new System.Drawing.Point(0, 0);
-            splitContainer7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            splitContainer7.Name = "splitContainer7";
-            splitContainer7.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer7.Panel1
-            // 
-            splitContainer7.Panel1.Controls.Add(textBoxTexID);
-            splitContainer7.Panel1.Controls.Add(label24);
-            // 
-            // splitContainer7.Panel2
-            // 
-            splitContainer7.Panel2.Controls.Add(checkedListBox2);
-            splitContainer7.Size = new System.Drawing.Size(477, 325);
-            splitContainer7.SplitterDistance = 27;
-            splitContainer7.SplitterWidth = 2;
-            splitContainer7.TabIndex = 25;
-            // 
-            // textBoxTexID
-            // 
-            textBoxTexID.Location = new System.Drawing.Point(251, 3);
-            textBoxTexID.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            textBoxTexID.Name = "textBoxTexID";
-            textBoxTexID.Size = new System.Drawing.Size(67, 23);
-            textBoxTexID.TabIndex = 2;
-            textBoxTexID.TextChanged += OnTextChangedLandTexID;
-            textBoxTexID.DoubleClick += TextBoxTexID_DoubleClick;
-            // 
-            // label24
-            // 
-            label24.AutoSize = true;
-            label24.Location = new System.Drawing.Point(202, 7);
-            label24.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            label24.Name = "label24";
-            label24.Size = new System.Drawing.Size(35, 15);
-            label24.TabIndex = 3;
-            label24.Text = "TexID";
-            // 
-            // checkedListBox2
-            // 
-            checkedListBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            checkedListBox2.FormattingEnabled = true;
-            checkedListBox2.Location = new System.Drawing.Point(0, 0);
-            checkedListBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            checkedListBox2.MultiColumn = true;
-            checkedListBox2.Name = "checkedListBox2";
-            checkedListBox2.Size = new System.Drawing.Size(477, 296);
-            checkedListBox2.TabIndex = 0;
-            checkedListBox2.ItemCheck += OnFlagItemCheckLandTiles;
-            // 
-            // MainToolStrip
-            // 
-            MainToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            MainToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripDropDownButton1, toolStripButton2, toolStripSeparator1, toolStripButton1, toolStripButton5, toolStripSeparator2, toolStripButton4, toolStripButton3, toolStripComboBox1, toolStripButton6, toolStripButton7, toolStripPushMarkedButton8 });
-            MainToolStrip.Location = new System.Drawing.Point(0, 0);
-            MainToolStrip.Name = "MainToolStrip";
-            MainToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            MainToolStrip.Size = new System.Drawing.Size(733, 25);
-            MainToolStrip.TabIndex = 1;
-            MainToolStrip.Text = "toolStrip1";
-            // 
-            // toolStripDropDownButton1
-            // 
-            toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { memorySaveWarningToolStripMenuItem, saveDirectlyOnChangesToolStripMenuItem, setFilterToolStripMenuItem, toolStripSeparator4, setTextureOnDoubleClickToolStripMenuItem, setTexturesToolStripMenuItem });
-            toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            toolStripDropDownButton1.Size = new System.Drawing.Size(45, 22);
-            toolStripDropDownButton1.Text = "Misc";
-            // 
-            // memorySaveWarningToolStripMenuItem
-            // 
-            memorySaveWarningToolStripMenuItem.Checked = true;
-            memorySaveWarningToolStripMenuItem.CheckOnClick = true;
-            memorySaveWarningToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            memorySaveWarningToolStripMenuItem.Name = "memorySaveWarningToolStripMenuItem";
-            memorySaveWarningToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
-            memorySaveWarningToolStripMenuItem.Text = "Memory save warning";
-            // 
-            // saveDirectlyOnChangesToolStripMenuItem
-            // 
-            saveDirectlyOnChangesToolStripMenuItem.CheckOnClick = true;
-            saveDirectlyOnChangesToolStripMenuItem.Name = "saveDirectlyOnChangesToolStripMenuItem";
-            saveDirectlyOnChangesToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
-            saveDirectlyOnChangesToolStripMenuItem.Text = "Save directly on changes";
-            // 
-            // setFilterToolStripMenuItem
-            // 
-            setFilterToolStripMenuItem.Name = "setFilterToolStripMenuItem";
-            setFilterToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
-            setFilterToolStripMenuItem.Text = "Set Filter";
-            setFilterToolStripMenuItem.Click += OnClickSetFilter;
-            // 
-            // toolStripSeparator4
-            // 
-            toolStripSeparator4.Name = "toolStripSeparator4";
-            toolStripSeparator4.Size = new System.Drawing.Size(202, 6);
-            // 
-            // setTextureOnDoubleClickToolStripMenuItem
-            // 
-            setTextureOnDoubleClickToolStripMenuItem.CheckOnClick = true;
-            setTextureOnDoubleClickToolStripMenuItem.Name = "setTextureOnDoubleClickToolStripMenuItem";
-            setTextureOnDoubleClickToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
-            setTextureOnDoubleClickToolStripMenuItem.Text = "Set TexID on double click";
-            // 
-            // setTexturesToolStripMenuItem
-            // 
-            setTexturesToolStripMenuItem.Name = "setTexturesToolStripMenuItem";
-            setTexturesToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
-            setTexturesToolStripMenuItem.Text = "Set Textures";
-            setTexturesToolStripMenuItem.Click += SetTextureMenuItem_Click;
-            // 
-            // toolStripButton2
-            // 
-            toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            toolStripButton2.Name = "toolStripButton2";
-            toolStripButton2.Size = new System.Drawing.Size(46, 22);
-            toolStripButton2.Text = "Search";
-            toolStripButton2.Click += OnClickSearch;
-            // 
-            // toolStripSeparator1
-            // 
-            toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripButton1
-            // 
-            toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            toolStripButton1.Name = "toolStripButton1";
-            toolStripButton1.Size = new System.Drawing.Size(84, 22);
-            toolStripButton1.Text = "Export To CSV";
-            toolStripButton1.Click += OnClickExport;
-            // 
-            // toolStripButton5
-            // 
-            toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
-            toolStripButton5.Name = "toolStripButton5";
-            toolStripButton5.Size = new System.Drawing.Size(102, 22);
-            toolStripButton5.Text = "Import From CSV";
-            toolStripButton5.Click += OnClickImport;
-            // 
-            // toolStripSeparator2
-            // 
-            toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripButton4
-            // 
-            toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-            toolStripButton4.Name = "toolStripButton4";
-            toolStripButton4.Size = new System.Drawing.Size(84, 22);
-            toolStripButton4.Text = "Save Changes";
-            toolStripButton4.Click += OnClickSaveChanges;
-            // 
-            // toolStripButton3
-            // 
-            toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            toolStripButton3.Name = "toolStripButton3";
-            toolStripButton3.Size = new System.Drawing.Size(79, 22);
-            toolStripButton3.Text = "Save Tiledata";
-            toolStripButton3.Click += OnClickSaveTiledata;
-            // 
-            // toolStripComboBox1
-            // 
-            toolStripComboBox1.Name = "toolStripComboBox1";
-            toolStripComboBox1.Size = new System.Drawing.Size(121, 25);
-            // 
-            // toolStripButton6
-            // 
-            toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            toolStripButton6.Image = Properties.Resources.volume;
-            toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
-            toolStripButton6.Name = "toolStripButton6";
-            toolStripButton6.Size = new System.Drawing.Size(23, 22);
-            toolStripButton6.Text = "toolStripButton6";
-            toolStripButton6.ToolTipText = "Message  box disabled and new Sound";
-            toolStripButton6.Click += toolStripButton6_Click;
-            // 
-            // toolStripButton7
-            // 
-            toolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            toolStripButton7.Image = (System.Drawing.Image)resources.GetObject("toolStripButton7.Image");
-            toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
-            toolStripButton7.Name = "toolStripButton7";
-            toolStripButton7.Size = new System.Drawing.Size(23, 22);
-            toolStripButton7.Text = "toolStripButton7";
-            toolStripButton7.ToolTipText = "Copy setting";
-            toolStripButton7.Click += toolStripButton7_Click;
-            // 
-            // toolStripPushMarkedButton8
-            // 
-            toolStripPushMarkedButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            toolStripPushMarkedButton8.Image = Properties.Resources.Copy;
-            toolStripPushMarkedButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
-            toolStripPushMarkedButton8.Name = "toolStripPushMarkedButton8";
-            toolStripPushMarkedButton8.Size = new System.Drawing.Size(23, 22);
-            toolStripPushMarkedButton8.Text = "toolStripButton8";
-            toolStripPushMarkedButton8.ToolTipText = "Copying the settings one by one.";
-            toolStripPushMarkedButton8.Click += toolStripPushMarkedButton8_Click;
+            // tabcontrol
+            // 
+            tabcontrol.Controls.Add(tabPageItems);
+            tabcontrol.Controls.Add(tabPageLand);
+            tabcontrol.Dock = System.Windows.Forms.DockStyle.Fill;
+            tabcontrol.Location = new System.Drawing.Point(0, 25);
+            tabcontrol.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabcontrol.Name = "tabcontrol";
+            tabcontrol.SelectedIndex = 0;
+            tabcontrol.Size = new System.Drawing.Size(733, 359);
+            tabcontrol.TabIndex = 0;
+            // 
+            // toolStripSeparator6
+            // 
+            toolStripSeparator6.Name = "toolStripSeparator6";
+            toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
             // 
             // TileDataControl
             // 
@@ -903,23 +958,10 @@ namespace UoFiddler.Controls.UserControls
             Size = new System.Drawing.Size(733, 384);
             Load += OnLoad;
             KeyUp += TileData_KeyUp;
-            tabcontrol.ResumeLayout(false);
-            tabPageItems.ResumeLayout(false);
-            splitContainer1.Panel1.ResumeLayout(false);
-            splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
-            splitContainer1.ResumeLayout(false);
-            splitContainer2.Panel1.ResumeLayout(false);
-            splitContainer2.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)splitContainer2).EndInit();
-            splitContainer2.ResumeLayout(false);
             ItemsContextMenuStrip.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBoxItem).EndInit();
-            splitContainer3.Panel1.ResumeLayout(false);
-            splitContainer3.Panel1.PerformLayout();
-            splitContainer3.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)splitContainer3).EndInit();
-            splitContainer3.ResumeLayout(false);
+            LandTilesContextMenuStrip.ResumeLayout(false);
+            MainToolStrip.ResumeLayout(false);
+            MainToolStrip.PerformLayout();
             tabPageLand.ResumeLayout(false);
             splitContainer5.Panel1.ResumeLayout(false);
             splitContainer5.Panel2.ResumeLayout(false);
@@ -930,72 +972,43 @@ namespace UoFiddler.Controls.UserControls
             splitContainer6.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer6).EndInit();
             splitContainer6.ResumeLayout(false);
-            LandTilesContextMenuStrip.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBoxLand).EndInit();
             splitContainer7.Panel1.ResumeLayout(false);
             splitContainer7.Panel1.PerformLayout();
             splitContainer7.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer7).EndInit();
             splitContainer7.ResumeLayout(false);
-            MainToolStrip.ResumeLayout(false);
-            MainToolStrip.PerformLayout();
+            tabPageItems.ResumeLayout(false);
+            splitContainer1.Panel1.ResumeLayout(false);
+            splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
+            splitContainer1.ResumeLayout(false);
+            splitContainer2.Panel1.ResumeLayout(false);
+            splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer2).EndInit();
+            splitContainer2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBoxItem).EndInit();
+            splitContainer3.Panel1.ResumeLayout(false);
+            splitContainer3.Panel1.PerformLayout();
+            splitContainer3.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer3).EndInit();
+            splitContainer3.ResumeLayout(false);
+            tabcontrol.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
-        private System.Windows.Forms.CheckedListBox checkedListBox2;
         private System.Windows.Forms.ContextMenuStrip ItemsContextMenuStrip;
         private System.Windows.Forms.ContextMenuStrip LandTilesContextMenuStrip;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ToolStripMenuItem memorySaveWarningToolStripMenuItem;
-        private System.Windows.Forms.PictureBox pictureBoxItem;
-        private System.Windows.Forms.PictureBox pictureBoxLand;
         private System.Windows.Forms.ToolStripMenuItem saveDirectlyOnChangesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem selectInItemsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem selectInLandtilesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem selectRadarColorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem selToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem setFilterToolStripMenuItem;
-        private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.SplitContainer splitContainer2;
-        private System.Windows.Forms.SplitContainer splitContainer3;
-        private System.Windows.Forms.SplitContainer splitContainer5;
-        private System.Windows.Forms.SplitContainer splitContainer6;
-        private System.Windows.Forms.SplitContainer splitContainer7;
         private UoFiddler.Controls.UserControls.CollapsibleSplitter splitter1;
-        private System.Windows.Forms.TabControl tabcontrol;
-        private System.Windows.Forms.TabPage tabPageItems;
-        private System.Windows.Forms.TabPage tabPageLand;
-        private System.Windows.Forms.TextBox textBoxAnim;
-        private System.Windows.Forms.TextBox textBoxHeigth;
-        private System.Windows.Forms.TextBox textBoxHue;
-        private System.Windows.Forms.TextBox textBoxName;
-        private System.Windows.Forms.TextBox textBoxNameLand;
-        private System.Windows.Forms.TextBox textBoxQuality;
-        private System.Windows.Forms.TextBox textBoxQuantity;
-        private System.Windows.Forms.TextBox textBoxStackOff;
-        private System.Windows.Forms.TextBox textBoxTexID;
-        private System.Windows.Forms.TextBox textBoxUnk1;
-        private System.Windows.Forms.TextBox textBoxUnk2;
-        private System.Windows.Forms.TextBox textBoxUnk3;
-        private System.Windows.Forms.TextBox textBoxValue;
-        private System.Windows.Forms.TextBox textBoxWeight;
         private System.Windows.Forms.ToolStrip MainToolStrip;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
@@ -1005,8 +1018,6 @@ namespace UoFiddler.Controls.UserControls
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.TreeView treeViewItem;
-        private System.Windows.Forms.TreeView treeViewLand;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem selectInGumpsTabMaleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem selectInGumpsTabFemaleToolStripMenuItem;
@@ -1017,5 +1028,55 @@ namespace UoFiddler.Controls.UserControls
         private System.Windows.Forms.ToolStripButton toolStripButton6;
         private System.Windows.Forms.ToolStripButton toolStripButton7;
         private System.Windows.Forms.ToolStripButton toolStripPushMarkedButton8;
+        private System.Windows.Forms.TabPage tabPageLand;
+        private System.Windows.Forms.SplitContainer splitContainer5;
+        private System.Windows.Forms.SplitContainer splitContainer6;
+        private System.Windows.Forms.TreeView treeViewLand;
+        private System.Windows.Forms.PictureBox pictureBoxLand;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.TextBox textBoxNameLand;
+        private System.Windows.Forms.SplitContainer splitContainer7;
+        private System.Windows.Forms.TextBox textBoxTexID;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.CheckedListBox checkedListBox2;
+        private System.Windows.Forms.TabPage tabPageItems;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.TreeView treeViewItem;
+        private System.Windows.Forms.PictureBox pictureBoxItem;
+        private System.Windows.Forms.SplitContainer splitContainer3;
+        private System.Windows.Forms.TextBox textBoxName;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox textBoxUnk2;
+        private System.Windows.Forms.TextBox textBoxUnk1;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox textBoxHeigth;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox textBoxValue;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox textBoxStackOff;
+        private System.Windows.Forms.TextBox textBoxHue;
+        private System.Windows.Forms.TextBox textBoxWeight;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBoxQuantity;
+        private System.Windows.Forms.TextBox textBoxQuality;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBoxUnk3;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox textBoxAnim;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.TabControl tabcontrol;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ToolStripTextBox searchByIdToolStripTextBox;
+        private System.Windows.Forms.ToolStripLabel toolStripLabelName;
+        private System.Windows.Forms.ToolStripTextBox searchByNameToolStripTextBox;
+        private System.Windows.Forms.ToolStripButton searchByNameToolStripButton;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
     }
 }

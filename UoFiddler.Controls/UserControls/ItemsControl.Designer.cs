@@ -82,6 +82,11 @@ namespace UoFiddler.Controls.UserControls
             GraphicLabel = new ToolStripStatusLabel();
             PreLoader = new System.ComponentModel.BackgroundWorker();
             ToolStrip = new ToolStrip();
+            toolStripLabel1 = new ToolStripLabel();
+            searchByIdToolStripTextBox = new ToolStripTextBox();
+            toolStripLabel2 = new ToolStripLabel();
+            searchByNameToolStripTextBox = new ToolStripTextBox();
+            searchByNameToolStripButton = new ToolStripButton();
             SearchToolStripButton = new ToolStripButton();
             ProgressBar = new ToolStripProgressBar();
             PreloadItemsToolStripButton = new ToolStripButton();
@@ -215,7 +220,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             TileViewContextMenuStrip.Items.AddRange(new ToolStripItem[] { showFreeSlotsToolStripMenuItem, findNextFreeSlotToolStripMenuItem, ChangeBackgroundColorToolStripMenuItem, toolStripSeparator3, selectInTileDataTabToolStripMenuItem, selectInRadarColorTabToolStripMenuItem, selectInGumpsTabMaleToolStripMenuItem, selectInGumpsTabFemaleToolStripMenuItem, toolStripSeparator2, extractToolStripMenuItem, replaceToolStripMenuItem, replaceStartingFromToolStripMenuItem, removeToolStripMenuItem, insertAtToolStripMenuItem, toolStripSeparator5, mirrorToolStripMenuItem, toolStripSeparator1, copyToolStripMenuItem, importToolStripclipboardMenuItem, toolStripSeparator4, saveToolStripMenuItem });
             TileViewContextMenuStrip.Name = "contextMenuStrip1";
-            TileViewContextMenuStrip.Size = new System.Drawing.Size(213, 408);
+            TileViewContextMenuStrip.Size = new System.Drawing.Size(213, 386);
             TileViewContextMenuStrip.Opening += TileViewContextMenuStrip_Opening;
             // 
             // showFreeSlotsToolStripMenuItem
@@ -302,28 +307,28 @@ namespace UoFiddler.Controls.UserControls
             // bmpToolStripMenuItem
             // 
             bmpToolStripMenuItem.Name = "bmpToolStripMenuItem";
-            bmpToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            bmpToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             bmpToolStripMenuItem.Text = "As Bmp";
             bmpToolStripMenuItem.Click += Extract_Image_ClickBmp;
             // 
             // tiffToolStripMenuItem
             // 
             tiffToolStripMenuItem.Name = "tiffToolStripMenuItem";
-            tiffToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            tiffToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             tiffToolStripMenuItem.Text = "As Tiff";
             tiffToolStripMenuItem.Click += Extract_Image_ClickTiff;
             // 
             // asJpgToolStripMenuItem1
             // 
             asJpgToolStripMenuItem1.Name = "asJpgToolStripMenuItem1";
-            asJpgToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            asJpgToolStripMenuItem1.Size = new System.Drawing.Size(115, 22);
             asJpgToolStripMenuItem1.Text = "As Jpg";
             asJpgToolStripMenuItem1.Click += Extract_Image_ClickJpg;
             // 
             // asPngToolStripMenuItem1
             // 
             asPngToolStripMenuItem1.Name = "asPngToolStripMenuItem1";
-            asPngToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            asPngToolStripMenuItem1.Size = new System.Drawing.Size(115, 22);
             asPngToolStripMenuItem1.Text = "As Png";
             asPngToolStripMenuItem1.Click += Extract_Image_ClickPng;
             // 
@@ -464,12 +469,45 @@ namespace UoFiddler.Controls.UserControls
             // ToolStrip
             // 
             ToolStrip.GripStyle = ToolStripGripStyle.Hidden;
-            ToolStrip.Items.AddRange(new ToolStripItem[] { SearchToolStripButton, ProgressBar, PreloadItemsToolStripButton, MiscToolStripDropDownButton });
+            ToolStrip.Items.AddRange(new ToolStripItem[] { toolStripLabel1, searchByIdToolStripTextBox, toolStripLabel2, searchByNameToolStripTextBox, searchByNameToolStripButton, SearchToolStripButton, ProgressBar, PreloadItemsToolStripButton, MiscToolStripDropDownButton });
             ToolStrip.Location = new System.Drawing.Point(0, 0);
             ToolStrip.Name = "ToolStrip";
             ToolStrip.RenderMode = ToolStripRenderMode.System;
             ToolStrip.Size = new System.Drawing.Size(758, 28);
             ToolStrip.TabIndex = 7;
+            // 
+            // toolStripLabel1
+            // 
+            toolStripLabel1.Name = "toolStripLabel1";
+            toolStripLabel1.Size = new System.Drawing.Size(39, 25);
+            toolStripLabel1.Text = "Index:";
+            // 
+            // searchByIdToolStripTextBox
+            // 
+            searchByIdToolStripTextBox.Name = "searchByIdToolStripTextBox";
+            searchByIdToolStripTextBox.Size = new System.Drawing.Size(100, 28);
+            searchByIdToolStripTextBox.KeyUp += SearchByIdToolStripTextBox_KeyUp;
+            // 
+            // toolStripLabel2
+            // 
+            toolStripLabel2.Name = "toolStripLabel2";
+            toolStripLabel2.Size = new System.Drawing.Size(42, 25);
+            toolStripLabel2.Text = "Name:";
+            // 
+            // searchByNameToolStripTextBox
+            // 
+            searchByNameToolStripTextBox.Name = "searchByNameToolStripTextBox";
+            searchByNameToolStripTextBox.Size = new System.Drawing.Size(100, 28);
+            searchByNameToolStripTextBox.KeyUp += SearchByNameToolStripTextBox_KeyUp;
+            // 
+            // searchByNameToolStripButton
+            // 
+            searchByNameToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            searchByNameToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            searchByNameToolStripButton.Name = "searchByNameToolStripButton";
+            searchByNameToolStripButton.Size = new System.Drawing.Size(60, 25);
+            searchByNameToolStripButton.Text = "Find next";
+            searchByNameToolStripButton.Click += searchByNameToolStripButton_Click;
             // 
             // SearchToolStripButton
             // 
@@ -642,5 +680,10 @@ namespace UoFiddler.Controls.UserControls
         private ToolStripMenuItem importToolStripclipboardMenuItem;
         private ToolStripMenuItem mirrorToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator5;
+        private ToolStripLabel toolStripLabel1;
+        private ToolStripTextBox searchByIdToolStripTextBox;
+        private ToolStripLabel toolStripLabel2;
+        private ToolStripTextBox searchByNameToolStripTextBox;
+        private ToolStripButton searchByNameToolStripButton;
     }
 }

@@ -1465,5 +1465,39 @@ namespace UoFiddler.Controls.UserControls
             ItemsTileView.Invalidate();
         }
         #endregion
+
+        #region new Search
+        private void SearchByIdToolStripTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (!Utils.ConvertStringToInt(searchByIdToolStripTextBox.Text, out int indexValue))
+            {
+                return;
+            }
+
+            var maximumIndex = Art.GetMaxItemId();
+
+            if (indexValue < 0)
+            {
+                indexValue = 0;
+            }
+
+            if (indexValue > maximumIndex)
+            {
+                indexValue = maximumIndex;
+            }
+
+            // we have to invalidate focus so it will scroll to item
+            ItemsTileView.FocusIndex = -1;
+            SelectedGraphicId = indexValue;
+        }
+        private void SearchByNameToolStripTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            SearchName(searchByNameToolStripTextBox.Text, false);
+        }
+        private void searchByNameToolStripButton_Click(object sender, EventArgs e)
+        {
+            SearchName(searchByNameToolStripTextBox.Text, true);
+        }
+        #endregion
     }
 }

@@ -2144,5 +2144,45 @@ namespace UoFiddler.Controls.UserControls
         }
 
         #endregion
+
+        #region Search New
+        private void SearchByIdToolStripTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (!Utils.ConvertStringToInt(searchByIdToolStripTextBox.Text, out int indexValue, 0, Art.GetMaxItemId()))
+            {
+                return;
+            }
+
+            var maximumIndex = Art.GetMaxItemId();
+
+            if (indexValue < 0)
+            {
+                indexValue = 0;
+            }
+
+            if (indexValue > maximumIndex)
+            {
+                indexValue = maximumIndex;
+            }
+
+            var landTilesSelected = tabcontrol.SelectedIndex != 0;
+
+            SearchGraphic(indexValue, landTilesSelected);
+        }
+
+        private void SearchByNameToolStripTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            var landTilesSelected = tabcontrol.SelectedIndex != 0;
+
+            SearchName(searchByNameToolStripTextBox.Text, false, landTilesSelected);
+        }
+
+        private void SearchByNameToolStripButton_Click(object sender, EventArgs e)
+        {
+            var landTilesSelected = tabcontrol.SelectedIndex != 0;
+
+            SearchName(searchByNameToolStripTextBox.Text, true, landTilesSelected);
+        }
+        #endregion
     }
 }

@@ -473,7 +473,7 @@ namespace UoFiddler.Controls.UserControls
                 return;
             }
 
-            contextMenuStrip1.Close();
+            contextMenuStrip.Close();
             using (OpenFileDialog dialog = new OpenFileDialog())
             {
                 dialog.Multiselect = false;
@@ -764,7 +764,7 @@ namespace UoFiddler.Controls.UserControls
                 return;
             }
 
-            contextMenuStrip1.Close();
+            contextMenuStrip.Close();
             using (OpenFileDialog dialog = new OpenFileDialog())
             {
                 dialog.Multiselect = true;
@@ -979,6 +979,19 @@ namespace UoFiddler.Controls.UserControls
                 // Calling the copyToolStripMenuItem_Click method to import the graphic from the clipboard.
                 copyToolStripMenuItem_Click(sender, e);
             }
+        }
+        #endregion
+
+        #region Search New TopMenuToolStrip
+        private void SearchByIdToolStripTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            var max = Gumps.GetCount();
+            if (!Utils.ConvertStringToInt(searchByIdToolStripTextBox.Text, out int graphic, 0, max))
+            {
+                return;
+            }
+
+            Search(graphic);
         }
         #endregion
     }

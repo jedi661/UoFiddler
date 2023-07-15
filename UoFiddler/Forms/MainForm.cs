@@ -15,6 +15,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Ultima;
 using Ultima.Helpers;
@@ -155,7 +156,28 @@ namespace UoFiddler.Forms
             // Get the bounds of the current TabPage
             Rectangle tabBounds = TabPanel.GetTabRect(e.Index);
             // Select the background color based on the name of the tab
-            Color backColor;
+
+            // Check if the current tab is selected.
+            bool isSelected = (e.State & DrawItemState.Selected) == DrawItemState.Selected;
+
+            // Set the background color based on the selection status.
+            Color backColor = isSelected ? Color.LightBlue : TabPanel.BackColor;
+
+            // Highlight color for selected tabs.
+            Color highlightColor = Color.Yellow;
+
+            // Check if the tab is selected to apply the highlight.
+            if (isSelected)
+            {
+                // Draw a highlight around the tab area.
+                using (Pen highlightPen = new Pen(highlightColor, 2))
+                {
+                    g.DrawRectangle(highlightPen, tabBounds);
+                }
+            }
+
+
+            //Color backColor;
             switch (tabPage.Name)
             {
                 case "MapTab":
@@ -188,9 +210,10 @@ namespace UoFiddler.Forms
                 case "SpeechTab":
                     backColor = Color.White;
                     break;
-                default:
+                /*default:
                     backColor = TabPanel.BackColor;
-                    break;
+                    //backColor = Color.Red;
+                    break;*/
             }
             // Fill the background of the current TabPage with the selected color
             g.FillRectangle(new SolidBrush(backColor), e.Bounds);

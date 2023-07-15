@@ -883,6 +883,7 @@ namespace UoFiddler.Controls.UserControls
         private void ShowFreeSlotsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _showFreeSlots = !_showFreeSlots;
+
             if (_showFreeSlots)
             {
                 for (int j = 0; j < _landTileMax; ++j)
@@ -916,6 +917,44 @@ namespace UoFiddler.Controls.UserControls
                 Reload();
             }
         }
+
+        #region new Search Tab ´Landtiles
+
+        private void SearchByNameToolStripTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            SearchName(searchByNameToolStripTextBox.Text, false);
+        }
+
+        private void SearchByNameToolStripButton_Click(object sender, EventArgs e)
+        {
+            SearchName(searchByNameToolStripTextBox.Text, true);
+        }
+
+        private void SearchByIdToolStripTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (!Utils.ConvertStringToInt(searchByIdToolStripTextBox.Text, out int indexValue))
+            {
+                return;
+            }
+
+            const int maximumIndex = 0x3FFF;
+
+            if (indexValue < 0)
+            {
+                indexValue = 0;
+            }
+
+            if (indexValue > maximumIndex)
+            {
+                indexValue = maximumIndex;
+            }
+
+            // we have to invalidate focus so it will scroll to item
+            LandTilesTileView.FocusIndex = -1;
+            SelectedGraphicId = indexValue;
+        }
+        #endregion
+
         #region Copy clipboard - Event handler for the click event of the copyToolStripMenuItem control
         private void copyToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1279,5 +1318,6 @@ namespace UoFiddler.Controls.UserControls
             LandTilesTileView.Invalidate();
         }
         #endregion
+
     }
 }

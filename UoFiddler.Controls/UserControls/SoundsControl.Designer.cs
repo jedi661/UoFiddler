@@ -43,7 +43,6 @@ namespace UoFiddler.Controls.UserControls
             treeView = new System.Windows.Forms.TreeView();
             cmStripSounds = new System.Windows.Forms.ContextMenuStrip(components);
             nameSortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            ToggleRightPanelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             tsSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             showFreeSlotsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             nextFreeSlotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,11 +53,6 @@ namespace UoFiddler.Controls.UserControls
             removeSoundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             itemSave = new System.Windows.Forms.ToolStripMenuItem();
-            toolStrip1 = new System.Windows.Forms.ToolStrip();
-            toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
-            itemExportSoundlist = new System.Windows.Forms.ToolStripMenuItem();
-            exportAllSoundsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             statusStripSounds = new System.Windows.Forms.StatusStrip();
             seconds = new System.Windows.Forms.ToolStripStatusLabel();
@@ -72,8 +66,8 @@ namespace UoFiddler.Controls.UserControls
             exportAllSoundsButton = new System.Windows.Forms.Button();
             ExportSoundListCsvButton = new System.Windows.Forms.Button();
             SaveFileButton = new System.Windows.Forms.Button();
-            SortByNameCheckbox = new System.Windows.Forms.CheckBox();
             includeSoundIdCheckBox = new System.Windows.Forms.CheckBox();
+            SortByNameCheckbox = new System.Windows.Forms.CheckBox();
             SelectedSoundGroup = new System.Windows.Forms.GroupBox();
             tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             PlaySoundButton = new System.Windows.Forms.Button();
@@ -96,8 +90,8 @@ namespace UoFiddler.Controls.UserControls
             WavFileInsertTextbox = new System.Windows.Forms.TextBox();
             WavChooseInsertButton = new System.Windows.Forms.Button();
             AddInsertReplaceButton = new System.Windows.Forms.Button();
+            stopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             cmStripSounds.SuspendLayout();
-            toolStrip1.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             statusStripSounds.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -123,7 +117,7 @@ namespace UoFiddler.Controls.UserControls
             treeView.Location = new System.Drawing.Point(0, 0);
             treeView.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             treeView.Name = "treeView";
-            treeView.Size = new System.Drawing.Size(406, 645);
+            treeView.Size = new System.Drawing.Size(406, 670);
             treeView.TabIndex = 0;
             treeView.BeforeSelect += BeforeSelect;
             treeView.AfterSelect += AfterSelect;
@@ -132,36 +126,28 @@ namespace UoFiddler.Controls.UserControls
             // 
             // cmStripSounds
             // 
-            cmStripSounds.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { nameSortToolStripMenuItem, ToggleRightPanelToolStripMenuItem, tsSeparator1, showFreeSlotsToolStripMenuItem, nextFreeSlotToolStripMenuItem, tsSeparator2, playSoundToolStripMenuItem, replaceToolStripMenuItem, extractSoundToolStripMenuItem, removeSoundToolStripMenuItem, toolStripMenuItem1, itemSave });
+            cmStripSounds.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { nameSortToolStripMenuItem, tsSeparator1, showFreeSlotsToolStripMenuItem, nextFreeSlotToolStripMenuItem, tsSeparator2, playSoundToolStripMenuItem, stopToolStripMenuItem, replaceToolStripMenuItem, extractSoundToolStripMenuItem, removeSoundToolStripMenuItem, toolStripMenuItem1, itemSave });
             cmStripSounds.Name = "contextMenuStrip1";
-            cmStripSounds.Size = new System.Drawing.Size(173, 220);
+            cmStripSounds.Size = new System.Drawing.Size(181, 242);
             // 
             // nameSortToolStripMenuItem
             // 
             nameSortToolStripMenuItem.CheckOnClick = true;
             nameSortToolStripMenuItem.Name = "nameSortToolStripMenuItem";
-            nameSortToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            nameSortToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             nameSortToolStripMenuItem.Text = "Name Sort";
             nameSortToolStripMenuItem.Click += OnChangeSort;
-            // 
-            // ToggleRightPanelToolStripMenuItem
-            // 
-            ToggleRightPanelToolStripMenuItem.CheckOnClick = true;
-            ToggleRightPanelToolStripMenuItem.Name = "ToggleRightPanelToolStripMenuItem";
-            ToggleRightPanelToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            ToggleRightPanelToolStripMenuItem.Text = "Toggle Right Panel";
-            ToggleRightPanelToolStripMenuItem.CheckedChanged += ToggleRightPanelToolStripMenuItem_CheckedChanged;
             // 
             // tsSeparator1
             // 
             tsSeparator1.Name = "tsSeparator1";
-            tsSeparator1.Size = new System.Drawing.Size(169, 6);
+            tsSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // showFreeSlotsToolStripMenuItem
             // 
             showFreeSlotsToolStripMenuItem.CheckOnClick = true;
             showFreeSlotsToolStripMenuItem.Name = "showFreeSlotsToolStripMenuItem";
-            showFreeSlotsToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            showFreeSlotsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             showFreeSlotsToolStripMenuItem.Text = "Show free slots";
             showFreeSlotsToolStripMenuItem.Click += ShowFreeSlotsClick;
             // 
@@ -169,21 +155,21 @@ namespace UoFiddler.Controls.UserControls
             // 
             nextFreeSlotToolStripMenuItem.Enabled = false;
             nextFreeSlotToolStripMenuItem.Name = "nextFreeSlotToolStripMenuItem";
-            nextFreeSlotToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            nextFreeSlotToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             nextFreeSlotToolStripMenuItem.Text = "Find next free slot";
             nextFreeSlotToolStripMenuItem.Click += NextFreeSlotToolStripMenuItem_Click;
             // 
             // tsSeparator2
             // 
             tsSeparator2.Name = "tsSeparator2";
-            tsSeparator2.Size = new System.Drawing.Size(169, 6);
+            tsSeparator2.Size = new System.Drawing.Size(177, 6);
             // 
             // playSoundToolStripMenuItem
             // 
             playSoundToolStripMenuItem.Enabled = false;
-            playSoundToolStripMenuItem.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            playSoundToolStripMenuItem.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             playSoundToolStripMenuItem.Name = "playSoundToolStripMenuItem";
-            playSoundToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            playSoundToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             playSoundToolStripMenuItem.Text = "Play";
             playSoundToolStripMenuItem.Click += OnClickPlay;
             // 
@@ -191,7 +177,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             replaceToolStripMenuItem.Enabled = false;
             replaceToolStripMenuItem.Name = "replaceToolStripMenuItem";
-            replaceToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            replaceToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             replaceToolStripMenuItem.Text = "Insert/Replace";
             replaceToolStripMenuItem.Click += OnClickReplace;
             // 
@@ -199,7 +185,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             extractSoundToolStripMenuItem.Enabled = false;
             extractSoundToolStripMenuItem.Name = "extractSoundToolStripMenuItem";
-            extractSoundToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            extractSoundToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             extractSoundToolStripMenuItem.Text = "Extract";
             extractSoundToolStripMenuItem.Click += OnClickExtract;
             // 
@@ -207,71 +193,27 @@ namespace UoFiddler.Controls.UserControls
             // 
             removeSoundToolStripMenuItem.Enabled = false;
             removeSoundToolStripMenuItem.Name = "removeSoundToolStripMenuItem";
-            removeSoundToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            removeSoundToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             removeSoundToolStripMenuItem.Text = "Remove";
             removeSoundToolStripMenuItem.Click += OnClickRemove;
             // 
             // toolStripMenuItem1
             // 
             toolStripMenuItem1.Name = "toolStripMenuItem1";
-            toolStripMenuItem1.Size = new System.Drawing.Size(169, 6);
+            toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
             // 
             // itemSave
             // 
             itemSave.Name = "itemSave";
-            itemSave.Size = new System.Drawing.Size(172, 22);
+            itemSave.Size = new System.Drawing.Size(180, 22);
             itemSave.Text = "Save";
             itemSave.Click += OnClickSave;
-            // 
-            // toolStrip1
-            // 
-            toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripButton2, toolStripDropDownButton1 });
-            toolStrip1.Location = new System.Drawing.Point(0, 0);
-            toolStrip1.Name = "toolStrip1";
-            toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            toolStrip1.Size = new System.Drawing.Size(851, 25);
-            toolStrip1.TabIndex = 2;
-            toolStrip1.Text = "tsSoundsMenu";
-            // 
-            // toolStripButton2
-            // 
-            toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            toolStripButton2.Name = "toolStripButton2";
-            toolStripButton2.Size = new System.Drawing.Size(46, 22);
-            toolStripButton2.Text = "Search";
-            toolStripButton2.Click += SearchClick;
-            // 
-            // toolStripDropDownButton1
-            // 
-            toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { itemExportSoundlist, exportAllSoundsToolStripMenuItem });
-            toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            toolStripDropDownButton1.Size = new System.Drawing.Size(45, 22);
-            toolStripDropDownButton1.Text = "Misc";
-            // 
-            // itemExportSoundlist
-            // 
-            itemExportSoundlist.Name = "itemExportSoundlist";
-            itemExportSoundlist.Size = new System.Drawing.Size(191, 22);
-            itemExportSoundlist.Text = "Export Soundlist (.csv)";
-            itemExportSoundlist.Click += OnClickExportSoundListCsv;
-            // 
-            // exportAllSoundsToolStripMenuItem
-            // 
-            exportAllSoundsToolStripMenuItem.Name = "exportAllSoundsToolStripMenuItem";
-            exportAllSoundsToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
-            exportAllSoundsToolStripMenuItem.Text = "Export All Sounds";
-            exportAllSoundsToolStripMenuItem.Click += ExportAllSoundsToolStripMenuItem_Click;
             // 
             // tableLayoutPanel1
             // 
             tableLayoutPanel1.ColumnCount = 1;
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             tableLayoutPanel1.Controls.Add(statusStripSounds, 0, 2);
-            tableLayoutPanel1.Controls.Add(toolStrip1, 0, 0);
             tableLayoutPanel1.Controls.Add(splitContainer1, 0, 1);
             tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
@@ -329,7 +271,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             splitContainer1.IsSplitterFixed = true;
-            splitContainer1.Location = new System.Drawing.Point(4, 28);
+            splitContainer1.Location = new System.Drawing.Point(4, 3);
             splitContainer1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             splitContainer1.Name = "splitContainer1";
             // 
@@ -340,7 +282,7 @@ namespace UoFiddler.Controls.UserControls
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.Controls.Add(tableLayoutPanel2);
-            splitContainer1.Size = new System.Drawing.Size(843, 645);
+            splitContainer1.Size = new System.Drawing.Size(843, 670);
             splitContainer1.SplitterDistance = 406;
             splitContainer1.SplitterWidth = 5;
             splitContainer1.TabIndex = 3;
@@ -362,7 +304,7 @@ namespace UoFiddler.Controls.UserControls
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 196F));
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            tableLayoutPanel2.Size = new System.Drawing.Size(432, 645);
+            tableLayoutPanel2.Size = new System.Drawing.Size(432, 670);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // groupBox1
@@ -387,8 +329,8 @@ namespace UoFiddler.Controls.UserControls
             tableLayoutPanel3.Controls.Add(exportAllSoundsButton, 0, 1);
             tableLayoutPanel3.Controls.Add(ExportSoundListCsvButton, 0, 0);
             tableLayoutPanel3.Controls.Add(SaveFileButton, 2, 0);
-            tableLayoutPanel3.Controls.Add(SortByNameCheckbox, 1, 0);
             tableLayoutPanel3.Controls.Add(includeSoundIdCheckBox, 1, 1);
+            tableLayoutPanel3.Controls.Add(SortByNameCheckbox, 1, 0);
             tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel3.Location = new System.Drawing.Point(4, 19);
             tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -434,19 +376,6 @@ namespace UoFiddler.Controls.UserControls
             SaveFileButton.UseVisualStyleBackColor = true;
             SaveFileButton.Click += OnClickSave;
             // 
-            // SortByNameCheckbox
-            // 
-            SortByNameCheckbox.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-            SortByNameCheckbox.AutoSize = true;
-            SortByNameCheckbox.Location = new System.Drawing.Point(199, 3);
-            SortByNameCheckbox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            SortByNameCheckbox.Name = "SortByNameCheckbox";
-            SortByNameCheckbox.Size = new System.Drawing.Size(119, 29);
-            SortByNameCheckbox.TabIndex = 2;
-            SortByNameCheckbox.Text = "Sort tree by name";
-            SortByNameCheckbox.UseVisualStyleBackColor = true;
-            SortByNameCheckbox.CheckedChanged += OnChangeSort;
-            // 
             // includeSoundIdCheckBox
             // 
             includeSoundIdCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
@@ -460,11 +389,24 @@ namespace UoFiddler.Controls.UserControls
             includeSoundIdCheckBox.Text = "Export with sound id in file name";
             includeSoundIdCheckBox.UseVisualStyleBackColor = true;
             // 
+            // SortByNameCheckbox
+            // 
+            SortByNameCheckbox.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            SortByNameCheckbox.AutoSize = true;
+            SortByNameCheckbox.Location = new System.Drawing.Point(188, 3);
+            SortByNameCheckbox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            SortByNameCheckbox.Name = "SortByNameCheckbox";
+            SortByNameCheckbox.Size = new System.Drawing.Size(119, 29);
+            SortByNameCheckbox.TabIndex = 2;
+            SortByNameCheckbox.Text = "Sort tree by name";
+            SortByNameCheckbox.UseVisualStyleBackColor = true;
+            SortByNameCheckbox.CheckedChanged += OnChangeSort;
+            // 
             // SelectedSoundGroup
             // 
             SelectedSoundGroup.Controls.Add(tableLayoutPanel4);
             SelectedSoundGroup.Dock = System.Windows.Forms.DockStyle.Fill;
-            SelectedSoundGroup.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            SelectedSoundGroup.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             SelectedSoundGroup.Location = new System.Drawing.Point(4, 222);
             SelectedSoundGroup.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             SelectedSoundGroup.Name = "SelectedSoundGroup";
@@ -538,7 +480,7 @@ namespace UoFiddler.Controls.UserControls
             ExtractSoundButton.Location = new System.Drawing.Point(4, 90);
             ExtractSoundButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             ExtractSoundButton.Name = "ExtractSoundButton";
-            ExtractSoundButton.Size = new System.Drawing.Size(95, 25);
+            ExtractSoundButton.Size = new System.Drawing.Size(95, 29);
             ExtractSoundButton.TabIndex = 3;
             ExtractSoundButton.Text = "Extract";
             ExtractSoundButton.UseVisualStyleBackColor = true;
@@ -550,7 +492,7 @@ namespace UoFiddler.Controls.UserControls
             RemoveSoundButton.Location = new System.Drawing.Point(108, 90);
             RemoveSoundButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             RemoveSoundButton.Name = "RemoveSoundButton";
-            RemoveSoundButton.Size = new System.Drawing.Size(88, 25);
+            RemoveSoundButton.Size = new System.Drawing.Size(88, 29);
             RemoveSoundButton.TabIndex = 4;
             RemoveSoundButton.Text = "Remove";
             RemoveSoundButton.UseVisualStyleBackColor = true;
@@ -560,7 +502,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             groupBox2.Controls.Add(tableLayoutPanel5);
             groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             groupBox2.Location = new System.Drawing.Point(4, 101);
             groupBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             groupBox2.Name = "groupBox2";
@@ -660,7 +602,7 @@ namespace UoFiddler.Controls.UserControls
             groupBox3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             groupBox3.Name = "groupBox3";
             groupBox3.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            groupBox3.Size = new System.Drawing.Size(424, 224);
+            groupBox3.Size = new System.Drawing.Size(424, 249);
             groupBox3.TabIndex = 3;
             groupBox3.TabStop = false;
             groupBox3.Text = "Insert \\ Replace";
@@ -677,17 +619,17 @@ namespace UoFiddler.Controls.UserControls
             tableLayoutPanel6.Controls.Add(IdInsertTextbox, 1, 0);
             tableLayoutPanel6.Controls.Add(WavFileInsertTextbox, 1, 1);
             tableLayoutPanel6.Controls.Add(WavChooseInsertButton, 2, 1);
-            tableLayoutPanel6.Controls.Add(AddInsertReplaceButton, 1, 2);
+            tableLayoutPanel6.Controls.Add(AddInsertReplaceButton, 0, 2);
             tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel6.Location = new System.Drawing.Point(4, 19);
             tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tableLayoutPanel6.Name = "tableLayoutPanel6";
-            tableLayoutPanel6.RowCount = 4;
+            tableLayoutPanel6.RowCount = 3;
             tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
             tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            tableLayoutPanel6.Size = new System.Drawing.Size(416, 202);
+            tableLayoutPanel6.Size = new System.Drawing.Size(416, 227);
             tableLayoutPanel6.TabIndex = 0;
             // 
             // label1
@@ -749,14 +691,21 @@ namespace UoFiddler.Controls.UserControls
             // 
             AddInsertReplaceButton.AutoSize = true;
             tableLayoutPanel6.SetColumnSpan(AddInsertReplaceButton, 2);
-            AddInsertReplaceButton.Location = new System.Drawing.Point(44, 61);
+            AddInsertReplaceButton.Location = new System.Drawing.Point(4, 61);
             AddInsertReplaceButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             AddInsertReplaceButton.Name = "AddInsertReplaceButton";
-            AddInsertReplaceButton.Size = new System.Drawing.Size(91, 29);
+            AddInsertReplaceButton.Size = new System.Drawing.Size(121, 29);
             AddInsertReplaceButton.TabIndex = 7;
             AddInsertReplaceButton.Text = "Add \\ Replace";
             AddInsertReplaceButton.UseVisualStyleBackColor = true;
             AddInsertReplaceButton.Click += AddInsertReplaceButton_Click;
+            // 
+            // stopToolStripMenuItem
+            // 
+            stopToolStripMenuItem.Name = "stopToolStripMenuItem";
+            stopToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            stopToolStripMenuItem.Text = "Stop";
+            stopToolStripMenuItem.Click += OnClickStop;
             // 
             // SoundsControl
             // 
@@ -769,8 +718,6 @@ namespace UoFiddler.Controls.UserControls
             Size = new System.Drawing.Size(851, 699);
             Load += OnLoad;
             cmStripSounds.ResumeLayout(false);
-            toolStrip1.ResumeLayout(false);
-            toolStrip1.PerformLayout();
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
             statusStripSounds.ResumeLayout(false);
@@ -799,7 +746,6 @@ namespace UoFiddler.Controls.UserControls
 
         private System.Windows.Forms.ContextMenuStrip cmStripSounds;
         private System.Windows.Forms.ToolStripMenuItem extractSoundToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem itemExportSoundlist;
         private System.Windows.Forms.ToolStripMenuItem itemSave;
         private System.Windows.Forms.ToolStripMenuItem nameSortToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nextFreeSlotToolStripMenuItem;
@@ -812,15 +758,11 @@ namespace UoFiddler.Controls.UserControls
         private System.Windows.Forms.StatusStrip statusStripSounds;
         private System.Windows.Forms.ToolStripDropDownButton stopButton;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
-        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusSpacer;
         private System.Windows.Forms.TreeView treeView;
         private System.Windows.Forms.ToolStripSeparator tsSeparator1;
         private System.Windows.Forms.ToolStripSeparator tsSeparator2;
-        private System.Windows.Forms.ToolStripMenuItem ToggleRightPanelToolStripMenuItem;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -850,8 +792,8 @@ namespace UoFiddler.Controls.UserControls
         private System.Windows.Forms.Button ExtractSoundButton;
         private System.Windows.Forms.Button RemoveSoundButton;
         private System.Windows.Forms.Button GoPrevResultButton;
-        private System.Windows.Forms.ToolStripMenuItem exportAllSoundsToolStripMenuItem;
         private System.Windows.Forms.Button exportAllSoundsButton;
         private System.Windows.Forms.CheckBox includeSoundIdCheckBox;
+        private System.Windows.Forms.ToolStripMenuItem stopToolStripMenuItem;
     }
 }
