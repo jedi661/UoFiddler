@@ -698,7 +698,19 @@ namespace UoFiddler.Controls.UserControls
             pictureBox1.Image = GetImage();
             LightTileText.Text = _currentImageIndex2.ToString();
         }
-        #endregion
+
+        private void LandTileKeyUp(object sender, KeyEventArgs e)
+        {
+            if (Utils.ConvertStringToInt(LandTileText.Text, out int index, 0, 0x3FFF))
+            {
+                // Display the entered value in the text field
+                LandTileText.Text = index.ToString();
+
+                // Other actions you want to take with the value
+                // ...
+            }
+        }
+        
         private void LandTileKeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode != Keys.Enter)
@@ -792,6 +804,7 @@ namespace UoFiddler.Controls.UserControls
                 _previewForm2?.Close();
             }
         }
+        #endregion
 
         #region Copy Clipbord     
         // Aktuelle

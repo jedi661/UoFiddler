@@ -6,10 +6,10 @@ UOFiddler based on Ultima SDK it's a tool to view and alter almost every UO 2D c
 
 ## Changelog
 Version : 4.11.15 
-- TextureCutter: I have added a texture cutter that trims textures to the respective size of an image, such as 44x44, 64x64, 128x128, and 256x256, all in a sequence of multiple images.
+- TextureCutter: I have added a texture cutter that trims textures to the respective size of an image, such as 33x33, 44x44, 64x64, 128x128, and 256x256, all in a sequence of multiple images.
 - TextureCutter: Added that it is allowed to crop only smaller than 5x5 by enabling the checkbox, but it is at your own risk as it can easily create over 1000+ images from a single image.
 - TextureCutter: has added a new feature to create tiles for LandTiles from textures. It also includes a resolution function to enhance graphics, a sharp function, color enhancement, white balance, and a save button.
-- Tiledata: The idea Taken over with the search directly from #XG2, The design here was set to graphics. (The old search forms have been kept and not removed.)
+- Tiledata: The idea Taken over with the search directly from AsYlum, The design here was set to graphics. (The old search forms have been kept and not removed.)
 - Soundmultab Great job on incorporating the Sound tab from version 4.10.8 
 - Removed color definition from the "draw default" for background tabs.
 
