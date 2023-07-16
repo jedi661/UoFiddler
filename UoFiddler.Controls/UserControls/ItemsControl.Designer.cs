@@ -98,6 +98,7 @@ namespace UoFiddler.Controls.UserControls
             asPngToolStripMenuItem = new ToolStripMenuItem();
             colorDialog = new ColorDialog();
             collapsibleSplitter1 = new CollapsibleSplitter();
+            toolStripButton1 = new ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)splitContainer2).BeginInit();
             splitContainer2.Panel1.SuspendLayout();
             splitContainer2.Panel2.SuspendLayout();
@@ -469,7 +470,7 @@ namespace UoFiddler.Controls.UserControls
             // ToolStrip
             // 
             ToolStrip.GripStyle = ToolStripGripStyle.Hidden;
-            ToolStrip.Items.AddRange(new ToolStripItem[] { toolStripLabel1, searchByIdToolStripTextBox, toolStripLabel2, searchByNameToolStripTextBox, searchByNameToolStripButton, SearchToolStripButton, ProgressBar, PreloadItemsToolStripButton, MiscToolStripDropDownButton });
+            ToolStrip.Items.AddRange(new ToolStripItem[] { toolStripLabel1, searchByIdToolStripTextBox, toolStripLabel2, searchByNameToolStripTextBox, searchByNameToolStripButton, SearchToolStripButton, ProgressBar, PreloadItemsToolStripButton, MiscToolStripDropDownButton, toolStripButton1 });
             ToolStrip.Location = new System.Drawing.Point(0, 0);
             ToolStrip.Name = "ToolStrip";
             ToolStrip.RenderMode = ToolStripRenderMode.System;
@@ -595,6 +596,17 @@ namespace UoFiddler.Controls.UserControls
             collapsibleSplitter1.UseAnimations = false;
             collapsibleSplitter1.VisualStyle = VisualStyles.DoubleDots;
             // 
+            // toolStripButton1
+            // 
+            toolStripButton1.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            toolStripButton1.Image = Properties.Resources.Save2;
+            toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            toolStripButton1.Name = "toolStripButton1";
+            toolStripButton1.Size = new System.Drawing.Size(23, 25);
+            toolStripButton1.Text = "toolStripButtonSave";
+            toolStripButton1.ToolTipText = "Save Items.mul file";
+            toolStripButton1.Click += OnClickSave;
+            // 
             // ItemsControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -685,5 +697,6 @@ namespace UoFiddler.Controls.UserControls
         private ToolStripLabel toolStripLabel2;
         private ToolStripTextBox searchByNameToolStripTextBox;
         private ToolStripButton searchByNameToolStripButton;
+        private ToolStripButton toolStripButton1;
     }
 }

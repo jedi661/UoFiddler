@@ -40,6 +40,7 @@ namespace UoFiddler.Plugin.UopPacker.UserControls
         private void InputMulSelect(object sender, EventArgs e)
         {
             FileDialog.FilterIndex = 1;
+            FileDialog.FileName = "art.mul";
 
             if (FileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -49,8 +50,8 @@ namespace UoFiddler.Plugin.UopPacker.UserControls
 
         private void InputIdxSelect(object sender, EventArgs e)
         {
-            FileDialog.FilterIndex = 3;
-
+            FileDialog.FilterIndex = 3;            
+            FileDialog.FileName = "artidx.mul";
             if (FileDialog.ShowDialog() == DialogResult.OK)
             {
                 inidx.Text = FileDialog.FileName;
@@ -60,6 +61,7 @@ namespace UoFiddler.Plugin.UopPacker.UserControls
         private void OutputUopSelect(object sender, EventArgs e)
         {
             FileDialog.FilterIndex = 2;
+            FileDialog.FileName = "artLegacyMUL.uop";
 
             if (FileDialog.ShowDialog() == DialogResult.OK)
             {
