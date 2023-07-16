@@ -12,7 +12,7 @@ Version : 4.11.15
 - Tiledata: The idea Taken over with the search directly from AsYlum, The design here was set to graphics. (The old search forms have been kept and not removed.)
 - Soundmultab Great job on incorporating the Sound tab from version 4.10.8 
 - Removed color definition from the "draw default" for background tabs.
-
+- Adjusted the default name of the Arts.mul file in the UOPPackerControl to include it in the "convert to mul" process and in the creation of the "artLegacyMUL.uop" file.
 
 Version : 4.11.14 
 -  LandTiles has received another function, which allows importing using the keyboard shortcut Ctrl+V and to copy using Ctrl+X.
