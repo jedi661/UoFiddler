@@ -63,6 +63,9 @@ namespace UoFiddler.Controls.UserControls
                 selectedMultiName = TreeViewMulti.SelectedNode.Text;
             }
 
+            // Event Handler für das KeyUp-Ereignis der ToolStripTextBoxSearch
+            ToolStripTextBoxSearch.KeyUp += ToolStripTextBoxSearch_KeyUp;
+
 
         }
 
@@ -1134,6 +1137,42 @@ namespace UoFiddler.Controls.UserControls
 
             MessageBox.Show("There is no image available to copy to the clipboard.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
+        }
+        #endregion
+
+        #region New Search KeyUp event of ToolStripTextBoxSearch.
+        // Event handler for the KeyUp event of ToolStripTextBoxSearch.
+        private void ToolStripTextBoxSearch_KeyUp(object sender, KeyEventArgs e)
+        {
+            // Retrieve text from the search and attempt to convert it into an ID.
+            if (int.TryParse(ToolStripTextBoxSearch.Text, out int searchId))
+            {
+                // Search for the ID in the TreeViewMulti.
+                TreeNode node = FindNodeById(TreeViewMulti.Nodes, searchId);
+                if (node != null)
+                {
+                    // Select and make the found node visible in the TreeViewMulti.
+                    TreeViewMulti.SelectedNode = node;
+                    node.EnsureVisible();
+                }
+            }
+        }
+        private TreeNode FindNodeById(TreeNodeCollection nodes, int searchId)
+        {
+            foreach (TreeNode node in nodes)
+            {
+                if (int.TryParse(node.Name, out int nodeId) && nodeId == searchId)
+                    return node;
+
+                if (node.Nodes.Count > 0)
+                {
+                    TreeNode foundNode = FindNodeById(node.Nodes, searchId);
+                    if (foundNode != null)
+                        return foundNode;
+                }
+            }
+
+            return null;
         }
         #endregion
     }

@@ -7,6 +7,7 @@ UOFiddler based on Ultima SDK it's a tool to view and alter almost every UO 2D c
 ## Changelog
 Version : 4.11.16
 - Design and graphics adjusted for the methods.
+- The Multi has been equipped with an index search feature.
 
 Version : 4.11.15 
 - TextureCutter: I have added a texture cutter that trims textures to the respective size of an image, such as 33x33, 44x44, 64x64, 128x128, and 256x256, all in a sequence of multiple images.
