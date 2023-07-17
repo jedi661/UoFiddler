@@ -157,14 +157,14 @@ namespace UoFiddler.Controls.UserControls
             // 
             contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuItem4, importToolStripMenuItem, exportToolStripMenuItem, removeToolStripMenuItem, editToolStripMenuItem, reloadToolStripMenuItem, saveToolStripMenuItem });
             contextMenuStrip2.Name = "contextMenuStrip1";
-            contextMenuStrip2.Size = new System.Drawing.Size(157, 158);
+            contextMenuStrip2.Size = new System.Drawing.Size(181, 180);
             // 
             // toolStripMenuItem4
             // 
             toolStripMenuItem4.CheckOnClick = true;
             toolStripMenuItem4.Image = Properties.Resources.Search;
             toolStripMenuItem4.Name = "toolStripMenuItem4";
-            toolStripMenuItem4.Size = new System.Drawing.Size(156, 22);
+            toolStripMenuItem4.Size = new System.Drawing.Size(180, 22);
             toolStripMenuItem4.Text = "Show Free Slots";
             toolStripMenuItem4.Click += OnClickFreeSlots;
             // 
@@ -172,7 +172,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             importToolStripMenuItem.Image = Properties.Resources.import;
             importToolStripMenuItem.Name = "importToolStripMenuItem";
-            importToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            importToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             importToolStripMenuItem.Text = "Import..";
             importToolStripMenuItem.Click += OnClickImport;
             // 
@@ -181,7 +181,7 @@ namespace UoFiddler.Controls.UserControls
             exportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toTextfileToolStripMenuItem, toUOAToolStripMenuItem, toWscToolStripMenuItem, toCsvToolStripMenuItem, toUOX3ToolStripMenuItem });
             exportToolStripMenuItem.Image = Properties.Resources.Export;
             exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            exportToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            exportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             exportToolStripMenuItem.Text = "Export..";
             // 
             // toTextfileToolStripMenuItem
@@ -223,7 +223,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             removeToolStripMenuItem.Image = Properties.Resources.Remove;
             removeToolStripMenuItem.Name = "removeToolStripMenuItem";
-            removeToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            removeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             removeToolStripMenuItem.Text = "Remove";
             removeToolStripMenuItem.Click += OnClickRemove;
             // 
@@ -231,7 +231,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             editToolStripMenuItem.Image = Properties.Resources.Text;
             editToolStripMenuItem.Name = "editToolStripMenuItem";
-            editToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            editToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             editToolStripMenuItem.Text = "Edit";
             editToolStripMenuItem.Click += editToolStripMenuItem_Click;
             // 
@@ -239,7 +239,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             reloadToolStripMenuItem.Image = Properties.Resources.reload;
             reloadToolStripMenuItem.Name = "reloadToolStripMenuItem";
-            reloadToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            reloadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             reloadToolStripMenuItem.Text = "Reload";
             reloadToolStripMenuItem.Click += reloadToolStripMenuItem_Click;
             // 
@@ -247,7 +247,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             saveToolStripMenuItem.Image = Properties.Resources.Save2;
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            saveToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             saveToolStripMenuItem.Text = "Save";
             saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
             // 
