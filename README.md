@@ -5,6 +5,9 @@
 UOFiddler based on Ultima SDK it's a tool to view and alter almost every UO 2D client file. Source code is released under the Beerware license.
 
 ## Changelog
+Version : 4.11.16
+- Design and graphics adjusted for the methods.
+
 Version : 4.11.15 
 - TextureCutter: I have added a texture cutter that trims textures to the respective size of an image, such as 33x33, 44x44, 64x64, 128x128, and 256x256, all in a sequence of multiple images.
 - TextureCutter: Added that it is allowed to crop only smaller than 5x5 by enabling the checkbox, but it is at your own risk as it can easily create over 1000+ images from a single image.

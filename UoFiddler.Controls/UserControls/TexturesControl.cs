@@ -335,7 +335,7 @@ namespace UoFiddler.Controls.UserControls
                 return;
             }
 
-            contextMenuStrip1.Close();
+            contextMenuStrip.Close();
 
             using (OpenFileDialog dialog = new OpenFileDialog())
             {
@@ -594,7 +594,7 @@ namespace UoFiddler.Controls.UserControls
                 return;
             }
 
-            contextMenuStrip1.Close();
+            contextMenuStrip.Close();
 
             using (OpenFileDialog dialog = new OpenFileDialog())
             {
@@ -1058,6 +1058,32 @@ namespace UoFiddler.Controls.UserControls
 
             // Update the view
             TextureTileView.Invalidate();
+        }
+        #endregion
+
+        #region Search New
+        private void SearchByIdToolStripTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (!Utils.ConvertStringToInt(searchByIdToolStripTextBox.Text, out int indexValue))
+            {
+                return;
+            }
+
+            var maximumIndex = Textures.GetIdxLength();
+
+            if (indexValue < 0)
+            {
+                indexValue = 0;
+            }
+
+            if (indexValue > maximumIndex)
+            {
+                indexValue = maximumIndex;
+            }
+
+            // we have to invalidate focus so it will scroll to item
+            TextureTileView.FocusIndex = -1;
+            SelectedTextureId = indexValue;
         }
         #endregion
     }

@@ -40,7 +40,7 @@ namespace UoFiddler.Controls.UserControls
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
+            contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(components);
             showFreeSlotsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             exportImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -62,29 +62,38 @@ namespace UoFiddler.Controls.UserControls
             importByTempToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             um90GradToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            toolStrip1 = new System.Windows.Forms.ToolStrip();
-            GraphicLabel = new System.Windows.Forms.ToolStripLabel();
+            toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStrip = new System.Windows.Forms.ToolStrip();
+            toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            SaveButton = new System.Windows.Forms.ToolStripButton();
+            toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            IndexToolStripLabel = new System.Windows.Forms.ToolStripLabel();
+            searchByIdToolStripTextBox = new System.Windows.Forms.ToolStripTextBox();
+            SearchButton = new System.Windows.Forms.ToolStripButton();
+            toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             MiscToolStripDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
             exportAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ExportAllAsBmp = new System.Windows.Forms.ToolStripMenuItem();
             ExportAllAsTiff = new System.Windows.Forms.ToolStripMenuItem();
             ExportAllAsJpeg = new System.Windows.Forms.ToolStripMenuItem();
             ExportAllAsPng = new System.Windows.Forms.ToolStripMenuItem();
-            toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            SearchButton = new System.Windows.Forms.ToolStripButton();
-            toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            SaveButton = new System.Windows.Forms.ToolStripButton();
-            toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             TextureTileView = new TileView.TileViewControl();
-            contextMenuStrip1.SuspendLayout();
-            toolStrip1.SuspendLayout();
+            panel1 = new System.Windows.Forms.Panel();
+            statusStrip = new System.Windows.Forms.StatusStrip();
+            GraphicLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            contextMenuStrip.SuspendLayout();
+            toolStrip.SuspendLayout();
+            panel1.SuspendLayout();
+            statusStrip.SuspendLayout();
             SuspendLayout();
             // 
-            // contextMenuStrip1
+            // contextMenuStrip
             // 
-            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { showFreeSlotsToolStripMenuItem, toolStripSeparator5, exportImageToolStripMenuItem, toolStripSeparator2, findNextFreeSlotToolStripMenuItem, removeToolStripMenuItem, replaceToolStripMenuItem, replaceStartingFromToolStripMenuItem, insertAtToolStripMenuItem, toolStripSeparator6, copyToolStripMenuItem, importFromClipboardToolStripMenuItem, importByTempToolStripMenuItem, toolStripSeparator7, um90GradToolStripMenuItem });
-            contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new System.Drawing.Size(194, 292);
+            contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { showFreeSlotsToolStripMenuItem, toolStripSeparator5, exportImageToolStripMenuItem, toolStripSeparator2, findNextFreeSlotToolStripMenuItem, removeToolStripMenuItem, replaceToolStripMenuItem, replaceStartingFromToolStripMenuItem, insertAtToolStripMenuItem, toolStripSeparator6, copyToolStripMenuItem, importFromClipboardToolStripMenuItem, importByTempToolStripMenuItem, toolStripSeparator7, um90GradToolStripMenuItem, toolStripSeparator9, saveToolStripMenuItem });
+            contextMenuStrip.Name = "contextMenuStrip1";
+            contextMenuStrip.Size = new System.Drawing.Size(194, 298);
             // 
             // showFreeSlotsToolStripMenuItem
             // 
@@ -111,28 +120,28 @@ namespace UoFiddler.Controls.UserControls
             // asBmpToolStripMenuItem
             // 
             asBmpToolStripMenuItem.Name = "asBmpToolStripMenuItem";
-            asBmpToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            asBmpToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             asBmpToolStripMenuItem.Text = "As Bmp";
             asBmpToolStripMenuItem.Click += OnClickExportBmp;
             // 
             // asTiffToolStripMenuItem
             // 
             asTiffToolStripMenuItem.Name = "asTiffToolStripMenuItem";
-            asTiffToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            asTiffToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             asTiffToolStripMenuItem.Text = "As Tiff";
             asTiffToolStripMenuItem.Click += OnClickExportTiff;
             // 
             // asJpgToolStripMenuItem
             // 
             asJpgToolStripMenuItem.Name = "asJpgToolStripMenuItem";
-            asJpgToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            asJpgToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             asJpgToolStripMenuItem.Text = "As Jpg";
             asJpgToolStripMenuItem.Click += OnClickExportJpg;
             // 
             // asPngToolStripMenuItem
             // 
             asPngToolStripMenuItem.Name = "asPngToolStripMenuItem";
-            asPngToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            asPngToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             asPngToolStripMenuItem.Text = "As Png";
             asPngToolStripMenuItem.Click += OnClickExportPng;
             // 
@@ -240,27 +249,93 @@ namespace UoFiddler.Controls.UserControls
             um90GradToolStripMenuItem.ToolTipText = "Rotate by 90 degrees.";
             um90GradToolStripMenuItem.Click += um90GradToolStripMenuItem_Click;
             // 
-            // toolStrip1
+            // toolStripSeparator9
             // 
-            toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { GraphicLabel, MiscToolStripDropDownButton, toolStripSeparator3, SearchButton, toolStripSeparator4, SaveButton, toolStripSeparator1 });
-            toolStrip1.Location = new System.Drawing.Point(0, 0);
-            toolStrip1.Name = "toolStrip1";
-            toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            toolStrip1.Size = new System.Drawing.Size(733, 25);
-            toolStrip1.TabIndex = 4;
-            toolStrip1.Text = "toolStrip1";
+            toolStripSeparator9.Name = "toolStripSeparator9";
+            toolStripSeparator9.Size = new System.Drawing.Size(190, 6);
             // 
-            // GraphicLabel
+            // saveToolStripMenuItem
             // 
-            GraphicLabel.Name = "GraphicLabel";
-            GraphicLabel.Size = new System.Drawing.Size(51, 22);
-            GraphicLabel.Text = "Graphic:";
-            GraphicLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            saveToolStripMenuItem.Image = Properties.Resources.Save2;
+            saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            saveToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            saveToolStripMenuItem.Text = "Save";
+            saveToolStripMenuItem.ToolTipText = "Save Texture.Mul";
+            saveToolStripMenuItem.Click += OnClickSave;
+            // 
+            // toolStrip
+            // 
+            toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripSeparator3, toolStripSeparator4, SaveButton, toolStripSeparator1, IndexToolStripLabel, searchByIdToolStripTextBox, SearchButton, toolStripSeparator8, MiscToolStripDropDownButton });
+            toolStrip.Location = new System.Drawing.Point(0, 0);
+            toolStrip.Name = "toolStrip";
+            toolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            toolStrip.Size = new System.Drawing.Size(733, 25);
+            toolStrip.TabIndex = 4;
+            toolStrip.Text = "toolStrip1";
+            // 
+            // toolStripSeparator3
+            // 
+            toolStripSeparator3.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            toolStripSeparator3.Name = "toolStripSeparator3";
+            toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripSeparator4
+            // 
+            toolStripSeparator4.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            toolStripSeparator4.Name = "toolStripSeparator4";
+            toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            // 
+            // SaveButton
+            // 
+            SaveButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            SaveButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            SaveButton.Image = Properties.Resources.Save2;
+            SaveButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            SaveButton.Name = "SaveButton";
+            SaveButton.Size = new System.Drawing.Size(23, 22);
+            SaveButton.Text = "Save";
+            SaveButton.ToolTipText = "Save Texture.mul";
+            SaveButton.Click += OnClickSave;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // IndexToolStripLabel
+            // 
+            IndexToolStripLabel.Name = "IndexToolStripLabel";
+            IndexToolStripLabel.Size = new System.Drawing.Size(39, 22);
+            IndexToolStripLabel.Text = "Index:";
+            // 
+            // searchByIdToolStripTextBox
+            // 
+            searchByIdToolStripTextBox.Name = "searchByIdToolStripTextBox";
+            searchByIdToolStripTextBox.Size = new System.Drawing.Size(100, 25);
+            searchByIdToolStripTextBox.ToolTipText = "Search";
+            searchByIdToolStripTextBox.KeyUp += SearchByIdToolStripTextBox_KeyUp;
+            // 
+            // SearchButton
+            // 
+            SearchButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            SearchButton.Image = Properties.Resources.Search;
+            SearchButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            SearchButton.Name = "SearchButton";
+            SearchButton.Size = new System.Drawing.Size(23, 22);
+            SearchButton.Text = "Search";
+            SearchButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            SearchButton.ToolTipText = "Old Search";
+            SearchButton.Click += OnClickSearch;
+            // 
+            // toolStripSeparator8
+            // 
+            toolStripSeparator8.Name = "toolStripSeparator8";
+            toolStripSeparator8.Size = new System.Drawing.Size(6, 25);
             // 
             // MiscToolStripDropDownButton
             // 
-            MiscToolStripDropDownButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             MiscToolStripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             MiscToolStripDropDownButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { exportAllToolStripMenuItem });
             MiscToolStripDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -304,53 +379,14 @@ namespace UoFiddler.Controls.UserControls
             ExportAllAsPng.Text = "As Png";
             ExportAllAsPng.Click += ExportAllAsPng_Click;
             // 
-            // toolStripSeparator3
-            // 
-            toolStripSeparator3.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            toolStripSeparator3.Name = "toolStripSeparator3";
-            toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
-            // 
-            // SearchButton
-            // 
-            SearchButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            SearchButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            SearchButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            SearchButton.Name = "SearchButton";
-            SearchButton.Size = new System.Drawing.Size(46, 22);
-            SearchButton.Text = "Search";
-            SearchButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            SearchButton.Click += OnClickSearch;
-            // 
-            // toolStripSeparator4
-            // 
-            toolStripSeparator4.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            toolStripSeparator4.Name = "toolStripSeparator4";
-            toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
-            // 
-            // SaveButton
-            // 
-            SaveButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            SaveButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            SaveButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            SaveButton.Name = "SaveButton";
-            SaveButton.Size = new System.Drawing.Size(35, 22);
-            SaveButton.Text = "Save";
-            SaveButton.Click += OnClickSave;
-            // 
-            // toolStripSeparator1
-            // 
-            toolStripSeparator1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
             // TextureTileView
             // 
             TextureTileView.AutoScroll = true;
             TextureTileView.AutoScrollMinSize = new System.Drawing.Size(0, 134);
-            TextureTileView.ContextMenuStrip = contextMenuStrip1;
+            TextureTileView.ContextMenuStrip = contextMenuStrip;
             TextureTileView.Dock = System.Windows.Forms.DockStyle.Fill;
             TextureTileView.FocusIndex = -1;
-            TextureTileView.Location = new System.Drawing.Point(0, 25);
+            TextureTileView.Location = new System.Drawing.Point(0, 0);
             TextureTileView.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             TextureTileView.MultiSelect = false;
             TextureTileView.Name = "TextureTileView";
@@ -369,20 +405,49 @@ namespace UoFiddler.Controls.UserControls
             TextureTileView.DrawItem += TextureTileView_DrawItem;
             TextureTileView.KeyDown += TexturesControl_KeyDown;
             // 
+            // panel1
+            // 
+            panel1.Controls.Add(statusStrip);
+            panel1.Controls.Add(TextureTileView);
+            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel1.Location = new System.Drawing.Point(0, 25);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(733, 356);
+            panel1.TabIndex = 1;
+            // 
+            // statusStrip
+            // 
+            statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { GraphicLabel });
+            statusStrip.Location = new System.Drawing.Point(0, 334);
+            statusStrip.Name = "statusStrip";
+            statusStrip.Size = new System.Drawing.Size(733, 22);
+            statusStrip.TabIndex = 6;
+            statusStrip.Text = "statusStrip1";
+            // 
+            // GraphicLabel
+            // 
+            GraphicLabel.Name = "GraphicLabel";
+            GraphicLabel.Size = new System.Drawing.Size(51, 17);
+            GraphicLabel.Text = "Graphic:";
+            // 
             // TexturesControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            Controls.Add(TextureTileView);
-            Controls.Add(toolStrip1);
+            Controls.Add(panel1);
+            Controls.Add(toolStrip);
             DoubleBuffered = true;
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Name = "TexturesControl";
             Size = new System.Drawing.Size(733, 381);
             Load += OnLoad;
-            contextMenuStrip1.ResumeLayout(false);
-            toolStrip1.ResumeLayout(false);
-            toolStrip1.PerformLayout();
+            contextMenuStrip.ResumeLayout(false);
+            toolStrip.ResumeLayout(false);
+            toolStrip.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            statusStrip.ResumeLayout(false);
+            statusStrip.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -393,17 +458,16 @@ namespace UoFiddler.Controls.UserControls
         private System.Windows.Forms.ToolStripMenuItem asJpgToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem asPngToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem asTiffToolStripMenuItem;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem exportImageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem findNextFreeSlotToolStripMenuItem;
-        private System.Windows.Forms.ToolStripLabel GraphicLabel;
         private System.Windows.Forms.ToolStripMenuItem insertAtToolStripMenuItem;
         private System.Windows.Forms.ToolStripTextBox InsertText;
         private System.Windows.Forms.ToolStripMenuItem removeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem replaceToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton SaveButton;
         private System.Windows.Forms.ToolStripButton SearchButton;
-        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStrip toolStrip;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
@@ -425,5 +489,13 @@ namespace UoFiddler.Controls.UserControls
         private System.Windows.Forms.ToolStripMenuItem importByTempToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem um90GradToolStripMenuItem;
+        private System.Windows.Forms.ToolStripLabel IndexToolStripLabel;
+        private System.Windows.Forms.ToolStripTextBox searchByIdToolStripTextBox;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.StatusStrip statusStrip;
+        private System.Windows.Forms.ToolStripStatusLabel GraphicLabel;
     }
 }
