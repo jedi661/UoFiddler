@@ -68,6 +68,34 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 labelImageSize.Text = $"Image size: {imageSize.Width} x {imageSize.Height} Pixel";
             }
         }
+
+        /*private void buttonLoadImage_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.Filter = "image files|*.bmp;*.png;*.jpeg;*.jpg;*.tiff;*.gif|All files|*.*";
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string selectedImagePath = openFileDialog1.FileName;
+
+                // Dispose the current image if it exists
+                if (pictureBox1.Image != null)
+                {
+                    pictureBox1.Image.Dispose();
+                }
+
+                // Load the new image into the pictureBox1
+                pictureBox1.Image = Image.FromFile(selectedImagePath);
+
+                // Resetting the scroll position.
+                panel1.AutoScrollPosition = new Point(0, 0);
+
+                // Displaying the image size in the label.
+                Size imageSize = pictureBox1.Image.Size;
+                labelImageSize.Text = $"Image size: {imageSize.Width} x {imageSize.Height} Pixel";
+            }
+        }*/
+
         private void buttonTextureCutter_Click(object sender, EventArgs e)
         {
             // Check if an image has been loaded into the picture box
@@ -406,7 +434,11 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             string fileName = $"TextureSingleImage_{timestamp}.bmp";
 
             // Create the full path to the file in the "tempGraphic" directory.
+            /*string directory = Path.Combine(Application.StartupPath, "tempGrafic");
+            string filePath = Path.Combine(directory, fileName);*/
+
             string directory = Path.Combine(Application.StartupPath, "tempGrafic");
+            Directory.CreateDirectory(directory);
             string filePath = Path.Combine(directory, fileName);
 
             // Save the image to the specified path
@@ -414,9 +446,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
 
             MessageBox.Show("The graphic was saved successfully.");
         }
-
-
-
         private Bitmap ResizeImageWithFixedBorder(Bitmap image, int borderWidth)
         {
             // Calculate the new width and height of the inner part of the image
@@ -493,7 +522,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // Returns null if the control is not found
             return null;
         }
-
 
         private void buttonResize_Click(object sender, EventArgs e)
         {
@@ -685,7 +713,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                     bitmap.SetPixel(x, y, Color.FromArgb(newRed, newGreen, newBlue));
                 }
             }
-        }       
+        }
 
         private void button45Degrees_Click(object sender, EventArgs e)
         {
@@ -722,9 +750,15 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // Display the new image in the PictureBox
             pictureBox1.Image = newBackground;
 
-            // Update display
+            // Free the previous image (optional to free up memory)
+            resizedImage.Dispose();
+
+            // Reset the resized image as a new image has now been loaded
+            resizedImage = null;
+
+            // Refresh the display
             Size imageSize = newBackground.Size;
-            labelImageSize.Text = $"Image Size {imageSize.Width} x {imageSize.Height} Pixel";
+            labelImageSize.Text = $"image size: {imageSize.Width} x {imageSize.Height} Pixel";
         }
 
         private Image RotateImageByAngle(Image image, float angle)
