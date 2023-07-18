@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<AssemblyName>MassImport</AssemblyName>
-		<TargetFramework>net8.0-windows8.0</TargetFramework>
+		<TargetFramework>net8.0-windows10.0.22621</TargetFramework>
 		<UseWindowsForms>true</UseWindowsForms>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<AssemblyTitle>MassImportPlugin</AssemblyTitle>
