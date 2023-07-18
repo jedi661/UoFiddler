@@ -68,34 +68,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 labelImageSize.Text = $"Image size: {imageSize.Width} x {imageSize.Height} Pixel";
             }
         }
-
-        /*private void buttonLoadImage_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.Filter = "image files|*.bmp;*.png;*.jpeg;*.jpg;*.tiff;*.gif|All files|*.*";
-
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                string selectedImagePath = openFileDialog1.FileName;
-
-                // Dispose the current image if it exists
-                if (pictureBox1.Image != null)
-                {
-                    pictureBox1.Image.Dispose();
-                }
-
-                // Load the new image into the pictureBox1
-                pictureBox1.Image = Image.FromFile(selectedImagePath);
-
-                // Resetting the scroll position.
-                panel1.AutoScrollPosition = new Point(0, 0);
-
-                // Displaying the image size in the label.
-                Size imageSize = pictureBox1.Image.Size;
-                labelImageSize.Text = $"Image size: {imageSize.Width} x {imageSize.Height} Pixel";
-            }
-        }*/
-
         private void buttonTextureCutter_Click(object sender, EventArgs e)
         {
             // Check if an image has been loaded into the picture box
