@@ -8,6 +8,7 @@ UOFiddler based on Ultima SDK it's a tool to view and alter almost every UO 2D c
 Version : 4.11.16
 - Design and graphics adjusted for the methods.
 - The Multi has been equipped with an index search feature.
+- Downgarde net7, texturecutter image reloaded
 
 Version : 4.11.15 
 - TextureCutter: I have added a texture cutter that trims textures to the respective size of an image, such as 33x33, 44x44, 64x64, 128x128, and 256x256, all in a sequence of multiple images.
@@ -251,8 +252,9 @@ Version : 4.8
 
 Starting from version 4.10.0:
 
-- Requires .NET Desktop Runtime 8.0.x (or SDK) installed to run the application.
+- Requires .NET Desktop Runtime 7.0.x (or SDK) installed to run the application.
 - You can download .NET 8.0 at: <https://dotnet.microsoft.com/en-us/download/dotnet/8.0>
+- You can download .NET 8.0 at: <https://dotnet.microsoft.com/en-us/download/dotnet/7.0>
 - Minimum supported Windows version is Windows 10.
 
 Older versions, 4.9.28 and lower use .Net Framework 4.8

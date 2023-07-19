@@ -1,6 +1,7 @@
 Version : 4.11.16 #XG1
 - Design and graphics adjusted for the methods.
 - The Multi has been equipped with an index search feature.
+- Downgarde net7 (Net 8.0 has been tested so far, it works on Win10 and Win11 for me, but some are having issues with the animation, so I downgraded it for testing purposes.), texturecutter image reloaded.
 
 Version : 4.11.15 #XG1
 - TextureCutter: I have added a texture cutter that trims textures to the respective size of an image, such as 44x44, 64x64, 128x128, and 256x256, all in a sequence of multiple images.

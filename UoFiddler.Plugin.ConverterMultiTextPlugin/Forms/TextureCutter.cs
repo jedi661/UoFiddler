@@ -405,10 +405,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             string timestamp = DateTime.Now.ToString("yyyyMMddHHmmss");
             string fileName = $"TextureSingleImage_{timestamp}.bmp";
 
-            // Create the full path to the file in the "tempGraphic" directory.
-            /*string directory = Path.Combine(Application.StartupPath, "tempGrafic");
-            string filePath = Path.Combine(directory, fileName);*/
-
             string directory = Path.Combine(Application.StartupPath, "tempGrafic");
             Directory.CreateDirectory(directory);
             string filePath = Path.Combine(directory, fileName);
