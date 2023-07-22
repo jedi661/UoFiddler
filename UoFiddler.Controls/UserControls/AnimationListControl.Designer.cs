@@ -73,19 +73,19 @@ namespace UoFiddler.Controls.UserControls
             copyFrameToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             importImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
-            GraphicLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            BaseGraphicLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            HueLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            toolStripStatusAminLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            SettingsButton = new System.Windows.Forms.ToolStripDropDownButton();
             sortAlphaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             hueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             animateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             rewriteXmlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            rewriteXml2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             tryToFindNewGraphicsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             animationEditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            SettingsButton = new System.Windows.Forms.ToolStripDropDownButton();
-            rewriteXml2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            GraphicLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            BaseGraphicLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            HueLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusAminLabel = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -157,7 +157,7 @@ namespace UoFiddler.Controls.UserControls
             FacingBar.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
             FacingBar.AutoSize = false;
             FacingBar.LargeChange = 1;
-            FacingBar.Location = new System.Drawing.Point(376, 363);
+            FacingBar.Location = new System.Drawing.Point(375, 363);
             FacingBar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             FacingBar.Maximum = 7;
             FacingBar.Name = "FacingBar";
@@ -423,6 +423,76 @@ namespace UoFiddler.Controls.UserControls
             statusStrip1.TabIndex = 0;
             statusStrip1.Text = "statusStrip1";
             // 
+            // SettingsButton
+            // 
+            SettingsButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            SettingsButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { sortAlphaToolStripMenuItem, hueToolStripMenuItem, animateToolStripMenuItem, toolStripSeparator1, rewriteXmlToolStripMenuItem, rewriteXml2ToolStripMenuItem, tryToFindNewGraphicsToolStripMenuItem, animationEditToolStripMenuItem });
+            SettingsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            SettingsButton.Name = "SettingsButton";
+            SettingsButton.Size = new System.Drawing.Size(62, 20);
+            SettingsButton.Text = "Settings";
+            // 
+            // sortAlphaToolStripMenuItem
+            // 
+            sortAlphaToolStripMenuItem.CheckOnClick = true;
+            sortAlphaToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            sortAlphaToolStripMenuItem.Name = "sortAlphaToolStripMenuItem";
+            sortAlphaToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            sortAlphaToolStripMenuItem.Text = "Sort alphabetically";
+            sortAlphaToolStripMenuItem.Click += OnClick_Sort;
+            // 
+            // hueToolStripMenuItem
+            // 
+            hueToolStripMenuItem.Image = Properties.Resources.Color;
+            hueToolStripMenuItem.Name = "hueToolStripMenuItem";
+            hueToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            hueToolStripMenuItem.Text = "Hue";
+            hueToolStripMenuItem.Click += OnClick_Hue;
+            // 
+            // animateToolStripMenuItem
+            // 
+            animateToolStripMenuItem.CheckOnClick = true;
+            animateToolStripMenuItem.Name = "animateToolStripMenuItem";
+            animateToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            animateToolStripMenuItem.Text = "Animate";
+            animateToolStripMenuItem.Click += Animate_Click;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new System.Drawing.Size(198, 6);
+            // 
+            // rewriteXmlToolStripMenuItem
+            // 
+            rewriteXmlToolStripMenuItem.Image = Properties.Resources.rewrite;
+            rewriteXmlToolStripMenuItem.Name = "rewriteXmlToolStripMenuItem";
+            rewriteXmlToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            rewriteXmlToolStripMenuItem.Text = "Rewrite xml";
+            rewriteXmlToolStripMenuItem.Click += RewriteXml;
+            // 
+            // rewriteXml2ToolStripMenuItem
+            // 
+            rewriteXml2ToolStripMenuItem.Image = Properties.Resources.rewrite;
+            rewriteXml2ToolStripMenuItem.Name = "rewriteXml2ToolStripMenuItem";
+            rewriteXml2ToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            rewriteXml2ToolStripMenuItem.Text = "Rewrite xml2";
+            rewriteXml2ToolStripMenuItem.Click += RewriteXml2;
+            // 
+            // tryToFindNewGraphicsToolStripMenuItem
+            // 
+            tryToFindNewGraphicsToolStripMenuItem.Name = "tryToFindNewGraphicsToolStripMenuItem";
+            tryToFindNewGraphicsToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            tryToFindNewGraphicsToolStripMenuItem.Text = "Try to find new Graphics";
+            tryToFindNewGraphicsToolStripMenuItem.Click += OnClickFindNewEntries;
+            // 
+            // animationEditToolStripMenuItem
+            // 
+            animationEditToolStripMenuItem.Image = Properties.Resources.Edit;
+            animationEditToolStripMenuItem.Name = "animationEditToolStripMenuItem";
+            animationEditToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            animationEditToolStripMenuItem.Text = "Animation Edit";
+            animationEditToolStripMenuItem.Click += OnClickAnimationEdit;
+            // 
             // GraphicLabel
             // 
             GraphicLabel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -457,72 +527,6 @@ namespace UoFiddler.Controls.UserControls
             toolStripStatusAminLabel.Size = new System.Drawing.Size(39, 17);
             toolStripStatusAminLabel.Text = "Amin:";
             toolStripStatusAminLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // sortAlphaToolStripMenuItem
-            // 
-            sortAlphaToolStripMenuItem.CheckOnClick = true;
-            sortAlphaToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            sortAlphaToolStripMenuItem.Name = "sortAlphaToolStripMenuItem";
-            sortAlphaToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            sortAlphaToolStripMenuItem.Text = "Sort alphabetically";
-            sortAlphaToolStripMenuItem.Click += OnClick_Sort;
-            // 
-            // hueToolStripMenuItem
-            // 
-            hueToolStripMenuItem.Name = "hueToolStripMenuItem";
-            hueToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            hueToolStripMenuItem.Text = "Hue";
-            hueToolStripMenuItem.Click += OnClick_Hue;
-            // 
-            // animateToolStripMenuItem
-            // 
-            animateToolStripMenuItem.CheckOnClick = true;
-            animateToolStripMenuItem.Name = "animateToolStripMenuItem";
-            animateToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            animateToolStripMenuItem.Text = "Animate";
-            animateToolStripMenuItem.Click += Animate_Click;
-            // 
-            // toolStripSeparator1
-            // 
-            toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new System.Drawing.Size(198, 6);
-            // 
-            // rewriteXmlToolStripMenuItem
-            // 
-            rewriteXmlToolStripMenuItem.Name = "rewriteXmlToolStripMenuItem";
-            rewriteXmlToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            rewriteXmlToolStripMenuItem.Text = "Rewrite xml";
-            rewriteXmlToolStripMenuItem.Click += RewriteXml;
-            // 
-            // tryToFindNewGraphicsToolStripMenuItem
-            // 
-            tryToFindNewGraphicsToolStripMenuItem.Name = "tryToFindNewGraphicsToolStripMenuItem";
-            tryToFindNewGraphicsToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            tryToFindNewGraphicsToolStripMenuItem.Text = "Try to find new Graphics";
-            tryToFindNewGraphicsToolStripMenuItem.Click += OnClickFindNewEntries;
-            // 
-            // animationEditToolStripMenuItem
-            // 
-            animationEditToolStripMenuItem.Name = "animationEditToolStripMenuItem";
-            animationEditToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            animationEditToolStripMenuItem.Text = "Animation Edit";
-            animationEditToolStripMenuItem.Click += OnClickAnimationEdit;
-            // 
-            // SettingsButton
-            // 
-            SettingsButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            SettingsButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { sortAlphaToolStripMenuItem, hueToolStripMenuItem, animateToolStripMenuItem, toolStripSeparator1, rewriteXmlToolStripMenuItem, rewriteXml2ToolStripMenuItem, tryToFindNewGraphicsToolStripMenuItem, animationEditToolStripMenuItem });
-            SettingsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            SettingsButton.Name = "SettingsButton";
-            SettingsButton.Size = new System.Drawing.Size(62, 20);
-            SettingsButton.Text = "Settings";
-            // 
-            // rewriteXml2ToolStripMenuItem
-            // 
-            rewriteXml2ToolStripMenuItem.Name = "rewriteXml2ToolStripMenuItem";
-            rewriteXml2ToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            rewriteXml2ToolStripMenuItem.Text = "Rewrite xml2";
-            rewriteXml2ToolStripMenuItem.Click += RewriteXml2;
             // 
             // AnimationListControl
             // 

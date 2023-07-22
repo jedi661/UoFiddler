@@ -103,6 +103,16 @@ namespace UoFiddler.Controls.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap Edit {
+            get {
+                object obj = ResourceManager.GetObject("Edit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap emptySquare {
             get {
                 object obj = ResourceManager.GetObject("emptySquare", resourceCulture);
@@ -146,6 +156,16 @@ namespace UoFiddler.Controls.Properties {
         public static System.Drawing.Bitmap fullSquare {
             get {
                 object obj = ResourceManager.GetObject("fullSquare", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Image {
+            get {
+                object obj = ResourceManager.GetObject("Image", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -256,6 +276,16 @@ namespace UoFiddler.Controls.Properties {
         public static System.Drawing.Bitmap replace2 {
             get {
                 object obj = ResourceManager.GetObject("replace2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap rewrite {
+            get {
+                object obj = ResourceManager.GetObject("rewrite", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

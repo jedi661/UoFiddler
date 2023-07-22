@@ -368,16 +368,31 @@ namespace UoFiddler.Controls.Forms
             SetPaletteBox();
         }
 
+        #region DrawFrameItem
         private void DrawFrameItem(object sender, DrawListViewItemEventArgs e)
         {
             AnimIdx edit = AnimationEdit.GetAnimation(_fileType, _currentBody, _currentAction, _currentDir);
+
             Bitmap[] currentBits = edit.GetFrames();
+
             Bitmap bmp = currentBits[(int)e.Item.Tag];
+
+            // Check if the current item is selected
+            if (FramesListView.SelectedItems.Contains(e.Item))
+            {
+                // Change background color of selected item
+                e.Graphics.FillRectangle(Brushes.LightBlue, e.Bounds);
+            }
+
             var penColor = FramesListView.SelectedItems.Contains(e.Item) ? Color.Red : Color.Gray;
+
             e.Graphics.DrawRectangle(new Pen(penColor), e.Bounds.X, e.Bounds.Y, e.Bounds.Width, e.Bounds.Height);
-            e.Graphics.DrawImage(bmp, e.Bounds.X, e.Bounds.Y, bmp.Width,  bmp.Height);
+
+            e.Graphics.DrawImage(bmp, e.Bounds.X, e.Bounds.Y, bmp.Width, bmp.Height);
+
             e.DrawText(TextFormatFlags.Bottom | TextFormatFlags.HorizontalCenter);
         }
+        #endregion
 
         private void OnAnimChanged(object sender, EventArgs e)
         {
@@ -967,8 +982,8 @@ namespace UoFiddler.Controls.Forms
             {
                 bitBmp[index] = new Bitmap(bmp.Width, bmp.Height, PixelFormat.Format16bppArgb1555);
                 bmp.SelectActiveFrame(dimension, index);
-                bitBmp[index] = ConvertBmpAnim(bitBmp[index], (int) numericUpDownRed.Value,
-                    (int) numericUpDownGreen.Value, (int) numericUpDownBlue.Value);
+                bitBmp[index] = ConvertBmpAnim(bitBmp[index], (int)numericUpDownRed.Value,
+                    (int)numericUpDownGreen.Value, (int)numericUpDownBlue.Value);
                 edit.AddFrame(bitBmp[index], bitBmp[index].Width / 2);
                 TreeNode node = GetNode(_currentBody);
                 if (node != null)
@@ -2039,9 +2054,9 @@ namespace UoFiddler.Controls.Forms
             for (int index = 0; index < frameCount; index++)
             {
                 bitBmp[index].SelectActiveFrame(dimension, index);
-                bitBmp[index] = ConvertBmpAnim(bitBmp[index], (int) numericUpDownRed.Value,
-                    (int) numericUpDownGreen.Value, (int) numericUpDownBlue.Value);
-                edit.AddFrame(bitBmp[index], bitBmp[index].Width/2);
+                bitBmp[index] = ConvertBmpAnim(bitBmp[index], (int)numericUpDownRed.Value,
+                    (int)numericUpDownGreen.Value, (int)numericUpDownBlue.Value);
+                edit.AddFrame(bitBmp[index], bitBmp[index].Width / 2);
                 TreeNode node = GetNode(_currentBody);
                 if (node != null)
                 {
@@ -2417,9 +2432,9 @@ namespace UoFiddler.Controls.Forms
             for (int index = frameCount / 8 * 4; index < frameCount / 8 * 5; index++)
             {
                 bitBmp[index].SelectActiveFrame(dimension, index);
-                bitBmp[index] = ConvertBmpAnimCv5(bitBmp[index], (int) numericUpDownRed.Value, (int) numericUpDownGreen.Value,
-                    (int) numericUpDownBlue.Value);
-                edit.AddFrame(bitBmp[index], bitBmp[index].Width/2);
+                bitBmp[index] = ConvertBmpAnimCv5(bitBmp[index], (int)numericUpDownRed.Value, (int)numericUpDownGreen.Value,
+                    (int)numericUpDownBlue.Value);
+                edit.AddFrame(bitBmp[index], bitBmp[index].Width / 2);
                 TreeNode node = GetNode(_currentBody);
                 if (node != null)
                 {
@@ -2467,9 +2482,9 @@ namespace UoFiddler.Controls.Forms
             for (int index = 0; index < frameCount / 8; index++)
             {
                 bitBmp[index].SelectActiveFrame(dimension, index);
-                bitBmp[index] = ConvertBmpAnimCv5(bitBmp[index], (int) numericUpDownRed.Value, (int) numericUpDownGreen.Value,
-                    (int) numericUpDownBlue.Value);
-                edit.AddFrame(bitBmp[index], bitBmp[index].Width/2);
+                bitBmp[index] = ConvertBmpAnimCv5(bitBmp[index], (int)numericUpDownRed.Value, (int)numericUpDownGreen.Value,
+                    (int)numericUpDownBlue.Value);
+                edit.AddFrame(bitBmp[index], bitBmp[index].Width / 2);
                 TreeNode node = GetNode(_currentBody);
                 if (node != null)
                 {
@@ -2517,9 +2532,9 @@ namespace UoFiddler.Controls.Forms
             for (int index = frameCount / 8 * 5; index < frameCount / 8 * 6; index++)
             {
                 bitBmp[index].SelectActiveFrame(dimension, index);
-                bitBmp[index] = ConvertBmpAnimCv5(bitBmp[index], (int) numericUpDownRed.Value, (int) numericUpDownGreen.Value,
-                    (int) numericUpDownBlue.Value);
-                edit.AddFrame(bitBmp[index], bitBmp[index].Width/2);
+                bitBmp[index] = ConvertBmpAnimCv5(bitBmp[index], (int)numericUpDownRed.Value, (int)numericUpDownGreen.Value,
+                    (int)numericUpDownBlue.Value);
+                edit.AddFrame(bitBmp[index], bitBmp[index].Width / 2);
                 TreeNode node = GetNode(_currentBody);
                 if (node != null)
                 {
@@ -2567,9 +2582,9 @@ namespace UoFiddler.Controls.Forms
             for (int index = frameCount / 8 * 1; index < frameCount / 8 * 2; index++)
             {
                 bitBmp[index].SelectActiveFrame(dimension, index);
-                bitBmp[index] = ConvertBmpAnimCv5(bitBmp[index], (int) numericUpDownRed.Value, (int) numericUpDownGreen.Value,
-                    (int) numericUpDownBlue.Value);
-                edit.AddFrame(bitBmp[index], bitBmp[index].Width/2);
+                bitBmp[index] = ConvertBmpAnimCv5(bitBmp[index], (int)numericUpDownRed.Value, (int)numericUpDownGreen.Value,
+                    (int)numericUpDownBlue.Value);
+                edit.AddFrame(bitBmp[index], bitBmp[index].Width / 2);
                 TreeNode node = GetNode(_currentBody);
                 if (node != null)
                 {
@@ -2617,9 +2632,9 @@ namespace UoFiddler.Controls.Forms
             for (int index = frameCount / 8 * 6; index < frameCount / 8 * 7; index++)
             {
                 bitBmp[index].SelectActiveFrame(dimension, index);
-                bitBmp[index] = ConvertBmpAnimCv5(bitBmp[index], (int) numericUpDownRed.Value, (int) numericUpDownGreen.Value,
-                    (int) numericUpDownBlue.Value);
-                edit.AddFrame(bitBmp[index], bitBmp[index].Width/2);
+                bitBmp[index] = ConvertBmpAnimCv5(bitBmp[index], (int)numericUpDownRed.Value, (int)numericUpDownGreen.Value,
+                    (int)numericUpDownBlue.Value);
+                edit.AddFrame(bitBmp[index], bitBmp[index].Width / 2);
                 TreeNode node = GetNode(_currentBody);
                 if (node != null)
                 {
@@ -3075,10 +3090,10 @@ namespace UoFiddler.Controls.Forms
                         if (dialog.ShowDialog() == DialogResult.OK)
                         {
                             Color customConvert = Color.FromArgb(255, (int)numericUpDownRed.Value, (int)numericUpDownGreen.Value, (int)numericUpDownBlue.Value);
-                            
+
                             DirectionTrackBar.Enabled = false;
                             DirectionTrackBar.Value = 0;
-                            
+
                             AnimIdx edit = AnimationEdit.GetAnimation(_fileType, _currentBody, _currentAction, _currentDir);
 
                             if (edit != null)
@@ -3151,9 +3166,9 @@ namespace UoFiddler.Controls.Forms
             for (int index = frameCount / 5 * 0; index < frameCount / 5 * 1; index++)
             {
                 bitBmp[index].SelectActiveFrame(dimension, index);
-                bitBmp[index] = ConvertBmpAnimKr(bitBmp[index], (int) numericUpDownRed.Value, (int) numericUpDownGreen.Value,
-                    (int) numericUpDownBlue.Value);
-                edit.AddFrame(bitBmp[index], bitBmp[index].Width/2);
+                bitBmp[index] = ConvertBmpAnimKr(bitBmp[index], (int)numericUpDownRed.Value, (int)numericUpDownGreen.Value,
+                    (int)numericUpDownBlue.Value);
+                edit.AddFrame(bitBmp[index], bitBmp[index].Width / 2);
                 TreeNode node = GetNode(_currentBody);
                 if (node != null)
                 {
@@ -3201,9 +3216,9 @@ namespace UoFiddler.Controls.Forms
             for (int index = frameCount / 5 * 1; index < frameCount / 5 * 2; index++)
             {
                 bitBmp[index].SelectActiveFrame(dimension, index);
-                bitBmp[index] = ConvertBmpAnimKr(bitBmp[index], (int) numericUpDownRed.Value, (int) numericUpDownGreen.Value,
-                    (int) numericUpDownBlue.Value);
-                edit.AddFrame(bitBmp[index], bitBmp[index].Width/2);
+                bitBmp[index] = ConvertBmpAnimKr(bitBmp[index], (int)numericUpDownRed.Value, (int)numericUpDownGreen.Value,
+                    (int)numericUpDownBlue.Value);
+                edit.AddFrame(bitBmp[index], bitBmp[index].Width / 2);
                 TreeNode node = GetNode(_currentBody);
                 if (node != null)
                 {
@@ -3251,9 +3266,9 @@ namespace UoFiddler.Controls.Forms
             for (int index = frameCount / 5 * 2; index < frameCount / 5 * 3; index++)
             {
                 bitBmp[index].SelectActiveFrame(dimension, index);
-                bitBmp[index] = ConvertBmpAnimKr(bitBmp[index], (int) numericUpDownRed.Value, (int) numericUpDownGreen.Value,
-                    (int) numericUpDownBlue.Value);
-                edit.AddFrame(bitBmp[index], bitBmp[index].Width/2);
+                bitBmp[index] = ConvertBmpAnimKr(bitBmp[index], (int)numericUpDownRed.Value, (int)numericUpDownGreen.Value,
+                    (int)numericUpDownBlue.Value);
+                edit.AddFrame(bitBmp[index], bitBmp[index].Width / 2);
                 TreeNode node = GetNode(_currentBody);
                 if (node != null)
                 {
@@ -3301,9 +3316,9 @@ namespace UoFiddler.Controls.Forms
             for (int index = frameCount / 5 * 3; index < frameCount / 5 * 4; index++)
             {
                 bitBmp[index].SelectActiveFrame(dimension, index);
-                bitBmp[index] = ConvertBmpAnimKr(bitBmp[index], (int) numericUpDownRed.Value, (int) numericUpDownGreen.Value,
-                    (int) numericUpDownBlue.Value);
-                edit.AddFrame(bitBmp[index], bitBmp[index].Width/2);
+                bitBmp[index] = ConvertBmpAnimKr(bitBmp[index], (int)numericUpDownRed.Value, (int)numericUpDownGreen.Value,
+                    (int)numericUpDownBlue.Value);
+                edit.AddFrame(bitBmp[index], bitBmp[index].Width / 2);
                 TreeNode node = GetNode(_currentBody);
                 if (node != null)
                 {
@@ -3351,9 +3366,9 @@ namespace UoFiddler.Controls.Forms
             for (int index = frameCount / 5 * 4; index < frameCount / 5 * 5; index++)
             {
                 bitBmp[index].SelectActiveFrame(dimension, index);
-                bitBmp[index] = ConvertBmpAnimKr(bitBmp[index], (int) numericUpDownRed.Value, (int) numericUpDownGreen.Value,
-                    (int) numericUpDownBlue.Value);
-                edit.AddFrame(bitBmp[index], bitBmp[index].Width/2);
+                bitBmp[index] = ConvertBmpAnimKr(bitBmp[index], (int)numericUpDownRed.Value, (int)numericUpDownGreen.Value,
+                    (int)numericUpDownBlue.Value);
+                edit.AddFrame(bitBmp[index], bitBmp[index].Width / 2);
                 TreeNode node = GetNode(_currentBody);
                 if (node != null)
                 {
@@ -3878,7 +3893,7 @@ namespace UoFiddler.Controls.Forms
             for (int x = 0; x < 5; x++)
             {
                 AnimIdx edit = AnimationEdit.GetAnimation(_fileType, _currentBody, _currentAction, _currentDir);
-                PaletteReducer((int) numericUpDown6.Value, (int) numericUpDown7.Value, (int) numericUpDown8.Value, edit);
+                PaletteReducer((int)numericUpDown6.Value, (int)numericUpDown7.Value, (int)numericUpDown8.Value, edit);
                 SetPaletteBox();
                 FramesListView.Invalidate();
                 Options.ChangedUltimaClass["Animations"] = true;
@@ -4164,5 +4179,115 @@ namespace UoFiddler.Controls.Forms
                 }
             }
         }
+
+        #region Copy image to Clipboard
+        private void copyFrameToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (FramesListView.SelectedItems.Count == 0)
+                return;
+
+            int frameIndex = (int)FramesListView.SelectedItems[0].Tag;
+
+            AnimIdx edit = AnimationEdit.GetAnimation(_fileType, _currentBody, _currentAction, _currentDir);
+            if (edit == null)
+                return;
+
+            Bitmap[] frames = edit.GetFrames();
+            if (frames == null || frameIndex >= frames.Length)
+                return;
+
+            Bitmap frame = frames[frameIndex];
+
+            // Frame in Zwischenablage kopieren
+            Clipboard.SetImage(frame);
+
+            MessageBox.Show("The selected frame was successfully copied to the clipboard.", "Copy Frame", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        #endregion
+
+        #region Import Image from Clipboard
+        private void importImageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Clipboard.ContainsImage() && FramesListView.SelectedItems.Count > 0)
+            {
+                int frameIndex = (int)FramesListView.SelectedItems[0].Tag;
+
+                AnimIdx edit = AnimationEdit.GetAnimation(_fileType, _currentBody, _currentAction, _currentDir);
+                if (edit == null)
+                    return;
+
+                Bitmap newFrame = (Bitmap)Clipboard.GetImage();
+
+                edit.ReplaceFrame(newFrame, frameIndex);
+
+                FramesListView.Items[frameIndex].ImageIndex = frameIndex;
+                FramesListView.Invalidate();
+
+                Options.ChangedUltimaClass["Animations"] = true;
+
+                MessageBox.Show("Frame image imported from clipboard");
+            }
+        }
+
+        private void FramesImportandCopyListView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.V)
+            {
+                importImageToolStripMenuItem_Click(null, null);
+            }
+
+            if (e.Control && e.KeyCode == Keys.X)
+            {
+                copyFrameToClipboardToolStripMenuItem_Click(null, null);
+            }
+        }
+        #endregion
+
+        #region Mirror Image
+
+        private void mirrorImageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (FramesListView.SelectedItems.Count > 0)
+            {
+                int frameIndex = (int)FramesListView.SelectedItems[0].Tag;
+
+                AnimIdx edit = AnimationEdit.GetAnimation(_fileType, _currentBody, _currentAction, _currentDir);
+                if (edit == null) return;
+
+                // Bitmap loaded
+                Bitmap frame = edit.GetFrames()[frameIndex];
+
+                // mirror image
+                frame.RotateFlip(RotateFlipType.RotateNoneFlipX);
+
+                // replace frames
+                edit.ReplaceFrame(frame, frameIndex);
+
+                // Rebuild ListView
+                FramesListView.BeginUpdate();
+                FramesListView.Items.Clear();
+                // Reload all frames
+                Bitmap[] frames = edit.GetFrames();
+                for (int i = 0; i < frames.Length; i++)
+                {
+                    ListViewItem item = new ListViewItem(i.ToString()) { Tag = i };
+                    if (frames[i] != null)
+                    {
+                        item.ImageIndex = i;
+                    }
+                    FramesListView.Items.Add(item);
+                }
+                FramesListView.EndUpdate();
+
+                // update display
+                FramesListView.Items[frameIndex].Selected = true;
+                FramesListView.Select();
+
+                Options.ChangedUltimaClass["Animations"] = true;
+
+                MessageBox.Show("Frame mirrored");
+            }
+        }
+        #endregion
     }
 }

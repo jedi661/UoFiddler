@@ -13,6 +13,11 @@ Version 4.11.17
 - Import from clipboard added for graphics, save function is still missing.
 - Rewrite the Animation.xml function again to save it in an external directory.
 - Added a label that shows the source of the animations.
+- AnimationEdit has received an import function to import graphics from the clipboard.
+- AnimationEdit has received a function to copy graphics to the clipboard.
+- AnimationEdit has received a Mirror function to flip the graphics horizontally.
+- AnimationEdit KeyDown functions have been added to enable importing with Ctrl+V and copying with Ctrl+X.
+- AnimationEdit has been given a function to highlight the selected frames.
 
 Version : 4.11.16
 - Design and graphics adjusted for the methods.
