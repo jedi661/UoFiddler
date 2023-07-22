@@ -16,6 +16,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
 using Ultima;
@@ -27,6 +28,7 @@ namespace UoFiddler.Controls.UserControls
 {
     public partial class AnimationListControl : UserControl
     {
+
         public AnimationListControl()
         {
             InitializeComponent();
@@ -172,7 +174,6 @@ namespace UoFiddler.Controls.UserControls
             _displayType = 0;
             OnLoad(this, EventArgs.Empty);
         }
-
         private void OnLoad(object sender, EventArgs e)
         {
             if (IsAncestorSiteInDesignMode || FormsDesignerHelper.IsInDesignMode())
@@ -183,7 +184,9 @@ namespace UoFiddler.Controls.UserControls
             Cursor.Current = Cursors.WaitCursor;
             Options.LoadedUltimaClass["Animations"] = true;
             Options.LoadedUltimaClass["Hues"] = true;
+
             TreeViewMobs.TreeViewNodeSorter = new GraphicSorter();
+
             if (!LoadXml())
             {
                 Cursor.Current = Cursors.Default;
@@ -191,16 +194,17 @@ namespace UoFiddler.Controls.UserControls
             }
 
             LoadListView();
-
             extractAnimationToolStripMenuItem.Visible = false;
             _currentSelect = 0;
             _currentSelectAction = 0;
+
             if (TreeViewMobs.Nodes[0].Nodes.Count > 0)
             {
                 TreeViewMobs.SelectedNode = TreeViewMobs.Nodes[0].Nodes[0];
             }
 
             FacingBar.Value = (_facing + 3) & 7;
+
             if (!_loaded)
             {
                 ControlEvents.FilePathChangeEvent += OnFilePathChangeEvent;
@@ -209,6 +213,7 @@ namespace UoFiddler.Controls.UserControls
             _loaded = true;
             Cursor.Current = Cursors.Default;
         }
+
 
         private void OnFilePathChangeEvent()
         {
@@ -497,6 +502,7 @@ namespace UoFiddler.Controls.UserControls
             }
         }
 
+        #region Load Dsiplay Frame and more listView1
         private void TreeViewMobs_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (e.Node.Parent != null)
@@ -515,6 +521,9 @@ namespace UoFiddler.Controls.UserControls
                         _displayType = 1;
                         LoadListView();
                     }
+
+                    // Here, call the DoAnimation() method to initialize _animationList
+                    DoAnimation();
                 }
                 else
                 {
@@ -530,6 +539,9 @@ namespace UoFiddler.Controls.UserControls
                         _displayType = 1;
                         LoadListView();
                     }
+
+                    // Here, call the DoAnimation() method to initialize _animationList
+                    DoAnimation();
                 }
             }
             else
@@ -546,7 +558,12 @@ namespace UoFiddler.Controls.UserControls
                 }
                 TreeViewMobs.SelectedNode = e.Node.Nodes[0];
             }
+
+            // Here you can add the code to update the text of the toolStripStatusAnimLabel
+            string fileName = Animations.GetFileName(_currentSelect);
+            toolStripStatusAminLabel.Text = $"Source: {fileName}";
         }
+        #endregion
 
         private void Animate_Click(object sender, EventArgs e)
         {
@@ -779,19 +796,27 @@ namespace UoFiddler.Controls.UserControls
             {
                 width = e.Bounds.Width;
             }
-
             if (height > e.Bounds.Height)
             {
                 height = e.Bounds.Height;
             }
 
+            // Verify that the current item is selected
+            if (listView1.SelectedItems.Contains(e.Item))
+            {
+                // Change the background color of the selected item
+                e.Graphics.FillRectangle(Brushes.LightBlue, e.Bounds);
+            }
+
             e.Graphics.DrawImage(bmp, e.Bounds.X, e.Bounds.Y, width, height);
             e.DrawText(TextFormatFlags.Bottom | TextFormatFlags.HorizontalCenter);
+
             using (var pen = new Pen(Color.Gray))
             {
                 e.Graphics.DrawRectangle(pen, e.Bounds.X, e.Bounds.Y, e.Bounds.Width, e.Bounds.Height);
             }
         }
+
 
         private void OnScrollFacing(object sender, EventArgs e)
         {
@@ -877,7 +902,7 @@ namespace UoFiddler.Controls.UserControls
                 TreeViewMobs.EndUpdate();
             }
 
-            string fileName = Path.Combine(Options.AppDataPath, "Animationlist.xml");
+            string fileName = Path.Combine(Options.OutputPath, "Animationlist.xml"); //Correct save path
 
             XmlDocument dom = new XmlDocument();
             XmlDeclaration decl = dom.CreateXmlDeclaration("1.0", "utf-8", null);
@@ -911,13 +936,90 @@ namespace UoFiddler.Controls.UserControls
                 elem.SetAttribute("type", ((int[])node.Tag)[1].ToString());
                 sr.AppendChild(elem);
             }
+
             dom.AppendChild(sr);
+
+            // Save the XML file in the Options.OutputPath directory
             dom.Save(fileName);
 
             MessageBox.Show("XML saved", "Rewrite", MessageBoxButtons.OK, MessageBoxIcon.Information,
                 MessageBoxDefaultButton.Button1);
         }
 
+        #region RewriteXml2
+        private void RewriteXml2(object sender, EventArgs e)
+        {
+            TreeViewMobs.BeginUpdate();
+            try
+            {
+                TreeViewMobs.TreeViewNodeSorter = new GraphicSorter();
+                TreeViewMobs.Sort();
+            }
+            finally
+            {
+                TreeViewMobs.EndUpdate();
+            }
+
+            string fileName = Path.Combine(Options.OutputPath, "Animationlist.xml"); // Correct save path
+
+            string CleanNodeName(string nodeName)
+            {
+                // Check if the node name contains (0x1), (0x2), etc.
+                // If yes, then remove them and the ID inside the parentheses
+                int index;
+                while ((index = nodeName.IndexOf(" (0x")) >= 0)
+                {
+                    nodeName = nodeName.Substring(0, index);
+                }
+                return nodeName;
+            }
+
+            XmlDocument dom = new XmlDocument();
+            XmlDeclaration decl = dom.CreateXmlDeclaration("1.0", "utf-8", null);
+            dom.AppendChild(decl);
+            XmlElement sr = dom.CreateElement("Graphics");
+            XmlComment comment = dom.CreateComment("Entries in Mob tab");
+            sr.AppendChild(comment);
+            comment = dom.CreateComment("Name=Displayed name");
+            sr.AppendChild(comment);
+            comment = dom.CreateComment("body=Graphic");
+            sr.AppendChild(comment);
+            comment = dom.CreateComment("type=0:Monster, 1:Sea, 2:Animal, 3:Human/Equipment");
+            sr.AppendChild(comment);
+
+            XmlElement elem;
+            foreach (TreeNode node in TreeViewMobs.Nodes[0].Nodes)
+            {
+                string nodeNameCleaned = CleanNodeName(node.Text);
+                int nodeId = ((int[])node.Tag)[0]; // Assuming the ID is stored in the first element of the node.Tag array
+                elem = dom.CreateElement("Mob");
+                elem.SetAttribute("name", $"{nodeNameCleaned}");
+                elem.SetAttribute("body", nodeId.ToString());
+                elem.SetAttribute("type", ((int[])node.Tag)[1].ToString());
+
+                sr.AppendChild(elem);
+            }
+
+            foreach (TreeNode node in TreeViewMobs.Nodes[1].Nodes)
+            {
+                string nodeNameCleaned = CleanNodeName(node.Text);
+                int nodeId = ((int[])node.Tag)[0]; // Assuming the ID is stored in the first element of the node.Tag array
+                elem = dom.CreateElement("Equip");
+                elem.SetAttribute("name", $"{nodeNameCleaned} ({nodeId})");
+                elem.SetAttribute("body", nodeId.ToString());
+                elem.SetAttribute("type", ((int[])node.Tag)[1].ToString());
+                sr.AppendChild(elem);
+            }
+
+            dom.AppendChild(sr);
+
+            // Save the XML file in the Options.OutputPath directory
+            dom.Save(fileName);
+
+            MessageBox.Show("XML saved", "Rewrite", MessageBoxButtons.OK, MessageBoxIcon.Information,
+                MessageBoxDefaultButton.Button1);
+        }
+        #endregion
         private void Extract_Image_ClickBmp(object sender, EventArgs e)
         {
             ExtractImage(ImageFormat.Bmp);
@@ -1070,6 +1172,60 @@ namespace UoFiddler.Controls.UserControls
                 newBitmap.Save($"{fileName}-{(int)listView1.SelectedItems[0].Tag}.{fileExtension}", imageFormat);
             }
         }
+
+        #region OnClickCopyFrameToClipboard
+        private void copyFrameToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Check if a frame is selected in listView1
+            if (listView1.SelectedItems.Count > 0)
+            {
+                // Copy the selected frame to the clipboard
+                int selectedFrameIndex = (int)listView1.SelectedItems[0].Tag;
+                if (selectedFrameIndex >= 0 && selectedFrameIndex < _animationList.Length)
+                {
+                    Clipboard.SetImage(_animationList[selectedFrameIndex]);
+
+                    // Display a MessageBox to confirm that the graphic was copied
+                    MessageBox.Show("The graphic was copied to the clipboard.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+        #endregion
+
+        #region importImage
+        private void importImageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Check if a frame is selected in listView1
+            if (listView1.SelectedItems.Count > 0)
+            {
+                // Check if there is an image in the cache
+                if (Clipboard.ContainsImage())
+                {
+                    int selectedFrameIndex = (int)listView1.SelectedItems[0].Tag;
+                    if (selectedFrameIndex >= 0 && selectedFrameIndex < _animationList.Length)
+                    {
+                        // Import the graphic from the clipboard into the selected ListViewItem (frame).
+                        Image imageFromClipboard = Clipboard.GetImage();
+                        _animationList[selectedFrameIndex] = (Bitmap)imageFromClipboard;
+
+                        // Here you can carry out further actions, e.g. B. View or save the updated graphic
+                        // ...
+
+                        // Refresh the ListView to show the changes
+                        LoadListViewFrames();
+
+                        // Display a MessageBox to confirm the graphic was imported
+                        MessageBox.Show("The graphic has been imported and saved in the frame.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                else
+                {
+                    // If there is no image in the cache, display an error message
+                    MessageBox.Show("There is no image in the cache.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+        #endregion
     }
 
     public class AlphaSorter : IComparer

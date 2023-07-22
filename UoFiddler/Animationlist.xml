@@ -34,7 +34,7 @@
   <Mob name="arachnids_spider_giant (28)" body="28" type="0" />
   <Mob name="gorillas_silverback (29)" body="29" type="0" />
   <Mob name="harpies_harpy (30)" body="30" type="0" />
-  <Mob name="headless_headless (31)" body="31" type="0" />
+  <Mob name="headless_headless (31)" body="31" type="0" />	
   <Mob name="lizard_race_lizardman (33)" body="33" type="0" />
   <Mob name="canines_wolf_white (34)" body="34" type="2" />
   <Mob name="lizard_race_lizardman2 (35)" body="35" type="0" />
@@ -97,7 +97,7 @@
   <Mob name="serpents_snake_giant_silver2 (92)" body="92" type="0" />
   <Mob name="serpents_snake_giant_silver3 (93)" body="93" type="0" />
   <Mob name="slimes_slime_frost (94)" body="94" type="0" />
-  <Mob name="bird_turkey (95)" body="95" type="0" />
+  <Mob name="bird_turkey (95)" body="138" type="2" />
   <Mob name="slimes_slime_frost2 (96)" body="96" type="0" />
   <Mob name="canines_hell_hound (97)" body="97" type="2" />
   <Mob name="canines_hell_hound2 (98)" body="98" type="2" />
