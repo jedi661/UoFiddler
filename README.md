@@ -18,6 +18,7 @@ Version 4.11.17
 - AnimationEdit has received a Mirror function to flip the graphics horizontally.
 - AnimationEdit KeyDown functions have been added to enable importing with Ctrl+V and copying with Ctrl+X.
 - AnimationEdit has been given a function to highlight the selected frames.
+- AnimationEdit has received a 90-degree rotation of the graphic to the left.
 
 Version : 4.11.16
 - Design and graphics adjusted for the methods.

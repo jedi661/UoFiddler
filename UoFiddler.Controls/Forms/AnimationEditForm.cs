@@ -4289,5 +4289,32 @@ namespace UoFiddler.Controls.Forms
             }
         }
         #endregion
+
+        #region RotateLeft90Degrees
+        private void rotateLeft90DegreesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (FramesListView.SelectedItems.Count > 0)
+            {
+                int index = (int)FramesListView.SelectedItems[0].Tag;
+
+                AnimIdx edit = AnimationEdit.GetAnimation(_fileType, _currentBody, _currentAction, _currentDir);
+
+                if (edit != null)
+                {
+                    Bitmap frame = edit.GetFrames()[index];
+
+                    if (frame != null)
+                    {
+                        frame.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                        edit.ReplaceFrame(frame, index);
+                    }
+                }
+
+                FramesListView.Invalidate();
+            }
+            // Mark change
+            Options.ChangedUltimaClass["Animations"] = true;
+        }
+        #endregion
     }
 }
