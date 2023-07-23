@@ -336,7 +336,7 @@
             // ProgressBar
             // 
             ProgressBar.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-            ProgressBar.Location = new System.Drawing.Point(503, 628);
+            ProgressBar.Location = new System.Drawing.Point(502, 628);
             ProgressBar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             ProgressBar.Name = "ProgressBar";
             ProgressBar.Size = new System.Drawing.Size(197, 20);
@@ -667,7 +667,7 @@
             // 
             ContextMenuStripListView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { allDirectionsAddToolStripMenuItem, allDirectionsAddWithCanvasToolStripMenuItem, addDirectionsAddWithCanvasUniqueImageToolStripMenuItem, allDirectionsAddWithCanvasKRframeEditorColorCorrectorToolStripMenuItem, toolStripSeparator1, addToolStripMenuItem1, addWithCanvasToolStripMenuItem, replaceToolStripMenuItem, toolStripSeparator2, removeToolStripMenuItem1, toolStripSeparator3, copyFrameToClipboardToolStripMenuItem, importImageToolStripMenuItem, toolStripSeparator4, mirrorImageToolStripMenuItem, rotateLeft90DegreesToolStripMenuItem });
             ContextMenuStripListView.Name = "contextMenuStrip1";
-            ContextMenuStripListView.Size = new System.Drawing.Size(413, 314);
+            ContextMenuStripListView.Size = new System.Drawing.Size(413, 292);
             // 
             // allDirectionsAddToolStripMenuItem
             // 
@@ -818,6 +818,7 @@
             // exportToolStripMenuItem
             // 
             exportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { bmpToolStripMenuItem, tiffToolStripMenuItem, textToolStripMenuItem });
+            exportToolStripMenuItem.Image = Properties.Resources.Export;
             exportToolStripMenuItem.Name = "exportToolStripMenuItem";
             exportToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             exportToolStripMenuItem.Text = "Export..";
@@ -849,6 +850,7 @@
             // importToolStripMenuItem
             // 
             importToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { fromTxtToolStripMenuItem, fromGifToolStripMenuItem, fromImageToolStripMenuItem });
+            importToolStripMenuItem.Image = Properties.Resources.import;
             importToolStripMenuItem.Name = "importToolStripMenuItem";
             importToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             importToolStripMenuItem.Text = "Import..";
@@ -1341,7 +1343,7 @@
             // 
             DirectionTrackBar.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
             DirectionTrackBar.AutoSize = false;
-            DirectionTrackBar.Location = new System.Drawing.Point(707, 626);
+            DirectionTrackBar.Location = new System.Drawing.Point(706, 626);
             DirectionTrackBar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             DirectionTrackBar.Maximum = 4;
             DirectionTrackBar.Name = "DirectionTrackBar";
@@ -1370,6 +1372,7 @@
             // 
             // SaveToolStripMenuItem
             // 
+            SaveToolStripMenuItem.Image = Properties.Resources.Save2;
             SaveToolStripMenuItem.Name = "SaveToolStripMenuItem";
             SaveToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             SaveToolStripMenuItem.Text = "Save";
@@ -1378,6 +1381,7 @@
             // ShowOnlyValidToolStripMenuItem
             // 
             ShowOnlyValidToolStripMenuItem.CheckOnClick = true;
+            ShowOnlyValidToolStripMenuItem.Image = Properties.Resources.show;
             ShowOnlyValidToolStripMenuItem.Name = "ShowOnlyValidToolStripMenuItem";
             ShowOnlyValidToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             ShowOnlyValidToolStripMenuItem.Text = "Show Only Valid";
@@ -1385,6 +1389,7 @@
             // 
             // ExportAllToVDToolStripMenuItem
             // 
+            ExportAllToVDToolStripMenuItem.Image = Properties.Resources.Export;
             ExportAllToVDToolStripMenuItem.Name = "ExportAllToVDToolStripMenuItem";
             ExportAllToVDToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             ExportAllToVDToolStripMenuItem.Text = "Export All Valid To VD";

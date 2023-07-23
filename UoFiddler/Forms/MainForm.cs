@@ -27,6 +27,8 @@ namespace UoFiddler.Forms
 {
     public partial class MainForm : Form
     {
+        //Bin_Dec_Hex_ConverterForm
+        private Bin_Dec_Hex_ConverterForm binDecHexConverterForm;
         public MainForm()
         {
             InitializeComponent();
@@ -210,10 +212,10 @@ namespace UoFiddler.Forms
                 case "SpeechTab":
                     backColor = Color.White;
                     break;
-                /*default:
-                    backColor = TabPanel.BackColor;
-                    //backColor = Color.Red;
-                    break;*/
+                    /*default:
+                        backColor = TabPanel.BackColor;
+                        //backColor = Color.Red;
+                        break;*/
             }
             // Fill the background of the current TabPage with the selected color
             g.FillRectangle(new SolidBrush(backColor), e.Bounds);
@@ -906,5 +908,21 @@ namespace UoFiddler.Forms
             System.Diagnostics.Process.Start("explorer.exe", $"\"{path}\"");
         }
         #endregion
+
+        private void binaryDecimalHexadecimalConverterToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            if (binDecHexConverterForm == null || binDecHexConverterForm.IsDisposed)
+            {
+                binDecHexConverterForm = new Bin_Dec_Hex_ConverterForm()
+                {
+                    TopMost = true
+                };
+                binDecHexConverterForm.Show();
+            }
+            else
+            {
+                binDecHexConverterForm.Focus();
+            }
+        }
     }
 }

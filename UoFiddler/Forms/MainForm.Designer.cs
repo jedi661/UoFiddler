@@ -134,6 +134,7 @@ namespace UoFiddler.Forms
             uodevuofreeshardsdeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            binaryDecimalHexadecimalConverterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             TabPanel.SuspendLayout();
             contextMenuStripMainForm.SuspendLayout();
             StartTab.SuspendLayout();
@@ -197,12 +198,12 @@ namespace UoFiddler.Forms
             // 
             contextMenuStripMainForm.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { unDockToolStripMenuItem, switchLogoImageToolStripMenuItem, directoryToolStripMenuItem });
             contextMenuStripMainForm.Name = "contextMenuStrip1";
-            contextMenuStripMainForm.Size = new System.Drawing.Size(181, 92);
+            contextMenuStripMainForm.Size = new System.Drawing.Size(176, 70);
             // 
             // unDockToolStripMenuItem
             // 
             unDockToolStripMenuItem.Name = "unDockToolStripMenuItem";
-            unDockToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            unDockToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             unDockToolStripMenuItem.Text = "UnDock";
             unDockToolStripMenuItem.Click += OnClickUnDock;
             // 
@@ -211,7 +212,7 @@ namespace UoFiddler.Forms
             switchLogoImageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripComboBoxImage });
             switchLogoImageToolStripMenuItem.Image = Properties.Resources._32x32;
             switchLogoImageToolStripMenuItem.Name = "switchLogoImageToolStripMenuItem";
-            switchLogoImageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            switchLogoImageToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             switchLogoImageToolStripMenuItem.Text = "Switch Logo Image";
             // 
             // toolStripComboBoxImage
@@ -224,7 +225,7 @@ namespace UoFiddler.Forms
             // 
             directoryToolStripMenuItem.Image = Properties.Resources.Directory;
             directoryToolStripMenuItem.Name = "directoryToolStripMenuItem";
-            directoryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            directoryToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             directoryToolStripMenuItem.Text = "Open Directory";
             directoryToolStripMenuItem.ToolTipText = "Opens the directory in Explorer that was specified in Options.";
             directoryToolStripMenuItem.Click += directoryToolStripMenuItem_Click;
@@ -1012,7 +1013,7 @@ namespace UoFiddler.Forms
             // toolStripDropDownButtonHelp
             // 
             toolStripDropDownButtonHelp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            toolStripDropDownButtonHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuItemHelp, toolStripSeparator1, toolStripMenuItemAbout, changelogToolStripMenuItem, toolStripSeparator2, uodevuofreeshardsdeToolStripMenuItem, toolStripMenuItem1, toolStripMenuItem2 });
+            toolStripDropDownButtonHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuItemHelp, binaryDecimalHexadecimalConverterToolStripMenuItem, toolStripSeparator1, toolStripMenuItemAbout, changelogToolStripMenuItem, toolStripSeparator2, uodevuofreeshardsdeToolStripMenuItem, toolStripMenuItem1, toolStripMenuItem2 });
             toolStripDropDownButtonHelp.ImageTransparentColor = System.Drawing.Color.Magenta;
             toolStripDropDownButtonHelp.Name = "toolStripDropDownButtonHelp";
             toolStripDropDownButtonHelp.Size = new System.Drawing.Size(45, 22);
@@ -1073,6 +1074,15 @@ namespace UoFiddler.Forms
             toolStripMenuItem2.Size = new System.Drawing.Size(199, 22);
             toolStripMenuItem2.Text = "uo-pixel.de";
             toolStripMenuItem2.Click += toolStripMenuItem2_Click;
+            // 
+            // binaryDecimalHexadecimalConverterToolStripMenuItem
+            // 
+            binaryDecimalHexadecimalConverterToolStripMenuItem.Image = Properties.Resources.calculator;
+            binaryDecimalHexadecimalConverterToolStripMenuItem.Name = "binaryDecimalHexadecimalConverterToolStripMenuItem";
+            binaryDecimalHexadecimalConverterToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            binaryDecimalHexadecimalConverterToolStripMenuItem.Text = "Converter";
+            binaryDecimalHexadecimalConverterToolStripMenuItem.ToolTipText = "Calculator for Binary, Decimal, and Hexadecimal";
+            binaryDecimalHexadecimalConverterToolStripMenuItem.Click += binaryDecimalHexadecimalConverterToolStripMenuItem_Click_1;
             // 
             // MainForm
             // 
@@ -1212,6 +1222,7 @@ namespace UoFiddler.Forms
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem uodevuofreeshardsdeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem directoryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem binaryDecimalHexadecimalConverterToolStripMenuItem;
     }
 }
 
