@@ -76,7 +76,6 @@ namespace UoFiddler.Forms
             bt_Hex0F = new System.Windows.Forms.Button();
             Bt_Delete_fields = new System.Windows.Forms.Button();
             tb_listing = new System.Windows.Forms.TextBox();
-            button1 = new System.Windows.Forms.Button();
             bt_Listing_Clear = new System.Windows.Forms.Button();
             SuspendLayout();
             // 
@@ -433,15 +432,6 @@ namespace UoFiddler.Forms
             tb_listing.Size = new System.Drawing.Size(214, 126);
             tb_listing.TabIndex = 35;
             // 
-            // button1
-            // 
-            button1.Location = new System.Drawing.Point(-2, 39);
-            button1.Name = "button1";
-            button1.Size = new System.Drawing.Size(75, 23);
-            button1.TabIndex = 36;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            // 
             // bt_Listing_Clear
             // 
             bt_Listing_Clear.Location = new System.Drawing.Point(571, 205);
@@ -458,7 +448,6 @@ namespace UoFiddler.Forms
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(673, 411);
             Controls.Add(bt_Listing_Clear);
-            Controls.Add(button1);
             Controls.Add(tb_listing);
             Controls.Add(Bt_Delete_fields);
             Controls.Add(bt_Hex0F);
@@ -541,7 +530,6 @@ namespace UoFiddler.Forms
         private System.Windows.Forms.Button bt_Hex0F;
         private System.Windows.Forms.Button Bt_Delete_fields;
         private System.Windows.Forms.TextBox tb_listing;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button bt_Listing_Clear;
     }
 }
