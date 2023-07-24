@@ -113,5 +113,25 @@ namespace UoFiddler.Forms
                 Application.Exit();
             }
         }
+
+        #region Delete Entry
+        private void bt_Delete_List_Click(object sender, EventArgs e)
+        {
+            if (comboBoxBasedOn.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please select an entry to delete..", "Delete Entry", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                string profileName = comboBoxBasedOn.SelectedItem.ToString();
+                string profilePath = Path.Combine(Options.AppDataPath, $"Options_{profileName}.xml");
+                if (File.Exists(profilePath))
+                {
+                    File.Delete(profilePath);
+                }
+                comboBoxBasedOn.Items.RemoveAt(comboBoxBasedOn.SelectedIndex);
+            }
+        }
+        #endregion
     }
 }
