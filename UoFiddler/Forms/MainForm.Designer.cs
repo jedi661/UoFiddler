@@ -127,6 +127,7 @@ namespace UoFiddler.Forms
             tsPluginsSeparator = new System.Windows.Forms.ToolStripSeparator();
             toolStripDropDownButtonHelp = new System.Windows.Forms.ToolStripDropDownButton();
             toolStripMenuItemHelp = new System.Windows.Forms.ToolStripMenuItem();
+            binaryDecimalHexadecimalConverterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             toolStripMenuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
             changelogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -134,7 +135,6 @@ namespace UoFiddler.Forms
             uodevuofreeshardsdeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            binaryDecimalHexadecimalConverterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             TabPanel.SuspendLayout();
             contextMenuStripMainForm.SuspendLayout();
             StartTab.SuspendLayout();
@@ -1022,10 +1022,20 @@ namespace UoFiddler.Forms
             // 
             // toolStripMenuItemHelp
             // 
+            toolStripMenuItemHelp.Image = Properties.Resources.Help;
             toolStripMenuItemHelp.Name = "toolStripMenuItemHelp";
             toolStripMenuItemHelp.Size = new System.Drawing.Size(199, 22);
             toolStripMenuItemHelp.Text = "Help";
             toolStripMenuItemHelp.Click += ToolStripMenuItemHelp_Click;
+            // 
+            // binaryDecimalHexadecimalConverterToolStripMenuItem
+            // 
+            binaryDecimalHexadecimalConverterToolStripMenuItem.Image = Properties.Resources.calculator;
+            binaryDecimalHexadecimalConverterToolStripMenuItem.Name = "binaryDecimalHexadecimalConverterToolStripMenuItem";
+            binaryDecimalHexadecimalConverterToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            binaryDecimalHexadecimalConverterToolStripMenuItem.Text = "Converter";
+            binaryDecimalHexadecimalConverterToolStripMenuItem.ToolTipText = "Calculator for Binary, Decimal, and Hexadecimal";
+            binaryDecimalHexadecimalConverterToolStripMenuItem.Click += binaryDecimalHexadecimalConverterToolStripMenuItem_Click_1;
             // 
             // toolStripSeparator1
             // 
@@ -1034,6 +1044,7 @@ namespace UoFiddler.Forms
             // 
             // toolStripMenuItemAbout
             // 
+            toolStripMenuItemAbout.Image = Properties.Resources.About;
             toolStripMenuItemAbout.Name = "toolStripMenuItemAbout";
             toolStripMenuItemAbout.Size = new System.Drawing.Size(199, 22);
             toolStripMenuItemAbout.Text = "About";
@@ -1041,6 +1052,7 @@ namespace UoFiddler.Forms
             // 
             // changelogToolStripMenuItem
             // 
+            changelogToolStripMenuItem.Image = Properties.Resources.Changelog;
             changelogToolStripMenuItem.Name = "changelogToolStripMenuItem";
             changelogToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             changelogToolStripMenuItem.Text = "Changelog";
@@ -1074,15 +1086,6 @@ namespace UoFiddler.Forms
             toolStripMenuItem2.Size = new System.Drawing.Size(199, 22);
             toolStripMenuItem2.Text = "uo-pixel.de";
             toolStripMenuItem2.Click += toolStripMenuItem2_Click;
-            // 
-            // binaryDecimalHexadecimalConverterToolStripMenuItem
-            // 
-            binaryDecimalHexadecimalConverterToolStripMenuItem.Image = Properties.Resources.calculator;
-            binaryDecimalHexadecimalConverterToolStripMenuItem.Name = "binaryDecimalHexadecimalConverterToolStripMenuItem";
-            binaryDecimalHexadecimalConverterToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
-            binaryDecimalHexadecimalConverterToolStripMenuItem.Text = "Converter";
-            binaryDecimalHexadecimalConverterToolStripMenuItem.ToolTipText = "Calculator for Binary, Decimal, and Hexadecimal";
-            binaryDecimalHexadecimalConverterToolStripMenuItem.Click += binaryDecimalHexadecimalConverterToolStripMenuItem_Click_1;
             // 
             // MainForm
             // 
