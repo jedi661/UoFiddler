@@ -4320,11 +4320,7 @@ namespace UoFiddler.Controls.Forms
         }
         #endregion
 
-        private void FindFreeIDsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        #region Find IDs
         /*private async void FindFreeIDSlotsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             await Task.Run(() =>
@@ -4346,35 +4342,6 @@ namespace UoFiddler.Controls.Forms
                     }
                 }
             });
-
-            AnimationListTreeView.Invalidate();
-        }*/
-
-        /*private async void FindFreeIDSlotsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            List<TreeNode> changedNodes = new List<TreeNode>();
-
-            await Task.Run(() =>
-            {
-                // Iteriere über TreeView Nodes
-                foreach (TreeNode node in AnimationListTreeView.Nodes)
-                {
-                    int bodyIndex = (int)node.Tag;
-
-                    // Überprüfe Action 0 
-                    if (!AnimationEdit.IsActionDefined(_fileType, bodyIndex, 0))
-                    {
-                        // Wenn undefined, ist Slot frei
-                        changedNodes.Add(node);
-                    }
-                }
-            });
-
-            foreach (TreeNode node in changedNodes)
-            {
-                node.ForeColor = Color.Blue;
-                node.Text += " - FREE";
-            }
 
             AnimationListTreeView.Invalidate();
         }*/
@@ -4416,6 +4383,6 @@ namespace UoFiddler.Controls.Forms
 
             AnimationListTreeView.Invalidate();
         }
-
+        #endregion
     }
 }
