@@ -198,12 +198,12 @@ namespace UoFiddler.Forms
             // 
             contextMenuStripMainForm.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { unDockToolStripMenuItem, switchLogoImageToolStripMenuItem, directoryToolStripMenuItem });
             contextMenuStripMainForm.Name = "contextMenuStrip1";
-            contextMenuStripMainForm.Size = new System.Drawing.Size(176, 70);
+            contextMenuStripMainForm.Size = new System.Drawing.Size(181, 92);
             // 
             // unDockToolStripMenuItem
             // 
             unDockToolStripMenuItem.Name = "unDockToolStripMenuItem";
-            unDockToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            unDockToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             unDockToolStripMenuItem.Text = "UnDock";
             unDockToolStripMenuItem.Click += OnClickUnDock;
             // 
@@ -212,7 +212,7 @@ namespace UoFiddler.Forms
             switchLogoImageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripComboBoxImage });
             switchLogoImageToolStripMenuItem.Image = Properties.Resources._32x32;
             switchLogoImageToolStripMenuItem.Name = "switchLogoImageToolStripMenuItem";
-            switchLogoImageToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            switchLogoImageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             switchLogoImageToolStripMenuItem.Text = "Switch Logo Image";
             // 
             // toolStripComboBoxImage
@@ -225,7 +225,7 @@ namespace UoFiddler.Forms
             // 
             directoryToolStripMenuItem.Image = Properties.Resources.Directory;
             directoryToolStripMenuItem.Name = "directoryToolStripMenuItem";
-            directoryToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            directoryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             directoryToolStripMenuItem.Text = "Open Directory";
             directoryToolStripMenuItem.ToolTipText = "Opens the directory in Explorer that was specified in Options.";
             directoryToolStripMenuItem.Click += directoryToolStripMenuItem_Click;
