@@ -10,10 +10,13 @@
  ***************************************************************************/
 
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Media.Imaging;
 using Ultima;
@@ -4316,5 +4319,103 @@ namespace UoFiddler.Controls.Forms
             Options.ChangedUltimaClass["Animations"] = true;
         }
         #endregion
+
+        private void FindFreeIDsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        /*private async void FindFreeIDSlotsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            await Task.Run(() =>
+            {
+                // Iteriere über TreeView Nodes
+                foreach (TreeNode node in AnimationListTreeView.Nodes)
+                {
+                    int bodyIndex = (int)node.Tag;
+
+                    // Überprüfe Action 0 
+                    if (!AnimationEdit.IsActionDefined(_fileType, bodyIndex, 0))
+                    {
+                        // Wenn undefined, ist Slot frei
+                        this.Invoke(new Action(() =>
+                        {
+                            node.ForeColor = Color.Blue;
+                            node.Text += " - FREE";
+                        }));
+                    }
+                }
+            });
+
+            AnimationListTreeView.Invalidate();
+        }*/
+
+        /*private async void FindFreeIDSlotsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            List<TreeNode> changedNodes = new List<TreeNode>();
+
+            await Task.Run(() =>
+            {
+                // Iteriere über TreeView Nodes
+                foreach (TreeNode node in AnimationListTreeView.Nodes)
+                {
+                    int bodyIndex = (int)node.Tag;
+
+                    // Überprüfe Action 0 
+                    if (!AnimationEdit.IsActionDefined(_fileType, bodyIndex, 0))
+                    {
+                        // Wenn undefined, ist Slot frei
+                        changedNodes.Add(node);
+                    }
+                }
+            });
+
+            foreach (TreeNode node in changedNodes)
+            {
+                node.ForeColor = Color.Blue;
+                node.Text += " - FREE";
+            }
+
+            AnimationListTreeView.Invalidate();
+        }*/
+        private async void FindFreeIDSlotsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Zeige Fortschrittsbalken an
+            ProgressBar.Visible = true;
+            ProgressBar.Maximum = AnimationListTreeView.Nodes.Count;
+            ProgressBar.Value = 0;
+
+            await Task.Run(() =>
+            {
+                // Iteriere über TreeView Nodes
+                foreach (TreeNode node in AnimationListTreeView.Nodes)
+                {
+                    int bodyIndex = (int)node.Tag;
+
+                    // Überprüfe Action 0 
+                    if (!AnimationEdit.IsActionDefined(_fileType, bodyIndex, 0))
+                    {
+                        // Wenn undefined, ist Slot frei
+                        this.Invoke(new Action(() =>
+                        {
+                            node.ForeColor = Color.Blue;
+                            node.Text += " - FREE";
+                        }));
+                    }
+
+                    // Aktualisiere Fortschrittsbalken
+                    this.Invoke(new Action(() =>
+                    {
+                        ProgressBar.Value++;
+                    }));
+                }
+            });
+
+            // Verstecke Fortschrittsbalken
+            ProgressBar.Visible = false;
+
+            AnimationListTreeView.Invalidate();
+        }
+
     }
 }

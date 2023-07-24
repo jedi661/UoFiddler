@@ -21,6 +21,8 @@ Version 4.11.17
 - AnimationEdit has received a 90-degree rotation of the graphic to the left.
 - Added calculator for Binary, Decimal, and Hexadecimal.
 - Added a Delete button to the LoadProfile that deletes the selected entries.
+- Added "Find Empty IDs" functionality to AnimationEdit.
+- AnimationEdit added a feature to display only animations with specific IDs in the context menu.
 
 Version : 4.11.16
 - Design and graphics adjusted for the methods.
