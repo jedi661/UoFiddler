@@ -301,9 +301,7 @@
 		<Compile Update="Forms\TileDataFilterForm.Designer.cs">
 			<DependentUpon>TileDataFilterForm.cs</DependentUpon>
 		</Compile>
-		<Compile Update="UserControls\TileDataControl.cs">
-			<SubType>UserControl</SubType>
-		</Compile>
+		<Compile Update="UserControls\TileDataControl.cs" />
 		<Compile Update="UserControls\TileDataControl.Designer.cs">
 			<DependentUpon>TileDataControl.cs</DependentUpon>
 		</Compile>

@@ -2184,5 +2184,18 @@ namespace UoFiddler.Controls.UserControls
             SearchName(searchByNameToolStripTextBox.Text, true, landTilesSelected);
         }
         #endregion
+
+        #region Middlemouse
+
+        private void TreeViewItem_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Middle)
+            {
+                if (treeViewItem.SelectedNode != null && toolStripButton7.Checked)
+                {
+                    toolStripPushMarkedButton8_Click(null, null);
+                }
+            }
+        }
     }
 }

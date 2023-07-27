@@ -6,6 +6,8 @@ UOFiddler based on Ultima SDK it's a tool to view and alter almost every UO 2D c
 
 ## Changelog
 
+
+
 Version 4.11.17
 - Animation: Made frames visible again.
 - Frames highlighting added.
@@ -23,6 +25,7 @@ Version 4.11.17
 - Added a Delete button to the LoadProfile that deletes the selected entries.
 - Added "Find Empty IDs" functionality to AnimationEdit.
 - AnimationEdit added a feature to display only animations with specific IDs in the context menu.
+- The middle mouse button has been assigned the function of copying the settings in the tiledata. This function is only active when a setting has been selected.
 
 Version : 4.11.16
 - Design and graphics adjusted for the methods.

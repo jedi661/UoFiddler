@@ -71,6 +71,7 @@ namespace UoFiddler.Controls.UserControls
             toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
             toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             toolStripButton7 = new System.Windows.Forms.ToolStripButton();
@@ -118,7 +119,6 @@ namespace UoFiddler.Controls.UserControls
             label2 = new System.Windows.Forms.Label();
             checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             tabcontrol = new System.Windows.Forms.TabControl();
-            toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             ItemsContextMenuStrip.SuspendLayout();
             LandTilesContextMenuStrip.SuspendLayout();
             MainToolStrip.SuspendLayout();
@@ -379,6 +379,11 @@ namespace UoFiddler.Controls.UserControls
             toolStripButton3.Text = "Save Tiledata";
             toolStripButton3.Click += OnClickSaveTiledata;
             // 
+            // toolStripSeparator6
+            // 
+            toolStripSeparator6.Name = "toolStripSeparator6";
+            toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
+            // 
             // toolStripComboBox1
             // 
             toolStripComboBox1.Name = "toolStripComboBox1";
@@ -632,6 +637,7 @@ namespace UoFiddler.Controls.UserControls
             treeViewItem.BeforeExpand += OnItemDataNodeExpanded;
             treeViewItem.AfterSelect += AfterSelectTreeViewItem;
             treeViewItem.KeyUp += TileData_KeyUp;
+            treeViewItem.MouseDown += TreeViewItem_MouseDown;
             // 
             // pictureBoxItem
             // 
@@ -940,11 +946,6 @@ namespace UoFiddler.Controls.UserControls
             tabcontrol.SelectedIndex = 0;
             tabcontrol.Size = new System.Drawing.Size(733, 359);
             tabcontrol.TabIndex = 0;
-            // 
-            // toolStripSeparator6
-            // 
-            toolStripSeparator6.Name = "toolStripSeparator6";
-            toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
             // 
             // TileDataControl
             // 
