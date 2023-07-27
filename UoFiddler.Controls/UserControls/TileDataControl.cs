@@ -2185,7 +2185,7 @@ namespace UoFiddler.Controls.UserControls
         }
         #endregion
 
-        #region Middlemouse
+        #region middle mouse button copying the settings in the tiledata
 
         private void TreeViewItem_MouseDown(object sender, MouseEventArgs e)
         {
@@ -2197,5 +2197,14 @@ namespace UoFiddler.Controls.UserControls
                 }
             }
         }
+
+        private void TreeViewItem_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.Y && treeViewItem.SelectedNode != null)
+            {
+                toolStripPushMarkedButton8_Click(null, null);
+            }
+        }
+        #endregion
     }
 }

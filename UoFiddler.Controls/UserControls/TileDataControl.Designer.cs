@@ -636,6 +636,7 @@ namespace UoFiddler.Controls.UserControls
             treeViewItem.TabIndex = 0;
             treeViewItem.BeforeExpand += OnItemDataNodeExpanded;
             treeViewItem.AfterSelect += AfterSelectTreeViewItem;
+            treeViewItem.KeyDown += TreeViewItem_KeyDown;
             treeViewItem.KeyUp += TileData_KeyUp;
             treeViewItem.MouseDown += TreeViewItem_MouseDown;
             // 
