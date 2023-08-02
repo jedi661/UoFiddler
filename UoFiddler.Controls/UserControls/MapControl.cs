@@ -64,6 +64,11 @@ namespace UoFiddler.Controls.UserControls
 
         private static bool _loaded;
 
+        //OnResizeMap
+        private bool isResizing = false;
+        private int targetZoomLevel = 0;
+        private const int ZoomTimerInterval = 10;
+
         /// <summary>
         /// ReLoads if loaded
         /// </summary>
@@ -613,6 +618,7 @@ namespace UoFiddler.Controls.UserControls
             _renderingZoom = false;
         }
 
+        #region OnPaint
         private void OnPaint(object sender, PaintEventArgs e)
         {
             if (IsAncestorSiteInDesignMode || FormsDesignerHelper.IsInDesignMode())
@@ -681,7 +687,7 @@ namespace UoFiddler.Controls.UserControls
                 }
             }
         }
-
+        #endregion
         private void OnKeyDownGoto(object sender, KeyEventArgs e)
         {
             if (e.KeyCode != Keys.Enter)
@@ -1057,7 +1063,9 @@ namespace UoFiddler.Controls.UserControls
             MessageBox.Show($"Statics saved to {Options.OutputPath}", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
         }
 
-        private void OnResizeMap(object sender, EventArgs e)
+        #region OnResizeMap
+        // Old Version
+        /*private void OnResizeMap(object sender, EventArgs e)
         {
             if (PreloadWorker.IsBusy)
             {
@@ -1071,8 +1079,76 @@ namespace UoFiddler.Controls.UserControls
 
             ChangeScrollBar();
             pictureBox.Invalidate();
-        }
+        }*/
+        private void OnResizeMap(object sender, EventArgs e)
+        {
+            if (PreloadWorker.IsBusy)
+            {
+                return;
+            }
 
+            if (!_loaded)
+            {
+                return;
+            }
+
+            // Make sure that the method is not called by multiple events at the same time
+            if (isResizing)
+            {
+                return;
+            }
+
+            isResizing = true;
+
+            // Calculate the target zoom level based on the size of the PictureBox
+            var targetWidth = pictureBox.Width;
+            var targetZoom = 1;
+
+            while (targetWidth > CurrentMap.Width)
+            {
+                targetZoom++;
+                targetWidth >>= 1;
+            }
+
+            targetZoomLevel = targetZoom;
+
+            // Start a timer to gradually zoom
+            Timer zoomTimer = new Timer();
+            zoomTimer.Interval = ZoomTimerInterval;
+            zoomTimer.Tick += PerformZoomStep;
+            zoomTimer.Start();
+        }
+        private void PerformZoomStep(object sender, EventArgs e)
+        {
+            // Zoom gradually until the desired zoom level is reached
+            if (Zoom < targetZoomLevel)
+            {
+                Zoom++;
+            }
+            else if (Zoom > targetZoomLevel)
+            {
+                Zoom--;
+            }
+            else
+            {
+                // When the desired zoom level is reached, stop the timer
+                Timer zoomTimer = (Timer)sender;
+                try
+                {
+                    zoomTimer.Stop();
+                    isResizing = false;
+
+                    // Update the ScrollBars and the PictureBox
+                    ChangeScrollBar();
+                    pictureBox.Invalidate();
+                }
+                finally
+                {
+                    zoomTimer.Dispose();
+                }
+            }
+        }
+        #endregion
         private void OnClickRewriteMap(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
