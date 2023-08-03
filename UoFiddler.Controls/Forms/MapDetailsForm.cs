@@ -52,10 +52,6 @@ namespace UoFiddler.Controls.Forms
                     pictureBox3.Image = currentTexture;
                 }
             }
-
-
-
-
             // Display of the land tiles in pictureBox1
             Bitmap landTileBitmap = Art.GetLand(currentTile.Id);
             pictureBox1.Image = landTileBitmap;
