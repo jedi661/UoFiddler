@@ -200,9 +200,7 @@
 		<Compile Update="UserControls\LightControl.Designer.cs">
 			<DependentUpon>LightControl.cs</DependentUpon>
 		</Compile>
-		<Compile Update="UserControls\MapControl.cs">
-			<SubType>UserControl</SubType>
-		</Compile>
+		<Compile Update="UserControls\MapControl.cs" />
 		<Compile Update="UserControls\MapControl.Designer.cs">
 			<DependentUpon>MapControl.cs</DependentUpon>
 		</Compile>
@@ -218,9 +216,7 @@
 		<Compile Update="Forms\MapReplaceForm.Designer.cs">
 			<DependentUpon>MapReplaceForm.cs</DependentUpon>
 		</Compile>
-		<Compile Update="Forms\MapDetailsForm.cs">
-			<SubType>Form</SubType>
-		</Compile>
+		<Compile Update="Forms\MapDetailsForm.cs" />
 		<Compile Update="Forms\MapDetailsForm.Designer.cs">
 			<DependentUpon>MapDetailsForm.cs</DependentUpon>
 		</Compile>
