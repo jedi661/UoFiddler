@@ -32,11 +32,15 @@ namespace UoFiddler.Controls.Forms
 
             Tile currentTile = currentMap.Tiles.GetLandTile(point.X, point.Y);            
             richTextBox.AppendText($"X: {point.X} Y: {point.Y}\n\n");
+            richTextBox.SelectionFont = new Font(richTextBox.Font, FontStyle.Bold);
             richTextBox.AppendText("LandTile:\n");
             richTextBox.AppendText($"{TileData.LandTable[currentTile.Id].Name}: 0x{currentTile.Id:X} Altitude: {currentTile.Z}\n\n");
             HuedTile[] staticsAtPoint = currentMap.Tiles.GetStaticTiles(point.X, point.Y);
+            richTextBox.SelectionFont = new Font(richTextBox.Font, FontStyle.Regular);
+            richTextBox.SelectionFont = new Font(richTextBox.Font, FontStyle.Bold);
             _staticsAtPoint = currentMap.Tiles.GetStaticTiles(point.X, point.Y);
             richTextBox.AppendText("Statics:\n");
+            richTextBox.SelectionFont = new Font(richTextBox.Font, FontStyle.Regular);
             foreach (HuedTile @static in staticsAtPoint)
             {
                 ushort id = @static.Id;
