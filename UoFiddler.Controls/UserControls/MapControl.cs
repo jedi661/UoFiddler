@@ -861,7 +861,7 @@ namespace UoFiddler.Controls.UserControls
                     int c = int.Parse(element.GetAttribute("color"));
                     string text = element.GetAttribute("text");
                     OverlayCursor o = new OverlayCursor(new Point(x, y), m, text, Color.FromArgb(c));
-                    TreeNode node = new TreeNode(text) {Tag = o};
+                    TreeNode node = new TreeNode(text) { Tag = o };
                     OverlayObjectTree.Nodes[m].Nodes.Add(node);
                 }
             }
