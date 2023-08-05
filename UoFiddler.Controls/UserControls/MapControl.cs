@@ -1149,6 +1149,8 @@ namespace UoFiddler.Controls.UserControls
             }
         }
         #endregion
+
+        #region ReWriteMap
         private void OnClickRewriteMap(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -1158,6 +1160,7 @@ namespace UoFiddler.Controls.UserControls
             MessageBox.Show($"Map saved to {Options.OutputPath}", "Saved", MessageBoxButtons.OK,
                 MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
         }
+        #endregion
 
         private void OnClickReportInvisStatics(object sender, EventArgs e)
         {
