@@ -84,8 +84,6 @@ namespace UoFiddler.Controls.Forms
                 richTextBox.SelectionFont = new Font(richTextBox.Font, FontStyle.Regular);
                 richTextBox.AppendText($"Width: {texture.Width} Height: {texture.Height}\n");
                 richTextBox.AppendText($"TexID: 0x{texID:X}\n");
-
-
                 // Load into PictureBox
                 pictureBox3.Image = texture;
             }
