@@ -30,7 +30,7 @@ namespace UoFiddler.Controls.Forms
             Icon = Options.GetFiddlerIcon();
             TopMost = true;
 
-            Tile currentTile = currentMap.Tiles.GetLandTile(point.X, point.Y);            
+            Tile currentTile = currentMap.Tiles.GetLandTile(point.X, point.Y);
             richTextBox.AppendText($"X: {point.X} Y: {point.Y}\n\n");
             richTextBox.SelectionFont = new Font(richTextBox.Font, FontStyle.Bold);
             richTextBox.AppendText("LandTile:\n");
