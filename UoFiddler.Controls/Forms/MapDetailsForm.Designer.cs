@@ -150,7 +150,7 @@ namespace UoFiddler.Controls.Forms
             Controls.Add(pictureBox1);
             Controls.Add(richTextBox);
             DoubleBuffered = true;
-            FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Name = "MapDetailsForm";
             Text = "MapDetails";
