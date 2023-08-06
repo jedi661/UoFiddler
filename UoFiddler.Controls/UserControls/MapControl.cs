@@ -576,9 +576,14 @@ namespace UoFiddler.Controls.UserControls
             }
         }
 
+        #region Zoom
+
+        private const double MaxZoom = 16;
+        private const double MinZoom = 0.25;
+
         private void OnZoomMinus(object sender, EventArgs e)
         {
-            if (Zoom / 2 < 0.25)
+            if (Zoom / 2 < MinZoom)
             {
                 return;
             }
@@ -589,7 +594,7 @@ namespace UoFiddler.Controls.UserControls
 
         private void OnZoomPlus(object sender, EventArgs e)
         {
-            if (Zoom * 2 > 16) // 4 or 8 or 16 or 32 zoom
+            if (Zoom * 2 > MaxZoom)
             {
                 return;
             }
@@ -617,6 +622,7 @@ namespace UoFiddler.Controls.UserControls
             pictureBox.Invalidate();
             _renderingZoom = false;
         }
+        #endregion
 
         #region OnPaint
         private void OnPaint(object sender, PaintEventArgs e)
