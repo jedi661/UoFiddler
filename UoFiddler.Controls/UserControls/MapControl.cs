@@ -589,7 +589,7 @@ namespace UoFiddler.Controls.UserControls
 
         private void OnZoomPlus(object sender, EventArgs e)
         {
-            if (Zoom * 2 > 16) // Erhöhen Sie den Wert von 4 auf 8 oder 16 einen anderen gewünschten Wert
+            if (Zoom * 2 > 16) // 4 or 8 or 16 or 32 zoom
             {
                 return;
             }
