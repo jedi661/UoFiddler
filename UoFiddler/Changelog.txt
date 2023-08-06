@@ -1,6 +1,7 @@
 Version 4.11.18 #XG1
 - Added a Performzoomstep to the map.
 - Map - Getmapinfo: Added Getmapinfo view for textures and static items. Map details now also work with the texture.
+- Zoom factor increased to 16 on the map
 
 Version : 4.11.17 #XG1
 - Animation: Made frames visible again.

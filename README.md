@@ -9,6 +9,7 @@ UOFiddler based on Ultima SDK it's a tool to view and alter almost every UO 2D c
 Version 4.11.18
 - Added a Performzoomstep to the map.
 - Map - Getmapinfo: Added Getmapinfo view for textures and static items. Map details now also work with the texture.
+- Zoom factor increased to 16 on the map
 
 Version 4.11.17
 - Animation: Made frames visible again.
