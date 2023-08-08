@@ -27,13 +27,13 @@ namespace UoFiddler.Controls.Forms
         private readonly Map _map;
         private List<ModArea> _toReplace;
 
-        // Listen zum Speichern der from- und to-Tile-IDs für Static- und Land-Tiles
+        // Lists for storing the from and to Tile IDs for static and land tiles
         private List<int> staticFromTileIds = new List<int>();
         private List<int> staticToTileIds = new List<int>();
         private List<int> landFromTileIds = new List<int>();
         private List<int> landToTileIds = new List<int>();
 
-        // Indizes zum Verfolgen der aktuellen Position in den Listen
+        // Indices for tracking the current position in the lists
         private int currentStaticIndex = 0;
         private int currentLandIndex = 0;
 
@@ -43,7 +43,7 @@ namespace UoFiddler.Controls.Forms
 
             _map = map;
 
-            // Aktualisieren der Bilder in den pictureBox-Steuerelementen
+            // Updating the images in the pictureBox controls
             ShowTileImages();
             ShowStaticTileImages();
         }
@@ -98,85 +98,59 @@ namespace UoFiddler.Controls.Forms
             }
         }
 
-        #region Tiles Statics Show
-
-        /*private void ShowTileImages()
-        {
-            // Laden des XML-Inhalts aus der richTextBox1
-            XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.LoadXml(richTextBox1.Text);
-
-            // Abrufen des ersten landtile-Elements
-            XmlNode landTileNode = xmlDoc.SelectSingleNode("//landtile");
-
-            // Abrufen der from- und to-Attribute
-            string fromHex = landTileNode.Attributes["from"].Value;
-            string toHex = landTileNode.Attributes["to"].Value;
-
-            // Konvertieren der Hex-Adressen in Ganzzahlen
-            int fromTileId = int.Parse(fromHex.Substring(2), System.Globalization.NumberStyles.HexNumber);
-            int toTileId = int.Parse(toHex.Substring(2), System.Globalization.NumberStyles.HexNumber);
-
-            // Abrufen der Bilder für die Tile-IDs
-            Bitmap fromTileImage = Ultima.Art.GetLand(fromTileId);
-            Bitmap toTileImage = Ultima.Art.GetLand(toTileId);
-
-            // Anzeigen der Bilder in den pictureBox-Steuerelementen
-            pictureBox1.Image = fromTileImage;
-            pictureBox2.Image = toTileImage;
-        }*/
+        #region Tiles Statics Show       
 
         private void ShowTileImages()
         {
-            // Laden des XML-Inhalts aus der richTextBox1
+            // Loading the XML content from the richTextBox1
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.LoadXml(richTextBox1.Text);
 
-            // Löschen der Listen
+            // Clearing the lists
             staticFromTileIds.Clear();
             staticToTileIds.Clear();
             landFromTileIds.Clear();
             landToTileIds.Clear();
 
-            // Zurücksetzen der Indizes
+            // Resetting the indices
             currentStaticIndex = 0;
             currentLandIndex = 0;
 
-            // Abrufen aller static-Elemente
+            // Fetching all the 'static' elements
             XmlNodeList staticNodes = xmlDoc.SelectNodes("//static");
             foreach (XmlNode staticNode in staticNodes)
             {
-                // Abrufen der from- und to-Attribute
+                // Fetching the 'from' and 'to' attributes
                 string fromHex = staticNode.Attributes["from"].Value;
                 string toHex = staticNode.Attributes["to"].Value;
 
-                // Konvertieren der Hex-Adressen in Ganzzahlen
+                // Converting the hex addresses to integers
                 int fromTileId = int.Parse(fromHex.Substring(2), System.Globalization.NumberStyles.HexNumber);
                 int toTileId = int.Parse(toHex.Substring(2), System.Globalization.NumberStyles.HexNumber);
 
-                // Hinzufügen der Tile-IDs zu den Listen
+                // Adding the tile IDs to the lists
                 staticFromTileIds.Add(fromTileId);
                 staticToTileIds.Add(toTileId);
             }
 
-            // Abrufen aller landtile-Elemente
+            // Fetching all 'landtile' elements
             XmlNodeList landTileNodes = xmlDoc.SelectNodes("//landtile");
             foreach (XmlNode landTileNode in landTileNodes)
             {
-                // Abrufen der from- und to-Attribute
+                // Fetching the 'from' and 'to' attributes
                 string fromHex = landTileNode.Attributes["from"].Value;
                 string toHex = landTileNode.Attributes["to"].Value;
 
-                // Konvertieren der Hex-Adressen in Ganzzahlen
+                // Converting the hex addresses to integers
                 int fromTileId = int.Parse(fromHex.Substring(2), System.Globalization.NumberStyles.HexNumber);
                 int toTileId = int.Parse(toHex.Substring(2), System.Globalization.NumberStyles.HexNumber);
 
-                // Hinzufügen der Tile-IDs zu den Listen
+                // Adding the tile IDs to the lists
                 landFromTileIds.Add(fromTileId);
                 landToTileIds.Add(toTileId);
             }
 
-            // Anzeigen der ersten Bilder in den pictureBox-Steuerelementen
+            // Displaying the initial images in the pictureBox controls
             UpdateStaticPictureBoxes();
             UpdateLandPictureBoxes();
         }
@@ -185,15 +159,15 @@ namespace UoFiddler.Controls.Forms
         {
             if (staticFromTileIds.Count > 0 && staticToTileIds.Count > 0)
             {
-                // Abrufen der aktuellen from- und to-Tile-IDs für Static-Tiles
+                // Retrieving the current "from" and "to" tile IDs for Static Tiles
                 int fromTileId = staticFromTileIds[currentStaticIndex];
                 int toTileId = staticToTileIds[currentStaticIndex];
 
-                // Abrufen der Bilder für die Tile-IDs
+                // Fetching the images for the tile IDs
                 Bitmap fromTileImage = Ultima.Art.GetStatic(fromTileId);
                 Bitmap toTileImage = Ultima.Art.GetStatic(toTileId);
 
-                // Anzeigen der Bilder in den pictureBox-Steuerelementen
+                // Displaying the images in the pictureBox controls
                 pictureBox3.Image = fromTileImage;
                 pictureBox4.Image = toTileImage;
             }
@@ -203,15 +177,15 @@ namespace UoFiddler.Controls.Forms
         {
             if (landFromTileIds.Count > 0 && landToTileIds.Count > 0)
             {
-                // Abrufen der aktuellen from- und to-Tile-IDs für Land-Tiles
+                // Fetching the current "from" and "to" tile IDs for land tiles
                 int fromTileId = landFromTileIds[currentLandIndex];
                 int toTileId = landToTileIds[currentLandIndex];
 
-                // Abrufen der Bilder für die Tile-IDs
+                // Fetching the images for the tile IDs
                 Bitmap fromTileImage = Ultima.Art.GetLand(fromTileId);
                 Bitmap toTileImage = Ultima.Art.GetLand(toTileId);
 
-                // Anzeigen der Bilder in den pictureBox-Steuerelementen
+                // Displaying the images in the pictureBox controls
                 pictureBox1.Image = fromTileImage;
                 pictureBox2.Image = toTileImage;
             }
@@ -219,120 +193,103 @@ namespace UoFiddler.Controls.Forms
 
         private void btStaticForward_Click(object sender, EventArgs e)
         {
-            // Erhöhen des aktuellen Static-Index
+            // Increasing the current static index
             currentStaticIndex++;
             if (currentStaticIndex >= staticFromTileIds.Count)
             {
                 currentStaticIndex = 0;
             }
 
-            // Aktualisieren der Bilder in den pictureBox-Steuerelementen
+            // Updating the images in the pictureBox controls
             UpdateStaticPictureBoxes();
         }
 
         private void btStaticBackward_Click(object sender, EventArgs e)
         {
-            // Verringern des aktuellen Static-Index
+            // Decreasing the current static index
             currentStaticIndex--;
             if (currentStaticIndex < 0)
             {
                 currentStaticIndex = staticFromTileIds.Count - 1;
             }
 
-            // Aktualisieren der Bilder in den pictureBox-Steuerelementen
+            // Updating the images in the pictureBox controls
             UpdateStaticPictureBoxes();
         }
 
         private void btLandForward_Click(object sender, EventArgs e)
         {
-            // Erhöhen des aktuellen Land-Index
+            // Increasing the current land index
             currentLandIndex++;
             if (currentLandIndex >= landFromTileIds.Count)
             {
                 currentLandIndex = 0;
             }
 
-            // Aktualisieren der Bilder in den pictureBox-Steuerelementen
+            // Updating the images in the pictureBox controls
             UpdateLandPictureBoxes();
         }
 
         private void btLandBackward_Click(object sender, EventArgs e)
         {
-            // Verringern des aktuellen Land-Index
+            // Decreasing the current land index
             currentLandIndex--;
             if (currentLandIndex < 0)
             {
                 currentLandIndex = landFromTileIds.Count - 1;
             }
 
-            // Aktualisieren der Bilder in den pictureBox-Steuerelementen
+            // Updating the images in the pictureBox controls
             UpdateLandPictureBoxes();
         }
 
         private void ShowStaticTileImages()
         {
-            // Laden des XML-Inhalts aus der richTextBox1
+            // Loading the XML content from the richTextBox1
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.LoadXml(richTextBox1.Text);
 
-            // Abrufen des ersten static-Elements
+            // Retrieving the first 'static' element
             XmlNode staticNode = xmlDoc.SelectSingleNode("//static");
 
-            // Abrufen der from- und to-Attribute
+            // Retrieving the 'from' and 'to' attributes
             string fromHex = staticNode.Attributes["from"].Value;
             string toHex = staticNode.Attributes["to"].Value;
 
-            // Konvertieren der Hex-Adressen in Ganzzahlen
+            // Converting the hex addresses to integers
             int fromTileId = int.Parse(fromHex.Substring(2), System.Globalization.NumberStyles.HexNumber);
             int toTileId = int.Parse(toHex.Substring(2), System.Globalization.NumberStyles.HexNumber);
 
-            // Abrufen der Bilder für die Tile-IDs
+            // Retrieving the images for the tile IDs
             Bitmap fromTileImage = Ultima.Art.GetStatic(fromTileId);
             Bitmap toTileImage = Ultima.Art.GetStatic(toTileId);
 
-            // Anzeigen der Bilder in den pictureBox-Steuerelementen
+            // Displaying the images in the pictureBox controls
             pictureBox3.Image = fromTileImage;
             pictureBox4.Image = toTileImage;
         }
 
-
-        /*private void richTextBoxchangeText_TextChanged(object sender, EventArgs e)
-        {
-            // Aktualisieren der Bilder in den pictureBox-Steuerelementen
-            ShowTileImages();
-        }
-
-        // Ereignishandler für das Leave-Ereignis der richTextBox1
-        private void richTextBox1_Leave(object sender, EventArgs e)
-        {
-            // Aktualisieren der Bilder in den pictureBox-Steuerelementen
-            ShowTileImages();
-            ShowStaticTileImages();
-        }*/
-
-
         private void btToupdateRichbox1_Click(object sender, EventArgs e)
         {
-            // Aktualisieren der Bilder in den pictureBox-Steuerelementen
+            // Updating the images in the pictureBox controls
             ShowTileImages();
             ShowStaticTileImages();
 
-            // Pfad zum Speichern der XML-Datei
+            // Path for saving the XML file
             string path = Options.OutputPath;
 
-            // Name der XML-Datei
+            // Name of the XML file
             string xmlFileName = "TileStaticReplace.xml";
 
-            // Vollständiger Pfad zur XML-Datei
+            // Full path to the XML file
             string xmlFilePath = Path.Combine(path, xmlFileName);
 
-            // Speichern des Inhalts der RichTextBox als XML-Datei
+            // Saving the content of the RichTextBox as an XML file
             richTextBox1.SaveFile(xmlFilePath, RichTextBoxStreamType.PlainText);
 
-            // Optional: Bestätigungsnachricht anzeigen
+            // Displaying confirmation message.
             MessageBox.Show($"XML file saved to {xmlFilePath}", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-
 
         #endregion
 
@@ -344,6 +301,7 @@ namespace UoFiddler.Controls.Forms
             public byte ZMax { get; set; }
         }
 
+        #region Browse
         private void OnBrowse(object sender, EventArgs e)
         {
             using (OpenFileDialog dialog = new OpenFileDialog
@@ -366,16 +324,17 @@ namespace UoFiddler.Controls.Forms
 
                 textBox1.Text = dialog.FileName;
 
-                // Lesen des Inhalts der ausgewählten Datei
+                // Reading the contents of the selected file.
                 string fileContent = File.ReadAllText(dialog.FileName);
 
-                // Anzeigen des Inhalts in der richTextBox1
+                // Displaying the content in the richTextBox1.
                 richTextBox1.Text = fileContent;
             }
 
             ShowTileImages();
             ShowStaticTileImages();
         }
+        #endregion
 
         private bool LoadFile(string file)
         {
@@ -525,6 +484,7 @@ namespace UoFiddler.Controls.Forms
             mMapReader.Close();
         }
 
+        #region ReplaceStatic
         private void ReplaceStatic(string path, int map, int width, int height)
         {
             string indexPath = Files.GetFilePath($"staidx{map}.mul");
@@ -674,11 +634,14 @@ namespace UoFiddler.Controls.Forms
             staticsReader.Close();
         }
 
+        #endregion
+
+        #region OpenDir
         private void btOpenDir_Click(object sender, EventArgs e)
         {
             string path = Options.OutputPath;
 
-            // Überprüfen, ob das Verzeichnis existiert, bevor es geöffnet wird
+            // Check if the directory exists before opening it.
             if (Directory.Exists(path))
             {
                 Process.Start("explorer.exe", path);
@@ -688,6 +651,7 @@ namespace UoFiddler.Controls.Forms
                 MessageBox.Show("Directory does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        #endregion
     }
 
     public class RectangleArea
