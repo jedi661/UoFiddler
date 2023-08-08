@@ -230,9 +230,7 @@
 		<Compile Update="Forms\MapMarkerForm.Designer.cs">
 			<DependentUpon>MapMarkerForm.cs</DependentUpon>
 		</Compile>
-		<Compile Update="Forms\MapReplaceTilesForm.cs">
-			<SubType>Form</SubType>
-		</Compile>
+		<Compile Update="Forms\MapReplaceTilesForm.cs" />
 		<Compile Update="Forms\MapReplaceTilesForm.Designer.cs">
 			<DependentUpon>MapReplaceTilesForm.cs</DependentUpon>
 		</Compile>

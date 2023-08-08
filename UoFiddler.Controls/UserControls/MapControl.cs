@@ -579,7 +579,7 @@ namespace UoFiddler.Controls.UserControls
         #region Zoom
 
         private const double MaxZoom = 16; // Here you can set the zoom factor  4 or 8 or 16 or 32...
-        private const double MinZoom = 0.25; 
+        private const double MinZoom = 0.25;
 
         private void OnZoomMinus(object sender, EventArgs e)
         {
