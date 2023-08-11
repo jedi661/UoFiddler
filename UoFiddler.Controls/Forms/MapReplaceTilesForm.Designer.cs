@@ -209,7 +209,7 @@ namespace UoFiddler.Controls.Forms
             // 
             // btStaticForward
             // 
-            btStaticForward.Image = Properties.Resources.left;
+            btStaticForward.Image = Properties.Resources.left_arrow;
             btStaticForward.Location = new System.Drawing.Point(404, 326);
             btStaticForward.Name = "btStaticForward";
             btStaticForward.Size = new System.Drawing.Size(55, 55);
@@ -219,7 +219,7 @@ namespace UoFiddler.Controls.Forms
             // 
             // btStaticBackward
             // 
-            btStaticBackward.Image = Properties.Resources.right;
+            btStaticBackward.Image = Properties.Resources.right_arrow;
             btStaticBackward.Location = new System.Drawing.Point(511, 326);
             btStaticBackward.Name = "btStaticBackward";
             btStaticBackward.Size = new System.Drawing.Size(54, 55);
@@ -229,7 +229,7 @@ namespace UoFiddler.Controls.Forms
             // 
             // btLandForward
             // 
-            btLandForward.Image = Properties.Resources.left;
+            btLandForward.Image = Properties.Resources.left_arrow;
             btLandForward.Location = new System.Drawing.Point(404, 121);
             btLandForward.Name = "btLandForward";
             btLandForward.Size = new System.Drawing.Size(55, 51);
@@ -239,7 +239,7 @@ namespace UoFiddler.Controls.Forms
             // 
             // btLandBackward
             // 
-            btLandBackward.Image = Properties.Resources.right;
+            btLandBackward.Image = Properties.Resources.right_arrow;
             btLandBackward.Location = new System.Drawing.Point(511, 121);
             btLandBackward.Name = "btLandBackward";
             btLandBackward.Size = new System.Drawing.Size(54, 51);

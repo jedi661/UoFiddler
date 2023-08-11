@@ -82,6 +82,7 @@ namespace UoFiddler.Plugin.UopPacker.UserControls
             inputfolder = new System.Windows.Forms.TextBox();
             SelectFolderButton = new System.Windows.Forms.Button();
             ExtractSingleFileTabPage = new System.Windows.Forms.TabPage();
+            checkBoxOverwriteSaveUop = new System.Windows.Forms.CheckBox();
             MainStatusStrip = new System.Windows.Forms.StatusStrip();
             toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             guilabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -466,7 +467,7 @@ namespace UoFiddler.Plugin.UopPacker.UserControls
             // 
             statustext.ForeColor = System.Drawing.Color.DarkRed;
             statustext.Name = "statustext";
-            statustext.Size = new System.Drawing.Size(299, 17);
+            statustext.Size = new System.Drawing.Size(330, 17);
             statustext.Spring = true;
             statustext.Text = "Status";
             statustext.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -533,6 +534,7 @@ namespace UoFiddler.Plugin.UopPacker.UserControls
             // 
             // ExtractSingleFileTabPage
             // 
+            ExtractSingleFileTabPage.Controls.Add(checkBoxOverwriteSaveUop);
             ExtractSingleFileTabPage.Controls.Add(label1);
             ExtractSingleFileTabPage.Controls.Add(label2);
             ExtractSingleFileTabPage.Controls.Add(inmul);
@@ -571,6 +573,16 @@ namespace UoFiddler.Plugin.UopPacker.UserControls
             ExtractSingleFileTabPage.TabIndex = 0;
             ExtractSingleFileTabPage.Text = "One file";
             ExtractSingleFileTabPage.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxOverwriteSaveUop
+            // 
+            checkBoxOverwriteSaveUop.AutoSize = true;
+            checkBoxOverwriteSaveUop.Location = new System.Drawing.Point(176, 137);
+            checkBoxOverwriteSaveUop.Name = "checkBoxOverwriteSaveUop";
+            checkBoxOverwriteSaveUop.Size = new System.Drawing.Size(102, 19);
+            checkBoxOverwriteSaveUop.TabIndex = 40;
+            checkBoxOverwriteSaveUop.Text = "overwrite .uop";
+            checkBoxOverwriteSaveUop.UseVisualStyleBackColor = true;
             // 
             // MainStatusStrip
             // 
@@ -704,5 +716,6 @@ namespace UoFiddler.Plugin.UopPacker.UserControls
         private System.Windows.Forms.Button uoptomul;
         private System.Windows.Forms.ComboBox uoptype;
         private System.Windows.Forms.ToolStripStatusLabel VersionLabel;
+        private System.Windows.Forms.CheckBox checkBoxOverwriteSaveUop;
     }
 }

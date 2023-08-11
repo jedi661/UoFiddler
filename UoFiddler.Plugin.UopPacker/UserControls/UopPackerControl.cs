@@ -30,6 +30,9 @@ namespace UoFiddler.Plugin.UopPacker.UserControls
             mulMapIndex.ReadOnly = uopMapIndex.ReadOnly = true;
 
             Dock = DockStyle.Fill;
+
+            checkBoxOverwriteSaveUop.Checked = Properties.Settings.Default.OverwriteSaveUop;
+
         }
 
         public UopPackerControl(string version) : this()
@@ -50,7 +53,7 @@ namespace UoFiddler.Plugin.UopPacker.UserControls
 
         private void InputIdxSelect(object sender, EventArgs e)
         {
-            FileDialog.FilterIndex = 3;            
+            FileDialog.FilterIndex = 3;
             FileDialog.FileName = "artidx.mul";
             if (FileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -108,11 +111,18 @@ namespace UoFiddler.Plugin.UopPacker.UserControls
                 return;
             }
 
-            if (File.Exists(outuop.Text))
+            /*if (File.Exists(outuop.Text))
+            {
+                MessageBox.Show("Output file already exists");
+                return;
+            }*/
+
+            if (File.Exists(outuop.Text) && !checkBoxOverwriteSaveUop.Checked)
             {
                 MessageBox.Show("Output file already exists");
                 return;
             }
+
 
             try
             {

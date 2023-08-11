@@ -3,6 +3,7 @@ Version 4.11.18 #XG1
 - Map - Getmapinfo: Added Getmapinfo view for textures and static items. Map details now also work with the texture.
 - Zoom factor increased to 16 on the map
 - Added Map Replace Tiles PictureBoxes to display the tiles and static elements. An update function has been implemented to refresh the RichTextBox for displaying XML data. This also enables the XML to be saved to an external directory. An 'Open Directory' button has been included to facilitate directory access. Graphics have been incorporated, along with buttons to navigate and view between the statics and tiles.
+- UOP Packer CheckBox added, which allows the file to be overwritten if active.
 
 Version : 4.11.17 #XG1
 - Animation: Made frames visible again.

@@ -39,6 +39,11 @@
 		  <AutoGen>True</AutoGen>
 		  <DependentUpon>Resources.resx</DependentUpon>
 		</Compile>
+		<Compile Update="Properties\Settings.Designer.cs">
+		  <DesignTimeSharedInput>True</DesignTimeSharedInput>
+		  <AutoGen>True</AutoGen>
+		  <DependentUpon>Settings.settings</DependentUpon>
+		</Compile>
 		<Compile Update="UserControls\UopPackerControl.cs">
 			<SubType>UserControl</SubType>
 		</Compile>
@@ -55,5 +60,11 @@
 			<DependentUpon>UopPackerControl.cs</DependentUpon>
 			<SubType>Designer</SubType>
 		</EmbeddedResource>
+	</ItemGroup>
+	<ItemGroup>
+	  <None Update="Properties\Settings.settings">
+	    <Generator>SettingsSingleFileGenerator</Generator>
+	    <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+	  </None>
 	</ItemGroup>
 </Project>
