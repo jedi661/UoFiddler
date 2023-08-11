@@ -174,13 +174,17 @@ namespace UoFiddler.Plugin.UopPacker.UserControls
             // 
             // multouop
             // 
-            multouop.Location = new System.Drawing.Point(405, 38);
+            multouop.AutoSize = true;
+            multouop.BackColor = System.Drawing.Color.Transparent;
+            multouop.FlatAppearance.BorderSize = 0;
+            multouop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            multouop.Image = Properties.Resources.ConvertUop2;
+            multouop.Location = new System.Drawing.Point(410, 59);
             multouop.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             multouop.Name = "multouop";
-            multouop.Size = new System.Drawing.Size(102, 150);
+            multouop.Size = new System.Drawing.Size(97, 103);
             multouop.TabIndex = 7;
-            multouop.Text = "Convert";
-            multouop.UseVisualStyleBackColor = true;
+            multouop.UseVisualStyleBackColor = false;
             multouop.Click += ToUop;
             // 
             // FileDialog
@@ -333,12 +337,15 @@ namespace UoFiddler.Plugin.UopPacker.UserControls
             // 
             // uoptomul
             // 
-            uoptomul.Location = new System.Drawing.Point(405, 238);
+            uoptomul.AutoSize = true;
+            uoptomul.FlatAppearance.BorderSize = 0;
+            uoptomul.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            uoptomul.Image = Properties.Resources.ConvertMul;
+            uoptomul.Location = new System.Drawing.Point(410, 268);
             uoptomul.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             uoptomul.Name = "uoptomul";
-            uoptomul.Size = new System.Drawing.Size(102, 150);
+            uoptomul.Size = new System.Drawing.Size(97, 101);
             uoptomul.TabIndex = 31;
-            uoptomul.Text = "Convert";
             uoptomul.UseVisualStyleBackColor = true;
             uoptomul.Click += ToMul;
             // 
