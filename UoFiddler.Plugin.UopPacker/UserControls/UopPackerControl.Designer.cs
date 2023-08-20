@@ -586,9 +586,9 @@ namespace UoFiddler.Plugin.UopPacker.UserControls
             checkBoxOverwriteSaveUop.AutoSize = true;
             checkBoxOverwriteSaveUop.Location = new System.Drawing.Point(176, 137);
             checkBoxOverwriteSaveUop.Name = "checkBoxOverwriteSaveUop";
-            checkBoxOverwriteSaveUop.Size = new System.Drawing.Size(102, 19);
+            checkBoxOverwriteSaveUop.Size = new System.Drawing.Size(104, 19);
             checkBoxOverwriteSaveUop.TabIndex = 40;
-            checkBoxOverwriteSaveUop.Text = "overwrite .uop";
+            checkBoxOverwriteSaveUop.Text = "Overwrite .uop";
             checkBoxOverwriteSaveUop.UseVisualStyleBackColor = true;
             // 
             // MainStatusStrip

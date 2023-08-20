@@ -195,5 +195,26 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
             isFormOpen = false;
             TextureCutter.Enabled = true; // Enable the button again.
         }
+
+        private void btDecriptClient_Click(object sender, EventArgs e)
+        {
+            if (isFormOpen)
+            {
+                return; // Exit the method if the form is already open.
+            }
+
+            DecriptClientForm form = new DecriptClientForm();
+            form.FormClosed += DecriptClientForm_FormClosed;
+            form.Show();
+            isFormOpen = true;
+
+            form.Enabled = true;
+        }
+
+        private void DecriptClientForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            isFormOpen = false;
+            btDecriptClient.Enabled = true; // Enable the button again.
+        }
     }
 }

@@ -26,6 +26,8 @@ namespace UoFiddler.Plugin.Compare.UserControls
         {
             InitializeComponent();
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint, true);
+
+            pictureBox.MouseWheel += new MouseEventHandler(pictureBox_MouseWheel); // MouseWeel
         }
 
         private bool _loaded;
@@ -452,16 +454,20 @@ namespace UoFiddler.Plugin.Compare.UserControls
 
         private void OnZoomPlus(object sender, EventArgs e)
         {
-            _zoom *= 2;
-
-            DoZoom();
+            if (_zoom < 18) // 18 zoom
+            {
+                _zoom *= 2;
+                DoZoom();
+            }
         }
 
         private void OnZoomMinus(object sender, EventArgs e)
         {
-            _zoom /= 2;
-
-            DoZoom();
+            if (_zoom > 0.25) //0.25 Zoom
+            {
+                _zoom /= 2;
+                DoZoom();
+            }
         }
 
         private void DoZoom()
@@ -470,8 +476,9 @@ namespace UoFiddler.Plugin.Compare.UserControls
 
             ZoomLabel.Text = $"Zoom: {_zoom}";
 
-            int x = Math.Max(0, _currentPoint.X - ((int)(pictureBox.ClientSize.Width / _zoom) / 2));
-            int y = Math.Max(0, _currentPoint.Y - ((int)(pictureBox.ClientSize.Height / _zoom) / 2));
+            Point mousePosition = pictureBox.PointToClient(MousePosition);
+            int x = Math.Max(0, (int)(mousePosition.X / _zoom + hScrollBar.Value) - (int)(pictureBox.ClientSize.Width / _zoom / 2));
+            int y = Math.Max(0, (int)(mousePosition.Y / _zoom + vScrollBar.Value) - (int)(pictureBox.ClientSize.Height / _zoom / 2));
 
             x = Math.Min(x, hScrollBar.Maximum);
             y = Math.Min(y, vScrollBar.Maximum);
@@ -772,5 +779,19 @@ namespace UoFiddler.Plugin.Compare.UserControls
         {
             pictureBox.Invalidate();
         }
+
+        #region MouseWeel Zoom
+        private void pictureBox_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (e.Delta > 0)
+            {
+                OnZoomPlus(sender, e);
+            }
+            else if (e.Delta < 0)
+            {
+                OnZoomMinus(sender, e);
+            }
+        }
+        #endregion
     }
 }

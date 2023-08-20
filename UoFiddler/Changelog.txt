@@ -1,4 +1,8 @@
-Version 4.11.18 #XG1
+Version : 4.11.19 #XG1
+-Add Decripter Client (ConverterMultiPlugin)
+-Add Zoom function Mouseweel Plugin Compare Map
+
+Version : 4.11.18 #XG1
 - Added a Performzoomstep to the map.
 - Map - Getmapinfo: Added Getmapinfo view for textures and static items. Map details now also work with the texture.
 - Zoom factor increased to 16 on the map

@@ -51,11 +51,12 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
             label3 = new System.Windows.Forms.Label();
             buttonGraficCutterForm = new System.Windows.Forms.Button();
             TextureCutter = new System.Windows.Forms.Button();
+            btDecriptClient = new System.Windows.Forms.Button();
             SuspendLayout();
             // 
             // BtnMultiOpen
             // 
-            BtnMultiOpen.Location = new System.Drawing.Point(350, 301);
+            BtnMultiOpen.Location = new System.Drawing.Point(350, 218);
             BtnMultiOpen.Name = "BtnMultiOpen";
             BtnMultiOpen.Size = new System.Drawing.Size(92, 23);
             BtnMultiOpen.TabIndex = 0;
@@ -65,7 +66,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
             // 
             // btnSpeichernTxt
             // 
-            btnSpeichernTxt.Location = new System.Drawing.Point(350, 272);
+            btnSpeichernTxt.Location = new System.Drawing.Point(350, 189);
             btnSpeichernTxt.Name = "btnSpeichernTxt";
             btnSpeichernTxt.Size = new System.Drawing.Size(92, 23);
             btnSpeichernTxt.TabIndex = 1;
@@ -144,7 +145,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
             // 
             // buttonGraficCutterForm
             // 
-            buttonGraficCutterForm.Location = new System.Drawing.Point(350, 330);
+            buttonGraficCutterForm.Location = new System.Drawing.Point(350, 247);
             buttonGraficCutterForm.Name = "buttonGraficCutterForm";
             buttonGraficCutterForm.Size = new System.Drawing.Size(92, 23);
             buttonGraficCutterForm.TabIndex = 9;
@@ -154,7 +155,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
             // 
             // TextureCutter
             // 
-            TextureCutter.Location = new System.Drawing.Point(350, 359);
+            TextureCutter.Location = new System.Drawing.Point(350, 276);
             TextureCutter.Name = "TextureCutter";
             TextureCutter.Size = new System.Drawing.Size(92, 23);
             TextureCutter.TabIndex = 10;
@@ -162,10 +163,21 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
             TextureCutter.UseVisualStyleBackColor = true;
             TextureCutter.Click += TextureCutter_Click;
             // 
+            // btDecriptClient
+            // 
+            btDecriptClient.Location = new System.Drawing.Point(350, 305);
+            btDecriptClient.Name = "btDecriptClient";
+            btDecriptClient.Size = new System.Drawing.Size(92, 23);
+            btDecriptClient.TabIndex = 11;
+            btDecriptClient.Text = "Decript";
+            btDecriptClient.UseVisualStyleBackColor = true;
+            btDecriptClient.Click += btDecriptClient_Click;
+            // 
             // ConverterMultiTextControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(btDecriptClient);
             Controls.Add(TextureCutter);
             Controls.Add(buttonGraficCutterForm);
             Controls.Add(label3);
@@ -199,5 +211,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button buttonGraficCutterForm;
         private System.Windows.Forms.Button TextureCutter;
+        private System.Windows.Forms.Button btDecriptClient;
     }
 }
