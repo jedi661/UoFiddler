@@ -215,7 +215,39 @@ namespace UoFiddler.Controls.UserControls
             IsLoaded = true;
         }
 
-
+        //Update TreeViewItems
+        private void UpdateTreeViewItem()
+        {
+            treeViewItem.BeginUpdate();
+            try
+            {
+                treeViewItem.Nodes.Clear();
+                if (TileData.ItemTable != null)
+                {
+                    TreeNode[] nodes = new TreeNode[Art.GetMaxItemId()];
+                    for (int i = 0; i < Art.GetMaxItemId(); ++i)
+                    {
+                        ushort color = RadarCol.GetItemColor(i);
+                        Color foreColor = HueHelpers.HueToColor(color);
+                        nodes[i] = new TreeNode(string.Format("0x{0:X4} ({0}) {1}", i, TileData.ItemTable[i].Name))
+                        {
+                            Tag = i,
+                            ForeColor = foreColor
+                        };
+                    }
+                    treeViewItem.Nodes.AddRange(nodes);
+                }
+            }
+            finally
+            {
+                treeViewItem.EndUpdate();
+            }
+        }
+        private void btupdateTreeView_Click(object sender, EventArgs e)
+        {
+            // Update the treeViewItem data.
+            UpdateTreeViewItem();
+        }
         #endregion
 
 
@@ -312,6 +344,8 @@ namespace UoFiddler.Controls.UserControls
             }
 
             CurrentColor = RadarCol.GetItemColor(_selectedIndex);
+            // Update the LabelTildataNameItemsLand label with the name of the selected item.
+            LabelTildataNameItemsLand.Text = TileData.ItemTable[_selectedIndex].Name;
         }
 
         private void AfterSelectTreeViewLand(object sender, TreeViewEventArgs e)
@@ -336,6 +370,8 @@ namespace UoFiddler.Controls.UserControls
             }
 
             CurrentColor = RadarCol.GetLandColor(_selectedIndex);
+            // Update the LabelTildataNameItemsLand label with the name of the selected item.
+            LabelTildataNameItemsLand.Text = TileData.LandTable[_selectedIndex].Name;
         }
 
         private void OnClickMeanColor(object sender, EventArgs e)
@@ -847,7 +883,6 @@ namespace UoFiddler.Controls.UserControls
                 toolTip.Show($"Copied '{text}' to clipboard", textBoxPhotoshopCode);
             }
         }
-
 
         #endregion
     }

@@ -55,6 +55,10 @@ namespace UoFiddler.Controls.UserControls
             tabControl2 = new System.Windows.Forms.TabControl();
             tabPage3 = new System.Windows.Forms.TabPage();
             tabPage4 = new System.Windows.Forms.TabPage();
+            btupdateTreeView = new System.Windows.Forms.Button();
+            label6 = new System.Windows.Forms.Label();
+            LabelTildataNameItemsLand = new System.Windows.Forms.Label();
+            label5 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
             textBoxPhotoshopCode = new System.Windows.Forms.TextBox();
@@ -78,7 +82,6 @@ namespace UoFiddler.Controls.UserControls
             button2 = new System.Windows.Forms.Button();
             button1 = new System.Windows.Forms.Button();
             buttonMean = new System.Windows.Forms.Button();
-            label5 = new System.Windows.Forms.Label();
             contextMenuStrip1.SuspendLayout();
             contextMenuStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxArt).BeginInit();
@@ -104,7 +107,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             treeViewItem.ContextMenuStrip = contextMenuStrip1;
             treeViewItem.Dock = System.Windows.Forms.DockStyle.Fill;
-            treeViewItem.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
+            treeViewItem.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawAll;
             treeViewItem.HideSelection = false;
             treeViewItem.Location = new System.Drawing.Point(4, 4);
             treeViewItem.Margin = new System.Windows.Forms.Padding(4);
@@ -199,6 +202,9 @@ namespace UoFiddler.Controls.UserControls
             // 
             // splitContainer5.Panel2
             // 
+            splitContainer5.Panel2.Controls.Add(btupdateTreeView);
+            splitContainer5.Panel2.Controls.Add(label6);
+            splitContainer5.Panel2.Controls.Add(LabelTildataNameItemsLand);
             splitContainer5.Panel2.Controls.Add(label5);
             splitContainer5.Panel2.Controls.Add(label4);
             splitContainer5.Panel2.Controls.Add(label3);
@@ -283,6 +289,43 @@ namespace UoFiddler.Controls.UserControls
             tabPage4.TabIndex = 1;
             tabPage4.Text = "Land Tiles";
             tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // btupdateTreeView
+            // 
+            btupdateTreeView.Location = new System.Drawing.Point(97, 128);
+            btupdateTreeView.Name = "btupdateTreeView";
+            btupdateTreeView.Size = new System.Drawing.Size(108, 27);
+            btupdateTreeView.TabIndex = 31;
+            btupdateTreeView.Text = "Update TreeView";
+            btupdateTreeView.UseVisualStyleBackColor = true;
+            btupdateTreeView.Click += btupdateTreeView_Click;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new System.Drawing.Point(4, 270);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(79, 15);
+            label6.TabIndex = 30;
+            label6.Text = "Items / Land :";
+            // 
+            // LabelTildataNameItemsLand
+            // 
+            LabelTildataNameItemsLand.AutoSize = true;
+            LabelTildataNameItemsLand.Location = new System.Drawing.Point(89, 270);
+            LabelTildataNameItemsLand.Name = "LabelTildataNameItemsLand";
+            LabelTildataNameItemsLand.Size = new System.Drawing.Size(39, 15);
+            LabelTildataNameItemsLand.TabIndex = 29;
+            LabelTildataNameItemsLand.Text = "Name";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(204, 7);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(81, 15);
+            label5.TabIndex = 28;
+            label5.Text = "Color Palette :";
             // 
             // label4
             // 
@@ -497,7 +540,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             // buttonMean
             // 
-            buttonMean.Location = new System.Drawing.Point(4, 128);
+            buttonMean.Location = new System.Drawing.Point(3, 129);
             buttonMean.Margin = new System.Windows.Forms.Padding(4);
             buttonMean.Name = "buttonMean";
             buttonMean.Size = new System.Drawing.Size(88, 26);
@@ -505,15 +548,6 @@ namespace UoFiddler.Controls.UserControls
             buttonMean.Text = "Average Color";
             buttonMean.UseVisualStyleBackColor = true;
             buttonMean.Click += OnClickMeanColor;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(204, 7);
-            label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(81, 15);
-            label5.TabIndex = 28;
-            label5.Text = "Color Palette :";
             // 
             // RadarColorControl
             // 
@@ -589,5 +623,8 @@ namespace UoFiddler.Controls.UserControls
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label LabelTildataNameItemsLand;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btupdateTreeView;
     }
 }
