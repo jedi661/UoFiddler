@@ -7,11 +7,11 @@ UOFiddler based on Ultima SDK it's a tool to view and alter almost every UO 2D c
 ## Changelog
 
 Version 4.11.19
--Add Decripter Client (ConverterMultiPlugin)
--Add Zoom function Mouseweel Plugin Compare Map
--Add Radarcolor Label Items and Land Name.
--Add Radarcolor Updatebutton TreeView
--Change Design Radarcolor ColorTreeView = DrawAll
+- Add Decripter Client (ConverterMultiPlugin)
+- Add Zoom function Mouseweel Plugin Compare Map
+- Add Radarcolor Label Items and Land Name.
+- Add Radarcolor Updatebutton TreeView
+- Change Design Radarcolor ColorTreeView = DrawAll
 
 Version 4.11.18
 - Added a Performzoomstep to the map.
