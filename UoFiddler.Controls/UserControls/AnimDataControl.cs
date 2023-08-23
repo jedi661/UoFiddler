@@ -413,7 +413,13 @@ namespace UoFiddler.Controls.UserControls
             else
             {
                 treeView1.SelectedNode.Parent.Nodes.Add(subNode);
+            } // Add 1 Hexadress = textBoxAddFrame
+            if (Utils.ConvertStringToInt(textBoxAddFrame.Text, out int newIndex))
+            {
+                newIndex++;
+                textBoxAddFrame.Text = $"0x{newIndex:X4}";
             }
+
 
             Options.ChangedUltimaClass["Animdata"] = true;
         }
@@ -547,6 +553,10 @@ namespace UoFiddler.Controls.UserControls
             node.Nodes.Add(subNode);
             node.EnsureVisible();
             treeView1.SelectedNode = node;
+
+            // Setzen Sie den Wert von textBoxAddFrame.Text auf die Hex-Adresse
+            textBoxAddFrame.Text = $"0x{index:X4}";
+
             Options.ChangedUltimaClass["Animdata"] = true;
         }
 

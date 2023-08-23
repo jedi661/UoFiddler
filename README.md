@@ -12,6 +12,7 @@ Version 4.11.19
 - Add Radarcolor Label Items and Land Name.
 - Add Radarcolor Updatebutton TreeView
 - Change Design Radarcolor ColorTreeView = DrawAll
+- I added the function to AminData that transmits the current hexadecimal address to the textbox, the Add button is modified to include the function that sends the next hexadecimal address to the textbox with "Add," so that you only need to press "Add."
 
 Version 4.11.18
 - Added a Performzoomstep to the map.
