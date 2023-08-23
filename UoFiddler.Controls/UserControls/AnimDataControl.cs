@@ -554,7 +554,7 @@ namespace UoFiddler.Controls.UserControls
             node.EnsureVisible();
             treeView1.SelectedNode = node;
 
-            // Setzen Sie den Wert von textBoxAddFrame.Text auf die Hex-Adresse
+            // Set the value of textBoxAddFrame.Text to the hexadecimal address.
             textBoxAddFrame.Text = $"0x{index:X4}";
 
             Options.ChangedUltimaClass["Animdata"] = true;
