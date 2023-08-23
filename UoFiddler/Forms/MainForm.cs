@@ -924,5 +924,22 @@ namespace UoFiddler.Forms
                 binDecHexConverterForm.Focus();
             }
         }
+
+        private void toolStripMenuItemLink3_Click(object sender, EventArgs e)
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "http://www.servuo.com",
+                UseShellExecute = true
+            });
+        }
+        private void ToolStripMenuItemDiscordUoFreeshardsDe_Click(object sender, EventArgs e)
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://discord.gg/XHXpbxgH8h",
+                UseShellExecute = true
+            });
+        }
     }
 }
