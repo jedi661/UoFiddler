@@ -420,7 +420,6 @@ namespace UoFiddler.Controls.UserControls
                 textBoxAddFrame.Text = $"0x{newIndex:X4}";
             }
 
-
             Options.ChangedUltimaClass["Animdata"] = true;
         }
 
