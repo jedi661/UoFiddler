@@ -64,6 +64,8 @@ namespace UoFiddler.Controls.UserControls
             um90GradToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            copyHexAdressToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            copyDecAdressToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStrip = new System.Windows.Forms.ToolStrip();
             toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
@@ -83,6 +85,7 @@ namespace UoFiddler.Controls.UserControls
             panel1 = new System.Windows.Forms.Panel();
             statusStrip = new System.Windows.Forms.StatusStrip();
             GraphicLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             contextMenuStrip.SuspendLayout();
             toolStrip.SuspendLayout();
             panel1.SuspendLayout();
@@ -91,9 +94,9 @@ namespace UoFiddler.Controls.UserControls
             // 
             // contextMenuStrip
             // 
-            contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { showFreeSlotsToolStripMenuItem, toolStripSeparator5, exportImageToolStripMenuItem, toolStripSeparator2, findNextFreeSlotToolStripMenuItem, removeToolStripMenuItem, replaceToolStripMenuItem, replaceStartingFromToolStripMenuItem, insertAtToolStripMenuItem, toolStripSeparator6, copyToolStripMenuItem, importFromClipboardToolStripMenuItem, importByTempToolStripMenuItem, toolStripSeparator7, um90GradToolStripMenuItem, toolStripSeparator9, saveToolStripMenuItem });
+            contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { showFreeSlotsToolStripMenuItem, toolStripSeparator5, exportImageToolStripMenuItem, toolStripSeparator2, findNextFreeSlotToolStripMenuItem, removeToolStripMenuItem, replaceToolStripMenuItem, replaceStartingFromToolStripMenuItem, insertAtToolStripMenuItem, toolStripSeparator6, copyToolStripMenuItem, importFromClipboardToolStripMenuItem, importByTempToolStripMenuItem, toolStripSeparator7, um90GradToolStripMenuItem, toolStripSeparator9, copyHexAdressToolStripMenuItem, copyDecAdressToolStripMenuItem, toolStripSeparator10, saveToolStripMenuItem });
             contextMenuStrip.Name = "contextMenuStrip1";
-            contextMenuStrip.Size = new System.Drawing.Size(194, 298);
+            contextMenuStrip.Size = new System.Drawing.Size(194, 370);
             // 
             // showFreeSlotsToolStripMenuItem
             // 
@@ -263,6 +266,22 @@ namespace UoFiddler.Controls.UserControls
             saveToolStripMenuItem.ToolTipText = "Save Texture.Mul";
             saveToolStripMenuItem.Click += OnClickSave;
             // 
+            // copyHexAdressToolStripMenuItem
+            // 
+            copyHexAdressToolStripMenuItem.Image = Properties.Resources.Clipbord;
+            copyHexAdressToolStripMenuItem.Name = "copyHexAdressToolStripMenuItem";
+            copyHexAdressToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            copyHexAdressToolStripMenuItem.Text = "Copy Hex Adress";
+            copyHexAdressToolStripMenuItem.Click += copyHexAdressToolStripMenuItem_Click;
+            // 
+            // copyDecAdressToolStripMenuItem
+            // 
+            copyDecAdressToolStripMenuItem.Image = Properties.Resources.Clipbord;
+            copyDecAdressToolStripMenuItem.Name = "copyDecAdressToolStripMenuItem";
+            copyDecAdressToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            copyDecAdressToolStripMenuItem.Text = "Copy Dec Adress";
+            copyDecAdressToolStripMenuItem.Click += copyDecAdressToolStripMenuItem_Click;
+            // 
             // toolStrip
             // 
             toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
@@ -430,6 +449,11 @@ namespace UoFiddler.Controls.UserControls
             GraphicLabel.Size = new System.Drawing.Size(51, 17);
             GraphicLabel.Text = "Graphic:";
             // 
+            // toolStripSeparator10
+            // 
+            toolStripSeparator10.Name = "toolStripSeparator10";
+            toolStripSeparator10.Size = new System.Drawing.Size(190, 6);
+            // 
             // TexturesControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -497,5 +521,8 @@ namespace UoFiddler.Controls.UserControls
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel GraphicLabel;
+        private System.Windows.Forms.ToolStripMenuItem copyHexAdressToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem copyDecAdressToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
     }
 }

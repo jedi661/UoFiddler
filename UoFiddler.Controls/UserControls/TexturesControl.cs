@@ -467,7 +467,8 @@ namespace UoFiddler.Controls.UserControls
         {
             var width = Textures.TestTexture(graphic) ? Textures.GetTexture(graphic).Width : 0;
 
-            GraphicLabel.Text = string.Format("Graphic: 0x{0:X4} ({0}) [{1}x{1}]", graphic, width);
+            GraphicLabel.Text = $"Graphic Values: Hex Address: 0x{graphic:X4} Decimal Address: ({graphic}) Texture Size: [{width}x{width}]";
+
         }
 
         private void TextureTileView_DrawItem(object sender, TileView.TileViewControl.DrawTileListItemEventArgs e)
@@ -1084,6 +1085,20 @@ namespace UoFiddler.Controls.UserControls
             // we have to invalidate focus so it will scroll to item
             TextureTileView.FocusIndex = -1;
             SelectedTextureId = indexValue;
+        }
+        #endregion
+
+        #region Copy Hex and Dec to clipbord
+        private void copyDecAdressToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Copy the decimal address to the clipboard
+            Clipboard.SetText(_selectedTextureId.ToString());
+        }
+
+        private void copyHexAdressToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Copy the hex address to the clipboard
+            Clipboard.SetText($"0x{_selectedTextureId:X}");
         }
         #endregion
     }
