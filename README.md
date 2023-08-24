@@ -15,6 +15,7 @@ Version 4.11.19
 - I added the function to AminData that transmits the current hexadecimal address to the textbox, the Add button is modified to include the function that sends the next hexadecimal address to the textbox with "Add," so that you only need to press "Add."
 - Update octokit package.
 - Add Links (Servuo, Discord)
+- Added two context menu functions to the texture control: "Copy Hex Address" and "Copy Decimal Address" to clipboard.
 - Add Icons
 
 Version 4.11.18

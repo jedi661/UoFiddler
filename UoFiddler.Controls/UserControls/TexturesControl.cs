@@ -463,13 +463,14 @@ namespace UoFiddler.Controls.UserControls
                 : _textureList[e.ItemIndex];
         }
 
+        #region Graphic Label
         private void UpdateLabels(int graphic)
         {
             var width = Textures.TestTexture(graphic) ? Textures.GetTexture(graphic).Width : 0;
 
             GraphicLabel.Text = $"Graphic Values: Hex Address: 0x{graphic:X4} Decimal Address: ({graphic}) Texture Size: [{width}x{width}]";
-
         }
+        #endregion
 
         private void TextureTileView_DrawItem(object sender, TileView.TileViewControl.DrawTileListItemEventArgs e)
         {
