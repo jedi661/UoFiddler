@@ -946,7 +946,8 @@ namespace UoFiddler.Forms
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             // Check if any of the F1-F12 keys were pressed
-            if (keyData >= Keys.F1 && keyData <= Keys.F12)
+            //if (keyData >= Keys.F1 && keyData <= Keys.F12)
+            if ((keyData >= Keys.F1 && keyData <= Keys.F12) || keyData == Keys.PageUp || keyData == Keys.PageDown)
             {
                 // Select the tab based on the pressed key
                 switch (keyData)
@@ -986,7 +987,21 @@ namespace UoFiddler.Forms
                         break;
                     case Keys.F12:
                         TabPanel.SelectedIndex = 14; // Light
-                        break;                        
+                        break;
+                    case Keys.PageUp:
+                        // Scroll to the previous tab
+                        if (TabPanel.SelectedIndex > 0)
+                        {
+                            TabPanel.SelectedIndex--;
+                        }
+                        break;
+                    case Keys.PageDown:
+                        // Scroll to the next tab
+                        if (TabPanel.SelectedIndex < TabPanel.TabCount - 1)
+                        {
+                            TabPanel.SelectedIndex++;
+                        }
+                        break;
                 }
 
                 // Prevent further processing of the key
