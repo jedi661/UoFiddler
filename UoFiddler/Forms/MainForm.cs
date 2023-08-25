@@ -941,5 +941,61 @@ namespace UoFiddler.Forms
                 UseShellExecute = true
             });
         }
+
+        #region F1-F12
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            // Check if any of the F1-F12 keys were pressed
+            if (keyData >= Keys.F1 && keyData <= Keys.F12)
+            {
+                // Select the tab based on the pressed key
+                switch (keyData)
+                {
+                    case Keys.F1:
+                        TabPanel.SelectedIndex = 1; // Items
+                        break;
+                    case Keys.F2:
+                        TabPanel.SelectedIndex = 4; // Tiledata
+                        break;
+                    case Keys.F3:
+                        TabPanel.SelectedIndex = 5; // LandTiles
+                        break;
+                    case Keys.F4:
+                        TabPanel.SelectedIndex = 6; // Texture
+                        break;
+                    case Keys.F5:
+                        TabPanel.SelectedIndex = 7; // Map
+                        break;
+                    case Keys.F6:
+                        TabPanel.SelectedIndex = 2; // Gumps
+                        break;
+                    case Keys.F7:
+                        TabPanel.SelectedIndex = 9; // Multis
+                        break;
+                    case Keys.F8:
+                        TabPanel.SelectedIndex = 10; // Radarcolor
+                        break;
+                    case Keys.F9:
+                        TabPanel.SelectedIndex = 11; // Hues
+                        break;
+                    case Keys.F10:
+                        TabPanel.SelectedIndex = 12; // Animationen
+                        break;
+                    case Keys.F11:
+                        TabPanel.SelectedIndex = 13; // AminData
+                        break;
+                    case Keys.F12:
+                        TabPanel.SelectedIndex = 14; // Light
+                        break;                        
+                }
+
+                // Prevent further processing of the key
+                return true;
+            }
+
+            // Call the base class to continue standard processing
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+        #endregion
     }
 }

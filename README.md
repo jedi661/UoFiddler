@@ -17,6 +17,7 @@ Version 4.11.19
 - Add Links (Servuo, Discord)
 - Added two context menu functions to the texture control: "Copy Hex Address" and "Copy Decimal Address" to clipboard.
 - Add Icons
+- F1-F12 keys reserved for tabs
 
 Version 4.11.18
 - Added a Performzoomstep to the map.
