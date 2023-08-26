@@ -15,6 +15,8 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Media;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Ultima;
 using UoFiddler.Controls.Classes;
@@ -25,6 +27,8 @@ namespace UoFiddler.Controls.UserControls
 {
     public partial class TexturesControl : UserControl
     {
+        private bool playCustomSound = false;
+
         public TexturesControl()
         {
             InitializeComponent();
@@ -286,6 +290,22 @@ namespace UoFiddler.Controls.UserControls
                     return;
                 }
 
+                // Check if the sound should be played
+                if (playCustomSound)
+                {
+                    SoundPlayer player = new SoundPlayer();
+                    player.SoundLocation = "sound.wav";
+                    player.Play();
+                }
+                else
+                {
+                    // Play the Windows 'Asterisk' sound
+                    System.Media.SystemSounds.Asterisk.Play();
+
+                    // Show the MessageBox
+                    MessageBox.Show("Replaced texture Successfully.", "Replaced information.");
+                }
+
                 using (var bmpTemp = new Bitmap(dialog.FileName))
                 {
                     Bitmap bitmap = new Bitmap(bmpTemp);
@@ -427,7 +447,7 @@ namespace UoFiddler.Controls.UserControls
             ExportTextureImage(_selectedTextureId, ImageFormat.Png);
         }
 
-        private static void ExportTextureImage(int index, ImageFormat imageFormat)
+        private void ExportTextureImage(int index, ImageFormat imageFormat)
         {
             if (!Textures.TestTexture(index))
             {
@@ -442,8 +462,18 @@ namespace UoFiddler.Controls.UserControls
                 bit.Save(fileName, imageFormat);
             }
 
-            MessageBox.Show($"Texture saved to {fileName}", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information,
-                MessageBoxDefaultButton.Button1);
+            // Check if the sound should be played
+            if (playCustomSound)
+            {
+                SoundPlayer player = new SoundPlayer();
+                player.SoundLocation = "sound.wav";
+                player.Play();
+            }
+            else
+            {
+                MessageBox.Show($"Texture saved to {fileName}", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information,
+                    MessageBoxDefaultButton.Button1);
+            }
         }
 
         private void TextureTileView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
@@ -598,12 +628,21 @@ namespace UoFiddler.Controls.UserControls
 
             contextMenuStrip.Close();
 
+            // Check if the sound should be played
+            if (playCustomSound)
+            {
+                SoundPlayer player = new SoundPlayer();
+                player.SoundLocation = "sound.wav";
+                player.Play();
+            }
+
             using (OpenFileDialog dialog = new OpenFileDialog())
             {
                 dialog.Multiselect = true;
                 dialog.Title = $"Choose images to replace starting at 0x{index:X}";
                 dialog.CheckFileExists = true;
                 dialog.Filter = "Image files (*.tif;*.tiff;*.bmp)|*.tif;*.tiff;*.bmp";
+
 
                 if (dialog.ShowDialog() != DialogResult.OK)
                 {
@@ -753,8 +792,19 @@ namespace UoFiddler.Controls.UserControls
                 {
                     // Copy the Bitmap to the clipboard
                     Clipboard.SetImage(bmp);
-                    // Show a MessageBox indicating that the image has been successfully copied to the clipboard
-                    MessageBox.Show("The image has been copied to the clipboard!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // Check if the sound should be played
+                    if (playCustomSound)
+                    {
+                        SoundPlayer player = new SoundPlayer();
+                        player.SoundLocation = "sound.wav";
+                        player.Play();
+                    }
+                    else
+                    {
+                        // Show a MessageBox indicating that the image has been successfully copied to the clipboard
+                        MessageBox.Show("The image has been copied to the clipboard!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
             }
             else
@@ -809,6 +859,14 @@ namespace UoFiddler.Controls.UserControls
                             TextureTileView.Invalidate();
                             SelectedTextureId = index;
                             Options.ChangedUltimaClass["Texture"] = true;
+
+                            // Check if the sound should be played
+                            if (playCustomSound)
+                            {
+                                SoundPlayer player = new SoundPlayer();
+                                player.SoundLocation = "sound.wav";
+                                player.Play();
+                            }
                         }
                         else
                         {
@@ -1093,13 +1151,60 @@ namespace UoFiddler.Controls.UserControls
         private void copyDecAdressToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Copy the decimal address to the clipboard
-            Clipboard.SetText(_selectedTextureId.ToString());
+            try
+            {
+                Clipboard.SetDataObject(_selectedTextureId.ToString(), true, 5, 100);
+
+                // Check if the sound should be played
+                if (playCustomSound)
+                {
+                    SoundPlayer player = new SoundPlayer();
+                    player.SoundLocation = "sound.wav";
+                    player.Play();
+                }
+            }
+            catch (ExternalException)
+            {
+                // Handle the error
+                if (!playCustomSound)
+                {
+                    MessageBox.Show("Failed to copy data to the clipboard.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         private void copyHexAdressToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Copy the hex address to the clipboard
-            Clipboard.SetText($"0x{_selectedTextureId:X}");
+            try
+            {
+                Clipboard.SetText($"0x{_selectedTextureId:X}");
+
+                // Check if the sound should be played
+                if (playCustomSound)
+                {
+                    SoundPlayer player = new SoundPlayer();
+                    player.SoundLocation = "sound.wav";
+                    player.Play();
+                }
+            }
+            catch (ExternalException)
+            {
+                // Handle the error
+                if (!playCustomSound)
+                {
+                    MessageBox.Show("Failed to copy data to the clipboard.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        #endregion
+
+        #region Sound
+        private void PlaySoundtoolStripButton1_Click(object sender, EventArgs e)
+        {
+            // Den Wert des _playInsertSound-Feldes umschalten            
+            playCustomSound = !playCustomSound;
         }
         #endregion
     }

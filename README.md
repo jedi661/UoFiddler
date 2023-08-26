@@ -19,6 +19,8 @@ Version 4.11.19
 - Add Icons
 - F1-F12 keys reserved for tabs
 - Page up page down also changes the tabs
+- Textures: Added a sound function that allows only the sound to be heard while deactivating the MessageBox when the sound function is active.
+- TileData LandTile: Sound enabled during caching.
 
 Version 4.11.18
 - Added a Performzoomstep to the map.

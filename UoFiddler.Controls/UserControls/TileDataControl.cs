@@ -798,32 +798,23 @@ namespace UoFiddler.Controls.UserControls
                 TileData.ItemTable[index] = item;
                 treeViewItem.SelectedNode.ForeColor = Color.Red;
                 Options.ChangedUltimaClass["TileData"] = true;
-                ControlEvents.FireTileDataChangeEvent(this, index + 0x4000);
-                /*if (memorySaveWarningToolStripMenuItem.Checked) //Old Code
-                {
-                    MessageBox.Show(
-                        string.Format(
-                            "Edits of 0x{0:X4} ({0}) saved to memory. Click 'Save Tiledata' to write to file.", index),
-                        "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
-                }*/
+                ControlEvents.FireTileDataChangeEvent(this, index + 0x4000);                
 
-                if (memorySaveWarningToolStripMenuItem.Checked)
+                if (toolStripButton7IsActive && memorySaveWarningToolStripMenuItem.Checked)
                 {
-                    if (playCustomSound)
+                    if (playCustomSound) //Land Tiles no MessageBox 
                     {
                         SoundPlayer player = new SoundPlayer();
                         player.SoundLocation = "sound.wav";
                         player.Play();
                     }
                     else //new
-                    {
-
                         MessageBox.Show(
-                            string.Format(
-                                "Edits of 0x{0:X4} ({0}) saved to memory. Click 'Save Tiledata' to write to file.", index),
-                            "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
-                    }
+                        string.Format(
+                            "Edits of 0x{0:X4} ({0}) saved to memory. Click 'Save Tiledata' to write to file.", index),
+                        "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
                 }
+
             }
             else // land
             {

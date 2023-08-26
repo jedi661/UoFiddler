@@ -63,9 +63,10 @@ namespace UoFiddler.Controls.UserControls
             toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             um90GradToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-            saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             copyHexAdressToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             copyDecAdressToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStrip = new System.Windows.Forms.ToolStrip();
             toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
@@ -81,11 +82,11 @@ namespace UoFiddler.Controls.UserControls
             ExportAllAsTiff = new System.Windows.Forms.ToolStripMenuItem();
             ExportAllAsJpeg = new System.Windows.Forms.ToolStripMenuItem();
             ExportAllAsPng = new System.Windows.Forms.ToolStripMenuItem();
+            PlaySoundtoolStripButton1 = new System.Windows.Forms.ToolStripButton();
             TextureTileView = new TileView.TileViewControl();
             panel1 = new System.Windows.Forms.Panel();
             statusStrip = new System.Windows.Forms.StatusStrip();
             GraphicLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             contextMenuStrip.SuspendLayout();
             toolStrip.SuspendLayout();
             panel1.SuspendLayout();
@@ -96,7 +97,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { showFreeSlotsToolStripMenuItem, toolStripSeparator5, exportImageToolStripMenuItem, toolStripSeparator2, findNextFreeSlotToolStripMenuItem, removeToolStripMenuItem, replaceToolStripMenuItem, replaceStartingFromToolStripMenuItem, insertAtToolStripMenuItem, toolStripSeparator6, copyToolStripMenuItem, importFromClipboardToolStripMenuItem, importByTempToolStripMenuItem, toolStripSeparator7, um90GradToolStripMenuItem, toolStripSeparator9, copyHexAdressToolStripMenuItem, copyDecAdressToolStripMenuItem, toolStripSeparator10, saveToolStripMenuItem });
             contextMenuStrip.Name = "contextMenuStrip1";
-            contextMenuStrip.Size = new System.Drawing.Size(194, 370);
+            contextMenuStrip.Size = new System.Drawing.Size(194, 348);
             // 
             // showFreeSlotsToolStripMenuItem
             // 
@@ -257,15 +258,6 @@ namespace UoFiddler.Controls.UserControls
             toolStripSeparator9.Name = "toolStripSeparator9";
             toolStripSeparator9.Size = new System.Drawing.Size(190, 6);
             // 
-            // saveToolStripMenuItem
-            // 
-            saveToolStripMenuItem.Image = Properties.Resources.Save2;
-            saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            saveToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
-            saveToolStripMenuItem.Text = "Save";
-            saveToolStripMenuItem.ToolTipText = "Save Texture.Mul";
-            saveToolStripMenuItem.Click += OnClickSave;
-            // 
             // copyHexAdressToolStripMenuItem
             // 
             copyHexAdressToolStripMenuItem.Image = Properties.Resources.Clipbord;
@@ -282,10 +274,24 @@ namespace UoFiddler.Controls.UserControls
             copyDecAdressToolStripMenuItem.Text = "Copy Dec Adress";
             copyDecAdressToolStripMenuItem.Click += copyDecAdressToolStripMenuItem_Click;
             // 
+            // toolStripSeparator10
+            // 
+            toolStripSeparator10.Name = "toolStripSeparator10";
+            toolStripSeparator10.Size = new System.Drawing.Size(190, 6);
+            // 
+            // saveToolStripMenuItem
+            // 
+            saveToolStripMenuItem.Image = Properties.Resources.Save2;
+            saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            saveToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            saveToolStripMenuItem.Text = "Save";
+            saveToolStripMenuItem.ToolTipText = "Save Texture.Mul";
+            saveToolStripMenuItem.Click += OnClickSave;
+            // 
             // toolStrip
             // 
             toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripSeparator3, toolStripSeparator4, SaveButton, toolStripSeparator1, IndexToolStripLabel, searchByIdToolStripTextBox, SearchButton, toolStripSeparator8, MiscToolStripDropDownButton });
+            toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripSeparator3, toolStripSeparator4, SaveButton, toolStripSeparator1, IndexToolStripLabel, searchByIdToolStripTextBox, SearchButton, toolStripSeparator8, MiscToolStripDropDownButton, PlaySoundtoolStripButton1 });
             toolStrip.Location = new System.Drawing.Point(0, 0);
             toolStrip.Name = "toolStrip";
             toolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -398,6 +404,18 @@ namespace UoFiddler.Controls.UserControls
             ExportAllAsPng.Text = "As Png";
             ExportAllAsPng.Click += ExportAllAsPng_Click;
             // 
+            // PlaySoundtoolStripButton1
+            // 
+            PlaySoundtoolStripButton1.CheckOnClick = true;
+            PlaySoundtoolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            PlaySoundtoolStripButton1.Image = Properties.Resources.volume;
+            PlaySoundtoolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            PlaySoundtoolStripButton1.Name = "PlaySoundtoolStripButton1";
+            PlaySoundtoolStripButton1.Size = new System.Drawing.Size(23, 22);
+            PlaySoundtoolStripButton1.Text = "Sound";
+            PlaySoundtoolStripButton1.ToolTipText = "Deactivate the MessageBox and enable only one sound.";
+            PlaySoundtoolStripButton1.Click += PlaySoundtoolStripButton1_Click;
+            // 
             // TextureTileView
             // 
             TextureTileView.AutoScroll = true;
@@ -448,11 +466,6 @@ namespace UoFiddler.Controls.UserControls
             GraphicLabel.Name = "GraphicLabel";
             GraphicLabel.Size = new System.Drawing.Size(51, 17);
             GraphicLabel.Text = "Graphic:";
-            // 
-            // toolStripSeparator10
-            // 
-            toolStripSeparator10.Name = "toolStripSeparator10";
-            toolStripSeparator10.Size = new System.Drawing.Size(190, 6);
             // 
             // TexturesControl
             // 
@@ -524,5 +537,6 @@ namespace UoFiddler.Controls.UserControls
         private System.Windows.Forms.ToolStripMenuItem copyHexAdressToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem copyDecAdressToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
+        private System.Windows.Forms.ToolStripButton PlaySoundtoolStripButton1;
     }
 }
