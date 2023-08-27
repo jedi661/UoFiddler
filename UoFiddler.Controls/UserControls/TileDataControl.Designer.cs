@@ -84,6 +84,8 @@ namespace UoFiddler.Controls.UserControls
             label23 = new System.Windows.Forms.Label();
             textBoxNameLand = new System.Windows.Forms.TextBox();
             splitContainer7 = new System.Windows.Forms.SplitContainer();
+            label13 = new System.Windows.Forms.Label();
+            LabelDecimalAdress = new System.Windows.Forms.Label();
             textBoxTexID = new System.Windows.Forms.TextBox();
             label24 = new System.Windows.Forms.Label();
             checkedListBox2 = new System.Windows.Forms.CheckedListBox();
@@ -530,6 +532,8 @@ namespace UoFiddler.Controls.UserControls
             // 
             // splitContainer7.Panel1
             // 
+            splitContainer7.Panel1.Controls.Add(label13);
+            splitContainer7.Panel1.Controls.Add(LabelDecimalAdress);
             splitContainer7.Panel1.Controls.Add(textBoxTexID);
             splitContainer7.Panel1.Controls.Add(label24);
             // 
@@ -540,6 +544,25 @@ namespace UoFiddler.Controls.UserControls
             splitContainer7.SplitterDistance = 27;
             splitContainer7.SplitterWidth = 2;
             splitContainer7.TabIndex = 25;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new System.Drawing.Point(325, 7);
+            label13.Name = "label13";
+            label13.Size = new System.Drawing.Size(67, 15);
+            label13.TabIndex = 4;
+            label13.Text = "Decimal ID:";
+            // 
+            // LabelDecimalAdress
+            // 
+            LabelDecimalAdress.AutoSize = true;
+            LabelDecimalAdress.Location = new System.Drawing.Point(392, 7);
+            LabelDecimalAdress.Name = "LabelDecimalAdress";
+            LabelDecimalAdress.Size = new System.Drawing.Size(50, 15);
+            LabelDecimalAdress.TabIndex = 1;
+            LabelDecimalAdress.Text = "Decimal";
+            LabelDecimalAdress.Click += LabelDecimalAdress_Click;
             // 
             // textBoxTexID
             // 
@@ -1080,5 +1103,7 @@ namespace UoFiddler.Controls.UserControls
         private System.Windows.Forms.ToolStripButton searchByNameToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.Label LabelDecimalAdress;
+        private System.Windows.Forms.Label label13;
     }
 }

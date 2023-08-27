@@ -21,6 +21,7 @@ Version 4.11.19
 - Page up page down also changes the tabs
 - Textures: Added a sound function that allows only the sound to be heard while deactivating the MessageBox when the sound function is active.
 - TileData LandTile: Sound enabled during caching.
+- Added a label that continuously displays the decimal ID of the position. Clicking on the label will insert the ID into the textbox.
 
 Version 4.11.18
 - Added a Performzoomstep to the map.

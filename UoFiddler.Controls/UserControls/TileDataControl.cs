@@ -79,6 +79,8 @@ namespace UoFiddler.Controls.UserControls
 
             ControlEvents.FilePathChangeEvent += OnFilePathChangeEvent;
             ControlEvents.TileDataChangeEvent += OnTileDataChangeEvent;
+
+            LabelDecimalAdress.Text = "";
         }
 
         private void InitLandTilesFlagsCheckBoxes()
@@ -668,6 +670,8 @@ namespace UoFiddler.Controls.UserControls
 
             int index = (int)e.Node.Tag;
 
+            LabelDecimalAdress.Text = index.ToString();
+
             Bitmap bit = Art.GetLand(index);
             if (bit != null)
             {
@@ -798,7 +802,7 @@ namespace UoFiddler.Controls.UserControls
                 TileData.ItemTable[index] = item;
                 treeViewItem.SelectedNode.ForeColor = Color.Red;
                 Options.ChangedUltimaClass["TileData"] = true;
-                ControlEvents.FireTileDataChangeEvent(this, index + 0x4000);                
+                ControlEvents.FireTileDataChangeEvent(this, index + 0x4000);
 
                 if (toolStripButton7IsActive && memorySaveWarningToolStripMenuItem.Checked)
                 {
@@ -2197,5 +2201,16 @@ namespace UoFiddler.Controls.UserControls
             }
         }
         #endregion
+
+        private void LabelDecimalAdress_Click(object sender, EventArgs e)
+        {
+            if (treeViewLand.SelectedNode?.Tag == null)
+            {
+                return;
+            }
+
+            int index = (int)treeViewLand.SelectedNode.Tag;
+            textBoxTexID.Text = index.ToString();
+        }
     }
 }
