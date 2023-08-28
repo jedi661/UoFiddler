@@ -537,7 +537,21 @@ namespace UoFiddler.Controls.UserControls
 
             if (image != null)
             {
-                Clipboard.SetImage(image);
+                // Make a copy of the image
+                Bitmap newImage = new Bitmap(image);
+                // Make all pixels with color #d3d3d3 transparent
+                newImage.MakeTransparent(Color.FromArgb(0xd3, 0xd3, 0xd3));
+                // Create a new bitmap with the background color you want
+                Bitmap finalImage = new Bitmap(newImage.Width, newImage.Height);
+                using (Graphics g = Graphics.FromImage(finalImage))
+                {
+                    // Draw a white background
+                    g.Clear(Color.FromArgb(0xff, 0xff, 0xff));
+                    // Draw the picture on it
+                    g.DrawImage(newImage, 0, 0);
+                }
+                // Copy the final image to the clipboard
+                Clipboard.SetImage(finalImage);
 
                 // Check if the sound should be played
                 if (playCustomSound)
@@ -548,7 +562,6 @@ namespace UoFiddler.Controls.UserControls
                 }
             }
         }
-
         private void Form_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Control && e.KeyCode == Keys.X)
