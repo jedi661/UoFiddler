@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Media;
 using System.Windows.Forms;
 using Ultima;
 using UoFiddler.Controls.Classes;
@@ -24,6 +25,8 @@ namespace UoFiddler.Controls.UserControls
 {
     public partial class FontsControl : UserControl
     {
+        private bool playCustomSound = false; //Sound True
+
         public FontsControl()
         {
             InitializeComponent();
@@ -33,6 +36,8 @@ namespace UoFiddler.Controls.UserControls
             setOffsetsToolStripMenuItem.Visible = false;
 
             splitContainer2.SplitterDistance = splitContainer2.Height - 40;
+
+            this.KeyDown += Form_KeyDown;
         }
 
         private bool _loaded;
@@ -301,7 +306,7 @@ namespace UoFiddler.Controls.UserControls
 
         private void OnClickSetOffsets(object sender, EventArgs e)
         {
-            if(treeView.SelectedNode == null)
+            if (treeView.SelectedNode == null)
             {
                 return;
             }
@@ -469,5 +474,119 @@ namespace UoFiddler.Controls.UserControls
             FontsTileView.TileHighlightColor = Options.TileSelectionColor;
             FontsTileView.Invalidate();
         }
+        #region Import und copy to clipbord
+        private void importClipbordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Clipboard.ContainsImage())
+            {
+                Bitmap import = new Bitmap(Clipboard.GetImage());
+                if (import.Height > 255 || import.Width > 255)
+                {
+                    import.Dispose();
+                    MessageBox.Show("Image height or width exceeds 255", "Import", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+                    return;
+                }
+
+                int font = (int)treeView.SelectedNode.Tag;
+
+                if ((int)treeView.SelectedNode.Parent.Tag == 1)
+                {
+                    UnicodeFonts.Fonts[font].Chars[FontsTileView.SelectedIndices[0]].SetBuffer(import);
+                    Options.ChangedUltimaClass["UnicodeFont"] = true;
+                }
+                else
+                {
+                    AsciiText.Fonts[font].ReplaceCharacter(FontsTileView.SelectedIndices[0], import);
+                    Options.ChangedUltimaClass["ASCIIFont"] = true;
+                }
+
+                FontsTileView.Invalidate();
+
+                // Check if the sound should be played
+                if (playCustomSound)
+                {
+                    SoundPlayer player = new SoundPlayer();
+                    player.SoundLocation = "sound.wav";
+                    player.Play();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Clipboard does not contain an image.");
+            }
+        }
+
+        private void copyClipbordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (FontsTileView.SelectedIndices.Count == 0)
+            {
+                return;
+            }
+
+            int font = (int)treeView.SelectedNode.Tag;
+            Bitmap image;
+
+            if ((int)treeView.SelectedNode.Parent.Tag == 1)
+            {
+                image = UnicodeFonts.Fonts[font].Chars[FontsTileView.SelectedIndices[0]].GetImage();
+            }
+            else
+            {
+                image = AsciiText.Fonts[font].Characters[FontsTileView.SelectedIndices[0]];
+            }
+
+            if (image != null)
+            {
+                Clipboard.SetImage(image);
+
+                // Check if the sound should be played
+                if (playCustomSound)
+                {
+                    SoundPlayer player = new SoundPlayer();
+                    player.SoundLocation = "sound.wav";
+                    player.Play();
+                }
+            }
+        }
+
+        private void Form_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.X)
+            {
+                copyClipbordToolStripMenuItem_Click(sender, e);
+            }
+            if (e.Control && e.KeyCode == Keys.V)
+            {
+                importClipbordToolStripMenuItem_Click(sender, e);
+            }
+        }
+        #endregion
+
+        #region Soundbutton
+        private void toolStripSplitSound_ButtonClick(object sender, EventArgs e)
+        {
+            // Toggle the value of the _playInsertSound field           
+            playCustomSound = !playCustomSound;
+
+            // Change the background image of the button
+            ToolStripSplitButton button = (ToolStripSplitButton)sender;
+            if (button.BackgroundImage == null)
+            {
+                // Create a red background image
+                Bitmap newImage = new Bitmap(button.Width, button.Height);
+                using (Graphics g = Graphics.FromImage(newImage))
+                {
+                    // Draw a red background
+                    g.Clear(Color.Red);
+                }
+                button.BackgroundImage = newImage;
+            }
+            else
+            {
+                // Reset the background image to zero
+                button.BackgroundImage = null;
+            }
+        }
+        #endregion
     }
 }
