@@ -46,9 +46,11 @@ namespace UoFiddler.Controls.UserControls
             setOffsetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             extractCharacterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             importCharacterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             importClipbordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             copyClipbordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             splitContainer1 = new System.Windows.Forms.SplitContainer();
             splitContainer2 = new System.Windows.Forms.SplitContainer();
             treeView = new System.Windows.Forms.TreeView();
@@ -57,8 +59,6 @@ namespace UoFiddler.Controls.UserControls
             statusStrip1 = new System.Windows.Forms.StatusStrip();
             toolStripSplitSound = new System.Windows.Forms.ToolStripSplitButton();
             toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
@@ -75,24 +75,26 @@ namespace UoFiddler.Controls.UserControls
             // 
             contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { writeTextToolStripMenuItem, toolStripSeparator1, setOffsetsToolStripMenuItem, extractCharacterToolStripMenuItem, importCharacterToolStripMenuItem, toolStripSeparator2, importClipbordToolStripMenuItem, copyClipbordToolStripMenuItem, toolStripSeparator3, saveToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new System.Drawing.Size(165, 176);
+            contextMenuStrip1.Size = new System.Drawing.Size(181, 198);
             // 
             // writeTextToolStripMenuItem
             // 
+            writeTextToolStripMenuItem.Image = Properties.Resources.Edit;
             writeTextToolStripMenuItem.Name = "writeTextToolStripMenuItem";
-            writeTextToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            writeTextToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             writeTextToolStripMenuItem.Text = "Write Text";
+            writeTextToolStripMenuItem.ToolTipText = "Wrote the text so that it's visible.";
             writeTextToolStripMenuItem.Click += OnClickWriteText;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new System.Drawing.Size(161, 6);
+            toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // setOffsetsToolStripMenuItem
             // 
             setOffsetsToolStripMenuItem.Name = "setOffsetsToolStripMenuItem";
-            setOffsetsToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            setOffsetsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             setOffsetsToolStripMenuItem.Text = "Set Offsets";
             setOffsetsToolStripMenuItem.Click += OnClickSetOffsets;
             // 
@@ -100,41 +102,56 @@ namespace UoFiddler.Controls.UserControls
             // 
             extractCharacterToolStripMenuItem.Image = Properties.Resources.Copy;
             extractCharacterToolStripMenuItem.Name = "extractCharacterToolStripMenuItem";
-            extractCharacterToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            extractCharacterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             extractCharacterToolStripMenuItem.Text = "Extract Character";
+            extractCharacterToolStripMenuItem.ToolTipText = "Exported graphics to a file.";
             extractCharacterToolStripMenuItem.Click += OnClickExport;
             // 
             // importCharacterToolStripMenuItem
             // 
             importCharacterToolStripMenuItem.Image = Properties.Resources.import;
             importCharacterToolStripMenuItem.Name = "importCharacterToolStripMenuItem";
-            importCharacterToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            importCharacterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             importCharacterToolStripMenuItem.Text = "Import Character";
+            importCharacterToolStripMenuItem.ToolTipText = "Imported graphics from a file.";
             importCharacterToolStripMenuItem.Click += OnClickImport;
             // 
-            // saveToolStripMenuItem
+            // toolStripSeparator2
             // 
-            saveToolStripMenuItem.Image = Properties.Resources.Save2;
-            saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            saveToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
-            saveToolStripMenuItem.Text = "Save";
-            saveToolStripMenuItem.Click += OnClickSave;
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
             // 
             // importClipbordToolStripMenuItem
             // 
             importClipbordToolStripMenuItem.Image = Properties.Resources.import;
             importClipbordToolStripMenuItem.Name = "importClipbordToolStripMenuItem";
-            importClipbordToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            importClipbordToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             importClipbordToolStripMenuItem.Text = "Import Clipbord";
+            importClipbordToolStripMenuItem.ToolTipText = "Imported from clipboard.";
             importClipbordToolStripMenuItem.Click += importClipbordToolStripMenuItem_Click;
             // 
             // copyClipbordToolStripMenuItem
             // 
             copyClipbordToolStripMenuItem.Image = Properties.Resources.Clipbord;
             copyClipbordToolStripMenuItem.Name = "copyClipbordToolStripMenuItem";
-            copyClipbordToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            copyClipbordToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             copyClipbordToolStripMenuItem.Text = "Copy Clipbord";
+            copyClipbordToolStripMenuItem.ToolTipText = "Copied to the clipboard.";
             copyClipbordToolStripMenuItem.Click += copyClipbordToolStripMenuItem_Click;
+            // 
+            // toolStripSeparator3
+            // 
+            toolStripSeparator3.Name = "toolStripSeparator3";
+            toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
+            // 
+            // saveToolStripMenuItem
+            // 
+            saveToolStripMenuItem.Image = Properties.Resources.Save2;
+            saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            saveToolStripMenuItem.Text = "Save";
+            saveToolStripMenuItem.ToolTipText = "Saved to the .mul file.";
+            saveToolStripMenuItem.Click += OnClickSave;
             // 
             // splitContainer1
             // 
@@ -246,6 +263,7 @@ namespace UoFiddler.Controls.UserControls
             toolStripSplitSound.Name = "toolStripSplitSound";
             toolStripSplitSound.Size = new System.Drawing.Size(32, 20);
             toolStripSplitSound.Text = "toolStripSplitButton1";
+            toolStripSplitSound.ToolTipText = "Activated the sound.";
             toolStripSplitSound.ButtonClick += toolStripSplitSound_ButtonClick;
             // 
             // toolStripStatusLabel1
@@ -253,16 +271,6 @@ namespace UoFiddler.Controls.UserControls
             toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             toolStripStatusLabel1.Size = new System.Drawing.Size(87, 17);
             toolStripStatusLabel1.Text = "<no selection>";
-            // 
-            // toolStripSeparator2
-            // 
-            toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new System.Drawing.Size(161, 6);
-            // 
-            // toolStripSeparator3
-            // 
-            toolStripSeparator3.Name = "toolStripSeparator3";
-            toolStripSeparator3.Size = new System.Drawing.Size(161, 6);
             // 
             // FontsControl
             // 
