@@ -37,6 +37,8 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             InitializeComponent();
 
             labelImageSize.Text = "";
+
+            checkBoxChange.CheckedChanged += checkBoxChange_CheckedChanged;
         }
 
         private void buttonLoadImage_Click(object sender, EventArgs e)
@@ -66,6 +68,12 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 // Displaying the image size in the label.
                 Size imageSize = pictureBox1.Image.Size;
                 labelImageSize.Text = $"Image size: {imageSize.Width} x {imageSize.Height} Pixel";
+
+                // Stellen Sie sicher, dass das ContextMenuStrip der pictureBox1 zugewiesen ist
+                if (pictureBox1.ContextMenuStrip == null)
+                {
+                    pictureBox1.ContextMenuStrip = contextMenuStrip1;
+                }
             }
         }
         private void buttonTextureCutter_Click(object sender, EventArgs e)
@@ -751,5 +759,204 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
 
             return rotatedImage;
         }
+        #region Copy to Clipbord Image        
+
+        private void copyClipboardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (pictureBox1.Image != null)
+            {
+                // Make a copy of the picture in pictureBox1
+                Bitmap image = new Bitmap(pictureBox1.Image);
+
+                // Verify that valid color values ​​were entered in the textBoxColorAdress and textBoxColorToAdress
+                if (IsValidColor(textBoxColorAdress.Text) && IsValidColor(textBoxColorToAdress.Text))
+                {
+                    // Add the # to the color code if it's not already there
+                    string fromColorCode = textBoxColorAdress.Text;
+                    if (!fromColorCode.StartsWith("#"))
+                    {
+                        fromColorCode = "#" + fromColorCode;
+                    }
+
+                    string toColorCode = textBoxColorToAdress.Text;
+                    if (!toColorCode.StartsWith("#"))
+                    {
+                        toColorCode = "#" + toColorCode;
+                    }
+
+                    // Convert the entered color values ​​into Color objects
+                    Color fromColor = ColorTranslator.FromHtml(fromColorCode);
+                    Color toColor = ColorTranslator.FromHtml(toColorCode);
+
+                    // Replace the color value in the image
+                    ReplaceColor(image, fromColor, toColor);
+                }
+
+                // Verify that a valid color value was entered in the textBoxColorErase
+                if (IsValidColor(textBoxColorErase.Text))
+                {
+                    // Add the # to the color code if it's not already there
+                    string eraseColorCode = textBoxColorErase.Text;
+                    if (!eraseColorCode.StartsWith("#"))
+                    {
+                        eraseColorCode = "#" + eraseColorCode;
+                    }
+
+                    // Convert the entered color value to a Color object
+                    Color eraseColor = ColorTranslator.FromHtml(eraseColorCode);
+
+                    // Replace the color value in the image with white
+                    ReplaceWithWhite(image, eraseColor);
+                }
+
+                // Copy the image to the clipboard
+                Clipboard.SetImage(image);
+            }
+        }
+
+        //Old function that sets to transparent not active
+        private void MakeTransparent(Bitmap image, Color color)
+        {
+            // Loop through each pixel in the image
+            for (int x = 0; x < image.Width; x++)
+            {
+                for (int y = 0; y < image.Height; y++)
+                {
+                    // Check if the pixel is the color you want to erase
+                    if (image.GetPixel(x, y) == color)
+                    {
+                        // Set the pixel to transparent
+                        image.SetPixel(x, y, Color.Transparent);
+                    }
+                }
+            }
+        }
+        //replaces the color with the given one
+        private void ReplaceColor(Bitmap image, Color fromColor, Color toColor)
+        {
+            // Loop through each pixel in the image
+            for (int x = 0; x < image.Width; x++)
+            {
+                for (int y = 0; y < image.Height; y++)
+                {
+                    // Verify that the pixel is the color to be replaced
+                    if (image.GetPixel(x, y) == fromColor)
+                    {
+                        // Set the pixel to the new color
+                        image.SetPixel(x, y, toColor);
+                    }
+                }
+            }
+        }
+
+        //Replaces the color with ffffff
+        private void ReplaceWithWhite(Bitmap image, Color color)
+        {
+            // Loop through each pixel in the image
+            for (int x = 0; x < image.Width; x++)
+            {
+                for (int y = 0; y < image.Height; y++)
+                {
+                    // Verify that the pixel is the color to be replaced
+                    if (image.GetPixel(x, y) == color)
+                    {
+                        // Set the pixel to white
+                        image.SetPixel(x, y, Color.White);
+                    }
+                }
+            }
+        }
+        #endregion
+
+        #region Textbox Color
+        private void textBoxColorAdress_TextChanged(object sender, EventArgs e)
+        {
+            // Verify that the text you entered is a valid color value
+            if (textBoxColorAdress.Text.Length == 7 && !IsValidColor(textBoxColorAdress.Text))
+            {
+                // The text you entered is not a valid color value - display an error message
+                MessageBox.Show("Please enter a valid color value.");
+            }
+        }
+        private void textBoxColorToAdress_TextChanged(object sender, EventArgs e)
+        {
+            // Verify that the text you entered is a valid color value
+            if (textBoxColorToAdress.Text.Length == 7 && !IsValidColor(textBoxColorToAdress.Text))
+            {
+                // The text you entered is not a valid color value - display an error message
+                MessageBox.Show("Please enter a valid color value.");
+            }
+        }
+
+        private void textBoxColorErase_TextChanged(object sender, EventArgs e)
+        {
+            // Verify that the text you entered is a valid color value
+            if (textBoxColorErase.Text.Length == 7 && !IsValidColor(textBoxColorErase.Text))
+            {
+                // The text you entered is not a valid color value - display an error message
+                MessageBox.Show("Please enter a valid color value.");
+            }
+        }
+        private bool IsValidColor(string color)
+        {
+            // Check if the color value starts with a #
+            if (color.StartsWith("#"))
+            {
+                // Remove the # from the beginning of the color value
+                color = color.Substring(1);
+            }
+
+            // Verify that the color value is 6 characters long
+            if (color.Length == 6)
+            {
+                // Verify that all characters are valid hexadecimal characters
+                for (int i = 0; i < color.Length; i++)
+                {
+                    if (!IsHexChar(color[i]))
+                    {
+                        return false;
+                    }
+                }
+
+                // The color value is valid
+                return true;
+            }
+
+            // The color value is invalid
+            return false;
+        }
+        private bool IsHexChar(char c)
+        {
+            return (c >= '0' && c <= '9') || (c >= 'A' && c <= 'F') || (c >= 'a' && c <= 'f');
+        }
+        #endregion
+
+        #region Checkbox
+        private void checkBoxChange_CheckedChanged(object sender, EventArgs e)
+        {
+            // Check if the checkBoxChange is checked
+            if (checkBoxChange.Checked)
+            {
+                // Transfer the value of comboBoxColorValue to textBoxColorToAdress
+                textBoxColorToAdress.Text = comboBoxColorValue.Text;
+            }
+        }
+        private void comboBoxColorValue_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Check if the checkBoxChange is checked
+            if (checkBoxChange.Checked)
+            {
+                // Transfer the value of comboBoxColorValue to textBoxColorToAdress
+                textBoxColorToAdress.Text = comboBoxColorValue.Text;
+            }
+
+            // Check if the checkBoxChange is checked
+            if (checkBoxDelete.Checked)
+            {
+                // Transfer the value of comboBoxColorValue to textBoxColorToAdress
+                textBoxColorErase.Text = comboBoxColorValue.Text;
+            }
+        }
+        #endregion
     }
 }

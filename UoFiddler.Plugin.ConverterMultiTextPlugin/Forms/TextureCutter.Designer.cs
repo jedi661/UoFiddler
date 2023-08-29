@@ -39,8 +39,11 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TextureCutter));
             pictureBox1 = new System.Windows.Forms.PictureBox();
+            contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
+            copyClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             buttonLoadImage = new System.Windows.Forms.Button();
             buttonTextureCutter = new System.Windows.Forms.Button();
             openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -67,19 +70,47 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             textBoxBorderWidth = new System.Windows.Forms.TextBox();
             buttonResize = new System.Windows.Forms.Button();
             checkBox33x33 = new System.Windows.Forms.CheckBox();
+            textBoxColorAdress = new System.Windows.Forms.TextBox();
+            textBoxColorErase = new System.Windows.Forms.TextBox();
+            textBoxColorToAdress = new System.Windows.Forms.TextBox();
+            lbColorValue01 = new System.Windows.Forms.Label();
+            lbColorValue02 = new System.Windows.Forms.Label();
+            label5 = new System.Windows.Forms.Label();
+            lbColorValueDelete = new System.Windows.Forms.Label();
+            comboBoxColorValue = new System.Windows.Forms.ComboBox();
+            lbColorValue03 = new System.Windows.Forms.Label();
+            panel3 = new System.Windows.Forms.Panel();
+            checkBoxDelete = new System.Windows.Forms.CheckBox();
+            checkBoxChange = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            contextMenuStrip1.SuspendLayout();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
+            panel3.SuspendLayout();
             SuspendLayout();
             // 
             // pictureBox1
             // 
+            pictureBox1.ContextMenuStrip = contextMenuStrip1;
             pictureBox1.Location = new System.Drawing.Point(0, 0);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new System.Drawing.Size(427, 366);
             pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
+            // 
+            // contextMenuStrip1
+            // 
+            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { copyClipboardToolStripMenuItem });
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new System.Drawing.Size(158, 26);
+            // 
+            // copyClipboardToolStripMenuItem
+            // 
+            copyClipboardToolStripMenuItem.Name = "copyClipboardToolStripMenuItem";
+            copyClipboardToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            copyClipboardToolStripMenuItem.Text = "Copy Clipboard";
+            copyClipboardToolStripMenuItem.Click += copyClipboardToolStripMenuItem_Click;
             // 
             // buttonLoadImage
             // 
@@ -157,7 +188,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // labelImageSize
             // 
             labelImageSize.AutoSize = true;
-            labelImageSize.Location = new System.Drawing.Point(578, 125);
+            labelImageSize.Location = new System.Drawing.Point(578, 122);
             labelImageSize.Name = "labelImageSize";
             labelImageSize.Size = new System.Drawing.Size(38, 15);
             labelImageSize.TabIndex = 10;
@@ -207,7 +238,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             // buttonOpenTempGrafic
             // 
-            buttonOpenTempGrafic.Location = new System.Drawing.Point(456, 398);
+            buttonOpenTempGrafic.Location = new System.Drawing.Point(365, 398);
             buttonOpenTempGrafic.Name = "buttonOpenTempGrafic";
             buttonOpenTempGrafic.Size = new System.Drawing.Size(74, 23);
             buttonOpenTempGrafic.TabIndex = 16;
@@ -257,9 +288,9 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             panel2.Controls.Add(buttonsharp);
             panel2.Controls.Add(buttonSaveImage);
             panel2.Controls.Add(ButtonShrinkTexture);
-            panel2.Location = new System.Drawing.Point(456, 154);
+            panel2.Location = new System.Drawing.Point(456, 143);
             panel2.Name = "panel2";
-            panel2.Size = new System.Drawing.Size(332, 100);
+            panel2.Size = new System.Drawing.Size(356, 100);
             panel2.TabIndex = 20;
             // 
             // button45Degrees
@@ -330,11 +361,130 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             checkBox33x33.Text = "33 x 33";
             checkBox33x33.UseVisualStyleBackColor = true;
             // 
+            // textBoxColorAdress
+            // 
+            textBoxColorAdress.Location = new System.Drawing.Point(9, 24);
+            textBoxColorAdress.Name = "textBoxColorAdress";
+            textBoxColorAdress.Size = new System.Drawing.Size(100, 23);
+            textBoxColorAdress.TabIndex = 22;
+            textBoxColorAdress.TextChanged += textBoxColorAdress_TextChanged;
+            // 
+            // textBoxColorErase
+            // 
+            textBoxColorErase.Location = new System.Drawing.Point(9, 82);
+            textBoxColorErase.Name = "textBoxColorErase";
+            textBoxColorErase.Size = new System.Drawing.Size(100, 23);
+            textBoxColorErase.TabIndex = 23;
+            textBoxColorErase.TextChanged += textBoxColorErase_TextChanged;
+            // 
+            // textBoxColorToAdress
+            // 
+            textBoxColorToAdress.Location = new System.Drawing.Point(140, 24);
+            textBoxColorToAdress.Name = "textBoxColorToAdress";
+            textBoxColorToAdress.Size = new System.Drawing.Size(100, 23);
+            textBoxColorToAdress.TabIndex = 24;
+            textBoxColorToAdress.TextChanged += textBoxColorToAdress_TextChanged;
+            // 
+            // lbColorValue01
+            // 
+            lbColorValue01.AutoSize = true;
+            lbColorValue01.Location = new System.Drawing.Point(9, 6);
+            lbColorValue01.Name = "lbColorValue01";
+            lbColorValue01.Size = new System.Drawing.Size(67, 15);
+            lbColorValue01.TabIndex = 25;
+            lbColorValue01.Text = "Color Value";
+            // 
+            // lbColorValue02
+            // 
+            lbColorValue02.AutoSize = true;
+            lbColorValue02.Location = new System.Drawing.Point(140, 6);
+            lbColorValue02.Name = "lbColorValue02";
+            lbColorValue02.Size = new System.Drawing.Size(67, 15);
+            lbColorValue02.TabIndex = 26;
+            lbColorValue02.Text = "Color Value";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(116, 27);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(18, 15);
+            label5.TabIndex = 27;
+            label5.Text = "to";
+            // 
+            // lbColorValueDelete
+            // 
+            lbColorValueDelete.AutoSize = true;
+            lbColorValueDelete.Location = new System.Drawing.Point(9, 64);
+            lbColorValueDelete.Name = "lbColorValueDelete";
+            lbColorValueDelete.Size = new System.Drawing.Size(103, 15);
+            lbColorValueDelete.TabIndex = 28;
+            lbColorValueDelete.Text = "Delete Color Value";
+            // 
+            // comboBoxColorValue
+            // 
+            comboBoxColorValue.FormattingEnabled = true;
+            comboBoxColorValue.Items.AddRange(new object[] { "ffffff", "000000" });
+            comboBoxColorValue.Location = new System.Drawing.Point(246, 24);
+            comboBoxColorValue.Name = "comboBoxColorValue";
+            comboBoxColorValue.Size = new System.Drawing.Size(103, 23);
+            comboBoxColorValue.TabIndex = 29;
+            comboBoxColorValue.SelectedIndexChanged += comboBoxColorValue_SelectedIndexChanged;
+            // 
+            // lbColorValue03
+            // 
+            lbColorValue03.AutoSize = true;
+            lbColorValue03.Location = new System.Drawing.Point(246, 6);
+            lbColorValue03.Name = "lbColorValue03";
+            lbColorValue03.Size = new System.Drawing.Size(87, 15);
+            lbColorValue03.TabIndex = 30;
+            lbColorValue03.Text = "Color Selection";
+            // 
+            // panel3
+            // 
+            panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            panel3.Controls.Add(checkBoxDelete);
+            panel3.Controls.Add(checkBoxChange);
+            panel3.Controls.Add(textBoxColorToAdress);
+            panel3.Controls.Add(lbColorValue03);
+            panel3.Controls.Add(textBoxColorAdress);
+            panel3.Controls.Add(textBoxColorErase);
+            panel3.Controls.Add(comboBoxColorValue);
+            panel3.Controls.Add(lbColorValue01);
+            panel3.Controls.Add(lbColorValueDelete);
+            panel3.Controls.Add(lbColorValue02);
+            panel3.Controls.Add(label5);
+            panel3.Location = new System.Drawing.Point(456, 253);
+            panel3.Name = "panel3";
+            panel3.Size = new System.Drawing.Size(356, 185);
+            panel3.TabIndex = 31;
+            // 
+            // checkBoxDelete
+            // 
+            checkBoxDelete.AutoSize = true;
+            checkBoxDelete.Location = new System.Drawing.Point(246, 86);
+            checkBoxDelete.Name = "checkBoxDelete";
+            checkBoxDelete.Size = new System.Drawing.Size(59, 19);
+            checkBoxDelete.TabIndex = 32;
+            checkBoxDelete.Text = "Delete";
+            checkBoxDelete.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxChange
+            // 
+            checkBoxChange.AutoSize = true;
+            checkBoxChange.Location = new System.Drawing.Point(246, 60);
+            checkBoxChange.Name = "checkBoxChange";
+            checkBoxChange.Size = new System.Drawing.Size(67, 19);
+            checkBoxChange.TabIndex = 31;
+            checkBoxChange.Text = "Change";
+            checkBoxChange.UseVisualStyleBackColor = true;
+            // 
             // TextureCutter
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(800, 450);
+            ClientSize = new System.Drawing.Size(822, 450);
+            Controls.Add(panel3);
             Controls.Add(checkBox33x33);
             Controls.Add(panel2);
             Controls.Add(buttonOpenTempGrafic);
@@ -354,12 +504,15 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Name = "TextureCutter";
-            Text = "TextureCutter";
+            Text = "TextureCutter and Color Changer";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            contextMenuStrip1.ResumeLayout(false);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -393,5 +546,19 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         private System.Windows.Forms.Button buttonWhite;
         private System.Windows.Forms.CheckBox checkBox33x33;
         private System.Windows.Forms.Button button45Degrees;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem copyClipboardToolStripMenuItem;
+        private System.Windows.Forms.TextBox textBoxColorAdress;
+        private System.Windows.Forms.TextBox textBoxColorErase;
+        private System.Windows.Forms.TextBox textBoxColorToAdress;
+        private System.Windows.Forms.Label lbColorValue01;
+        private System.Windows.Forms.Label lbColorValue02;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lbColorValueDelete;
+        private System.Windows.Forms.ComboBox comboBoxColorValue;
+        private System.Windows.Forms.Label lbColorValue03;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.CheckBox checkBoxDelete;
+        private System.Windows.Forms.CheckBox checkBoxChange;
     }
 }

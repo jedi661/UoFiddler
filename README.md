@@ -24,6 +24,7 @@ Version 4.11.19
 - Added a label that continuously displays the decimal ID of the position. Clicking on the label will insert the ID into the textbox.
 - Font: Added functions for importing and exporting to the clipboard via the context menu or Ctrl+V and Ctrl+X, along with an optional sound function that can be activated.
 - Font: The function replaces #d3d3d3 with #ffffff when copying to the clipboard.
+- Added textboxes to TextureCutter to clear color values from an image and added a context menu to copy the image to the clipboard.
 
 Version 4.11.18
 - Added a Performzoomstep to the map.
