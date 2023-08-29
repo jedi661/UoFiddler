@@ -6,6 +6,14 @@ UOFiddler based on Ultima SDK it's a tool to view and alter almost every UO 2D c
 
 ## Changelog
 
+Version : 4.11.20
+- Added textboxes to TextureCutter to clear color values from an image and added a context menu to copy the image to the clipboard.
+- Added an import function to Texturecutter to insert the image into the PictureBox.
+- Added a refresh function to Texturecutter to update the image when color is replaced; this can be repeated as needed.
+- Added a dropper tool to Texturecutter to retrieve the color code from the image in the PictureBox.
+- Added a mirror function to Texturecutter that horizontally mirrors the image in the PictureBox.
+- Added Ctrl+V and Ctrl+X functionality to Texturecutter to copy and import the image from the PictureBox.
+
 Version 4.11.19
 - Add Decripter Client (ConverterMultiPlugin)
 - Add Zoom function Mouseweel Plugin Compare Map
@@ -24,7 +32,6 @@ Version 4.11.19
 - Added a label that continuously displays the decimal ID of the position. Clicking on the label will insert the ID into the textbox.
 - Font: Added functions for importing and exporting to the clipboard via the context menu or Ctrl+V and Ctrl+X, along with an optional sound function that can be activated.
 - Font: The function replaces #d3d3d3 with #ffffff when copying to the clipboard.
-- Added textboxes to TextureCutter to clear color values from an image and added a context menu to copy the image to the clipboard.
 
 Version 4.11.18
 - Added a Performzoomstep to the map.

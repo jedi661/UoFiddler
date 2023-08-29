@@ -44,6 +44,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             pictureBox1 = new System.Windows.Forms.PictureBox();
             contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
             copyClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            importClipbordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             buttonLoadImage = new System.Windows.Forms.Button();
             buttonTextureCutter = new System.Windows.Forms.Button();
             openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -80,6 +81,9 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             comboBoxColorValue = new System.Windows.Forms.ComboBox();
             lbColorValue03 = new System.Windows.Forms.Label();
             panel3 = new System.Windows.Forms.Panel();
+            BtMirroImage = new System.Windows.Forms.Button();
+            btPickColor = new System.Windows.Forms.Button();
+            btToUpdate = new System.Windows.Forms.Button();
             checkBoxDelete = new System.Windows.Forms.CheckBox();
             checkBoxChange = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -98,23 +102,31 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
+            pictureBox1.MouseClick += pictureBox1_MouseClick;
             // 
             // contextMenuStrip1
             // 
-            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { copyClipboardToolStripMenuItem });
+            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { copyClipboardToolStripMenuItem, importClipbordToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new System.Drawing.Size(158, 26);
+            contextMenuStrip1.Size = new System.Drawing.Size(160, 48);
             // 
             // copyClipboardToolStripMenuItem
             // 
             copyClipboardToolStripMenuItem.Name = "copyClipboardToolStripMenuItem";
-            copyClipboardToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            copyClipboardToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             copyClipboardToolStripMenuItem.Text = "Copy Clipboard";
             copyClipboardToolStripMenuItem.Click += copyClipboardToolStripMenuItem_Click;
             // 
+            // importClipbordToolStripMenuItem
+            // 
+            importClipbordToolStripMenuItem.Name = "importClipbordToolStripMenuItem";
+            importClipbordToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            importClipbordToolStripMenuItem.Text = "Import Clipbord";
+            importClipbordToolStripMenuItem.Click += importClipbordToolStripMenuItem_Click;
+            // 
             // buttonLoadImage
             // 
-            buttonLoadImage.Location = new System.Drawing.Point(12, 398);
+            buttonLoadImage.Location = new System.Drawing.Point(12, 384);
             buttonLoadImage.Name = "buttonLoadImage";
             buttonLoadImage.Size = new System.Drawing.Size(75, 23);
             buttonLoadImage.TabIndex = 1;
@@ -124,7 +136,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             // buttonTextureCutter
             // 
-            buttonTextureCutter.Location = new System.Drawing.Point(93, 398);
+            buttonTextureCutter.Location = new System.Drawing.Point(93, 384);
             buttonTextureCutter.Name = "buttonTextureCutter";
             buttonTextureCutter.Size = new System.Drawing.Size(75, 23);
             buttonTextureCutter.TabIndex = 2;
@@ -238,7 +250,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             // buttonOpenTempGrafic
             // 
-            buttonOpenTempGrafic.Location = new System.Drawing.Point(365, 398);
+            buttonOpenTempGrafic.Location = new System.Drawing.Point(365, 384);
             buttonOpenTempGrafic.Name = "buttonOpenTempGrafic";
             buttonOpenTempGrafic.Size = new System.Drawing.Size(74, 23);
             buttonOpenTempGrafic.TabIndex = 16;
@@ -443,6 +455,9 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // panel3
             // 
             panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            panel3.Controls.Add(BtMirroImage);
+            panel3.Controls.Add(btPickColor);
+            panel3.Controls.Add(btToUpdate);
             panel3.Controls.Add(checkBoxDelete);
             panel3.Controls.Add(checkBoxChange);
             panel3.Controls.Add(textBoxColorToAdress);
@@ -458,6 +473,36 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             panel3.Name = "panel3";
             panel3.Size = new System.Drawing.Size(356, 185);
             panel3.TabIndex = 31;
+            // 
+            // BtMirroImage
+            // 
+            BtMirroImage.Location = new System.Drawing.Point(171, 129);
+            BtMirroImage.Name = "BtMirroImage";
+            BtMirroImage.Size = new System.Drawing.Size(75, 23);
+            BtMirroImage.TabIndex = 35;
+            BtMirroImage.Text = "Mirror";
+            BtMirroImage.UseVisualStyleBackColor = true;
+            BtMirroImage.Click += BtMirroImage_Click;
+            // 
+            // btPickColor
+            // 
+            btPickColor.Location = new System.Drawing.Point(90, 129);
+            btPickColor.Name = "btPickColor";
+            btPickColor.Size = new System.Drawing.Size(75, 23);
+            btPickColor.TabIndex = 34;
+            btPickColor.Text = "Pipette";
+            btPickColor.UseVisualStyleBackColor = true;
+            btPickColor.Click += btPickColor_Click;
+            // 
+            // btToUpdate
+            // 
+            btToUpdate.Location = new System.Drawing.Point(9, 129);
+            btToUpdate.Name = "btToUpdate";
+            btToUpdate.Size = new System.Drawing.Size(75, 23);
+            btToUpdate.TabIndex = 33;
+            btToUpdate.Text = "To update";
+            btToUpdate.UseVisualStyleBackColor = true;
+            btToUpdate.Click += btToUpdate_Click;
             // 
             // checkBoxDelete
             // 
@@ -503,8 +548,10 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             Controls.Add(buttonLoadImage);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            KeyPreview = true;
             Name = "TextureCutter";
             Text = "TextureCutter and Color Changer";
+            KeyDown += Form1_KeyDown;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             contextMenuStrip1.ResumeLayout(false);
             panel1.ResumeLayout(false);
@@ -560,5 +607,9 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.CheckBox checkBoxDelete;
         private System.Windows.Forms.CheckBox checkBoxChange;
+        private System.Windows.Forms.ToolStripMenuItem importClipbordToolStripMenuItem;
+        private System.Windows.Forms.Button btToUpdate;
+        private System.Windows.Forms.Button btPickColor;
+        private System.Windows.Forms.Button BtMirroImage;
     }
 }

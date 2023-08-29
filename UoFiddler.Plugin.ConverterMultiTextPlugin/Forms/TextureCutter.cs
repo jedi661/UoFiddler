@@ -32,6 +32,8 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
 
         private Bitmap resizedImage;
 
+        private bool isPickingColor = false;
+
         public TextureCutter()
         {
             InitializeComponent();
@@ -39,6 +41,12 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             labelImageSize.Text = "";
 
             checkBoxChange.CheckedChanged += checkBoxChange_CheckedChanged;
+
+            // Set the KeyPreview property of the form to true.
+            this.KeyPreview = true;
+
+            // Add a keyboard event handler to the form.
+            this.KeyDown += Form1_KeyDown;
         }
 
         private void buttonLoadImage_Click(object sender, EventArgs e)
@@ -62,6 +70,9 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 pictureBox1.Image = Image.FromFile(selectedImagePath);
                 panel1.Controls.Add(pictureBox1);
 
+                // Link the MouseClick event of the new pictureBox1 with the pictureBox1_MouseClick event handler.
+                pictureBox1.MouseClick += pictureBox1_MouseClick;
+
                 // Resetting the scroll position.
                 panel1.AutoScrollPosition = new Point(0, 0);
 
@@ -69,7 +80,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 Size imageSize = pictureBox1.Image.Size;
                 labelImageSize.Text = $"Image size: {imageSize.Width} x {imageSize.Height} Pixel";
 
-                // Stellen Sie sicher, dass das ContextMenuStrip der pictureBox1 zugewiesen ist
+                // Make sure that the ContextMenuStrip of pictureBox1 is assigned.
                 if (pictureBox1.ContextMenuStrip == null)
                 {
                     pictureBox1.ContextMenuStrip = contextMenuStrip1;
@@ -813,6 +824,15 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 Clipboard.SetImage(image);
             }
         }
+        private void importClipbordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Check if there is an image in the clipboard.
+            if (Clipboard.ContainsImage())
+            {
+                // Paste the image from the clipboard into pictureBox1.
+                pictureBox1.Image = Clipboard.GetImage();
+            }
+        }
 
         //Old function that sets to transparent not active
         private void MakeTransparent(Bitmap image, Color color)
@@ -955,6 +975,137 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             {
                 // Transfer the value of comboBoxColorValue to textBoxColorToAdress
                 textBoxColorErase.Text = comboBoxColorValue.Text;
+            }
+        }
+        #endregion
+
+        #region To Update
+        private void btToUpdate_Click(object sender, EventArgs e)
+        {
+            if (pictureBox1.Image != null)
+            {
+                // Create a copy of the image in pictureBox1.
+                Bitmap image = new Bitmap(pictureBox1.Image);
+
+                // Check if valid color values have been entered in both textBoxColorAdress and textBoxColorToAdress.
+                if (IsValidColor(textBoxColorAdress.Text) && IsValidColor(textBoxColorToAdress.Text))
+                {
+                    // Add the "#" symbol to the color code if it's not already present.
+                    string fromColorCode = textBoxColorAdress.Text;
+                    if (!fromColorCode.StartsWith("#"))
+                    {
+                        fromColorCode = "#" + fromColorCode;
+                    }
+
+                    string toColorCode = textBoxColorToAdress.Text;
+                    if (!toColorCode.StartsWith("#"))
+                    {
+                        toColorCode = "#" + toColorCode;
+                    }
+
+                    // Convert the entered color values into Color objects.
+                    Color fromColor = ColorTranslator.FromHtml(fromColorCode);
+                    Color toColor = ColorTranslator.FromHtml(toColorCode);
+
+                    // Replace the color value in the image.
+                    ReplaceColor(image, fromColor, toColor);
+                }
+
+                // Check if a valid color value has been entered in the textBoxColorErase.
+                if (IsValidColor(textBoxColorErase.Text))
+                {
+                    // Add the "#" symbol to the color code if it's not already present.
+                    string eraseColorCode = textBoxColorErase.Text;
+                    if (!eraseColorCode.StartsWith("#"))
+                    {
+                        eraseColorCode = "#" + eraseColorCode;
+                    }
+
+                    // Convert the entered color value into a Color object.
+                    Color eraseColor = ColorTranslator.FromHtml(eraseColorCode);
+
+                    // Replace the color value in the image with white.
+                    ReplaceWithWhite(image, eraseColor);
+                }
+
+                // Update the image in pictureBox1.
+                pictureBox1.Image = image;
+            }
+        }
+        #endregion
+
+        #region Keydown
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Check if Ctrl+V was pressed.
+            if (e.Control && e.KeyCode == Keys.X)
+            {
+                // Invoke the copyClipboardToolStripMenuItem_Click method.
+                copyClipboardToolStripMenuItem_Click(sender, e);
+            }
+            if (e.Control && e.KeyCode == Keys.V)
+            {
+                // Invoke the importClipbordToolStripMenuItem_Click method.
+                importClipbordToolStripMenuItem_Click(sender, e);
+            }
+        }
+        #endregion
+
+        #region Pipette
+        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            // Check if the dropper mode is activated.
+            if (isPickingColor)
+            {
+                // Check if there is an image in pictureBox1.
+                if (pictureBox1.Image != null)
+                {
+                    // Convert the mouse coordinates to image coordinates.
+                    int x = e.X * pictureBox1.Image.Width / pictureBox1.Width;
+                    int y = e.Y * pictureBox1.Image.Height / pictureBox1.Height;
+
+                    // Create a copy of the image in pictureBox1.
+                    Bitmap image = new Bitmap(pictureBox1.Image);
+
+                    // Check if the coordinates are within the image bounds.
+                    if (x >= 0 && x < image.Width && y >= 0 && y < image.Height)
+                    {
+                        // Retrieve the color value of the pixel at the specified coordinates.
+                        Color color = image.GetPixel(x, y);
+
+                        // Convert the color value to a hexadecimal code.
+                        string colorCode = "#" + color.R.ToString("X2") + color.G.ToString("X2") + color.B.ToString("X2");
+
+                        // Set the color code in the textBoxColorAdress.
+                        textBoxColorAdress.Text = colorCode;
+                    }
+                }
+
+                // Disable eyedropper mode
+                isPickingColor = false;
+            }
+        }
+
+        private void btPickColor_Click(object sender, EventArgs e)
+        {
+            // Activate eyedropper mode
+            isPickingColor = true;
+        }
+        #endregion
+        #region Mirror
+        private void BtMirroImage_Click(object sender, EventArgs e)
+        {
+            // Check if there is an image in pictureBox1.
+            if (pictureBox1.Image != null)
+            {
+                // Create a copy of the image in pictureBox1.
+                Bitmap image = new Bitmap(pictureBox1.Image);
+
+                // Mirror the image horizontally.
+                image.RotateFlip(RotateFlipType.RotateNoneFlipX);
+
+                // Update the image in pictureBox1.
+                pictureBox1.Image = image;
             }
         }
         #endregion
