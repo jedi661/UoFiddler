@@ -92,6 +92,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             zoomOutButton = new System.Windows.Forms.Button();
             resetButton = new System.Windows.Forms.Button();
             coordinatesLabel = new System.Windows.Forms.Label();
+            colorLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             contextMenuStrip1.SuspendLayout();
             panel1.SuspendLayout();
@@ -592,11 +593,21 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             coordinatesLabel.TabIndex = 35;
             coordinatesLabel.Text = "Coordinates";
             // 
+            // colorLabel
+            // 
+            colorLabel.AutoSize = true;
+            colorLabel.Location = new System.Drawing.Point(93, 417);
+            colorLabel.Name = "colorLabel";
+            colorLabel.Size = new System.Drawing.Size(36, 15);
+            colorLabel.TabIndex = 36;
+            colorLabel.Text = "Color";
+            // 
             // TextureCutter
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(822, 450);
+            Controls.Add(colorLabel);
             Controls.Add(coordinatesLabel);
             Controls.Add(resetButton);
             Controls.Add(zoomOutButton);
@@ -689,5 +700,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         private System.Windows.Forms.Button selectColorButton;
         private System.Windows.Forms.Label coordinatesLabel;
         private System.Windows.Forms.Button convertToIndexedButton;
+        private System.Windows.Forms.Label colorLabel;
     }
 }

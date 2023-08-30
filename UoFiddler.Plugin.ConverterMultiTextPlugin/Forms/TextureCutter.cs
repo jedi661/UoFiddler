@@ -1192,12 +1192,37 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             }
         }
         #endregion
-        #region Koordinaten des Mauszeigers
+        #region Coordinates of the mouse cursor.
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            // Display the coordinates of the mouse pointer in the label
+            // Checking if an image has been loaded in the PictureBox.
+            if (pictureBox1.Image != null)
+            {
+                // Converting the mouse coordinates to image coordinates.
+                int x = e.X * pictureBox1.Image.Width / pictureBox1.Width;
+                int y = e.Y * pictureBox1.Image.Height / pictureBox1.Height;
+
+                // Creating a copy of the image in pictureBox1.
+                Bitmap image = new Bitmap(pictureBox1.Image);
+
+                // Checking if the coordinates are within the image boundaries.
+                if (x >= 0 && x < image.Width && y >= 0 && y < image.Height)
+                {
+                    // Retrieving the color value of the pixel at the specified coordinates.
+                    Color color = image.GetPixel(x, y);
+
+                    // Converting the color value to a hexadecimal code.
+                    string colorCode = "#" + color.R.ToString("X2") + color.G.ToString("X2") + color.B.ToString("X2");
+
+                    // Setting the color code in the label control.
+                    colorLabel.Text = colorCode;
+                }
+            }
+
+            // Displaying the coordinates of the mouse cursor in the label.
             coordinatesLabel.Text = $"X: {e.X}, Y: {e.Y}";
         }
+
         #endregion
 
         #region indexed colors
