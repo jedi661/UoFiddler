@@ -81,6 +81,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             comboBoxColorValue = new System.Windows.Forms.ComboBox();
             lbColorValue03 = new System.Windows.Forms.Label();
             panel3 = new System.Windows.Forms.Panel();
+            convertToIndexedButton = new System.Windows.Forms.Button();
             selectColorButton = new System.Windows.Forms.Button();
             BtMirroImage = new System.Windows.Forms.Button();
             btPickColor = new System.Windows.Forms.Button();
@@ -461,6 +462,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // panel3
             // 
             panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            panel3.Controls.Add(convertToIndexedButton);
             panel3.Controls.Add(selectColorButton);
             panel3.Controls.Add(BtMirroImage);
             panel3.Controls.Add(btPickColor);
@@ -480,6 +482,16 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             panel3.Name = "panel3";
             panel3.Size = new System.Drawing.Size(356, 185);
             panel3.TabIndex = 31;
+            // 
+            // convertToIndexedButton
+            // 
+            convertToIndexedButton.Location = new System.Drawing.Point(252, 129);
+            convertToIndexedButton.Name = "convertToIndexedButton";
+            convertToIndexedButton.Size = new System.Drawing.Size(75, 23);
+            convertToIndexedButton.TabIndex = 37;
+            convertToIndexedButton.Text = "indexed";
+            convertToIndexedButton.UseVisualStyleBackColor = true;
+            convertToIndexedButton.Click += convertToIndexedButton_Click;
             // 
             // selectColorButton
             // 
@@ -676,5 +688,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         private System.Windows.Forms.Button resetButton;
         private System.Windows.Forms.Button selectColorButton;
         private System.Windows.Forms.Label coordinatesLabel;
+        private System.Windows.Forms.Button convertToIndexedButton;
     }
 }

@@ -1199,5 +1199,24 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             coordinatesLabel.Text = $"X: {e.X}, Y: {e.Y}";
         }
         #endregion
+
+        #region indexed colors
+        private void convertToIndexedButton_Click(object sender, EventArgs e)
+        {
+            // Check if there is an image on the clipboard
+            if (Clipboard.ContainsImage())
+            {
+                // Paste the image from the clipboard into the PictureBox
+                Bitmap source = new Bitmap(Clipboard.GetImage());
+                pictureBox1.Image = source;
+
+                // Convert the image to indexed colors
+                Bitmap result = source.Clone(new Rectangle(0, 0, source.Width, source.Height), PixelFormat.Format8bppIndexed);
+
+                // Update the image in the PictureBox
+                pictureBox1.Image = result;
+            }
+        }
+        #endregion
     }
 }
