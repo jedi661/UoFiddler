@@ -18,6 +18,7 @@ Version : 4.11.20
 - Added a ColorDialog to Texturecutter that places the color values into the textbox.
 - Added coordinates that are displayed on a label.
 - Expanded the ToUpdate function to work with the zoom function and refresh properly.
+- Added indexed colors.
 
 Version 4.11.19
 - Add Decripter Client (ConverterMultiPlugin)
