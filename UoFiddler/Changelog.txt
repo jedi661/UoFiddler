@@ -5,6 +5,11 @@ Version : 4.11.20 #XG1
 - Added a dropper tool to Texturecutter to retrieve the color code from the image in the PictureBox.
 - Added a mirror function to Texturecutter that horizontally mirrors the image in the PictureBox.
 - Added Ctrl+V and Ctrl+X functionality to Texturecutter to copy and import the image from the PictureBox.
+- Added zoom in and zoom out buttons to Texturecutter, as well as zoom functionality using the mouse wheel.
+- Added a reset button to Texturecutter to restore the original size.
+- Added a ColorDialog to Texturecutter that places the color values into the textbox.
+- Added coordinates that are displayed on a label.
+- Expanded the ToUpdate function to work with the zoom function and refresh properly.
 
 Version : 4.11.19 #XG1
 - Add Decripter Client (ConverterMultiPlugin)

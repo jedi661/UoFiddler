@@ -34,6 +34,14 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
 
         private bool isPickingColor = false;
 
+        // Save OrginalImage
+        private Bitmap originalImage;
+        // Save Orginal Size
+        private Size originalSize;
+
+        // Define a variable to store the custom colors
+        private int[] customColors;
+
         public TextureCutter()
         {
             InitializeComponent();
@@ -47,6 +55,9 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
 
             // Add a keyboard event handler to the form.
             this.KeyDown += Form1_KeyDown;
+
+            //zoom
+            pictureBox1.MouseWheel += pictureBox1_MouseWheel;
         }
 
         private void buttonLoadImage_Click(object sender, EventArgs e)
@@ -826,11 +837,15 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         }
         private void importClipbordToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Check if there is an image in the clipboard.
+            // Überprüfen Sie, ob sich ein Bild in der Zwischenablage befindet
             if (Clipboard.ContainsImage())
             {
-                // Paste the image from the clipboard into pictureBox1.
+                // Fügen Sie das Bild aus der Zwischenablage in die PictureBox ein
                 pictureBox1.Image = Clipboard.GetImage();
+
+                // Speichern Sie das ursprüngliche Bild und seine Größe
+                originalImage = new Bitmap(pictureBox1.Image);
+                originalSize = pictureBox1.Image.Size;
             }
         }
 
@@ -1030,6 +1045,9 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
 
                 // Update the image in pictureBox1.
                 pictureBox1.Image = image;
+
+                // Update the originalImage object
+                originalImage = new Bitmap(image);
             }
         }
         #endregion
@@ -1107,6 +1125,78 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 // Update the image in pictureBox1.
                 pictureBox1.Image = image;
             }
+        }
+        #endregion
+
+        #region Zoom
+        private void zoomInButton_Click(object sender, EventArgs e)
+        {
+            // Check that the Image object is not null
+            if (originalImage != null)
+            {
+                //  Enlarge
+                pictureBox1.Image = new Bitmap(originalImage, new Size(pictureBox1.Image.Width + 10, pictureBox1.Image.Height + 10));
+            }
+        }
+
+        private void zoomOutButton_Click(object sender, EventArgs e)
+        {
+            // zoom out
+            pictureBox1.Image = new Bitmap(originalImage, new Size(pictureBox1.Image.Width - 10, pictureBox1.Image.Height - 10));
+        }
+        private void pictureBox1_MouseWheel(object sender, MouseEventArgs e)
+        {
+            // Check whether the mouse wheel has been rotated up or down
+            if (e.Delta > 0)
+            {
+                // Enlarge
+                pictureBox1.Image = new Bitmap(originalImage, new Size(pictureBox1.Image.Width + 10, pictureBox1.Image.Height + 10));
+            }
+            else
+            {
+                // zoom out
+                pictureBox1.Image = new Bitmap(originalImage, new Size(pictureBox1.Image.Width - 10, pictureBox1.Image.Height - 10));
+            }
+        }
+
+        private void resetButton_Click(object sender, EventArgs e)
+        {
+            // Resize the image in the PictureBox to its original size
+            pictureBox1.Image = new Bitmap(originalImage, originalSize);
+        }
+        #endregion
+
+        #region Color Dialog
+        private void selectColorButton_Click(object sender, EventArgs e)
+        {
+            // Create a new ColorDialog object
+            ColorDialog colorDialog = new ColorDialog();
+
+            // Restore the custom colors, if any
+            if (customColors != null)
+            {
+                colorDialog.CustomColors = customColors;
+            }
+
+            // Display the ColorDialog and verify that the user clicked OK
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                // Convert the selected color to a hexadecimal code
+                string colorCode = "#" + colorDialog.Color.R.ToString("X2") + colorDialog.Color.G.ToString("X2") + colorDialog.Color.B.ToString("X2");
+
+                // Put the color code in the textBoxColorToAdress
+                textBoxColorToAdress.Text = colorCode;
+
+                // Save the custom colors
+                customColors = colorDialog.CustomColors;
+            }
+        }
+        #endregion
+        #region Koordinaten des Mauszeigers
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            // Display the coordinates of the mouse pointer in the label
+            coordinatesLabel.Text = $"X: {e.X}, Y: {e.Y}";
         }
         #endregion
     }

@@ -81,11 +81,16 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             comboBoxColorValue = new System.Windows.Forms.ComboBox();
             lbColorValue03 = new System.Windows.Forms.Label();
             panel3 = new System.Windows.Forms.Panel();
+            selectColorButton = new System.Windows.Forms.Button();
             BtMirroImage = new System.Windows.Forms.Button();
             btPickColor = new System.Windows.Forms.Button();
             btToUpdate = new System.Windows.Forms.Button();
             checkBoxDelete = new System.Windows.Forms.CheckBox();
             checkBoxChange = new System.Windows.Forms.CheckBox();
+            zoomInButton = new System.Windows.Forms.Button();
+            zoomOutButton = new System.Windows.Forms.Button();
+            resetButton = new System.Windows.Forms.Button();
+            coordinatesLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             contextMenuStrip1.SuspendLayout();
             panel1.SuspendLayout();
@@ -103,6 +108,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             pictureBox1.MouseClick += pictureBox1_MouseClick;
+            pictureBox1.MouseMove += pictureBox1_MouseMove;
             // 
             // contextMenuStrip1
             // 
@@ -383,7 +389,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             // textBoxColorErase
             // 
-            textBoxColorErase.Location = new System.Drawing.Point(9, 82);
+            textBoxColorErase.Location = new System.Drawing.Point(9, 78);
             textBoxColorErase.Name = "textBoxColorErase";
             textBoxColorErase.Size = new System.Drawing.Size(100, 23);
             textBoxColorErase.TabIndex = 23;
@@ -427,7 +433,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // lbColorValueDelete
             // 
             lbColorValueDelete.AutoSize = true;
-            lbColorValueDelete.Location = new System.Drawing.Point(9, 64);
+            lbColorValueDelete.Location = new System.Drawing.Point(9, 60);
             lbColorValueDelete.Name = "lbColorValueDelete";
             lbColorValueDelete.Size = new System.Drawing.Size(103, 15);
             lbColorValueDelete.TabIndex = 28;
@@ -436,7 +442,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // comboBoxColorValue
             // 
             comboBoxColorValue.FormattingEnabled = true;
-            comboBoxColorValue.Items.AddRange(new object[] { "ffffff", "000000" });
+            comboBoxColorValue.Items.AddRange(new object[] { "ffffff", "000000", "f456ea" });
             comboBoxColorValue.Location = new System.Drawing.Point(246, 24);
             comboBoxColorValue.Name = "comboBoxColorValue";
             comboBoxColorValue.Size = new System.Drawing.Size(103, 23);
@@ -455,6 +461,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // panel3
             // 
             panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            panel3.Controls.Add(selectColorButton);
             panel3.Controls.Add(BtMirroImage);
             panel3.Controls.Add(btPickColor);
             panel3.Controls.Add(btToUpdate);
@@ -473,6 +480,16 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             panel3.Name = "panel3";
             panel3.Size = new System.Drawing.Size(356, 185);
             panel3.TabIndex = 31;
+            // 
+            // selectColorButton
+            // 
+            selectColorButton.Location = new System.Drawing.Point(140, 56);
+            selectColorButton.Name = "selectColorButton";
+            selectColorButton.Size = new System.Drawing.Size(84, 23);
+            selectColorButton.TabIndex = 36;
+            selectColorButton.Text = "ColorDialog";
+            selectColorButton.UseVisualStyleBackColor = true;
+            selectColorButton.Click += selectColorButton_Click;
             // 
             // BtMirroImage
             // 
@@ -524,11 +541,54 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             checkBoxChange.Text = "Change";
             checkBoxChange.UseVisualStyleBackColor = true;
             // 
+            // zoomInButton
+            // 
+            zoomInButton.Location = new System.Drawing.Point(174, 384);
+            zoomInButton.Name = "zoomInButton";
+            zoomInButton.Size = new System.Drawing.Size(75, 23);
+            zoomInButton.TabIndex = 32;
+            zoomInButton.Text = "Zoom In";
+            zoomInButton.UseVisualStyleBackColor = true;
+            zoomInButton.Click += zoomInButton_Click;
+            // 
+            // zoomOutButton
+            // 
+            zoomOutButton.Location = new System.Drawing.Point(255, 384);
+            zoomOutButton.Name = "zoomOutButton";
+            zoomOutButton.Size = new System.Drawing.Size(75, 23);
+            zoomOutButton.TabIndex = 33;
+            zoomOutButton.Text = "Zoom Out";
+            zoomOutButton.UseVisualStyleBackColor = true;
+            zoomOutButton.Click += zoomOutButton_Click;
+            // 
+            // resetButton
+            // 
+            resetButton.Location = new System.Drawing.Point(174, 413);
+            resetButton.Name = "resetButton";
+            resetButton.Size = new System.Drawing.Size(75, 23);
+            resetButton.TabIndex = 34;
+            resetButton.Text = "Reset";
+            resetButton.UseVisualStyleBackColor = true;
+            resetButton.Click += resetButton_Click;
+            // 
+            // coordinatesLabel
+            // 
+            coordinatesLabel.AutoSize = true;
+            coordinatesLabel.Location = new System.Drawing.Point(12, 417);
+            coordinatesLabel.Name = "coordinatesLabel";
+            coordinatesLabel.Size = new System.Drawing.Size(71, 15);
+            coordinatesLabel.TabIndex = 35;
+            coordinatesLabel.Text = "Coordinates";
+            // 
             // TextureCutter
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(822, 450);
+            Controls.Add(coordinatesLabel);
+            Controls.Add(resetButton);
+            Controls.Add(zoomOutButton);
+            Controls.Add(zoomInButton);
             Controls.Add(panel3);
             Controls.Add(checkBox33x33);
             Controls.Add(panel2);
@@ -611,5 +671,10 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         private System.Windows.Forms.Button btToUpdate;
         private System.Windows.Forms.Button btPickColor;
         private System.Windows.Forms.Button BtMirroImage;
+        private System.Windows.Forms.Button zoomInButton;
+        private System.Windows.Forms.Button zoomOutButton;
+        private System.Windows.Forms.Button resetButton;
+        private System.Windows.Forms.Button selectColorButton;
+        private System.Windows.Forms.Label coordinatesLabel;
     }
 }
