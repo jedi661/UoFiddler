@@ -610,7 +610,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             KeyPreview = true;
             Name = "TextureCutter";
-            Text = "TextureCutter and Color Changer";
+            Text = "TextureCutter and Color Changer Clipboard";
             KeyDown += Form1_KeyDown;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             contextMenuStrip1.ResumeLayout(false);
