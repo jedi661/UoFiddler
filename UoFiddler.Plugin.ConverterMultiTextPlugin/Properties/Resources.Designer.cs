@@ -153,6 +153,16 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap left2 {
+            get {
+                object obj = ResourceManager.GetObject("left2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Load {
             get {
                 object obj = ResourceManager.GetObject("Load", resourceCulture);

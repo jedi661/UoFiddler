@@ -42,6 +42,13 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         // Define a variable to store the custom colors
         private int[] customColors;
 
+        // Zeichnen
+        private bool isDrawing = false;
+        private Point lastPoint;
+
+        // Löschen
+        private bool isErasing = false;
+
         public TextureCutter()
         {
             InitializeComponent();
@@ -1193,7 +1200,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         }
         #endregion
         #region Coordinates of the mouse cursor.
-        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        /*private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             // Checking if an image has been loaded in the PictureBox.
             if (pictureBox1.Image != null)
@@ -1221,8 +1228,109 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
 
             // Displaying the coordinates of the mouse cursor in the label.
             coordinatesLabel.Text = $"X: {e.X}, Y: {e.Y}";
-        }
+        }*/
 
+        /*private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            // Überprüfen Sie, ob ein Bild in der PictureBox geladen wurde
+            if (pictureBox1.Image != null)
+            {
+                // Konvertieren Sie die Mauskoordinaten in Bildkoordinaten
+                int x = e.X * pictureBox1.Image.Width / pictureBox1.Width;
+                int y = e.Y * pictureBox1.Image.Height / pictureBox1.Height;
+
+                // Erstellen Sie eine Kopie des Bildes in pictureBox1
+                Bitmap image = new Bitmap(pictureBox1.Image);
+
+                // Überprüfen Sie, ob die Koordinaten innerhalb der Bildgrenzen liegen
+                if (x >= 0 && x < image.Width && y >= 0 && y < image.Height)
+                {
+                    // Abrufen des Farbwerts des Pixels an den angegebenen Koordinaten
+                    Color color = image.GetPixel(x, y);
+
+                    // Konvertieren Sie den Farbwert in einen Hexadezimalcode
+                    string colorCode = "#" + color.R.ToString("X2") + color.G.ToString("X2") + color.B.ToString("X2");
+
+                    // Setzen Sie den Farbcode im Label-Steuerelement
+                    colorLabel.Text = colorCode;
+                }
+            }            
+        }*/        
+
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            // Überprüfen Sie, ob ein Bild in der PictureBox geladen wurde
+            if (pictureBox1.Image != null)
+            {
+                // Konvertieren Sie die Mauskoordinaten in Bildkoordinaten
+                int x = e.X * pictureBox1.Image.Width / pictureBox1.Width;
+                int y = e.Y * pictureBox1.Image.Height / pictureBox1.Height;
+
+                // Erstellen Sie eine Kopie des Bildes in pictureBox1
+                Bitmap image = new Bitmap(pictureBox1.Image);
+
+                // Überprüfen Sie, ob die Koordinaten innerhalb der Bildgrenzen liegen
+                if (x >= 0 && x < image.Width && y >= 0 && y < image.Height)
+                {
+                    // Abrufen des Farbwerts des Pixels an den angegebenen Koordinaten
+                    Color color = image.GetPixel(x, y);
+
+                    // Konvertieren Sie den Farbwert in einen Hexadezimalcode
+                    string colorCode = "#" + color.R.ToString("X2") + color.G.ToString("X2") + color.B.ToString("X2");
+
+                    // Setzen Sie den Farbcode im Label-Steuerelement
+                    colorLabel.Text = colorCode;
+                }
+            }
+
+            // Überprüfen Sie, ob der Löschmodus aktiviert ist und ob die linke Maustaste gedrückt wird
+            if (isErasing && e.Button == MouseButtons.Left)
+            {
+                // Erstellen Sie eine Kopie des Bildes in pictureBox1
+                Bitmap image = new Bitmap(pictureBox1.Image);
+
+                // Erstellen Sie ein Graphics-Objekt aus dem Bild
+                using (Graphics g = Graphics.FromImage(image))
+                {
+                    // Löschen Sie einen Bereich um die aktuelle Mausposition
+                    g.FillEllipse(Brushes.White, e.X - 5, e.Y - 5, 10, 10);
+                }
+
+                // Aktualisieren Sie das Bild in pictureBox1
+                pictureBox1.Image = image;
+            }
+            else if (isDrawing && e.Button == MouseButtons.Left)
+            {
+                // Erstellen Sie eine Kopie des Bildes in pictureBox1
+                Bitmap image = new Bitmap(pictureBox1.Image);
+
+                // Erstellen Sie ein Graphics-Objekt aus dem Bild
+                using (Graphics g = Graphics.FromImage(image))
+                {
+                    // Konvertieren Sie den Text in textBoxColorToAdress in einen Farbwert
+                    Color penColor = ColorTranslator.FromHtml(textBoxColorToAdress.Text);
+
+                    // Erstellen Sie einen Stift mit der angegebenen Farbe
+                    Pen pen = new Pen(penColor);
+
+                    // Zeichnen Sie eine Linie von der letzten Position zur aktuellen Position
+                    g.DrawLine(pen, lastPoint.X, lastPoint.Y, e.X, e.Y);
+                }
+
+                // Aktualisieren Sie das Bild in pictureBox1
+                pictureBox1.Image = image;
+
+                // Setzen Sie den letzten Punkt auf die aktuelle Position
+                lastPoint = e.Location;
+            }
+            else if (e.Button == MouseButtons.None)
+            {
+                // Setzen Sie den letzten Punkt auf die aktuelle Position
+                lastPoint = e.Location;
+            }
+            // Displaying the coordinates of the mouse cursor in the label.
+            coordinatesLabel.Text = $"X: {e.X}, Y: {e.Y}";
+        }
         #endregion
 
         #region indexed colors
@@ -1242,6 +1350,38 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 pictureBox1.Image = result;
             }
         }
+
+        private void drawButton_Click(object sender, EventArgs e)
+        {
+            // Wechseln Sie in den Zeichenmodus
+            isDrawing = true;
+
+            // Deaktivieren Sie den Löschmodus
+            isErasing = false;
+
+            drawButton.FlatAppearance.MouseDownBackColor = Color.Red;
+        }
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            // Überprüfen Sie, ob der Zeichenmodus aktiviert ist
+            if (isDrawing)
+            {
+                // Setzen Sie den letzten Punkt auf die aktuelle Mausposition
+                lastPoint = e.Location;
+            }
+        }
+
+        private void eraseButton_Click(object sender, EventArgs e)
+        {
+            // Wechseln Sie in den Löschmodus
+            isErasing = true;
+
+            // Deaktivieren Sie den Zeichenmodus
+            isDrawing = false;
+
+            eraseButton.FlatAppearance.MouseDownBackColor = Color.Red;
+        }
+
         #endregion
     }
 }

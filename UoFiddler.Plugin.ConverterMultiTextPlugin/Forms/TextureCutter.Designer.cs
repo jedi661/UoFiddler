@@ -81,6 +81,8 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             comboBoxColorValue = new System.Windows.Forms.ComboBox();
             lbColorValue03 = new System.Windows.Forms.Label();
             panel3 = new System.Windows.Forms.Panel();
+            eraseButton = new System.Windows.Forms.Button();
+            drawButton = new System.Windows.Forms.Button();
             convertToIndexedButton = new System.Windows.Forms.Button();
             selectColorButton = new System.Windows.Forms.Button();
             BtMirroImage = new System.Windows.Forms.Button();
@@ -463,6 +465,8 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // panel3
             // 
             panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            panel3.Controls.Add(eraseButton);
+            panel3.Controls.Add(drawButton);
             panel3.Controls.Add(convertToIndexedButton);
             panel3.Controls.Add(selectColorButton);
             panel3.Controls.Add(BtMirroImage);
@@ -483,6 +487,28 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             panel3.Name = "panel3";
             panel3.Size = new System.Drawing.Size(356, 185);
             panel3.TabIndex = 31;
+            // 
+            // eraseButton
+            // 
+            eraseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            eraseButton.Location = new System.Drawing.Point(171, 155);
+            eraseButton.Name = "eraseButton";
+            eraseButton.Size = new System.Drawing.Size(75, 23);
+            eraseButton.TabIndex = 39;
+            eraseButton.Text = "Erase";
+            eraseButton.UseVisualStyleBackColor = true;
+            eraseButton.Click += eraseButton_Click;
+            // 
+            // drawButton
+            // 
+            drawButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            drawButton.Location = new System.Drawing.Point(91, 155);
+            drawButton.Name = "drawButton";
+            drawButton.Size = new System.Drawing.Size(75, 23);
+            drawButton.TabIndex = 38;
+            drawButton.Text = "zeichnen";
+            drawButton.UseVisualStyleBackColor = true;
+            drawButton.Click += drawButton_Click;
             // 
             // convertToIndexedButton
             // 
@@ -701,5 +727,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         private System.Windows.Forms.Label coordinatesLabel;
         private System.Windows.Forms.Button convertToIndexedButton;
         private System.Windows.Forms.Label colorLabel;
+        private System.Windows.Forms.Button drawButton;
+        private System.Windows.Forms.Button eraseButton;
     }
 }

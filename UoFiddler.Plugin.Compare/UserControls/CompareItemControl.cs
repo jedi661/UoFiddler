@@ -33,6 +33,7 @@ namespace UoFiddler.Plugin.Compare.UserControls
         {
             InitializeComponent();
             listBoxSec.SelectedIndexChanged += OnSelectedIndexChangedSec; //Replace graphic
+
         }
 
         private void OnLoad(object sender, EventArgs e)
@@ -625,6 +626,7 @@ namespace UoFiddler.Plugin.Compare.UserControls
                 item.ImageScaling = ToolStripItemImageScaling.None; // Disable image scaling
                 item.Image = new Bitmap(image, new Size(image.Width * 2, image.Height * 2)); // Enlarge the image
                 item.Tag = i;
+                item.Click += Item_Click;
                 contextMenuStrip2.Items.Add(item);
             }
 
@@ -632,6 +634,27 @@ namespace UoFiddler.Plugin.Compare.UserControls
             ToolStripButton okButton = new ToolStripButton("OK");
             okButton.Click += OnClickOkButton;
             contextMenuStrip2.Items.Add(okButton);
+        }
+
+        private void Item_Click(object sender, EventArgs e)
+        {
+            if (sender is ToolStripMenuItem item && item.Tag is int i)
+            {
+                int selectedIndex = listBoxOrg.SelectedIndex;
+                if (selectedIndex != -1)
+                {
+                    Bitmap image = SecondArt.GetStatic(i);
+                    Art.ReplaceStatic(selectedIndex, image);
+                    Options.ChangedUltimaClass["Art"] = true;
+                    ControlEvents.FireItemChangeEvent(this, selectedIndex);
+
+                    // Update pictureBoxOrg with the selected item
+                    pictureBoxOrg.BackgroundImage = Art.GetStatic(selectedIndex);
+
+                    // Uncheck the selected item in listBoxSec
+                    listBoxSec.SelectedIndices.Remove(listBoxSec.Items.IndexOf(i));
+                }
+            }
         }
 
         private void OnClickOkButton(object sender, EventArgs e)
@@ -645,6 +668,9 @@ namespace UoFiddler.Plugin.Compare.UserControls
                 Art.ReplaceStatic(selectedIndex, image);
                 Options.ChangedUltimaClass["Art"] = true;
                 ControlEvents.FireItemChangeEvent(this, selectedIndex);
+
+                // Update pictureBoxOrg with the selected item
+                pictureBoxOrg.BackgroundImage = Art.GetStatic(selectedIndex);
             }
         }
 
@@ -754,6 +780,114 @@ namespace UoFiddler.Plugin.Compare.UserControls
                 lastDirectories = lastDirectories.Take(10).ToList();
             }
             File.WriteAllLines(lastDirectoriesFilePath, lastDirectories);
+        }
+        #endregion
+
+        #region Buttons
+        private void btLeftMoveItem_Click(object sender, EventArgs e)
+        {
+            if (listBoxSec.SelectedIndex == -1)
+            {
+                return;
+            }
+            int i = int.Parse(listBoxSec.Items[listBoxSec.SelectedIndex].ToString());
+            if (!SecondArt.IsValidStatic(i))
+            {
+                return;
+            }
+            int staticLength = Art.GetMaxItemId() + 1;
+            if (i >= staticLength)
+            {
+                return;
+            }
+            Bitmap copy = new Bitmap(SecondArt.GetStatic(i));
+            Art.ReplaceStatic(i, copy);
+            Options.ChangedUltimaClass["Art"] = true;
+            ControlEvents.FireItemChangeEvent(this, i);
+            _mCompare[i] = true;
+            listBoxOrg.BeginUpdate();
+            bool done = false;
+            for (int id = 0; id < staticLength; id++)
+            {
+                if (id > i)
+                {
+                    listBoxOrg.Items.Insert(id, i);
+                    done = true;
+                    break;
+                }
+                if (id == i)
+                {
+                    done = true;
+                    break;
+                }
+            }
+            if (!done)
+            {
+                listBoxOrg.Items.Add(i);
+            }
+            listBoxOrg.EndUpdate();
+            listBoxOrg.Invalidate();
+            listBoxSec.Invalidate();
+
+            // Update pictureBoxOrg with the selected item
+            pictureBoxOrg.BackgroundImage = Art.GetStatic(i);
+        }
+
+        private void btLeftMoveItemMore_Click(object sender, EventArgs e)
+        {
+            if (listBoxSec.SelectedIndices.Count == 0)
+            {
+                return;
+            }
+
+            int staticLength = Art.GetMaxItemId() + 1;
+            listBoxOrg.BeginUpdate();
+
+            foreach (int selectedIndex in listBoxSec.SelectedIndices)
+            {
+                int i = int.Parse(listBoxSec.Items[selectedIndex].ToString());
+                if (!SecondArt.IsValidStatic(i))
+                {
+                    continue;
+                }
+                if (i >= staticLength)
+                {
+                    continue;
+                }
+                Bitmap copy = new Bitmap(SecondArt.GetStatic(i));
+                Art.ReplaceStatic(i, copy);
+                Options.ChangedUltimaClass["Art"] = true;
+                ControlEvents.FireItemChangeEvent(this, i);
+                _mCompare[i] = true;
+
+                bool done = false;
+                for (int id = 0; id < staticLength; id++)
+                {
+                    if (id > i)
+                    {
+                        listBoxOrg.Items.Insert(id, i);
+                        done = true;
+                        break;
+                    }
+                    if (id == i)
+                    {
+                        done = true;
+                        break;
+                    }
+                }
+                if (!done)
+                {
+                    listBoxOrg.Items.Add(i);
+                }
+            }
+
+            listBoxOrg.EndUpdate();
+            listBoxOrg.Invalidate();
+            listBoxSec.Invalidate();
+
+            // Update pictureBoxOrg with the first item selected
+            int firstSelectedIndex = int.Parse(listBoxSec.Items[listBoxSec.SelectedIndices[0]].ToString());
+            pictureBoxOrg.BackgroundImage = Art.GetStatic(firstSelectedIndex);
         }
         #endregion
     }

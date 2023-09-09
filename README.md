@@ -6,6 +6,12 @@ UOFiddler based on Ultima SDK it's a tool to view and alter almost every UO 2D c
 
 ## Changelog
 
+Version : 4.11.21
+- Added graphics for "Compare Items."
+- Added "Compare Items." two buttons for individual and bulk imports.
+- Expanded the left textbox with a preview feature so that when you click on the item, it gets imported to the selected position and removed from the list of choices.
+
+
 Version : 4.11.20
 - Added textboxes to TextureCutter to clear color values from an image and added a context menu to copy the image to the clipboard.
 - Added an import function to Texturecutter to insert the image into the PictureBox.
@@ -20,6 +26,8 @@ Version : 4.11.20
 - Expanded the ToUpdate function to work with the zoom function and refresh properly.
 - Added indexed colors.
 - Added Label Colorcode
+- Added a "Draw" button to allow drawing on the image with the respective color.
+- Added an "Erase" button to allow using the mouse to erase a specific area.
 
 Version 4.11.19
 - Add Decripter Client (ConverterMultiPlugin)
