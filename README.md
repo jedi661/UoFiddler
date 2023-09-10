@@ -12,6 +12,7 @@ Version : 4.11.21
 - Expanded the left textbox with a preview feature so that when you click on the item, it gets imported to the selected position and removed from the list of choices.
 - Expanded the left key binding so that when a key is pressed, it triggers the btLeftMoveItem method in listBoxSec, moving the selected item.
 - The last selected ID address is added to the search textbox.
+- Added a "Remove" button to clear the ID slot, and this method is also triggered with the right arrow key.
 
 Version : 4.11.20
 - Added textboxes to TextureCutter to clear color values from an image and added a context menu to copy the image to the clipboard.
