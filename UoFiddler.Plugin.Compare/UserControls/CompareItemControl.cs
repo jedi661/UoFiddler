@@ -33,7 +33,7 @@ namespace UoFiddler.Plugin.Compare.UserControls
         {
             InitializeComponent();
             listBoxSec.SelectedIndexChanged += OnSelectedIndexChangedSec; //Replace graphic
-
+            listBoxSec.KeyDown += ListBoxSec_KeyDown;
         }
 
         private void OnLoad(object sender, EventArgs e)
@@ -893,5 +893,13 @@ namespace UoFiddler.Plugin.Compare.UserControls
             pictureBoxOrg.BackgroundImage = Art.GetStatic(firstSelectedIndex);
         }
         #endregion
+        private void ListBoxSec_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Left)
+            {
+                btLeftMoveItem_Click(sender, e);
+                e.Handled = true; // Verhindert das Standardverhalten der linken Pfeiltaste
+            }
+        }
     }
 }

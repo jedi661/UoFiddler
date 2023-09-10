@@ -92,7 +92,7 @@ namespace UoFiddler.Plugin.Compare.UserControls
             listBoxOrg.Location = new System.Drawing.Point(4, 3);
             listBoxOrg.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             listBoxOrg.Name = "listBoxOrg";
-            listBoxOrg.Size = new System.Drawing.Size(220, 266);
+            listBoxOrg.Size = new System.Drawing.Size(220, 260);
             listBoxOrg.TabIndex = 0;
             listBoxOrg.DrawItem += DrawItemOrg;
             listBoxOrg.MeasureItem += MeasureOrg;
@@ -130,11 +130,12 @@ namespace UoFiddler.Plugin.Compare.UserControls
             listBoxSec.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             listBoxSec.Name = "listBoxSec";
             listBoxSec.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            listBoxSec.Size = new System.Drawing.Size(221, 266);
+            listBoxSec.Size = new System.Drawing.Size(221, 260);
             listBoxSec.TabIndex = 1;
             listBoxSec.DrawItem += DrawItemSec;
             listBoxSec.MeasureItem += MeasureSec;
             listBoxSec.SelectedIndexChanged += OnIndexChangedSec;
+            listBoxSec.KeyDown += ListBoxSec_KeyDown;
             // 
             // contextMenuStrip1
             // 
@@ -199,7 +200,7 @@ namespace UoFiddler.Plugin.Compare.UserControls
             pictureBoxOrg.Location = new System.Drawing.Point(5, 4);
             pictureBoxOrg.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             pictureBoxOrg.Name = "pictureBoxOrg";
-            pictureBoxOrg.Size = new System.Drawing.Size(362, 125);
+            pictureBoxOrg.Size = new System.Drawing.Size(362, 122);
             pictureBoxOrg.TabIndex = 2;
             pictureBoxOrg.TabStop = false;
             // 
@@ -207,10 +208,10 @@ namespace UoFiddler.Plugin.Compare.UserControls
             // 
             pictureBoxSec.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             pictureBoxSec.Dock = System.Windows.Forms.DockStyle.Fill;
-            pictureBoxSec.Location = new System.Drawing.Point(5, 136);
+            pictureBoxSec.Location = new System.Drawing.Point(5, 133);
             pictureBoxSec.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             pictureBoxSec.Name = "pictureBoxSec";
-            pictureBoxSec.Size = new System.Drawing.Size(362, 126);
+            pictureBoxSec.Size = new System.Drawing.Size(362, 123);
             pictureBoxSec.TabIndex = 3;
             pictureBoxSec.TabStop = false;
             // 
@@ -260,7 +261,7 @@ namespace UoFiddler.Plugin.Compare.UserControls
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            tableLayoutPanel1.Size = new System.Drawing.Size(372, 266);
+            tableLayoutPanel1.Size = new System.Drawing.Size(372, 260);
             tableLayoutPanel1.TabIndex = 7;
             // 
             // tableLayoutPanel2
@@ -278,7 +279,7 @@ namespace UoFiddler.Plugin.Compare.UserControls
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            tableLayoutPanel2.Size = new System.Drawing.Size(837, 272);
+            tableLayoutPanel2.Size = new System.Drawing.Size(837, 266);
             tableLayoutPanel2.TabIndex = 8;
             // 
             // splitContainer1
@@ -310,7 +311,7 @@ namespace UoFiddler.Plugin.Compare.UserControls
             splitContainer1.Panel2.Controls.Add(checkBox1);
             splitContainer1.Panel2.Controls.Add(button1);
             splitContainer1.Size = new System.Drawing.Size(837, 432);
-            splitContainer1.SplitterDistance = 272;
+            splitContainer1.SplitterDistance = 266;
             splitContainer1.SplitterWidth = 5;
             splitContainer1.TabIndex = 9;
             // 
@@ -340,23 +341,23 @@ namespace UoFiddler.Plugin.Compare.UserControls
             comboBoxSaveDir.FormattingEnabled = true;
             comboBoxSaveDir.Location = new System.Drawing.Point(76, 45);
             comboBoxSaveDir.Name = "comboBoxSaveDir";
-            comboBoxSaveDir.Size = new System.Drawing.Size(148, 23);
+            comboBoxSaveDir.Size = new System.Drawing.Size(278, 23);
             comboBoxSaveDir.TabIndex = 12;
             comboBoxSaveDir.SelectedIndexChanged += comboBoxSaveDir_SelectedIndexChanged;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(242, 49);
+            label2.Location = new System.Drawing.Point(360, 50);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(136, 15);
+            label2.Size = new System.Drawing.Size(88, 15);
             label2.TabIndex = 11;
-            label2.Text = "Hexadecimal addresses :";
+            label2.Text = "Hex addresses :";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(14, 50);
+            label1.Location = new System.Drawing.Point(11, 50);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(63, 15);
             label1.TabIndex = 10;
@@ -364,7 +365,7 @@ namespace UoFiddler.Plugin.Compare.UserControls
             // 
             // OnClickSearch
             // 
-            OnClickSearch.Location = new System.Drawing.Point(469, 46);
+            OnClickSearch.Location = new System.Drawing.Point(519, 42);
             OnClickSearch.Name = "OnClickSearch";
             OnClickSearch.Size = new System.Drawing.Size(57, 23);
             OnClickSearch.TabIndex = 9;
@@ -374,9 +375,9 @@ namespace UoFiddler.Plugin.Compare.UserControls
             // 
             // searchTextBox
             // 
-            searchTextBox.Location = new System.Drawing.Point(384, 46);
+            searchTextBox.Location = new System.Drawing.Point(456, 42);
             searchTextBox.Name = "searchTextBox";
-            searchTextBox.Size = new System.Drawing.Size(68, 23);
+            searchTextBox.Size = new System.Drawing.Size(57, 23);
             searchTextBox.TabIndex = 8;
             // 
             // button2
