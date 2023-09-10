@@ -24,6 +24,9 @@ namespace UoFiddler.Plugin.Compare.UserControls
 {
     public partial class CompareLandControl : UserControl
     {
+        // Create a list to store the selected IDs
+        private List<int> selectedIds = new List<int>();
+
         public CompareLandControl()
         {
             InitializeComponent();
@@ -93,10 +96,9 @@ namespace UoFiddler.Plugin.Compare.UserControls
                 }
             }
 
-            e.Graphics.DrawString($"0x{i:X}", Font, fontBrush,
-                new PointF(5,
-                e.Bounds.Y + ((e.Bounds.Height / 2) -
-                (e.Graphics.MeasureString($"0x{i:X}", Font).Height / 2))));
+            e.Graphics.DrawString($"0x{i:X} ({i})", Font, fontBrush,
+                new PointF(5,e.Bounds.Y + ((e.Bounds.Height / 2) -
+                (e.Graphics.MeasureString($"0x{i:X} ({i})", Font).Height / 2))));
         }
 
         private void MeasureOrg(object sender, MeasureItemEventArgs e)
@@ -133,8 +135,9 @@ namespace UoFiddler.Plugin.Compare.UserControls
             }
             listBoxSec.Items.AddRange(cache.ToArray());
             listBoxSec.EndUpdate();
-        }
+        }      
 
+        #region DrawItemSec
         private void DrawItemSec(object sender, DrawItemEventArgs e)
         {
             if (e.Index == -1)
@@ -143,11 +146,27 @@ namespace UoFiddler.Plugin.Compare.UserControls
             }
 
             Brush fontBrush = Brushes.Gray;
+            Brush selectionBrush = Brushes.LightSteelBlue; // Color for the first selection
+            Brush secondSelectionBrush = Brushes.Yellow; // Color for the second selection (CTRL)
 
             int i = int.Parse(listBoxOrg.Items[e.Index].ToString());
-            if (listBoxSec.SelectedIndex == e.Index)
+
+            if (listBoxSec.SelectedIndices.Contains(e.Index))
             {
-                e.Graphics.FillRectangle(Brushes.LightSteelBlue, e.Bounds.X, e.Bounds.Y, e.Bounds.Width, e.Bounds.Height);
+                if (ModifierKeys.HasFlag(Keys.Control)) // When the CTRL key is pressed
+                {
+                    e.Graphics.FillRectangle(secondSelectionBrush, e.Bounds.X, e.Bounds.Y, e.Bounds.Width, e.Bounds.Height);
+                }
+                else
+                {
+                    e.Graphics.FillRectangle(selectionBrush, e.Bounds.X, e.Bounds.Y, e.Bounds.Width, e.Bounds.Height);
+                }
+            }
+
+            // Check whether the entry is in the list of selected IDs
+            if (selectedIds.Contains(i))
+            {
+                e.Graphics.FillRectangle(Brushes.Yellow, e.Bounds.X, e.Bounds.Y, e.Bounds.Width, e.Bounds.Height);
             }
 
             if (!SecondArt.IsValidLand(i))
@@ -159,22 +178,35 @@ namespace UoFiddler.Plugin.Compare.UserControls
                 fontBrush = Brushes.Blue;
             }
 
-            e.Graphics.DrawString($"0x{i:X}", Font, fontBrush,
+            e.Graphics.DrawString($"0x{i:X} ({i})", Font, fontBrush,
                 new PointF(5,
                 e.Bounds.Y + ((e.Bounds.Height / 2) -
-                (e.Graphics.MeasureString($"0x{i:X}", Font).Height / 2))));
+                (e.Graphics.MeasureString($"0x{i:X} ({i})", Font).Height / 2))));
+
         }
+        #endregion
 
         private void MeasureSec(object sender, MeasureItemEventArgs e)
         {
             e.ItemHeight = 13;
         }
 
+        #region OnIndexChangeSec
         private void OnIndexChangedSec(object sender, EventArgs e)
         {
             if (listBoxSec.SelectedIndex == -1 || listBoxSec.Items.Count < 1)
             {
                 return;
+            }
+
+            // Add the selected ID to the list when the CTRL key is pressed
+            if (ModifierKeys.HasFlag(Keys.Control))
+            {
+                int selectedId = int.Parse(listBoxSec.Items[listBoxSec.SelectedIndex].ToString());
+                if (!selectedIds.Contains(selectedId))
+                {
+                    selectedIds.Add(selectedId);
+                }
             }
 
             int i = int.Parse(listBoxSec.Items[listBoxSec.SelectedIndex].ToString());
@@ -183,7 +215,7 @@ namespace UoFiddler.Plugin.Compare.UserControls
 
             listBoxSec.Invalidate();
         }
-
+        #endregion
         private bool Compare(int index)
         {
             if (_mCompare.ContainsKey(index))
@@ -406,6 +438,38 @@ namespace UoFiddler.Plugin.Compare.UserControls
             pictureBoxOrg.BackgroundImage = null;
         }
 
+        private void btmultipleImageID_Click(object sender, EventArgs e)
+        {
+            if (selectedIds.Count == 0)
+            {
+                return;
+            }
+
+            // Move the selected entries from listBoxSec to listBoxOrg
+            foreach (int sourceId in selectedIds)
+            {
+                if (!SecondArt.IsValidLand(sourceId))
+                {
+                    continue;
+                }
+
+                Bitmap sourceImage = SecondArt.GetLand(sourceId);
+                Art.ReplaceLand(sourceId, new Bitmap(sourceImage));
+                Options.ChangedUltimaClass["Art"] = true;
+                ControlEvents.FireLandTileChangeEvent(this, sourceId);
+            }
+
+            // Update listBoxOrg and pictureBoxOrg
+            listBoxOrg.Invalidate();
+            if (listBoxOrg.SelectedIndex != -1)
+            {
+                int selectedId = int.Parse(listBoxOrg.Items[listBoxOrg.SelectedIndex].ToString());
+                pictureBoxOrg.BackgroundImage = Art.GetLand(selectedId);
+            }
+
+            selectedIds.Clear();
+        }
+
         private void ListBoxSec_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Left)
@@ -438,6 +502,25 @@ namespace UoFiddler.Plugin.Compare.UserControls
             {
                 // Select the entry when it is found
                 listBoxOrg.SelectedIndex = index;
+            }
+        }
+        #endregion
+
+        #region MouseDown
+        private void listBoxSec_MouseDown(object sender, MouseEventArgs e)
+        {
+            int index = this.listBoxSec.IndexFromPoint(e.Location);
+            if (index != ListBox.NoMatches)
+            {
+                if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
+                {
+                    // Add the selected ID to the list when the CTRL key is pressed
+                    int selectedId = int.Parse(listBoxSec.Items[index].ToString());
+                    if (!selectedIds.Contains(selectedId))
+                    {
+                        selectedIds.Add(selectedId);
+                    }
+                }
             }
         }
         #endregion
