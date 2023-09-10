@@ -900,6 +900,26 @@ namespace UoFiddler.Plugin.Compare.UserControls
                 btLeftMoveItem_Click(sender, e);
                 e.Handled = true; // Verhindert das Standardverhalten der linken Pfeiltaste
             }
+            if (e.KeyCode == Keys.Right)
+            {
+                btremoveitemfromindex_Click(sender, e);
+                e.Handled = true; // Verhindert das Standardverhalten der rechten Pfeiltaste
+            }
+        }
+
+        private void btremoveitemfromindex_Click(object sender, EventArgs e)
+        {
+            if (listBoxOrg.SelectedIndex != -1)
+            {
+                int selectedIndex = listBoxOrg.SelectedIndex;
+                // Setzen Sie das ausgewählte Element in Art auf null
+                Art.ReplaceStatic(selectedIndex, null);
+                Options.ChangedUltimaClass["Art"] = true;
+                ControlEvents.FireItemChangeEvent(this, selectedIndex);
+
+                // Aktualisieren Sie pictureBoxOrg
+                pictureBoxOrg.BackgroundImage = null;
+            }
         }
     }
 }
