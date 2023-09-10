@@ -55,11 +55,11 @@ namespace UoFiddler.Plugin.Compare.UserControls
             checkBox1 = new System.Windows.Forms.CheckBox();
             button1 = new System.Windows.Forms.Button();
             splitContainer1 = new System.Windows.Forms.SplitContainer();
+            label1 = new System.Windows.Forms.Label();
             tbSearchHex = new System.Windows.Forms.TextBox();
             btRemoveImageId = new System.Windows.Forms.Button();
             btmoveItemtoId = new System.Windows.Forms.Button();
             button2 = new System.Windows.Forms.Button();
-            label1 = new System.Windows.Forms.Label();
             tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxSec).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxOrg).BeginInit();
@@ -80,7 +80,7 @@ namespace UoFiddler.Plugin.Compare.UserControls
             listBoxOrg.Location = new System.Drawing.Point(4, 3);
             listBoxOrg.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             listBoxOrg.Name = "listBoxOrg";
-            listBoxOrg.Size = new System.Drawing.Size(188, 356);
+            listBoxOrg.Size = new System.Drawing.Size(188, 355);
             listBoxOrg.TabIndex = 0;
             listBoxOrg.DrawItem += DrawitemOrg;
             listBoxOrg.MeasureItem += MeasureOrg;
@@ -100,7 +100,7 @@ namespace UoFiddler.Plugin.Compare.UserControls
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            tableLayoutPanel1.Size = new System.Drawing.Size(318, 356);
+            tableLayoutPanel1.Size = new System.Drawing.Size(318, 355);
             tableLayoutPanel1.TabIndex = 7;
             // 
             // pictureBoxSec
@@ -110,7 +110,7 @@ namespace UoFiddler.Plugin.Compare.UserControls
             pictureBoxSec.Location = new System.Drawing.Point(5, 181);
             pictureBoxSec.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             pictureBoxSec.Name = "pictureBoxSec";
-            pictureBoxSec.Size = new System.Drawing.Size(308, 171);
+            pictureBoxSec.Size = new System.Drawing.Size(308, 170);
             pictureBoxSec.TabIndex = 3;
             pictureBoxSec.TabStop = false;
             // 
@@ -148,7 +148,7 @@ namespace UoFiddler.Plugin.Compare.UserControls
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            tableLayoutPanel2.Size = new System.Drawing.Size(719, 362);
+            tableLayoutPanel2.Size = new System.Drawing.Size(719, 361);
             tableLayoutPanel2.TabIndex = 8;
             // 
             // listBoxSec
@@ -161,7 +161,7 @@ namespace UoFiddler.Plugin.Compare.UserControls
             listBoxSec.Location = new System.Drawing.Point(526, 3);
             listBoxSec.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             listBoxSec.Name = "listBoxSec";
-            listBoxSec.Size = new System.Drawing.Size(189, 356);
+            listBoxSec.Size = new System.Drawing.Size(189, 355);
             listBoxSec.TabIndex = 1;
             listBoxSec.DrawItem += DrawItemSec;
             listBoxSec.MeasureItem += MeasureSec;
@@ -252,13 +252,22 @@ namespace UoFiddler.Plugin.Compare.UserControls
             splitContainer1.Panel2.Controls.Add(checkBox1);
             splitContainer1.Panel2.Controls.Add(button1);
             splitContainer1.Size = new System.Drawing.Size(719, 430);
-            splitContainer1.SplitterDistance = 362;
+            splitContainer1.SplitterDistance = 361;
             splitContainer1.SplitterWidth = 5;
             splitContainer1.TabIndex = 10;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(593, 7);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(69, 15);
+            label1.TabIndex = 11;
+            label1.Text = "Hex Adress:";
+            // 
             // tbSearchHex
             // 
-            tbSearchHex.Location = new System.Drawing.Point(593, 31);
+            tbSearchHex.Location = new System.Drawing.Point(593, 25);
             tbSearchHex.Name = "tbSearchHex";
             tbSearchHex.Size = new System.Drawing.Size(100, 23);
             tbSearchHex.TabIndex = 10;
@@ -296,15 +305,6 @@ namespace UoFiddler.Plugin.Compare.UserControls
             button2.Text = "...";
             button2.UseVisualStyleBackColor = true;
             button2.Click += BrowseOnClick;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(593, 13);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(69, 15);
-            label1.TabIndex = 11;
-            label1.Text = "Hex Adress:";
             // 
             // CompareLandControl
             // 
