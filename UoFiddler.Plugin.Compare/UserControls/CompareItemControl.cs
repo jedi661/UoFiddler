@@ -786,7 +786,7 @@ namespace UoFiddler.Plugin.Compare.UserControls
         }
         #endregion
 
-        #region Buttons
+        #region Buttons and left and right 
         private void btLeftMoveItem_Click(object sender, EventArgs e)
         {
             if (listBoxSec.SelectedIndex == -1)
@@ -892,7 +892,7 @@ namespace UoFiddler.Plugin.Compare.UserControls
             int firstSelectedIndex = int.Parse(listBoxSec.Items[listBoxSec.SelectedIndices[0]].ToString());
             pictureBoxOrg.BackgroundImage = Art.GetStatic(firstSelectedIndex);
         }
-        #endregion
+        
         private void ListBoxSec_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Left)
@@ -921,5 +921,6 @@ namespace UoFiddler.Plugin.Compare.UserControls
                 pictureBoxOrg.BackgroundImage = null;
             }
         }
+        #endregion
     }
 }
