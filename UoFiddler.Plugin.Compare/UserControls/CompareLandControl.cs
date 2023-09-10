@@ -420,5 +420,26 @@ namespace UoFiddler.Plugin.Compare.UserControls
             }
         }
         #endregion
+
+        #region Search Hex
+        private void tbSearchHex_TextChanged(object sender, EventArgs e)
+        {
+            string hexInput = tbSearchHex.Text;
+
+            // Check that the input is a valid hexadecimal number
+            if (!int.TryParse(hexInput, System.Globalization.NumberStyles.HexNumber, null, out int id))
+            {
+                return;
+            }
+
+            // Find the entry in listBoxOrg
+            int index = listBoxOrg.Items.IndexOf(id);
+            if (index != -1)
+            {
+                // Select the entry when it is found
+                listBoxOrg.SelectedIndex = index;
+            }
+        }
+        #endregion
     }
 }
