@@ -97,7 +97,7 @@ namespace UoFiddler.Plugin.Compare.UserControls
             }
 
             e.Graphics.DrawString($"0x{i:X} ({i})", Font, fontBrush,
-                new PointF(5,e.Bounds.Y + ((e.Bounds.Height / 2) -
+                new PointF(5, e.Bounds.Y + ((e.Bounds.Height / 2) -
                 (e.Graphics.MeasureString($"0x{i:X} ({i})", Font).Height / 2))));
         }
 
@@ -135,7 +135,7 @@ namespace UoFiddler.Plugin.Compare.UserControls
             }
             listBoxSec.Items.AddRange(cache.ToArray());
             listBoxSec.EndUpdate();
-        }      
+        }
 
         #region DrawItemSec
         private void DrawItemSec(object sender, DrawItemEventArgs e)
