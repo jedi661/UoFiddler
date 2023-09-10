@@ -92,7 +92,7 @@ namespace UoFiddler.Plugin.Compare.UserControls
             listBoxOrg.Location = new System.Drawing.Point(4, 3);
             listBoxOrg.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             listBoxOrg.Name = "listBoxOrg";
-            listBoxOrg.Size = new System.Drawing.Size(220, 267);
+            listBoxOrg.Size = new System.Drawing.Size(220, 266);
             listBoxOrg.TabIndex = 0;
             listBoxOrg.DrawItem += DrawItemOrg;
             listBoxOrg.MeasureItem += MeasureOrg;
@@ -115,7 +115,7 @@ namespace UoFiddler.Plugin.Compare.UserControls
             // okayToolStripMenuItem
             // 
             okayToolStripMenuItem.Name = "okayToolStripMenuItem";
-            okayToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            okayToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
             okayToolStripMenuItem.Text = "Okay";
             okayToolStripMenuItem.Click += OnClickOkButton;
             // 
@@ -130,7 +130,7 @@ namespace UoFiddler.Plugin.Compare.UserControls
             listBoxSec.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             listBoxSec.Name = "listBoxSec";
             listBoxSec.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            listBoxSec.Size = new System.Drawing.Size(221, 267);
+            listBoxSec.Size = new System.Drawing.Size(221, 266);
             listBoxSec.TabIndex = 1;
             listBoxSec.DrawItem += DrawItemSec;
             listBoxSec.MeasureItem += MeasureSec;
@@ -199,7 +199,7 @@ namespace UoFiddler.Plugin.Compare.UserControls
             pictureBoxOrg.Location = new System.Drawing.Point(5, 4);
             pictureBoxOrg.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             pictureBoxOrg.Name = "pictureBoxOrg";
-            pictureBoxOrg.Size = new System.Drawing.Size(362, 126);
+            pictureBoxOrg.Size = new System.Drawing.Size(362, 125);
             pictureBoxOrg.TabIndex = 2;
             pictureBoxOrg.TabStop = false;
             // 
@@ -207,7 +207,7 @@ namespace UoFiddler.Plugin.Compare.UserControls
             // 
             pictureBoxSec.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             pictureBoxSec.Dock = System.Windows.Forms.DockStyle.Fill;
-            pictureBoxSec.Location = new System.Drawing.Point(5, 137);
+            pictureBoxSec.Location = new System.Drawing.Point(5, 136);
             pictureBoxSec.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             pictureBoxSec.Name = "pictureBoxSec";
             pictureBoxSec.Size = new System.Drawing.Size(362, 126);
@@ -216,16 +216,16 @@ namespace UoFiddler.Plugin.Compare.UserControls
             // 
             // textBoxSecondDir
             // 
-            textBoxSecondDir.Location = new System.Drawing.Point(244, 12);
+            textBoxSecondDir.Location = new System.Drawing.Point(14, 9);
             textBoxSecondDir.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             textBoxSecondDir.Name = "textBoxSecondDir";
-            textBoxSecondDir.Size = new System.Drawing.Size(168, 23);
+            textBoxSecondDir.Size = new System.Drawing.Size(293, 23);
             textBoxSecondDir.TabIndex = 4;
             // 
             // button1
             // 
             button1.AutoSize = true;
-            button1.Location = new System.Drawing.Point(454, 10);
+            button1.Location = new System.Drawing.Point(349, 6);
             button1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             button1.Name = "button1";
             button1.Size = new System.Drawing.Size(99, 29);
@@ -237,7 +237,7 @@ namespace UoFiddler.Plugin.Compare.UserControls
             // checkBox1
             // 
             checkBox1.AutoSize = true;
-            checkBox1.Location = new System.Drawing.Point(561, 15);
+            checkBox1.Location = new System.Drawing.Point(456, 11);
             checkBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             checkBox1.Name = "checkBox1";
             checkBox1.Size = new System.Drawing.Size(143, 19);
@@ -260,7 +260,7 @@ namespace UoFiddler.Plugin.Compare.UserControls
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            tableLayoutPanel1.Size = new System.Drawing.Size(372, 267);
+            tableLayoutPanel1.Size = new System.Drawing.Size(372, 266);
             tableLayoutPanel1.TabIndex = 7;
             // 
             // tableLayoutPanel2
@@ -278,7 +278,7 @@ namespace UoFiddler.Plugin.Compare.UserControls
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            tableLayoutPanel2.Size = new System.Drawing.Size(837, 273);
+            tableLayoutPanel2.Size = new System.Drawing.Size(837, 272);
             tableLayoutPanel2.TabIndex = 8;
             // 
             // splitContainer1
@@ -310,14 +310,14 @@ namespace UoFiddler.Plugin.Compare.UserControls
             splitContainer1.Panel2.Controls.Add(checkBox1);
             splitContainer1.Panel2.Controls.Add(button1);
             splitContainer1.Size = new System.Drawing.Size(837, 432);
-            splitContainer1.SplitterDistance = 273;
+            splitContainer1.SplitterDistance = 272;
             splitContainer1.SplitterWidth = 5;
             splitContainer1.TabIndex = 9;
             // 
             // btLeftMoveItemMore
             // 
             btLeftMoveItemMore.Image = Properties.Resources.left2;
-            btLeftMoveItemMore.Location = new System.Drawing.Point(770, 3);
+            btLeftMoveItemMore.Location = new System.Drawing.Point(671, 3);
             btLeftMoveItemMore.Name = "btLeftMoveItemMore";
             btLeftMoveItemMore.Size = new System.Drawing.Size(52, 53);
             btLeftMoveItemMore.TabIndex = 14;
@@ -327,7 +327,7 @@ namespace UoFiddler.Plugin.Compare.UserControls
             // btLeftMoveItem
             // 
             btLeftMoveItem.Image = (System.Drawing.Image)resources.GetObject("btLeftMoveItem.Image");
-            btLeftMoveItem.Location = new System.Drawing.Point(711, 3);
+            btLeftMoveItem.Location = new System.Drawing.Point(612, 3);
             btLeftMoveItem.Name = "btLeftMoveItem";
             btLeftMoveItem.Size = new System.Drawing.Size(53, 53);
             btLeftMoveItem.TabIndex = 13;
@@ -338,7 +338,7 @@ namespace UoFiddler.Plugin.Compare.UserControls
             // 
             comboBoxSaveDir.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             comboBoxSaveDir.FormattingEnabled = true;
-            comboBoxSaveDir.Location = new System.Drawing.Point(79, 12);
+            comboBoxSaveDir.Location = new System.Drawing.Point(76, 45);
             comboBoxSaveDir.Name = "comboBoxSaveDir";
             comboBoxSaveDir.Size = new System.Drawing.Size(148, 23);
             comboBoxSaveDir.TabIndex = 12;
@@ -347,7 +347,7 @@ namespace UoFiddler.Plugin.Compare.UserControls
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(17, 51);
+            label2.Location = new System.Drawing.Point(242, 49);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(136, 15);
             label2.TabIndex = 11;
@@ -356,7 +356,7 @@ namespace UoFiddler.Plugin.Compare.UserControls
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(17, 17);
+            label1.Location = new System.Drawing.Point(14, 50);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(63, 15);
             label1.TabIndex = 10;
@@ -364,7 +364,7 @@ namespace UoFiddler.Plugin.Compare.UserControls
             // 
             // OnClickSearch
             // 
-            OnClickSearch.Location = new System.Drawing.Point(244, 48);
+            OnClickSearch.Location = new System.Drawing.Point(469, 46);
             OnClickSearch.Name = "OnClickSearch";
             OnClickSearch.Size = new System.Drawing.Size(57, 23);
             OnClickSearch.TabIndex = 9;
@@ -374,7 +374,7 @@ namespace UoFiddler.Plugin.Compare.UserControls
             // 
             // searchTextBox
             // 
-            searchTextBox.Location = new System.Drawing.Point(159, 48);
+            searchTextBox.Location = new System.Drawing.Point(384, 46);
             searchTextBox.Name = "searchTextBox";
             searchTextBox.Size = new System.Drawing.Size(68, 23);
             searchTextBox.TabIndex = 8;
@@ -383,7 +383,7 @@ namespace UoFiddler.Plugin.Compare.UserControls
             // 
             button2.AutoSize = true;
             button2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            button2.Location = new System.Drawing.Point(420, 12);
+            button2.Location = new System.Drawing.Point(315, 8);
             button2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             button2.Name = "button2";
             button2.Size = new System.Drawing.Size(26, 25);
