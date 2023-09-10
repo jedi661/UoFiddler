@@ -366,5 +366,59 @@ namespace UoFiddler.Plugin.Compare.UserControls
             listBoxSec.Invalidate();
             OnIndexChangedOrg(this, null);
         }
+        #region Buttons and Left and Right
+        private void btmoveItemtoId_Click(object sender, EventArgs e)
+        {
+            if (listBoxSec.SelectedIndex == -1 || listBoxOrg.SelectedIndex == -1)
+            {
+                return;
+            }
+
+            int sourceId = int.Parse(listBoxSec.Items[listBoxSec.SelectedIndex].ToString());
+            int targetId = int.Parse(listBoxOrg.Items[listBoxOrg.SelectedIndex].ToString());
+
+            if (!SecondArt.IsValidLand(sourceId))
+            {
+                return;
+            }
+
+            Bitmap sourceImage = SecondArt.GetLand(sourceId);
+            Art.ReplaceLand(targetId, new Bitmap(sourceImage));
+            Options.ChangedUltimaClass["Art"] = true;
+            ControlEvents.FireLandTileChangeEvent(this, targetId);
+
+            pictureBoxOrg.BackgroundImage = Art.GetLand(targetId);
+        }
+
+        private void btRemoveImageId_Click(object sender, EventArgs e)
+        {
+            if (listBoxOrg.SelectedIndex == -1)
+            {
+                return;
+            }
+
+            int targetId = int.Parse(listBoxOrg.Items[listBoxOrg.SelectedIndex].ToString());
+
+            Art.RemoveLand(targetId);
+            Options.ChangedUltimaClass["Art"] = true;
+            ControlEvents.FireLandTileChangeEvent(this, targetId);
+
+            pictureBoxOrg.BackgroundImage = null;
+        }
+
+        private void ListBoxSec_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Left)
+            {
+                btmoveItemtoId_Click(sender, e);
+                e.Handled = true; // Prevents the default behavior of the left arrow key
+            }
+            if (e.KeyCode == Keys.Right)
+            {
+                btRemoveImageId_Click(sender, e);
+                e.Handled = true; // Prevents the default behavior of the right arrow key
+            }
+        }
+        #endregion
     }
 }
