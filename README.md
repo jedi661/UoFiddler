@@ -20,6 +20,7 @@ Version : 4.11.21
 - "Compare Land" You can select multiple items in listBoxSec by holding the Ctrl key and either clicking with the mouse or using the arrow keys to move up and down.
 - Added two buttons, "Insert" and "Remove," to the "Compare Texture" feature, and assigned them to the left and right arrow keys.
 - Expanded listBoxOrg and listBoxSec to display decimal values as well.
+- The listBoxOrg and listBoxSec in Compare Items were also expanded to display decimal values.
 
 Version : 4.11.20
 - Added textboxes to TextureCutter to clear color values from an image and added a context menu to copy the image to the clipboard.
