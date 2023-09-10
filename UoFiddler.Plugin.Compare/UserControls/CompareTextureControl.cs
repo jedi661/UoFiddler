@@ -93,10 +93,10 @@ namespace UoFiddler.Plugin.Compare.UserControls
                 }
             }
 
-            e.Graphics.DrawString($"0x{i:X}", Font, fontBrush,
+            e.Graphics.DrawString($"0x{i:X} ({i})", Font, fontBrush,
                 new PointF(5,
                 e.Bounds.Y + ((e.Bounds.Height / 2) -
-                (e.Graphics.MeasureString($"0x{i:X}", Font).Height / 2))));
+                (e.Graphics.MeasureString($"0x{i:X} ({i})", Font).Height / 2))));
         }
 
         private void MeasureOrg(object sender, MeasureItemEventArgs e)
@@ -159,10 +159,10 @@ namespace UoFiddler.Plugin.Compare.UserControls
                 fontBrush = Brushes.Blue;
             }
 
-            e.Graphics.DrawString($"0x{i:X}", Font, fontBrush,
+            e.Graphics.DrawString($"0x{i:X} ({i})", Font, fontBrush,
                 new PointF(5,
                 e.Bounds.Y + ((e.Bounds.Height / 2) -
-                (e.Graphics.MeasureString($"0x{i:X}", Font).Height / 2))));
+                (e.Graphics.MeasureString($"0x{i:X} ({i})", Font).Height / 2))));
         }
 
         private void MeasureSec(object sender, MeasureItemEventArgs e)
@@ -434,6 +434,68 @@ namespace UoFiddler.Plugin.Compare.UserControls
             listBoxOrg.Items.AddRange(cache.ToArray());
             listBoxOrg.EndUpdate();
         }
+
+        #region Buttons and Left and Right
+        private void btMoveIdImage_Click(object sender, EventArgs e)
+        {
+            if (listBoxSec.SelectedIndex == -1)
+            {
+                return;
+            }
+
+            int i = int.Parse(listBoxSec.Items[listBoxSec.SelectedIndex].ToString());
+
+            if (!SecondTexture.IsValidTexture(i))
+            {
+                return;
+            }
+
+            Bitmap copy = new Bitmap(SecondTexture.GetTexture(i));
+            Textures.Replace(i, copy);
+            ControlEvents.FireTextureChangeEvent(this, i);
+
+            // Update the listBoxOrg and pictureBoxOrg
+            listBoxOrg.SelectedIndex = listBoxOrg.Items.IndexOf(i);
+            pictureBoxOrg.BackgroundImage = Textures.GetTexture(i);
+
+            // Refresh the ad
+            listBoxOrg.Invalidate();
+            listBoxSec.Invalidate();
+        }
+
+        private void btRemoveIdImage_Click(object sender, EventArgs e)
+        {
+            if (listBoxOrg.SelectedIndex == -1)
+            {
+                return;
+            }
+
+            int i = int.Parse(listBoxOrg.Items[listBoxOrg.SelectedIndex].ToString());
+
+            // Remove the texture and update the listBoxOrg and pictureBoxOrg
+            Textures.Remove(i);
+            ControlEvents.FireTextureChangeEvent(this, i);
+
+            pictureBoxOrg.BackgroundImage = null;
+
+            // Refresh the ad
+            listBoxOrg.Invalidate();
+        }
+
+        private void ListBoxSec_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Left)
+            {
+                btMoveIdImage_Click(sender, e);
+                e.Handled = true; // Prevents the default behavior of the left arrow key
+            }
+            if (e.KeyCode == Keys.Right)
+            {
+                btRemoveIdImage_Click(sender, e);
+                e.Handled = true; // Prevents the default behavior of the right arrow key
+            }
+        }
+        #endregion
     }
 }
 
