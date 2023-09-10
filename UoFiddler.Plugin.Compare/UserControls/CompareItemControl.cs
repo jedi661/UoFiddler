@@ -898,12 +898,12 @@ namespace UoFiddler.Plugin.Compare.UserControls
             if (e.KeyCode == Keys.Left)
             {
                 btLeftMoveItem_Click(sender, e);
-                e.Handled = true; // Verhindert das Standardverhalten der linken Pfeiltaste
+                e.Handled = true; // Prevents the default behavior of the left arrow key
             }
             if (e.KeyCode == Keys.Right)
             {
                 btremoveitemfromindex_Click(sender, e);
-                e.Handled = true; // Verhindert das Standardverhalten der rechten Pfeiltaste
+                e.Handled = true; // Prevents the default behavior of the right arrow key
             }
         }
 
@@ -912,12 +912,12 @@ namespace UoFiddler.Plugin.Compare.UserControls
             if (listBoxOrg.SelectedIndex != -1)
             {
                 int selectedIndex = listBoxOrg.SelectedIndex;
-                // Setzen Sie das ausgewählte Element in Art auf null
+                // Set the selected item to null in Kind
                 Art.ReplaceStatic(selectedIndex, null);
                 Options.ChangedUltimaClass["Art"] = true;
                 ControlEvents.FireItemChangeEvent(this, selectedIndex);
 
-                // Aktualisieren Sie pictureBoxOrg
+                // Update pictureBoxOrg
                 pictureBoxOrg.BackgroundImage = null;
             }
         }
