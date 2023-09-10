@@ -102,6 +102,9 @@ namespace UoFiddler.Plugin.Compare.UserControls
                 ? Art.GetStatic(i)
                 : null;
 
+            // Set the text of the searchTextBox to the hexadecimal representation of the selected item
+            searchTextBox.Text = $"0x{i:X}";
+
             listBoxOrg.Invalidate();
         }
 
