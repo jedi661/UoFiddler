@@ -81,6 +81,15 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             comboBoxColorValue = new System.Windows.Forms.ComboBox();
             lbColorValue03 = new System.Windows.Forms.Label();
             panel3 = new System.Windows.Forms.Panel();
+            checkBoxtoleranz35 = new System.Windows.Forms.CheckBox();
+            checkBoxtoleranz30 = new System.Windows.Forms.CheckBox();
+            checkBoxtoleranz10 = new System.Windows.Forms.CheckBox();
+            checkBoxtoleranz15 = new System.Windows.Forms.CheckBox();
+            checkBoxtoleranz5 = new System.Windows.Forms.CheckBox();
+            checkBoxtoleranz100 = new System.Windows.Forms.CheckBox();
+            checkBoxtoleranz75 = new System.Windows.Forms.CheckBox();
+            checkBoxtoleranz50 = new System.Windows.Forms.CheckBox();
+            checkBoxtoleranz25 = new System.Windows.Forms.CheckBox();
             eraseButton = new System.Windows.Forms.Button();
             drawButton = new System.Windows.Forms.Button();
             convertToIndexedButton = new System.Windows.Forms.Button();
@@ -312,7 +321,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             panel2.Controls.Add(ButtonShrinkTexture);
             panel2.Location = new System.Drawing.Point(456, 143);
             panel2.Name = "panel2";
-            panel2.Size = new System.Drawing.Size(356, 100);
+            panel2.Size = new System.Drawing.Size(379, 100);
             panel2.TabIndex = 20;
             // 
             // button45Degrees
@@ -465,6 +474,15 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // panel3
             // 
             panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            panel3.Controls.Add(checkBoxtoleranz35);
+            panel3.Controls.Add(checkBoxtoleranz30);
+            panel3.Controls.Add(checkBoxtoleranz10);
+            panel3.Controls.Add(checkBoxtoleranz15);
+            panel3.Controls.Add(checkBoxtoleranz5);
+            panel3.Controls.Add(checkBoxtoleranz100);
+            panel3.Controls.Add(checkBoxtoleranz75);
+            panel3.Controls.Add(checkBoxtoleranz50);
+            panel3.Controls.Add(checkBoxtoleranz25);
             panel3.Controls.Add(eraseButton);
             panel3.Controls.Add(drawButton);
             panel3.Controls.Add(convertToIndexedButton);
@@ -485,13 +503,103 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             panel3.Controls.Add(label5);
             panel3.Location = new System.Drawing.Point(456, 253);
             panel3.Name = "panel3";
-            panel3.Size = new System.Drawing.Size(356, 185);
+            panel3.Size = new System.Drawing.Size(379, 228);
             panel3.TabIndex = 31;
+            // 
+            // checkBoxtoleranz35
+            // 
+            checkBoxtoleranz35.AutoSize = true;
+            checkBoxtoleranz35.Location = new System.Drawing.Point(206, 118);
+            checkBoxtoleranz35.Name = "checkBoxtoleranz35";
+            checkBoxtoleranz35.Size = new System.Drawing.Size(38, 19);
+            checkBoxtoleranz35.TabIndex = 48;
+            checkBoxtoleranz35.Text = "35";
+            checkBoxtoleranz35.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxtoleranz30
+            // 
+            checkBoxtoleranz30.AutoSize = true;
+            checkBoxtoleranz30.Location = new System.Drawing.Point(165, 118);
+            checkBoxtoleranz30.Name = "checkBoxtoleranz30";
+            checkBoxtoleranz30.Size = new System.Drawing.Size(38, 19);
+            checkBoxtoleranz30.TabIndex = 47;
+            checkBoxtoleranz30.Text = "30";
+            checkBoxtoleranz30.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxtoleranz10
+            // 
+            checkBoxtoleranz10.AutoSize = true;
+            checkBoxtoleranz10.Location = new System.Drawing.Point(42, 118);
+            checkBoxtoleranz10.Name = "checkBoxtoleranz10";
+            checkBoxtoleranz10.Size = new System.Drawing.Size(38, 19);
+            checkBoxtoleranz10.TabIndex = 46;
+            checkBoxtoleranz10.Text = "10";
+            checkBoxtoleranz10.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxtoleranz15
+            // 
+            checkBoxtoleranz15.AutoSize = true;
+            checkBoxtoleranz15.Location = new System.Drawing.Point(83, 118);
+            checkBoxtoleranz15.Name = "checkBoxtoleranz15";
+            checkBoxtoleranz15.Size = new System.Drawing.Size(38, 19);
+            checkBoxtoleranz15.TabIndex = 45;
+            checkBoxtoleranz15.Text = "15";
+            checkBoxtoleranz15.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxtoleranz5
+            // 
+            checkBoxtoleranz5.AutoSize = true;
+            checkBoxtoleranz5.Location = new System.Drawing.Point(8, 118);
+            checkBoxtoleranz5.Name = "checkBoxtoleranz5";
+            checkBoxtoleranz5.Size = new System.Drawing.Size(32, 19);
+            checkBoxtoleranz5.TabIndex = 44;
+            checkBoxtoleranz5.Text = "5";
+            checkBoxtoleranz5.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxtoleranz100
+            // 
+            checkBoxtoleranz100.AutoSize = true;
+            checkBoxtoleranz100.Location = new System.Drawing.Point(328, 118);
+            checkBoxtoleranz100.Name = "checkBoxtoleranz100";
+            checkBoxtoleranz100.Size = new System.Drawing.Size(44, 19);
+            checkBoxtoleranz100.TabIndex = 43;
+            checkBoxtoleranz100.Text = "100";
+            checkBoxtoleranz100.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxtoleranz75
+            // 
+            checkBoxtoleranz75.AutoSize = true;
+            checkBoxtoleranz75.Location = new System.Drawing.Point(287, 118);
+            checkBoxtoleranz75.Name = "checkBoxtoleranz75";
+            checkBoxtoleranz75.Size = new System.Drawing.Size(38, 19);
+            checkBoxtoleranz75.TabIndex = 42;
+            checkBoxtoleranz75.Text = "75";
+            checkBoxtoleranz75.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxtoleranz50
+            // 
+            checkBoxtoleranz50.AutoSize = true;
+            checkBoxtoleranz50.Location = new System.Drawing.Point(246, 118);
+            checkBoxtoleranz50.Name = "checkBoxtoleranz50";
+            checkBoxtoleranz50.Size = new System.Drawing.Size(38, 19);
+            checkBoxtoleranz50.TabIndex = 41;
+            checkBoxtoleranz50.Text = "50";
+            checkBoxtoleranz50.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxtoleranz25
+            // 
+            checkBoxtoleranz25.AutoSize = true;
+            checkBoxtoleranz25.Location = new System.Drawing.Point(124, 118);
+            checkBoxtoleranz25.Name = "checkBoxtoleranz25";
+            checkBoxtoleranz25.Size = new System.Drawing.Size(38, 19);
+            checkBoxtoleranz25.TabIndex = 40;
+            checkBoxtoleranz25.Text = "25";
+            checkBoxtoleranz25.UseVisualStyleBackColor = true;
             // 
             // eraseButton
             // 
             eraseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            eraseButton.Location = new System.Drawing.Point(171, 155);
+            eraseButton.Location = new System.Drawing.Point(87, 172);
             eraseButton.Name = "eraseButton";
             eraseButton.Size = new System.Drawing.Size(75, 23);
             eraseButton.TabIndex = 39;
@@ -502,7 +610,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // drawButton
             // 
             drawButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            drawButton.Location = new System.Drawing.Point(91, 155);
+            drawButton.Location = new System.Drawing.Point(6, 172);
             drawButton.Name = "drawButton";
             drawButton.Size = new System.Drawing.Size(75, 23);
             drawButton.TabIndex = 38;
@@ -512,7 +620,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             // convertToIndexedButton
             // 
-            convertToIndexedButton.Location = new System.Drawing.Point(252, 129);
+            convertToIndexedButton.Location = new System.Drawing.Point(165, 143);
             convertToIndexedButton.Name = "convertToIndexedButton";
             convertToIndexedButton.Size = new System.Drawing.Size(75, 23);
             convertToIndexedButton.TabIndex = 37;
@@ -532,7 +640,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             // BtMirroImage
             // 
-            BtMirroImage.Location = new System.Drawing.Point(171, 129);
+            BtMirroImage.Location = new System.Drawing.Point(165, 172);
             BtMirroImage.Name = "BtMirroImage";
             BtMirroImage.Size = new System.Drawing.Size(75, 23);
             BtMirroImage.TabIndex = 35;
@@ -542,7 +650,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             // btPickColor
             // 
-            btPickColor.Location = new System.Drawing.Point(90, 129);
+            btPickColor.Location = new System.Drawing.Point(87, 143);
             btPickColor.Name = "btPickColor";
             btPickColor.Size = new System.Drawing.Size(75, 23);
             btPickColor.TabIndex = 34;
@@ -552,7 +660,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             // btToUpdate
             // 
-            btToUpdate.Location = new System.Drawing.Point(9, 129);
+            btToUpdate.Location = new System.Drawing.Point(6, 143);
             btToUpdate.Name = "btToUpdate";
             btToUpdate.Size = new System.Drawing.Size(75, 23);
             btToUpdate.TabIndex = 33;
@@ -563,7 +671,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // checkBoxDelete
             // 
             checkBoxDelete.AutoSize = true;
-            checkBoxDelete.Location = new System.Drawing.Point(246, 86);
+            checkBoxDelete.Location = new System.Drawing.Point(246, 78);
             checkBoxDelete.Name = "checkBoxDelete";
             checkBoxDelete.Size = new System.Drawing.Size(59, 19);
             checkBoxDelete.TabIndex = 32;
@@ -573,7 +681,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // checkBoxChange
             // 
             checkBoxChange.AutoSize = true;
-            checkBoxChange.Location = new System.Drawing.Point(246, 60);
+            checkBoxChange.Location = new System.Drawing.Point(246, 56);
             checkBoxChange.Name = "checkBoxChange";
             checkBoxChange.Size = new System.Drawing.Size(67, 19);
             checkBoxChange.TabIndex = 31;
@@ -632,7 +740,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(822, 450);
+            ClientSize = new System.Drawing.Size(847, 493);
             Controls.Add(colorLabel);
             Controls.Add(coordinatesLabel);
             Controls.Add(resetButton);
@@ -729,5 +837,14 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         private System.Windows.Forms.Label colorLabel;
         private System.Windows.Forms.Button drawButton;
         private System.Windows.Forms.Button eraseButton;
+        private System.Windows.Forms.CheckBox checkBoxtoleranz25;
+        private System.Windows.Forms.CheckBox checkBoxtoleranz100;
+        private System.Windows.Forms.CheckBox checkBoxtoleranz75;
+        private System.Windows.Forms.CheckBox checkBoxtoleranz50;
+        private System.Windows.Forms.CheckBox checkBoxtoleranz5;
+        private System.Windows.Forms.CheckBox checkBoxtoleranz35;
+        private System.Windows.Forms.CheckBox checkBoxtoleranz30;
+        private System.Windows.Forms.CheckBox checkBoxtoleranz10;
+        private System.Windows.Forms.CheckBox checkBoxtoleranz15;
     }
 }

@@ -21,6 +21,7 @@ Version : 4.11.21
 - Added two buttons, "Insert" and "Remove," to the "Compare Texture" feature, and assigned them to the left and right arrow keys.
 - Expanded listBoxOrg and listBoxSec to display decimal values as well.
 - The listBoxOrg and listBoxSec in Compare Items were also expanded to display decimal values.
+- Added a ColorWithTolerance function to replace color values within a specified tolerance range "Texturecutter".
 
 Version : 4.11.20
 - Added textboxes to TextureCutter to clear color values from an image and added a context menu to copy the image to the clipboard.

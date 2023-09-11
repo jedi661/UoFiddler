@@ -1029,8 +1029,19 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                     Color fromColor = ColorTranslator.FromHtml(fromColorCode);
                     Color toColor = ColorTranslator.FromHtml(toColorCode);
 
+
+                    int tolerance = 0;
+                    if (checkBoxtoleranz5.Checked) tolerance = 13; // 5% von 255
+                    else if (checkBoxtoleranz10.Checked) tolerance = 26; // 10% von 255
+                    else if (checkBoxtoleranz15.Checked) tolerance = 38; // 15% von 255
+                    else if (checkBoxtoleranz25.Checked) tolerance = 64; // 25% von 255
+                    else if (checkBoxtoleranz30.Checked) tolerance = 77; // 30% von 255
+                    else if (checkBoxtoleranz35.Checked) tolerance = 89; // 35% von 255
+                    else if (checkBoxtoleranz50.Checked) tolerance = 127; // 50% von 255
+                    else if (checkBoxtoleranz75.Checked) tolerance = 191; // 75% von 255
+                    else if (checkBoxtoleranz100.Checked) tolerance = 255; // 100% von 255
                     // Replace the color value in the image.
-                    ReplaceColor(image, fromColor, toColor);
+                    ReplaceColorWithTolerance(image, fromColor, toColor, tolerance);
                 }
 
                 // Check if a valid color value has been entered in the textBoxColorErase.
@@ -1255,7 +1266,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                     colorLabel.Text = colorCode;
                 }
             }            
-        }*/        
+        }*/
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
@@ -1353,35 +1364,65 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
 
         private void drawButton_Click(object sender, EventArgs e)
         {
-            // Wechseln Sie in den Zeichenmodus
+            // Switch to drawing mode
             isDrawing = true;
 
-            // Deaktivieren Sie den Löschmodus
+            // Disable delete mode
             isErasing = false;
 
             drawButton.FlatAppearance.MouseDownBackColor = Color.Red;
         }
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            // Überprüfen Sie, ob der Zeichenmodus aktiviert ist
+            // Check whether drawing mode is activated
             if (isDrawing)
             {
-                // Setzen Sie den letzten Punkt auf die aktuelle Mausposition
+                // Set the last point to the current mouse position
                 lastPoint = e.Location;
             }
         }
 
         private void eraseButton_Click(object sender, EventArgs e)
         {
-            // Wechseln Sie in den Löschmodus
+            // Enter delete mode
             isErasing = true;
 
-            // Deaktivieren Sie den Zeichenmodus
+            // Disable drawing mode
             isDrawing = false;
 
             eraseButton.FlatAppearance.MouseDownBackColor = Color.Red;
         }
 
+        #endregion
+
+        #region ColorWithTolerance
+        private void ReplaceColorWithTolerance(Bitmap image, Color fromColor, Color toColor, int tolerance)
+        {
+            // Loop through every pixel in the image
+            for (int x = 0; x < image.Width; x++)
+            {
+                for (int y = 0; y < image.Height; y++)
+                {
+                    // Check whether the pixel is within the tolerance range of the color to be replaced
+                    Color pixelColor = image.GetPixel(x, y);
+                    if (IsWithinTolerance(pixelColor, fromColor, tolerance))
+                    {
+                        // Set the pixel to the new color
+                        image.SetPixel(x, y, toColor);
+                    }
+                }
+            }
+        }
+
+        private bool IsWithinTolerance(Color color1, Color color2, int tolerance)
+        {
+            int rDiff = Math.Abs(color1.R - color2.R);
+            int gDiff = Math.Abs(color1.G - color2.G);
+            int bDiff = Math.Abs(color1.B - color2.B);
+
+            // Check whether the difference in each color channel is within tolerance
+            return rDiff <= tolerance && gDiff <= tolerance && bDiff <= tolerance;
+        }
         #endregion
     }
 }
