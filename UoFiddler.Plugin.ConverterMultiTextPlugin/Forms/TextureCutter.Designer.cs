@@ -81,6 +81,8 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             comboBoxColorValue = new System.Windows.Forms.ComboBox();
             lbColorValue03 = new System.Windows.Forms.Label();
             panel3 = new System.Windows.Forms.Panel();
+            btEvaluateColor = new System.Windows.Forms.Button();
+            btcolorlistimage = new System.Windows.Forms.Button();
             checkBoxtoleranz35 = new System.Windows.Forms.CheckBox();
             checkBoxtoleranz30 = new System.Windows.Forms.CheckBox();
             checkBoxtoleranz10 = new System.Windows.Forms.CheckBox();
@@ -221,9 +223,9 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             labelImageSize.AutoSize = true;
             labelImageSize.Location = new System.Drawing.Point(578, 122);
             labelImageSize.Name = "labelImageSize";
-            labelImageSize.Size = new System.Drawing.Size(38, 15);
+            labelImageSize.Size = new System.Drawing.Size(26, 15);
             labelImageSize.TabIndex = 10;
-            labelImageSize.Text = "label1";
+            labelImageSize.Text = "size";
             // 
             // textBoxSizeH
             // 
@@ -474,6 +476,8 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // panel3
             // 
             panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            panel3.Controls.Add(btEvaluateColor);
+            panel3.Controls.Add(btcolorlistimage);
             panel3.Controls.Add(checkBoxtoleranz35);
             panel3.Controls.Add(checkBoxtoleranz30);
             panel3.Controls.Add(checkBoxtoleranz10);
@@ -505,6 +509,26 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             panel3.Name = "panel3";
             panel3.Size = new System.Drawing.Size(379, 228);
             panel3.TabIndex = 31;
+            // 
+            // btEvaluateColor
+            // 
+            btEvaluateColor.Location = new System.Drawing.Point(245, 172);
+            btEvaluateColor.Name = "btEvaluateColor";
+            btEvaluateColor.Size = new System.Drawing.Size(104, 23);
+            btEvaluateColor.TabIndex = 50;
+            btEvaluateColor.Text = "Evaluate Color";
+            btEvaluateColor.UseVisualStyleBackColor = true;
+            btEvaluateColor.Click += btEvaluateColor_Click;
+            // 
+            // btcolorlistimage
+            // 
+            btcolorlistimage.Location = new System.Drawing.Point(245, 143);
+            btcolorlistimage.Name = "btcolorlistimage";
+            btcolorlistimage.Size = new System.Drawing.Size(75, 23);
+            btcolorlistimage.TabIndex = 49;
+            btcolorlistimage.Text = "Color List";
+            btcolorlistimage.UseVisualStyleBackColor = true;
+            btcolorlistimage.Click += btcolorlistimage_Click;
             // 
             // checkBoxtoleranz35
             // 
@@ -599,7 +623,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // eraseButton
             // 
             eraseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            eraseButton.Location = new System.Drawing.Point(87, 172);
+            eraseButton.Location = new System.Drawing.Point(86, 172);
             eraseButton.Name = "eraseButton";
             eraseButton.Size = new System.Drawing.Size(75, 23);
             eraseButton.TabIndex = 39;
@@ -650,7 +674,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             // btPickColor
             // 
-            btPickColor.Location = new System.Drawing.Point(87, 143);
+            btPickColor.Location = new System.Drawing.Point(86, 143);
             btPickColor.Name = "btPickColor";
             btPickColor.Size = new System.Drawing.Size(75, 23);
             btPickColor.TabIndex = 34;
@@ -846,5 +870,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         private System.Windows.Forms.CheckBox checkBoxtoleranz30;
         private System.Windows.Forms.CheckBox checkBoxtoleranz10;
         private System.Windows.Forms.CheckBox checkBoxtoleranz15;
+        private System.Windows.Forms.Button btcolorlistimage;
+        private System.Windows.Forms.Button btEvaluateColor;
     }
 }

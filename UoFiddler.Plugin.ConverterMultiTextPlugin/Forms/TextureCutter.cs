@@ -1424,5 +1424,265 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             return rDiff <= tolerance && gDiff <= tolerance && bDiff <= tolerance;
         }
         #endregion
+
+        #region Color Evaluate
+        private Form colorForm = null;
+        private Label mostCommonColorLabel = null;
+
+        private void btEvaluateColor_Click(object sender, EventArgs e)
+        {
+            if (colorForm != null && !colorForm.IsDisposed)
+            {
+                colorForm.Close();
+            }
+
+            if (pictureBox1.Image != null)
+            {
+                Bitmap image = new Bitmap(pictureBox1.Image);
+                Dictionary<string, int> colors = new Dictionary<string, int>();
+                for (int x = 0; x < image.Width; x++)
+                {
+                    for (int y = 0; y < image.Height; y++)
+                    {
+                        Color color = image.GetPixel(x, y);
+                        string colorCode = "#" + color.R.ToString("X2") + color.G.ToString("X2") + color.B.ToString("X2");
+                        if (colorCode == "#FFFFFF" || colorCode == "#000000") continue;
+                        if (colors.ContainsKey(colorCode))
+                        {
+                            colors[colorCode]++;
+                        }
+                        else
+                        {
+                            colors.Add(colorCode, 1);
+                        }
+                    }
+                }
+                var sortedColors = from pair in colors orderby pair.Value descending select pair;
+                int totalPixels = image.Width * image.Height;
+                colorForm = new Form();
+                colorForm.Text = "Evaluate Color";
+
+                colorForm.ShowIcon = false;
+
+                mostCommonColorLabel = new Label();
+                mostCommonColorLabel.Dock = DockStyle.Top;
+
+                Button refreshButton = new Button();
+                refreshButton.Text = "Refresh";
+                refreshButton.Dock = DockStyle.Top;
+                refreshButton.Click += btEvaluateColor_Click;
+
+                TreeView treeView = new TreeView();
+                treeView.Dock = DockStyle.Fill;
+
+                // Setzen Sie DrawMode auf OwnerDrawAll
+                treeView.DrawMode = TreeViewDrawMode.OwnerDrawAll;
+
+                treeView.DrawNode += (s, evt) =>
+                {
+                    evt.DrawDefault = false;
+                    using (var brush = new SolidBrush(ColorTranslator.FromHtml(evt.Node.Text.Split(' ')[0])))
+                    {
+                        var rect = new Rectangle(evt.Bounds.Left + 2, evt.Bounds.Top + 2, evt.Bounds.Height - 4, evt.Bounds.Height - 4);
+                        evt.Graphics.FillRectangle(brush, rect);
+                    }
+
+                    // Setzen Sie die Schriftfarbe auf Schwarz
+                    Color textColor = Color.Black;
+
+                    // Wenn der Knoten ausgewählt ist, ändern Sie die Hintergrundfarbe
+                    if ((evt.State & TreeNodeStates.Selected) != 0)
+                    {
+                        using (var brush = new SolidBrush(Color.FromArgb(128, Color.LightBlue))) // Ändern Sie dies in die gewünschte Hervorhebungsfarbe
+                        {
+                            evt.Graphics.FillRectangle(brush, new Rectangle(0, evt.Node.Bounds.Top, treeView.Width, evt.Node.Bounds.Height));
+                        }
+                    }
+
+                    TextRenderer.DrawText(evt.Graphics, evt.Node.Text, evt.Node.TreeView.Font,
+                        new Rectangle(evt.Bounds.Left + evt.Bounds.Height, evt.Bounds.Top, evt.Bounds.Width - evt.Bounds.Height, evt.Bounds.Height),
+                        textColor);
+                };
+
+
+                treeView.NodeMouseClick += (s, evt) =>
+                {
+                    string hexCode = evt.Node.Text.Split(' ')[0];
+                    textBoxColorAdress.Text = hexCode;
+                    Clipboard.SetText(hexCode);
+                };
+
+                int count = 0;
+                foreach (KeyValuePair<string, int> pair in sortedColors)
+                {
+                    if (count >= 20) break;
+                    double percentage = (double)pair.Value / totalPixels * 100;
+                    string nodeText = pair.Key + " - " + percentage.ToString("F2") + "%";
+                    TreeNode colorNode = new TreeNode(nodeText);
+                    treeView.Nodes.Add(colorNode);
+
+                    if (count == 0)
+                    {
+                        mostCommonColorLabel.Text = "Most common color: " + pair.Key;
+                    }
+
+                    count++;
+                }
+
+                colorForm.Controls.Add(treeView);
+                colorForm.Controls.Add(refreshButton);
+                colorForm.Controls.Add(mostCommonColorLabel);
+
+                colorForm.Show();
+            }
+        }
+
+        #endregion
+
+        #region Color List
+        // Globale Variable zur Speicherung des Formulars
+        Form colorListForm = null;
+
+        private void btcolorlistimage_Click(object sender, EventArgs e)
+        {
+            // Überprüfen Sie, ob das Formular bereits geöffnet ist
+            if (colorListForm != null)
+            {
+                // Das Formular ist bereits geöffnet, also kehren Sie einfach zurück
+                return;
+            }
+
+            // Überprüfen Sie, ob ein Bild in der PictureBox geladen wurde
+            if (pictureBox1.Image != null)
+            {
+                // Erstellen Sie eine neue Form
+                colorListForm = new Form();
+                colorListForm.Text = "Color List";
+                colorListForm.FormClosed += (s, e) => { colorListForm = null; };
+
+                // Erstellen Sie eine TreeView und fügen Sie sie zur Form hinzu
+                TreeView treeView = new TreeView();
+                treeView.Dock = DockStyle.Fill;
+                colorListForm.Controls.Add(treeView);
+
+                // Erstellen Sie ein Label zur Anzeige der Gesamtzahl der Farben
+                Label label = new Label();
+                label.Dock = DockStyle.Top;
+                colorListForm.Controls.Add(label);
+
+                // Funktion zum Laden der Farben aus dem Bild
+                Action loadColors = () =>
+                {
+                    // Löschen Sie alle vorhandenen Knoten in der TreeView
+                    treeView.Nodes.Clear();
+
+                    // Erstellen Sie eine Kopie des Bildes in pictureBox1
+                    Bitmap image = new Bitmap(pictureBox1.Image);
+
+                    // Erstellen Sie ein HashSet zum Speichern der eindeutigen Farben im Bild
+                    HashSet<string> uniqueColors = new HashSet<string>();
+
+                    // Erstellen Sie eine Liste zum Speichern der Farben und ihrer Helligkeitswerte
+                    List<Tuple<string, float>> colors = new List<Tuple<string, float>>();
+
+                    // Durchlaufen Sie jedes Pixel im Bild
+                    for (int x = 0; x < image.Width; x++)
+                    {
+                        for (int y = 0; y < image.Height; y++)
+                        {
+                            // Abrufen des Farbwerts des Pixels an den angegebenen Koordinaten
+                            Color color = image.GetPixel(x, y);
+
+                            // Konvertieren Sie den Farbwert in einen Hexadezimalcode
+                            string colorCode = "#" + color.R.ToString("X2") + color.G.ToString("X2") + color.B.ToString("X2");
+
+                            // Überprüfen Sie, ob der Farbcode bereits im HashSet vorhanden ist
+                            if (!uniqueColors.Contains(colorCode))
+                            {
+                                // Wenn nicht, fügen Sie ihn zum HashSet und zur Liste hinzu
+
+                                uniqueColors.Add(colorCode);
+
+                                // Konvertieren Sie den RGB-Farbwert in einen HSL-Wert und holen Sie sich die Helligkeit
+                                float brightness = color.GetBrightness();
+
+                                // Fügen Sie den Farbcode und die Helligkeit zur Liste hinzu
+                                colors.Add(new Tuple<string, float>(colorCode, brightness));
+                            }
+                        }
+                    }
+
+                    // Sortieren Sie die Liste nach der Helligkeit der Farben in umgekehrter Reihenfolge
+                    colors.Sort((a, b) => b.Item2.CompareTo(a.Item2));
+
+
+                    // Fügen Sie alle Farbcodes zur TreeView hinzu
+                    foreach (var color in colors)
+                    {
+                        TreeNode node = new TreeNode();
+                        node.Text = color.Item1;
+                        node.BackColor = ColorTranslator.FromHtml(color.Item1);
+                        treeView.Nodes.Add(node);
+                    }
+
+                    // Aktualisieren Sie das Label mit der Gesamtzahl der Farben
+                    label.Text = "Total unique colors: " + colors.Count;
+                };
+
+                // Laden Sie die Farben beim ersten Öffnen des Formulars
+                loadColors();
+
+                // Hervorheben des Knotens beim Darüberfahren mit der Maus
+                treeView.NodeMouseHover += (s, e) =>
+                {
+                    treeView.SelectedNode = e.Node;
+                };
+
+                // Erstellen Sie einen Button und fügen Sie ihn zur Form hinzu
+                Button buttonSendToTextBoxColorAdress = new Button();
+                buttonSendToTextBoxColorAdress.Text = "Send ColorAdress";
+                buttonSendToTextBoxColorAdress.Dock = DockStyle.Bottom;
+
+                buttonSendToTextBoxColorAdress.Click += (s, e) =>
+                {
+                    // Überprüfen Sie, ob ein Element ausgewählt ist
+                    if (treeView.SelectedNode != null)
+                    {
+                        // Nehmen Sie den ausgewählten Text aus der TreeView
+                        string selectedColor = treeView.SelectedNode.Text;
+
+                        // Setzen Sie den Text in textBoxColorAdress
+                        textBoxColorAdress.Text = selectedColor;
+                    }
+                };
+
+                colorListForm.Controls.Add(buttonSendToTextBoxColorAdress);
+
+                // Erstellen Sie einen btToUpdate-Button und fügen Sie ihn zur Form hinzu
+                Button buttonBtToUpdate = new Button();
+                buttonBtToUpdate.Text = "Update";
+                buttonBtToUpdate.Dock = DockStyle.Bottom;
+
+                buttonBtToUpdate.Click += btToUpdate_Click;
+
+                colorListForm.Controls.Add(buttonBtToUpdate);
+
+                // Erstellen Sie einen Aktualisieren-Button und fügen Sie ihn zur Form hinzu
+                Button buttonRefresh = new Button();
+                buttonRefresh.Text = "Refresh List";
+                buttonRefresh.Dock = DockStyle.Bottom;
+
+                buttonRefresh.Click += (s, e) =>
+                {
+                    loadColors();
+                };
+
+                colorListForm.Controls.Add(buttonRefresh);
+
+                // Zeigen Sie die Form an
+                colorListForm.Show();
+            }
+        }
+        #endregion
     }
 }

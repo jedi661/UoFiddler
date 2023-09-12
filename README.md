@@ -22,6 +22,8 @@ Version : 4.11.21
 - Expanded listBoxOrg and listBoxSec to display decimal values as well.
 - The listBoxOrg and listBoxSec in Compare Items were also expanded to display decimal values.
 - Added a ColorWithTolerance function to replace color values within a specified tolerance range "Texturecutter".
+- Added a Textcutter button in a form that lists all colors, including a label, a button to set the hex value into the textbox, and a refresh function to reread.
+- Added a button in Textcutter that reads the most common color values from the image, listing the top 20.
 
 Version : 4.11.20
 - Added textboxes to TextureCutter to clear color values from an image and added a context menu to copy the image to the clipboard.
