@@ -42,11 +42,11 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         // Define a variable to store the custom colors
         private int[] customColors;
 
-        // Zeichnen
+        // Draw
         private bool isDrawing = false;
         private Point lastPoint;
 
-        // Löschen
+        // Delete
         private bool isErasing = false;
 
         public TextureCutter()
@@ -1487,13 +1487,13 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                         evt.Graphics.FillRectangle(brush, rect);
                     }
 
-                    // Setzen Sie die Schriftfarbe auf Schwarz
+                    // Set DrawMode to OwnerDrawAll
                     Color textColor = Color.Black;
 
-                    // Wenn der Knoten ausgewählt ist, ändern Sie die Hintergrundfarbe
+                    // With the node selected, change the background color
                     if ((evt.State & TreeNodeStates.Selected) != 0)
                     {
-                        using (var brush = new SolidBrush(Color.FromArgb(128, Color.LightBlue))) // Ändern Sie dies in die gewünschte Hervorhebungsfarbe
+                        using (var brush = new SolidBrush(Color.FromArgb(128, Color.LightBlue))) // Change this to the highlight color you want
                         {
                             evt.Graphics.FillRectangle(brush, new Rectangle(0, evt.Node.Bounds.Top, treeView.Width, evt.Node.Bounds.Height));
                         }
@@ -1540,83 +1540,81 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         #endregion
 
         #region Color List
-        // Globale Variable zur Speicherung des Formulars
+        // Global variable to store the form
         Form colorListForm = null;
 
         private void btcolorlistimage_Click(object sender, EventArgs e)
         {
-            // Überprüfen Sie, ob das Formular bereits geöffnet ist
+            // Check if the form is already open
             if (colorListForm != null)
             {
-                // Das Formular ist bereits geöffnet, also kehren Sie einfach zurück
+                // The form is already open, so just return
                 return;
             }
 
-            // Überprüfen Sie, ob ein Bild in der PictureBox geladen wurde
+            // Check whether an image has been loaded in the PictureBox
             if (pictureBox1.Image != null)
             {
-                // Erstellen Sie eine neue Form
+                // Create a new shape
                 colorListForm = new Form();
                 colorListForm.Text = "Color List";
                 colorListForm.FormClosed += (s, e) => { colorListForm = null; };
 
-                // Erstellen Sie eine TreeView und fügen Sie sie zur Form hinzu
+                // Create a TreeView and add it to the shape
                 TreeView treeView = new TreeView();
                 treeView.Dock = DockStyle.Fill;
                 colorListForm.Controls.Add(treeView);
 
-                // Erstellen Sie ein Label zur Anzeige der Gesamtzahl der Farben
+                // Create a label to display the total number of colors
                 Label label = new Label();
                 label.Dock = DockStyle.Top;
                 colorListForm.Controls.Add(label);
 
-                // Funktion zum Laden der Farben aus dem Bild
+                // Function to load the colors from the image
                 Action loadColors = () =>
                 {
-                    // Löschen Sie alle vorhandenen Knoten in der TreeView
+                    // Delete all existing nodes in the TreeView
                     treeView.Nodes.Clear();
 
-                    // Erstellen Sie eine Kopie des Bildes in pictureBox1
+                    // Make a copy of the image in pictureBox1
                     Bitmap image = new Bitmap(pictureBox1.Image);
 
-                    // Erstellen Sie ein HashSet zum Speichern der eindeutigen Farben im Bild
+                    // Create a HashSet to store the unique colors in the image
                     HashSet<string> uniqueColors = new HashSet<string>();
 
-                    // Erstellen Sie eine Liste zum Speichern der Farben und ihrer Helligkeitswerte
+                    // Create a list to store the colors and their brightness values
                     List<Tuple<string, float>> colors = new List<Tuple<string, float>>();
 
-                    // Durchlaufen Sie jedes Pixel im Bild
+                    // Loop through every pixel in the image
                     for (int x = 0; x < image.Width; x++)
                     {
                         for (int y = 0; y < image.Height; y++)
                         {
-                            // Abrufen des Farbwerts des Pixels an den angegebenen Koordinaten
+                            // Get the color value of the pixel at the specified coordinates
                             Color color = image.GetPixel(x, y);
 
-                            // Konvertieren Sie den Farbwert in einen Hexadezimalcode
+                            // Convert the color value to a hexadecimal code
                             string colorCode = "#" + color.R.ToString("X2") + color.G.ToString("X2") + color.B.ToString("X2");
 
-                            // Überprüfen Sie, ob der Farbcode bereits im HashSet vorhanden ist
+                            // Check if the color code already exists in the HashSet
                             if (!uniqueColors.Contains(colorCode))
                             {
-                                // Wenn nicht, fügen Sie ihn zum HashSet und zur Liste hinzu
-
+                                // If not, add it to the HashSet and List
                                 uniqueColors.Add(colorCode);
 
-                                // Konvertieren Sie den RGB-Farbwert in einen HSL-Wert und holen Sie sich die Helligkeit
+                                // Convert the RGB color value to an HSL value and get the brightness
                                 float brightness = color.GetBrightness();
 
-                                // Fügen Sie den Farbcode und die Helligkeit zur Liste hinzu
+                                // Add the color code and brightness to the list
                                 colors.Add(new Tuple<string, float>(colorCode, brightness));
                             }
                         }
                     }
 
-                    // Sortieren Sie die Liste nach der Helligkeit der Farben in umgekehrter Reihenfolge
+                    // Sort the list by the brightness of the colors in reverse order
                     colors.Sort((a, b) => b.Item2.CompareTo(a.Item2));
 
-
-                    // Fügen Sie alle Farbcodes zur TreeView hinzu
+                    // Add all color codes to the TreeView
                     foreach (var color in colors)
                     {
                         TreeNode node = new TreeNode();
@@ -1625,40 +1623,40 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                         treeView.Nodes.Add(node);
                     }
 
-                    // Aktualisieren Sie das Label mit der Gesamtzahl der Farben
+                    // Update the label with the total number of colors
                     label.Text = "Total unique colors: " + colors.Count;
                 };
 
-                // Laden Sie die Farben beim ersten Öffnen des Formulars
+                // Load the colors when you first open the form
                 loadColors();
 
-                // Hervorheben des Knotens beim Darüberfahren mit der Maus
+                // Highlight the node when hovering over it with the mouse
                 treeView.NodeMouseHover += (s, e) =>
                 {
                     treeView.SelectedNode = e.Node;
                 };
 
-                // Erstellen Sie einen Button und fügen Sie ihn zur Form hinzu
+                // Create a button and add it to the shape
                 Button buttonSendToTextBoxColorAdress = new Button();
                 buttonSendToTextBoxColorAdress.Text = "Send ColorAdress";
                 buttonSendToTextBoxColorAdress.Dock = DockStyle.Bottom;
 
                 buttonSendToTextBoxColorAdress.Click += (s, e) =>
                 {
-                    // Überprüfen Sie, ob ein Element ausgewählt ist
+                    // Check if an item is selected
                     if (treeView.SelectedNode != null)
                     {
-                        // Nehmen Sie den ausgewählten Text aus der TreeView
+                        // Take the selected text from the TreeView
                         string selectedColor = treeView.SelectedNode.Text;
 
-                        // Setzen Sie den Text in textBoxColorAdress
+                        // Put the text in textBoxColorAdress
                         textBoxColorAdress.Text = selectedColor;
                     }
                 };
 
                 colorListForm.Controls.Add(buttonSendToTextBoxColorAdress);
 
-                // Erstellen Sie einen btToUpdate-Button und fügen Sie ihn zur Form hinzu
+                // Create a btToUpdate button and add it to the shape
                 Button buttonBtToUpdate = new Button();
                 buttonBtToUpdate.Text = "Update";
                 buttonBtToUpdate.Dock = DockStyle.Bottom;
@@ -1667,7 +1665,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
 
                 colorListForm.Controls.Add(buttonBtToUpdate);
 
-                // Erstellen Sie einen Aktualisieren-Button und fügen Sie ihn zur Form hinzu
+                // Create an update button and add it to the shape
                 Button buttonRefresh = new Button();
                 buttonRefresh.Text = "Refresh List";
                 buttonRefresh.Dock = DockStyle.Bottom;
@@ -1679,7 +1677,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
 
                 colorListForm.Controls.Add(buttonRefresh);
 
-                // Zeigen Sie die Form an
+                // Display the shape
                 colorListForm.Show();
             }
         }
