@@ -1682,5 +1682,388 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             }
         }
         #endregion
+
+        #region Modus
+
+        private Form colorChangeForm; // Instance variable for the shape
+        private void btModusColorChange_Click(object sender, EventArgs e)
+        {
+            // Check if the shape already exists
+            if (colorChangeForm != null && colorChangeForm.Visible)
+            {
+                // The shape is already open, so bring it to the foreground
+                colorChangeForm.BringToFront();
+            }
+            else
+            {
+                // The form does not exist or has been closed, so create a new one
+                colorChangeForm = new Form();
+
+                colorChangeForm.Size = new Size(250, 400); // Default is 800 pixels wide and 600 pixels high
+
+                // Set the title of the form
+                colorChangeForm.Text = "Modus";
+
+                // Remove the icon
+                colorChangeForm.ShowIcon = false;
+
+                // Add the FormClosing event handler
+                colorChangeForm.FormClosing += (s, e) =>
+                {
+                    e.Cancel = true;  // Prevents the mold from closing
+                    colorChangeForm.Hide();  // Instead, hides the shape
+                };
+
+                // Create the checkbox
+                RadioButton grayscaleCheckbox = new RadioButton();
+                grayscaleCheckbox.Text = "Grayscale";
+                grayscaleCheckbox.Location = new Point(10, 10); // Set position
+
+                // Create the TrackBar to change brightness
+                TrackBar brightnessTrackBar = new TrackBar();
+                brightnessTrackBar.Location = new Point(10, 40); // Set position
+                brightnessTrackBar.Minimum = -100;
+                brightnessTrackBar.Maximum = 100;
+
+                // Create the TrackBar to change contrast
+                TrackBar contrastTrackBar = new TrackBar();
+                contrastTrackBar.Location = new Point(10, 85); // Set position
+                contrastTrackBar.Minimum = -100;
+                contrastTrackBar.Maximum = 100;
+                contrastTrackBar.Value = 0; // Set the initial value to 0
+
+                // Create the TrackBar for gamma correction
+                TrackBar gammaTrackBar = new TrackBar();
+                gammaTrackBar.Location = new Point(10, 130); // Set position
+                gammaTrackBar.Minimum = -97;
+                gammaTrackBar.Maximum = 400;
+                gammaTrackBar.Value = 0; // Set the initial value to 0
+
+                // Create the Saturation TrackBar
+                TrackBar saturationTrackBar = new TrackBar();
+                saturationTrackBar.Location = new Point(10, 175); // Set position
+                saturationTrackBar.Minimum = -100;
+                saturationTrackBar.Maximum = 100;
+                saturationTrackBar.Value = 0; // Set the initial value to 0
+
+                // Create the TrackBar for color change
+                TrackBar colorTrackBar = new TrackBar();
+                colorTrackBar.Location = new Point(10, 220); // Set position
+                colorTrackBar.Minimum = -180;
+                colorTrackBar.Maximum = 180;
+                colorTrackBar.Value = 0; // Set the initial value to 0
+
+                // Create the label to display the current value of the TrackBar
+                Label brightnessLabel = new Label();
+                brightnessLabel.Location = new Point(120, 40); // Set position 40 is height 120 from the right
+
+                // Create the label to display the current value of the TrackBar
+                Label contrastLabel = new Label();
+                contrastLabel.Location = new Point(120, 85); // Set position
+
+                // Create the label to display the current value of the TrackBar
+                Label gammaLabel = new Label();
+                gammaLabel.Location = new Point(120, 130); // Set position
+
+                // Create the label to display the current value of the TrackBar
+                Label saturationLabel = new Label();
+                saturationLabel.Location = new Point(120, 175); // Set position
+
+                // Create the label to display the current value of the TrackBar
+                Label colorLabel = new Label();
+                colorLabel.Location = new Point(120, 220); // Set position
+
+                // Add an event handler to change brightness in real time
+                brightnessTrackBar.Scroll += (s, e) =>
+                {
+                    if (originalImage != null)
+                    {
+                        Bitmap image = new Bitmap(originalImage);
+
+                        // Change the brightness of the image
+                        float brightness = brightnessTrackBar.Value * 0.01f;
+                        float[][] ptsArray ={
+                    new float[] {1, 0, 0, 0, 0},
+                    new float[] {0, 1, 0, 0, 0},
+                    new float[] {0, 0, 1, 0, 0},
+                    new float[] {0, 0, 0, 1.0f, 0},
+                    new float[] {brightness, brightness, brightness, 1.0f, 1}
+                        };
+                        ImageAttributes attributes = new ImageAttributes();
+                        attributes.ClearColorMatrix();
+                        attributes.SetColorMatrix(new ColorMatrix(ptsArray), ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+                        Graphics g = Graphics.FromImage(image);
+                        g.DrawImage(image,
+                            new Rectangle(0, 0, image.Width, image.Height),
+                            0,
+                            0,
+                            image.Width,
+                            image.Height,
+                            GraphicsUnit.Pixel,
+                            attributes);
+
+                        pictureBox1.Image = image;
+
+                        // Update the label with the current value of the TrackBar
+                        brightnessLabel.Text = "Brightness: " + brightnessTrackBar.Value.ToString();
+                    }
+                };
+
+                // Add an event handler to change the contrast in real time
+                contrastTrackBar.Scroll += (s, e) =>
+                {
+                    if (originalImage != null)
+                    {
+                        Bitmap image = new Bitmap(originalImage);
+                        // Change the contrast of the image
+                        float contrast = (contrastTrackBar.Value + 100) * 0.01f;
+                        float[][] ptsArray ={
+                    new float[] {contrast, 0, 0, 0, 0},
+                    new float[] {0, contrast, 0, 0, 0},
+                    new float[] {0, 0, contrast, 0, 0},
+                    new float[] {0, 0, 0, 1.0f, 0},
+                    new float[] {0.001f, 0.001f, 0.001f, 1.0f, 1}
+                };
+                        ImageAttributes attributes = new ImageAttributes();
+                        attributes.ClearColorMatrix();
+                        attributes.SetColorMatrix(new ColorMatrix(ptsArray), ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+                        Graphics g = Graphics.FromImage(image);
+                        g.DrawImage(image, new Rectangle(0, 0, image.Width, image.Height), 0, 0,
+                            image.Width, image.Height,
+                            GraphicsUnit.Pixel,
+                            attributes);
+                        pictureBox1.Image = image;
+
+                        // Update the label with the current value of the TrackBar
+                        contrastLabel.Text = "Contrast: " + contrastTrackBar.Value.ToString();
+
+                    }
+                };
+
+                // Method of adjusting the gamma value of an image
+                Bitmap AdjustGamma(Image image, float gamma)
+                {
+                    Bitmap adjustedImage = new Bitmap(image.Width, image.Height);
+                    Graphics g = Graphics.FromImage(adjustedImage);
+                    ImageAttributes attributes = new ImageAttributes();
+                    attributes.SetGamma(gamma);
+                    g.DrawImage(image, new Rectangle(0, 0, image.Width, image.Height),
+                                0, 0, image.Width, image.Height,
+                                GraphicsUnit.Pixel, attributes);
+                    return adjustedImage;
+                }
+
+                // Add an event handler to change gamma correction in real time
+                gammaTrackBar.Scroll += (s, e) => {
+                    if (originalImage != null)
+                    {
+                        Bitmap image = new Bitmap(originalImage);
+                        // Change the gamma of the image
+                        float gamma = 1.0f + gammaTrackBar.Value * 0.01f; // Adjust gamma value
+                        Bitmap adjustedImage = AdjustGamma(image, gamma);
+                        pictureBox1.Image = adjustedImage;
+                        // Update the label with the current value of the TrackBar
+                        gammaLabel.Text = "Gamma: " + gammaTrackBar.Value.ToString();
+                    }
+                };
+
+                // Add an event handler to change saturation in real time
+                saturationTrackBar.Scroll += (s, e) => {
+                    if (originalImage != null)
+                    {
+                        Bitmap image = new Bitmap(originalImage);
+                        // Change the saturation of the image
+                        float saturation = 1.0f + saturationTrackBar.Value * 0.01f; // Adjust saturation value
+                        for (int y = 0; y < image.Height; y++)
+                        {
+                            for (int x = 0; x < image.Width; x++)
+                            {
+                                Color originalColor = image.GetPixel(x, y);
+                                float grayScale = (originalColor.R * 0.3f) + (originalColor.G * 0.59f) + (originalColor.B * 0.11f);
+                                int r = Clamp((int)(grayScale + saturation * (originalColor.R - grayScale)));
+                                int g = Clamp((int)(grayScale + saturation * (originalColor.G - grayScale)));
+                                int b = Clamp((int)(grayScale + saturation * (originalColor.B - grayScale)));
+                                Color newColor = Color.FromArgb(r, g, b);
+                                image.SetPixel(x, y, newColor);
+                            }
+                        }
+                        pictureBox1.Image = image;
+                        // Update the label with the current value of the TrackBar
+                        saturationLabel.Text = "Saturation: " + saturationTrackBar.Value.ToString();
+                    }
+
+                    // Method for limiting values ​​between 0 and 255
+                    int Clamp(int value)
+                    {
+                        if (value < 0) return 0;
+                        if (value > 255) return 255;
+                        return value;
+                    }
+                };
+
+                // Add an event handler to change the color in real time
+                colorTrackBar.Scroll += (sender, eventArgs) => {
+                    if (originalImage != null)
+                    {
+                        Bitmap image = new Bitmap(originalImage);
+                        // Change the color of the image
+                        float hueChange = colorTrackBar.Value / 360.0f; // Adjust hue change value
+
+                        // Local function to limit values ​​between 0 and 255
+                        int Clamp(int value)
+                        {
+                            if (value < 0) return 0;
+                            if (value > 255) return 255;
+                            return value;
+                        }
+
+                        // Local function to convert RGB to HSL
+                        void RgbToHsl(int r, int g, int b, out double h, out double s, out double l)
+                        {
+                            double r_ = r / 255.0;
+                            double g_ = g / 255.0;
+                            double b_ = b / 255.0;
+
+                            double max = Math.Max(r_, Math.Max(g_, b_));
+                            double min = Math.Min(r_, Math.Min(g_, b_));
+
+                            h = (max + min) / 2.0;
+                            l = h;
+                            s = h;
+
+                            if (max == min)
+                            {
+                                h = s = 0; // achromatic
+                            }
+                            else
+                            {
+                                double d = max - min;
+                                s = l > 0.5 ? d / (2.0 - max - min) : d / (max + min);
+                                if (max == r_)
+                                {
+                                    h = (g_ - b_) / d + (g_ < b_ ? 6 : 0);
+                                }
+                                else if (max == g_)
+                                {
+                                    h = (b_ - r_) / d + 2;
+                                }
+                                else if (max == b_)
+                                {
+                                    h = (r_ - g_) / d + 4;
+                                }
+                                h /= 6;
+                            }
+                        }
+
+                        // Local function to convert HSL to RGB
+                        void HslToRgb(double h, double s, double l, out int r, out int g, out int b)
+                        {
+                            double r_, g_, b_;
+
+                            if (s == 0)
+                            {
+                                r_ = g_ = b_ = l; // achromatic
+                            }
+                            else
+                            {
+                                Func<double, double, double, double> hue2rgb = (p, q, t) =>
+                                {
+                                    if (t < 0) t += 1;
+                                    if (t > 1) t -= 1;
+                                    if (t < 1 / 6.0) return p + (q - p) * 6 * t;
+                                    if (t < 1 / 2.0) return q;
+                                    if (t < 2 / 3.0) return p + (q - p) * (2 / 3.0 - t) * 6;
+                                    return p;
+                                };
+
+                                var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+                                var p = 2 * l - q;
+                                r_ = hue2rgb(p, q, h + hueChange);
+                                g_ = hue2rgb(p, q, h);
+                                b_ = hue2rgb(p, q, h - hueChange);
+                            }
+
+                            r = Clamp((int)(r_ * 255.0));
+                            g = Clamp((int)(g_ * 255.0));
+                            b = Clamp((int)(b_ * 255.0));
+                        }
+
+                        for (int y = 0; y < image.Height; y++)
+                        {
+                            for (int x = 0; x < image.Width; x++)
+                            {
+                                Color originalColor = image.GetPixel(x, y);
+                                // Convert the color to HSL color space
+                                double h;
+                                double s;
+                                double l;
+                                RgbToHsl(originalColor.R, originalColor.G, originalColor.B, out h, out s, out l);
+
+                                // Convert the color back to the RGB color space
+                                int r;
+                                int g;
+                                int b;
+                                HslToRgb(h, s, l, out r, out g, out b);
+
+                                Color newColor = Color.FromArgb(r, g, b);
+                                image.SetPixel(x, y, newColor);
+                            }
+                        }
+                        pictureBox1.Image = image;
+                        // Update the label with the current value of the TrackBar
+                        pictureBox1.Refresh();  // Update the PictureBox
+                        colorLabel.Text = "Color: " + colorTrackBar.Value.ToString();
+                    }
+                };
+
+                // Create the button to apply the grayscale changes
+                Button applyButton = new Button();
+                applyButton.Text = "Apply";
+                applyButton.Location = new Point(10, 320); // Set position
+                applyButton.Click += (s, e) =>
+                {
+                    if (originalImage != null && grayscaleCheckbox.Checked)
+                    {
+                        Bitmap image = new Bitmap(originalImage);
+
+                        // Convert the image to grayscale
+                        for (int y = 0; y < image.Height; y++)
+                        {
+                            for (int x = 0; x < image.Width; x++)
+                            {
+                                Color originalColor = image.GetPixel(x, y);
+                                int grayScale = (int)((originalColor.R * .3) + (originalColor.G * .59) + (originalColor.B * .11));
+                                Color newColor = Color.FromArgb(grayScale, grayScale, grayScale);
+                                image.SetPixel(x, y, newColor);
+                            }
+                        }
+
+                        pictureBox1.Image = image;
+                    }
+                };
+
+                // Add the checkbox and button to the shape
+                colorChangeForm.Controls.Add(grayscaleCheckbox);
+                colorChangeForm.Controls.Add(brightnessTrackBar);
+                colorChangeForm.Controls.Add(brightnessLabel);
+                colorChangeForm.Controls.Add(applyButton);
+                // Add the new TrackBar and Label to the shape
+                colorChangeForm.Controls.Add(contrastTrackBar);
+                colorChangeForm.Controls.Add(contrastLabel);
+                // Add the new TrackBar and Label to the shape
+                colorChangeForm.Controls.Add(gammaTrackBar);
+                colorChangeForm.Controls.Add(gammaLabel);
+                // Add the new TrackBar and Label to the shape
+                colorChangeForm.Controls.Add(saturationTrackBar);
+                colorChangeForm.Controls.Add(saturationLabel);
+                // Add the new TrackBar and Label to the shape
+                colorChangeForm.Controls.Add(colorTrackBar);
+                colorChangeForm.Controls.Add(colorLabel);
+
+                // Display the shape
+                colorChangeForm.Show();
+            }
+        }
+        #endregion
     }
 }

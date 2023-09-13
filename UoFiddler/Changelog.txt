@@ -16,6 +16,7 @@ Version : 4.11.21 #XG1
 - Added a ColorWithTolerance function to replace color values within a specified tolerance range "Texturecutter".
 - Added a Textcutter button in a form that lists all colors, including a label, a button to set the hex value into the textbox, and a refresh function to reread.
 - Added a button in Textcutter that reads the most common color values from the image, listing the top 20.
+- In Texturecutter, a form was added with a mode that includes the following functions: grayscale conversion of the image, changing brightness, adjusting contrast, gamma correction, modifying saturation, and altering color.
 
 Version : 4.11.20 #XG1
 - Added textboxes to TextureCutter to clear color values from an image and added a context menu to copy the image to the clipboard.

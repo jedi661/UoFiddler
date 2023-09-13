@@ -81,6 +81,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             comboBoxColorValue = new System.Windows.Forms.ComboBox();
             lbColorValue03 = new System.Windows.Forms.Label();
             panel3 = new System.Windows.Forms.Panel();
+            btModusColorChange = new System.Windows.Forms.Button();
             btEvaluateColor = new System.Windows.Forms.Button();
             btcolorlistimage = new System.Windows.Forms.Button();
             checkBoxtoleranz35 = new System.Windows.Forms.CheckBox();
@@ -221,7 +222,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // labelImageSize
             // 
             labelImageSize.AutoSize = true;
-            labelImageSize.Location = new System.Drawing.Point(578, 122);
+            labelImageSize.Location = new System.Drawing.Point(549, 125);
             labelImageSize.Name = "labelImageSize";
             labelImageSize.Size = new System.Drawing.Size(26, 15);
             labelImageSize.TabIndex = 10;
@@ -323,7 +324,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             panel2.Controls.Add(ButtonShrinkTexture);
             panel2.Location = new System.Drawing.Point(456, 143);
             panel2.Name = "panel2";
-            panel2.Size = new System.Drawing.Size(379, 100);
+            panel2.Size = new System.Drawing.Size(414, 100);
             panel2.TabIndex = 20;
             // 
             // button45Degrees
@@ -338,7 +339,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             // buttonWhite
             // 
-            buttonWhite.Location = new System.Drawing.Point(180, 67);
+            buttonWhite.Location = new System.Drawing.Point(154, 66);
             buttonWhite.Name = "buttonWhite";
             buttonWhite.Size = new System.Drawing.Size(124, 23);
             buttonWhite.TabIndex = 24;
@@ -358,7 +359,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             // ButtonAutoTexture
             // 
-            ButtonAutoTexture.Location = new System.Drawing.Point(180, 37);
+            ButtonAutoTexture.Location = new System.Drawing.Point(154, 37);
             ButtonAutoTexture.Name = "ButtonAutoTexture";
             ButtonAutoTexture.Size = new System.Drawing.Size(124, 23);
             ButtonAutoTexture.TabIndex = 22;
@@ -476,6 +477,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // panel3
             // 
             panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            panel3.Controls.Add(btModusColorChange);
             panel3.Controls.Add(btEvaluateColor);
             panel3.Controls.Add(btcolorlistimage);
             panel3.Controls.Add(checkBoxtoleranz35);
@@ -507,8 +509,18 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             panel3.Controls.Add(label5);
             panel3.Location = new System.Drawing.Point(456, 253);
             panel3.Name = "panel3";
-            panel3.Size = new System.Drawing.Size(379, 228);
+            panel3.Size = new System.Drawing.Size(414, 228);
             panel3.TabIndex = 31;
+            // 
+            // btModusColorChange
+            // 
+            btModusColorChange.Location = new System.Drawing.Point(326, 143);
+            btModusColorChange.Name = "btModusColorChange";
+            btModusColorChange.Size = new System.Drawing.Size(75, 23);
+            btModusColorChange.TabIndex = 51;
+            btModusColorChange.Text = "Modus";
+            btModusColorChange.UseVisualStyleBackColor = true;
+            btModusColorChange.Click += btModusColorChange_Click;
             // 
             // btEvaluateColor
             // 
@@ -764,7 +776,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(847, 493);
+            ClientSize = new System.Drawing.Size(882, 493);
             Controls.Add(colorLabel);
             Controls.Add(coordinatesLabel);
             Controls.Add(resetButton);
@@ -872,5 +884,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         private System.Windows.Forms.CheckBox checkBoxtoleranz15;
         private System.Windows.Forms.Button btcolorlistimage;
         private System.Windows.Forms.Button btEvaluateColor;
+        private System.Windows.Forms.Button btModusColorChange;
     }
 }
