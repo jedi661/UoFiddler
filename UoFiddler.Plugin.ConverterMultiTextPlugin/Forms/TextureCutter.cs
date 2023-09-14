@@ -1719,6 +1719,11 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 grayscaleCheckbox.Text = "Grayscale";
                 grayscaleCheckbox.Location = new Point(10, 10); // Set position
 
+                // Create the checkbox
+                CheckBox protectColorsCheckbox = new CheckBox();
+                protectColorsCheckbox.Text = "Protect Colors";
+                protectColorsCheckbox.Location = new Point(120, 10); // Setzen Sie die Position
+
                 // Create the TrackBar to change brightness
                 TrackBar brightnessTrackBar = new TrackBar();
                 brightnessTrackBar.Location = new Point(10, 40); // Set position
@@ -2015,6 +2020,236 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                         colorLabel.Text = "Color: " + colorTrackBar.Value.ToString();
                     }
                 };
+                // Colors except 000000 or ffffff
+                // Add the event handler
+                protectColorsCheckbox.CheckedChanged += (s, e) => {
+                    // Check whether the checkbox is activated
+                    if (protectColorsCheckbox.Checked)
+                    {
+                        // Change the brightness change function
+                        brightnessTrackBar.Scroll += (senderBrightness, e) => {
+                            if (originalImage != null)
+                            {
+                                Bitmap image = new Bitmap(originalImage);
+                                float brightness = brightnessTrackBar.Value * 0.01f; // Scale the value so that it is between -1 and 1
+                                for (int y = 0; y < image.Height; y++)
+                                {
+                                    for (int x = 0; x < image.Width; x++)
+                                    {
+                                        Color originalColor = image.GetPixel(x, y);
+                                        // Check if the color is 000000 or ffffff
+                                        if (originalColor.ToArgb() != Color.Black.ToArgb() && originalColor.ToArgb() != Color.White.ToArgb())
+                                        {
+                                            // Change the brightness of the color
+                                            int r = Clamp((int)(originalColor.R + brightness * 255)); // Brightness range adjustment
+                                            int g = Clamp((int)(originalColor.G + brightness * 255)); // Brightness range adjustment
+                                            int b = Clamp((int)(originalColor.B + brightness * 255)); // Brightness range adjustment
+                                            Color newColor = Color.FromArgb(r, g, b);
+                                            image.SetPixel(x, y, newColor);
+                                        }
+                                    }
+                                }
+                                pictureBox1.Image = image;
+                                brightnessLabel.Text = "Brightness: " + brightnessTrackBar.Value.ToString();
+                            }
+                        };
+
+                        // Change the contrast change function
+                        contrastTrackBar.Scroll += (s, e) => {
+                            if (originalImage != null)
+                            {
+                                Bitmap image = new Bitmap(originalImage);
+                                float contrast = (contrastTrackBar.Value + 100) * 0.01f;
+                                for (int y = 0; y < image.Height; y++)
+                                {
+                                    for (int x = 0; x < image.Width; x++)
+                                    {
+                                        Color originalColor = image.GetPixel(x, y);
+                                        // Check if the color is 000000 or ffffff
+                                        if (originalColor.ToArgb() != Color.Black.ToArgb() && originalColor.ToArgb() != Color.White.ToArgb())
+                                        {
+                                            // Change the contrast of the color
+                                            int r = Clamp((int)(originalColor.R * contrast));
+                                            int g = Clamp((int)(originalColor.G * contrast));
+                                            int b = Clamp((int)(originalColor.B * contrast));
+                                            Color newColor = Color.FromArgb(r, g, b);
+                                            image.SetPixel(x, y, newColor);
+                                        }
+                                    }
+                                }
+                                pictureBox1.Image = image;
+                                contrastLabel.Text = "Contrast: " + contrastTrackBar.Value.ToString();
+                            }
+                        };
+
+                        // Change the gamma correction function
+                        gammaTrackBar.Scroll += (s, e) => {
+                            if (originalImage != null)
+                            {
+                                Bitmap image = new Bitmap(originalImage);
+                                float gamma = 1.0f + gammaTrackBar.Value * 0.01f;
+                                for (int y = 0; y < image.Height; y++)
+                                {
+                                    for (int x = 0; x < image.Width; x++)
+                                    {
+                                        Color originalColor = image.GetPixel(x, y);
+                                        // Check if the color is 000000 or ffffff
+                                        if (originalColor.ToArgb() != Color.Black.ToArgb() && originalColor.ToArgb() != Color.White.ToArgb())
+                                        {
+                                            // Change the gamma of the color
+                                            int r = Clamp((int)(Math.Pow(originalColor.R / 255.0, gamma) * 255));
+                                            int g = Clamp((int)(Math.Pow(originalColor.G / 255.0, gamma) * 255));
+                                            int b = Clamp((int)(Math.Pow(originalColor.B / 255.0, gamma) * 255));
+                                            Color newColor = Color.FromArgb(r, g, b);
+                                            image.SetPixel(x, y, newColor);
+                                        }
+                                    }
+                                }
+                                pictureBox1.Image = image;
+                                gammaLabel.Text = "Gamma: " + gammaTrackBar.Value.ToString();
+                            }
+                        };
+
+                        // Change the saturation change function
+                        saturationTrackBar.Scroll += (s, e) => {
+                            if (originalImage != null)
+                            {
+                                Bitmap image = new Bitmap(originalImage);
+                                float saturation = 1.0f + saturationTrackBar.Value * 0.01f;
+                                for (int y = 0; y < image.Height; y++)
+                                {
+                                    for (int x = 0; x < image.Width; x++)
+                                    {
+                                        Color originalColor = image.GetPixel(x, y);
+                                        // Check if the color is 000000 or ffffff
+                                        if (originalColor.ToArgb() != Color.Black.ToArgb() && originalColor.ToArgb() != Color.White.ToArgb())
+                                        {
+                                            // Change the saturation of the color
+                                            float grayScale = (originalColor.R * 0.3f) + (originalColor.G * 0.59f) + (originalColor.B * 0.11f);
+                                            int r = Clamp((int)(grayScale + saturation * (originalColor.R - grayScale)));
+                                            int g = Clamp((int)(grayScale + saturation * (originalColor.G - grayScale)));
+                                            int b = Clamp((int)(grayScale + saturation * (originalColor.B - grayScale)));
+                                            Color newColor = Color.FromArgb(r, g, b);
+                                            image.SetPixel(x, y, newColor);
+                                        }
+                                    }
+                                }
+                                pictureBox1.Image = image;
+                                saturationLabel.Text = "Saturation: " + saturationTrackBar.Value.ToString();
+                            }
+                        };
+
+                        int Clamp(int value, int min = 0, int max = 255)
+                        {
+                            if (value < min) return min;
+                            if (value > max) return max;
+                            return value;
+                        }
+
+                        void RgbToHsl(int r, int g, int b, out double h, out double s, out double l)
+                        {
+                            double r_ = r / 255.0;
+                            double g_ = g / 255.0;
+                            double b_ = b / 255.0;
+
+                            double max = Math.Max(r_, Math.Max(g_, b_));
+                            double min = Math.Min(r_, Math.Min(g_, b_));
+
+                            h = (max + min) / 2.0;
+                            l = h;
+                            s = h;
+
+                            if (max == min)
+                            {
+                                h = s = 0; // achromatic
+                            }
+                            else
+                            {
+                                double d = max - min;
+                                s = l > 0.5 ? d / (2.0 - max - min) : d / (max + min);
+                                if (max == r_)
+                                {
+                                    h = (g_ - b_) / d + (g_ < b_ ? 6 : 0);
+                                }
+                                else if (max == g_)
+                                {
+                                    h = (b_ - r_) / d + 2;
+                                }
+                                else if (max == b_)
+                                {
+                                    h = (r_ - g_) / d + 4;
+                                }
+                                h /= 6;
+                            }
+                        }
+
+                        void HslToRgb(double h, double s, double l, out int r, out int g, out int b)
+                        {
+                            double r_, g_, b_;
+
+                            if (s == 0)
+                            {
+                                r_ = g_ = b_ = l; // achromatic
+                            }
+                            else
+                            {
+                                Func<double, double, double, double> hue2rgb = (p, q, t) =>
+                                {
+                                    if (t < 0) t += 1;
+                                    if (t > 1) t -= 1;
+                                    if (t < 1 / 6.0) return p + (q - p) * 6 * t;
+                                    if (t < 1 / 2.0) return q;
+                                    if (t < 2 / 3.0) return p + (q - p) * (2 / 3.0 - t) * 6;
+                                    return p;
+                                };
+
+                                var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+                                var p = 2 * l - q;
+
+                                r_ = hue2rgb(p, q, h + 1 / 3.0);
+                                g_ = hue2rgb(p, q, h);
+                                b_ = hue2rgb(p, q, h - 1 / 3.0);
+                            }
+
+                            r = (int)(r_ * 255.0);
+                            g = (int)(g_ * 255.0);
+                            b = (int)(b_ * 255.0);
+                        }
+
+                        // Change color change function
+                        colorTrackBar.Scroll += (s, e) => {
+                            if (originalImage != null)
+                            {
+                                Bitmap image = new Bitmap(originalImage);
+                                float hueChange = colorTrackBar.Value / 360.0f;
+                                for (int y = 0; y < image.Height; y++)
+                                {
+                                    for (int x = 0; x < image.Width; x++)
+                                    {
+                                        Color originalColor = image.GetPixel(x, y);
+                                        // Check if the color is 000000 or ffffff
+                                        if (originalColor.ToArgb() != Color.Black.ToArgb() && originalColor.ToArgb() != Color.White.ToArgb())
+                                        {
+                                            // Change the hue of the paint
+                                            double h;
+                                            double saturation;
+                                            double l;
+                                            RgbToHsl(originalColor.R, originalColor.G, originalColor.B, out h, out saturation, out l);
+                                            int r;
+                                            int g;
+                                            int b;
+                                            HslToRgb(h + hueChange, saturation, l, out r, out g, out b);
+                                            Color newColor = Color.FromArgb(r, g, b);
+                                            image.SetPixel(x, y, newColor);
+                                        }
+                                    }
+                                }
+                                pictureBox1.Image = image;
+                                colorLabel.Text = "Color: " + colorTrackBar.Value.ToString();
+                            }
+                        };
+                    }
+                };
 
                 // Create the button to apply the grayscale changes
                 Button applyButton = new Button();
@@ -2042,6 +2277,29 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                     }
                 };
 
+                // Create the button
+                Button resetButton = new Button();
+                resetButton.Text = "Reset";
+                resetButton.Location = new Point(80, 320); // Set the position
+
+                // Add the event handler
+                resetButton.Click += (s, e) =>
+                {
+                    // Reset the values ​​of all TrackBars to 0
+                    brightnessTrackBar.Value = 0;
+                    contrastTrackBar.Value = 0;
+                    gammaTrackBar.Value = 0;
+                    saturationTrackBar.Value = 0;
+                    colorTrackBar.Value = 0;
+
+                    // Update the labels
+                    brightnessLabel.Text = "Brightness: 0";
+                    contrastLabel.Text = "Contrast: 0";
+                    gammaLabel.Text = "Gamma: 0";
+                    saturationLabel.Text = "Saturation: 0";
+                    colorLabel.Text = "Color: 0";
+                };
+
                 // Add the checkbox and button to the shape
                 colorChangeForm.Controls.Add(grayscaleCheckbox);
                 colorChangeForm.Controls.Add(brightnessTrackBar);
@@ -2059,6 +2317,10 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 // Add the new TrackBar and Label to the shape
                 colorChangeForm.Controls.Add(colorTrackBar);
                 colorChangeForm.Controls.Add(colorLabel);
+                // Add the checkbox to the form
+                colorChangeForm.Controls.Add(protectColorsCheckbox);
+                // Add the button to the form
+                colorChangeForm.Controls.Add(resetButton);
 
                 // Display the shape
                 colorChangeForm.Show();
