@@ -5,6 +5,8 @@
 UOFiddler based on Ultima SDK it's a tool to view and alter almost every UO 2D client file. Source code is released under the Beerware license.
 
 ## Changelog
+Version : 4.11.22
+- Added a ContextMenuStrip button for the hex address to export the selected items to the clipboard. In the AminData function, implemented logic to pass the hex address to the TextBox in the ContextMenuStrip when there is a hex address in the clipboard.
 
 Version : 4.11.21
 - Added graphics for "Compare Items."

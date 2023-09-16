@@ -1499,5 +1499,19 @@ namespace UoFiddler.Controls.UserControls
             SearchName(searchByNameToolStripTextBox.Text, true);
         }
         #endregion
+
+        #region Select ID to Hex
+        private void SelectIDToHexToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (_selectedGraphicId >= 0)
+            {
+                // Convert the selected ID to a hex address
+                string hexAddress = $"0x{_selectedGraphicId:X4}";
+
+                // Copy the hex address to the clipboard
+                Clipboard.SetText(hexAddress);
+            }
+        }
+        #endregion
     }
 }

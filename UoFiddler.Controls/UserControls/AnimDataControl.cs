@@ -571,13 +571,26 @@ namespace UoFiddler.Controls.UserControls
             _timerFrame = 0;
         }
 
+        #region ConextMenuStriip Opering
         private void ContextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
             var enabled = treeView1.SelectedNode.Parent == null;
 
             removeToolStripMenuItem.Enabled = enabled;
             addToolStripMenuItem.Enabled = enabled;
+
+            // Add this code to check the clipboard contents and paste them into AddTextBox
+            if (Clipboard.ContainsText())
+            {
+                string clipboardText = Clipboard.GetText();
+                // Check whether the text is a valid hex address
+                if (System.Text.RegularExpressions.Regex.IsMatch(clipboardText, @"\A\b0x[0-9a-fA-F]+\b\Z"))
+                {
+                    AddTextBox.Text = clipboardText;
+                }
+            }
         }
+        #endregion
     }
 
     public class AnimdataSorter : IComparer

@@ -233,6 +233,16 @@ namespace UoFiddler.Controls.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap hexdecimal_adresse_to_clipbord {
+            get {
+                object obj = ResourceManager.GetObject("hexdecimal-adresse-to-clipbord", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap iishenar_map {
             get {
                 object obj = ResourceManager.GetObject("iishenar-map", resourceCulture);
