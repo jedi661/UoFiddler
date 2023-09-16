@@ -1,5 +1,6 @@
-Version : 4.11.22
+Version : 4.11.22 #XG1
 - Added a ContextMenuStrip button for the hex address to export the selected items to the clipboard. In the AminData function, implemented logic to pass the hex address to the TextBox in the ContextMenuStrip when there is a hex address in the clipboard.
+- Added images for the Gumps and tooltips.
 
 Version : 4.11.21 #XG1
 - Added graphics for "Compare Items."

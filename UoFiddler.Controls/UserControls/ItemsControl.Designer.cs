@@ -288,17 +288,21 @@ namespace UoFiddler.Controls.UserControls
             // selectInGumpsTabMaleToolStripMenuItem
             // 
             selectInGumpsTabMaleToolStripMenuItem.Enabled = false;
+            selectInGumpsTabMaleToolStripMenuItem.Image = Properties.Resources.gumps_men_fantasy;
             selectInGumpsTabMaleToolStripMenuItem.Name = "selectInGumpsTabMaleToolStripMenuItem";
             selectInGumpsTabMaleToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             selectInGumpsTabMaleToolStripMenuItem.Text = "Select in Gumps (M)";
+            selectInGumpsTabMaleToolStripMenuItem.ToolTipText = "Highlights the ID in the Gumps tab.";
             selectInGumpsTabMaleToolStripMenuItem.Click += SelectInGumpsTabMaleToolStripMenuItem_Click;
             // 
             // selectInGumpsTabFemaleToolStripMenuItem
             // 
             selectInGumpsTabFemaleToolStripMenuItem.Enabled = false;
+            selectInGumpsTabFemaleToolStripMenuItem.Image = Properties.Resources.gumps_woman_fantasy;
             selectInGumpsTabFemaleToolStripMenuItem.Name = "selectInGumpsTabFemaleToolStripMenuItem";
             selectInGumpsTabFemaleToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             selectInGumpsTabFemaleToolStripMenuItem.Text = "Select in Gumps (F)";
+            selectInGumpsTabFemaleToolStripMenuItem.ToolTipText = "Highlights the ID in the Gumps tab.";
             selectInGumpsTabFemaleToolStripMenuItem.Click += SelectInGumpsTabFemaleToolStripMenuItem_Click;
             // 
             // toolStripSeparator2
