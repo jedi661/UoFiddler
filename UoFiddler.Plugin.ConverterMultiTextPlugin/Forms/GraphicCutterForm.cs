@@ -43,6 +43,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
 
         private Color gridColor = Color.Red; // Setze die Standardfarbe des Gitters auf Rot PictureBox1.
 
+        private Bitmap transparentImage; // Transparent Image
         public GraphicCutterForm()
         {
             InitializeComponent();
@@ -134,6 +135,15 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 {
                     image = new Bitmap(openFileDialog.FileName);
                     originalImage = new Bitmap(image); // Save a copy of the original image.
+                    image = new Bitmap(originalImage); // Start with the original image.
+
+                    if (checkBoxTransparent.Checked)
+                    {
+                        // Make colors transparent when the checkbox is checked.
+                        MakeColorTransparent(image, Color.White); // Make white color transparent.
+                        MakeColorTransparent(image, Color.Black); // Make black color transparent.
+                    }
+
                     pictureBox1.Image = image;
                     pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
 
@@ -1246,6 +1256,82 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             int height = bottommost - topmost;
 
             return new Bitmap(image).Clone(new Rectangle(leftmost, topmost, width, height), image.PixelFormat);
+        }
+        #endregion
+
+        #region Transparent and Checkbox
+        private void checkBoxTransparent_CheckedChanged(object sender, EventArgs e)
+        {
+            if (originalImage != null) // Ensure an image has been loaded
+            {
+                if (checkBoxTransparent.Checked)
+                {
+                    // Make colors transparent when the checkbox is checked.
+                    image = new Bitmap(originalImage); // Start with a copy of the original image.
+                    MakeColorTransparent(image, Color.White); // Make white color transparent.
+                    MakeColorTransparent(image, Color.Black); // Make black color transparent.
+                }
+                else
+                {
+                    // Restore the original image when the checkbox is unchecked.
+                    image = new Bitmap(originalImage);
+                }
+
+                // Display the modified image in PictureBox.
+                pictureBox1.Image = image;
+                pictureBox1.Refresh(); // Refresh the PictureBox to show the new image.
+            }
+        }
+
+        private void MakeColorTransparent(Bitmap image, Color color)
+        {
+            for (int i = 0; i < image.Width; i++)
+            {
+                for (int j = 0; j < image.Height; j++)
+                {
+                    Color pixelColor = image.GetPixel(i, j);
+                    if (pixelColor.R == color.R && pixelColor.G == color.G && pixelColor.B == color.B)
+                    {
+                        image.SetPixel(i, j, Color.Transparent);
+                    }
+                }
+            }
+        }
+
+        private void importToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Clipboard.ContainsImage())
+            {
+                originalImage = new Bitmap(Clipboard.GetImage()); // Save a copy of the original image.
+                image = new Bitmap(originalImage); // Start with the original image.
+
+                if (checkBoxTransparent.Checked)
+                {
+                    // Make colors transparent when the checkbox is checked.
+                    MakeColorTransparent(image, Color.White); // Make white color transparent.
+                    MakeColorTransparent(image, Color.Black); // Make black color transparent.
+                }
+
+                pictureBox1.Image = image;
+                pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
+
+                // Display the image in PictureBox2 as well.
+                pictureBox2.Image = image;
+                pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
+
+                pictureBox1.Refresh(); // Display a new image.
+
+                // Set the position of the image in PictureBox1.
+                SetImagePosition(0, 0);
+
+                // Set the values in the text boxes.
+                textBoxWidth.Text = image.Width.ToString();
+                textBoxHeight.Text = image.Height.ToString();
+                textBoxStartX.Text = ((pictureBox1.Width - image.Width) / 2).ToString();
+                textBoxStartY.Text = (pictureBox1.Height - image.Height).ToString();
+
+                isImageTransparent = false; // Set the state of the image to non-transparent.
+            }
         }
         #endregion
     }

@@ -8,6 +8,7 @@ UOFiddler based on Ultima SDK it's a tool to view and alter almost every UO 2D c
 Version : 4.11.22
 - Added a ContextMenuStrip button for the hex address to export the selected items to the clipboard. In the AminData function, implemented logic to pass the hex address to the TextBox in the ContextMenuStrip when there is a hex address in the clipboard.
 - Added images for the Gumps and tooltips.
+- In GraphicCutter, added a checkbox and a transparency function, as well as an import function via the clipboard.
 
 Version : 4.11.21
 - Added graphics for "Compare Items."
