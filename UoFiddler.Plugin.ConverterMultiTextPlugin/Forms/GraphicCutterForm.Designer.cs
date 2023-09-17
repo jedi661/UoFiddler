@@ -319,9 +319,9 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             label1.AutoSize = true;
             label1.Location = new System.Drawing.Point(11, 396);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(38, 15);
+            label1.Size = new System.Drawing.Size(69, 15);
             label1.TabIndex = 9;
-            label1.Text = "label1";
+            label1.Text = "coordinates";
             // 
             // panel1
             // 

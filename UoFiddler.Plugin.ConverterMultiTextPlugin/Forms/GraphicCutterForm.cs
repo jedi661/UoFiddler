@@ -869,7 +869,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                     pictureBox2.Refresh();
                 }
             }
-        }      
+        }
 
         private void buttonCrop_Click(object sender, EventArgs e)
         {
@@ -1237,7 +1237,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 else if (selectedOption == "clear")
                 {
                     pictureBox1.BackgroundImage = null; // Delete the background image.
-                }               
+                }
             }
         }
 
