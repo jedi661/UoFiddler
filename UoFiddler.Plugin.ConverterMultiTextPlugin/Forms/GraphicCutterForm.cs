@@ -41,10 +41,15 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         private Bitmap originalImage;
         private bool isImageTransparent = false; // Variable to track the current state of the image.
 
-        private Color gridColor = Color.Red; // Setze die Standardfarbe des Gitters auf Rot PictureBox1.
+        private Color gridColor = Color.Red; // Set the default grid color to red PictureBox1.
 
         private Bitmap transparentImage; // Transparent Image
         private bool playCustomSound = true; //Sound
+
+        // Global variable to store the state of the mirrored image
+        private bool isMirrored = false;
+
+        private List<Point> points = new List<Point>();
 
         public GraphicCutterForm()
         {
@@ -65,14 +70,8 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // Link the KeyDown event of the form to the event handler
             this.KeyDown += Form1_KeyDown;
 
-            // Rufe die CropImage-Methode auf
+            // Call the CropImage method
             CropImage();
-
-            // Link the Click event of each button to the event handler
-            button1.Click += button1_Click;
-            button2.Click += button2_Click;
-            button3.Click += button3_Click;
-            button4.Click += button4_Click;
 
             // Link the Click event of the ToolStripMenuItem to the event handler
             saveImageToolStripMenuItem.Click += saveImageToolStripMenuItem_Click;
@@ -80,7 +79,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // Set the default selected item
             toolStripComboBox1.SelectedIndex = 0;
 
-            label1.Text = "";
+            label1.Text = ""; // do not show text
 
             // Register the Paint event handler for the PictureBox2 control.
             pictureBox2.Paint += pictureBox3_Paint;
@@ -311,87 +310,91 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         }
         private void btnUp_Click(object sender, EventArgs e)
         {
+            // Move the image in the desired direction
             MoveImage(0, -1);
         }
 
         private void btnDown_Click(object sender, EventArgs e)
         {
+            // Move the image in the desired direction
             MoveImage(0, 1);
         }
 
         private void btnLeft_Click(object sender, EventArgs e)
         {
+            // Move the image in the desired direction
             MoveImage(-1, 0);
         }
 
         private void btnRight_Click(object sender, EventArgs e)
         {
+            // Move the image in the desired direction
             MoveImage(1, 0);
         }
 
         private void moveTimer_Tick(object sender, EventArgs e)
         {
-            // Bewegen Sie das Bild in die gewünschte Richtung
+            // Move the image in the desired direction
             MoveImage(moveX, moveY);
         }
 
         private void btnUp_MouseDown(object sender, MouseEventArgs e)
         {
-            // Setzen Sie die Bewegungsrichtung
+            // Set the direction of movement
             moveX = 0;
             moveY = -1;
-            // Starten Sie den Timer
+            // Start the timer
             moveTimer.Start();
         }
 
         private void btnUp_MouseUp(object sender, MouseEventArgs e)
         {
-            // Stoppen Sie den Timer
+            // Stop the timer
             moveTimer.Stop();
         }
 
         private void btnDown_MouseDown(object sender, MouseEventArgs e)
         {
-            // Setzen Sie die Bewegungsrichtung
+            // Set the direction of movement
             moveX = 0;
             moveY = 1;
-            // Starten Sie den Timer
+            // Start the timer
             moveTimer.Start();
         }
 
         private void btnDown_MouseUp(object sender, MouseEventArgs e)
         {
-            // Stoppen Sie den Timer
+            // Stop the timer
             moveTimer.Stop();
         }
 
         private void btnLeft_MouseDown(object sender, MouseEventArgs e)
         {
-            // Setzen Sie die Bewegungsrichtung
+            // Set the direction of movement
             moveX = -1;
             moveY = 0;
-            // Starten Sie den Timer
+            // Start the timer
             moveTimer.Start();
         }
 
         private void btnLeft_MouseUp(object sender, MouseEventArgs e)
         {
-            // Stoppen Sie den Timer
+            // Stop the timer
             moveTimer.Stop();
         }
 
         private void btnRight_MouseDown(object sender, MouseEventArgs e)
         {
-            // Setzen Sie die Bewegungsrichtung
+            // Set the direction of movement
             moveX = 1;
             moveY = 0;
-            // Starten Sie den Timer
+            // Start the timer
             moveTimer.Start();
         }
 
         private void btnRight_MouseUp(object sender, MouseEventArgs e)
         {
-            // Stoppen Sie den Timer
+            // Stop the timer
             moveTimer.Stop();
         }
         #endregion
@@ -423,88 +426,149 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             }
         }
 
+        private void MoveImage()
+        {
+            // Code to move the image...
+
+            // If the image is mirrored, apply the mirroring again after moving it
+            if (isMirrored)
+            {
+                Bitmap movedImage = new Bitmap(pictureBox2.Image);
+                movedImage.RotateFlip(RotateFlipType.RotateNoneFlipX);
+                pictureBox2.Image = movedImage;
+            }
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             // Increase the value in the textBoxStartY
             textBoxStartY.Text = (int.Parse(textBoxStartY.Text) + 1).ToString();
+
+            // If the image is mirrored, apply the mirroring again after moving it
+            if (isMirrored)
+            {
+                Bitmap movedImage = new Bitmap(pictureBox2.Image);
+                movedImage.RotateFlip(RotateFlipType.RotateNoneFlipX);
+                pictureBox2.Image = movedImage;
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             // Decrease the value in the textBoxStartY
             textBoxStartY.Text = (int.Parse(textBoxStartY.Text) - 1).ToString();
+
+            // If the image is mirrored, apply the mirroring again after moving it
+            if (isMirrored)
+            {
+                Bitmap movedImage = new Bitmap(pictureBox2.Image);
+                movedImage.RotateFlip(RotateFlipType.RotateNoneFlipX);
+                pictureBox2.Image = movedImage;
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             // Decrease the value in the textBoxStartX
             textBoxStartX.Text = (int.Parse(textBoxStartX.Text) - 1).ToString();
+
+            // If the image is mirrored, apply the mirroring again after moving it
+            if (isMirrored)
+            {
+                Bitmap movedImage = new Bitmap(pictureBox2.Image);
+                movedImage.RotateFlip(RotateFlipType.RotateNoneFlipX);
+                pictureBox2.Image = movedImage;
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             // Increase the value in the textBoxStartX
             textBoxStartX.Text = (int.Parse(textBoxStartX.Text) + 1).ToString();
+
+            // If the image is mirrored, apply the mirroring again after moving it
+            if (isMirrored)
+            {
+                Bitmap movedImage = new Bitmap(pictureBox2.Image);
+                movedImage.RotateFlip(RotateFlipType.RotateNoneFlipX);
+                pictureBox2.Image = movedImage;
+            }
         }
-
-
-
         #endregion
 
         #region Paint 
         private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
         {
-            // Check if the left mouse button is pressed.
-            if (e.Button == MouseButtons.Left)
+            if (checkBoxFreehand.Checked && e.Button == MouseButtons.Left)
             {
-                // Set the starting point of the crop.
+                points.Clear();
+                points.Add(e.Location);
+            }
+            else if (e.Button == MouseButtons.Left)
+            {
                 startPoint = e.Location;
                 isDragging = true;
+                cropArea = new Rectangle(startPoint.X, startPoint.Y, 0, 0);
             }
         }
 
         private void pictureBox2_MouseMove(object sender, MouseEventArgs e)
         {
-            // Check if the left mouse button is pressed and the user is dragging the mouse.
-            if (e.Button == MouseButtons.Left && isDragging)
+            if (checkBoxFreehand.Checked && e.Button == MouseButtons.Left)
             {
-                // Calculate the size of the cropping area.
+                points.Add(e.Location);
+                pictureBox2.Invalidate();
+            }
+            else if (e.Button == MouseButtons.Left && isDragging)
+            {
                 int width = e.X - startPoint.X;
                 int height = e.Y - startPoint.Y;
-
-                // Set the size of the cropping area.
-                textBoxWidth.Text = width.ToString();
-                textBoxHeight.Text = height.ToString();
-
-                // Set the starting point of the crop.
-                textBoxStartX.Text = startPoint.X.ToString();
-                textBoxStartY.Text = startPoint.Y.ToString();
-
-                // Update the cropping area.
                 cropArea = new Rectangle(startPoint.X, startPoint.Y, width, height);
-
-                // Redraw the PictureBox to show the cropping area.
                 pictureBox2.Invalidate();
             }
         }
 
         private void pictureBox2_MouseUp(object sender, MouseEventArgs e)
         {
-            // Check if the left mouse button has been released.
-            if (e.Button == MouseButtons.Left)
+            if (checkBoxFreehand.Checked && e.Button == MouseButtons.Left)
+            {
+                points.Add(points[0]);  // Verbinden Sie das Ende mit dem Anfang
+                pictureBox2.Invalidate();
+            }
+            else if (e.Button == MouseButtons.Left)
             {
                 isDragging = false;
             }
         }
         private void pictureBox2_Paint(object sender, PaintEventArgs e)
         {
-            // Draw a dashed line around the cropping area.
             using (Pen pen = new Pen(Color.Yellow))
             {
                 pen.DashStyle = DashStyle.Dash;
-                e.Graphics.DrawRectangle(pen, cropArea);
+
+                if (checkBoxCircle.Checked)
+                {
+                    // Draw a circle
+                    e.Graphics.DrawEllipse(pen, cropArea);
+                }
+                else
+                {
+                    // Draw a rectangle
+                    e.Graphics.DrawRectangle(pen, cropArea);
+                }
+
+                if (checkBoxFreehand.Checked && points.Count > 1)
+                {
+                    // Draw freehand
+                    e.Graphics.DrawLines(Pens.Yellow, points.ToArray());
+                }
             }
         }
+
+        private void checkBoxCircle_CheckedChanged(object sender, EventArgs e)
+        {
+            pictureBox2.Invalidate();
+        }
+
         #endregion
 
         #region funktions Menu
@@ -605,7 +669,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 }
                 catch
                 {
-                    // Zeigen Sie eine Fehlermeldung an, wenn der eingegebene Text kein gültiger Farbcode ist
+                    // Display an error message if the text entered is not a valid color code
                     MessageBox.Show("Please enter a valid 6-digit color code. Example: FF0000 for red.", "Invalid color code.", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -622,10 +686,10 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         }
         private void unloadToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Überprüfen, ob ein Bild geladen ist
+            // Check if an image is loaded
             if (pictureBox1.Image == null)
             {
-                MessageBox.Show("Es wurde kein Bild geladen.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("No image was loaded.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -633,7 +697,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             pictureBox1.Image = null;
             pictureBox1.Refresh();
         }
-
         #endregion
 
         // Imput 
@@ -657,7 +720,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         {
             CropImage();
         }
-
         #region CromImage        
 
         private void CropImage()
@@ -701,7 +763,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             showBorder = !showBorder;
             MoveImage(0, 0); // Redraw the image to update the border visibility
         }
-
         #region Save
         private void saveImageToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -756,17 +817,22 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 }
 
                 // Show a message box to indicate that the image was saved
-                MessageBox.Show("Das Bild wurde gespeichert in: " + filePath);
+                MessageBox.Show("The image was saved in: " + filePath);
             }
         }
 
-        private void pictureBox2_MouseClick(object sender, MouseEventArgs e)
+        private void pictureBox2_MouseClick(object sender, EventArgs e)
         {
-            // Check if the right mouse button was clicked
-            if (e.Button == MouseButtons.Right)
+            // Cast EventArgs to MouseEventArgs
+            var me = e as MouseEventArgs;
+            if (me != null)
             {
-                // Show the contextMenuStrip1 at the current mouse position
-                contextMenuStrip1.Show(pictureBox2, e.Location);
+                // Check if the right mouse button was clicked
+                if (me.Button == MouseButtons.Right)
+                {
+                    // Show the contextMenuStrip1 at the current mouse position
+                    contextMenuStrip1.Show(pictureBox2, me.Location);
+                }
             }
         }
         #endregion
@@ -803,54 +869,13 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                     pictureBox2.Refresh();
                 }
             }
-        }
+        }      
 
         private void buttonCrop_Click(object sender, EventArgs e)
         {
-            // Check if an image is loaded in PictureBox1 or PictureBox2.
-            if (pictureBox1.Image != null || pictureBox2.Image != null)
+            // Check if an image is loaded in the pictureBox2
+            if (pictureBox2.Image != null)
             {
-                // Load the image from PictureBox2 into PictureBox2 if it is not null, otherwise load the image from PictureBox1.
-                Bitmap image = pictureBox2.Image != null ? new Bitmap(pictureBox2.Image) : new Bitmap(pictureBox1.Image);
-
-                // Declare variables for the width, height, startX and startY values.
-                int width, height, startX, startY;
-
-                // Check if the text boxes are empty.
-                if (string.IsNullOrEmpty(textBoxWidth.Text) || string.IsNullOrEmpty(textBoxHeight.Text) || string.IsNullOrEmpty(textBoxStartX.Text) || string.IsNullOrEmpty(textBoxStartY.Text))
-                {
-                    // Use the entire image if the text boxes are empty.
-                    width = image.Width;
-                    height = image.Height;
-                    startX = 0;
-                    startY = 0;
-                }
-                else
-                {
-                    // Read the width and height from the text boxes.
-                    width = int.Parse(textBoxWidth.Text);
-                    height = int.Parse(textBoxHeight.Text);
-
-                    // Check if the width and height are greater than 0.
-                    if (width <= 0 || height <= 0)
-                    {
-                        // Display an error message or perform a different action for invalid width or height value
-                        // For example: MessageBox.Show("Invalid width or height value.");
-                        return;
-                    }
-
-                    // Read the starting point from the text boxes.
-                    startX = int.Parse(textBoxStartX.Text);
-                    startY = int.Parse(textBoxStartY.Text);
-                }
-
-                // Crop the image to the specified size.
-                Bitmap croppedImage = new Bitmap(width, height);
-                using (Graphics g = Graphics.FromImage(croppedImage))
-                {
-                    g.DrawImage(image, new Rectangle(0, 0, width, height), new Rectangle(startX, startY, width, height), GraphicsUnit.Pixel);
-                }
-
                 // Create the directory if it doesn't exist
                 string directory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tempGrafic");
                 Directory.CreateDirectory(directory);
@@ -861,11 +886,11 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 // Combine the directory and file name
                 string filePath = Path.Combine(directory, fileName);
 
-                // Save the cropped image as a BMP file
-                croppedImage.Save(filePath, ImageFormat.Bmp);
+                // Save the image in BMP format
+                pictureBox2.Image.Save(filePath, ImageFormat.Bmp);
 
                 // Show a message box to indicate that the image was saved
-                MessageBox.Show("Das Bild wurde gespeichert in: " + filePath);
+                MessageBox.Show("The image was saved in: " + filePath);
             }
         }
 
@@ -947,6 +972,9 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
 
                 // Mirror the image horizontally.
                 originalImage.RotateFlip(RotateFlipType.RotateNoneFlipX);
+
+                // Set the mirrored state to true
+                isMirrored = true;
 
                 // Reset the mirrored image back to PictureBox2.
                 pictureBox2.Image = originalImage;
@@ -1073,46 +1101,104 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 }
             }
         }
+
         private void fillTextureToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Check if an image is loaded.
             if (pictureBox2.Image == null)
             {
                 MessageBox.Show("No image has been loaded.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            // Check if a region has been selected.
-            int width = int.Parse(textBoxWidth.Text);
-            int height = int.Parse(textBoxHeight.Text);
-            int startX = int.Parse(textBoxStartX.Text);
-            int startY = int.Parse(textBoxStartY.Text);
-            if (width <= 0 || height <= 0)
+            if ((cropArea.Width <= 0 || cropArea.Height <= 0) && !checkBoxFreehand.Checked)
             {
-                MessageBox.Show("No area has been selected..", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("No area has been selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            // Prompt the user to select a new texture.
             using (System.Windows.Forms.OpenFileDialog openFileDialog = new System.Windows.Forms.OpenFileDialog())
             {
                 openFileDialog.Filter = "Bilddateien|*.bmp;*.jpg;*.jpeg;*.png";
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    // Load the new texture.
                     Bitmap newTexture = new Bitmap(openFileDialog.FileName);
-
-                    // Create a copy of the current image in the PictureBox.
                     Bitmap imageCopy = (Bitmap)pictureBox2.Image.Clone();
 
-                    // Fill the selected area with the new texture
                     using (Graphics g = Graphics.FromImage(imageCopy))
                     {
-                        // Fill the selected area with the new texture.
-                        g.DrawImage(newTexture, new Rectangle(startX, startY, width, height));
+                        // Adjust cropArea and points based on zoom level
+                        Rectangle adjustedCropArea = new Rectangle(cropArea.X / (int)Math.Pow(2, zoomCounter), cropArea.Y / (int)Math.Pow(2, zoomCounter), cropArea.Width / (int)Math.Pow(2, zoomCounter), cropArea.Height / (int)Math.Pow(2, zoomCounter));
+                        List<Point> adjustedPoints = points.Select(p => new Point(p.X / (int)Math.Pow(2, zoomCounter), p.Y / (int)Math.Pow(2, zoomCounter))).ToList();
+
+                        if (checkBoxCircle.Checked)
+                        {
+                            // Create a mask for the circle area
+                            using (Bitmap mask = new Bitmap(adjustedCropArea.Width, adjustedCropArea.Height))
+                            {
+                                using (Graphics maskGraphics = Graphics.FromImage(mask))
+                                {
+                                    maskGraphics.Clear(Color.White);
+                                    maskGraphics.FillEllipse(Brushes.Black, 0, 0, adjustedCropArea.Width, adjustedCropArea.Height);
+                                }
+
+                                // Skaliere die Textur auf die Größe der Maske
+                                newTexture = new Bitmap(newTexture, mask.Size);
+
+                                // Wende die Maske auf das neue Texturbild an
+                                for (int x = 0; x < mask.Width; x++)
+                                {
+                                    for (int y = 0; y < mask.Height; y++)
+                                    {
+                                        if (mask.GetPixel(x, y).R != 0)
+                                        {
+                                            newTexture.SetPixel(x, y, Color.Transparent);
+                                        }
+                                    }
+                                }
+                            }
+
+                            // Draw the texture on the image inside the circle
+                            g.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceOver;
+                            g.DrawImage(newTexture, adjustedCropArea);
+                        }
+                        else if (checkBoxFreehand.Checked && adjustedPoints.Count > 1)
+                        {
+                            // Create a mask for the freehand area
+                            using (Bitmap mask = new Bitmap(imageCopy.Width, imageCopy.Height))
+                            {
+                                using (Graphics maskGraphics = Graphics.FromImage(mask))
+                                {
+                                    maskGraphics.Clear(Color.White);
+                                    maskGraphics.FillPolygon(Brushes.Black, adjustedPoints.ToArray());
+                                }
+
+                                // Scale the texture to the size of the mask
+                                newTexture = new Bitmap(newTexture, mask.Size);
+
+                                // Apply the mask to the new texture image
+                                for (int x = 0; x < mask.Width; x++)
+                                {
+                                    for (int y = 0; y < mask.Height; y++)
+                                    {
+                                        if (mask.GetPixel(x, y).R != 0)
+                                        {
+                                            newTexture.SetPixel(x, y, Color.Transparent);
+                                        }
+                                    }
+                                }
+                            }
+
+                            // Draw the texture onto the image inside the freehand shape
+                            g.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceOver;
+                            g.DrawImage(newTexture, new Rectangle(0, 0, imageCopy.Width, imageCopy.Height));
+                        }
+                        else
+                        {
+                            // Draw the texture on the image
+                            g.DrawImage(newTexture, adjustedCropArea);
+                        }
                     }
 
-                    // Update the PictureBox.
                     pictureBox2.Image = imageCopy;
                     pictureBox2.Refresh();
                 }
@@ -1131,7 +1217,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             pictureBox2.Image = null;
             pictureBox2.Refresh();
         }
-
         #endregion
 
         #region Background Image PictureBox1
@@ -1147,18 +1232,12 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 }
                 if (selectedOption == "water")
                 {
-                    pictureBox1.BackgroundImage = Properties.Resources.water; // Hintergrundbild ändern water
+                    pictureBox1.BackgroundImage = Properties.Resources.water; // Change background image water
                 }
                 else if (selectedOption == "clear")
                 {
                     pictureBox1.BackgroundImage = null; // Delete the background image.
-                }
-                // Additional options for other images can be added here.
-                // else if (selectedOption == "blue")
-                // {
-                //     pictureBox1.BackgroundImage = Properties.Resources.blue; // Change the background image.
-                // }
-                // ...
+                }               
             }
         }
 
@@ -1326,6 +1405,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         }
         #endregion
 
+        #region Copy Clipbord
         private void copyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (pictureBox2.Image != null)
@@ -1341,5 +1421,51 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 }
             }
         }
+        #endregion
+        #region Reset Button
+        private void resetButton_Click(object sender, EventArgs e)
+        {
+            // Reset the SizeMode property to Normal
+            pictureBox2.SizeMode = PictureBoxSizeMode.Normal;
+
+            // Reset the size of the PictureBox to its original size
+            pictureBox2.Width /= (int)Math.Pow(2, zoomCounter);
+            pictureBox2.Height /= (int)Math.Pow(2, zoomCounter);
+
+            // Reset the zoom counter
+            zoomCounter = 0;
+
+            // Clear the list of points
+            points.Clear();
+
+            // Reset the cropArea
+            cropArea = new Rectangle();
+
+            // Update the PictureBox to reflect the changes
+            pictureBox2.Invalidate();
+        }
+        #endregion
+
+        #region Zoom Button
+        private int zoomCounter = 0;
+        private void zoomButton_Click(object sender, EventArgs e)
+        {
+            // Check if the zoom has already been applied twice
+            if (zoomCounter >= 2)
+            {
+                return;
+            }
+
+            // Set the SizeMode property to Zoom
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+
+            // Resize the PictureBox to increase the zoom effect
+            pictureBox2.Width *= 2;
+            pictureBox2.Height *= 2;
+
+            // Increase the zoom counter
+            zoomCounter++;
+        }
+        #endregion
     }
 }

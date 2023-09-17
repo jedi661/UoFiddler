@@ -4,6 +4,11 @@ Version : 4.11.22 #XG1
 - In GraphicCutter, added a checkbox and a transparency function, as well as an import function via the clipboard.
 - Assigned the arrow keys for moving in the GraphicCutter. Added the ability to copy the image from PictureBox2 to the clipboard, and a sound plays when copying with Ctrl+X.
 - Added Mapmaker form and a button.
+- Added a "Circle" checkbox and a "Freehand" checkbox to draw shapes in the graphic frame. The default selection is a rectangle.
+- Added a function to fill the marked area with a texture or graphic.
+- Added a zoom button to allow zooming in on the image.
+- Added a reset button that clears the selections and resets the zoom level.
+
 
 Version : 4.11.21 #XG1
 - Added graphics for "Compare Items."
