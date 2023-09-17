@@ -52,6 +52,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
             buttonGraficCutterForm = new System.Windows.Forms.Button();
             TextureCutter = new System.Windows.Forms.Button();
             btDecriptClient = new System.Windows.Forms.Button();
+            btMapMaker = new System.Windows.Forms.Button();
             SuspendLayout();
             // 
             // BtnMultiOpen
@@ -155,7 +156,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
             // 
             // TextureCutter
             // 
-            TextureCutter.Location = new System.Drawing.Point(350, 276);
+            TextureCutter.Location = new System.Drawing.Point(350, 274);
             TextureCutter.Name = "TextureCutter";
             TextureCutter.Size = new System.Drawing.Size(92, 23);
             TextureCutter.TabIndex = 10;
@@ -165,7 +166,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
             // 
             // btDecriptClient
             // 
-            btDecriptClient.Location = new System.Drawing.Point(350, 305);
+            btDecriptClient.Location = new System.Drawing.Point(350, 328);
             btDecriptClient.Name = "btDecriptClient";
             btDecriptClient.Size = new System.Drawing.Size(92, 23);
             btDecriptClient.TabIndex = 11;
@@ -173,10 +174,21 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
             btDecriptClient.UseVisualStyleBackColor = true;
             btDecriptClient.Click += btDecriptClient_Click;
             // 
+            // btMapMaker
+            // 
+            btMapMaker.Location = new System.Drawing.Point(350, 301);
+            btMapMaker.Name = "btMapMaker";
+            btMapMaker.Size = new System.Drawing.Size(92, 23);
+            btMapMaker.TabIndex = 12;
+            btMapMaker.Text = "MapMaker";
+            btMapMaker.UseVisualStyleBackColor = true;
+            btMapMaker.Click += btMapMaker_Click;
+            // 
             // ConverterMultiTextControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(btMapMaker);
             Controls.Add(btDecriptClient);
             Controls.Add(TextureCutter);
             Controls.Add(buttonGraficCutterForm);
@@ -212,5 +224,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
         private System.Windows.Forms.Button buttonGraficCutterForm;
         private System.Windows.Forms.Button TextureCutter;
         private System.Windows.Forms.Button btDecriptClient;
+        private System.Windows.Forms.Button btMapMaker;
     }
 }

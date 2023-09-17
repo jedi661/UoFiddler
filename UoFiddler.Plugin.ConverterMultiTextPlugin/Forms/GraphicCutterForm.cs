@@ -13,7 +13,7 @@ using System.Windows.Forms.VisualStyles;
 using Microsoft.Win32;
 using Ultima;
 using System.Drawing.Drawing2D;
-
+using System.Media;
 
 namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
 {
@@ -44,6 +44,8 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         private Color gridColor = Color.Red; // Setze die Standardfarbe des Gitters auf Rot PictureBox1.
 
         private Bitmap transparentImage; // Transparent Image
+        private bool playCustomSound = true; //Sound
+
         public GraphicCutterForm()
         {
             InitializeComponent();
@@ -88,7 +90,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
 
         }
 
-        // Keys to Textbox
+        #region keydown Move and Textbox
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             // Check which key was pressed
@@ -97,21 +99,53 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 case Keys.Up:
                     // Increase the value in the textBoxStartY
                     textBoxStartY.Text = (int.Parse(textBoxStartY.Text) + 1).ToString();
+                    btnUp.PerformClick(); // Simulate a click on the btnUp button
                     break;
                 case Keys.Down:
                     // Decrease the value in the textBoxStartY
                     textBoxStartY.Text = (int.Parse(textBoxStartY.Text) - 1).ToString();
+                    btnDown.PerformClick(); // Simulate a click on the btnDown button
                     break;
                 case Keys.Left:
                     // Decrease the value in the textBoxStartX
                     textBoxStartX.Text = (int.Parse(textBoxStartX.Text) - 1).ToString();
+                    btnLeft.PerformClick(); // Simulate a click on the btnLeft button
                     break;
                 case Keys.Right:
                     // Increase the value in the textBoxStartX
                     textBoxStartX.Text = (int.Parse(textBoxStartX.Text) + 1).ToString();
+                    btnRight.PerformClick(); // Simulate a click on the btnRight button
+                    break;
+                case Keys.X:
+                    if (e.Control)
+                    {
+                        // Copy the image from pictureBox2 to clipboard
+                        copyToolStripMenuItem_Click(sender, e);
+                    }
                     break;
             }
         }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch (keyData)
+            {
+                case Keys.Up:
+                    btnUp.PerformClick();
+                    break;
+                case Keys.Down:
+                    btnDown.PerformClick();
+                    break;
+                case Keys.Left:
+                    btnLeft.PerformClick();
+                    break;
+                case Keys.Right:
+                    btnRight.PerformClick();
+                    break;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+        #endregion
 
         //Disables character input.
         private void textBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -166,50 +200,9 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 }
             }
         }
-
-
-
         #endregion
 
         #region  Picture Paint
-        //Paint Grid
-        /*private void pictureBox1_Paint(object sender, PaintEventArgs e)
-        {
-            // Check if the grid should be displayed.
-            if (showGrid)
-            {
-                int kachelBreite = 32; // Tile width.
-                int gridSize = 8; // Number of tiles.
-                float scaleFactor = 250f / (gridSize * kachelBreite);
-                Pen pen = new Pen(Color.Red, 1f); // Verwende die ausgewählte Farbe für den Stift.
-                Brush brush = new SolidBrush(Color.Black);
-
-                // Calculate grid size.
-                int gridSizeInPixels = gridSize * kachelBreite;
-
-                int dx = 0; // Move the graphics 10 pixels to the right.
-                int dy = -178; // Move the graphics 20 pixels upwards.
-
-                // Move the origin to the center of the PictureBox.
-                e.Graphics.TranslateTransform(pictureBox1.Width / 2 + dx, pictureBox1.Height / 2 + dy);
-
-                // Scale the graphics.
-                e.Graphics.ScaleTransform(scaleFactor, scaleFactor);
-
-                // Rotate the graphics by 45 degrees.
-                e.Graphics.RotateTransform(45);
-
-                for (int i = gridSize; i >= 0; i--)
-                {
-                    // Draw horizontal lines.
-                    e.Graphics.DrawLine(pen, new Point(0, i * kachelBreite), new Point(gridSize * kachelBreite, i * kachelBreite));
-
-                    // Draw vertical lines.
-                    e.Graphics.DrawLine(pen, new Point(i * kachelBreite, 0), new Point(i * kachelBreite, gridSize * kachelBreite));
-                }
-            }
-        }*/
-
         //Paint Grid
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
@@ -248,7 +241,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             }
         }
 
-
         private void toolStripMenuItem1_Click_1(object sender, EventArgs e)
         {
             // Create a new ColorDialog control.
@@ -267,8 +259,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 pictureBox1.Invalidate();
             }
         }
-
-
         #endregion
 
         #region Move
@@ -1297,7 +1287,8 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 }
             }
         }
-
+        #endregion
+        #region Clipbord Import Image
         private void importToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (Clipboard.ContainsImage())
@@ -1319,8 +1310,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 pictureBox2.Image = image;
                 pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
 
-                pictureBox1.Refresh(); // Display a new image.
-
                 // Set the position of the image in PictureBox1.
                 SetImagePosition(0, 0);
 
@@ -1331,8 +1320,26 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 textBoxStartY.Text = (pictureBox1.Height - image.Height).ToString();
 
                 isImageTransparent = false; // Set the state of the image to non-transparent.
+
+                pictureBox1.Invalidate(); // Redraw the grid and the image.
             }
         }
         #endregion
+
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (pictureBox2.Image != null)
+            {
+                Clipboard.SetImage(pictureBox2.Image);
+
+                // Check if the sound should be played
+                if (playCustomSound)
+                {
+                    SoundPlayer player = new SoundPlayer();
+                    player.SoundLocation = "sound.wav";
+                    player.Play();
+                }
+            }
+        }
     }
 }

@@ -216,5 +216,25 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
             isFormOpen = false;
             btDecriptClient.Enabled = true; // Enable the button again.
         }
+
+        private void btMapMaker_Click(object sender, EventArgs e)
+        {
+            if (isFormOpen)
+            {
+                return; // Exit the method if the form is already open.
+            }
+
+            MapMaker form = new MapMaker();
+            form.FormClosed += MapMaker_FormClosed;
+            form.Show();
+            isFormOpen = true;
+
+            btMapMaker.Enabled = false;
+        }
+        private void MapMaker_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            isFormOpen = false;
+            btMapMaker.Enabled = true; // Enable the button again.
+        }
     }
 }

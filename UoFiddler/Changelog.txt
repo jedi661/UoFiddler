@@ -2,6 +2,8 @@ Version : 4.11.22 #XG1
 - Added a ContextMenuStrip button for the hex address to export the selected items to the clipboard. In the AminData function, implemented logic to pass the hex address to the TextBox in the ContextMenuStrip when there is a hex address in the clipboard.
 - Added images for the Gumps and tooltips.
 - In GraphicCutter, added a checkbox and a transparency function, as well as an import function via the clipboard.
+- Assigned the arrow keys for moving in the GraphicCutter. Added the ability to copy the image from PictureBox2 to the clipboard, and a sound plays when copying with Ctrl+X.
+- Added Mapmaker form and a button.
 
 Version : 4.11.21 #XG1
 - Added graphics for "Compare Items."
