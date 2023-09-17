@@ -141,6 +141,7 @@ namespace UoFiddler.Forms
             toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             toolStripMenuItemLink3 = new System.Windows.Forms.ToolStripMenuItem();
+            tempDirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             TabPanel.SuspendLayout();
             contextMenuStripMainForm.SuspendLayout();
             StartTab.SuspendLayout();
@@ -202,14 +203,14 @@ namespace UoFiddler.Forms
             // 
             // contextMenuStripMainForm
             // 
-            contextMenuStripMainForm.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { unDockToolStripMenuItem, switchLogoImageToolStripMenuItem, directoryToolStripMenuItem });
+            contextMenuStripMainForm.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { unDockToolStripMenuItem, switchLogoImageToolStripMenuItem, directoryToolStripMenuItem, tempDirToolStripMenuItem });
             contextMenuStripMainForm.Name = "contextMenuStrip1";
-            contextMenuStripMainForm.Size = new System.Drawing.Size(176, 70);
+            contextMenuStripMainForm.Size = new System.Drawing.Size(181, 114);
             // 
             // unDockToolStripMenuItem
             // 
             unDockToolStripMenuItem.Name = "unDockToolStripMenuItem";
-            unDockToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            unDockToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             unDockToolStripMenuItem.Text = "UnDock";
             unDockToolStripMenuItem.Click += OnClickUnDock;
             // 
@@ -218,7 +219,7 @@ namespace UoFiddler.Forms
             switchLogoImageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripComboBoxImage });
             switchLogoImageToolStripMenuItem.Image = Properties.Resources._32x32;
             switchLogoImageToolStripMenuItem.Name = "switchLogoImageToolStripMenuItem";
-            switchLogoImageToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            switchLogoImageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             switchLogoImageToolStripMenuItem.Text = "Switch Logo Image";
             // 
             // toolStripComboBoxImage
@@ -231,7 +232,7 @@ namespace UoFiddler.Forms
             // 
             directoryToolStripMenuItem.Image = Properties.Resources.Directory;
             directoryToolStripMenuItem.Name = "directoryToolStripMenuItem";
-            directoryToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            directoryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             directoryToolStripMenuItem.Text = "Open Directory";
             directoryToolStripMenuItem.ToolTipText = "Opens the directory in Explorer that was specified in Options.";
             directoryToolStripMenuItem.Click += directoryToolStripMenuItem_Click;
@@ -1030,7 +1031,7 @@ namespace UoFiddler.Forms
             // 
             toolStripMenuItemHelp.Image = Properties.Resources.Help;
             toolStripMenuItemHelp.Name = "toolStripMenuItemHelp";
-            toolStripMenuItemHelp.Size = new System.Drawing.Size(180, 22);
+            toolStripMenuItemHelp.Size = new System.Drawing.Size(132, 22);
             toolStripMenuItemHelp.Text = "Help";
             toolStripMenuItemHelp.Click += ToolStripMenuItemHelp_Click;
             // 
@@ -1038,7 +1039,7 @@ namespace UoFiddler.Forms
             // 
             binaryDecimalHexadecimalConverterToolStripMenuItem.Image = Properties.Resources.calculator;
             binaryDecimalHexadecimalConverterToolStripMenuItem.Name = "binaryDecimalHexadecimalConverterToolStripMenuItem";
-            binaryDecimalHexadecimalConverterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            binaryDecimalHexadecimalConverterToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             binaryDecimalHexadecimalConverterToolStripMenuItem.Text = "Converter";
             binaryDecimalHexadecimalConverterToolStripMenuItem.ToolTipText = "Calculator for Binary, Decimal, and Hexadecimal";
             binaryDecimalHexadecimalConverterToolStripMenuItem.Click += binaryDecimalHexadecimalConverterToolStripMenuItem_Click_1;
@@ -1046,13 +1047,13 @@ namespace UoFiddler.Forms
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            toolStripSeparator1.Size = new System.Drawing.Size(129, 6);
             // 
             // toolStripMenuItemAbout
             // 
             toolStripMenuItemAbout.Image = Properties.Resources.About;
             toolStripMenuItemAbout.Name = "toolStripMenuItemAbout";
-            toolStripMenuItemAbout.Size = new System.Drawing.Size(180, 22);
+            toolStripMenuItemAbout.Size = new System.Drawing.Size(132, 22);
             toolStripMenuItemAbout.Text = "About";
             toolStripMenuItemAbout.Click += ToolStripMenuItemAbout_Click;
             // 
@@ -1060,42 +1061,42 @@ namespace UoFiddler.Forms
             // 
             changelogToolStripMenuItem.Image = Properties.Resources.Changelog;
             changelogToolStripMenuItem.Name = "changelogToolStripMenuItem";
-            changelogToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            changelogToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             changelogToolStripMenuItem.Text = "Changelog";
             changelogToolStripMenuItem.Click += changelogToolStripMenuItem_Click;
             // 
             // toolStripSeparator2
             // 
             toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
+            toolStripSeparator2.Size = new System.Drawing.Size(129, 6);
             // 
             // ToolStripMenuItemDiscordUO
             // 
             ToolStripMenuItemDiscordUO.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { ToolStripMenuItemDiscordUoFreeshardsDe });
             ToolStripMenuItemDiscordUO.Image = Properties.Resources.Discord;
             ToolStripMenuItemDiscordUO.Name = "ToolStripMenuItemDiscordUO";
-            ToolStripMenuItemDiscordUO.Size = new System.Drawing.Size(180, 22);
+            ToolStripMenuItemDiscordUO.Size = new System.Drawing.Size(132, 22);
             ToolStripMenuItemDiscordUO.Text = "Discord";
             // 
             // ToolStripMenuItemDiscordUoFreeshardsDe
             // 
             ToolStripMenuItemDiscordUoFreeshardsDe.Image = Properties.Resources.pngegg;
             ToolStripMenuItemDiscordUoFreeshardsDe.Name = "ToolStripMenuItemDiscordUoFreeshardsDe";
-            ToolStripMenuItemDiscordUoFreeshardsDe.Size = new System.Drawing.Size(180, 22);
+            ToolStripMenuItemDiscordUoFreeshardsDe.Size = new System.Drawing.Size(166, 22);
             ToolStripMenuItemDiscordUoFreeshardsDe.Text = "Uo-Freeshards.de";
             ToolStripMenuItemDiscordUoFreeshardsDe.Click += ToolStripMenuItemDiscordUoFreeshardsDe_Click;
             // 
             // toolStripSeparator3
             // 
             toolStripSeparator3.Name = "toolStripSeparator3";
-            toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
+            toolStripSeparator3.Size = new System.Drawing.Size(129, 6);
             // 
             // toolStripMenuItemLinks
             // 
             toolStripMenuItemLinks.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { uodevuofreeshardsdeToolStripMenuItem, toolStripMenuItem1, toolStripMenuItem2, toolStripSeparator4, toolStripMenuItemLink3 });
             toolStripMenuItemLinks.Image = Properties.Resources.Links;
             toolStripMenuItemLinks.Name = "toolStripMenuItemLinks";
-            toolStripMenuItemLinks.Size = new System.Drawing.Size(180, 22);
+            toolStripMenuItemLinks.Size = new System.Drawing.Size(132, 22);
             toolStripMenuItemLinks.Text = "Links";
             // 
             // uodevuofreeshardsdeToolStripMenuItem
@@ -1134,6 +1135,13 @@ namespace UoFiddler.Forms
             toolStripMenuItemLink3.Size = new System.Drawing.Size(199, 22);
             toolStripMenuItemLink3.Text = "Servuo.com";
             toolStripMenuItemLink3.Click += toolStripMenuItemLink3_Click;
+            // 
+            // tempDirToolStripMenuItem
+            // 
+            tempDirToolStripMenuItem.Name = "tempDirToolStripMenuItem";
+            tempDirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            tempDirToolStripMenuItem.Text = "Temp Dir";
+            tempDirToolStripMenuItem.Click += tempDirToolStripMenuItem_Click;
             // 
             // MainForm
             // 
@@ -1280,6 +1288,7 @@ namespace UoFiddler.Forms
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemDiscordUoFreeshardsDe;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemDiscordUO;
+        private System.Windows.Forms.ToolStripMenuItem tempDirToolStripMenuItem;
     }
 }
 

@@ -779,6 +779,7 @@ namespace UoFiddler.Forms
             }
         }
 
+        #region Polserver Link
         private void ToolStripMenuItemHelp_Click(object sender, EventArgs e)
         {
             /*Process.Start(new ProcessStartInfo
@@ -792,7 +793,9 @@ namespace UoFiddler.Forms
                 helpDokuForm.ShowDialog();
             }
         }
+        #endregion
 
+        #region About
         private void ToolStripMenuItemAbout_Click(object sender, EventArgs e)
         {
             using (AboutBoxForm aboutBoxForm = new AboutBoxForm())
@@ -800,7 +803,9 @@ namespace UoFiddler.Forms
                 aboutBoxForm.ShowDialog(this);
             }
         }
+        #endregion
 
+        #region Changelog
         private void changelogToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (ChangeLogForm changelogForm = new ChangeLogForm())
@@ -808,6 +813,7 @@ namespace UoFiddler.Forms
                 changelogForm.ShowDialog(this);
             }
         }
+        #endregion
 
         #region Delete WebView Cache
         private void HelpDokuForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -909,6 +915,7 @@ namespace UoFiddler.Forms
         }
         #endregion
 
+        #region DecimalHexConverter
         private void binaryDecimalHexadecimalConverterToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             if (binDecHexConverterForm == null || binDecHexConverterForm.IsDisposed)
@@ -924,7 +931,9 @@ namespace UoFiddler.Forms
                 binDecHexConverterForm.Focus();
             }
         }
+        #endregion
 
+        #region Links Servuo.com and Discord 
         private void toolStripMenuItemLink3_Click(object sender, EventArgs e)
         {
             Process.Start(new ProcessStartInfo
@@ -941,6 +950,7 @@ namespace UoFiddler.Forms
                 UseShellExecute = true
             });
         }
+        #endregion
 
         #region F1-F12
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -1010,6 +1020,21 @@ namespace UoFiddler.Forms
 
             // Call the base class to continue standard processing
             return base.ProcessCmdKey(ref msg, keyData);
+        }
+        #endregion
+
+        #region Open Tempdir
+        private void tempDirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string path = Path.Combine(Application.StartupPath, "tempGrafic");
+            if (Directory.Exists(path))
+            {
+                System.Diagnostics.Process.Start("explorer.exe", path);
+            }
+            else
+            {
+                MessageBox.Show("The 'tempGrafic' folder does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         #endregion
     }

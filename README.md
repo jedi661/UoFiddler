@@ -15,6 +15,7 @@ Version : 4.11.22
 - Added a function to fill the marked area with a texture or graphic.
 - Added a zoom button to allow zooming in on the image.
 - Added a reset button that clears the selections and resets the zoom level.
+- Added a button to open the tempGrafic in the main directory.
 
 Version : 4.11.21
 - Added graphics for "Compare Items."
