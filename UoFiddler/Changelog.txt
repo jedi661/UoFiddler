@@ -10,7 +10,6 @@ Version : 4.11.22 #XG1
 - Added a reset button that clears the selections and resets the zoom level.
 - Added a button to open the tempGrafic in the main directory.
 
-
 Version : 4.11.21 #XG1
 - Added graphics for "Compare Items."
 - Added "Compare Items." two buttons for individual and bulk imports.
