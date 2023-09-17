@@ -48,6 +48,7 @@ namespace UoFiddler.Forms
             switchLogoImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripComboBoxImage = new System.Windows.Forms.ToolStripComboBox();
             directoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            tempDirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             StartTab = new System.Windows.Forms.TabPage();
             Versionlabel = new System.Windows.Forms.Label();
             MultisTab = new System.Windows.Forms.TabPage();
@@ -141,7 +142,6 @@ namespace UoFiddler.Forms
             toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             toolStripMenuItemLink3 = new System.Windows.Forms.ToolStripMenuItem();
-            tempDirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             TabPanel.SuspendLayout();
             contextMenuStripMainForm.SuspendLayout();
             StartTab.SuspendLayout();
@@ -236,6 +236,14 @@ namespace UoFiddler.Forms
             directoryToolStripMenuItem.Text = "Open Directory";
             directoryToolStripMenuItem.ToolTipText = "Opens the directory in Explorer that was specified in Options.";
             directoryToolStripMenuItem.Click += directoryToolStripMenuItem_Click;
+            // 
+            // tempDirToolStripMenuItem
+            // 
+            tempDirToolStripMenuItem.Image = Properties.Resources.Directory;
+            tempDirToolStripMenuItem.Name = "tempDirToolStripMenuItem";
+            tempDirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            tempDirToolStripMenuItem.Text = "Temp Dir";
+            tempDirToolStripMenuItem.Click += tempDirToolStripMenuItem_Click;
             // 
             // StartTab
             // 
@@ -1135,13 +1143,6 @@ namespace UoFiddler.Forms
             toolStripMenuItemLink3.Size = new System.Drawing.Size(199, 22);
             toolStripMenuItemLink3.Text = "Servuo.com";
             toolStripMenuItemLink3.Click += toolStripMenuItemLink3_Click;
-            // 
-            // tempDirToolStripMenuItem
-            // 
-            tempDirToolStripMenuItem.Name = "tempDirToolStripMenuItem";
-            tempDirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            tempDirToolStripMenuItem.Text = "Temp Dir";
-            tempDirToolStripMenuItem.Click += tempDirToolStripMenuItem_Click;
             // 
             // MainForm
             // 
