@@ -16,6 +16,12 @@ Version : 4.11.22
 - Added a zoom button to allow zooming in on the image.
 - Added a reset button that clears the selections and resets the zoom level.
 - Added a button to open the tempGrafic in the main directory.
+- Expanded and redesigned functions in TextureCutter, added optimization, brightness, gamma, and contrast adjustment with increments of 0.01. Also added an RGB checkbox that, when active, adjusts the values by 0.01 when moved up or down.
+- Added a Trackbar to control the entire process.
+- "TextureCutter" Drawing function now directly calculates on the cursor with zoom functionality.
+- "TextureCutter" Added a fill function so that you can include rectangle, circle, or freehand textures here as well.
+- Panels now display the color that will be applied to the image when using the pipette, which takes the color from the TextBox.
+- Revised the zoom function for Textcutter and added a label to display the zoom factor.
 
 Version : 4.11.21
 - Added graphics for "Compare Items."

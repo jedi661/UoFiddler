@@ -83,6 +83,16 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Copy {
+            get {
+                object obj = ResourceManager.GetObject("Copy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap createDesign {
             get {
                 object obj = ResourceManager.GetObject("createDesign", resourceCulture);
@@ -206,6 +216,16 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Properties {
         internal static System.Drawing.Bitmap Rahmen {
             get {
                 object obj = ResourceManager.GetObject("Rahmen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap reload {
+            get {
+                object obj = ResourceManager.GetObject("reload", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

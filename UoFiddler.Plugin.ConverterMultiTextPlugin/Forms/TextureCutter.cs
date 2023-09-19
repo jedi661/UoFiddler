@@ -22,6 +22,9 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing.Drawing2D;
+using System.Media;
+using Microsoft.Win32;
 
 
 namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
@@ -29,25 +32,27 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
     public partial class TextureCutter : Form
     {
         private Point originalImageLocation;
-
         private Bitmap resizedImage;
-
         private bool isPickingColor = false;
 
         // Save OrginalImage
         private Bitmap originalImage;
         // Save Orginal Size
         private Size originalSize;
-
         // Define a variable to store the custom colors
         private int[] customColors;
-
         // Draw
         private bool isDrawing = false;
         private Point lastPoint;
-
         // Delete
         private bool isErasing = false;
+        //PictureBox1
+        private Point startPoint;
+        private Rectangle cropArea;
+        private bool isDragging = false;
+        private bool showGrid2 = false;
+        private Rectangle selectedRectangle; // The selected range.
+        private List<Point> points = new List<Point>();
 
         public TextureCutter()
         {
@@ -59,17 +64,18 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
 
             // Set the KeyPreview property of the form to true.
             this.KeyPreview = true;
-
             // Add a keyboard event handler to the form.
             this.KeyDown += Form1_KeyDown;
-
             //zoom
             pictureBox1.MouseWheel += pictureBox1_MouseWheel;
+            // Set the initial value of the TrackBar control to the center
+            trackBarTolerance.Value = trackBarTolerance.Maximum / 2;
+            // Update the label with the current value of the TrackBar control
+            labelTolerance.Text = trackBarTolerance.Value.ToString();
         }
-
         private void buttonLoadImage_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            System.Windows.Forms.OpenFileDialog openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             openFileDialog1.Filter = "image files|*.bmp;*.png;*.jpeg;*.jpg;*.tiff;*.gif|All files|*.*";
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -88,8 +94,11 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 pictureBox1.Image = Image.FromFile(selectedImagePath);
                 panel1.Controls.Add(pictureBox1);
 
-                // Link the MouseClick event of the new pictureBox1 with the pictureBox1_MouseClick event handler.
-                pictureBox1.MouseClick += pictureBox1_MouseClick;
+                // Update originalImage to point to the new image
+                originalImage = new Bitmap(pictureBox1.Image);
+
+                // Save the original size of the image
+                originalSize = pictureBox1.Image.Size;
 
                 // Resetting the scroll position.
                 panel1.AutoScrollPosition = new Point(0, 0);
@@ -397,6 +406,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             return sharpenedImage;
         }
 
+
         private void buttonsharp_Click(object sender, EventArgs e)
         {
             // Check if an image is loaded in the PictureBox.
@@ -502,41 +512,26 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             return result;
         }
 
-        private TextBox GetBorderWidthTextBox()
+        #region Optimize
+        private void buttonOptimize_Click(object sender, EventArgs e)
         {
-            // Check if the control already exists
-            if (textBoxBorderWidth != null)
-            {
-                // Return the existing control
-                return textBoxBorderWidth;
-            }
-            else
-            {
-                // The control was not found, so a search is performed in the form's controls
-                foreach (Control control in Controls)
-                {
-                    // Check that it is a TextBox control and has the appropriate name
-                    if (control is TextBox textBox && textBox.Name == "textBoxBorderWidth")
-                    {
-                        // Return the found control
-                        return textBox;
-                    }
-                }
-            }
+            // Save the current image as the new original image
+            originalImage = new Bitmap(pictureBox1.Image);
 
-            // Returns null if the control is not found
-            return null;
+            // Set the TrackBar control back to the center
+            trackBarTolerance.Value = trackBarTolerance.Maximum / 2;
+
+            // Update the label with the current value of the TrackBar control
+            labelTolerance.Text = trackBarTolerance.Value.ToString();
+
+            // Set focus to trackBarTolerance
+            trackBarTolerance.Focus();
         }
 
-        private void buttonResize_Click(object sender, EventArgs e)
+        private void trackBarTolerance_Scroll(object sender, EventArgs e)
         {
-            TextBox borderWidthTextBox = GetBorderWidthTextBox();
-
-            if (borderWidthTextBox == null)
-            {
-                MessageBox.Show("The textBoxBorderWidth control was not found.");
-                return;
-            }
+            // Update the label with the current value of the TrackBar control
+            labelTolerance.Text = trackBarTolerance.Value.ToString();
 
             // Check if an image is loaded in the PictureBox
             if (pictureBox1.Image == null)
@@ -545,37 +540,115 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 return;
             }
 
-            // Read the desired margin width value (e.g. from a TextBox control)
-            int borderWidth;
-            if (!int.TryParse(textBoxBorderWidth.Text, out borderWidth))
+            // Optimize the image using the tolerance from the TrackBar
+            Bitmap optimizedImage = OptimizeImage(originalImage, trackBarTolerance.Value);
+
+            // If the RGB checkbox is checked, optimize the colors
+            if (checkBoxRGB.Checked)
             {
-                MessageBox.Show("Invalid border width value.");
-                return;
+                optimizedImage = OptimizeColors(optimizedImage, trackBarTolerance.Value);
             }
 
-            // Copy the original image in the PictureBox
-            Bitmap originalImage = new Bitmap(pictureBox1.Image);
-
-            try
-            {
-                // Enlarge the image with a fixed margin
-                Bitmap resizedImage = ResizeImageWithFixedBorder(originalImage, borderWidth);
-
-                // Remove the current image in the PictureBox and set the enlarged image
-                pictureBox1.Image = null;
-                pictureBox1.Image = resizedImage;
-
-                // update display
-                Size imageSize = resizedImage.Size;
-                labelImageSize.Text = $"image size: {imageSize.Width} x {imageSize.Height} Pixel";
-            }
-            catch (Exception ex)
-            {
-                // An error has occurred - display a message
-                MessageBox.Show($"Error enlarging the image: {ex.Message}");
-            }
+            // Remove the current image in the PictureBox and put the optimized image
+            pictureBox1.Image = null;
+            pictureBox1.Image = optimizedImage;
+            // textBoxTrackBarTolerance.Text = trackBarTolerance.Value.ToString();
         }
+        private Bitmap OptimizeImage(Bitmap originalImage, int tolerance)
+        {
+            // Make a copy of the original image
+            Bitmap optimizedImage = new Bitmap(originalImage);
 
+            // Set values ​​for brightness, contrast and gamma
+            float brightness = 1.0f; // no change in brightness
+            float contrast = 1.0f; // no contrast
+            float gamma = 1.0f; // no change in gamma
+
+            // Adjust brightness, contrast and gamma based on tolerance
+            brightness += (tolerance - 5) / 100.0f;
+            contrast += (tolerance - 5) / 100.0f;
+            gamma += (tolerance - 5) / 100.0f;
+
+            float adjustedBrightness = brightness - 1.0f;
+
+            // Create a matrix that brightens the image and increases contrast
+            float[][] ptsArray =
+            {
+        new float[] {contrast, 0, 0, 0, adjustedBrightness}, // Scale and lighten red
+        new float[] {0, contrast, 0, 0, adjustedBrightness}, // Scale and lighten green
+        new float[] {0, 0, contrast, 0, adjustedBrightness}, // Scale and lighten blue
+        new float[] {0, 0, 0, gamma, 0}, // Adjust gamma
+        new float[] {adjustedBrightness, adjustedBrightness, adjustedBrightness, 0, brightness} // Adjust brightness
+    };
+
+            ImageAttributes imageAttributes = new ImageAttributes();
+            imageAttributes.ClearColorMatrix();
+            imageAttributes.SetColorMatrix(new ColorMatrix(ptsArray), ColorMatrixFlag.Default,
+                ColorAdjustType.Bitmap);
+
+            using (Graphics g = Graphics.FromImage(optimizedImage))
+            {
+                for (int y = 0; y < optimizedImage.Height; y++)
+                {
+                    for (int x = 0; x < optimizedImage.Width; x++)
+                    {
+                        Color pixelColor = originalImage.GetPixel(x, y);
+
+                        // Check that the color is not #ffffff or #000000
+                        if (pixelColor.ToArgb() != Color.White.ToArgb() && pixelColor.ToArgb() != Color.Black.ToArgb())
+                        {
+                            // Draw the optimized pixel on the optimized image
+                            g.DrawImage(originalImage,
+                                new Rectangle(x, y, 1, 1),
+                                x,
+                                y,
+                                1,
+                                1,
+                                GraphicsUnit.Pixel,
+                                imageAttributes);
+                        }
+                    }
+                }
+            }
+
+            return optimizedImage;
+        }
+        private Bitmap OptimizeColors(Bitmap originalImage, int tolerance)
+        {
+            // Make a copy of the original image
+            Bitmap optimizedImage = new Bitmap(originalImage);
+
+            // Adjust color based on tolerance
+            float colorAdjustment = (tolerance - 5) / 100.0f;
+
+            using (Graphics g1 = Graphics.FromImage(optimizedImage))
+            {
+                for (int y = 0; y < optimizedImage.Height; y++)
+                {
+                    for (int x = 0; x < optimizedImage.Width; x++)
+                    {
+                        Color pixelColor = originalImage.GetPixel(x, y);
+
+                        // Check that the color is not #ffffff or #000000
+                        if (pixelColor.ToArgb() != Color.White.ToArgb() && pixelColor.ToArgb() != Color.Black.ToArgb())
+                        {
+                            // Adjust the RGB values of the pixel
+                            int r = Math.Min(Math.Max((int)(pixelColor.R + colorAdjustment * 255), 0), 255);
+                            int g = Math.Min(Math.Max((int)(pixelColor.G + colorAdjustment * 255), 0), 255);
+                            int b = Math.Min(Math.Max((int)(pixelColor.B + colorAdjustment * 255), 0), 255);
+
+                            Color optimizedColor = Color.FromArgb(r, g, b);
+
+                            // Set the optimized pixel on the optimized image
+                            optimizedImage.SetPixel(x, y, optimizedColor);
+                        }
+                    }
+                }
+            }
+
+            return optimizedImage;
+        }
+        #endregion
         private void ButtonRotateTexture_Click(object sender, EventArgs e)
         {
             // Check if an image is loaded in the PictureBox
@@ -719,7 +792,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 }
             }
         }
-
         private void button45Degrees_Click(object sender, EventArgs e)
         {
             // Check if an image is loaded in the PictureBox
@@ -844,13 +916,20 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         }
         private void importClipbordToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Überprüfen Sie, ob sich ein Bild in der Zwischenablage befindet
+            // Check if there is an image on the clipboard
             if (Clipboard.ContainsImage())
             {
-                // Fügen Sie das Bild aus der Zwischenablage in die PictureBox ein
-                pictureBox1.Image = Clipboard.GetImage();
+                // Paste the image from the clipboard into the PictureBox
+                Image image = Clipboard.GetImage();
+                pictureBox1.Image = image;
 
-                // Speichern Sie das ursprüngliche Bild und seine Größe
+                // Adjust the size of the PictureBox to the size of the image
+                pictureBox1.Size = image.Size;
+
+                // Set the SizeMode property to Normal to maintain the original size of the image
+                pictureBox1.SizeMode = PictureBoxSizeMode.Normal; // This line has been added
+
+                // Save the original image and its size
                 originalImage = new Bitmap(pictureBox1.Image);
                 originalSize = pictureBox1.Image.Size;
             }
@@ -918,6 +997,12 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             {
                 // The text you entered is not a valid color value - display an error message
                 MessageBox.Show("Please enter a valid color value.");
+            }
+            // Check if the text in the TextBox is a valid color code
+            if (ColorTranslator.FromHtml(textBoxColorAdress.Text) is Color color)
+            {
+                // Set the background color of panelIsPickingColor to the color value
+                panelIsPickingColor.BackColor = color;
             }
         }
         private void textBoxColorToAdress_TextChanged(object sender, EventArgs e)
@@ -1147,36 +1232,81 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         #endregion
 
         #region Zoom
+        private void ZoomImage(int change)
+        {
+            // Calculate the new size based on the current image size
+            int newWidth = pictureBox1.Image.Width + change;
+            int newHeight = pictureBox1.Image.Height + change;
+
+            // If the new size is less than half of the original size or greater than the size of the PictureBox,
+            // adjust it to be within these bounds
+            newWidth = Math.Max(Math.Min(newWidth, panel1.Width), originalImage.Width / 2);
+            newHeight = Math.Max(Math.Min(newHeight, panel1.Height), originalImage.Height / 2);
+
+            // Calculate the zoom percentage
+            double zoomPercentage = (double)newWidth / originalImage.Width * 100;
+
+            // If the zoom percentage is close to 100%, restore the original image
+            if (zoomPercentage >= 98.8 && zoomPercentage <= 102.7)
+            {
+                pictureBox1.Image = new Bitmap(originalImage);
+                zoomLabel.Text = "Original size reached";
+                return;
+            }
+
+            // Create a new Bitmap object with the new size
+            Bitmap newImage = new Bitmap(originalImage, new Size(newWidth, newHeight));
+
+            // Dispose of the old image to free up memory
+            pictureBox1.Image.Dispose();
+
+            // Assign the new image to the PictureBox
+            pictureBox1.Image = newImage;
+
+            // Update the zoom label
+            zoomLabel.Text = $"Zoom: {Math.Round(zoomPercentage, 1)}%";
+        }
         private void zoomInButton_Click(object sender, EventArgs e)
         {
             // Check that the Image object is not null
-            if (originalImage != null)
+            if (pictureBox1.Image != null)
             {
-                //  Enlarge
-                pictureBox1.Image = new Bitmap(originalImage, new Size(pictureBox1.Image.Width + 10, pictureBox1.Image.Height + 10));
+                // Enlarge
+                ZoomImage(10);
+            }
+        }
+        private void zoomOutButton_Click(object sender, EventArgs e)
+        {
+            // Check that the Image object is not null and the new size is greater than half of the original size
+            if (pictureBox1.Image != null && pictureBox1.Image.Width > originalImage.Width / 2 && pictureBox1.Image.Height > originalImage.Height / 2)
+            {
+                // Shrink
+                ZoomImage(-10);
             }
         }
 
-        private void zoomOutButton_Click(object sender, EventArgs e)
-        {
-            // zoom out
-            pictureBox1.Image = new Bitmap(originalImage, new Size(pictureBox1.Image.Width - 10, pictureBox1.Image.Height - 10));
-        }
         private void pictureBox1_MouseWheel(object sender, MouseEventArgs e)
         {
             // Check whether the mouse wheel has been rotated up or down
             if (e.Delta > 0)
             {
-                // Enlarge
-                pictureBox1.Image = new Bitmap(originalImage, new Size(pictureBox1.Image.Width + 10, pictureBox1.Image.Height + 10));
+                // Check that the Image object is not null
+                if (pictureBox1.Image != null)
+                {
+                    // Enlarge
+                    ZoomImage(10);
+                }
             }
             else
             {
-                // zoom out
-                pictureBox1.Image = new Bitmap(originalImage, new Size(pictureBox1.Image.Width - 10, pictureBox1.Image.Height - 10));
+                // Check that the Image object is not null and the new size is greater than half of the original size
+                if (pictureBox1.Image != null && pictureBox1.Image.Width > originalImage.Width / 2 && pictureBox1.Image.Height > originalImage.Height / 2)
+                {
+                    // Shrink
+                    ZoomImage(-10);
+                }
             }
         }
-
         private void resetButton_Click(object sender, EventArgs e)
         {
             // Resize the image in the PictureBox to its original size
@@ -1211,136 +1341,132 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         }
         #endregion
         #region Coordinates of the mouse cursor.
-        /*private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            // Checking if an image has been loaded in the PictureBox.
             if (pictureBox1.Image != null)
             {
                 // Converting the mouse coordinates to image coordinates.
-                int x = e.X * pictureBox1.Image.Width / pictureBox1.Width;
-                int y = e.Y * pictureBox1.Image.Height / pictureBox1.Height;
+                // int x = e.X * pictureBox1.Image.Width / pictureBox1.Width;
+                // int y = e.Y * pictureBox1.Image.Height / pictureBox1.Height;
 
-                // Creating a copy of the image in pictureBox1.
-                Bitmap image = new Bitmap(pictureBox1.Image);
+                // Adjust the mouse coordinates for the zoom factor
+                int zoomFactor = (int)Math.Pow(2, zoomCounter);
+                int x = (e.X * pictureBox1.Image.Width / pictureBox1.Width) / zoomFactor;
+                int y = (e.Y * pictureBox1.Image.Height / pictureBox1.Height) / zoomFactor;
 
                 // Checking if the coordinates are within the image boundaries.
-                if (x >= 0 && x < image.Width && y >= 0 && y < image.Height)
+                if (x >= 0 && x < pictureBox1.Image.Width && y >= 0 && y < pictureBox1.Image.Height)
                 {
-                    // Retrieving the color value of the pixel at the specified coordinates.
-                    Color color = image.GetPixel(x, y);
+                    // Creating a copy of the image in pictureBox1.
+                    Bitmap image = new Bitmap(pictureBox1.Image);
+
+                    // Adjust the coordinates for the zoom factor
+                    int adjustedX = x * zoomFactor;
+                    int adjustedY = y * zoomFactor;
+
+                    // Retrieving the color value of the pixel at the adjusted coordinates.
+                    Color color = image.GetPixel(adjustedX, adjustedY);
 
                     // Converting the color value to a hexadecimal code.
                     string colorCode = "#" + color.R.ToString("X2") + color.G.ToString("X2") + color.B.ToString("X2");
 
                     // Setting the color code in the label control.
                     colorLabel.Text = colorCode;
+
+                    // Displaying the coordinates of the mouse cursor in the label.
+                    coordinatesLabel.Text = $"X: {adjustedX}, Y: {adjustedY}";
+
+                    // Set the background color of the color display panel to the retrieved color value.
+                    panelColorHex.BackColor = color;
+                }
+                else
+                {
+                    // Mouse is outside of the image, no color display
+                    colorLabel.Text = "";
+                    coordinatesLabel.Text = "";
+                    panelColorHex.BackColor = Color.Transparent;
                 }
             }
-
-            // Displaying the coordinates of the mouse cursor in the label.
-            coordinatesLabel.Text = $"X: {e.X}, Y: {e.Y}";
-        }*/
-
-        /*private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
-        {
-            // Überprüfen Sie, ob ein Bild in der PictureBox geladen wurde
-            if (pictureBox1.Image != null)
+            else
             {
-                // Konvertieren Sie die Mauskoordinaten in Bildkoordinaten
-                int x = e.X * pictureBox1.Image.Width / pictureBox1.Width;
-                int y = e.Y * pictureBox1.Image.Height / pictureBox1.Height;
-
-                // Erstellen Sie eine Kopie des Bildes in pictureBox1
-                Bitmap image = new Bitmap(pictureBox1.Image);
-
-                // Überprüfen Sie, ob die Koordinaten innerhalb der Bildgrenzen liegen
-                if (x >= 0 && x < image.Width && y >= 0 && y < image.Height)
-                {
-                    // Abrufen des Farbwerts des Pixels an den angegebenen Koordinaten
-                    Color color = image.GetPixel(x, y);
-
-                    // Konvertieren Sie den Farbwert in einen Hexadezimalcode
-                    string colorCode = "#" + color.R.ToString("X2") + color.G.ToString("X2") + color.B.ToString("X2");
-
-                    // Setzen Sie den Farbcode im Label-Steuerelement
-                    colorLabel.Text = colorCode;
-                }
-            }            
-        }*/
-
-        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
-        {
-            // Überprüfen Sie, ob ein Bild in der PictureBox geladen wurde
-            if (pictureBox1.Image != null)
-            {
-                // Konvertieren Sie die Mauskoordinaten in Bildkoordinaten
-                int x = e.X * pictureBox1.Image.Width / pictureBox1.Width;
-                int y = e.Y * pictureBox1.Image.Height / pictureBox1.Height;
-
-                // Erstellen Sie eine Kopie des Bildes in pictureBox1
-                Bitmap image = new Bitmap(pictureBox1.Image);
-
-                // Überprüfen Sie, ob die Koordinaten innerhalb der Bildgrenzen liegen
-                if (x >= 0 && x < image.Width && y >= 0 && y < image.Height)
-                {
-                    // Abrufen des Farbwerts des Pixels an den angegebenen Koordinaten
-                    Color color = image.GetPixel(x, y);
-
-                    // Konvertieren Sie den Farbwert in einen Hexadezimalcode
-                    string colorCode = "#" + color.R.ToString("X2") + color.G.ToString("X2") + color.B.ToString("X2");
-
-                    // Setzen Sie den Farbcode im Label-Steuerelement
-                    colorLabel.Text = colorCode;
-                }
+                // PictureBox is empty, no color display
+                colorLabel.Text = "";
+                coordinatesLabel.Text = "";
             }
 
-            // Überprüfen Sie, ob der Löschmodus aktiviert ist und ob die linke Maustaste gedrückt wird
+            // Check if erasing mode is enabled and if left mouse button is pressed
             if (isErasing && e.Button == MouseButtons.Left)
             {
-                // Erstellen Sie eine Kopie des Bildes in pictureBox1
+                // Create a copy of the image in pictureBox1
                 Bitmap image = new Bitmap(pictureBox1.Image);
 
-                // Erstellen Sie ein Graphics-Objekt aus dem Bild
+                // Create a Graphics object from the image
                 using (Graphics g = Graphics.FromImage(image))
                 {
-                    // Löschen Sie einen Bereich um die aktuelle Mausposition
+                    // Erase an area around the current mouse position
                     g.FillEllipse(Brushes.White, e.X - 5, e.Y - 5, 10, 10);
                 }
 
-                // Aktualisieren Sie das Bild in pictureBox1
+                // Update the image in pictureBox1
                 pictureBox1.Image = image;
             }
             else if (isDrawing && e.Button == MouseButtons.Left)
             {
-                // Erstellen Sie eine Kopie des Bildes in pictureBox1
+                // Create a copy of the image in pictureBox1
                 Bitmap image = new Bitmap(pictureBox1.Image);
 
-                // Erstellen Sie ein Graphics-Objekt aus dem Bild
+                // Create a Graphics object from the image
                 using (Graphics g = Graphics.FromImage(image))
                 {
-                    // Konvertieren Sie den Text in textBoxColorToAdress in einen Farbwert
-                    Color penColor = ColorTranslator.FromHtml(textBoxColorToAdress.Text);
+                    // Check if textBoxColorToAdress is not empty
+                    if (!string.IsNullOrEmpty(textBoxColorToAdress.Text))
+                    {
+                        // Convert the text in textBoxColorToAdress into a color value
+                        string colorCode = textBoxColorToAdress.Text;
+                        if (!colorCode.StartsWith("#"))
+                        {
+                            colorCode = "#" + colorCode;
+                        }
+                        Color penColor = ColorTranslator.FromHtml(colorCode);
 
-                    // Erstellen Sie einen Stift mit der angegebenen Farbe
-                    Pen pen = new Pen(penColor);
+                        // Create a pen with the specified color
+                        Pen pen = new Pen(penColor);
 
-                    // Zeichnen Sie eine Linie von der letzten Position zur aktuellen Position
-                    g.DrawLine(pen, lastPoint.X, lastPoint.Y, e.X, e.Y);
+                        // Adjust the mouse coordinates for the zoom factor
+                        int zoomFactor = (int)Math.Pow(2, zoomCounter);
+                        Point adjustedLastPoint = new Point(lastPoint.X / zoomFactor, lastPoint.Y / zoomFactor);
+                        Point adjustedCurrentPoint = new Point(e.X / zoomFactor, e.Y / zoomFactor);
+
+                        // Draw a line from the adjusted last position to the adjusted current position
+                        g.DrawLine(pen, adjustedLastPoint.X, adjustedLastPoint.Y, adjustedCurrentPoint.X, adjustedCurrentPoint.Y);
+                    }
                 }
 
-                // Aktualisieren Sie das Bild in pictureBox1
+                // Update the image in pictureBox1
                 pictureBox1.Image = image;
 
-                // Setzen Sie den letzten Punkt auf die aktuelle Position
+                // Set the last point to the current position
                 lastPoint = e.Location;
+            }
+
+            else if (checkBoxFreehand.Checked && e.Button == MouseButtons.Left)
+            {
+                points.Add(e.Location);
+                pictureBox1.Invalidate();
+            }
+            else if (e.Button == MouseButtons.Left && isDragging)
+            {
+                int width = e.X - startPoint.X;
+                int height = e.Y - startPoint.Y;
+                cropArea = new Rectangle(startPoint.X, startPoint.Y, width, height);
+                pictureBox1.Invalidate();
             }
             else if (e.Button == MouseButtons.None)
             {
-                // Setzen Sie den letzten Punkt auf die aktuelle Position
+                // Set the last point to the current position
                 lastPoint = e.Location;
             }
-            // Displaying the coordinates of the mouse cursor in the label.
-            coordinatesLabel.Text = $"X: {e.X}, Y: {e.Y}";
         }
         #endregion
 
@@ -1362,15 +1488,27 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             }
         }
 
+        private ToolTip toolTip = new ToolTip();
         private void drawButton_Click(object sender, EventArgs e)
         {
-            // Switch to drawing mode
-            isDrawing = true;
+            if (isDrawing)
+            {
+                // Switch off drawing mode
+                isDrawing = false;
+                drawButton.FlatAppearance.MouseDownBackColor = Color.FromName("Control"); // Reset the button color
+                toolTip.SetToolTip(drawButton, "Draw mode is deactivated");
+            }
+            else
+            {
+                // Switch to drawing mode
+                isDrawing = true;
 
-            // Disable delete mode
-            isErasing = false;
+                // Disable delete mode
+                isErasing = false;
 
-            drawButton.FlatAppearance.MouseDownBackColor = Color.Red;
+                drawButton.FlatAppearance.MouseDownBackColor = Color.Red;
+                toolTip.SetToolTip(drawButton, "Draw mode is activated");
+            }
         }
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -1381,18 +1519,27 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 lastPoint = e.Location;
             }
         }
-
         private void eraseButton_Click(object sender, EventArgs e)
         {
-            // Enter delete mode
-            isErasing = true;
+            if (isErasing)
+            {
+                // Switch off erase mode
+                isErasing = false;
+                eraseButton.FlatAppearance.MouseDownBackColor = Color.FromName("Control"); // Reset the button color
+                toolTip.SetToolTip(eraseButton, "Erase mode is deactivated");
+            }
+            else
+            {
+                // Enter erase mode
+                isErasing = true;
 
-            // Disable drawing mode
-            isDrawing = false;
+                // Disable drawing mode
+                isDrawing = false;
 
-            eraseButton.FlatAppearance.MouseDownBackColor = Color.Red;
+                eraseButton.FlatAppearance.MouseDownBackColor = Color.Red;
+                toolTip.SetToolTip(eraseButton, "Erase mode is activated");
+            }
         }
-
         #endregion
 
         #region ColorWithTolerance
@@ -1536,9 +1683,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 colorForm.Show();
             }
         }
-
         #endregion
-
         #region Color List
         // Global variable to store the form
         Form colorListForm = null;
@@ -1682,7 +1827,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             }
         }
         #endregion
-
         #region Modus
 
         private Form colorChangeForm; // Instance variable for the shape
@@ -1859,7 +2003,8 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 }
 
                 // Add an event handler to change gamma correction in real time
-                gammaTrackBar.Scroll += (s, e) => {
+                gammaTrackBar.Scroll += (s, e) =>
+                {
                     if (originalImage != null)
                     {
                         Bitmap image = new Bitmap(originalImage);
@@ -1873,7 +2018,8 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 };
 
                 // Add an event handler to change saturation in real time
-                saturationTrackBar.Scroll += (s, e) => {
+                saturationTrackBar.Scroll += (s, e) =>
+                {
                     if (originalImage != null)
                     {
                         Bitmap image = new Bitmap(originalImage);
@@ -1907,7 +2053,8 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 };
 
                 // Add an event handler to change the color in real time
-                colorTrackBar.Scroll += (sender, eventArgs) => {
+                colorTrackBar.Scroll += (sender, eventArgs) =>
+                {
                     if (originalImage != null)
                     {
                         Bitmap image = new Bitmap(originalImage);
@@ -2022,12 +2169,14 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 };
                 // Colors except 000000 or ffffff
                 // Add the event handler
-                protectColorsCheckbox.CheckedChanged += (s, e) => {
+                protectColorsCheckbox.CheckedChanged += (s, e) =>
+                {
                     // Check whether the checkbox is activated
                     if (protectColorsCheckbox.Checked)
                     {
                         // Change the brightness change function
-                        brightnessTrackBar.Scroll += (senderBrightness, e) => {
+                        brightnessTrackBar.Scroll += (senderBrightness, e) =>
+                        {
                             if (originalImage != null)
                             {
                                 Bitmap image = new Bitmap(originalImage);
@@ -2055,7 +2204,8 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                         };
 
                         // Change the contrast change function
-                        contrastTrackBar.Scroll += (s, e) => {
+                        contrastTrackBar.Scroll += (s, e) =>
+                        {
                             if (originalImage != null)
                             {
                                 Bitmap image = new Bitmap(originalImage);
@@ -2083,7 +2233,8 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                         };
 
                         // Change the gamma correction function
-                        gammaTrackBar.Scroll += (s, e) => {
+                        gammaTrackBar.Scroll += (s, e) =>
+                        {
                             if (originalImage != null)
                             {
                                 Bitmap image = new Bitmap(originalImage);
@@ -2111,7 +2262,8 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                         };
 
                         // Change the saturation change function
-                        saturationTrackBar.Scroll += (s, e) => {
+                        saturationTrackBar.Scroll += (s, e) =>
+                        {
                             if (originalImage != null)
                             {
                                 Bitmap image = new Bitmap(originalImage);
@@ -2217,7 +2369,8 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                         }
 
                         // Change color change function
-                        colorTrackBar.Scroll += (s, e) => {
+                        colorTrackBar.Scroll += (s, e) =>
+                        {
                             if (originalImage != null)
                             {
                                 Bitmap image = new Bitmap(originalImage);
@@ -2325,6 +2478,226 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 // Display the shape
                 colorChangeForm.Show();
             }
+        }
+        #endregion
+        #region FillTeture
+        private void fillTextureToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (pictureBox1.Image == null)
+            {
+                MessageBox.Show("No image has been loaded.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if ((cropArea.Width <= 0 || cropArea.Height <= 0) && !checkBoxFreehand.Checked)
+            {
+                MessageBox.Show("No area has been selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            using (System.Windows.Forms.OpenFileDialog openFileDialog2 = new System.Windows.Forms.OpenFileDialog())
+            {
+                openFileDialog2.Filter = "Image files|*.bmp;*.jpg;*.jpeg;*.png";
+
+                if (openFileDialog2.ShowDialog() == DialogResult.OK)
+                {
+                    Bitmap newTexture = new Bitmap(openFileDialog2.FileName);
+                    Bitmap imageCopy = (Bitmap)pictureBox1.Image.Clone();
+
+                    using (Graphics g = Graphics.FromImage(imageCopy))
+                    {
+                        // Adjust cropArea and points based on zoom level
+                        Rectangle adjustedCropArea = new Rectangle(cropArea.X / (int)Math.Pow(2, zoomCounter), cropArea.Y / (int)Math.Pow(2, zoomCounter), cropArea.Width / (int)Math.Pow(2, zoomCounter), cropArea.Height / (int)Math.Pow(2, zoomCounter));
+                        List<Point> adjustedPoints = points.Select(p => new Point(p.X / (int)Math.Pow(2, zoomCounter), p.Y / (int)Math.Pow(2, zoomCounter))).ToList();
+
+                        if (checkBoxCircle.Checked)
+                        {
+                            // Create a mask for the circle area
+                            using (Bitmap mask = new Bitmap(adjustedCropArea.Width, adjustedCropArea.Height))
+                            {
+                                using (Graphics maskGraphics = Graphics.FromImage(mask))
+                                {
+                                    maskGraphics.Clear(Color.White);
+                                    maskGraphics.FillEllipse(Brushes.Black, 0, 0, adjustedCropArea.Width, adjustedCropArea.Height);
+                                }
+
+                                // Scale the texture to the size of the mask
+                                newTexture = new Bitmap(newTexture, mask.Size);
+
+                                // Apply the mask to the new texture image
+                                for (int x = 0; x < mask.Width; x++)
+                                {
+                                    for (int y = 0; y < mask.Height; y++)
+                                    {
+                                        if (mask.GetPixel(x, y).R != 0)
+                                        {
+                                            newTexture.SetPixel(x, y, Color.Transparent);
+                                        }
+                                    }
+                                }
+                            }
+
+                            // Draw the texture on the image inside the circle
+                            g.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceOver;
+                            g.DrawImage(newTexture, adjustedCropArea);
+                        }
+                        else if (checkBoxFreehand.Checked && adjustedPoints.Count > 1)
+                        {
+                            // Create a mask for the freehand area
+                            using (Bitmap mask = new Bitmap(imageCopy.Width, imageCopy.Height))
+                            {
+                                using (Graphics maskGraphics = Graphics.FromImage(mask))
+                                {
+                                    maskGraphics.Clear(Color.White);
+                                    maskGraphics.FillPolygon(Brushes.Black, adjustedPoints.ToArray());
+                                }
+
+                                // Scale the texture to the size of the mask
+                                newTexture = new Bitmap(newTexture, mask.Size);
+
+                                // Apply the mask to the new texture image
+                                for (int x = 0; x < mask.Width; x++)
+                                {
+                                    for (int y = 0; y < mask.Height; y++)
+                                    {
+                                        if (mask.GetPixel(x, y).R != 0)
+                                        {
+                                            newTexture.SetPixel(x, y, Color.Transparent);
+                                        }
+                                    }
+                                }
+                            }
+
+                            // Draw the texture onto the image inside the freehand shape
+                            g.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceOver;
+                            g.DrawImage(newTexture, new Rectangle(0, 0, imageCopy.Width, imageCopy.Height));
+                        }
+                        else
+                        {
+                            // Draw the texture on the image
+                            g.DrawImage(newTexture, adjustedCropArea);
+                        }
+                    }
+
+                    pictureBox1.Image = imageCopy;
+                    pictureBox1.Refresh();
+                }
+            }
+        }
+
+        private bool shouldDrawRectangle = false; //??
+
+        private void pictureBox1_MouseDown2(object sender, MouseEventArgs e)
+        {
+            if (checkBoxFreehand.Checked && e.Button == MouseButtons.Left)
+            {
+                points.Clear();
+                points.Add(e.Location);
+            }
+            else if (e.Button == MouseButtons.Left)
+            {
+                startPoint = e.Location;
+                isDragging = true;
+                cropArea = new Rectangle(startPoint.X, startPoint.Y, 0, 0);
+            }
+        }
+
+        private void checkBox_CheckedChanged(object sender, EventArgs e)
+        {
+            // Cast the sender to a CheckBox
+            CheckBox checkBox = (CheckBox)sender;
+
+            // If the CheckBox is checked, uncheck all other CheckBoxes
+            if (checkBox.Checked)
+            {
+                foreach (Control control in panel3.Controls) // Ersetzen Sie "panel3" durch den Namen Ihres Panels
+                {
+                    if (control is CheckBox && control != checkBox)
+                    {
+                        ((CheckBox)control).Checked = false;
+                    }
+                }
+            }
+        }
+        #endregion
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (checkBoxFreehand.Checked && e.Button == MouseButtons.Left)
+            {
+                points.Add(points[0]);  // Connect the end to the beginning
+                pictureBox1.Invalidate();
+            }
+            else if (e.Button == MouseButtons.Left)
+            {
+                isDragging = false;
+            }
+        }
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            using (Pen pen = new Pen(Color.Yellow))
+            {
+                pen.DashStyle = DashStyle.Dash;
+
+                if (checkBoxCircle.Checked)
+                {
+                    // Draw a circle
+                    e.Graphics.DrawEllipse(pen, cropArea);
+                }
+                else
+                {
+                    // Draw a rectangle
+                    e.Graphics.DrawRectangle(pen, cropArea);
+                }
+
+                if (checkBoxFreehand.Checked && points.Count > 1)
+                {
+                    // Draw freehand
+                    e.Graphics.DrawLines(Pens.Yellow, points.ToArray());
+                }
+            }
+        }
+        #region Zoom
+        private int zoomCounter = 0;
+        private void zoomButton_Click(object sender, EventArgs e)
+        {
+            // Check if the zoom has already been applied twice
+            if (zoomCounter >= 2)
+            {
+                return;
+            }
+
+            // Set the SizeMode property to Zoom
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+
+            // Resize the PictureBox to increase the zoom effect
+            pictureBox1.Width *= 2;
+            pictureBox1.Height *= 2;
+
+            // Increase the zoom counter
+            zoomCounter++;
+        }
+        #endregion
+        #region Reset
+        private void resetButton2_Click(object sender, EventArgs e)
+        {
+            // Reset the SizeMode property to Normal
+            pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
+
+            // Reset the size of the PictureBox to its original size
+            pictureBox1.Width /= (int)Math.Pow(2, zoomCounter);
+            pictureBox1.Height /= (int)Math.Pow(2, zoomCounter);
+
+            // Reset the zoom counter
+            zoomCounter = 0;
+
+            // Clear the list of points
+            points.Clear();
+
+            // Reset the cropArea
+            cropArea = new Rectangle();
+
+            // Update the PictureBox to reflect the changes
+            pictureBox1.Invalidate();
         }
         #endregion
     }
