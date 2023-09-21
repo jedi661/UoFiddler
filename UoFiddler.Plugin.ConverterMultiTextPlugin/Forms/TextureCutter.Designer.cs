@@ -511,9 +511,9 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             // textBoxColorToAdress2
             // 
-            textBoxColorToAdress2.Location = new System.Drawing.Point(121, 52);
+            textBoxColorToAdress2.Location = new System.Drawing.Point(120, 52);
             textBoxColorToAdress2.Name = "textBoxColorToAdress2";
-            textBoxColorToAdress2.Size = new System.Drawing.Size(66, 23);
+            textBoxColorToAdress2.Size = new System.Drawing.Size(67, 23);
             textBoxColorToAdress2.TabIndex = 21;
             // 
             // checkBox33x33
