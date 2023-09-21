@@ -148,6 +148,21 @@
   <data name="Covert" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Covert.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Delete01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Delete01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Delete02" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Delete02.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Delete03" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Delete03.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Delete04" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Delete04.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Delete05" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Delete05.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

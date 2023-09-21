@@ -45,6 +45,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
             copyClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             importClipbordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             fillTextureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             buttonLoadImage = new System.Windows.Forms.Button();
             buttonTextureCutter = new System.Windows.Forms.Button();
@@ -66,7 +67,12 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             buttonSaveImage = new System.Windows.Forms.Button();
             panel2 = new System.Windows.Forms.Panel();
             checkBoxRGB = new System.Windows.Forms.CheckBox();
+            checkboxDarken = new System.Windows.Forms.CheckBox();
+            LabelWhiteBalance = new System.Windows.Forms.Label();
+            TrackbarWhiteBalance = new System.Windows.Forms.TrackBar();
+            labelSharpnessValue = new System.Windows.Forms.Label();
             labelTolerance = new System.Windows.Forms.Label();
+            trackBarSharpness = new System.Windows.Forms.TrackBar();
             trackBarTolerance = new System.Windows.Forms.TrackBar();
             button45Degrees = new System.Windows.Forms.Button();
             buttonWhite = new System.Windows.Forms.Button();
@@ -74,7 +80,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             ButtonAutoTexture = new System.Windows.Forms.Button();
             buttonOptimize = new System.Windows.Forms.Button();
             BtMirroImage = new System.Windows.Forms.Button();
-            textBoxTrackBarTolerance = new System.Windows.Forms.TextBox();
+            textBoxColorToAdress2 = new System.Windows.Forms.TextBox();
             checkBox33x33 = new System.Windows.Forms.CheckBox();
             textBoxColorAdress = new System.Windows.Forms.TextBox();
             textBoxColorErase = new System.Windows.Forms.TextBox();
@@ -86,7 +92,9 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             comboBoxColorValue = new System.Windows.Forms.ComboBox();
             lbColorValue03 = new System.Windows.Forms.Label();
             panel3 = new System.Windows.Forms.Panel();
+            selectColorButton2 = new System.Windows.Forms.Button();
             panelIsPickingColor = new System.Windows.Forms.Panel();
+            checkBox2Colors = new System.Windows.Forms.CheckBox();
             btModusColorChange = new System.Windows.Forms.Button();
             zoomButton = new System.Windows.Forms.Button();
             btEvaluateColor = new System.Windows.Forms.Button();
@@ -125,6 +133,8 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             contextMenuStrip1.SuspendLayout();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)TrackbarWhiteBalance).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)trackBarSharpness).BeginInit();
             ((System.ComponentModel.ISupportInitialize)trackBarTolerance).BeginInit();
             panel3.SuspendLayout();
             SuspendLayout();
@@ -132,7 +142,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // pictureBox1
             // 
             pictureBox1.ContextMenuStrip = contextMenuStrip1;
-            pictureBox1.Location = new System.Drawing.Point(0, 0);
+            pictureBox1.Location = new System.Drawing.Point(2, 8);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new System.Drawing.Size(427, 366);
             pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -146,9 +156,9 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             // contextMenuStrip1
             // 
-            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { copyClipboardToolStripMenuItem, importClipbordToolStripMenuItem, fillTextureToolStripMenuItem });
+            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { copyClipboardToolStripMenuItem, importClipbordToolStripMenuItem, toolStripSeparator1, fillTextureToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new System.Drawing.Size(160, 70);
+            contextMenuStrip1.Size = new System.Drawing.Size(160, 76);
             // 
             // copyClipboardToolStripMenuItem
             // 
@@ -165,6 +175,11 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             importClipbordToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             importClipbordToolStripMenuItem.Text = "Import Clipbord";
             importClipbordToolStripMenuItem.Click += importClipbordToolStripMenuItem_Click;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new System.Drawing.Size(156, 6);
             // 
             // fillTextureToolStripMenuItem
             // 
@@ -242,9 +257,9 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             panel1.AutoScroll = true;
             panel1.Controls.Add(pictureBox1);
-            panel1.Location = new System.Drawing.Point(12, 31);
+            panel1.Location = new System.Drawing.Point(3, 33);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(427, 366);
+            panel1.Size = new System.Drawing.Size(447, 404);
             panel1.TabIndex = 9;
             // 
             // labelImageSize
@@ -301,7 +316,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             // buttonOpenTempGrafic
             // 
-            buttonOpenTempGrafic.Location = new System.Drawing.Point(375, 487);
+            buttonOpenTempGrafic.Location = new System.Drawing.Point(378, 549);
             buttonOpenTempGrafic.Name = "buttonOpenTempGrafic";
             buttonOpenTempGrafic.Size = new System.Drawing.Size(75, 23);
             buttonOpenTempGrafic.TabIndex = 16;
@@ -311,7 +326,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             // ButtonShrinkTexture
             // 
-            ButtonShrinkTexture.Location = new System.Drawing.Point(13, 9);
+            ButtonShrinkTexture.Location = new System.Drawing.Point(13, 17);
             ButtonShrinkTexture.Name = "ButtonShrinkTexture";
             ButtonShrinkTexture.Size = new System.Drawing.Size(75, 23);
             ButtonShrinkTexture.TabIndex = 17;
@@ -321,7 +336,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             // buttonsharp
             // 
-            buttonsharp.Location = new System.Drawing.Point(13, 38);
+            buttonsharp.Location = new System.Drawing.Point(13, 44);
             buttonsharp.Name = "buttonsharp";
             buttonsharp.Size = new System.Drawing.Size(75, 23);
             buttonsharp.TabIndex = 18;
@@ -331,7 +346,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             // buttonSaveImage
             // 
-            buttonSaveImage.Location = new System.Drawing.Point(312, 487);
+            buttonSaveImage.Location = new System.Drawing.Point(320, 549);
             buttonSaveImage.Name = "buttonSaveImage";
             buttonSaveImage.Size = new System.Drawing.Size(57, 23);
             buttonSaveImage.TabIndex = 19;
@@ -343,7 +358,12 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             panel2.Controls.Add(checkBoxRGB);
+            panel2.Controls.Add(checkboxDarken);
+            panel2.Controls.Add(LabelWhiteBalance);
+            panel2.Controls.Add(TrackbarWhiteBalance);
+            panel2.Controls.Add(labelSharpnessValue);
             panel2.Controls.Add(labelTolerance);
+            panel2.Controls.Add(trackBarSharpness);
             panel2.Controls.Add(trackBarTolerance);
             panel2.Controls.Add(button45Degrees);
             panel2.Controls.Add(buttonWhite);
@@ -353,41 +373,85 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             panel2.Controls.Add(buttonsharp);
             panel2.Controls.Add(ButtonShrinkTexture);
             panel2.Controls.Add(BtMirroImage);
-            panel2.Location = new System.Drawing.Point(456, 162);
+            panel2.Location = new System.Drawing.Point(456, 156);
             panel2.Name = "panel2";
-            panel2.Size = new System.Drawing.Size(414, 100);
+            panel2.Size = new System.Drawing.Size(425, 162);
             panel2.TabIndex = 20;
             // 
             // checkBoxRGB
             // 
             checkBoxRGB.AutoSize = true;
-            checkBoxRGB.Location = new System.Drawing.Point(171, 11);
+            checkBoxRGB.Location = new System.Drawing.Point(171, 19);
             checkBoxRGB.Name = "checkBoxRGB";
             checkBoxRGB.Size = new System.Drawing.Size(48, 19);
             checkBoxRGB.TabIndex = 28;
             checkBoxRGB.Text = "RGB";
             checkBoxRGB.UseVisualStyleBackColor = true;
             // 
+            // checkboxDarken
+            // 
+            checkboxDarken.AutoSize = true;
+            checkboxDarken.Location = new System.Drawing.Point(96, 78);
+            checkboxDarken.Name = "checkboxDarken";
+            checkboxDarken.Size = new System.Drawing.Size(63, 19);
+            checkboxDarken.TabIndex = 41;
+            checkboxDarken.Text = "Darken";
+            checkboxDarken.UseVisualStyleBackColor = true;
+            // 
+            // LabelWhiteBalance
+            // 
+            LabelWhiteBalance.AutoSize = true;
+            LabelWhiteBalance.Location = new System.Drawing.Point(171, 106);
+            LabelWhiteBalance.Name = "LabelWhiteBalance";
+            LabelWhiteBalance.Size = new System.Drawing.Size(48, 15);
+            LabelWhiteBalance.TabIndex = 41;
+            LabelWhiteBalance.Text = "Change";
+            // 
+            // TrackbarWhiteBalance
+            // 
+            TrackbarWhiteBalance.Location = new System.Drawing.Point(245, 102);
+            TrackbarWhiteBalance.Name = "TrackbarWhiteBalance";
+            TrackbarWhiteBalance.Size = new System.Drawing.Size(104, 45);
+            TrackbarWhiteBalance.TabIndex = 42;
+            TrackbarWhiteBalance.Scroll += TrackbarWhiteBalance_ValueChanged;
+            // 
+            // labelSharpnessValue
+            // 
+            labelSharpnessValue.AutoSize = true;
+            labelSharpnessValue.Location = new System.Drawing.Point(190, 48);
+            labelSharpnessValue.Name = "labelSharpnessValue";
+            labelSharpnessValue.Size = new System.Drawing.Size(37, 15);
+            labelSharpnessValue.TabIndex = 42;
+            labelSharpnessValue.Text = "Sharp";
+            // 
             // labelTolerance
             // 
             labelTolerance.AutoSize = true;
-            labelTolerance.Location = new System.Drawing.Point(218, 12);
+            labelTolerance.Location = new System.Drawing.Point(215, 20);
             labelTolerance.Name = "labelTolerance";
             labelTolerance.Size = new System.Drawing.Size(55, 15);
             labelTolerance.TabIndex = 27;
             labelTolerance.Text = "Optimize";
             // 
+            // trackBarSharpness
+            // 
+            trackBarSharpness.Location = new System.Drawing.Point(91, 43);
+            trackBarSharpness.Name = "trackBarSharpness";
+            trackBarSharpness.Size = new System.Drawing.Size(104, 45);
+            trackBarSharpness.TabIndex = 41;
+            trackBarSharpness.Scroll += trackBarSharpness_Scroll;
+            // 
             // trackBarTolerance
             // 
-            trackBarTolerance.Location = new System.Drawing.Point(287, 3);
+            trackBarTolerance.Location = new System.Drawing.Point(275, 12);
             trackBarTolerance.Name = "trackBarTolerance";
-            trackBarTolerance.Size = new System.Drawing.Size(104, 45);
+            trackBarTolerance.Size = new System.Drawing.Size(92, 45);
             trackBarTolerance.TabIndex = 26;
             trackBarTolerance.Scroll += trackBarTolerance_Scroll;
             // 
             // button45Degrees
             // 
-            button45Degrees.Location = new System.Drawing.Point(13, 67);
+            button45Degrees.Location = new System.Drawing.Point(13, 131);
             button45Degrees.Name = "button45Degrees";
             button45Degrees.Size = new System.Drawing.Size(75, 23);
             button45Degrees.TabIndex = 25;
@@ -397,17 +461,17 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             // buttonWhite
             // 
-            buttonWhite.Location = new System.Drawing.Point(154, 66);
+            buttonWhite.Location = new System.Drawing.Point(74, 102);
             buttonWhite.Name = "buttonWhite";
-            buttonWhite.Size = new System.Drawing.Size(124, 23);
+            buttonWhite.Size = new System.Drawing.Size(92, 23);
             buttonWhite.TabIndex = 24;
-            buttonWhite.Text = "white balance";
+            buttonWhite.Text = "White Balance";
             buttonWhite.UseVisualStyleBackColor = true;
             buttonWhite.Click += buttonWhite_Click;
             // 
             // ButtonRotateTexture
             // 
-            ButtonRotateTexture.Location = new System.Drawing.Point(91, 38);
+            ButtonRotateTexture.Location = new System.Drawing.Point(13, 74);
             ButtonRotateTexture.Name = "ButtonRotateTexture";
             ButtonRotateTexture.Size = new System.Drawing.Size(57, 23);
             ButtonRotateTexture.TabIndex = 23;
@@ -417,7 +481,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             // ButtonAutoTexture
             // 
-            ButtonAutoTexture.Location = new System.Drawing.Point(154, 37);
+            ButtonAutoTexture.Location = new System.Drawing.Point(91, 131);
             ButtonAutoTexture.Name = "ButtonAutoTexture";
             ButtonAutoTexture.Size = new System.Drawing.Size(124, 23);
             ButtonAutoTexture.TabIndex = 22;
@@ -427,7 +491,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             // buttonOptimize
             // 
-            buttonOptimize.Location = new System.Drawing.Point(91, 8);
+            buttonOptimize.Location = new System.Drawing.Point(91, 16);
             buttonOptimize.Name = "buttonOptimize";
             buttonOptimize.Size = new System.Drawing.Size(75, 23);
             buttonOptimize.TabIndex = 20;
@@ -437,7 +501,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             // BtMirroImage
             // 
-            BtMirroImage.Location = new System.Drawing.Point(91, 66);
+            BtMirroImage.Location = new System.Drawing.Point(13, 102);
             BtMirroImage.Name = "BtMirroImage";
             BtMirroImage.Size = new System.Drawing.Size(57, 23);
             BtMirroImage.TabIndex = 35;
@@ -445,13 +509,12 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             BtMirroImage.UseVisualStyleBackColor = true;
             BtMirroImage.Click += BtMirroImage_Click;
             // 
-            // textBoxTrackBarTolerance
+            // textBoxColorToAdress2
             // 
-            textBoxTrackBarTolerance.Location = new System.Drawing.Point(121, 52);
-            textBoxTrackBarTolerance.Name = "textBoxTrackBarTolerance";
-            textBoxTrackBarTolerance.Size = new System.Drawing.Size(57, 23);
-            textBoxTrackBarTolerance.TabIndex = 21;
-            textBoxTrackBarTolerance.Text = "0";
+            textBoxColorToAdress2.Location = new System.Drawing.Point(121, 52);
+            textBoxColorToAdress2.Name = "textBoxColorToAdress2";
+            textBoxColorToAdress2.Size = new System.Drawing.Size(66, 23);
+            textBoxColorToAdress2.TabIndex = 21;
             // 
             // checkBox33x33
             // 
@@ -508,7 +571,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(91, 27);
+            label5.Location = new System.Drawing.Point(90, 27);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(18, 15);
             label5.TabIndex = 27;
@@ -545,13 +608,15 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // panel3
             // 
             panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            panel3.Controls.Add(selectColorButton2);
             panel3.Controls.Add(panelIsPickingColor);
+            panel3.Controls.Add(checkBox2Colors);
             panel3.Controls.Add(btModusColorChange);
             panel3.Controls.Add(zoomButton);
             panel3.Controls.Add(btEvaluateColor);
             panel3.Controls.Add(resetButton2);
             panel3.Controls.Add(btcolorlistimage);
-            panel3.Controls.Add(textBoxTrackBarTolerance);
+            panel3.Controls.Add(textBoxColorToAdress2);
             panel3.Controls.Add(checkBoxFreehand);
             panel3.Controls.Add(checkBoxCircle);
             panel3.Controls.Add(checkBoxtoleranz35);
@@ -580,10 +645,20 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             panel3.Controls.Add(lbColorValueDelete);
             panel3.Controls.Add(lbColorValue02);
             panel3.Controls.Add(label5);
-            panel3.Location = new System.Drawing.Point(456, 291);
+            panel3.Location = new System.Drawing.Point(456, 352);
             panel3.Name = "panel3";
             panel3.Size = new System.Drawing.Size(414, 228);
             panel3.TabIndex = 31;
+            // 
+            // selectColorButton2
+            // 
+            selectColorButton2.Location = new System.Drawing.Point(149, 109);
+            selectColorButton2.Name = "selectColorButton2";
+            selectColorButton2.Size = new System.Drawing.Size(92, 23);
+            selectColorButton2.TabIndex = 52;
+            selectColorButton2.Text = "ColorDialog 2";
+            selectColorButton2.UseVisualStyleBackColor = true;
+            selectColorButton2.Click += selectColorButton2_Click;
             // 
             // panelIsPickingColor
             // 
@@ -591,6 +666,16 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             panelIsPickingColor.Name = "panelIsPickingColor";
             panelIsPickingColor.Size = new System.Drawing.Size(24, 22);
             panelIsPickingColor.TabIndex = 41;
+            // 
+            // checkBox2Colors
+            // 
+            checkBox2Colors.AutoSize = true;
+            checkBox2Colors.Location = new System.Drawing.Point(9, 54);
+            checkBox2Colors.Name = "checkBox2Colors";
+            checkBox2Colors.Size = new System.Drawing.Size(69, 19);
+            checkBox2Colors.TabIndex = 41;
+            checkBox2Colors.Text = "2 Colors";
+            checkBox2Colors.UseVisualStyleBackColor = true;
             // 
             // btModusColorChange
             // 
@@ -614,7 +699,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             // btEvaluateColor
             // 
-            btEvaluateColor.Location = new System.Drawing.Point(301, 24);
+            btEvaluateColor.Location = new System.Drawing.Point(307, 84);
             btEvaluateColor.Name = "btEvaluateColor";
             btEvaluateColor.Size = new System.Drawing.Size(100, 24);
             btEvaluateColor.TabIndex = 50;
@@ -634,7 +719,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             // btcolorlistimage
             // 
-            btcolorlistimage.Location = new System.Drawing.Point(301, 56);
+            btcolorlistimage.Location = new System.Drawing.Point(332, 108);
             btcolorlistimage.Name = "btcolorlistimage";
             btcolorlistimage.Size = new System.Drawing.Size(75, 24);
             btcolorlistimage.TabIndex = 49;
@@ -788,11 +873,11 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             // selectColorButton
             // 
-            selectColorButton.Location = new System.Drawing.Point(113, 85);
+            selectColorButton.Location = new System.Drawing.Point(149, 80);
             selectColorButton.Name = "selectColorButton";
-            selectColorButton.Size = new System.Drawing.Size(84, 23);
+            selectColorButton.Size = new System.Drawing.Size(92, 23);
             selectColorButton.TabIndex = 36;
-            selectColorButton.Text = "ColorDialog";
+            selectColorButton.Text = "ColorDialog 1";
             selectColorButton.UseVisualStyleBackColor = true;
             selectColorButton.Click += selectColorButton_Click;
             // 
@@ -829,7 +914,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // checkBoxChange
             // 
             checkBoxChange.AutoSize = true;
-            checkBoxChange.Location = new System.Drawing.Point(193, 56);
+            checkBoxChange.Location = new System.Drawing.Point(266, 26);
             checkBoxChange.Name = "checkBoxChange";
             checkBoxChange.Size = new System.Drawing.Size(67, 19);
             checkBoxChange.TabIndex = 31;
@@ -869,7 +954,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // coordinatesLabel
             // 
             coordinatesLabel.AutoSize = true;
-            coordinatesLabel.Location = new System.Drawing.Point(12, 414);
+            coordinatesLabel.Location = new System.Drawing.Point(12, 457);
             coordinatesLabel.Name = "coordinatesLabel";
             coordinatesLabel.Size = new System.Drawing.Size(71, 15);
             coordinatesLabel.TabIndex = 35;
@@ -878,7 +963,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // colorLabel
             // 
             colorLabel.AutoSize = true;
-            colorLabel.Location = new System.Drawing.Point(89, 414);
+            colorLabel.Location = new System.Drawing.Point(89, 457);
             colorLabel.Name = "colorLabel";
             colorLabel.Size = new System.Drawing.Size(36, 15);
             colorLabel.TabIndex = 36;
@@ -902,7 +987,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             label4.AutoSize = true;
             label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            label4.Location = new System.Drawing.Point(456, 265);
+            label4.Location = new System.Drawing.Point(456, 325);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(410, 21);
             label4.TabIndex = 38;
@@ -919,7 +1004,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             // panelColorHex
             // 
-            panelColorHex.Location = new System.Drawing.Point(143, 407);
+            panelColorHex.Location = new System.Drawing.Point(143, 450);
             panelColorHex.Name = "panelColorHex";
             panelColorHex.Size = new System.Drawing.Size(24, 22);
             panelColorHex.TabIndex = 40;
@@ -928,7 +1013,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(882, 523);
+            ClientSize = new System.Drawing.Size(893, 587);
             Controls.Add(panelColorHex);
             Controls.Add(zoomLabel);
             Controls.Add(label4);
@@ -959,6 +1044,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             KeyPreview = true;
+            MaximizeBox = false;
             Name = "TextureCutter";
             Text = "TextureCutter and Color Changer Clipboard";
             KeyDown += Form1_KeyDown;
@@ -968,6 +1054,8 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)TrackbarWhiteBalance).EndInit();
+            ((System.ComponentModel.ISupportInitialize)trackBarSharpness).EndInit();
             ((System.ComponentModel.ISupportInitialize)trackBarTolerance).EndInit();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
@@ -998,7 +1086,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         private System.Windows.Forms.Button buttonSaveImage;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button buttonOptimize;
-        private System.Windows.Forms.TextBox textBoxTrackBarTolerance;
+        private System.Windows.Forms.TextBox textBoxColorToAdress2;
         private System.Windows.Forms.Button ButtonAutoTexture;
         private System.Windows.Forms.Button ButtonRotateTexture;
         private System.Windows.Forms.Button buttonWhite;
@@ -1057,5 +1145,13 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         private System.Windows.Forms.TrackBar trackBarTolerance;
         private System.Windows.Forms.Label labelTolerance;
         private System.Windows.Forms.CheckBox checkBoxRGB;
+        private System.Windows.Forms.TrackBar trackBarSharpness;
+        private System.Windows.Forms.Label labelSharpnessValue;
+        private System.Windows.Forms.Label LabelWhiteBalance;
+        private System.Windows.Forms.TrackBar TrackbarWhiteBalance;
+        private System.Windows.Forms.CheckBox checkboxDarken;
+        private System.Windows.Forms.CheckBox checkBox2Colors;
+        private System.Windows.Forms.Button selectColorButton2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }

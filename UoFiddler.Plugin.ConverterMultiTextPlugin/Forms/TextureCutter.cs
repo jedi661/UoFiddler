@@ -72,6 +72,14 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             trackBarTolerance.Value = trackBarTolerance.Maximum / 2;
             // Update the label with the current value of the TrackBar control
             labelTolerance.Text = trackBarTolerance.Value.ToString();
+            // Aktualisieren Sie das Label beim Start der Anwendung.
+            UpdateSharpnessLabel();
+
+            // Set the initial value of the TrackBar
+            TrackbarWhiteBalance.Value = 1;  // or whatever value you want
+
+            // Display the initial value in the Label
+            LabelWhiteBalance.Text = $"change: {TrackbarWhiteBalance.Value}%";
         }
         private void buttonLoadImage_Click(object sender, EventArgs e)
         {
@@ -352,60 +360,69 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             return result;
         }
 
-        private Bitmap SharpenImage(Bitmap image)
+        #region Sharp
+        private Bitmap SharpenImage(Bitmap image, double sharpenValue)
         {
-            // Create a copy of the image.
+            // Make a copy of the image.
             Bitmap sharpenedImage = (Bitmap)image.Clone();
 
-            // Create an unsharp mask matrix.
+            // Create a sharpening matrix based on the sharpness value.
             double[,] sharpenMatrix = new double[,]
             {
-                { -1, -1, -1 },
-                { -1, 9, -1 },
-                { -1, -1, -1 }
-
-                /*{ -0.1, -0.1, -0.1 },
-                 * { -0.1, 1.9, -0.1 },
-                 * { -0.1, -0.1, -0.1 }*/
+        { -sharpenValue, -sharpenValue, -sharpenValue },
+        { -sharpenValue, 1 + (8 * sharpenValue), -sharpenValue },
+        { -sharpenValue, -sharpenValue, -sharpenValue }
             };
 
-            // Apply the unsharp mask to the image.
+            // Apply the sharpening matrix to the image.
             for (int x = 1; x < image.Width - 1; x++)
             {
                 for (int y = 1; y < image.Height - 1; y++)
                 {
-                    double r = 0;
-                    double g = 0;
-                    double b = 0;
+                    Color pixel = image.GetPixel(x, y);
 
-                    for (int i = 0; i < 3; i++)
+                    // Skip the white and black pixel sharpening process.
+                    if (pixel.ToArgb() == Color.White.ToArgb() || pixel.ToArgb() == Color.Black.ToArgb())
                     {
-                        for (int j = 0; j < 3; j++)
-                        {
-                            int offsetX = x + i - 1;
-                            int offsetY = y + j - 1;
-
-                            Color pixel = image.GetPixel(offsetX, offsetY);
-
-                            r += pixel.R * sharpenMatrix[i, j];
-                            g += pixel.G * sharpenMatrix[i, j];
-                            b += pixel.B * sharpenMatrix[i, j];
-                        }
+                        continue;
                     }
 
-                    r = Math.Max(0, Math.Min(255, r));
-                    g = Math.Max(0, Math.Min(255, g));
-                    b = Math.Max(0, Math.Min(255, b));
-
-                    Color newPixel = Color.FromArgb((int)r, (int)g, (int)b);
-                    sharpenedImage.SetPixel(x, y, newPixel);
+                    // Apply the sharpening process.
+                    ApplySharpening(sharpenedImage, x, y, pixel, sharpenMatrix);
                 }
             }
 
             // Return the sharpened image.
             return sharpenedImage;
         }
+        private void ApplySharpening(Bitmap image, int x, int y, Color pixel, double[,] matrix)
+        {
+            double r = 0;
+            double g = 0;
+            double b = 0;
 
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    int offsetX = x + i - 1;
+                    int offsetY = y + j - 1;
+
+                    Color neighborPixel = image.GetPixel(offsetX, offsetY);
+
+                    r += neighborPixel.R * matrix[i, j];
+                    g += neighborPixel.G * matrix[i, j];
+                    b += neighborPixel.B * matrix[i, j];
+                }
+            }
+
+            r = Math.Max(0, Math.Min(255, r));
+            g = Math.Max(0, Math.Min(255, g));
+            b = Math.Max(0, Math.Min(255, b));
+
+            Color newPixel = Color.FromArgb((int)r, (int)g, (int)b);
+            image.SetPixel(x, y, newPixel);
+        }
 
         private void buttonsharp_Click(object sender, EventArgs e)
         {
@@ -413,7 +430,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             if (pictureBox1.Image == null)
             {
                 // Display a message and exit the method.
-                MessageBox.Show("No image has been loaded.");
+                MessageBox.Show("Es wurde kein Bild geladen.");
                 return;
             }
 
@@ -422,24 +439,41 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
 
             try
             {
-                // Sharpen the image.
-                Bitmap sharpenedImage = SharpenImage(originalImage);
+                // Initialize the sharpened image variable.
+                Bitmap sharpenedImage;
 
-                // Remove the current image from the PictureBox and set the sharpened image.
+                // Read the value of the slider.
+                double sharpenValue = trackBarSharpness.Value / 100.0;
+
+                // Sharpen the image based on the value of the slider.
+                sharpenedImage = SharpenImage(originalImage, sharpenValue);
+
+                // Remove the current image from the PictureBox and insert the sharpened image.
                 pictureBox1.Image = null;
                 pictureBox1.Image = sharpenedImage;
 
-                // Update the display.
+                // Refresh the display.
                 Size imageSize = sharpenedImage.Size;
-                labelImageSize.Text = $"Image Size: {imageSize.Width} x {imageSize.Height} Pixel";
+                labelImageSize.Text = $"Image size: {imageSize.Width} x {imageSize.Height} Pixel";
             }
             catch (Exception ex)
             {
-                // An error has occurred - display an error message and proceed to the next step.
-                MessageBox.Show($"Error occurred while sharpening the image.: {ex.Message}");
+                // An error occurred - display an error message and go to the next step.
+                MessageBox.Show($"An error occurred while sharpening the image.: {ex.Message}");
             }
         }
+        private void UpdateSharpnessLabel()
+        {
+            // Update the label with the current value of the TrackBar.
+            labelSharpnessValue.Text = $"Level of spiciness: {trackBarSharpness.Value}%";
+        }
 
+        private void trackBarSharpness_Scroll(object sender, EventArgs e)
+        {
+            // Update the label when the user moves the slider.
+            UpdateSharpnessLabel();
+        }
+        #endregion
         private void buttonSaveImage_Click(object sender, EventArgs e)
         {
             if (pictureBox1.Image == null)
@@ -511,7 +545,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // Return the resulting image
             return result;
         }
-
         #region Optimize
         private void buttonOptimize_Click(object sender, EventArgs e)
         {
@@ -649,6 +682,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             return optimizedImage;
         }
         #endregion
+        #region Rotate
         private void ButtonRotateTexture_Click(object sender, EventArgs e)
         {
             // Check if an image is loaded in the PictureBox
@@ -676,7 +710,8 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             enhancedImage.RotateFlip(RotateFlipType.Rotate90FlipNone);
             return enhancedImage;
         }
-
+        #endregion
+        #region AutoTexture
         private void ButtonAutoTexture_Click(object sender, EventArgs e)
         {
             // Check if an image is loaded in the PictureBox
@@ -728,7 +763,8 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
 
             return bitmap;
         }
-
+        #endregion
+        #region WhiteBalace
         private void buttonWhite_Click(object sender, EventArgs e)
         {
             // Check if an image is loaded in the PictureBox
@@ -744,6 +780,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
 
             // Display the enhanced image in the PictureBox
             pictureBox1.Image = image;
+            pictureBox1.Refresh();  // Refresh the PictureBox
 
             // update display
             Size imageSize = image.Size;
@@ -754,27 +791,10 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         {
             // White balance calculation code here
 
-            // Example: white balance with fixed values
-            int red = 200; // valid value between 0 and 255
-            int green = 200; // valid value between 0 and 255
-            int blue = 200; // valid value between 0 and 255
-
-            if (red < 0 || red > 255)
-            {
-                // Handling of the invalid red value
-                // Here you can implement appropriate error handling, e.g. B. use a default color or throw an exception.
-                // Example: red = 255; // Default color white
-            }
-
-            if (green < 0 || green > 255)
-            {
-                // Handling of the invalid green value
-            }
-
-            if (blue < 0 || blue > 255)
-            {
-                // Handling of the invalid blue value
-            }
+            // Example: white balance with dynamic values
+            int red = CalculateMaxRedValue(bitmap); // valid value between 0 and 255
+            int green = CalculateMaxGreenValue(bitmap); // valid value between 0 and 255
+            int blue = CalculateMaxBlueValue(bitmap); // valid value between 0 and 255
 
             for (int y = 0; y < bitmap.Height; y++)
             {
@@ -782,16 +802,105 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 {
                     Color pixelColor = bitmap.GetPixel(x, y);
 
+                    // Skip white and black pixels
+                    if (pixelColor.R == 255 && pixelColor.G == 255 && pixelColor.B == 255)
+                        continue; // Skip white pixels
+
+                    if (pixelColor.R == 0 && pixelColor.G == 0 && pixelColor.B == 0)
+                        continue; // Skip black pixels
+
                     // Calculate new RGB values ​​after white balance
-                    int newRed = (pixelColor.R * red) / 255;
-                    int newGreen = (pixelColor.G * green) / 255;
-                    int newBlue = (pixelColor.B * blue) / 255;
+                    int newRed, newGreen, newBlue;
+                    if (checkboxDarken.Checked)
+                    {
+                        newRed = pixelColor.R - ((red - pixelColor.R) * TrackbarWhiteBalance.Value / 100);
+                        newRed = Math.Max(newRed, 0);  // Ensure the value is not less than 0
+
+                        newGreen = pixelColor.G - ((green - pixelColor.G) * TrackbarWhiteBalance.Value / 100);
+                        newGreen = Math.Max(newGreen, 0);  // Ensure the value is not less than 0
+
+                        newBlue = pixelColor.B - ((blue - pixelColor.B) * TrackbarWhiteBalance.Value / 100);
+                        newBlue = Math.Max(newBlue, 0);  // Ensure the value is not less than 0
+                    }
+                    else
+                    {
+                        newRed = pixelColor.R + ((red - pixelColor.R) * TrackbarWhiteBalance.Value / 100);
+                        newGreen = pixelColor.G + ((green - pixelColor.G) * TrackbarWhiteBalance.Value / 100);
+                        newBlue = pixelColor.B + ((blue - pixelColor.B) * TrackbarWhiteBalance.Value / 100);
+                    }
 
                     // Update pixels with the new RGB values
                     bitmap.SetPixel(x, y, Color.FromArgb(newRed, newGreen, newBlue));
                 }
             }
         }
+
+        // Method to calculate the max red value based on the properties of the image.
+        private int CalculateMaxRedValue(Bitmap bitmap)
+        {
+            int max = 0;
+
+            for (int y = 0; y < bitmap.Height; y++)
+            {
+                for (int x = 0; x < bitmap.Width; x++)
+                {
+                    Color pixelColor = bitmap.GetPixel(x, y);
+                    if (pixelColor.R > max)
+                    {
+                        max = pixelColor.R;
+                    }
+                }
+            }
+
+            return max;
+        }
+
+        // Method to calculate the max green value based on the properties of the image.
+        private int CalculateMaxGreenValue(Bitmap bitmap)
+        {
+            int max = 0;
+
+            for (int y = 0; y < bitmap.Height; y++)
+            {
+                for (int x = 0; x < bitmap.Width; x++)
+                {
+                    Color pixelColor = bitmap.GetPixel(x, y);
+                    if (pixelColor.G > max)
+                    {
+                        max = pixelColor.G;
+                    }
+                }
+            }
+
+            return max;
+        }
+
+        // Method to calculate the max blue value based on the properties of the image.
+        private int CalculateMaxBlueValue(Bitmap bitmap)
+        {
+            int max = 0;
+
+            for (int y = 0; y < bitmap.Height; y++)
+            {
+                for (int x = 0; x < bitmap.Width; x++)
+                {
+                    Color pixelColor = bitmap.GetPixel(x, y);
+                    if (pixelColor.B > max)
+                    {
+                        max = pixelColor.B;
+                    }
+                }
+            }
+
+            return max;
+        }
+
+        private void TrackbarWhiteBalance_ValueChanged(object sender, EventArgs e)
+        {
+            LabelWhiteBalance.Text = $"change: {TrackbarWhiteBalance.Value}%";
+        }
+        #endregion
+        #region Rotate 45 Degress
         private void button45Degrees_Click(object sender, EventArgs e)
         {
             // Check if an image is loaded in the PictureBox
@@ -837,7 +946,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             Size imageSize = newBackground.Size;
             labelImageSize.Text = $"image size: {imageSize.Width} x {imageSize.Height} Pixel";
         }
-
         private Image RotateImageByAngle(Image image, float angle)
         {
             // Calculate the size of the new Bitmap
@@ -860,6 +968,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
 
             return rotatedImage;
         }
+        #endregion
         #region Copy to Clipbord Image        
 
         private void copyClipboardToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1288,7 +1397,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         private void pictureBox1_MouseWheel(object sender, MouseEventArgs e)
         {
             // Check whether the mouse wheel has been rotated up or down
-            if (e.Delta > 0)
+            /*if (e.Delta > 0)
             {
                 // Check that the Image object is not null
                 if (pictureBox1.Image != null)
@@ -1305,7 +1414,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                     // Shrink
                     ZoomImage(-10);
                 }
-            }
+            }*/
         }
         private void resetButton_Click(object sender, EventArgs e)
         {
@@ -1339,8 +1448,160 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 customColors = colorDialog.CustomColors;
             }
         }
+
+        private void selectColorButton2_Click(object sender, EventArgs e)
+        {
+            // Create a new ColorDialog object
+            ColorDialog colorDialog = new ColorDialog();
+
+            // Restore the custom colors, if any
+            if (customColors != null)
+            {
+                colorDialog.CustomColors = customColors;
+            }
+
+            // Display the ColorDialog and verify that the user clicked OK
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                // Convert the selected color to a hexadecimal code
+                string colorCode = "#" + colorDialog.Color.R.ToString("X2") + colorDialog.Color.G.ToString("X2") + colorDialog.Color.B.ToString("X2");
+
+                // Put the color code in the textBoxColorToAdress
+                textBoxColorToAdress2.Text = colorCode;
+
+                // Save the custom colors
+                customColors = colorDialog.CustomColors;
+            }
+        }
         #endregion
         #region Coordinates of the mouse cursor.
+
+        /*private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (pictureBox1.Image != null)
+            {
+                // Converting the mouse coordinates to image coordinates.
+                // int x = e.X * pictureBox1.Image.Width / pictureBox1.Width;
+                // int y = e.Y * pictureBox1.Image.Height / pictureBox1.Height;
+
+                // Adjust the mouse coordinates for the zoom factor
+                int zoomFactor = (int)Math.Pow(2, zoomCounter);
+                int x = (e.X * pictureBox1.Image.Width / pictureBox1.Width) / zoomFactor;
+                int y = (e.Y * pictureBox1.Image.Height / pictureBox1.Height) / zoomFactor;
+
+                // Checking if the coordinates are within the image boundaries.
+                if (x >= 0 && x < pictureBox1.Image.Width && y >= 0 && y < pictureBox1.Image.Height)
+                {
+                    // Creating a copy of the image in pictureBox1.
+                    Bitmap image = new Bitmap(pictureBox1.Image);
+
+                    // Adjust the coordinates for the zoom factor
+                    int adjustedX = x * zoomFactor;
+                    int adjustedY = y * zoomFactor;
+
+                    // Retrieving the color value of the pixel at the adjusted coordinates.
+                    Color color = image.GetPixel(adjustedX, adjustedY);
+
+                    // Converting the color value to a hexadecimal code.
+                    string colorCode = "#" + color.R.ToString("X2") + color.G.ToString("X2") + color.B.ToString("X2");
+
+                    // Setting the color code in the label control.
+                    colorLabel.Text = colorCode;
+
+                    // Displaying the coordinates of the mouse cursor in the label.
+                    coordinatesLabel.Text = $"X: {adjustedX}, Y: {adjustedY}";
+
+                    // Set the background color of the color display panel to the retrieved color value.
+                    panelColorHex.BackColor = color;
+                }
+                else
+                {
+                    // Mouse is outside of the image, no color display
+                    colorLabel.Text = "";
+                    coordinatesLabel.Text = "";
+                    panelColorHex.BackColor = Color.Transparent;
+                }
+            }
+            else
+            {
+                // PictureBox is empty, no color display
+                colorLabel.Text = "";
+                coordinatesLabel.Text = "";
+            }
+
+            // Check if erasing mode is enabled and if left mouse button is pressed
+            if (isErasing && e.Button == MouseButtons.Left)
+            {
+                // Create a copy of the image in pictureBox1
+                Bitmap image = new Bitmap(pictureBox1.Image);
+
+                // Create a Graphics object from the image
+                using (Graphics g = Graphics.FromImage(image))
+                {
+                    // Erase an area around the current mouse position
+                    g.FillEllipse(Brushes.White, e.X - 5, e.Y - 5, 10, 10);
+                }
+
+                // Update the image in pictureBox1
+                pictureBox1.Image = image;
+            }
+            else if (isDrawing && e.Button == MouseButtons.Left)
+            {
+                // Create a copy of the image in pictureBox1
+                Bitmap image = new Bitmap(pictureBox1.Image);
+
+                // Create a Graphics object from the image
+                using (Graphics g = Graphics.FromImage(image))
+                {
+                    // Check if textBoxColorToAdress is not empty
+                    if (!string.IsNullOrEmpty(textBoxColorToAdress.Text))
+                    {
+                        // Convert the text in textBoxColorToAdress into a color value
+                        string colorCode = textBoxColorToAdress.Text;
+                        if (!colorCode.StartsWith("#"))
+                        {
+                            colorCode = "#" + colorCode;
+                        }
+                        Color penColor = ColorTranslator.FromHtml(colorCode);
+
+                        // Create a pen with the specified color
+                        Pen pen = new Pen(penColor);
+
+                        // Adjust the mouse coordinates for the zoom factor
+                        int zoomFactor = (int)Math.Pow(2, zoomCounter);
+                        Point adjustedLastPoint = new Point(lastPoint.X / zoomFactor, lastPoint.Y / zoomFactor);
+                        Point adjustedCurrentPoint = new Point(e.X / zoomFactor, e.Y / zoomFactor);
+
+                        // Draw a line from the adjusted last position to the adjusted current position
+                        g.DrawLine(pen, adjustedLastPoint.X, adjustedLastPoint.Y, adjustedCurrentPoint.X, adjustedCurrentPoint.Y);
+                    }
+                }
+
+                // Update the image in pictureBox1
+                pictureBox1.Image = image;
+
+                // Set the last point to the current position
+                lastPoint = e.Location;
+            }
+
+            else if (checkBoxFreehand.Checked && e.Button == MouseButtons.Left)
+            {
+                points.Add(e.Location);
+                pictureBox1.Invalidate();
+            }
+            else if (e.Button == MouseButtons.Left && isDragging)
+            {
+                int width = e.X - startPoint.X;
+                int height = e.Y - startPoint.Y;
+                cropArea = new Rectangle(startPoint.X, startPoint.Y, width, height);
+                pictureBox1.Invalidate();
+            }
+            else if (e.Button == MouseButtons.None)
+            {
+                // Set the last point to the current position
+                lastPoint = e.Location;
+            }
+        }*/
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
@@ -1440,6 +1701,23 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
 
                         // Draw a line from the adjusted last position to the adjusted current position
                         g.DrawLine(pen, adjustedLastPoint.X, adjustedLastPoint.Y, adjustedCurrentPoint.X, adjustedCurrentPoint.Y);
+
+                        if (checkBox2Colors.Checked && !string.IsNullOrEmpty(textBoxColorToAdress2.Text))
+                        {
+                            string colorCode2 = textBoxColorToAdress2.Text;
+                            if (!colorCode2.StartsWith("#")) { colorCode2 = "#" + colorCode2; }
+                            Color penColor2;
+                            try { penColor2 = ColorTranslator.FromHtml(colorCode2); }
+                            catch { penColor2 = Color.Black; }  // Default to black if the color code is invalid
+
+                            Pen pen2 = new Pen(penColor2);
+
+                            // Adjust the coordinates for the second color
+                            Point adjustedCurrentPoint2 = new Point((e.X + 1) / zoomFactor, e.Y / zoomFactor);
+
+                            g.DrawRectangle(pen2, adjustedCurrentPoint2.X, adjustedCurrentPoint2.Y, 1, 1);
+                        }
+
                     }
                 }
 
@@ -1866,13 +2144,14 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 // Create the checkbox
                 CheckBox protectColorsCheckbox = new CheckBox();
                 protectColorsCheckbox.Text = "Protect Colors";
-                protectColorsCheckbox.Location = new Point(120, 10); // Setzen Sie die Position
+                protectColorsCheckbox.Location = new Point(120, 10); // Set the position
+                protectColorsCheckbox.Checked = false;
 
                 // Create the TrackBar to change brightness
                 TrackBar brightnessTrackBar = new TrackBar();
                 brightnessTrackBar.Location = new Point(10, 40); // Set position
-                brightnessTrackBar.Minimum = -100;
-                brightnessTrackBar.Maximum = 100;
+                brightnessTrackBar.Minimum = -40;
+                brightnessTrackBar.Maximum = 40;
 
                 // Create the TrackBar to change contrast
                 TrackBar contrastTrackBar = new TrackBar();
@@ -1902,6 +2181,11 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 colorTrackBar.Maximum = 180;
                 colorTrackBar.Value = 0; // Set the initial value to 0
 
+                // Create the label
+                Label updateLabel = new Label();
+                updateLabel.Location = new Point(10, 280); // Set the position
+                updateLabel.Text = ""; // Put the initial text
+
                 // Create the label to display the current value of the TrackBar
                 Label brightnessLabel = new Label();
                 brightnessLabel.Location = new Point(120, 40); // Set position 40 is height 120 from the right
@@ -1923,6 +2207,8 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 colorLabel.Location = new Point(120, 220); // Set position
 
                 // Add an event handler to change brightness in real time
+
+                // Add an event handler to change brightness in real time
                 brightnessTrackBar.Scroll += (s, e) =>
                 {
                     if (originalImage != null)
@@ -1930,13 +2216,13 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                         Bitmap image = new Bitmap(originalImage);
 
                         // Change the brightness of the image
-                        float brightness = brightnessTrackBar.Value * 0.01f;
+                        float brightness = brightnessTrackBar.Value * 0.01f; //Increases the gradual brightness factor example 0.001f
                         float[][] ptsArray ={
-                    new float[] {1, 0, 0, 0, 0},
-                    new float[] {0, 1, 0, 0, 0},
-                    new float[] {0, 0, 1, 0, 0},
-                    new float[] {0, 0, 0, 1.0f, 0},
-                    new float[] {brightness, brightness, brightness, 1.0f, 1}
+                            new float[] {1, 0, 0, 0, 0},
+                            new float[] {0, 1, 0, 0, 0},
+                            new float[] {0, 0, 1, 0, 0},
+                            new float[] {0, 0, 0, 1.0f, 0},
+                            new float[] {brightness, brightness, brightness, 1.0f, 1}
                         };
                         ImageAttributes attributes = new ImageAttributes();
                         attributes.ClearColorMatrix();
@@ -2410,23 +2696,30 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 applyButton.Location = new Point(10, 320); // Set position
                 applyButton.Click += (s, e) =>
                 {
-                    if (originalImage != null && grayscaleCheckbox.Checked)
+                    if (pictureBox1.Image != null)
                     {
-                        Bitmap image = new Bitmap(originalImage);
+                        Bitmap image = new Bitmap(pictureBox1.Image); // Zugriff auf das Bild in der PictureBox
 
-                        // Convert the image to grayscale
-                        for (int y = 0; y < image.Height; y++)
+                        // Convert the image to grayscale only if grayscaleCheckbox is checked
+                        if (grayscaleCheckbox.Checked)
                         {
-                            for (int x = 0; x < image.Width; x++)
+                            for (int y = 0; y < image.Height; y++)
                             {
-                                Color originalColor = image.GetPixel(x, y);
-                                int grayScale = (int)((originalColor.R * .3) + (originalColor.G * .59) + (originalColor.B * .11));
-                                Color newColor = Color.FromArgb(grayScale, grayScale, grayScale);
-                                image.SetPixel(x, y, newColor);
+                                for (int x = 0; x < image.Width; x++)
+                                {
+                                    Color originalColor = image.GetPixel(x, y);
+                                    int grayScale = (int)((originalColor.R * .3) + (originalColor.G * .59) + (originalColor.B * .11));
+                                    Color newColor = Color.FromArgb(grayScale, grayScale, grayScale);
+                                    image.SetPixel(x, y, newColor);
+                                }
                             }
                         }
 
-                        pictureBox1.Image = image;
+                        pictureBox1.Image = image; // Update the image in the PictureBox
+                        pictureBox1.Refresh();  // Refresh the PictureBox
+
+                        // Update the text of the label
+                        updateLabel.Text = "Image updated.";
                     }
                 };
 
@@ -2474,6 +2767,8 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 colorChangeForm.Controls.Add(protectColorsCheckbox);
                 // Add the button to the form
                 colorChangeForm.Controls.Add(resetButton);
+                // Add the label to the shape
+                colorChangeForm.Controls.Add(updateLabel);
 
                 // Display the shape
                 colorChangeForm.Show();
@@ -2587,6 +2882,21 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
 
         private bool shouldDrawRectangle = false; //??
 
+        /*private void pictureBox1_MouseDown2(object sender, MouseEventArgs e)
+        {
+            if (checkBoxFreehand.Checked && e.Button == MouseButtons.Left)
+            {
+                points.Clear();
+                points.Add(e.Location);
+            }
+            else if (e.Button == MouseButtons.Left)
+            {
+                startPoint = e.Location;
+                isDragging = true;
+                cropArea = new Rectangle(startPoint.X, startPoint.Y, 0, 0);
+            }
+        }*/
+
         private void pictureBox1_MouseDown2(object sender, MouseEventArgs e)
         {
             if (checkBoxFreehand.Checked && e.Button == MouseButtons.Left)
@@ -2599,6 +2909,46 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 startPoint = e.Location;
                 isDragging = true;
                 cropArea = new Rectangle(startPoint.X, startPoint.Y, 0, 0);
+
+                if (checkBox2Colors.Checked)
+                {
+                    // Create a copy of the image in pictureBox1
+                    Bitmap image = new Bitmap(pictureBox1.Image);
+
+                    // Create a Graphics object from the image
+                    using (Graphics g = Graphics.FromImage(image))
+                    {
+                        // Convert the text in textBoxColorToAdress and textBoxColorToAdress2 into color values
+                        string colorCode1 = textBoxColorToAdress.Text;
+                        if (!colorCode1.StartsWith("#")) { colorCode1 = "#" + colorCode1; }
+                        Color penColor1;
+                        try { penColor1 = ColorTranslator.FromHtml(colorCode1); }
+                        catch { penColor1 = Color.Black; }  // Default to black if the color code is invalid
+
+                        string colorCode2 = textBoxColorToAdress2.Text;
+                        if (!colorCode2.StartsWith("#")) { colorCode2 = "#" + colorCode2; }
+                        Color penColor2;
+                        try { penColor2 = ColorTranslator.FromHtml(colorCode2); }
+                        catch { penColor2 = Color.Black; }  // Default to black if the color code is invalid
+
+                        // If one of the text boxes is empty, use the color from the other text box
+                        if (string.IsNullOrEmpty(textBoxColorToAdress.Text)) { penColor1 = penColor2; }
+                        if (string.IsNullOrEmpty(textBoxColorToAdress2.Text)) { penColor2 = penColor1; }
+
+                        // Create pens with the specified colors
+                        Pen pen1 = new Pen(penColor1);
+                        Pen pen2 = new Pen(penColor2);
+
+                        // Draw a pixel at the current position with the first color
+                        g.DrawRectangle(pen1, startPoint.X, startPoint.Y, 1, 1);
+
+                        // Draw a pixel next to the current position with the second color
+                        g.DrawRectangle(pen2, startPoint.X + 1, startPoint.Y, 1, 1);
+                    }
+
+                    // Update the image in pictureBox1
+                    pictureBox1.Image = image;
+                }
             }
         }
 

@@ -15,6 +15,16 @@ Version : 4.11.22 #XG1
 - "TextureCutter" Added a fill function so that you can include rectangle, circle, or freehand textures here as well.
 - Panels now display the color that will be applied to the image when using the pipette, which takes the color from the TextBox.
 - Revised the zoom function for Textcutter and added a label to display the zoom factor.
+- In Tiledata, added a button that clears all values, with a sound when activated.
+- In Tiledata, added a new listing for "tree" and a "clear" function.
+- Revised the "Sharp" button, added a Trackbar to control the sharpness level.
+- Improved the White Balance function, refined the values, and added a Trackbar to set values from 1 to 10%.
+- The mode now has a label, and when applied, the image is sent to the PictureBox. Brightness has been refined to be more precise.
+- Added a second textbox for color values, along with a second ColorDialog to select values for the textbox.
+- The drawing function now allows you to draw with a second color when it is set in the textbox and activated with the checkbox.
+- Added a "Draken" checkbox to reverse the White Balance and make it darker.
+- The design has been updated.
+- New icons have been added.
 
 Version : 4.11.21 #XG1
 - Added graphics for "Compare Items."

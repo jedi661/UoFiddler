@@ -16,6 +16,7 @@ using System.IO;
 using System.Linq;
 using System.Media;
 using System.Runtime.ConstrainedExecution;
+using System.Windows.Controls.Primitives;
 using System.Windows.Forms;
 using Ultima;
 using UoFiddler.Controls.Classes;
@@ -60,13 +61,15 @@ namespace UoFiddler.Controls.UserControls
             toolStripComboBox1.Items.Add("Chair-35"); //26
             toolStripComboBox1.Items.Add("Chair-Wood-8"); //27
             toolStripComboBox1.Items.Add("Chair-Throne-15"); //28
-
             // checkedListBox2
-
             toolStripComboBox1.Items.Add("LandTile Land"); //29
             toolStripComboBox1.Items.Add("LandTile Water"); //30
             toolStripComboBox1.Items.Add("LandTile Mountain"); //31
-
+            // checkedListBox2 End
+            //Tree
+            toolStripComboBox1.Items.Add("Tree"); //32
+            //Clear
+            toolStripComboBox1.Items.Add("Clear"); //33
             // Add an event handler for toolStripComboBox1's SelectedIndexChanged event
             toolStripComboBox1.SelectedIndexChanged += ToolStripComboBox1_SelectedIndexChanged;
 
@@ -797,8 +800,7 @@ namespace UoFiddler.Controls.UserControls
                     {
                         item.Flags |= (TileFlag)enumValues.GetValue(i + 1);
                     }
-                }
-
+                } 
                 TileData.ItemTable[index] = item;
                 treeViewItem.SelectedNode.ForeColor = Color.Red;
                 Options.ChangedUltimaClass["TileData"] = true;
@@ -1775,9 +1777,7 @@ namespace UoFiddler.Controls.UserControls
 
             MessageBox.Show(updated > 0 ? $"Updated {updated} land tile(s)." : "Nothing was updated.", "Set textures");
         }
-
         #region ToolStripComboBox
-
         private void ToolStripComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Set all elements to unchecked
@@ -1790,249 +1790,311 @@ namespace UoFiddler.Controls.UserControls
             {
                 checkedListBox2.SetItemChecked(i, false);
             }
-
             // Update the Checked items and the Weight and Height values ​​based on the selected preset
-            switch (toolStripComboBox1.SelectedItem.ToString())
+            if (toolStripComboBox1.SelectedItem != null)
             {
-                case "Wall":  //1
-                    textBoxWeight.Text = "255";
-                    textBoxHeigth.Text = "20";
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Wall"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Impassable"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoShoot"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("ArticleA"), true);
-                    break;
-                case "Door-E-L": //2
-                    textBoxWeight.Text = "255";
-                    textBoxHeigth.Text = "20";
-                    textBoxQuality.Text = "1";
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Wall"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Impassable"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoShoot"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("ArticleA"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Door"), true);
-                    break;
-                case "Door-E-R": //3
-                    textBoxWeight.Text = "255";
-                    textBoxHeigth.Text = "20";
-                    textBoxQuality.Text = "2";
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Wall"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Impassable"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoShoot"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("ArticleA"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Door"), true);
-                    break;
-                case "Door-S-L": //4
-                    textBoxWeight.Text = "255";
-                    textBoxHeigth.Text = "20";
-                    textBoxQuality.Text = "2";
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Wall"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Impassable"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoShoot"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("ArticleA"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Door"), true);
-                    break;
-                case "Door-S-R": //5
-                    textBoxWeight.Text = "255";
-                    textBoxHeigth.Text = "20";
-                    textBoxQuality.Text = "3";
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Wall"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Impassable"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoShoot"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("ArticleA"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Door"), true);
-                    break;
-                case "Window": //6
-                    textBoxWeight.Text = "255";
-                    textBoxHeigth.Text = "20";
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Wall"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Impassable"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Window"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoShoot"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("ArticleA"), true);
-                    break;
-                case "Roof": //7
-                    textBoxWeight.Text = "255";
-                    textBoxHeigth.Text = "3";
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoShoot"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("ArticleA"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Roof"), true);
-                    break;
-                case "Floor": //8
-                    textBoxWeight.Text = "255";
-                    textBoxHeigth.Text = "0";
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Background"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Bridge"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Surface"), true);
-                    break;
-                case "Water": //9
-                    textBoxWeight.Text = "255";
-                    textBoxHeigth.Text = "0";
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Background"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Translucent"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Surface"), true);
-                    break;
-                case "Stairs-W": //10
-                    textBoxWeight.Text = "255";
-                    textBoxHeigth.Text = "5";
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Surface"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Bridge"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoShoot"), true);
-                    break;
-                case "Stairs-N": //11
-                    textBoxWeight.Text = "255";
-                    textBoxHeigth.Text = "5";
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Surface"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Bridge"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoShoot"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("StairBack"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("StairRight"), true);
-                    break;
-                case "Stairs-E": //12
-                    textBoxWeight.Text = "255";
-                    textBoxHeigth.Text = "5";
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Surface"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Bridge"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoShoot"), true);
-                    break;
-                case "Stairs-S": //13
-                    textBoxWeight.Text = "255";
-                    textBoxHeigth.Text = "5";
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Surface"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Bridge"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoShoot"), true);
-                    break;
-                case "Stairs-W-N": //14
-                    textBoxWeight.Text = "255";
-                    textBoxHeigth.Text = "5";
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Surface"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Bridge"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoShoot"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("StairBack"), true);
-                    break;
-                case "Stairs-N-E": //15
-                    textBoxWeight.Text = "255";
-                    textBoxHeigth.Text = "5";
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Surface"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Bridge"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoShoot"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("StairRight"), true);
-                    break;
-                case "Stairs-E-S": //16
-                    textBoxWeight.Text = "255";
-                    textBoxHeigth.Text = "5";
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Surface"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Bridge"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoShoot"), true);
-                    break;
-                case "Stairs-S-W": //17
-                    textBoxWeight.Text = "255";
-                    textBoxHeigth.Text = "5";
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Surface"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Bridge"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoShoot"), true);
-                    break;
-                case "Stairs-Block": //18
-                    textBoxWeight.Text = "255";
-                    textBoxHeigth.Text = "10";
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Surface"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Bridge"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoShoot"), true);
-                    break;
-                case "Container": //19
-                    textBoxWeight.Text = "255";
-                    textBoxHeigth.Text = "5";
-                    textBoxStackOff.Text = "15";
-                    textBoxUnk1.Text = "1";
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Impassable"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("ArticleA"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Container"), true);
-                    break;
-                case "Lamp Post": //20
-                    textBoxWeight.Text = "255";
-                    textBoxHeigth.Text = "15";
-                    textBoxQuality.Text = "29";
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Impassable"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("ArticleA"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("LightSource"), true);
-                    break;
-                case "Fence": //21
-                    textBoxWeight.Text = "255";
-                    textBoxHeigth.Text = "10";
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Wall"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Impassable"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("ArticleA"), true);
-                    break;
-                case "Cave Wall": //22
-                    textBoxWeight.Text = "255";
-                    textBoxHeigth.Text = "24";
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Wall"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Impassable"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoShoot"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("ArticleA"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("ArticleAn"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoHouse"), true);
-                    break;
-                case "Clothing": //23
-                    textBoxWeight.Text = "10";
-                    textBoxHeigth.Text = "1";
-                    textBoxQuality.Text = "10"; //Layer
-                    textBoxStackOff.Text = "6"; //StackOff
-                    textBoxUnk1.Text = "582"; //MiscData
-                    textBoxAnim.Text = "599"; //Anim
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Weapon"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("ArticleA"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Wearable"), true);
-                    break;
-                case "Plant": //24
-                    textBoxWeight.Text = "255";
-                    textBoxHeigth.Text = "1";
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Background"), true);
-                    break;
-                case "Chair-Small-5": //25
-                    textBoxWeight.Text = "20";
-                    textBoxHeigth.Text = "1";
-                    textBoxStackOff.Text = "5"; //StackOff
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("ArticleA"), true);
-                    break;
-                case "Chair-35": //26
-                    textBoxWeight.Text = "20";
-                    textBoxHeigth.Text = "1";
-                    textBoxStackOff.Text = "35"; //StackOff
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("ArticleA"), true);
-                    break;
-                case "Chair-Wood-8": //27
-                    textBoxWeight.Text = "20";
-                    textBoxHeigth.Text = "1";
-                    textBoxStackOff.Text = "8"; //StackOff
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("ArticleA"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("PartialHue"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoDiagonal"), true);
-                    break;
-                case "Chair-Throne-15": //27
-                    textBoxWeight.Text = "20";
-                    textBoxHeigth.Text = "1";
-                    textBoxStackOff.Text = "8"; //StackOff
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("ArticleA"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("PartialHue"), true);
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoDiagonal"), true);
-                    break;
-                case "LandTile Land": //29
-                    checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("Background"), true);
-                    checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("Surface"), true);
-                    break;
-                case "LandTile Water": //30
-                    checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("Translucent"), true);
-                    break;
-                case "LandTile Mountain": //31
-                    checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("Impassable"), true);
-                    break;
-
-                    // Add more presets here
+                string selectedItem = toolStripComboBox1.SelectedItem.ToString();
+                switch (selectedItem)
+                {
+                    case "Wall":  //1
+                        textBoxWeight.Text = "255";
+                        textBoxHeigth.Text = "20";
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Wall"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Impassable"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoShoot"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("ArticleA"), true);
+                        break;
+                    case "Door-E-L": //2
+                        textBoxWeight.Text = "255";
+                        textBoxHeigth.Text = "20";
+                        textBoxQuality.Text = "1";
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Wall"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Impassable"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoShoot"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("ArticleA"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Door"), true);
+                        break;
+                    case "Door-E-R": //3
+                        textBoxWeight.Text = "255";
+                        textBoxHeigth.Text = "20";
+                        textBoxQuality.Text = "2";
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Wall"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Impassable"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoShoot"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("ArticleA"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Door"), true);
+                        break;
+                    case "Door-S-L": //4
+                        textBoxWeight.Text = "255";
+                        textBoxHeigth.Text = "20";
+                        textBoxQuality.Text = "2";
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Wall"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Impassable"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoShoot"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("ArticleA"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Door"), true);
+                        break;
+                    case "Door-S-R": //5
+                        textBoxWeight.Text = "255";
+                        textBoxHeigth.Text = "20";
+                        textBoxQuality.Text = "3";
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Wall"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Impassable"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoShoot"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("ArticleA"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Door"), true);
+                        break;
+                    case "Window": //6
+                        textBoxWeight.Text = "255";
+                        textBoxHeigth.Text = "20";
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Wall"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Impassable"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Window"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoShoot"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("ArticleA"), true);
+                        break;
+                    case "Roof": //7
+                        textBoxWeight.Text = "255";
+                        textBoxHeigth.Text = "3";
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoShoot"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("ArticleA"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Roof"), true);
+                        break;
+                    case "Floor": //8
+                        textBoxWeight.Text = "255";
+                        textBoxHeigth.Text = "0";
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Background"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Bridge"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Surface"), true);
+                        break;
+                    case "Water": //9
+                        textBoxWeight.Text = "255";
+                        textBoxHeigth.Text = "0";
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Background"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Translucent"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Surface"), true);
+                        break;
+                    case "Stairs-W": //10
+                        textBoxWeight.Text = "255";
+                        textBoxHeigth.Text = "5";
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Surface"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Bridge"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoShoot"), true);
+                        break;
+                    case "Stairs-N": //11
+                        textBoxWeight.Text = "255";
+                        textBoxHeigth.Text = "5";
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Surface"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Bridge"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoShoot"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("StairBack"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("StairRight"), true);
+                        break;
+                    case "Stairs-E": //12
+                        textBoxWeight.Text = "255";
+                        textBoxHeigth.Text = "5";
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Surface"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Bridge"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoShoot"), true);
+                        break;
+                    case "Stairs-S": //13
+                        textBoxWeight.Text = "255";
+                        textBoxHeigth.Text = "5";
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Surface"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Bridge"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoShoot"), true);
+                        break;
+                    case "Stairs-W-N": //14
+                        textBoxWeight.Text = "255";
+                        textBoxHeigth.Text = "5";
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Surface"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Bridge"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoShoot"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("StairBack"), true);
+                        break;
+                    case "Stairs-N-E": //15
+                        textBoxWeight.Text = "255";
+                        textBoxHeigth.Text = "5";
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Surface"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Bridge"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoShoot"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("StairRight"), true);
+                        break;
+                    case "Stairs-E-S": //16
+                        textBoxWeight.Text = "255";
+                        textBoxHeigth.Text = "5";
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Surface"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Bridge"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoShoot"), true);
+                        break;
+                    case "Stairs-S-W": //17
+                        textBoxWeight.Text = "255";
+                        textBoxHeigth.Text = "5";
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Surface"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Bridge"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoShoot"), true);
+                        break;
+                    case "Stairs-Block": //18
+                        textBoxWeight.Text = "255";
+                        textBoxHeigth.Text = "10";
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Surface"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Bridge"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoShoot"), true);
+                        break;
+                    case "Container": //19
+                        textBoxWeight.Text = "255";
+                        textBoxHeigth.Text = "5";
+                        textBoxStackOff.Text = "15";
+                        textBoxUnk1.Text = "1";
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Impassable"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("ArticleA"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Container"), true);
+                        break;
+                    case "Lamp Post": //20
+                        textBoxWeight.Text = "255";
+                        textBoxHeigth.Text = "15";
+                        textBoxQuality.Text = "29";
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Impassable"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("ArticleA"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("LightSource"), true);
+                        break;
+                    case "Fence": //21
+                        textBoxWeight.Text = "255";
+                        textBoxHeigth.Text = "10";
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Wall"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Impassable"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("ArticleA"), true);
+                        break;
+                    case "Cave Wall": //22
+                        textBoxWeight.Text = "255";
+                        textBoxHeigth.Text = "24";
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Wall"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Impassable"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoShoot"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("ArticleA"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("ArticleAn"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoHouse"), true);
+                        break;
+                    case "Clothing": //23
+                        textBoxWeight.Text = "10";
+                        textBoxHeigth.Text = "1";
+                        textBoxQuality.Text = "10"; //Layer
+                        textBoxStackOff.Text = "6"; //StackOff
+                        textBoxUnk1.Text = "582"; //MiscData
+                        textBoxAnim.Text = "599"; //Anim
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Weapon"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("ArticleA"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Wearable"), true);
+                        break;
+                    case "Plant": //24
+                        textBoxWeight.Text = "255";
+                        textBoxHeigth.Text = "1";
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Background"), true);
+                        break;
+                    case "Chair-Small-5": //25
+                        textBoxWeight.Text = "20";
+                        textBoxHeigth.Text = "1";
+                        textBoxStackOff.Text = "5"; //StackOff
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("ArticleA"), true);
+                        break;
+                    case "Chair-35": //26
+                        textBoxWeight.Text = "20";
+                        textBoxHeigth.Text = "1";
+                        textBoxStackOff.Text = "35"; //StackOff
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("ArticleA"), true);
+                        break;
+                    case "Chair-Wood-8": //27
+                        textBoxWeight.Text = "20";
+                        textBoxHeigth.Text = "1";
+                        textBoxStackOff.Text = "8"; //StackOff
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("ArticleA"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("PartialHue"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoDiagonal"), true);
+                        break;
+                    case "Chair-Throne-15": //27
+                        textBoxWeight.Text = "20";
+                        textBoxHeigth.Text = "1";
+                        textBoxStackOff.Text = "8"; //StackOff
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("ArticleA"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("PartialHue"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoDiagonal"), true);
+                        break;
+                    case "LandTile Land": //29
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("Background"), true);
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("Surface"), true);
+                        break;
+                    case "LandTile Water": //30
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("Translucent"), true);
+                        break;
+                    case "LandTile Mountain": //31
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("Impassable"), true);
+                        break;
+                    case "Tree": //32
+                        textBoxName.Text = "Tree";
+                        textBoxWeight.Text = "255";
+                        textBoxHeigth.Text = "20";
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Impassable"), true);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("ArticleAn"), true);
+                        break;
+                    case "Clear": //33
+                        textBoxName.Text = "";
+                        textBoxWeight.Text = "";
+                        textBoxHeigth.Text = "";
+                        textBoxHue.Text = "";
+                        textBoxUnk3.Text = "";
+                        textBoxQuality.Text = "";
+                        textBoxStackOff.Text = "";
+                        textBoxUnk1.Text = "";
+                        textBoxQuantity.Text = "";
+                        textBoxValue.Text = "";
+                        textBoxUnk2.Text = "";
+                        textBoxAnim.Text = "";
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("Background"), false);
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("Weapon"), false);
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("Transparent"), false);
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("Translucent"), false);
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("Wall"), false);
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("Damaging"), false);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("Impassable"), false);
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("Wet"), false);
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("Unknown1"), false);
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("Surface"), false);
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("Bridge"), false);
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("Generic"), false);
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("Window"), false);
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("NoShoot"), false);
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("ArticleA"), false);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("ArticleAn"), false);
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("ArticleThe"), false);
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("Foliage"), false);
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("PartialHue"), false);
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("NoHouse"), false);
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("Map"), false);
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("Container"), false);
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("Wearable"), false);
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("LightSource"), false);
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("Animation"), false);
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("HoverOver"), false);
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("NoDiagonal"), false);
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("Armor"), false);
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("Roof"), false);
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("Door"), false);
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("StairBack"), false);
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("StairRight"), false);
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("AlphaBlend"), false);
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("UseNewArt"), false);
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("ArtUsed"), false);
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("Unused8"), false);
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("NoShadow"), false);
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("PixelBleed"), false);
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("PlayAnimOnce"), false);
+                        checkedListBox2.SetItemChecked(checkedListBox2.Items.IndexOf("MultiMovable"), false);
+                        break;
+                        // Add more presets here
+                }
             }
         }
         #endregion
-
         #region toolStripButton6 for Sound
 
         private bool playCustomSound = false;
@@ -2114,7 +2176,6 @@ namespace UoFiddler.Controls.UserControls
                 toolStripButton7IsActive = false;
             }
         }
-
         private void toolStripPushMarkedButton8_Click(object sender, EventArgs e)
         {
             if (toolStripButton7IsActive)
@@ -2137,9 +2198,7 @@ namespace UoFiddler.Controls.UserControls
                 OnClickSaveChanges(null, EventArgs.Empty);
             }
         }
-
         #endregion
-
         #region Search New
         private void SearchByIdToolStripTextBox_KeyUp(object sender, KeyEventArgs e)
         {
@@ -2212,5 +2271,92 @@ namespace UoFiddler.Controls.UserControls
             int index = (int)treeViewLand.SelectedNode.Tag;
             textBoxTexID.Text = index.ToString();
         }
+        #region Delete Button
+        private void toolStripButton8Clear_Click(object sender, EventArgs e)
+        {
+            // Set the text of all TextBoxes to an empty string
+            textBoxName.Text = "";
+            textBoxWeight.Text = "";
+            textBoxHeigth.Text = "";
+            textBoxHue.Text = "";
+            textBoxUnk3.Text = "";
+            textBoxQuality.Text = "";
+            textBoxStackOff.Text = "";
+            textBoxUnk1.Text = "";
+            textBoxQuantity.Text = "";
+            textBoxValue.Text = "";
+            textBoxUnk2.Text = "";
+            textBoxAnim.Text = "";
+
+            // Make a list of the checkboxes you want to uncheck
+            List<string> itemsToUncheck = new List<string>
+            {
+                "Background",
+                "Weapon",
+                "Transparent",
+                "Translucent",
+                "Wall",
+                "Damaging",
+                "Impassable",
+                "Wet",
+                "Unknown1",
+                "Surface",
+                "Bridge",
+                "Generic",
+                "Window",
+                "NoShoot",
+                "ArticleA",
+                "ArticleAn",
+                "ArticleThe",
+                "Foliage",
+                "PartialHue",
+                "NoHouse",
+                "Map",
+                "Container",
+                "Wearable",
+                "LightSource",
+                "Animation",
+                "HoverOver",
+                "NoDiagonal",
+                "Armor",
+                "Roof",
+                "Door",
+                "StairBack",
+                "StairRight",
+                "AlphaBlend",
+                "UseNewArt",
+                "ArtUsed",
+                "Unused8",
+                "NoShadow",
+                "PixelBleed",
+                "PlayAnimOnce",
+                "MultiMovable"
+            };
+
+            // Uncheck all checkboxes in the list
+            foreach (string item in itemsToUncheck)
+            {
+                int index = checkedListBox2.Items.IndexOf(item);
+                if (index != -1)
+                {
+                    checkedListBox2.SetItemChecked(index, false);
+                }
+            }
+
+            // Uncheck all checkboxes in checkedListBox1
+            for (int i = 0; i < checkedListBox1.Items.Count; i++)
+            {
+                checkedListBox1.SetItemChecked(i, false);
+            }
+
+            // Play a sound when playCustomSound is set to true
+            if (playCustomSound)
+            {
+                SoundPlayer player = new SoundPlayer();
+                player.SoundLocation = "sound.wav";
+                player.Play();
+            }
+        }
+        #endregion
     }
 }
