@@ -962,11 +962,35 @@ namespace UoFiddler.Controls.UserControls
             if (_selectedGraphicId >= 0)
             {
                 // Get the bitmap of the selected graphic using the Art class
-                Bitmap bitmap = Art.GetLand(_selectedGraphicId);
-                if (bitmap != null)
+                Bitmap originalBitmap = Art.GetLand(_selectedGraphicId);
+                if (originalBitmap != null)
                 {
-                    // Copy the bitmap to the clipboard
-                    Clipboard.SetImage(bitmap);
+                    // Erstellen Sie eine Kopie des Originalbildes
+                    Bitmap bitmap = new Bitmap(originalBitmap);
+
+                    // Farbänderungsfunktion direkt eingebaut
+                    for (int y = 0; y < bitmap.Height; y++)
+                    {
+                        for (int x = 0; x < bitmap.Width; x++)
+                        {
+                            Color pixelColor = bitmap.GetPixel(x, y);
+                            if (pixelColor.R == 211 && pixelColor.G == 211 && pixelColor.B == 211) // Check if the color of the pixel is #D3D3D3
+                            {
+                                bitmap.SetPixel(x, y, Color.Black); // Change the color of the pixel to black
+                            }
+                        }
+                    }
+
+                    // Convert the image to a 24-bit color depth
+                    Bitmap bmp24bit = new Bitmap(bitmap.Width, bitmap.Height, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                    using (Graphics g = Graphics.FromImage(bmp24bit))
+                    {
+                        g.DrawImage(bitmap, new Rectangle(0, 0, bmp24bit.Width, bmp24bit.Height));
+                    }
+
+                    // Copy the graphic to the clipboard
+                    Clipboard.SetImage(bmp24bit);
+
                     // Show a message box indicating success
                     MessageBox.Show("The image has been copied to the clipboard!");
                 }

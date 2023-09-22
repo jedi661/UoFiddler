@@ -867,16 +867,39 @@ namespace UoFiddler.Controls.UserControls
         #region Copy clipboard
         private void copyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             if (listBox.SelectedIndex != -1)
             {
                 int i = int.Parse(listBox.Items[listBox.SelectedIndex].ToString());
                 if (Gumps.IsValidIndex(i))
                 {
-                    Bitmap bmp = Gumps.GetGump(i);
-                    if (bmp != null)
+                    Bitmap originalBmp = Gumps.GetGump(i);
+                    if (originalBmp != null)
                     {
-                        Clipboard.SetImage(bmp);
+                        // Erstellen Sie eine Kopie des Originalbildes
+                        Bitmap bmp = new Bitmap(originalBmp);
+
+                        // Farbänderungsfunktion direkt eingebaut
+                        for (int y = 0; y < bmp.Height; y++)
+                        {
+                            for (int x = 0; x < bmp.Width; x++)
+                            {
+                                Color pixelColor = bmp.GetPixel(x, y);
+                                if (pixelColor.R == 211 && pixelColor.G == 211 && pixelColor.B == 211) // Check if the color of the pixel is #D3D3D3
+                                {
+                                    bmp.SetPixel(x, y, Color.Black); // Change the color of the pixel to black
+                                }
+                            }
+                        }
+
+                        // Convert the image to a 24-bit color depth
+                        Bitmap bmp24bit = new Bitmap(bmp.Width, bmp.Height, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                        using (Graphics g = Graphics.FromImage(bmp24bit))
+                        {
+                            g.DrawImage(bmp, new Rectangle(0, 0, bmp24bit.Width, bmp24bit.Height));
+                        }
+
+                        // Copy the graphic to the clipboard
+                        Clipboard.SetImage(bmp24bit);
                         MessageBox.Show("The image has been copied to the clipboard!");
                     }
                     else

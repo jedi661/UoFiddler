@@ -33,6 +33,7 @@ Version : 4.11.22
 - The design has been updated.
 - New icons have been added.
 - TextureCutter Two buttons for coloring have been added.
+- For the Gumps and Landtiles, the image is adjusted in the clipboard with black, and the color d3d3d3 is converted.
 
 Version : 4.11.21
 - Added graphics for "Compare Items."
