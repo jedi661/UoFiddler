@@ -3117,28 +3117,28 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         {
             if (Clipboard.ContainsImage())
             {
-                // Das Bild aus der Zwischenablage abrufen
+                // Retrieve the image from the clipboard
                 Image clipboardImage = Clipboard.GetImage();
 
-                // Ein Bitmap-Objekt erstellen
+                // Create a bitmap object
                 Bitmap bitmapImage = new Bitmap(clipboardImage);
 
-                // Ein neues Bitmap-Objekt mit den gleichen Abmessungen wie das ursprüngliche Bild erstellen
+                // Create a new Bitmap object with the same dimensions as the original image
                 Bitmap newImage = new Bitmap(bitmapImage.Width, bitmapImage.Height);
 
-                // Schleife zur Verarbeitung jedes Pixels im Bild
+                // Loop to process each pixel in the image
                 for (int y = 0; y < bitmapImage.Height; y++)
                 {
                     for (int x = 0; x < bitmapImage.Width; x++)
                     {
-                        // Farbe des aktuellen Pixels abrufen
+                        // Get color of current pixel
                         Color pixelColor = bitmapImage.GetPixel(x, y);
 
-                        // Je nach Farbmodus die Farbkonvertierung durchführen
+                        // Depending on the color mode, perform the color conversion
                         Color newColor;
                         switch (colorMode)
                         {
-                            case 0: // Roter Modus (Standard)
+                            case 0: // Red mode (default)
                                 if (pixelColor.R > pixelColor.G && pixelColor.R > pixelColor.B)
                                 {
                                     newColor = Color.FromArgb(pixelColor.A, pixelColor.B, pixelColor.G, pixelColor.R);
@@ -3148,94 +3148,94 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                                     newColor = pixelColor;
                                 }
                                 break;
-                            case 1: // Grüner Modus
+                            case 1: // Green mode
                                 newColor = Color.FromArgb(pixelColor.A, pixelColor.G, pixelColor.R, pixelColor.B);
                                 break;
-                            case 2: // Gelber Modus
+                            case 2: // Yellow mode
                                 newColor = Color.FromArgb(pixelColor.A, pixelColor.G, pixelColor.G, pixelColor.R);
                                 break;
-                            case 3: // Braun Modus
+                            case 3: // Brown mode
                                 newColor = Color.FromArgb(pixelColor.A, pixelColor.R, pixelColor.G / 2, pixelColor.B / 2);
                                 break;
                             case 4: // Orange
                                 newColor = Color.FromArgb(pixelColor.A, pixelColor.R, pixelColor.G / 2, 0);
                                 break;
-                            case 5: // Violett
+                            case 5: // Violet
                                 newColor = Color.FromArgb(pixelColor.A, pixelColor.R / 2, 0, pixelColor.B);
                                 break;
-                            case 6: // Grün
+                            case 6: // Green
                                 newColor = Color.FromArgb(pixelColor.A, 0, pixelColor.G, 0);
                                 break;
-                            case 7: // Türkis
+                            case 7: // Turquoise
                                 newColor = Color.FromArgb(pixelColor.A, 0, pixelColor.G, pixelColor.B);
                                 break;
                             case 8: // Pink
                                 newColor = Color.FromArgb(pixelColor.A, pixelColor.R, 0, pixelColor.B);
                                 break;
-                            case 9: // Hellblau
+                            case 9: // Light Blue
                                 newColor = Color.FromArgb(pixelColor.A, 0, pixelColor.G, pixelColor.R);
                                 break;
-                            case 10: // Dunkelrot
+                            case 10: // Dark red
                                 newColor = Color.FromArgb(pixelColor.A, pixelColor.R / 2, 0, 0);
                                 break;
-                            case 11: // Lila
+                            case 11: // Purple
                                 newColor = Color.FromArgb(pixelColor.A, pixelColor.R / 2, 0, pixelColor.B / 2);
                                 break;
-                            case 12: // Gelbgrün
+                            case 12: // Yellow-green
                                 newColor = Color.FromArgb(pixelColor.A, pixelColor.R / 2, pixelColor.G / 2, 0);
                                 break;
-                            case 13: // Magenta
+                            case 13: // magenta
                                 newColor = Color.FromArgb(pixelColor.A, pixelColor.R, 0, pixelColor.B / 2);
                                 break;
                             case 14: // Cyan
                                 newColor = Color.FromArgb(pixelColor.A, 0, pixelColor.G / 2, pixelColor.B);
                                 break;
-                            case 15: // Dunkelgrün
+                            case 15: // Dark green
                                 newColor = Color.FromArgb(pixelColor.A, 0, pixelColor.G / 2, 0);
                                 break;
-                            case 16: // Olivgrün
+                            case 16: // olive green
                                 newColor = Color.FromArgb(pixelColor.A, pixelColor.R / 2, pixelColor.G / 2, 0);
                                 break;
-                            case 17: // Rosarot
+                            case 17: // Pink
                                 newColor = Color.FromArgb(pixelColor.A, pixelColor.R, 0, pixelColor.B / 2);
                                 break;
-                            case 18: // Türkisblau
+                            case 18: // Turquoise blue
                                 newColor = Color.FromArgb(pixelColor.A, 0, pixelColor.G / 2, pixelColor.B / 2);
                                 break;
-                            case 19: // Goldgelb
+                            case 19: // Golden yellow
                                 newColor = Color.FromArgb(pixelColor.A, pixelColor.R / 2, pixelColor.G / 2, 0);
                                 break;
-                            case 20: // Beispiele für weitere Farben (Grau)
+                            case 20: // Gray
                                 newColor = Color.FromArgb(pixelColor.A, pixelColor.R / 2, pixelColor.G / 2, pixelColor.B / 2);
                                 break;
-                            case 21: // Beispiele für weitere Farben (Hellrot)
+                            case 21: // Bright red
                                 newColor = Color.FromArgb(pixelColor.A, pixelColor.R, 0, 0);
                                 break;
-                            case 22: // Beispiele für weitere Farben (Hellgrün)
+                            case 22: // Light green
                                 newColor = Color.FromArgb(pixelColor.A, 0, pixelColor.G, 0);
                                 break;
-                            case 23: // Beispiele für weitere Farben (Hellblau)
+                            case 23: // Light Blue
                                 newColor = Color.FromArgb(pixelColor.A, 0, 0, pixelColor.B);
                                 break;
-                            case 24: // Braun
+                            case 24: // Brown
                                 newColor = Color.FromArgb(pixelColor.A, pixelColor.R / 2, pixelColor.G / 2, pixelColor.B / 2);
                                 break;
-                            case 25: // Dunkelbraun 
+                            case 25: // Dark brown
                                 newColor = Color.FromArgb(pixelColor.A, pixelColor.R / 2, pixelColor.G / 4, pixelColor.B / 4); // Dunkelbraun 
                                 break;
-                            case 26: // Grau 
+                            case 26: // Gray
                                 int grayValue = (pixelColor.R + pixelColor.G + pixelColor.B) / 3;
                                 newColor = Color.FromArgb(pixelColor.A, grayValue, grayValue, grayValue);
                                 break;
-                            case 27: // Dunkelgrau 
+                            case 27: // Dark gray
                                 int darkGrayValue = (pixelColor.R + pixelColor.G + pixelColor.B) / 3;
                                 darkGrayValue = Math.Max(0, Math.Min(255, darkGrayValue - 64)); // Dunkelgrau
                                 newColor = Color.FromArgb(pixelColor.A, darkGrayValue, darkGrayValue, darkGrayValue);
                                 break;
-                            case 28: // Hellblau 
+                            case 28: // Light Blue
                                 newColor = Color.FromArgb(pixelColor.A, 0, 0, pixelColor.B); // Hellblau 
                                 break;
-                            case 29: // Grün 
+                            case 29: // Green 
                                 newColor = Color.FromArgb(pixelColor.A, 0, pixelColor.G, 0); // Grün 
                                 break;
                             case 30: // Gold 
@@ -3247,30 +3247,30 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                             case 32: // Bronze 
                                 newColor = Color.FromArgb(pixelColor.A, pixelColor.R / 2, pixelColor.G / 4, 0); // Bronze 
                                 break;
-                            case 33: // Kupfer 
+                            case 33: // copper
                                 newColor = Color.FromArgb(pixelColor.A, pixelColor.R, pixelColor.G / 3, 0); // Kupfer 
                                 break;
-                            default: // Standardmäßig in den roten Modus zurückfallen 
+                            default: // Default to red mode 
                                 newColor = Color.FromArgb(pixelColor.A, pixelColor.B, pixelColor.G, pixelColor.R);
-                                colorMode = 0; // Den Farbmodus auf den Standard (rot) zurücksetzen 
+                                colorMode = 0; //Reset the color mode to the default (red).
                                 break;
                         }
 
-                        // Den geänderten Pixel im neuen Bild speichern
+                        // Save the changed pixel in the new image
                         newImage.SetPixel(x, y, newColor);
                     }
                 }
 
-                // Das bearbeitete Bild im PictureBox anzeigen
+                // Show the edited image in the PictureBox
                 pictureBox1.Image = newImage;
 
-                // Den Farbmodus für den nächsten Klick erhöhen
+                // Increase the color mode for the next click
                 colorMode++;
             }
             else
             {
-                // Meldung anzeigen, wenn die Zwischenablage kein Bild enthält
-                MessageBox.Show("Die Zwischenablage enthält kein Bild.");
+                // Show message if clipboard does not contain image
+                MessageBox.Show("The clipboard does not contain an image.");
             }
         }
         private void btphotorandomColor_Click(object sender, EventArgs e)
