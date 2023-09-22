@@ -67,6 +67,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             buttonSaveImage = new System.Windows.Forms.Button();
             panel2 = new System.Windows.Forms.Panel();
             checkBoxRGB = new System.Windows.Forms.CheckBox();
+            btColorNormalization = new System.Windows.Forms.Button();
             checkboxDarken = new System.Windows.Forms.CheckBox();
             LabelWhiteBalance = new System.Windows.Forms.Label();
             TrackbarWhiteBalance = new System.Windows.Forms.TrackBar();
@@ -129,6 +130,8 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             label4 = new System.Windows.Forms.Label();
             zoomLabel = new System.Windows.Forms.Label();
             panelColorHex = new System.Windows.Forms.Panel();
+            buttonRedToBlueColors = new System.Windows.Forms.Button();
+            btphotorandomColor = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             contextMenuStrip1.SuspendLayout();
             panel1.SuspendLayout();
@@ -358,6 +361,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             panel2.Controls.Add(checkBoxRGB);
+            panel2.Controls.Add(btColorNormalization);
             panel2.Controls.Add(checkboxDarken);
             panel2.Controls.Add(LabelWhiteBalance);
             panel2.Controls.Add(TrackbarWhiteBalance);
@@ -387,6 +391,16 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             checkBoxRGB.TabIndex = 28;
             checkBoxRGB.Text = "RGB";
             checkBoxRGB.UseVisualStyleBackColor = true;
+            // 
+            // btColorNormalization
+            // 
+            btColorNormalization.Location = new System.Drawing.Point(221, 132);
+            btColorNormalization.Name = "btColorNormalization";
+            btColorNormalization.Size = new System.Drawing.Size(119, 23);
+            btColorNormalization.TabIndex = 41;
+            btColorNormalization.Text = "ColorNormalization";
+            btColorNormalization.UseVisualStyleBackColor = true;
+            btColorNormalization.Click += btColorNormalization_Click;
             // 
             // checkboxDarken
             // 
@@ -609,7 +623,9 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             panel3.Controls.Add(selectColorButton2);
+            panel3.Controls.Add(btphotorandomColor);
             panel3.Controls.Add(panelIsPickingColor);
+            panel3.Controls.Add(buttonRedToBlueColors);
             panel3.Controls.Add(checkBox2Colors);
             panel3.Controls.Add(btModusColorChange);
             panel3.Controls.Add(zoomButton);
@@ -1009,6 +1025,26 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             panelColorHex.Size = new System.Drawing.Size(24, 22);
             panelColorHex.TabIndex = 40;
             // 
+            // buttonRedToBlueColors
+            // 
+            buttonRedToBlueColors.Location = new System.Drawing.Point(372, 140);
+            buttonRedToBlueColors.Name = "buttonRedToBlueColors";
+            buttonRedToBlueColors.Size = new System.Drawing.Size(29, 22);
+            buttonRedToBlueColors.TabIndex = 41;
+            buttonRedToBlueColors.Text = "R1";
+            buttonRedToBlueColors.UseVisualStyleBackColor = true;
+            buttonRedToBlueColors.Click += buttonRedToBlueColors_Click;
+            // 
+            // btphotorandomColor
+            // 
+            btphotorandomColor.Location = new System.Drawing.Point(372, 164);
+            btphotorandomColor.Name = "btphotorandomColor";
+            btphotorandomColor.Size = new System.Drawing.Size(29, 23);
+            btphotorandomColor.TabIndex = 42;
+            btphotorandomColor.Text = "R2";
+            btphotorandomColor.UseVisualStyleBackColor = true;
+            btphotorandomColor.Click += btphotorandomColor_Click;
+            // 
             // TextureCutter
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1153,5 +1189,8 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         private System.Windows.Forms.CheckBox checkBox2Colors;
         private System.Windows.Forms.Button selectColorButton2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.Button btColorNormalization;
+        private System.Windows.Forms.Button buttonRedToBlueColors;
+        private System.Windows.Forms.Button btphotorandomColor;
     }
 }
