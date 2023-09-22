@@ -88,13 +88,15 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             textBoxColorToAdress = new System.Windows.Forms.TextBox();
             lbColorValue01 = new System.Windows.Forms.Label();
             lbColorValue02 = new System.Windows.Forms.Label();
-            label5 = new System.Windows.Forms.Label();
             lbColorValueDelete = new System.Windows.Forms.Label();
             comboBoxColorValue = new System.Windows.Forms.ComboBox();
             lbColorValue03 = new System.Windows.Forms.Label();
             panel3 = new System.Windows.Forms.Panel();
+            checkBoxToTextboxColor = new System.Windows.Forms.CheckBox();
             selectColorButton2 = new System.Windows.Forms.Button();
+            btphotorandomColor = new System.Windows.Forms.Button();
             panelIsPickingColor = new System.Windows.Forms.Panel();
+            buttonRedToBlueColors = new System.Windows.Forms.Button();
             checkBox2Colors = new System.Windows.Forms.CheckBox();
             btModusColorChange = new System.Windows.Forms.Button();
             zoomButton = new System.Windows.Forms.Button();
@@ -130,8 +132,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             label4 = new System.Windows.Forms.Label();
             zoomLabel = new System.Windows.Forms.Label();
             panelColorHex = new System.Windows.Forms.Panel();
-            buttonRedToBlueColors = new System.Windows.Forms.Button();
-            btphotorandomColor = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             contextMenuStrip1.SuspendLayout();
             panel1.SuspendLayout();
@@ -276,14 +276,14 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             // textBoxSizeH
             // 
-            textBoxSizeH.Location = new System.Drawing.Point(571, 72);
+            textBoxSizeH.Location = new System.Drawing.Point(571, 103);
             textBoxSizeH.Name = "textBoxSizeH";
             textBoxSizeH.Size = new System.Drawing.Size(67, 23);
             textBoxSizeH.TabIndex = 11;
             // 
             // textBoxSizeW
             // 
-            textBoxSizeW.Location = new System.Drawing.Point(571, 101);
+            textBoxSizeW.Location = new System.Drawing.Point(571, 73);
             textBoxSizeW.Name = "textBoxSizeW";
             textBoxSizeW.Size = new System.Drawing.Size(67, 23);
             textBoxSizeW.TabIndex = 12;
@@ -291,7 +291,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(522, 75);
+            label1.Location = new System.Drawing.Point(522, 106);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(47, 15);
             label1.TabIndex = 13;
@@ -301,7 +301,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             label2.AutoSize = true;
             label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            label2.Location = new System.Drawing.Point(526, 106);
+            label2.Location = new System.Drawing.Point(526, 78);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(43, 15);
             label2.TabIndex = 14;
@@ -582,15 +582,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             lbColorValue02.TabIndex = 26;
             lbColorValue02.Text = "Color Value";
             // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(90, 27);
-            label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(18, 15);
-            label5.TabIndex = 27;
-            label5.Text = "to";
-            // 
             // lbColorValueDelete
             // 
             lbColorValueDelete.AutoSize = true;
@@ -622,6 +613,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // panel3
             // 
             panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            panel3.Controls.Add(checkBoxToTextboxColor);
             panel3.Controls.Add(selectColorButton2);
             panel3.Controls.Add(btphotorandomColor);
             panel3.Controls.Add(panelIsPickingColor);
@@ -660,11 +652,21 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             panel3.Controls.Add(lbColorValue01);
             panel3.Controls.Add(lbColorValueDelete);
             panel3.Controls.Add(lbColorValue02);
-            panel3.Controls.Add(label5);
             panel3.Location = new System.Drawing.Point(456, 352);
             panel3.Name = "panel3";
             panel3.Size = new System.Drawing.Size(414, 228);
             panel3.TabIndex = 31;
+            // 
+            // checkBoxToTextboxColor
+            // 
+            checkBoxToTextboxColor.AutoSize = true;
+            checkBoxToTextboxColor.Location = new System.Drawing.Point(81, 26);
+            checkBoxToTextboxColor.Name = "checkBoxToTextboxColor";
+            checkBoxToTextboxColor.Size = new System.Drawing.Size(38, 19);
+            checkBoxToTextboxColor.TabIndex = 53;
+            checkBoxToTextboxColor.Text = "To";
+            checkBoxToTextboxColor.UseVisualStyleBackColor = true;
+            checkBoxToTextboxColor.CheckedChanged += checkBoxToTextboxColor_CheckedChanged;
             // 
             // selectColorButton2
             // 
@@ -676,12 +678,32 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             selectColorButton2.UseVisualStyleBackColor = true;
             selectColorButton2.Click += selectColorButton2_Click;
             // 
+            // btphotorandomColor
+            // 
+            btphotorandomColor.Location = new System.Drawing.Point(372, 164);
+            btphotorandomColor.Name = "btphotorandomColor";
+            btphotorandomColor.Size = new System.Drawing.Size(29, 23);
+            btphotorandomColor.TabIndex = 42;
+            btphotorandomColor.Text = "R2";
+            btphotorandomColor.UseVisualStyleBackColor = true;
+            btphotorandomColor.Click += btphotorandomColor_Click;
+            // 
             // panelIsPickingColor
             // 
             panelIsPickingColor.Location = new System.Drawing.Point(146, 166);
             panelIsPickingColor.Name = "panelIsPickingColor";
             panelIsPickingColor.Size = new System.Drawing.Size(24, 22);
             panelIsPickingColor.TabIndex = 41;
+            // 
+            // buttonRedToBlueColors
+            // 
+            buttonRedToBlueColors.Location = new System.Drawing.Point(372, 140);
+            buttonRedToBlueColors.Name = "buttonRedToBlueColors";
+            buttonRedToBlueColors.Size = new System.Drawing.Size(29, 22);
+            buttonRedToBlueColors.TabIndex = 41;
+            buttonRedToBlueColors.Text = "R1";
+            buttonRedToBlueColors.UseVisualStyleBackColor = true;
+            buttonRedToBlueColors.Click += buttonRedToBlueColors_Click;
             // 
             // checkBox2Colors
             // 
@@ -1025,26 +1047,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             panelColorHex.Size = new System.Drawing.Size(24, 22);
             panelColorHex.TabIndex = 40;
             // 
-            // buttonRedToBlueColors
-            // 
-            buttonRedToBlueColors.Location = new System.Drawing.Point(372, 140);
-            buttonRedToBlueColors.Name = "buttonRedToBlueColors";
-            buttonRedToBlueColors.Size = new System.Drawing.Size(29, 22);
-            buttonRedToBlueColors.TabIndex = 41;
-            buttonRedToBlueColors.Text = "R1";
-            buttonRedToBlueColors.UseVisualStyleBackColor = true;
-            buttonRedToBlueColors.Click += buttonRedToBlueColors_Click;
-            // 
-            // btphotorandomColor
-            // 
-            btphotorandomColor.Location = new System.Drawing.Point(372, 164);
-            btphotorandomColor.Name = "btphotorandomColor";
-            btphotorandomColor.Size = new System.Drawing.Size(29, 23);
-            btphotorandomColor.TabIndex = 42;
-            btphotorandomColor.Text = "R2";
-            btphotorandomColor.UseVisualStyleBackColor = true;
-            btphotorandomColor.Click += btphotorandomColor_Click;
-            // 
             // TextureCutter
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1135,7 +1137,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         private System.Windows.Forms.TextBox textBoxColorToAdress;
         private System.Windows.Forms.Label lbColorValue01;
         private System.Windows.Forms.Label lbColorValue02;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lbColorValueDelete;
         private System.Windows.Forms.ComboBox comboBoxColorValue;
         private System.Windows.Forms.Label lbColorValue03;
@@ -1192,5 +1193,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         private System.Windows.Forms.Button btColorNormalization;
         private System.Windows.Forms.Button buttonRedToBlueColors;
         private System.Windows.Forms.Button btphotorandomColor;
+        private System.Windows.Forms.CheckBox checkBoxToTextboxColor;
     }
 }

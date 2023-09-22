@@ -1110,6 +1110,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         #endregion
 
         #region Textbox Color
+
         private void textBoxColorAdress_TextChanged(object sender, EventArgs e)
         {
             // Verify that the text you entered is a valid color value
@@ -1118,13 +1119,38 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 // The text you entered is not a valid color value - display an error message
                 MessageBox.Show("Please enter a valid color value.");
             }
-            // Check if the text in the TextBox is a valid color code
-            if (ColorTranslator.FromHtml(textBoxColorAdress.Text) is Color color)
+            else
             {
-                // Set the background color of panelIsPickingColor to the color value
-                panelIsPickingColor.BackColor = color;
+                // Check if the text in the TextBox is a valid color code
+                try
+                {
+                    if (ColorTranslator.FromHtml(textBoxColorAdress.Text) is Color color)
+                    {
+                        // Set the background color of panelIsPickingColor to the color value
+                        panelIsPickingColor.BackColor = color;
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Please enter a valid color value.");
+                }
+            }
+            // Wenn die Checkbox aktiviert ist, kopieren Sie den Text aus textBoxColorAdress in textBoxColorToAdress
+            if (checkBoxToTextboxColor.Checked)
+            {
+                textBoxColorToAdress.Text = textBoxColorAdress.Text;
             }
         }
+
+        private void checkBoxToTextboxColor_CheckedChanged(object sender, EventArgs e)
+        {
+            // Wenn die Checkbox aktiviert ist, kopieren Sie den Text aus textBoxColorAdress in textBoxColorToAdress
+            if (checkBoxToTextboxColor.Checked)
+            {
+                textBoxColorToAdress.Text = textBoxColorAdress.Text;
+            }
+        }
+
         private void textBoxColorToAdress_TextChanged(object sender, EventArgs e)
         {
             // Verify that the text you entered is a valid color value
@@ -1132,6 +1158,12 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             {
                 // The text you entered is not a valid color value - display an error message
                 MessageBox.Show("Please enter a valid color value.");
+            }
+
+            // Wenn die Checkbox aktiviert ist, kopieren Sie den Text aus textBoxColorAdress in textBoxColorToAdress
+            if (checkBoxToTextboxColor.Checked)
+            {
+                textBoxColorToAdress.Text = textBoxColorAdress.Text;
             }
         }
 

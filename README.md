@@ -5,6 +5,10 @@
 UOFiddler based on Ultima SDK it's a tool to view and alter almost every UO 2D client file. Source code is released under the Beerware license.
 
 ## Changelog
+Version : 4.11.23
+- Fixed an issue in Texturecutter regarding the input of hex addresses so that it works with and without the "#" symbol.
+- Added a checkbox that, when active, moves the input from one textbox to another.
+
 Version : 4.11.22
 - Added a ContextMenuStrip button for the hex address to export the selected items to the clipboard. In the AminData function, implemented logic to pass the hex address to the TextBox in the ContextMenuStrip when there is a hex address in the clipboard.
 - Added images for the Gumps and tooltips.
