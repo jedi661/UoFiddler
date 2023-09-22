@@ -32,6 +32,7 @@ Version : 4.11.22
 - Added a "Draken" checkbox to reverse the White Balance and make it darker.
 - The design has been updated.
 - New icons have been added.
+- TextureCutter Two buttons for coloring have been added.
 
 Version : 4.11.21
 - Added graphics for "Compare Items."
