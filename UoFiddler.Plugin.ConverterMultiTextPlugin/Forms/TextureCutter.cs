@@ -3474,5 +3474,21 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // Show the form
             clockForm.Show();
         }
+
+        //Saves the position.
+        private void TextureCutter_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Properties.Settings.Default.FormTextureCutter = this.Location;
+            Properties.Settings.Default.Save();
+        }
+
+        //Load position.
+        private void TextureCutterForm_Load(object sender, EventArgs e)
+        {
+            if (Properties.Settings.Default.FormTextureCutter != Point.Empty)
+            {
+                this.Location = Properties.Settings.Default.FormTextureCutter;
+            }
+        }
     }
 }

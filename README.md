@@ -14,6 +14,7 @@ Version : 4.11.23
 - Settings are now saved, including the size of the MainForm and whether it's maximized, in the personalized settings. Positioning, however, is still not exact.
 - The AlarmClock now has the feature to load an alternative wave file as an alarm sound.
 - The Dec Hex Bin Converter now also saves the position where it was placed.
+- TextureCutter now saves its position as well.
 
 Version : 4.11.22
 - Added a ContextMenuStrip button for the hex address to export the selected items to the clipboard. In the AminData function, implemented logic to pass the hex address to the TextBox in the ContextMenuStrip when there is a hex address in the clipboard.

@@ -93,6 +93,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             lbColorValue03 = new System.Windows.Forms.Label();
             panel3 = new System.Windows.Forms.Panel();
             checkBoxToTextboxColor = new System.Windows.Forms.CheckBox();
+            btTimePin = new System.Windows.Forms.Button();
             selectColorButton2 = new System.Windows.Forms.Button();
             btphotorandomColor = new System.Windows.Forms.Button();
             panelIsPickingColor = new System.Windows.Forms.Panel();
@@ -132,7 +133,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             label4 = new System.Windows.Forms.Label();
             zoomLabel = new System.Windows.Forms.Label();
             panelColorHex = new System.Windows.Forms.Panel();
-            btTimePin = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             contextMenuStrip1.SuspendLayout();
             panel1.SuspendLayout();
@@ -670,6 +670,16 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             checkBoxToTextboxColor.UseVisualStyleBackColor = true;
             checkBoxToTextboxColor.CheckedChanged += checkBoxToTextboxColor_CheckedChanged;
             // 
+            // btTimePin
+            // 
+            btTimePin.Location = new System.Drawing.Point(352, 24);
+            btTimePin.Name = "btTimePin";
+            btTimePin.Size = new System.Drawing.Size(55, 23);
+            btTimePin.TabIndex = 41;
+            btTimePin.Text = "Empty";
+            btTimePin.UseVisualStyleBackColor = true;
+            btTimePin.Click += btTimePin_Click;
+            // 
             // selectColorButton2
             // 
             selectColorButton2.Location = new System.Drawing.Point(149, 109);
@@ -1049,16 +1059,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             panelColorHex.Size = new System.Drawing.Size(24, 22);
             panelColorHex.TabIndex = 40;
             // 
-            // btTimePin
-            // 
-            btTimePin.Location = new System.Drawing.Point(352, 24);
-            btTimePin.Name = "btTimePin";
-            btTimePin.Size = new System.Drawing.Size(55, 23);
-            btTimePin.TabIndex = 41;
-            btTimePin.Text = "Empty";
-            btTimePin.UseVisualStyleBackColor = true;
-            btTimePin.Click += btTimePin_Click;
-            // 
             // TextureCutter
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1097,6 +1097,8 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             MaximizeBox = false;
             Name = "TextureCutter";
             Text = "TextureCutter and Color Changer Clipboard";
+            FormClosed += TextureCutter_FormClosed;
+            Load += TextureCutterForm_Load;
             KeyDown += Form1_KeyDown;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             contextMenuStrip1.ResumeLayout(false);
