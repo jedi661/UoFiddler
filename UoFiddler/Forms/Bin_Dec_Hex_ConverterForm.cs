@@ -15,6 +15,11 @@ namespace UoFiddler.Forms
         public Bin_Dec_Hex_ConverterForm()
         {
             InitializeComponent();
+
+            if (Properties.Settings.Default.FormBinDecHexConverter != Point.Empty)
+            {
+                this.Location = Properties.Settings.Default.FormBinDecHexConverter;
+            }
         }
 
         private void textBoxBinär_TextChanged(object sender, EventArgs e)
@@ -272,6 +277,22 @@ namespace UoFiddler.Forms
         private void bt_Listing_Clear_Click(object sender, EventArgs e)
         {
             tb_listing.Clear();
+        }
+
+        // Save Position User.config
+        private void Bin_Dec_Hex_ConverterForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Properties.Settings.Default.FormBinDecHexConverter = this.Location;
+            Properties.Settings.Default.Save();
+        }
+
+        //Load Postion
+        private void Bin_Dec_Hex_ConverterForm_Load(object sender, EventArgs e)
+        {
+            if (Properties.Settings.Default.FormBinDecHexConverter != Point.Empty)
+            {
+                this.Location = Properties.Settings.Default.FormBinDecHexConverter;
+            }
         }
     }
 }

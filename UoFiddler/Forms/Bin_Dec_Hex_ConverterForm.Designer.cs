@@ -488,6 +488,8 @@ namespace UoFiddler.Forms
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Name = "Bin_Dec_Hex_ConverterForm";
             Text = "Binary Decimal Hexadecimal Converter";
+            FormClosed += Bin_Dec_Hex_ConverterForm_FormClosed;
+            Load += Bin_Dec_Hex_ConverterForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }
