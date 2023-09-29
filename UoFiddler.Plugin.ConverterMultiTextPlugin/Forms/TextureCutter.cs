@@ -3464,5 +3464,15 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             }
             #endregion
         }
+
+        private void btTimePin_Click(object sender, EventArgs e)
+        {
+            // Create a new form
+            Form clockForm = new Form();
+            clockForm.Text = "Empty";
+
+            // Show the form
+            clockForm.Show();
+        }
     }
 }

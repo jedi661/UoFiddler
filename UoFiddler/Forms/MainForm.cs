@@ -29,9 +29,69 @@ namespace UoFiddler.Forms
     {
         //Bin_Dec_Hex_ConverterForm
         private Bin_Dec_Hex_ConverterForm binDecHexConverterForm;
+
+        //AlarmClock
+        private AlarmClockForm alarmClockForm;
         public MainForm()
         {
             InitializeComponent();
+
+            //Orginal
+            /*if (FiddlerOptions.StoreFormState)
+            {
+                if (FiddlerOptions.MaximisedForm)
+                {
+                    StartPosition = FormStartPosition.Manual;
+                    WindowState = FormWindowState.Maximized;
+                }
+                else
+                {
+                    if (IsOkFormStateLocation(FiddlerOptions.FormPosition, FiddlerOptions.FormSize))
+                    {
+                        StartPosition = FormStartPosition.Manual; 
+                        WindowState = FormWindowState.Normal;
+                        Location = FiddlerOptions.FormPosition;
+                        Size = FiddlerOptions.FormSize;
+                    }
+                }
+            }*/
+
+            // Original
+            if (FiddlerOptions.StoreFormState)
+            {
+                if (FiddlerOptions.MaximisedForm)
+                {
+                    StartPosition = FormStartPosition.Manual;
+                    WindowState = FormWindowState.Maximized;
+                }
+                else
+                {
+                    if (IsOkFormStateLocation(FiddlerOptions.FormPosition, FiddlerOptions.FormSize))
+                    {
+                        StartPosition = FormStartPosition.Manual;
+                        WindowState = FormWindowState.Normal;
+                        Location = FiddlerOptions.FormPosition;
+                        Size = FiddlerOptions.FormSize;
+                    }
+                }
+            }
+
+            // Ohne IsOkFormStateLocation
+            /*if (FiddlerOptions.StoreFormState)
+            {
+                if (FiddlerOptions.MaximisedForm)
+                {
+                    StartPosition = FormStartPosition.Manual;
+                    WindowState = FormWindowState.Maximized;
+                }
+                else
+                {
+                    StartPosition = FormStartPosition.Manual;
+                    WindowState = FormWindowState.Normal;
+                    Location = FiddlerOptions.FormPosition;
+                    Size = FiddlerOptions.FormSize;
+                }
+            }*/
 
             // Please define the desired order of the tabs.
             string[] tabOrder = new string[] { "StartTab", "ItemsTab", "GumpsTab", "DressTab", "TileDataTab", "LandTilesTab", "TextureTab", "MapTab", "MultiMapTab", "MultisTab", "RadarColTab", "HuesTab", "AnimationTab", "AnimDataTab", "LightTab", "SoundsTab", "SkillsTab", "SkillGrpTab", "SpeechTab", "ClilocTab", "FontsTab", };
@@ -59,31 +119,13 @@ namespace UoFiddler.Forms
             TabPanel.DrawMode = TabDrawMode.OwnerDrawFixed;
             // Register the TabPanel_DrawItem method as an event handler for the DrawItem event of the TabPanel control
             TabPanel.DrawItem += TabPanel_DrawItem;
-
-            if (FiddlerOptions.StoreFormState)
-            {
-                if (FiddlerOptions.MaximisedForm)
-                {
-                    StartPosition = FormStartPosition.Manual;
-                    WindowState = FormWindowState.Maximized;
-                }
-                else
-                {
-                    if (IsOkFormStateLocation(FiddlerOptions.FormPosition, FiddlerOptions.FormSize))
-                    {
-                        StartPosition = FormStartPosition.Manual;
-                        WindowState = FormWindowState.Normal;
-                        Location = FiddlerOptions.FormPosition;
-                        Size = FiddlerOptions.FormSize;
-                    }
-                }
-            }
-
+                       
+            // Icon
             Icon = Options.GetFiddlerIcon();
-
+            // Version
             Versionlabel.Text = $"Version {FiddlerOptions.AppVersion.Major}.{FiddlerOptions.AppVersion.Minor}.{FiddlerOptions.AppVersion.Build}";
             Versionlabel.Left = StartTab.Size.Width - Versionlabel.Width - 5;
-
+            // Load Plugins
             LoadExternToolStripMenu();
             GlobalPlugins.Plugins.FindPlugins($@"{Application.StartupPath}\plugins");
 
@@ -143,6 +185,33 @@ namespace UoFiddler.Forms
                     StartTab.BackgroundImage = Properties.Resources.UOFiddler6; // Set the background image of the StartTab to UOFiddler6
                     break;
             }
+
+
+            // AlarmClock Set Pos User.config
+            if (Properties.Settings.Default.FormLocationAlarm != Point.Empty)
+            {
+                this.Location = Properties.Settings.Default.FormLocationAlarm;
+            }
+
+            /*
+            // MainFormPos
+            if (Properties.Settings.Default.MainFormPos != Point.Empty)
+            {
+                this.Location = Properties.Settings.Default.MainFormPos;
+            }
+
+            // MainFormSize
+            if (Properties.Settings.Default.MainFormSize != Size.Empty)
+            {
+                this.Size = Properties.Settings.Default.MainFormSize;
+            }
+
+            // MainFormMaximized
+            if (Properties.Settings.Default.MainFormMaximized)
+            {
+                this.WindowState = FormWindowState.Maximized;
+            }
+            */
         }
 
         #region TabPanel_DrawItem => tab design
@@ -232,6 +301,7 @@ namespace UoFiddler.Forms
         }
         #endregion
 
+        #region PathSettingsForm
         private PathSettingsForm _pathSettingsForm = new PathSettingsForm();
 
         private void Click_path(object sender, EventArgs e)
@@ -248,13 +318,17 @@ namespace UoFiddler.Forms
             _pathSettingsForm.TopMost = true;
             _pathSettingsForm.Show();
         }
+        #endregion
 
+        #region OnClickAlwaysTop
         private void OnClickAlwaysTop(object sender, EventArgs e)
         {
             TopMost = AlwaysOnTopMenuitem.Checked;
             ControlEvents.FireAlwaysOnTopChangeEvent(TopMost);
         }
+        #endregion
 
+        #region Reload Files
         private void ReloadFiles(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -349,6 +423,7 @@ namespace UoFiddler.Forms
 
             Cursor.Current = Cursors.Default;
         }
+        #endregion
 
         /// <summary>
         /// Reloads the Extern Tools DropDown <see cref="FiddlerOptions.ExternTools"/>
@@ -405,6 +480,7 @@ namespace UoFiddler.Forms
             }
         }
 
+        #region ExternTool
         private static void ExternTool_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             int argInfo = (int)e.ClickedItem.Tag;
@@ -436,7 +512,9 @@ namespace UoFiddler.Forms
                 }
             }
         }
+        #endregion
 
+        #region ManageToolsForm
         private ManageToolsForm _manageForm;
 
         private void OnClickToolManage(object sender, EventArgs e)
@@ -452,7 +530,9 @@ namespace UoFiddler.Forms
             };
             _manageForm.Show();
         }
+        #endregion
 
+        #region OptionsForm
         private OptionsForm _optionsForm;
 
         private void OnClickOptions(object sender, EventArgs e)
@@ -472,6 +552,7 @@ namespace UoFiddler.Forms
             };
             _optionsForm.Show();
         }
+        #endregion
 
         /// <summary>
         /// Updates all tile view tabs
@@ -537,6 +618,7 @@ namespace UoFiddler.Forms
             soundControl.Reload();
         }
 
+        #region Dock and Undock
         private void OnClickUnDock(object sender, EventArgs e)
         {
             int tag = (int)TabPanel.SelectedTab.Tag;
@@ -575,7 +657,9 @@ namespace UoFiddler.Forms
 
             TabPanel.SelectedTab = oldTab;
         }
+        #endregion
 
+        #region ManagePlugins
         private ManagePluginsForm _pluginsFormForm;
 
         private void OnClickManagePlugins(object sender, EventArgs e)
@@ -591,7 +675,9 @@ namespace UoFiddler.Forms
             };
             _pluginsFormForm.Show();
         }
+        #endregion
 
+        #region OnClosing
         private void OnClosing(object sender, FormClosingEventArgs e)
         {
             FiddlerOptions.Logger.Information("MainForm - OnClosing - start");
@@ -612,17 +698,33 @@ namespace UoFiddler.Forms
                 }
             }
 
+            /*
+            // Speichern Sie die Position des MainForm-Fensters
+            Properties.Settings.Default.MainFormPos = this.Location;
+
+            //Speichert Size
+            Properties.Settings.Default.MainFormSize = this.Size;
+            //Speichert das Maximiert
+            Properties.Settings.Default.MainFormMaximized = (this.WindowState == FormWindowState.Maximized);
+            // Speichern Sie die Einstellungen in die User.Config
+            Properties.Settings.Default.Save();
+            //ende
+            */
+
             FiddlerOptions.MaximisedForm = WindowState == FormWindowState.Maximized;
-            FiddlerOptions.FormPosition = Location;
-            FiddlerOptions.FormSize = Size;
+            FiddlerOptions.FormPosition = this.Location;
+            FiddlerOptions.FormSize = this.Size;
 
             FiddlerOptions.Logger.Information("MainForm - OnClosing - unloading plugins");
             GlobalPlugins.Plugins.ClosePlugins();
 
             FiddlerOptions.Logger.Information("MainForm - OnClosing - done");
         }
+        #endregion
 
-        private static bool IsOkFormStateLocation(Point loc, Size size)
+        #region IsOkFormStateLocation
+        // orginal
+        /*private static bool IsOkFormStateLocation(Point loc, Size size)
         {
             if (loc.X < 0 || loc.Y < 0)
             {
@@ -635,8 +737,130 @@ namespace UoFiddler.Forms
             }
 
             return loc.Y + size.Height <= Screen.PrimaryScreen.WorkingArea.Height;
+        }*/
+
+        /*private bool IsOkFormStateLocation(Point loc, Size size)
+        {
+            int maxX = Screen.PrimaryScreen.WorkingArea.Width;
+            int maxY = Screen.PrimaryScreen.WorkingArea.Height;
+
+            // Überprüfen Sie die X-Koordinate
+            // Check the X coordinate
+            if (loc.X < 0 || loc.X + size.Width > maxX)
+            {
+                loc.X = Math.Max(0, maxX - size.Width);
+            }
+
+            // Überprüfen Sie die Y-Koordinate
+            // Check the Y coordinate
+            if (loc.Y < 0 || loc.Y + size.Height > maxY)
+            {
+                loc.Y = Math.Max(0, maxY - size.Height);
+            }
+
+            // Überprüfen Sie auch die Größe
+            // Also check the size
+            if (size.Width <= Screen.PrimaryScreen.WorkingArea.Width &&
+                size.Height <= Screen.PrimaryScreen.WorkingArea.Height)
+            {
+                // Die Größe ist in Ordnung
+                // The size is okay
+            }
+            else
+            {
+                // Die Größe ist zu groß, passen Sie sie an
+                // The size is too big, adjust it
+                size = new Size(
+                    Math.Min(size.Width, Screen.PrimaryScreen.WorkingArea.Width),
+                    Math.Min(size.Height, Screen.PrimaryScreen.WorkingArea.Height)
+                );
+            }
+
+            // Überprüfen Sie, ob die Position und Größe gültig sind und geben Sie das Ergebnis zurück
+            // Check if the position and size are valid and return the result
+            bool isValid = (loc.X >= 0 &&
+                            loc.Y >= 0 &&
+                            loc.X + size.Width <= maxX &&
+                            loc.Y + size.Height <= maxY);
+
+            if (!isValid)
+            {
+                throw new Exception("Die Position oder Größe des Fensters ist ungültig.");
+                // Throw an exception if the position or size of the window is invalid.
+            }
+
+            return isValid;
+        }*/
+
+        private bool IsOkFormStateLocation(Point loc, Size size)
+        {
+            int maxX = Screen.PrimaryScreen.WorkingArea.Width;
+            int maxY = Screen.PrimaryScreen.WorkingArea.Height;
+
+            // Adjust the X and Y coordinates
+            // Passen Sie die X- und Y-Koordinaten an
+            loc = AdjustCoordinates(loc, size, maxX, maxY);
+
+            // Adjust the size
+            // Passen Sie die Größe an
+            size = AdjustSize(size);
+
+            // Check if the position and size are valid and return the result
+            // Überprüfen Sie, ob die Position und Größe gültig sind und geben Sie das Ergebnis zurück
+            bool isValid = (loc.X >= 0 &&
+                            loc.Y >= 0 &&
+                            loc.X + size.Width <= maxX &&
+                            loc.Y + size.Height <= maxY);
+
+            if (!isValid)
+            {
+                throw new Exception("Die Position oder Größe des Fensters ist ungültig.");
+                // Throw an exception if the position or size of the window is invalid.
+            }
+
+            return isValid;
         }
 
+        private Point AdjustCoordinates(Point loc, Size size, int maxX, int maxY)
+        {
+            // Check the X coordinate
+            // Überprüfen Sie die X-Koordinate
+            if (loc.X < 0 || loc.X + size.Width > maxX)
+            {
+                loc.X = Math.Max(0, maxX - size.Width);
+            }
+
+            // Check the Y coordinate
+            // Überprüfen Sie die Y-Koordinate
+            if (loc.Y < 0 || loc.Y + size.Height > maxY)
+            {
+                loc.Y = Math.Max(0, maxY - size.Height);
+            }
+
+            return loc;
+        }
+
+        private Size AdjustSize(Size size)
+        {
+            // Also check the size
+            // Überprüfen Sie auch die Größe
+            if (size.Width > Screen.PrimaryScreen.WorkingArea.Width ||
+                size.Height > Screen.PrimaryScreen.WorkingArea.Height)
+            {
+                // The size is too big, adjust it
+                // Die Größe ist zu groß, passen Sie sie an
+                size = new Size(
+                    Math.Min(size.Width, Screen.PrimaryScreen.WorkingArea.Width),
+                    Math.Min(size.Height, Screen.PrimaryScreen.WorkingArea.Height)
+                );
+            }
+
+            return size;
+        }
+
+        #endregion
+
+        #region View Tab List
         private void ToggleView(object sender, EventArgs e)
         {
             ToolStripMenuItem theMenuItem = (ToolStripMenuItem)sender;
@@ -721,6 +945,7 @@ namespace UoFiddler.Forms
             }
         }
 
+        
         private TabPage TabFromTag(int tag)
         {
             switch (tag)
@@ -750,6 +975,7 @@ namespace UoFiddler.Forms
             }
         }
 
+
         private ToolStripMenuItem MenuFromTag(int tag)
         {
             switch (tag)
@@ -778,6 +1004,7 @@ namespace UoFiddler.Forms
                 default: return ToggleViewStart;
             }
         }
+        #endregion
 
         #region Polserver Link
         private void ToolStripMenuItemHelp_Click(object sender, EventArgs e)
@@ -1034,6 +1261,24 @@ namespace UoFiddler.Forms
             else
             {
                 MessageBox.Show("The 'tempGrafic' folder does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        #endregion
+
+        #region AlarmClock
+        private void alarmClockToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (alarmClockForm == null || alarmClockForm.IsDisposed)
+            {
+                alarmClockForm = new AlarmClockForm()
+                {
+                    TopMost = true
+                };
+                alarmClockForm.Show();
+            }
+            else
+            {
+                alarmClockForm.Focus();
             }
         }
         #endregion

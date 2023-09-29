@@ -451,6 +451,7 @@ namespace UoFiddler.Classes
                 Options.ChangedViewState[viewTab] = false;
             }
 
+            #region Create Pos profile
             elem = (XmlElement)xOptions.SelectSingleNode("ViewState");
             if (elem != null)
             {
@@ -459,7 +460,7 @@ namespace UoFiddler.Classes
                 FormPosition = new Point(int.Parse(elem.GetAttribute("PositionX")), int.Parse(elem.GetAttribute("PositionY")));
                 FormSize = new Size(int.Parse(elem.GetAttribute("Width")), int.Parse(elem.GetAttribute("Height")));
             }
-
+            #endregion
             elem = (XmlElement)xOptions.SelectSingleNode("TileDataDirectlySaveOnChange");
             Options.TileDataDirectlySaveOnChange = elem != null && (elem.GetAttribute("value") ?? "").Equals("true", StringComparison.OrdinalIgnoreCase);
 

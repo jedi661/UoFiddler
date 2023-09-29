@@ -163,6 +163,26 @@ namespace UoFiddler.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap uhr {
+            get {
+                object obj = ResourceManager.GetObject("uhr", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap uhr2 {
+            get {
+                object obj = ResourceManager.GetObject("uhr2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap UOFiddler {
             get {
                 object obj = ResourceManager.GetObject("UOFiddler", resourceCulture);

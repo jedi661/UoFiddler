@@ -132,6 +132,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             label4 = new System.Windows.Forms.Label();
             zoomLabel = new System.Windows.Forms.Label();
             panelColorHex = new System.Windows.Forms.Panel();
+            btTimePin = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             contextMenuStrip1.SuspendLayout();
             panel1.SuspendLayout();
@@ -614,6 +615,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             panel3.Controls.Add(checkBoxToTextboxColor);
+            panel3.Controls.Add(btTimePin);
             panel3.Controls.Add(selectColorButton2);
             panel3.Controls.Add(btphotorandomColor);
             panel3.Controls.Add(panelIsPickingColor);
@@ -660,7 +662,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // checkBoxToTextboxColor
             // 
             checkBoxToTextboxColor.AutoSize = true;
-            checkBoxToTextboxColor.Location = new System.Drawing.Point(81, 26);
+            checkBoxToTextboxColor.Location = new System.Drawing.Point(82, 26);
             checkBoxToTextboxColor.Name = "checkBoxToTextboxColor";
             checkBoxToTextboxColor.Size = new System.Drawing.Size(38, 19);
             checkBoxToTextboxColor.TabIndex = 53;
@@ -1047,6 +1049,16 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             panelColorHex.Size = new System.Drawing.Size(24, 22);
             panelColorHex.TabIndex = 40;
             // 
+            // btTimePin
+            // 
+            btTimePin.Location = new System.Drawing.Point(352, 24);
+            btTimePin.Name = "btTimePin";
+            btTimePin.Size = new System.Drawing.Size(55, 23);
+            btTimePin.TabIndex = 41;
+            btTimePin.Text = "Empty";
+            btTimePin.UseVisualStyleBackColor = true;
+            btTimePin.Click += btTimePin_Click;
+            // 
             // TextureCutter
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1194,5 +1206,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         private System.Windows.Forms.Button buttonRedToBlueColors;
         private System.Windows.Forms.Button btphotorandomColor;
         private System.Windows.Forms.CheckBox checkBoxToTextboxColor;
+        private System.Windows.Forms.Button btTimePin;
     }
 }
