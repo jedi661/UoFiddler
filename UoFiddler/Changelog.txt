@@ -4,6 +4,7 @@ Version : 4.11.23 #XG1
 - Octokit Update 8.0.0
 - Added an alarm clock feature where you can set a time for the alarm to go off.
 - Settings are now saved, including the size of the MainForm and whether it's maximized, in the personalized settings. Positioning, however, is still not exact.
+- The AlarmClock now has the feature to load an alternative wave file as an alarm sound.
 
 Version : 4.11.22 #XG1
 - Added a ContextMenuStrip button for the hex address to export the selected items to the clipboard. In the AminData function, implemented logic to pass the hex address to the TextBox in the ContextMenuStrip when there is a hex address in the clipboard.
