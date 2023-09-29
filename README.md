@@ -11,7 +11,6 @@ Version : 4.11.23
 - Octokit Update 8.0.0
 - Added an alarm clock feature where you can set a time for the alarm to go off.
 - The Alarmclock now saves its last positioned location.
-- Added AlarmClock to remind you of the time.
 - Settings are now saved, including the size of the MainForm and whether it's maximized, in the personalized settings. Positioning, however, is still not exact.
 
 Version : 4.11.22
