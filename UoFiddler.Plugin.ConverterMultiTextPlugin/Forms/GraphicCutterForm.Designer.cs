@@ -91,6 +91,8 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             toolStripMenuItemrotate90degrees = new System.Windows.Forms.ToolStripMenuItem();
             cutImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             fillTextureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            showMaskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            dischargedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             panel2 = new System.Windows.Forms.Panel();
@@ -102,6 +104,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             zoomButton = new System.Windows.Forms.Button();
             pictureBox2 = new System.Windows.Forms.PictureBox();
             panel3 = new System.Windows.Forms.Panel();
+            checkBoxOrgSize = new System.Windows.Forms.CheckBox();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
@@ -454,15 +457,15 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             // contextMenuStrip1
             // 
-            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { openToolStrip2MenuItem, saveImageToolStripMenuItem, unloadimageToolStripMenuItem, toolStripSeparator4, gridToolStripMenuItem, mirror2ToolStripMenuItem, toolStripMenuItemrotate90degrees, cutImageToolStripMenuItem, fillTextureToolStripMenuItem, toolStripSeparator5, copyToolStripMenuItem });
+            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { openToolStrip2MenuItem, saveImageToolStripMenuItem, unloadimageToolStripMenuItem, toolStripSeparator4, gridToolStripMenuItem, mirror2ToolStripMenuItem, toolStripMenuItemrotate90degrees, cutImageToolStripMenuItem, fillTextureToolStripMenuItem, showMaskToolStripMenuItem, toolStripSeparator5, copyToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new System.Drawing.Size(168, 214);
+            contextMenuStrip1.Size = new System.Drawing.Size(181, 258);
             // 
             // openToolStrip2MenuItem
             // 
             openToolStrip2MenuItem.Image = Properties.Resources.Load;
             openToolStrip2MenuItem.Name = "openToolStrip2MenuItem";
-            openToolStrip2MenuItem.Size = new System.Drawing.Size(167, 22);
+            openToolStrip2MenuItem.Size = new System.Drawing.Size(180, 22);
             openToolStrip2MenuItem.Text = "Open";
             openToolStrip2MenuItem.Click += openToolStrip2MenuItem_Click;
             // 
@@ -471,7 +474,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             saveImageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripComboBox1 });
             saveImageToolStripMenuItem.Image = Properties.Resources.Save;
             saveImageToolStripMenuItem.Name = "saveImageToolStripMenuItem";
-            saveImageToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            saveImageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             saveImageToolStripMenuItem.Text = "Save Image";
             saveImageToolStripMenuItem.Click += saveImageToolStripMenuItem_Click;
             // 
@@ -488,21 +491,21 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             unloadimageToolStripMenuItem.Image = Properties.Resources.Leeren;
             unloadimageToolStripMenuItem.Name = "unloadimageToolStripMenuItem";
-            unloadimageToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            unloadimageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             unloadimageToolStripMenuItem.Text = "Unload Image";
             unloadimageToolStripMenuItem.Click += unloadimageToolStripMenuItem_Click;
             // 
             // toolStripSeparator4
             // 
             toolStripSeparator4.Name = "toolStripSeparator4";
-            toolStripSeparator4.Size = new System.Drawing.Size(164, 6);
+            toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
             // 
             // gridToolStripMenuItem
             // 
             gridToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripComboBox3 });
             gridToolStripMenuItem.Image = Properties.Resources.Schablone;
             gridToolStripMenuItem.Name = "gridToolStripMenuItem";
-            gridToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            gridToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             gridToolStripMenuItem.Text = "Grid";
             gridToolStripMenuItem.Click += gridToolStripMenuItem_Click;
             gridToolStripMenuItem.Paint += pictureBox3_Paint;
@@ -518,7 +521,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             mirror2ToolStripMenuItem.Image = Properties.Resources.Mirror1;
             mirror2ToolStripMenuItem.Name = "mirror2ToolStripMenuItem";
-            mirror2ToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            mirror2ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             mirror2ToolStripMenuItem.Text = "Mirror";
             mirror2ToolStripMenuItem.Click += mirror2ToolStripMenuItem_Click_1;
             // 
@@ -526,7 +529,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             toolStripMenuItemrotate90degrees.Image = Properties.Resources.Rotate;
             toolStripMenuItemrotate90degrees.Name = "toolStripMenuItemrotate90degrees";
-            toolStripMenuItemrotate90degrees.Size = new System.Drawing.Size(167, 22);
+            toolStripMenuItemrotate90degrees.Size = new System.Drawing.Size(180, 22);
             toolStripMenuItemrotate90degrees.Text = "Rotate 90 degrees";
             toolStripMenuItemrotate90degrees.Click += toolStripMenuItemrotate90degrees_Click;
             // 
@@ -534,7 +537,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             cutImageToolStripMenuItem.Image = Properties.Resources.Cut;
             cutImageToolStripMenuItem.Name = "cutImageToolStripMenuItem";
-            cutImageToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            cutImageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             cutImageToolStripMenuItem.Text = "Cut Image";
             cutImageToolStripMenuItem.Click += cutImageToolStripMenuItem_Click;
             // 
@@ -542,20 +545,38 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             fillTextureToolStripMenuItem.Image = Properties.Resources.fill;
             fillTextureToolStripMenuItem.Name = "fillTextureToolStripMenuItem";
-            fillTextureToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            fillTextureToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             fillTextureToolStripMenuItem.Text = "Fill Texture";
             fillTextureToolStripMenuItem.Click += fillTextureToolStripMenuItem_Click;
+            // 
+            // showMaskToolStripMenuItem
+            // 
+            showMaskToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { dischargedToolStripMenuItem });
+            showMaskToolStripMenuItem.Image = Properties.Resources.image_eine_maske_laden03;
+            showMaskToolStripMenuItem.Name = "showMaskToolStripMenuItem";
+            showMaskToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            showMaskToolStripMenuItem.Text = "Show Mask";
+            showMaskToolStripMenuItem.ToolTipText = "\"Clipping mask for alignment, mask provided by Otimpyre.";
+            showMaskToolStripMenuItem.Click += showMaskToolStripMenuItem_Click;
+            // 
+            // dischargedToolStripMenuItem
+            // 
+            dischargedToolStripMenuItem.Image = Properties.Resources.image_eine_maske_laden02;
+            dischargedToolStripMenuItem.Name = "dischargedToolStripMenuItem";
+            dischargedToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            dischargedToolStripMenuItem.Text = "discharged";
+            dischargedToolStripMenuItem.Click += dischargedToolStripMenuItem_Click;
             // 
             // toolStripSeparator5
             // 
             toolStripSeparator5.Name = "toolStripSeparator5";
-            toolStripSeparator5.Size = new System.Drawing.Size(164, 6);
+            toolStripSeparator5.Size = new System.Drawing.Size(177, 6);
             // 
             // copyToolStripMenuItem
             // 
             copyToolStripMenuItem.Image = Properties.Resources.import;
             copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            copyToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            copyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             copyToolStripMenuItem.Text = "Copy Clipbord";
             copyToolStripMenuItem.ToolTipText = "Copy Image to Clipbord";
             copyToolStripMenuItem.Click += copyToolStripMenuItem_Click;
@@ -660,11 +681,23 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             panel3.Size = new System.Drawing.Size(399, 365);
             panel3.TabIndex = 30;
             // 
+            // checkBoxOrgSize
+            // 
+            checkBoxOrgSize.AutoSize = true;
+            checkBoxOrgSize.Location = new System.Drawing.Point(47, 507);
+            checkBoxOrgSize.Name = "checkBoxOrgSize";
+            checkBoxOrgSize.Size = new System.Drawing.Size(68, 19);
+            checkBoxOrgSize.TabIndex = 31;
+            checkBoxOrgSize.Text = "44 x 123";
+            checkBoxOrgSize.UseVisualStyleBackColor = true;
+            checkBoxOrgSize.CheckedChanged += checkBoxOrgSize_CheckedChanged;
+            // 
             // GraphicCutterForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(797, 518);
+            ClientSize = new System.Drawing.Size(797, 533);
+            Controls.Add(checkBoxOrgSize);
             Controls.Add(panel3);
             Controls.Add(zoomButton);
             Controls.Add(resetButton);
@@ -765,5 +798,8 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         private System.Windows.Forms.Button zoomButton;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.ToolStripMenuItem showMaskToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dischargedToolStripMenuItem;
+        private System.Windows.Forms.CheckBox checkBoxOrgSize;
     }
 }

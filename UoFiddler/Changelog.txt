@@ -7,6 +7,8 @@ Version : 4.11.23 #XG1
 - The AlarmClock now has the feature to load an alternative wave file as an alarm sound.
 - The Dec Hex Bin Converter now also saves the position where it was placed.
 - TextureCutter now saves its position as well.
+- Added a mask in TextureCutter for alignment during cutting and unloading the mask.
+- Added a checkbox for the ideal height and width of image measurements.
 
 Version : 4.11.22 #XG1
 - Added a ContextMenuStrip button for the hex address to export the selected items to the clipboard. In the AminData function, implemented logic to pass the hex address to the TextBox in the ContextMenuStrip when there is a hex address in the clipboard.

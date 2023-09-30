@@ -1467,5 +1467,93 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             zoomCounter++;
         }
         #endregion
+
+        #region Show Mask
+        // Add these lines to the beginning of your class
+        private Bitmap originalImageMask; //Show Mask
+        private Bitmap originalImageBeforeMask; // Show Mask bevor
+        private bool isMaskDisplayed = false;
+
+        private void showMaskToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Check if pictureBox2.Image is not null
+            if (pictureBox2.Image != null)
+            {
+                // Save the original image in originalImageBeforeMask
+                originalImageBeforeMask = new Bitmap(pictureBox2.Image);
+
+                // Copy the original image to originalImageMask
+                originalImageMask = new Bitmap(originalImageBeforeMask);
+
+                // Load the image from resources
+                var maskImage = Properties.Resources.showmask;
+
+                // Create a new bitmap with the same size as pictureBox2
+                var bitmap = new Bitmap(pictureBox2.Width, pictureBox2.Height);
+
+                // Create a Graphics object from the bitmap
+                using (var g = Graphics.FromImage(bitmap))
+                {
+                    // Draw the maskImage onto the bitmap, keeping the mask's original size
+                    g.DrawImage(maskImage, new Rectangle(0, 0, maskImage.Width, maskImage.Height));
+                }
+
+                // Loop through every pixel in the image
+                for (int x = 0; x < bitmap.Width; x++)
+                {
+                    for (int y = 0; y < bitmap.Height; y++)
+                    {
+                        // Get the color of the pixel
+                        var color = bitmap.GetPixel(x, y);
+
+                        // If the color is black, make it transparent
+                        if (color.R == 0 && color.G == 0 && color.B == 0)
+                            bitmap.SetPixel(x, y, Color.Transparent);
+                    }
+                }
+
+                // Combine the original image and mask
+                using (var g = Graphics.FromImage(originalImageMask))
+                {
+                    g.DrawImage(bitmap, 0, 0);
+                }
+
+                // Set the image of the pictureBox2 to the combined image
+                pictureBox2.Image = originalImageMask;
+
+                isMaskDisplayed = true;
+            }
+        }
+        #endregion
+        #region Discharged Mask
+        private void dischargedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (isMaskDisplayed)
+            {
+                // Reset the image of pictureBox2 to the original image
+                pictureBox2.Image = originalImageBeforeMask;
+                isMaskDisplayed = false;
+
+                // Check if pictureBox2.Image is set correctly
+                if (pictureBox2.Image != originalImageBeforeMask)
+                {
+                    // Paste code here to troubleshoot or log the issue
+                    Console.WriteLine("pictureBox2.Image was not correctly set to originalImageBeforeMask.");
+                }
+            }
+        }
+        #endregion
+        #region Checkbox Size 44x123
+        private void checkBoxOrgSize_CheckedChanged(object sender, EventArgs e)
+        {
+            // Check that the checkbox is selected
+            if (checkBoxOrgSize.Checked)
+            {
+                // Update the values ​​of the text boxes
+                textBoxWidth.Text = "44";
+                textBoxHeight.Text = "123";
+            }
+        }
+        #endregion
     }
 }
