@@ -103,7 +103,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             btnTracert.UseVisualStyleBackColor = true;
             btnTracert.Click += btnTracert_Click;
             // 
-            // ConverterMultiTextForm
+            // AdminToolForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -118,8 +118,9 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            Name = "ConverterMultiTextForm";
+            Name = "AdminToolForm";
             Text = "AdminTool";
+            TopMost = true;
             ResumeLayout(false);
             PerformLayout();
         }

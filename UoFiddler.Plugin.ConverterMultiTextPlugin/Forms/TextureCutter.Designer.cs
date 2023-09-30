@@ -1097,6 +1097,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             MaximizeBox = false;
             Name = "TextureCutter";
             Text = "TextureCutter and Color Changer Clipboard";
+            TopMost = true;
             FormClosed += TextureCutter_FormClosed;
             Load += TextureCutterForm_Load;
             KeyDown += Form1_KeyDown;

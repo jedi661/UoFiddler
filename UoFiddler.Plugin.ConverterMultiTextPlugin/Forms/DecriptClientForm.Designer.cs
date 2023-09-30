@@ -90,6 +90,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Name = "DecriptClientForm";
             Text = "Decript Client";
+            TopMost = true;
             ResumeLayout(false);
             PerformLayout();
         }

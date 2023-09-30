@@ -1555,5 +1555,148 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             }
         }
         #endregion
+
+        #region Copy 
+        private void CopyHighlightedAreaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Check if checkBoxFreehand is enabled
+            if (checkBoxFreehand.Checked)
+            {
+                // Call the FreehandCheckCopy_Click method
+                FreehandCheckCopy_Click(sender, e);
+            }
+            else
+            {
+
+                // Verify that an area is selected
+                if (pictureBox2.Image != null && (cropArea.Width > 0 && cropArea.Height > 0))
+                {
+                    // Create a new Bitmap object with the dimensions of the selected area
+                    Bitmap bmp = new Bitmap(cropArea.Width, cropArea.Height);
+
+                    // Convert the image to a bitmap
+                    Bitmap imageBitmap = new Bitmap(pictureBox2.Image);
+
+                    // Create a new Graphics object from the bitmap
+                    using (Graphics g = Graphics.FromImage(bmp))
+                    {
+                        // Check whether the checkBoxCircle is activated
+                        if (checkBoxCircle.Checked)
+                        {
+                            // Create a mask for the circle area
+                            using (Bitmap mask = new Bitmap(cropArea.Width, cropArea.Height))
+                            {
+                                using (Graphics maskGraphics = Graphics.FromImage(mask))
+                                {
+                                    maskGraphics.Clear(Color.White);
+                                    maskGraphics.FillEllipse(Brushes.Black, 0, 0, cropArea.Width, cropArea.Height);
+                                }
+
+                                // Apply the mask to the image and copy only the circle area
+                                for (int x = 0; x < mask.Width; x++)
+                                {
+                                    for (int y = 0; y < mask.Height; y++)
+                                    {
+                                        if (mask.GetPixel(x, y).R == 0)
+                                        {
+                                            bmp.SetPixel(x, y, imageBitmap.GetPixel(x + cropArea.X, y + cropArea.Y));
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            // Copy the selected area into the Graphics object
+                            g.DrawImage(pictureBox2.Image, new Rectangle(0, 0, cropArea.Width, cropArea.Height), cropArea,
+                                        GraphicsUnit.Pixel);
+                        }
+                    }
+
+                    // Copy the image to the clipboard
+                    Clipboard.SetImage(bmp);
+                }
+            }
+        }
+
+        private void FreehandCheckCopy_Click(object sender, EventArgs e)
+        {
+            // Verify that an area is selected
+            if (pictureBox2.Image != null)
+            {
+                // Set the cropping area to the entire image
+                Rectangle cropArea = new Rectangle(0, 0, pictureBox2.Image.Width, pictureBox2.Image.Height);
+
+                if (cropArea.Width > 0 && cropArea.Height > 0)
+                {
+                    // Create a new Bitmap object with the dimensions of the selected area
+                    Bitmap bmp = new Bitmap(cropArea.Width, cropArea.Height);
+
+                    // Create a Graphics object from the new bitmap
+                    using (Graphics g = Graphics.FromImage(bmp))
+                    {
+                        // Set the background color to Transparent
+                        g.Clear(Color.Transparent);
+
+                        if (checkBoxFreehand.Checked && points.Count > 1)
+                        {
+                            // Create a GraphicsPath from the freehand points
+                            GraphicsPath path = new GraphicsPath();
+                            path.AddPolygon(points.ToArray());
+
+                            // Draw the freehand area directly onto the new bitmap
+                            g.SetClip(path);
+                            g.DrawImage(((Bitmap)pictureBox2.Image), new Rectangle(0, 0, cropArea.Width, cropArea.Height), cropArea, GraphicsUnit.Pixel);
+                        }
+                    }
+
+                    // Find the bounding rectangle of the non-transparent area
+                    int minX = bmp.Width, minY = bmp.Height, maxX = 0, maxY = 0;
+                    for (int x = 0; x < bmp.Width; x++)
+                    {
+                        for (int y = 0; y < bmp.Height; y++)
+                        {
+                            if (bmp.GetPixel(x, y).A != 0)
+                            {
+                                minX = Math.Min(minX, x);
+                                minY = Math.Min(minY, y);
+                                maxX = Math.Max(maxX, x);
+                                maxY = Math.Max(maxY, y);
+                            }
+                        }
+                    }
+
+                    // Create a new Bitmap object with the dimensions of the non-transparent area
+                    Bitmap croppedBmp = new Bitmap(maxX - minX + 1, maxY - minY + 1);
+
+                    // Copy the non-transparent area into the new bitmap object
+                    using (Graphics g = Graphics.FromImage(croppedBmp))
+                    {
+                        g.DrawImage(bmp, new Rectangle(0, 0, croppedBmp.Width, croppedBmp.Height), new Rectangle(minX, minY, croppedBmp.Width, croppedBmp.Height), GraphicsUnit.Pixel);
+                    }
+
+                    // Copy the image to the clipboard
+                    Clipboard.SetImage(croppedBmp);
+                }
+            }
+        }
+        #endregion
+
+        private void UpdateCheckBoxes(object sender, EventArgs e)
+        {
+            CheckBox changedCheckBox = sender as CheckBox;
+            if (changedCheckBox != null)
+            {
+                if (changedCheckBox == checkBoxCircle && checkBoxCircle.Checked)
+                {
+                    checkBoxFreehand.Checked = false;
+                }
+                else if (changedCheckBox == checkBoxFreehand && checkBoxFreehand.Checked)
+                {
+                    checkBoxCircle.Checked = false;
+                }
+            }
+        }
+
     }
 }
