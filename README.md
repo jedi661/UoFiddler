@@ -18,6 +18,7 @@ Version : 4.11.23
 - Added a mask in TextureCutter for alignment during cutting and unloading the mask.
 - Added a checkbox for the ideal height and width of image measurements.
 - Added functionality to the Graphic Cutter to mark areas on images and copy the marked area of the graphic to the clipboard.
+- CompareItems - Fixed the System.NullReferenceException error.
 
 Version : 4.11.22
 - Added a ContextMenuStrip button for the hex address to export the selected items to the clipboard. In the AminData function, implemented logic to pass the hex address to the TextBox in the ContextMenuStrip when there is a hex address in the clipboard.
