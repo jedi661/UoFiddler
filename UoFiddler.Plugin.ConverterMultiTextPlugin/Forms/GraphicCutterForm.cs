@@ -51,6 +51,8 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
 
         private List<Point> points = new List<Point>();
 
+        private bool shouldDraw = false; // The indicator
+
         public GraphicCutterForm()
         {
             InitializeComponent();
@@ -1682,6 +1684,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         }
         #endregion
 
+        #region Checkbox Only
         private void UpdateCheckBoxes(object sender, EventArgs e)
         {
             CheckBox changedCheckBox = sender as CheckBox;
@@ -1697,6 +1700,85 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 }
             }
         }
+        #endregion
 
+        #region Ruler
+        private void customsRuleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            shouldDraw = !shouldDraw; // Switching the indicator when the menu item is clicked
+            panel4.Invalidate(); // This triggers the Paint event
+        }
+
+        private void panel4_Paint(object sender, PaintEventArgs e)
+        {
+            if (shouldDraw) // Check the indicator
+            {
+                var g = e.Graphics; // Use the Graphics object provided by the Paint event
+                DrawMeasurements(g);
+            }
+            else
+            {
+                e.Graphics.Clear(panel4.BackColor); // Delete the drawing if shouldDraw is false
+            }
+        }
+        private void DrawMeasurements(Graphics g)
+        {
+            // Height and width of the PictureBox object
+            var h = pictureBox1.Height;
+            var w = pictureBox1.Width;
+
+            // Offset in millimeters
+            var offset = 3;
+
+            // Create a new pen with the color red
+            using (var pen = new Pen(Color.Red))
+            {
+                // Create a new font with a smaller size
+                using (var smallFont = new Font(this.Font.FontFamily, 9)) // Sets the font size to 10
+                {
+                    // Draw horizontal lines and measurements
+                    for (int i = 0; i <= h; i += 10)
+                    {
+                        // Draw a line
+                        g.DrawLine(pen, pictureBox1.Left - offset, pictureBox1.Bottom - i, pictureBox1.Left - offset - 5, pictureBox1.Bottom - i);
+
+                        // Draw the measurement using the smaller font
+                        g.DrawString(i.ToString(), smallFont, Brushes.Red, pictureBox1.Left - offset - 5 - g.MeasureString(i.ToString(), smallFont).Width, pictureBox1.Bottom - i - g.MeasureString(i.ToString(), smallFont).Height / 2);
+                    }
+
+                    // Draw vertical lines and measurements
+                    for (int i = 0; i <= w; i += 10)
+                    {
+                        // Draw a line
+                        g.DrawLine(pen, pictureBox1.Left + i, pictureBox1.Bottom + offset, pictureBox1.Left + i, pictureBox1.Bottom + offset + 5);
+
+                        // Create a new StringFormat object for vertical alignment
+                        var sf = new StringFormat();
+                        sf.FormatFlags = StringFormatFlags.DirectionVertical;
+                        sf.Alignment = StringAlignment.Far;
+
+                        float yPosition = pictureBox1.Bottom + offset + 5 + 3; //Move the width to the right by 3 pixels
+
+                        // Calculate the width of the string with the smaller font
+                        float stringWidth = g.MeasureString(" " + i.ToString(), smallFont).Width;
+
+                        // Check if the number is greater than or equal to 100
+                        if (i >= 100)
+                        {
+                            // Add an additional adjustment to change the position of the number
+                            stringWidth += g.MeasureString(" ", smallFont).Width;
+
+                            // Add an additional 3 pixels of padding
+                            stringWidth += 3;
+                        }
+
+                        // Draw the measurement with a space before the number just after the hyphen in the smaller font
+                        g.DrawString(" " + i.ToString(), smallFont, Brushes.Red, pictureBox1.Left + i - (stringWidth / 2), yPosition + g.MeasureString(" " + i.ToString(), smallFont).Height * 2, sf);
+
+                    }
+                }
+            }
+        }
+        #endregion
     }
 }

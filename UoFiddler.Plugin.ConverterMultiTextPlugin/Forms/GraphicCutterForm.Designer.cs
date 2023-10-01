@@ -57,6 +57,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             showBorderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             unloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             imageColorClearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            customsRuleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripComboBox2 = new System.Windows.Forms.ToolStripComboBox();
             openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -106,6 +107,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             pictureBox2 = new System.Windows.Forms.PictureBox();
             panel3 = new System.Windows.Forms.Panel();
             checkBoxOrgSize = new System.Windows.Forms.CheckBox();
+            panel4 = new System.Windows.Forms.Panel();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
@@ -113,6 +115,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panel3.SuspendLayout();
+            panel4.SuspendLayout();
             SuspendLayout();
             // 
             // toolStrip1
@@ -120,14 +123,14 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripDropDownButton1, toolStripComboBox2 });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new System.Drawing.Size(797, 25);
+            toolStrip1.Size = new System.Drawing.Size(879, 25);
             toolStrip1.TabIndex = 2;
             toolStrip1.Text = "toolStrip1";
             // 
             // toolStripDropDownButton1
             // 
             toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { openImageToolStripMenuItem, importToolStripMenuItem, toolStripSeparator1, colorToolStripMenuItem, PaintPictureToolStripMenuItem, toolStripSeparator2, spiegelnToolStripMenuItem, toolStripSeparator3, toggleGridToolStripMenuItem, showBorderToolStripMenuItem, unloadToolStripMenuItem, imageColorClearToolStripMenuItem });
+            toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { openImageToolStripMenuItem, importToolStripMenuItem, toolStripSeparator1, colorToolStripMenuItem, PaintPictureToolStripMenuItem, toolStripSeparator2, spiegelnToolStripMenuItem, toolStripSeparator3, toggleGridToolStripMenuItem, showBorderToolStripMenuItem, unloadToolStripMenuItem, imageColorClearToolStripMenuItem, customsRuleToolStripMenuItem });
             toolStripDropDownButton1.Image = Properties.Resources.Shild;
             toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             toolStripDropDownButton1.Name = "toolStripDropDownButton1";
@@ -138,7 +141,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             openImageToolStripMenuItem.Image = Properties.Resources.Load;
             openImageToolStripMenuItem.Name = "openImageToolStripMenuItem";
-            openImageToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            openImageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             openImageToolStripMenuItem.Text = "Open Image";
             openImageToolStripMenuItem.Click += openImageToolStripMenuItem_Click;
             // 
@@ -146,7 +149,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             importToolStripMenuItem.Image = Properties.Resources.import;
             importToolStripMenuItem.Name = "importToolStripMenuItem";
-            importToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            importToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             importToolStripMenuItem.Text = "Import Clipbord";
             importToolStripMenuItem.ToolTipText = "Import Image from Clipboard";
             importToolStripMenuItem.Click += importToolStripMenuItem_Click;
@@ -154,14 +157,14 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new System.Drawing.Size(173, 6);
+            toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // colorToolStripMenuItem
             // 
             colorToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripTextBoxColors });
             colorToolStripMenuItem.Image = Properties.Resources.Color;
             colorToolStripMenuItem.Name = "colorToolStripMenuItem";
-            colorToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            colorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             colorToolStripMenuItem.Text = "BackGrundColor";
             colorToolStripMenuItem.Click += colorToolStripMenuItem_Click;
             // 
@@ -175,34 +178,34 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             PaintPictureToolStripMenuItem.Image = Properties.Resources.createDesign;
             PaintPictureToolStripMenuItem.Name = "PaintPictureToolStripMenuItem";
-            PaintPictureToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            PaintPictureToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             PaintPictureToolStripMenuItem.Text = "Grafic Paint";
             PaintPictureToolStripMenuItem.Click += PaintGridToolStripMenuItem_Click;
             // 
             // toolStripSeparator2
             // 
             toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new System.Drawing.Size(173, 6);
+            toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
             // 
             // spiegelnToolStripMenuItem
             // 
             spiegelnToolStripMenuItem.Image = Properties.Resources.Mirror1;
             spiegelnToolStripMenuItem.Name = "spiegelnToolStripMenuItem";
-            spiegelnToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            spiegelnToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             spiegelnToolStripMenuItem.Text = "Mirror";
             spiegelnToolStripMenuItem.Click += spiegelnToolStripMenuItem_Click;
             // 
             // toolStripSeparator3
             // 
             toolStripSeparator3.Name = "toolStripSeparator3";
-            toolStripSeparator3.Size = new System.Drawing.Size(173, 6);
+            toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
             // 
             // toggleGridToolStripMenuItem
             // 
             toggleGridToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuItem1 });
             toggleGridToolStripMenuItem.Image = Properties.Resources.Schablone;
             toggleGridToolStripMenuItem.Name = "toggleGridToolStripMenuItem";
-            toggleGridToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            toggleGridToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             toggleGridToolStripMenuItem.Text = "ToggleGrid";
             toggleGridToolStripMenuItem.Click += toggleGridToolStripMenuItem_Click;
             // 
@@ -217,7 +220,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             showBorderToolStripMenuItem.Image = Properties.Resources.Rahmen;
             showBorderToolStripMenuItem.Name = "showBorderToolStripMenuItem";
-            showBorderToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            showBorderToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             showBorderToolStripMenuItem.Text = "Show Border";
             showBorderToolStripMenuItem.Click += showBorderToolStripMenuItem_Click;
             // 
@@ -225,7 +228,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             unloadToolStripMenuItem.Image = Properties.Resources.Leeren;
             unloadToolStripMenuItem.Name = "unloadToolStripMenuItem";
-            unloadToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            unloadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             unloadToolStripMenuItem.Text = "unloadImage";
             unloadToolStripMenuItem.Click += unloadToolStripMenuItem_Click;
             // 
@@ -233,9 +236,17 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             imageColorClearToolStripMenuItem.Image = Properties.Resources.Border;
             imageColorClearToolStripMenuItem.Name = "imageColorClearToolStripMenuItem";
-            imageColorClearToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            imageColorClearToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             imageColorClearToolStripMenuItem.Text = "Change the border.";
             imageColorClearToolStripMenuItem.Click += imageColorClearToolStripMenuItem_Click;
+            // 
+            // customsRuleToolStripMenuItem
+            // 
+            customsRuleToolStripMenuItem.Image = Properties.Resources.ruler;
+            customsRuleToolStripMenuItem.Name = "customsRuleToolStripMenuItem";
+            customsRuleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            customsRuleToolStripMenuItem.Text = "Ruler";
+            customsRuleToolStripMenuItem.Click += customsRuleToolStripMenuItem_Click;
             // 
             // toolStripComboBox2
             // 
@@ -254,7 +265,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             pictureBox1.Enabled = false;
             pictureBox1.ErrorImage = null;
             pictureBox1.InitialImage = null;
-            pictureBox1.Location = new System.Drawing.Point(11, 28);
+            pictureBox1.Location = new System.Drawing.Point(36, 3);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new System.Drawing.Size(352, 352);
             pictureBox1.TabIndex = 3;
@@ -321,7 +332,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(11, 396);
+            label1.Location = new System.Drawing.Point(11, 465);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(69, 15);
             label1.TabIndex = 9;
@@ -335,14 +346,14 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             panel1.Controls.Add(btnUp);
             panel1.Controls.Add(btnLeft);
             panel1.Controls.Add(btnRight);
-            panel1.Location = new System.Drawing.Point(197, 399);
+            panel1.Location = new System.Drawing.Point(197, 468);
             panel1.Name = "panel1";
             panel1.Size = new System.Drawing.Size(166, 113);
             panel1.TabIndex = 10;
             // 
             // textBoxWidth
             // 
-            textBoxWidth.Location = new System.Drawing.Point(47, 441);
+            textBoxWidth.Location = new System.Drawing.Point(47, 510);
             textBoxWidth.Name = "textBoxWidth";
             textBoxWidth.Size = new System.Drawing.Size(52, 23);
             textBoxWidth.TabIndex = 12;
@@ -352,7 +363,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             // textBoxHeight
             // 
-            textBoxHeight.Location = new System.Drawing.Point(135, 441);
+            textBoxHeight.Location = new System.Drawing.Point(135, 510);
             textBoxHeight.Name = "textBoxHeight";
             textBoxHeight.Size = new System.Drawing.Size(52, 23);
             textBoxHeight.TabIndex = 13;
@@ -362,7 +373,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             // textBoxStartX
             // 
-            textBoxStartX.Location = new System.Drawing.Point(47, 478);
+            textBoxStartX.Location = new System.Drawing.Point(47, 547);
             textBoxStartX.Name = "textBoxStartX";
             textBoxStartX.Size = new System.Drawing.Size(52, 23);
             textBoxStartX.TabIndex = 14;
@@ -372,7 +383,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             // textBoxStartY
             // 
-            textBoxStartY.Location = new System.Drawing.Point(135, 478);
+            textBoxStartY.Location = new System.Drawing.Point(135, 547);
             textBoxStartY.Name = "textBoxStartY";
             textBoxStartY.Size = new System.Drawing.Size(52, 23);
             textBoxStartY.TabIndex = 15;
@@ -383,7 +394,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // Width
             // 
             Width.AutoSize = true;
-            Width.Location = new System.Drawing.Point(48, 421);
+            Width.Location = new System.Drawing.Point(48, 490);
             Width.Name = "Width";
             Width.Size = new System.Drawing.Size(45, 15);
             Width.TabIndex = 16;
@@ -392,7 +403,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // Height
             // 
             Height.AutoSize = true;
-            Height.Location = new System.Drawing.Point(135, 421);
+            Height.Location = new System.Drawing.Point(135, 490);
             Height.Name = "Height";
             Height.Size = new System.Drawing.Size(49, 15);
             Height.TabIndex = 17;
@@ -401,7 +412,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(21, 481);
+            label2.Location = new System.Drawing.Point(21, 550);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(20, 15);
             label2.TabIndex = 18;
@@ -410,7 +421,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(112, 481);
+            label3.Location = new System.Drawing.Point(112, 550);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(17, 15);
             label3.TabIndex = 19;
@@ -600,7 +611,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             panel2.Controls.Add(button1);
             panel2.Controls.Add(button4);
             panel2.Controls.Add(button3);
-            panel2.Location = new System.Drawing.Point(389, 399);
+            panel2.Location = new System.Drawing.Point(389, 468);
             panel2.Name = "panel2";
             panel2.Size = new System.Drawing.Size(170, 113);
             panel2.TabIndex = 24;
@@ -620,7 +631,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             checkBoxTransparent.AutoSize = true;
             checkBoxTransparent.Checked = true;
             checkBoxTransparent.CheckState = System.Windows.Forms.CheckState.Checked;
-            checkBoxTransparent.Location = new System.Drawing.Point(579, 404);
+            checkBoxTransparent.Location = new System.Drawing.Point(579, 473);
             checkBoxTransparent.Name = "checkBoxTransparent";
             checkBoxTransparent.Size = new System.Drawing.Size(87, 19);
             checkBoxTransparent.TabIndex = 25;
@@ -630,7 +641,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // checkBoxCircle
             // 
             checkBoxCircle.AutoSize = true;
-            checkBoxCircle.Location = new System.Drawing.Point(579, 425);
+            checkBoxCircle.Location = new System.Drawing.Point(579, 494);
             checkBoxCircle.Name = "checkBoxCircle";
             checkBoxCircle.Size = new System.Drawing.Size(56, 19);
             checkBoxCircle.TabIndex = 26;
@@ -641,7 +652,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // checkBoxFreehand
             // 
             checkBoxFreehand.AutoSize = true;
-            checkBoxFreehand.Location = new System.Drawing.Point(579, 447);
+            checkBoxFreehand.Location = new System.Drawing.Point(579, 516);
             checkBoxFreehand.Name = "checkBoxFreehand";
             checkBoxFreehand.Size = new System.Drawing.Size(75, 19);
             checkBoxFreehand.TabIndex = 27;
@@ -651,7 +662,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             // resetButton
             // 
-            resetButton.Location = new System.Drawing.Point(672, 401);
+            resetButton.Location = new System.Drawing.Point(672, 470);
             resetButton.Name = "resetButton";
             resetButton.Size = new System.Drawing.Size(47, 23);
             resetButton.TabIndex = 28;
@@ -661,7 +672,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             // zoomButton
             // 
-            zoomButton.Location = new System.Drawing.Point(672, 427);
+            zoomButton.Location = new System.Drawing.Point(672, 496);
             zoomButton.Name = "zoomButton";
             zoomButton.Size = new System.Drawing.Size(47, 23);
             zoomButton.TabIndex = 29;
@@ -688,7 +699,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             panel3.AutoScroll = true;
             panel3.Controls.Add(pictureBox2);
-            panel3.Location = new System.Drawing.Point(369, 28);
+            panel3.Location = new System.Drawing.Point(468, 28);
             panel3.Name = "panel3";
             panel3.Size = new System.Drawing.Size(399, 365);
             panel3.TabIndex = 30;
@@ -696,7 +707,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // checkBoxOrgSize
             // 
             checkBoxOrgSize.AutoSize = true;
-            checkBoxOrgSize.Location = new System.Drawing.Point(47, 507);
+            checkBoxOrgSize.Location = new System.Drawing.Point(47, 576);
             checkBoxOrgSize.Name = "checkBoxOrgSize";
             checkBoxOrgSize.Size = new System.Drawing.Size(68, 19);
             checkBoxOrgSize.TabIndex = 31;
@@ -704,11 +715,21 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             checkBoxOrgSize.UseVisualStyleBackColor = true;
             checkBoxOrgSize.CheckedChanged += checkBoxOrgSize_CheckedChanged;
             // 
+            // panel4
+            // 
+            panel4.Controls.Add(pictureBox1);
+            panel4.Location = new System.Drawing.Point(11, 28);
+            panel4.Name = "panel4";
+            panel4.Size = new System.Drawing.Size(425, 411);
+            panel4.TabIndex = 32;
+            panel4.Paint += panel4_Paint;
+            // 
             // GraphicCutterForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(797, 533);
+            ClientSize = new System.Drawing.Size(879, 627);
+            Controls.Add(panel4);
             Controls.Add(checkBoxOrgSize);
             Controls.Add(panel3);
             Controls.Add(zoomButton);
@@ -727,7 +748,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             Controls.Add(textBoxWidth);
             Controls.Add(panel1);
             Controls.Add(label1);
-            Controls.Add(pictureBox1);
             Controls.Add(toolStrip1);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
@@ -745,6 +765,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             panel3.ResumeLayout(false);
+            panel4.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -815,5 +836,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         private System.Windows.Forms.ToolStripMenuItem dischargedToolStripMenuItem;
         private System.Windows.Forms.CheckBox checkBoxOrgSize;
         private System.Windows.Forms.ToolStripMenuItem CopyHighlightedAreaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem customsRuleToolStripMenuItem;
+        private System.Windows.Forms.Panel panel4;
     }
 }
