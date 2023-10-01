@@ -614,7 +614,7 @@ namespace UoFiddler.Plugin.Compare.UserControls
             UpdateContextMenu();
         }
 
-        private void UpdateContextMenu()
+        /*private void UpdateContextMenu()
         {
             // Delete all existing items from contextMenuStrip2
             contextMenuStrip2.Items.Clear();
@@ -637,7 +637,37 @@ namespace UoFiddler.Plugin.Compare.UserControls
             ToolStripButton okButton = new ToolStripButton("OK");
             okButton.Click += OnClickOkButton;
             contextMenuStrip2.Items.Add(okButton);
+        }*/
+
+        private void UpdateContextMenu()
+        {
+            // Delete all existing items from contextMenuStrip2
+            contextMenuStrip2.Items.Clear();
+
+            // Add each selected item in listBoxSec to contextMenuStrip2
+            foreach (int index in listBoxSec.SelectedIndices)
+            {
+                int i = int.Parse(listBoxSec.Items[index].ToString());
+                Bitmap image = SecondArt.GetStatic(i);
+                if (image == null) // Check if the image is null
+                {
+                    continue; // Skip this iteration of the loop if the image is null
+                }
+                string text = $"0x{i:X}";
+                ToolStripMenuItem item = new ToolStripMenuItem(text);
+                item.ImageScaling = ToolStripItemImageScaling.None; // Disable image scaling
+                item.Image = new Bitmap(image, new Size(image.Width * 2, image.Height * 2)); // Enlarge the image
+                item.Tag = i;
+                item.Click += Item_Click;
+                contextMenuStrip2.Items.Add(item);
+            }
+
+            // Add an "OK" button
+            ToolStripButton okButton = new ToolStripButton("OK");
+            okButton.Click += OnClickOkButton;
+            contextMenuStrip2.Items.Add(okButton);
         }
+
 
         private void Item_Click(object sender, EventArgs e)
         {
