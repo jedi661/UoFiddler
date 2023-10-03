@@ -1041,6 +1041,9 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 // Save the original image and its size
                 originalImage = new Bitmap(pictureBox1.Image);
                 originalSize = pictureBox1.Image.Size;
+
+                // Set the text of the label to the size of the image
+                labelImageSize.Text = "Image Size: " + image.Width + " x " + image.Height;
             }
         }
 
