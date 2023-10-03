@@ -1,15 +1,4 @@
-﻿// /***************************************************************************
-//  *
-//  * $Author: Nikodemus
-//  * 
-//  * "THE BEER-WARE LICENSE"
-//  * As long as you retain this notice you can do whatever you want with 
-//  * this stuff. If we meet some day, and you think this stuff is worth it,
-//  * you can buy me a beer in return.
-//  *
-//  ***************************************************************************/
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -42,7 +31,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         // Define a variable to store the custom colors
         private int[] customColors;
         // Draw
-        private bool isDrawing = false;
+        private bool isDrawing = false; // Variable to track drawing mode
         private Point lastPoint;
         // Delete
         private bool isErasing = false;
@@ -72,7 +61,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             trackBarTolerance.Value = trackBarTolerance.Maximum / 2;
             // Update the label with the current value of the TrackBar control
             labelTolerance.Text = trackBarTolerance.Value.ToString();
-            // Aktualisieren Sie das Label beim Start der Anwendung.
+            // Update the label when the application starts.
             UpdateSharpnessLabel();
 
             // Set the initial value of the TrackBar
@@ -1517,134 +1506,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             }
         }
         #endregion
-        #region Coordinates of the mouse cursor.
-
-        /*private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (pictureBox1.Image != null)
-            {
-                // Converting the mouse coordinates to image coordinates.
-                // int x = e.X * pictureBox1.Image.Width / pictureBox1.Width;
-                // int y = e.Y * pictureBox1.Image.Height / pictureBox1.Height;
-
-                // Adjust the mouse coordinates for the zoom factor
-                int zoomFactor = (int)Math.Pow(2, zoomCounter);
-                int x = (e.X * pictureBox1.Image.Width / pictureBox1.Width) / zoomFactor;
-                int y = (e.Y * pictureBox1.Image.Height / pictureBox1.Height) / zoomFactor;
-
-                // Checking if the coordinates are within the image boundaries.
-                if (x >= 0 && x < pictureBox1.Image.Width && y >= 0 && y < pictureBox1.Image.Height)
-                {
-                    // Creating a copy of the image in pictureBox1.
-                    Bitmap image = new Bitmap(pictureBox1.Image);
-
-                    // Adjust the coordinates for the zoom factor
-                    int adjustedX = x * zoomFactor;
-                    int adjustedY = y * zoomFactor;
-
-                    // Retrieving the color value of the pixel at the adjusted coordinates.
-                    Color color = image.GetPixel(adjustedX, adjustedY);
-
-                    // Converting the color value to a hexadecimal code.
-                    string colorCode = "#" + color.R.ToString("X2") + color.G.ToString("X2") + color.B.ToString("X2");
-
-                    // Setting the color code in the label control.
-                    colorLabel.Text = colorCode;
-
-                    // Displaying the coordinates of the mouse cursor in the label.
-                    coordinatesLabel.Text = $"X: {adjustedX}, Y: {adjustedY}";
-
-                    // Set the background color of the color display panel to the retrieved color value.
-                    panelColorHex.BackColor = color;
-                }
-                else
-                {
-                    // Mouse is outside of the image, no color display
-                    colorLabel.Text = "";
-                    coordinatesLabel.Text = "";
-                    panelColorHex.BackColor = Color.Transparent;
-                }
-            }
-            else
-            {
-                // PictureBox is empty, no color display
-                colorLabel.Text = "";
-                coordinatesLabel.Text = "";
-            }
-
-            // Check if erasing mode is enabled and if left mouse button is pressed
-            if (isErasing && e.Button == MouseButtons.Left)
-            {
-                // Create a copy of the image in pictureBox1
-                Bitmap image = new Bitmap(pictureBox1.Image);
-
-                // Create a Graphics object from the image
-                using (Graphics g = Graphics.FromImage(image))
-                {
-                    // Erase an area around the current mouse position
-                    g.FillEllipse(Brushes.White, e.X - 5, e.Y - 5, 10, 10);
-                }
-
-                // Update the image in pictureBox1
-                pictureBox1.Image = image;
-            }
-            else if (isDrawing && e.Button == MouseButtons.Left)
-            {
-                // Create a copy of the image in pictureBox1
-                Bitmap image = new Bitmap(pictureBox1.Image);
-
-                // Create a Graphics object from the image
-                using (Graphics g = Graphics.FromImage(image))
-                {
-                    // Check if textBoxColorToAdress is not empty
-                    if (!string.IsNullOrEmpty(textBoxColorToAdress.Text))
-                    {
-                        // Convert the text in textBoxColorToAdress into a color value
-                        string colorCode = textBoxColorToAdress.Text;
-                        if (!colorCode.StartsWith("#"))
-                        {
-                            colorCode = "#" + colorCode;
-                        }
-                        Color penColor = ColorTranslator.FromHtml(colorCode);
-
-                        // Create a pen with the specified color
-                        Pen pen = new Pen(penColor);
-
-                        // Adjust the mouse coordinates for the zoom factor
-                        int zoomFactor = (int)Math.Pow(2, zoomCounter);
-                        Point adjustedLastPoint = new Point(lastPoint.X / zoomFactor, lastPoint.Y / zoomFactor);
-                        Point adjustedCurrentPoint = new Point(e.X / zoomFactor, e.Y / zoomFactor);
-
-                        // Draw a line from the adjusted last position to the adjusted current position
-                        g.DrawLine(pen, adjustedLastPoint.X, adjustedLastPoint.Y, adjustedCurrentPoint.X, adjustedCurrentPoint.Y);
-                    }
-                }
-
-                // Update the image in pictureBox1
-                pictureBox1.Image = image;
-
-                // Set the last point to the current position
-                lastPoint = e.Location;
-            }
-
-            else if (checkBoxFreehand.Checked && e.Button == MouseButtons.Left)
-            {
-                points.Add(e.Location);
-                pictureBox1.Invalidate();
-            }
-            else if (e.Button == MouseButtons.Left && isDragging)
-            {
-                int width = e.X - startPoint.X;
-                int height = e.Y - startPoint.Y;
-                cropArea = new Rectangle(startPoint.X, startPoint.Y, width, height);
-                pictureBox1.Invalidate();
-            }
-            else if (e.Button == MouseButtons.None)
-            {
-                // Set the last point to the current position
-                lastPoint = e.Location;
-            }
-        }*/
+        #region Coordinates of the mouse cursor.        
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
@@ -1702,73 +1564,81 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // Check if erasing mode is enabled and if left mouse button is pressed
             if (isErasing && e.Button == MouseButtons.Left)
             {
-                // Create a copy of the image in pictureBox1
-                Bitmap image = new Bitmap(pictureBox1.Image);
-
-                // Create a Graphics object from the image
-                using (Graphics g = Graphics.FromImage(image))
+                // Check if pictureBox1.Image is not null
+                if (pictureBox1.Image != null)
                 {
-                    // Erase an area around the current mouse position
-                    g.FillEllipse(Brushes.White, e.X - 5, e.Y - 5, 10, 10);
-                }
+                    // Create a copy of the image in pictureBox1
+                    Bitmap image = new Bitmap(pictureBox1.Image);
 
-                // Update the image in pictureBox1
-                pictureBox1.Image = image;
+                    // Create a Graphics object from the image
+                    using (Graphics g = Graphics.FromImage(image))
+                    {
+                        // Erase an area around the current mouse position
+                        g.FillEllipse(Brushes.White, e.X - 5, e.Y - 5, 10, 10);
+                    }
+
+                    // Update the image in pictureBox1
+                    pictureBox1.Image = image;
+                }
             }
             else if (isDrawing && e.Button == MouseButtons.Left)
             {
-                // Create a copy of the image in pictureBox1
-                Bitmap image = new Bitmap(pictureBox1.Image);
-
-                // Create a Graphics object from the image
-                using (Graphics g = Graphics.FromImage(image))
+                // Check if pictureBox1.Image is not null
+                if (pictureBox1.Image != null)
                 {
-                    // Check if textBoxColorToAdress is not empty
-                    if (!string.IsNullOrEmpty(textBoxColorToAdress.Text))
+                    // Create a copy of the image in pictureBox1
+                    Bitmap image = new Bitmap(pictureBox1.Image);
+
+                    // Create a Graphics object from the image
+                    using (Graphics g = Graphics.FromImage(image))
                     {
-                        // Convert the text in textBoxColorToAdress into a color value
-                        string colorCode = textBoxColorToAdress.Text;
-                        if (!colorCode.StartsWith("#"))
+                        // Check if textBoxColorToAdress is not empty
+                        if (!string.IsNullOrEmpty(textBoxColorToAdress.Text))
                         {
-                            colorCode = "#" + colorCode;
+                            // Convert the text in textBoxColorToAdress into a color value
+                            string colorCode = textBoxColorToAdress.Text;
+                            if (!colorCode.StartsWith("#"))
+                            {
+                                colorCode = "#" + colorCode;
+                            }
+                            Color penColor = ColorTranslator.FromHtml(colorCode);
+
+                            // Create a pen with the specified color
+                            Pen pen = new Pen(penColor);
+
+                            // Adjust the mouse coordinates for the zoom factor
+                            int zoomFactor = (int)Math.Pow(2, zoomCounter);
+                            Point adjustedLastPoint = new Point(lastPoint.X / zoomFactor, lastPoint.Y / zoomFactor);
+                            Point adjustedCurrentPoint = new Point(e.X / zoomFactor, e.Y / zoomFactor);
+
+                            // Draw a line from the adjusted last position to the adjusted current position
+                            g.DrawLine(pen, adjustedLastPoint.X, adjustedLastPoint.Y, adjustedCurrentPoint.X, adjustedCurrentPoint.Y);
+
+                            if (checkBox2Colors.Checked && !string.IsNullOrEmpty(textBoxColorToAdress2.Text))
+                            {
+                                string colorCode2 = textBoxColorToAdress2.Text;
+                                if (!colorCode2.StartsWith("#")) { colorCode2 = "#" + colorCode2; }
+                                Color penColor2;
+                                try { penColor2 = ColorTranslator.FromHtml(colorCode2); }
+                                catch { penColor2 = Color.Black; }  // Default to black if the color code is invalid
+
+                                Pen pen2 = new Pen(penColor2);
+
+                                // Adjust the coordinates for the second color
+                                Point adjustedCurrentPoint2 = new Point((e.X + 1) / zoomFactor, e.Y / zoomFactor);
+
+                                g.DrawRectangle(pen2, adjustedCurrentPoint2.X, adjustedCurrentPoint2.Y, 1, 1);
+                            }
+
                         }
-                        Color penColor = ColorTranslator.FromHtml(colorCode);
-
-                        // Create a pen with the specified color
-                        Pen pen = new Pen(penColor);
-
-                        // Adjust the mouse coordinates for the zoom factor
-                        int zoomFactor = (int)Math.Pow(2, zoomCounter);
-                        Point adjustedLastPoint = new Point(lastPoint.X / zoomFactor, lastPoint.Y / zoomFactor);
-                        Point adjustedCurrentPoint = new Point(e.X / zoomFactor, e.Y / zoomFactor);
-
-                        // Draw a line from the adjusted last position to the adjusted current position
-                        g.DrawLine(pen, adjustedLastPoint.X, adjustedLastPoint.Y, adjustedCurrentPoint.X, adjustedCurrentPoint.Y);
-
-                        if (checkBox2Colors.Checked && !string.IsNullOrEmpty(textBoxColorToAdress2.Text))
-                        {
-                            string colorCode2 = textBoxColorToAdress2.Text;
-                            if (!colorCode2.StartsWith("#")) { colorCode2 = "#" + colorCode2; }
-                            Color penColor2;
-                            try { penColor2 = ColorTranslator.FromHtml(colorCode2); }
-                            catch { penColor2 = Color.Black; }  // Default to black if the color code is invalid
-
-                            Pen pen2 = new Pen(penColor2);
-
-                            // Adjust the coordinates for the second color
-                            Point adjustedCurrentPoint2 = new Point((e.X + 1) / zoomFactor, e.Y / zoomFactor);
-
-                            g.DrawRectangle(pen2, adjustedCurrentPoint2.X, adjustedCurrentPoint2.Y, 1, 1);
-                        }
-
                     }
+
+                    // Update the image in pictureBox1
+                    pictureBox1.Image = image;
+
+                    // Set the last point to the current position
+                    lastPoint = e.Location;
                 }
-
-                // Update the image in pictureBox1
-                pictureBox1.Image = image;
-
-                // Set the last point to the current position
-                lastPoint = e.Location;
             }
 
             else if (checkBoxFreehand.Checked && e.Button == MouseButtons.Left)
@@ -3041,7 +2911,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // If the CheckBox is checked, uncheck all other CheckBoxes
             if (checkBox.Checked)
             {
-                foreach (Control control in panel3.Controls) // Ersetzen Sie "panel3" durch den Namen Ihres Panels
+                foreach (Control control in panel3.Controls) // Replace "panel3" with the name of your panel
                 {
                     if (control is CheckBox && control != checkBox)
                     {
@@ -3384,11 +3254,11 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                     {
                         Color pixelColor = bitmapImage.GetPixel(x, y);
 
-                        // Überprüfen Sie, ob die Farbe des Pixels Schwarz oder Weiß ist
+                        // Check whether the color of the pixel is black or white
                         if (pixelColor.R == 0 && pixelColor.G == 0 && pixelColor.B == 0 ||
                             pixelColor.R == 255 && pixelColor.G == 255 && pixelColor.B == 255)
                         {
-                            // Wenn das Pixel Schwarz oder Weiß ist, überspringen Sie die Farbänderung
+                            // If the pixel is black or white, skip the color change
                             newImage.SetPixel(x, y, pixelColor);
                             continue;
                         }
