@@ -528,6 +528,11 @@ namespace UoFiddler.Plugin.Compare.UserControls
             {
                 _currentMap = Map.Custom = new Map(path, _originalMap.FileIndex, _currentMapId, _originalMap.Width, _originalMap.Height);
             }
+            else
+            {
+                MessageBox.Show("Please select a directory.");
+                return;
+            }
 
             CalculateDiffs();
 

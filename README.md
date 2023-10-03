@@ -21,6 +21,7 @@ Version : 4.11.23
 - CompareItems - Fixed the System.NullReferenceException error.
 - Added a ruler for pictureBox1 in GraphicCutter.
 - Added CheckBoxLines to fill textures within lines.
+- Fix NullReferenceException CompareMapControl load Button
 
 Version : 4.11.22
 - Added a ContextMenuStrip button for the hex address to export the selected items to the clipboard. In the AminData function, implemented logic to pass the hex address to the TextBox in the ContextMenuStrip when there is a hex address in the clipboard.
