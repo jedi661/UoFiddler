@@ -93,6 +93,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             lbColorValue03 = new System.Windows.Forms.Label();
             panel3 = new System.Windows.Forms.Panel();
             checkBoxToTextboxColor = new System.Windows.Forms.CheckBox();
+            checkBoxLines = new System.Windows.Forms.CheckBox();
             btTimePin = new System.Windows.Forms.Button();
             selectColorButton2 = new System.Windows.Forms.Button();
             btphotorandomColor = new System.Windows.Forms.Button();
@@ -615,6 +616,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // 
             panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             panel3.Controls.Add(checkBoxToTextboxColor);
+            panel3.Controls.Add(checkBoxLines);
             panel3.Controls.Add(btTimePin);
             panel3.Controls.Add(selectColorButton2);
             panel3.Controls.Add(btphotorandomColor);
@@ -669,6 +671,17 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             checkBoxToTextboxColor.Text = "To";
             checkBoxToTextboxColor.UseVisualStyleBackColor = true;
             checkBoxToTextboxColor.CheckedChanged += checkBoxToTextboxColor_CheckedChanged;
+            // 
+            // checkBoxLines
+            // 
+            checkBoxLines.AutoSize = true;
+            checkBoxLines.Location = new System.Drawing.Point(289, 182);
+            checkBoxLines.Name = "checkBoxLines";
+            checkBoxLines.Size = new System.Drawing.Size(53, 19);
+            checkBoxLines.TabIndex = 41;
+            checkBoxLines.Text = "Lines";
+            checkBoxLines.UseVisualStyleBackColor = true;
+            checkBoxLines.CheckedChanged += checkBox_CheckedChanged;
             // 
             // btTimePin
             // 
@@ -780,7 +793,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // checkBoxFreehand
             // 
             checkBoxFreehand.AutoSize = true;
-            checkBoxFreehand.Location = new System.Drawing.Point(289, 194);
+            checkBoxFreehand.Location = new System.Drawing.Point(289, 201);
             checkBoxFreehand.Name = "checkBoxFreehand";
             checkBoxFreehand.Size = new System.Drawing.Size(75, 19);
             checkBoxFreehand.TabIndex = 38;
@@ -791,7 +804,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             // checkBoxCircle
             // 
             checkBoxCircle.AutoSize = true;
-            checkBoxCircle.Location = new System.Drawing.Point(289, 168);
+            checkBoxCircle.Location = new System.Drawing.Point(289, 163);
             checkBoxCircle.Name = "checkBoxCircle";
             checkBoxCircle.Size = new System.Drawing.Size(56, 19);
             checkBoxCircle.TabIndex = 37;
@@ -1210,5 +1223,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         private System.Windows.Forms.Button btphotorandomColor;
         private System.Windows.Forms.CheckBox checkBoxToTextboxColor;
         private System.Windows.Forms.Button btTimePin;
+        private System.Windows.Forms.CheckBox checkBoxLines;
     }
 }

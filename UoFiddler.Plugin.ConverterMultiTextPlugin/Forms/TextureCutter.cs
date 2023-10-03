@@ -1788,6 +1788,12 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 // Set the last point to the current position
                 lastPoint = e.Location;
             }
+
+            if (pictureBox1.Image != null && checkBoxLines.Checked && e.Button == MouseButtons.Left)
+            {
+                points.Add(e.Location);
+                pictureBox1.Invalidate();
+            }
         }
         #endregion
 
@@ -2910,11 +2916,43 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                             g.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceOver;
                             g.DrawImage(newTexture, new Rectangle(0, 0, imageCopy.Width, imageCopy.Height));
                         }
+                        else if (checkBoxLines.Checked && adjustedPoints.Count > 1)
+                        {
+                            // Create a mask for the line area
+                            using (Bitmap mask = new Bitmap(imageCopy.Width, imageCopy.Height))
+                            {
+                                using (Graphics maskGraphics = Graphics.FromImage(mask))
+                                {
+                                    maskGraphics.Clear(Color.White);
+                                    maskGraphics.FillPolygon(Brushes.Black, adjustedPoints.ToArray());
+                                }
+
+                                // Scale the texture to the size of the mask
+                                newTexture = new Bitmap(newTexture, mask.Size);
+
+                                // Apply the mask to the new texture image
+                                for (int x = 0; x < mask.Width; x++)
+                                {
+                                    for (int y = 0; y < mask.Height; y++)
+                                    {
+                                        if (mask.GetPixel(x, y).R != 0)
+                                        {
+                                            newTexture.SetPixel(x, y, Color.Transparent);
+                                        }
+                                    }
+                                }
+                            }
+
+                            // Draw the texture onto the image inside the line
+                            g.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceOver;
+                            g.DrawImage(newTexture, new Rectangle(0, 0, imageCopy.Width, imageCopy.Height));
+                        }
                         else
                         {
                             // Draw the texture on the image
                             g.DrawImage(newTexture, adjustedCropArea);
                         }
+
                     }
 
                     pictureBox1.Image = imageCopy;
@@ -3013,6 +3051,8 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             }
         }
         #endregion
+
+
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             if (checkBoxFreehand.Checked && e.Button == MouseButtons.Left)
@@ -3020,11 +3060,28 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 points.Add(points[0]);  // Connect the end to the beginning
                 pictureBox1.Invalidate();
             }
+            else if (checkBoxLines.Checked && e.Button == MouseButtons.Left && points.Count > 0)
+            {
+                // Don't connect the end to the beginning for lines
+                pictureBox1.Invalidate();
+
+                // Calculate the bounding box of the points
+                int minX = points.Min(p => p.X);
+                int minY = points.Min(p => p.Y);
+                int maxX = points.Max(p => p.X);
+                int maxY = points.Max(p => p.Y);
+
+                // Set the cropArea to the bounding box
+                cropArea = new Rectangle(minX, minY, maxX - minX, maxY - minY);
+            }
             else if (e.Button == MouseButtons.Left)
             {
                 isDragging = false;
             }
         }
+
+
+
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             using (Pen pen = new Pen(Color.Yellow))
@@ -3046,6 +3103,12 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 {
                     // Draw freehand
                     e.Graphics.DrawLines(Pens.Yellow, points.ToArray());
+                }
+
+                if (checkBoxLines.Checked)
+                {
+                    // Draw lines from point to point
+                    DrawLines(e.Graphics, points);
                 }
             }
         }
@@ -3490,5 +3553,34 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 this.Location = Properties.Settings.Default.FormTextureCutter;
             }
         }
+
+        #region Lines
+        private void DrawLines(Graphics g, List<Point> points)
+        {
+            if (points.Count > 1)
+            {
+                g.DrawLines(Pens.Yellow, points.ToArray());
+            }
+        }
+        private Point lastPointLines = Point.Empty; // Add this field to keep track of the last point
+
+        private void pictureBox1_MouseDownLines(object sender, MouseEventArgs e)
+        {
+            if (checkBoxLines.Checked && e.Button == MouseButtons.Left)
+            {
+                if (lastPointLines.IsEmpty) // If this is the first point
+                {
+                    points.Clear();
+                    points.Add(e.Location);
+                    lastPointLines = e.Location;
+                }
+                else // If this is not the first point
+                {
+                    points.Add(e.Location);
+                }
+            }
+        }
+
+        #endregion
     }
 }
