@@ -53,6 +53,8 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
             TextureCutter = new System.Windows.Forms.Button();
             btDecriptClient = new System.Windows.Forms.Button();
             btMapMaker = new System.Windows.Forms.Button();
+            btAnimationVDForm = new System.Windows.Forms.Button();
+            btAnimationEditFormButton = new System.Windows.Forms.Button();
             SuspendLayout();
             // 
             // BtnMultiOpen
@@ -184,10 +186,32 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
             btMapMaker.UseVisualStyleBackColor = true;
             btMapMaker.Click += btMapMaker_Click;
             // 
+            // btAnimationVDForm
+            // 
+            btAnimationVDForm.Location = new System.Drawing.Point(350, 357);
+            btAnimationVDForm.Name = "btAnimationVDForm";
+            btAnimationVDForm.Size = new System.Drawing.Size(92, 23);
+            btAnimationVDForm.TabIndex = 13;
+            btAnimationVDForm.Text = "VD Edit";
+            btAnimationVDForm.UseVisualStyleBackColor = true;
+            btAnimationVDForm.Click += btAnimationVDForm_Click;
+            // 
+            // btAnimationEditFormButton
+            // 
+            btAnimationEditFormButton.Location = new System.Drawing.Point(350, 386);
+            btAnimationEditFormButton.Name = "btAnimationEditFormButton";
+            btAnimationEditFormButton.Size = new System.Drawing.Size(92, 23);
+            btAnimationEditFormButton.TabIndex = 14;
+            btAnimationEditFormButton.Text = "Amin Edit";
+            btAnimationEditFormButton.UseVisualStyleBackColor = true;
+            btAnimationEditFormButton.Click += btAnimationEditFormButton_Click;
+            // 
             // ConverterMultiTextControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(btAnimationEditFormButton);
+            Controls.Add(btAnimationVDForm);
             Controls.Add(btMapMaker);
             Controls.Add(btDecriptClient);
             Controls.Add(TextureCutter);
@@ -225,5 +249,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
         private System.Windows.Forms.Button TextureCutter;
         private System.Windows.Forms.Button btDecriptClient;
         private System.Windows.Forms.Button btMapMaker;
+        private System.Windows.Forms.Button btAnimationVDForm;
+        private System.Windows.Forms.Button btAnimationEditFormButton;
     }
 }

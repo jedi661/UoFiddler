@@ -44,7 +44,9 @@
             fromvdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             exportToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             tovdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             FindFreeIDSlotsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             AnimationFileToolStrip = new System.Windows.Forms.ToolStrip();
             SelectFileToolStripComboBox = new System.Windows.Forms.ToolStripComboBox();
             ProgressBar = new System.Windows.Forms.ProgressBar();
@@ -145,9 +147,8 @@
             SaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ShowOnlyValidToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ExportAllToVDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripStatusLabelVDAminInfo = new System.Windows.Forms.ToolStripStatusLabel();
             AnimationTimer = new System.Windows.Forms.Timer(components);
-            showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)MainSplitContainer).BeginInit();
             MainSplitContainer.Panel1.SuspendLayout();
             MainSplitContainer.Panel2.SuspendLayout();
@@ -226,13 +227,13 @@
             // 
             ContextMenuStripTreeView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { AddToolStripMenuItem, removeToolStripMenuItem, extractImagesToolStripMenuItem1, importToolStripMenuItem1, exportToolStripMenuItem1, toolStripSeparator8, FindFreeIDSlotsToolStripMenuItem, showToolStripMenuItem });
             ContextMenuStripTreeView.Name = "contextMenuStrip2";
-            ContextMenuStripTreeView.Size = new System.Drawing.Size(181, 186);
+            ContextMenuStripTreeView.Size = new System.Drawing.Size(158, 164);
             // 
             // AddToolStripMenuItem
             // 
             AddToolStripMenuItem.Image = Properties.Resources.replace2;
             AddToolStripMenuItem.Name = "AddToolStripMenuItem";
-            AddToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            AddToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             AddToolStripMenuItem.Text = "Replace";
             AddToolStripMenuItem.ToolTipText = "Replace";
             AddToolStripMenuItem.Visible = false;
@@ -241,7 +242,7 @@
             // 
             removeToolStripMenuItem.Image = Properties.Resources.Remove;
             removeToolStripMenuItem.Name = "removeToolStripMenuItem";
-            removeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            removeToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             removeToolStripMenuItem.Text = "Remove";
             removeToolStripMenuItem.ToolTipText = "Remove the animation.";
             removeToolStripMenuItem.Click += OnClickRemoveAction;
@@ -251,7 +252,7 @@
             extractImagesToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { asBmpToolStripMenuItem, asTiffToolStripMenuItem, asJpgToolStripMenuItem, asPngToolStripMenuItem });
             extractImagesToolStripMenuItem1.Image = Properties.Resources.Export;
             extractImagesToolStripMenuItem1.Name = "extractImagesToolStripMenuItem1";
-            extractImagesToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            extractImagesToolStripMenuItem1.Size = new System.Drawing.Size(157, 22);
             extractImagesToolStripMenuItem1.Text = "Extract Images..";
             extractImagesToolStripMenuItem1.ToolTipText = "Save graphics in the selected format.";
             // 
@@ -292,7 +293,7 @@
             importToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { fromvdToolStripMenuItem });
             importToolStripMenuItem1.Image = Properties.Resources.import;
             importToolStripMenuItem1.Name = "importToolStripMenuItem1";
-            importToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            importToolStripMenuItem1.Size = new System.Drawing.Size(157, 22);
             importToolStripMenuItem1.Text = "Import..";
             importToolStripMenuItem1.ToolTipText = "Import from .vd file.";
             // 
@@ -308,7 +309,7 @@
             exportToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tovdToolStripMenuItem });
             exportToolStripMenuItem1.Image = Properties.Resources.Export;
             exportToolStripMenuItem1.Name = "exportToolStripMenuItem1";
-            exportToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            exportToolStripMenuItem1.Size = new System.Drawing.Size(157, 22);
             exportToolStripMenuItem1.Text = "Export..";
             exportToolStripMenuItem1.ToolTipText = "Export to .vd file.";
             // 
@@ -319,14 +320,27 @@
             tovdToolStripMenuItem.Text = "To .vd";
             tovdToolStripMenuItem.Click += OnClickExportToVD;
             // 
+            // toolStripSeparator8
+            // 
+            toolStripSeparator8.Name = "toolStripSeparator8";
+            toolStripSeparator8.Size = new System.Drawing.Size(154, 6);
+            // 
             // FindFreeIDSlotsToolStripMenuItem
             // 
             FindFreeIDSlotsToolStripMenuItem.Image = Properties.Resources.Search;
             FindFreeIDSlotsToolStripMenuItem.Name = "FindFreeIDSlotsToolStripMenuItem";
-            FindFreeIDSlotsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            FindFreeIDSlotsToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             FindFreeIDSlotsToolStripMenuItem.Text = "Find";
             FindFreeIDSlotsToolStripMenuItem.ToolTipText = "Find Free ID Slots";
             FindFreeIDSlotsToolStripMenuItem.Click += FindFreeIDSlotsToolStripMenuItem_Click;
+            // 
+            // showToolStripMenuItem
+            // 
+            showToolStripMenuItem.Image = Properties.Resources.show;
+            showToolStripMenuItem.Name = "showToolStripMenuItem";
+            showToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            showToolStripMenuItem.Text = "Show";
+            showToolStripMenuItem.Click += OnClickShowOnlyValid;
             // 
             // AnimationFileToolStrip
             // 
@@ -348,7 +362,7 @@
             // ProgressBar
             // 
             ProgressBar.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-            ProgressBar.Location = new System.Drawing.Point(497, 628);
+            ProgressBar.Location = new System.Drawing.Point(494, 628);
             ProgressBar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             ProgressBar.Name = "ProgressBar";
             ProgressBar.Size = new System.Drawing.Size(197, 20);
@@ -1355,7 +1369,7 @@
             // 
             DirectionTrackBar.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
             DirectionTrackBar.AutoSize = false;
-            DirectionTrackBar.Location = new System.Drawing.Point(701, 626);
+            DirectionTrackBar.Location = new System.Drawing.Point(698, 626);
             DirectionTrackBar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             DirectionTrackBar.Maximum = 4;
             DirectionTrackBar.Name = "DirectionTrackBar";
@@ -1365,7 +1379,7 @@
             // 
             // StatusStrip
             // 
-            StatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { MiscToolStripButton });
+            StatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { MiscToolStripButton, toolStripStatusLabelVDAminInfo });
             StatusStrip.Location = new System.Drawing.Point(0, 629);
             StatusStrip.Name = "StatusStrip";
             StatusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
@@ -1407,22 +1421,15 @@
             ExportAllToVDToolStripMenuItem.Text = "Export All Valid To VD";
             ExportAllToVDToolStripMenuItem.Click += OnClickExportAllToVD;
             // 
+            // toolStripStatusLabelVDAminInfo
+            // 
+            toolStripStatusLabelVDAminInfo.Name = "toolStripStatusLabelVDAminInfo";
+            toolStripStatusLabelVDAminInfo.Size = new System.Drawing.Size(73, 17);
+            toolStripStatusLabelVDAminInfo.Text = "Import Info :";
+            // 
             // AnimationTimer
             // 
             AnimationTimer.Tick += AnimationTimer_Tick;
-            // 
-            // showToolStripMenuItem
-            // 
-            showToolStripMenuItem.Image = Properties.Resources.show;
-            showToolStripMenuItem.Name = "showToolStripMenuItem";
-            showToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            showToolStripMenuItem.Text = "Show";
-            showToolStripMenuItem.Click += OnClickShowOnlyValid;
-            // 
-            // toolStripSeparator8
-            // 
-            toolStripSeparator8.Name = "toolStripSeparator8";
-            toolStripSeparator8.Size = new System.Drawing.Size(177, 6);
             // 
             // AnimationEditForm
             // 
@@ -1608,5 +1615,6 @@
         private System.Windows.Forms.ToolStripMenuItem FindFreeIDSlotsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ToolStripMenuItem showToolStripMenuItem;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelVDAminInfo;
     }
 }

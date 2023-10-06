@@ -22,6 +22,9 @@ Version : 4.11.23
 - Added a ruler for pictureBox1 in GraphicCutter.
 - Added CheckBoxLines to fill textures within lines.
 - Fix NullReferenceException CompareMapControl load Button
+- Added a function to MapControl that allows drawing on the map, and the coordinates are displayed in a MessageBox for the respective area.
+- Added a label to Animation that displays information about the .vd file, import details, and the last ID slot address.
+- Added a button and a form to Convert MultiTextControl.
 
 Version : 4.11.22
 - Added a ContextMenuStrip button for the hex address to export the selected items to the clipboard. In the AminData function, implemented logic to pass the hex address to the TextBox in the ContextMenuStrip when there is a hex address in the clipboard.

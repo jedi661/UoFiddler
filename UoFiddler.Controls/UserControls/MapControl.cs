@@ -26,6 +26,14 @@ namespace UoFiddler.Controls.UserControls
 {
     public partial class MapControl : UserControl
     {
+        // starting point of the rectangle
+        private Point rectStartPoint;
+        private Point rectEndPoint;
+        // the rectrangle that is drawn
+        private Rectangle rect = Rectangle.Empty;
+        // Declaration of the isDrawingRectangle variable
+        private bool isDrawingRectangle = false;
+
         public MapControl()
         {
             InitializeComponent();
@@ -372,22 +380,29 @@ namespace UoFiddler.Controls.UserControls
 
         private void OnMouseDown(object sender, MouseEventArgs e)
         {
-            if (PreloadWorker.IsBusy)
+            // Check that we are in drawing mode
+            if (isDrawingRectangle)
             {
-                return;
-            }
+                // Save the starting point                              
+                rectStartPoint = new Point((int)((e.X / Zoom) + hScrollBar.Value), (int)((e.Y / Zoom) + vScrollBar.Value));
+                rect.Location = e.Location; // Set rect.Location to the position of the mouse click relative to the Picture
 
-            if (e.Button == MouseButtons.Left)
-            {
-                _moving = true;
-                _movingPoint.X = e.X;
-                _movingPoint.Y = e.Y;
-                Cursor = Cursors.Hand;
             }
             else
             {
-                _moving = false;
-                Cursor = Cursors.Default;
+                // Moving the map
+                if (PreloadWorker.IsBusy)
+                {
+                    return;
+                }
+
+                if (e.Button == MouseButtons.Left)
+                {
+                    _moving = true;
+                    _movingPoint.X = e.X;
+                    _movingPoint.Y = e.Y;
+                    Cursor = Cursors.Hand;
+                }
             }
         }
 
@@ -400,30 +415,61 @@ namespace UoFiddler.Controls.UserControls
 
             _moving = false;
             Cursor = Cursors.Default;
+
+            // Check that we are in drawing mode
+            if (isDrawingRectangle)
+            {
+                // Finish drawing the rectangle and display a MessageBox with the coordinates
+                rectEndPoint = new Point((int)((e.X / Zoom) + hScrollBar.Value), (int)((e.Y / Zoom) + vScrollBar.Value));
+                isDrawingRectangle = false;
+                MessageBox.Show($"Upper left corner: {rectStartPoint}\nBottom right corner: {rectEndPoint}", "Coordinates of the rectangle", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void OnMouseMove(object sender, MouseEventArgs e)
         {
-            int xDelta = Math.Min(CurrentMap.Width, (int)(e.X / Zoom) + Round(hScrollBar.Value));
-            int yDelta = Math.Min(CurrentMap.Height, (int)(e.Y / Zoom) + Round(vScrollBar.Value));
-
-            CoordsLabel.Text = $"Coords: {xDelta},{yDelta}";
-
-            if (!_moving)
+            // Check that we are in drawing mode and the left mouse button is pressed
+            if (isDrawingRectangle && e.Button == MouseButtons.Left)
             {
-                return;
+                // Update the endpoint
+                //rectEndPoint = new Point((int)(e.X / Zoom) + Round(hScrollBar.Value), (int)(e.Y / Zoom) + Round(vScrollBar.Value));
+                rectEndPoint = new Point((int)((e.X / Zoom) + hScrollBar.Value), (int)((e.Y / Zoom) + vScrollBar.Value));
+
+                // Update the size and position of the rectangle
+                int x = Math.Min(rectStartPoint.X, rectEndPoint.X) - hScrollBar.Value;
+                int y = Math.Min(rectStartPoint.Y, rectEndPoint.Y) - vScrollBar.Value;
+                int width = Math.Abs(rectStartPoint.X - rectEndPoint.X);
+                int height = Math.Abs(rectStartPoint.Y - rectEndPoint.Y);
+                rect = new Rectangle(x, y, width, height);
+
+                // Redraw PictureBox
+                pictureBox.Invalidate();
             }
+            else
+            {
+                // Moving the map
 
-            int deltaX = (int)(-1 * (e.X - _movingPoint.X) / Zoom);
-            int deltaY = (int)(-1 * (e.Y - _movingPoint.Y) / Zoom);
+                int xDelta = Math.Min(CurrentMap.Width, (int)(e.X / Zoom) + Round(hScrollBar.Value));
+                int yDelta = Math.Min(CurrentMap.Height, (int)(e.Y / Zoom) + Round(vScrollBar.Value));
 
-            _movingPoint.X = e.X;
-            _movingPoint.Y = e.Y;
+                CoordsLabel.Text = $"Coords: {xDelta},{yDelta}";
 
-            hScrollBar.Value = Math.Max(0, Math.Min(hScrollBar.Maximum, hScrollBar.Value + deltaX));
-            vScrollBar.Value = Math.Max(0, Math.Min(vScrollBar.Maximum, vScrollBar.Value + deltaY));
+                if (!_moving)
+                {
+                    return;
+                }
 
-            pictureBox.Invalidate();
+                int deltaX = (int)(-1 * (e.X - _movingPoint.X) / Zoom);
+                int deltaY = (int)(-1 * (e.Y - _movingPoint.Y) / Zoom);
+
+                _movingPoint.X = e.X;
+                _movingPoint.Y = e.Y;
+
+                hScrollBar.Value = Math.Max(0, Math.Min(hScrollBar.Maximum, hScrollBar.Value + deltaX));
+                vScrollBar.Value = Math.Max(0, Math.Min(vScrollBar.Maximum, vScrollBar.Value + deltaY));
+
+                pictureBox.Invalidate();
+            }
         }
 
         private void OnClick_ShowClientLoc(object sender, EventArgs e)
@@ -690,6 +736,16 @@ namespace UoFiddler.Controls.UserControls
                 if (o.IsVisible(e.ClipRectangle, _currentMapId, HScrollBar, VScrollBar, Zoom))
                 {
                     o.Draw(e.Graphics, Round(HScrollBar), Round(VScrollBar), Zoom, CurrentMap.Width);
+                }
+            }
+
+            // Check if we should draw a rectangle
+            if (isDrawingRectangle)
+            {
+                using (Pen pen = new Pen(Color.Red, 2))
+                {
+                    e.Graphics.ScaleTransform((float)Zoom, (float)Zoom);
+                    e.Graphics.DrawRectangle(pen, rect);
                 }
             }
         }
@@ -1380,6 +1436,26 @@ namespace UoFiddler.Controls.UserControls
                 TopMost = true
             };
             _showMapReplaceTilesForm.Show();
+        }
+
+        private void toolStripButtonMarkRegion_Click(object sender, EventArgs e)
+        {
+            // Switch drawing mode
+            isDrawingRectangle = !isDrawingRectangle;
+        }
+
+        private void pictureBox_MouseClick(object sender, MouseEventArgs e)
+        {
+            // Überprüfen Sie, ob der Mausklick innerhalb des Rechtecks erfolgt
+            /*if (rect.Contains(e.Location))
+            {
+                // Berechnen Sie die Koordinaten der oberen linken und unteren rechten Ecke
+                Point topLeft = new Point(rectStartPoint.X, rectStartPoint.Y);
+                Point bottomRight = new Point(rectEndPoint.X, rectEndPoint.Y);
+
+                // Zeigen Sie eine MessageBox mit den Koordinaten an
+                MessageBox.Show($"Obere linke Ecke: {topLeft}\nUntere rechte Ecke: {bottomRight}", "Koordinaten des Rechtecks", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }*/
         }
     }
 

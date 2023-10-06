@@ -109,6 +109,7 @@ namespace UoFiddler.Controls.UserControls
             insertDiffDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             replaceTilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripButtonMarkRegion = new System.Windows.Forms.ToolStripButton();
             toolTip1 = new System.Windows.Forms.ToolTip(components);
             collapsibleSplitter2 = new CollapsibleSplitter();
             collapsibleSplitter1 = new CollapsibleSplitter();
@@ -165,6 +166,7 @@ namespace UoFiddler.Controls.UserControls
             pictureBox.TabIndex = 1;
             pictureBox.TabStop = false;
             pictureBox.Paint += OnPaint;
+            pictureBox.MouseClick += pictureBox_MouseClick;
             pictureBox.MouseDown += OnMouseDown;
             pictureBox.MouseMove += OnMouseMove;
             pictureBox.MouseUp += OnMouseUp;
@@ -408,7 +410,7 @@ namespace UoFiddler.Controls.UserControls
             // toolStrip1
             // 
             toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripDropDownButton1, toolStripDropDownButton2, ProgressBar, PreloadMap, toolStripDropDownButton3 });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripDropDownButton1, toolStripDropDownButton2, ProgressBar, PreloadMap, toolStripDropDownButton3, toolStripButtonMarkRegion });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -626,6 +628,17 @@ namespace UoFiddler.Controls.UserControls
             replaceTilesToolStripMenuItem.Text = "Replace Tiles..";
             replaceTilesToolStripMenuItem.Click += OnClickReplaceTiles;
             // 
+            // toolStripButtonMarkRegion
+            // 
+            toolStripButtonMarkRegion.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            toolStripButtonMarkRegion.Image = Properties.Resources.mapcordinate;
+            toolStripButtonMarkRegion.ImageTransparentColor = System.Drawing.Color.Magenta;
+            toolStripButtonMarkRegion.Name = "toolStripButtonMarkRegion";
+            toolStripButtonMarkRegion.Size = new System.Drawing.Size(23, 25);
+            toolStripButtonMarkRegion.Text = "Mark";
+            toolStripButtonMarkRegion.ToolTipText = "Marks the area with coordinates";
+            toolStripButtonMarkRegion.Click += toolStripButtonMarkRegion_Click;
+            // 
             // collapsibleSplitter2
             // 
             collapsibleSplitter2.AnimationDelay = 20;
@@ -762,5 +775,6 @@ namespace UoFiddler.Controls.UserControls
         private System.Windows.Forms.ToolStripStatusLabel ZoomLabel;
         private System.Windows.Forms.ToolStripMenuItem zoomToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem zoomToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripButton toolStripButtonMarkRegion;
     }
 }

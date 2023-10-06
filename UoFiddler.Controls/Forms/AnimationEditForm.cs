@@ -1145,6 +1145,24 @@ namespace UoFiddler.Controls.Forms
                     {
                         int fileType = bin.ReadInt16();
                         int animType = bin.ReadInt16();
+
+                        // Update the label with the file type and animation type
+                        toolStripStatusLabelVDAminInfo.Text = $"File Type: {fileType}, Animation Type: {animType}";
+
+                        if (fileType != 6)
+                        {
+                            MessageBox.Show("Not an Anim File.", "Import", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                            toolStripStatusLabelVDAminInfo.Text += " - Not an Anim File.";
+                            return;
+                        }
+
+                        if (animType != currentType) //Error Message
+                        {
+                            MessageBox.Show($"The selected .vd file has an animation type of {animType} (Got: {animType}), but the program expects an animation type of {currentType} (Expected: {currentType}). This results in a 'Wrong Anim Id ( Type )' error. Please check the .vd file and ensure it has the correct animation type.", "Import", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                            toolStripStatusLabelVDAminInfo.Text += $" - Wrong Anim Id ( Type ). Expected: {currentType}, Got: {animType}. Selected slot: {_currentBody}";
+                            return;
+                        }
+
                         if (fileType != 6)
                         {
                             MessageBox.Show("Not an Anim File.", "Import", MessageBoxButtons.OK,
@@ -1181,11 +1199,12 @@ namespace UoFiddler.Controls.Forms
                     node.ForeColor = valid ? Color.Black : Color.Red;
                 }
 
+                //import Message
                 Options.ChangedUltimaClass["Animations"] = true;
                 AfterSelectTreeView(this, null);
+                MessageBox.Show("successfully imported animation to the slot", "Import", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
 
-                MessageBox.Show("Finished", "Import", MessageBoxButtons.OK, MessageBoxIcon.Information,
-                    MessageBoxDefaultButton.Button1);
+                toolStripStatusLabelVDAminInfo.Text += $" - Selected slot: {_currentBody}";
             }
         }
 

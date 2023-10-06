@@ -14,6 +14,7 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using Ultima;
+using UoFiddler.Controls.Forms;
 using UoFiddler.Plugin.ConverterMultiTextPlugin.Forms;
 
 namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
@@ -235,6 +236,54 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
         {
             isFormOpen = false;
             btMapMaker.Enabled = true; // Enable the button again.
+        }
+
+        private void btAnimationVDForm_Click(object sender, EventArgs e)
+        {
+            if (isFormOpen)
+            {
+                return; // Exit the method if the form is already open.
+            }
+
+            AnimationVDForm form = new AnimationVDForm();
+            form.FormClosed += AnimationVDForm_FormClosed;
+            form.Show();
+            isFormOpen = true;
+
+            btAnimationVDForm.Enabled = false;
+        }
+
+        private void AnimationVDForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (isFormOpen)
+            {
+                isFormOpen = false;
+                btAnimationVDForm.Enabled = true; // Enable the button again.
+            }
+        }
+
+        private void btAnimationEditFormButton_Click(object sender, EventArgs e)
+        {
+            if (isFormOpen)
+            {
+                return; // Exit the method if the form is already open.
+            }
+
+            AnimationEditFormButton form = new AnimationEditFormButton();
+            form.FormClosed += AnimationEditFormButton_FormClosed;
+            form.Show();
+            isFormOpen = true;
+
+            btAnimationEditFormButton.Enabled = false;
+        }
+
+        private void AnimationEditFormButton_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (isFormOpen)
+            {
+                isFormOpen = false;
+                btAnimationEditFormButton.Enabled = true; // Enable the button again.
+            }
         }
     }
 }
