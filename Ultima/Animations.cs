@@ -231,7 +231,7 @@ namespace Ultima
             }
         }
 
-        private static void LoadTable()
+        /*private static void LoadTable()
         {
             // TODO: check why it was fixed at max 1697. Probably old code for anim.mul?
             //int count = 400 + ((_fileIndex.Index.Length - 35000) / 175);
@@ -250,7 +250,38 @@ namespace Ultima
                     _table[i] = bodyTableEntry.OldId | (1 << 31) | ((bodyTableEntry.NewHue & 0xFFFF) << 15);
                 }
             }
+        }*/
+
+        #region LoadTable Method
+        private static void LoadTable()
+        {
+            _table = new int[_maxAnimationValue + 1];
+
+            for (int i = 0; i < _table.Length; ++i)
+            {
+                _table[i] = CalculateTableEntry(i);
+            }
         }
+        #endregion
+
+        #region CalculateTableEntry Method
+        private static int CalculateTableEntry(int index)
+        {
+            var bodyTableEntryExist = BodyTable.Entries.TryGetValue(index, out BodyTableEntry bodyTableEntry);
+            if (!bodyTableEntryExist || BodyConverter.Contains(index))
+            {
+                return index;
+            }
+            else
+            {
+                const int bitShiftForOldId = 31;
+                const int bitShiftForNewHue = 15;
+                const int newHueMask = 0xFFFF;
+
+                return bodyTableEntry.OldId | (1 << bitShiftForOldId) | ((bodyTableEntry.NewHue & newHueMask) << bitShiftForNewHue);
+            }
+        }
+        #endregion
 
         /// <summary>
         /// Is Body with action and direction defined
