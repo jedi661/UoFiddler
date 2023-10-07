@@ -119,7 +119,7 @@ namespace UoFiddler.Forms
             TabPanel.DrawMode = TabDrawMode.OwnerDrawFixed;
             // Register the TabPanel_DrawItem method as an event handler for the DrawItem event of the TabPanel control
             TabPanel.DrawItem += TabPanel_DrawItem;
-                       
+
             // Icon
             Icon = Options.GetFiddlerIcon();
             // Version
@@ -945,7 +945,7 @@ namespace UoFiddler.Forms
             }
         }
 
-        
+
         private TabPage TabFromTag(int tag)
         {
             switch (tag)

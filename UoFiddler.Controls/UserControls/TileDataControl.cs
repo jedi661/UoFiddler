@@ -113,7 +113,12 @@ namespace UoFiddler.Controls.UserControls
                 checkedListBox2.EndUpdate();
             }
         }
-
+        #region ItemControl Select PiictureBox refresh
+        public void RefreshPictureBoxItem()
+        {
+            pictureBoxItem.Refresh();
+        }
+        #endregion
         private void InitItemsFlagsCheckBoxes()
         {
             checkedListBox1.BeginUpdate();

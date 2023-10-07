@@ -29,6 +29,7 @@ namespace UoFiddler.Controls.UserControls
 {
     public partial class ItemsControl : UserControl
     {
+        private TileDataControl tileDataControl = new TileDataControl(); //Refesh image pictureBoxItem TiledataControl
         public ItemsControl()
         {
             InitializeComponent();
@@ -838,6 +839,7 @@ namespace UoFiddler.Controls.UserControls
             if (_selectedGraphicId >= 0)
             {
                 TileDataControl.Select(_selectedGraphicId, false);
+                tileDataControl.RefreshPictureBoxItem(); //Select pictureBoxItem TileDataControl
             }
         }
 

@@ -739,34 +739,37 @@ namespace UoFiddler.Forms
             // 
             AlwaysOnTopMenuitem.CheckOnClick = true;
             AlwaysOnTopMenuitem.Name = "AlwaysOnTopMenuitem";
-            AlwaysOnTopMenuitem.Size = new System.Drawing.Size(152, 22);
+            AlwaysOnTopMenuitem.Size = new System.Drawing.Size(180, 22);
             AlwaysOnTopMenuitem.Text = "Always On Top";
             AlwaysOnTopMenuitem.Click += OnClickAlwaysTop;
             // 
             // optionsToolStripMenuItem
             // 
+            optionsToolStripMenuItem.Image = Properties.Resources.optionen;
             optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            optionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            optionsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             optionsToolStripMenuItem.Text = "Options..";
             optionsToolStripMenuItem.Click += OnClickOptions;
             // 
             // pathSettingsMenuItem
             // 
+            pathSettingsMenuItem.Image = Properties.Resources.path_settings;
             pathSettingsMenuItem.Name = "pathSettingsMenuItem";
-            pathSettingsMenuItem.Size = new System.Drawing.Size(152, 22);
+            pathSettingsMenuItem.Size = new System.Drawing.Size(180, 22);
             pathSettingsMenuItem.Text = "Path Settings..";
             pathSettingsMenuItem.Click += Click_path;
             // 
             // tsSettingsSeparator
             // 
             tsSettingsSeparator.Name = "tsSettingsSeparator";
-            tsSettingsSeparator.Size = new System.Drawing.Size(149, 6);
+            tsSettingsSeparator.Size = new System.Drawing.Size(177, 6);
             // 
             // reloadFilesMenuItem
             // 
             reloadFilesMenuItem.ForeColor = System.Drawing.Color.DarkRed;
+            reloadFilesMenuItem.Image = Properties.Resources.reload_files;
             reloadFilesMenuItem.Name = "reloadFilesMenuItem";
-            reloadFilesMenuItem.Size = new System.Drawing.Size(152, 22);
+            reloadFilesMenuItem.Size = new System.Drawing.Size(180, 22);
             reloadFilesMenuItem.Text = "Reload Files";
             reloadFilesMenuItem.Click += ReloadFiles;
             // 
@@ -1000,8 +1003,9 @@ namespace UoFiddler.Forms
             // 
             // manageToolStripMenuItem
             // 
+            manageToolStripMenuItem.Image = Properties.Resources.path_settings;
             manageToolStripMenuItem.Name = "manageToolStripMenuItem";
-            manageToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            manageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             manageToolStripMenuItem.Text = "Manage..";
             manageToolStripMenuItem.Click += OnClickToolManage;
             // 
@@ -1016,8 +1020,9 @@ namespace UoFiddler.Forms
             // 
             // manageToolStripMenuItem1
             // 
+            manageToolStripMenuItem1.Image = Properties.Resources.path_settings;
             manageToolStripMenuItem1.Name = "manageToolStripMenuItem1";
-            manageToolStripMenuItem1.Size = new System.Drawing.Size(123, 22);
+            manageToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             manageToolStripMenuItem1.Text = "Manage..";
             manageToolStripMenuItem1.Click += OnClickManagePlugins;
             // 
