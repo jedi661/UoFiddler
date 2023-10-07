@@ -836,10 +836,15 @@ namespace UoFiddler.Controls.UserControls
 
         private void OnClickSelectTiledata(object sender, EventArgs e)
         {
+            if (_selectedGraphicId == -1)
+            {
+                tileDataControl.RefreshPictureBoxItem();
+            }
+
             if (_selectedGraphicId >= 0)
             {
                 TileDataControl.Select(_selectedGraphicId, false);
-                tileDataControl.RefreshPictureBoxItem(); //Select pictureBoxItem TileDataControl
+                //tileDataControl.RefreshPictureBoxItem(); //Select pictureBoxItem TileDataControl
             }
         }
 

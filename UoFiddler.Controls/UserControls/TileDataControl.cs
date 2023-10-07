@@ -805,7 +805,7 @@ namespace UoFiddler.Controls.UserControls
                     {
                         item.Flags |= (TileFlag)enumValues.GetValue(i + 1);
                     }
-                } 
+                }
                 TileData.ItemTable[index] = item;
                 treeViewItem.SelectedNode.ForeColor = Color.Red;
                 Options.ChangedUltimaClass["TileData"] = true;
