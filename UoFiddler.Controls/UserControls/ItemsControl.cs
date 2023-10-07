@@ -838,7 +838,7 @@ namespace UoFiddler.Controls.UserControls
         {
             if (_selectedGraphicId == -1)
             {
-                tileDataControl.RefreshPictureBoxItem();
+                tileDataControl.RefreshPictureBoxItem(); // Refresh the picture box
             }
 
             if (_selectedGraphicId >= 0)
