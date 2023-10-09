@@ -40,7 +40,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin
         /// <summary>
         /// Description of the Plugin's purpose
         /// </summary>
-        public override string Description { get; } = "This is ConverterMultiText plugin and AdminTool, Imagecutter and Texturecutter";
+        public override string Description { get; } = "This is ConverterMultiText plugin and AdminTool, Imagecutter and Texturecutter, Converter, Alarm Clock, and more.";
 
         /// <summary>
         /// Author of the plugin
@@ -50,7 +50,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin
         /// <summary>
         /// Version of the plugin
         /// </summary>
-        public override string Version { get; } = "1.0.2";
+        public override string Version { get; } = "1.0.3";
 
         /// <summary>
         /// Host of the plugin.
