@@ -3402,8 +3402,9 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             #endregion
         }
 
-        #region Paint and Mirror Drawing and Lines
+        #region PaintBox and Mirror Drawing and Lines
         private static Form PaintBoxForm = null;
+
         private void btPaintBox_Click(object sender, EventArgs e)
         {
             bool isLineDrawingActive = false;
@@ -3435,11 +3436,23 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                 return;
             }
 
-            // Create a new form
-            PaintBoxForm = new Form();
-            PaintBoxForm.Text = "Paint Box";
-            PaintBoxForm.Size = new Size(900, 900);
-            PaintBoxForm.KeyPreview = true;
+            PaintBoxForm = new Form
+            {
+                Text = "Paint Box",
+                Size = new Size(900, 900),
+                KeyPreview = true                
+            };
+
+            // Set the icon of the Form
+            if (Properties.Resources.paint_box_colors != null)
+            {
+                using (Bitmap bmp = Properties.Resources.paint_box_colors)
+                {
+                    IntPtr hIcon = bmp.GetHicon(); // Create an icon handle from the bitmap
+                    Icon icon = Icon.FromHandle(hIcon); // Create an Icon from the handle
+                    PaintBoxForm.Icon = icon;
+                }
+            }
 
             // Create a new picture box
             PictureBox pictureBox = new PictureBox();
