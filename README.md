@@ -26,6 +26,7 @@ Version : 4.11.23
 - Added a label to Animation that displays information about the .vd file, import details, and the last ID slot address.
 - Added a button and a form to Convert MultiTextControl.
 - The method OnClickSelectTiledata in the ItemsControl class now attempts to update a PictureBox in the TileDataControl class when a certain ID is selected.
+- Added Texturecutter PaintBox
 
 Version : 4.11.22
 - Added a ContextMenuStrip button for the hex address to export the selected items to the clipboard. In the AminData function, implemented logic to pass the hex address to the TextBox in the ContextMenuStrip when there is a hex address in the clipboard.
