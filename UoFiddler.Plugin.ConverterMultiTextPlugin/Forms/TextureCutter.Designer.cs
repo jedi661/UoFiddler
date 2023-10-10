@@ -94,7 +94,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             panel3 = new System.Windows.Forms.Panel();
             checkBoxToTextboxColor = new System.Windows.Forms.CheckBox();
             checkBoxLines = new System.Windows.Forms.CheckBox();
-            btTimePin = new System.Windows.Forms.Button();
+            btPaintBoxPin = new System.Windows.Forms.Button();
             selectColorButton2 = new System.Windows.Forms.Button();
             btphotorandomColor = new System.Windows.Forms.Button();
             panelIsPickingColor = new System.Windows.Forms.Panel();
@@ -617,7 +617,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             panel3.Controls.Add(checkBoxToTextboxColor);
             panel3.Controls.Add(checkBoxLines);
-            panel3.Controls.Add(btTimePin);
+            panel3.Controls.Add(btPaintBoxPin);
             panel3.Controls.Add(selectColorButton2);
             panel3.Controls.Add(btphotorandomColor);
             panel3.Controls.Add(panelIsPickingColor);
@@ -683,15 +683,15 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             checkBoxLines.UseVisualStyleBackColor = true;
             checkBoxLines.CheckedChanged += checkBox_CheckedChanged;
             // 
-            // btTimePin
+            // btPaintBoxPin
             // 
-            btTimePin.Location = new System.Drawing.Point(352, 24);
-            btTimePin.Name = "btTimePin";
-            btTimePin.Size = new System.Drawing.Size(55, 23);
-            btTimePin.TabIndex = 41;
-            btTimePin.Text = "Empty";
-            btTimePin.UseVisualStyleBackColor = true;
-            btTimePin.Click += btTimePin_Click;
+            btPaintBoxPin.Location = new System.Drawing.Point(332, 61);
+            btPaintBoxPin.Name = "btPaintBoxPin";
+            btPaintBoxPin.Size = new System.Drawing.Size(75, 23);
+            btPaintBoxPin.TabIndex = 41;
+            btPaintBoxPin.Text = "Paint Box";
+            btPaintBoxPin.UseVisualStyleBackColor = true;
+            btPaintBoxPin.Click += btPaintBox_Click;
             // 
             // selectColorButton2
             // 
@@ -1222,7 +1222,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         private System.Windows.Forms.Button buttonRedToBlueColors;
         private System.Windows.Forms.Button btphotorandomColor;
         private System.Windows.Forms.CheckBox checkBoxToTextboxColor;
-        private System.Windows.Forms.Button btTimePin;
+        private System.Windows.Forms.Button btPaintBoxPin;
         private System.Windows.Forms.CheckBox checkBoxLines;
     }
 }

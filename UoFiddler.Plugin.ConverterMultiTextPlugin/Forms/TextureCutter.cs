@@ -14,6 +14,7 @@ using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using System.Media;
 using Microsoft.Win32;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 
 namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
@@ -3401,15 +3402,351 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             #endregion
         }
 
-        private void btTimePin_Click(object sender, EventArgs e)
+        #region Paint and Mirror Drawing and Lines
+        private static Form PaintBoxForm = null;
+        private void btPaintBox_Click(object sender, EventArgs e)
         {
+            bool isLineDrawingActive = false;
+            bool isDrawingActive = true;
+            Point startPoint = Point.Empty;
+            Point endPoint = Point.Empty; // Add this line at the beginning of your code
+            Point lastPoint = Point.Empty;
+            List<Point> points = new List<Point>();
+            // Declare imageRect outside the event
+            //Rectangle imageRect = new Rectangle();
+            bool drawing = false;
+            bool mirrorDrawing = false;
+            Rectangle imageRect = Rectangle.Empty;
+
+            // Create a bitmap to store the drawing
+            Bitmap bitmap = null;
+            
+            Stack<Bitmap> bitmapHistory = new Stack<Bitmap>();
+            // Add the current bitmap to the gradient after you draw
+            if (bitmap != null)
+            {
+                bitmapHistory.Push((Bitmap)bitmap.Clone());
+            }
+
+            // Declare imageRect outside the event
+            if (PaintBoxForm != null)
+            {
+                //MessageBox.Show("The form is already opened.");
+                return;
+            }
+
             // Create a new form
-            Form clockForm = new Form();
-            clockForm.Text = "Empty";
+            PaintBoxForm = new Form();
+            PaintBoxForm.Text = "Paint Box";
+            PaintBoxForm.Size = new Size(900, 900);
+            PaintBoxForm.KeyPreview = true;
+
+            // Create a new picture box
+            PictureBox pictureBox = new PictureBox();
+            pictureBox.Location = new Point(50, 50);
+
+            // Add the picture box to the form
+            PaintBoxForm.Controls.Add(pictureBox);
+
+            // Create a color dialog
+            ColorDialog colorDialog = new ColorDialog();
+
+            // Create a new label
+            Label pixelLabel = new Label();
+            pixelLabel.Text = "Pixel";
+            pixelLabel.Location = new Point(464, 775); // Position it above the TextBox
+
+            // Add the label to the shape
+            PaintBoxForm.Controls.Add(pixelLabel);
+
+            // Create a button to draw on the picture box
+            Button drawButton = new Button();
+            drawButton.Text = "Draw Line";
+            drawButton.Location = new Point(50, 800);
+            drawButton.Click += (s, e) =>
+            // Toggle function for drawing lines
+            drawButton.Click += (s, e) =>
+            {
+                isLineDrawingActive = !isLineDrawingActive;
+                drawButton.Text = isLineDrawingActive ? "Stop Drawing Line" : "Draw Line";
+                drawButton.BackColor = colorDialog.Color; // Sets the background color of the button to the selected color
+
+                // Change the text color of the button to ensure it's readable
+                drawButton.ForeColor = (colorDialog.Color.R * 0.299 + colorDialog.Color.G * 0.587 + colorDialog.Color.B * 0.114) > 186 ? Color.Black : Color.White;
+
+                // Make isDrawingActive always the opposite of isLineDrawingActive
+                isDrawingActive = !isLineDrawingActive;
+            };
+
+            // Create a button to paste an image from the clipboard to the picture box
+            Button pasteButton = new Button();
+            pasteButton.Text = "Paste";
+            pasteButton.Location = new Point(132, 800);
+            pasteButton.Click += (s, e) =>
+            {
+                if (Clipboard.ContainsImage())
+                {
+                    Image img = Clipboard.GetImage();
+                    bitmap = new Bitmap(img);
+                    pictureBox.Size = img.Size;
+
+                    // Update imageRect within the event
+                    imageRect.Size = img.Size;  // Update the size of the imageRect
+
+                    // Update the picture box
+                    pictureBox.Image = bitmap;
+
+                    // Add the inserted bitmap to the gradient
+                    if (bitmap != null)
+                    {
+                        bitmapHistory.Push((Bitmap)bitmap.Clone());
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No image found on clipboard.");
+                }
+            };
+
+            // Create a button to choose a color
+            Button colorButton = new Button();
+            colorButton.Text = "Choose Color";
+            colorButton.Location = new Point(296, 800);
+            colorButton.Click += (s, e) =>
+            {
+                if (colorDialog.ShowDialog() == DialogResult.OK)
+                {
+                    drawButton.ForeColor = colorDialog.Color;
+                }
+            };
+
+            // Create a button to copy the image to the clipboard
+            Button copyButton = new Button();
+            copyButton.Text = "Copy";
+            copyButton.Location = new Point(214, 800);
+            copyButton.Click += (s, e) =>
+            {
+                if (pictureBox.Image != null)
+                {
+                    Clipboard.SetImage(bitmap);
+                }
+                else
+                {
+                    MessageBox.Show("No image available to copy.");
+                }
+            };
+
+            // Create a button for mirror drawing
+            Button mirrorDrawButton = new Button();
+            mirrorDrawButton.Text = "Mirror Draw";
+            mirrorDrawButton.Location = new Point(378, 800);
+
+            // Create a textbox to set the pen width
+            TextBox penWidthTextBox = new TextBox();
+            penWidthTextBox.Text = "1";
+            penWidthTextBox.Location = new Point(464, 800);
+            penWidthTextBox.Size = new Size(50, penWidthTextBox.Height); // Sets the width to 50 pixels
+
+            // Create an undo button
+            Button undoButton = new Button();
+            undoButton.Text = "Undone";
+            undoButton.Location = new Point(522, 800); // Position it next to the other buttons
+            undoButton.Click += (s, e) =>
+            {
+                if (bitmapHistory.Count > 0)
+                {
+                    bitmap = bitmapHistory.Pop();
+                    pictureBox.Image = bitmap;
+                }
+            };
+
+            // Add the buttons and textbox to the form
+            PaintBoxForm.Controls.Add(drawButton);
+            PaintBoxForm.Controls.Add(pasteButton);
+            PaintBoxForm.Controls.Add(colorButton);
+            PaintBoxForm.Controls.Add(copyButton);
+            PaintBoxForm.Controls.Add(mirrorDrawButton);
+            PaintBoxForm.Controls.Add(penWidthTextBox);
+            PaintBoxForm.Controls.Add(undoButton);
+
+            // Add mouse down event to start drawing
+            pictureBox.MouseDown += (s, e) =>
+            {
+                // Set the starting point by pressing the mouse button                
+                if (isLineDrawingActive && imageRect.Contains(e.Location))
+                {
+                    drawing = true;
+                    startPoint = e.Location;
+                }
+                else if (isDrawingActive)
+                {
+                    // Set the starting point by pressing the mouse button
+                    if (imageRect.Contains(e.Location))
+                    {
+                        drawing = true;
+                    }
+                }
+            };
+
+            // Add mouse up event to stop drawing
+            pictureBox.MouseUp += (s, e) =>
+            {
+                drawing = false;
+
+                if (isLineDrawingActive && bitmap != null && startPoint != Point.Empty)
+                {
+                    drawing = false;
+
+                    // Draw the final line on the original image
+                    Graphics graphics = Graphics.FromImage(bitmap);
+                    float penWidth = float.Parse(penWidthTextBox.Text);
+                    graphics.DrawLine(new Pen(colorDialog.Color, penWidth), startPoint, e.Location);
+
+                    // Update the picture box
+                    pictureBox.Image = bitmap;
+
+                    // Reset the start point
+                    startPoint = Point.Empty;
+
+                    // Add the current bitmap to the gradient after you draw
+                    bitmapHistory.Push((Bitmap)bitmap.Clone());
+                }
+                else if (isDrawingActive && bitmap != null && imageRect.Contains(e.Location))
+                {
+                    // Reset the last point when the mouse is released
+                    lastPoint = Point.Empty;
+                    drawing = false;
+                    bitmapHistory.Push((Bitmap)bitmap.Clone()); // Remove the last image from the history
+                }
+            };
+
+            // Add mouse move event to draw when mouse is down
+            pictureBox.MouseMove += (s, e) =>
+            {
+                //if (isLineDrawingActive && bitmap != null)
+                if (isLineDrawingActive && drawing && imageRect.Contains(e.Location))
+                {
+                    ;
+                    pictureBox.Invalidate();
+
+                    if (startPoint != Point.Empty)
+                    {
+                        // Draw the line on the picture box, not the bitmap
+                        Graphics graphics = pictureBox.CreateGraphics();
+                        float penWidth = float.Parse(penWidthTextBox.Text);
+                        graphics.DrawLine(new Pen(colorDialog.Color, penWidth), startPoint, e.Location);
+                    }
+                }
+                else if (isDrawingActive)
+                {
+                    // Draw image when mouse is down
+                    if (drawing && bitmap != null)
+                    {
+                        Graphics graphics = Graphics.FromImage(bitmap);
+                        float penWidth = float.Parse(penWidthTextBox.Text);
+                        graphics.FillEllipse(new SolidBrush(colorDialog.Color), e.X - penWidth / 2, e.Y - penWidth / 2, penWidth, penWidth);
+
+                        if (mirrorDrawing)
+                        {
+                            int mirrorX = bitmap.Width - e.X;
+                            graphics.FillEllipse(new SolidBrush(colorDialog.Color), mirrorX - penWidth / 2, e.Y - penWidth / 2, penWidth, penWidth);
+                        }
+                        // Aktualisieren Sie den letzten Punkt
+                        lastPoint = e.Location;
+
+                        // Update the picture box
+                        pictureBox.Image = bitmap;
+                    }
+                }
+            };
+
+            mirrorDrawButton.Click += (s, e) =>
+            {
+                mirrorDrawing = !mirrorDrawing;
+                mirrorDrawButton.Text = mirrorDrawing ? "Stop Mirror Draw" : "Mirror Draw";
+                if (bitmap != null)
+                {
+                    bitmapHistory.Push((Bitmap)bitmap.Clone()); // Remove last image from history
+                }
+            };
+
+            // Add keydown event to handle Ctrl+V and Ctrl+X
+            PaintBoxForm.KeyDown += (s, e) =>
+            {
+                if (e.Control && e.KeyCode == Keys.V) // Ctrl+V
+                {
+                    if (Clipboard.ContainsImage())
+                    {
+                        Image img = Clipboard.GetImage();
+                        bitmap = new Bitmap(img);
+                        pictureBox.Size = img.Size;
+                        imageRect.Size = img.Size;
+
+                        // Update the picture box
+                        pictureBox.Image = bitmap;
+
+                        // Fügen Sie das eingefügte Bitmap zum Verlauf hinzu
+                        if (bitmap != null)
+                        {
+                            bitmapHistory.Push((Bitmap)bitmap.Clone());
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("No image found on clipboard.");
+                    }
+                }
+                else if (e.Control && e.KeyCode == Keys.X) // Ctrl+X
+                {
+                    if (pictureBox.Image != null)
+                    {
+                        Clipboard.SetImage(bitmap);
+                        pictureBox.Image = bitmap;
+                    }
+                    else
+                    {
+                        MessageBox.Show("No image found on clipboard..");
+                    }
+                }
+            };
+
+            // Create a timer
+            Timer timer = new Timer();
+            timer.Interval = 100; // Set the interval to 100 milliseconds
+
+            Bitmap tempBitmap = null; // Temporary bitmap for the line preview
+
+            timer.Tick += (s, e) =>
+            {
+                if (isLineDrawingActive && bitmap != null && drawing)
+                {
+                    // Get the current position of the mouse cursor
+                    Point currentPosition = pictureBox.PointToClient(Cursor.Position);
+
+                    // Make a copy of the current image
+                    tempBitmap = new Bitmap(bitmap);
+
+                    // Draw on the temporary image
+                    Graphics graphics = Graphics.FromImage(tempBitmap);
+                    float penWidth = float.Parse(penWidthTextBox.Text);
+                    graphics.DrawLine(new Pen(colorDialog.Color, penWidth), startPoint, currentPosition);
+
+                    // Update the PictureBox with the temporary image
+                    pictureBox.Image = tempBitmap;
+                }
+            };
+
+            // Start the timer
+            timer.Start();
+
+            // Add an event to reset the static variable when the form closes
+            PaintBoxForm.FormClosed += (s, e) => { PaintBoxForm = null; };
 
             // Show the form
-            clockForm.Show();
+            PaintBoxForm.Show();
         }
+        #endregion
+
 
         //Saves the position.
         private void TextureCutter_FormClosed(object sender, FormClosedEventArgs e)
