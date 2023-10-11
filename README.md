@@ -5,7 +5,7 @@
 UOFiddler based on Ultima SDK it's a tool to view and alter almost every UO 2D client file. Source code is released under the Beerware license.
 
 ## Changelog
-Version : 4.11.23
+Version : 4.11.24
 - Added ItemControl a Built-in image swap function
 
 Version : 4.11.23
