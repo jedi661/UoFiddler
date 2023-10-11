@@ -3562,7 +3562,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
 
             // Create an undo button
             Button undoButton = new Button();
-            undoButton.Text = "Undone";
+            undoButton.Text = "Undo";
             undoButton.Location = new Point(522, 800); // Position it next to the other buttons
             undoButton.Click += (s, e) =>
             {
