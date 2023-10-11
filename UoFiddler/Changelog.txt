@@ -1,4 +1,5 @@
 Version : 4.11.24 #XG1
+- Added ItemControl a Built-in image swap function
 
 Version : 4.11.23 #XG1
 - Fixed an issue in Texturecutter regarding the input of hex addresses so that it works with and without the "#" symbol.
