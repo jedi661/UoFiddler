@@ -71,6 +71,7 @@ namespace UoFiddler.Controls.UserControls
             removeToolStripMenuItem = new ToolStripMenuItem();
             insertAtToolStripMenuItem = new ToolStripMenuItem();
             InsertText = new ToolStripTextBox();
+            imageSwapToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator5 = new ToolStripSeparator();
             mirrorToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator1 = new ToolStripSeparator();
@@ -78,7 +79,6 @@ namespace UoFiddler.Controls.UserControls
             importToolStripclipboardMenuItem = new ToolStripMenuItem();
             toolStripSeparator4 = new ToolStripSeparator();
             saveToolStripMenuItem = new ToolStripMenuItem();
-            imageSwapToolStripMenuItem = new ToolStripMenuItem();
             StatusStrip = new StatusStrip();
             NameLabel = new ToolStripStatusLabel();
             GraphicLabel = new ToolStripStatusLabel();
@@ -397,6 +397,15 @@ namespace UoFiddler.Controls.UserControls
             InsertText.KeyDown += OnKeyDownInsertText;
             InsertText.TextChanged += OnTextChangedInsert;
             // 
+            // imageSwapToolStripMenuItem
+            // 
+            imageSwapToolStripMenuItem.Image = Properties.Resources.two_image_swap;
+            imageSwapToolStripMenuItem.Name = "imageSwapToolStripMenuItem";
+            imageSwapToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            imageSwapToolStripMenuItem.Text = "Image Swap";
+            imageSwapToolStripMenuItem.ToolTipText = "Swap the graphics with each other";
+            imageSwapToolStripMenuItem.Click += imageSwapToolStripMenuItem_Click;
+            // 
             // toolStripSeparator5
             // 
             toolStripSeparator5.Name = "toolStripSeparator5";
@@ -447,14 +456,6 @@ namespace UoFiddler.Controls.UserControls
             saveToolStripMenuItem.Text = "Save";
             saveToolStripMenuItem.ToolTipText = "Saves the .mul file.";
             saveToolStripMenuItem.Click += OnClickSave;
-            // 
-            // imageSwapToolStripMenuItem
-            // 
-            imageSwapToolStripMenuItem.Image = Properties.Resources.two_image_swap;
-            imageSwapToolStripMenuItem.Name = "imageSwapToolStripMenuItem";
-            imageSwapToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
-            imageSwapToolStripMenuItem.Text = "Image Swap";
-            imageSwapToolStripMenuItem.Click += imageSwapToolStripMenuItem_Click;
             // 
             // StatusStrip
             // 
