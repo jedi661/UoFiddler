@@ -1,3 +1,5 @@
+Version : 4.11.24 #XG1
+
 Version : 4.11.23 #XG1
 - Fixed an issue in Texturecutter regarding the input of hex addresses so that it works with and without the "#" symbol.
 - Added a checkbox that, when active, moves the input from one textbox to another.

@@ -1520,5 +1520,53 @@ namespace UoFiddler.Controls.UserControls
             }
         }
         #endregion
+
+        #region Image swap
+        private void imageSwapToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Make sure that exactly two items are selected
+            if (ItemsTileView.SelectedIndices.Count != 2)
+            {
+                MessageBox.Show("Please select exactly two items to exchange.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Get the Selected Indices
+            int index1 = ItemsTileView.SelectedIndices[0];
+            int index2 = ItemsTileView.SelectedIndices[1];
+
+            // Save the graphics temporarily
+            Bitmap ArtTempImage1 = Art.GetStatic(_itemList[index1]);
+            Bitmap ArtTempImage2 = Art.GetStatic(_itemList[index2]);
+
+            // Swap the graphics
+            ReplaceStaticSwap(_itemList[index1], ArtTempImage1, _itemList[index2], ArtTempImage2);
+
+            // Update the view and labels
+            ItemsTileView.Invalidate();
+            UpdateToolStripLabels(_selectedGraphicId);
+            UpdateDetail(_selectedGraphicId);
+
+            Options.ChangedUltimaClass["Art"] = true;
+        }
+
+        private void ReplaceStaticSwap(int index1, Bitmap newGraphic1, int index2, Bitmap newGraphic2)
+        {
+            // Replace the graph at 'index1' with 'newGraphic2'
+            _selectedGraphicId = index1;
+            OnClickReplace(newGraphic2);
+
+            // Replace the graphic at 'index2' with 'newGraphic1'
+            _selectedGraphicId = index2;
+            OnClickReplace(newGraphic1);
+
+        }
+
+        private void OnClickReplace(Bitmap bitmap)
+        {
+            Art.ReplaceStatic(_selectedGraphicId, bitmap);
+            ControlEvents.FireItemChangeEvent(this, _selectedGraphicId);
+        }
+        #endregion
     }
 }

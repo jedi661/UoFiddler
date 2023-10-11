@@ -78,6 +78,7 @@ namespace UoFiddler.Controls.UserControls
             importToolStripclipboardMenuItem = new ToolStripMenuItem();
             toolStripSeparator4 = new ToolStripSeparator();
             saveToolStripMenuItem = new ToolStripMenuItem();
+            imageSwapToolStripMenuItem = new ToolStripMenuItem();
             StatusStrip = new StatusStrip();
             NameLabel = new ToolStripStatusLabel();
             GraphicLabel = new ToolStripStatusLabel();
@@ -220,9 +221,9 @@ namespace UoFiddler.Controls.UserControls
             // 
             // TileViewContextMenuStrip
             // 
-            TileViewContextMenuStrip.Items.AddRange(new ToolStripItem[] { showFreeSlotsToolStripMenuItem, findNextFreeSlotToolStripMenuItem, ChangeBackgroundColorToolStripMenuItem, toolStripSeparator3, selectInTileDataTabToolStripMenuItem, selectInRadarColorTabToolStripMenuItem, SelectIDToHexToolStripMenuItem, selectInGumpsTabMaleToolStripMenuItem, selectInGumpsTabFemaleToolStripMenuItem, toolStripSeparator2, extractToolStripMenuItem, replaceToolStripMenuItem, replaceStartingFromToolStripMenuItem, removeToolStripMenuItem, insertAtToolStripMenuItem, toolStripSeparator5, mirrorToolStripMenuItem, toolStripSeparator1, copyToolStripMenuItem, importToolStripclipboardMenuItem, toolStripSeparator4, saveToolStripMenuItem });
+            TileViewContextMenuStrip.Items.AddRange(new ToolStripItem[] { showFreeSlotsToolStripMenuItem, findNextFreeSlotToolStripMenuItem, ChangeBackgroundColorToolStripMenuItem, toolStripSeparator3, selectInTileDataTabToolStripMenuItem, selectInRadarColorTabToolStripMenuItem, SelectIDToHexToolStripMenuItem, selectInGumpsTabMaleToolStripMenuItem, selectInGumpsTabFemaleToolStripMenuItem, toolStripSeparator2, extractToolStripMenuItem, replaceToolStripMenuItem, replaceStartingFromToolStripMenuItem, removeToolStripMenuItem, insertAtToolStripMenuItem, imageSwapToolStripMenuItem, toolStripSeparator5, mirrorToolStripMenuItem, toolStripSeparator1, copyToolStripMenuItem, importToolStripclipboardMenuItem, toolStripSeparator4, saveToolStripMenuItem });
             TileViewContextMenuStrip.Name = "contextMenuStrip1";
-            TileViewContextMenuStrip.Size = new System.Drawing.Size(213, 430);
+            TileViewContextMenuStrip.Size = new System.Drawing.Size(213, 452);
             TileViewContextMenuStrip.Opening += TileViewContextMenuStrip_Opening;
             // 
             // showFreeSlotsToolStripMenuItem
@@ -446,6 +447,14 @@ namespace UoFiddler.Controls.UserControls
             saveToolStripMenuItem.Text = "Save";
             saveToolStripMenuItem.ToolTipText = "Saves the .mul file.";
             saveToolStripMenuItem.Click += OnClickSave;
+            // 
+            // imageSwapToolStripMenuItem
+            // 
+            imageSwapToolStripMenuItem.Image = Properties.Resources.two_image_swap;
+            imageSwapToolStripMenuItem.Name = "imageSwapToolStripMenuItem";
+            imageSwapToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            imageSwapToolStripMenuItem.Text = "Image Swap";
+            imageSwapToolStripMenuItem.Click += imageSwapToolStripMenuItem_Click;
             // 
             // StatusStrip
             // 
@@ -718,5 +727,6 @@ namespace UoFiddler.Controls.UserControls
         private ToolStripButton searchByNameToolStripButton;
         private ToolStripButton toolStripButton1;
         private ToolStripMenuItem SelectIDToHexToolStripMenuItem;
+        private ToolStripMenuItem imageSwapToolStripMenuItem;
     }
 }
