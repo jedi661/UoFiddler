@@ -7,6 +7,7 @@ UOFiddler based on Ultima SDK it's a tool to view and alter almost every UO 2D c
 ## Changelog
 Version : 4.11.24
 - Added ItemControl a Built-in image swap function
+- Added a notepad that saves information into an XML file, serving as a reminder that can be edited later.
 
 Version : 4.11.23
 - Fixed an issue in Texturecutter regarding the input of hex addresses so that it works with and without the "#" symbol.

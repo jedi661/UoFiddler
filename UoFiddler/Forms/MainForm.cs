@@ -1282,5 +1282,24 @@ namespace UoFiddler.Forms
             }
         }
         #endregion
+
+        #region Notepad Editor
+        private NotepadForm notepadForm; // Declare an instance of NotepadForm
+        private void notPadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (notepadForm == null || notepadForm.IsDisposed)
+            {
+                notepadForm = new NotepadForm()
+                {
+                    TopMost = true
+                };
+                notepadForm.Show();
+            }
+            else
+            {
+                notepadForm.Focus();
+            }
+        }
+        #endregion
     }
 }
