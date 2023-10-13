@@ -22,6 +22,7 @@ using System.Windows.Forms;
 using System.Xml;
 using System.IO;
 using System.Windows.Documents;
+using System.Drawing.Printing;
 
 namespace UoFiddler.Forms
 {
@@ -78,6 +79,8 @@ namespace UoFiddler.Forms
             ToolTip1.SetToolTip(this.btnAlignCenter, "To align the text to the center");
             ToolTip1.SetToolTip(this.btnAlignRight, "To align the text to the right");
             ToolTip1.SetToolTip(this.btSaveAs, "Save the text in the relevant format in the target directory");
+            //ToolTip1.SetToolTip(this.btPrint, "Print the text");
+
             // Set the text of the button to the cursive "i" symbol
             string italicIcon = "\uD835\uDC56";
             BtItalic.Text = italicIcon;
@@ -877,6 +880,46 @@ namespace UoFiddler.Forms
                     richTextBoxNotPad.SaveFile(saveFileDialog.FileName, RichTextBoxStreamType.PlainText);
                 }
             }
+        }
+        #endregion
+
+        #region Print
+        private void PrintToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Create a new instance of PrintDocument
+            PrintDocument printDocument = new PrintDocument();
+
+            // Add the event handler for the PrintPage event
+            printDocument.PrintPage += new PrintPageEventHandler(PrintDocument_PrintPage);
+
+            // Create a new PrintDialog
+            System.Windows.Forms.PrintDialog printDialog = new System.Windows.Forms.PrintDialog();
+
+            // Set the PrintDocument for the dialog
+            printDialog.Document = printDocument;
+
+            // Display the dialog and verify that the user clicked OK
+            if (printDialog.ShowDialog() == DialogResult.OK)
+            {
+                // Print the document
+                printDialog.Document.Print();
+            }
+        }
+
+        // Event handler method for the PrintPage event
+        private void PrintDocument_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            // Draw the RichTextBox's text onto the page
+            e.Graphics.DrawString(richTextBoxNotPad.Text, richTextBoxNotPad.Font, Brushes.Black, 10, 10);
+        }
+        #endregion
+
+        #region Copy Clipboard
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Copy all the text in the RichTextBox to the clipboard
+            richTextBoxNotPad.SelectAll();
+            richTextBoxNotPad.Copy();
         }
         #endregion
     }

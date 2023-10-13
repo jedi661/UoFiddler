@@ -83,6 +83,9 @@ namespace UoFiddler.Forms
             toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            PrintToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            printDialog = new System.Windows.Forms.PrintDialog();
+            copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             contextMenuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             menuStrip1.SuspendLayout();
@@ -114,14 +117,14 @@ namespace UoFiddler.Forms
             // 
             // contextMenuStrip1
             // 
-            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { dateTimeToolStripMenuItem, searchToolStripMenuItem, deleteToolStripMenuItem, undoToolStripMenuItem, replaceToolStripMenuItem, selectAllToolStripMenuItem });
+            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { dateTimeToolStripMenuItem, searchToolStripMenuItem, deleteToolStripMenuItem, undoToolStripMenuItem, replaceToolStripMenuItem, selectAllToolStripMenuItem, copyToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new System.Drawing.Size(130, 136);
+            contextMenuStrip1.Size = new System.Drawing.Size(181, 180);
             // 
             // dateTimeToolStripMenuItem
             // 
             dateTimeToolStripMenuItem.Name = "dateTimeToolStripMenuItem";
-            dateTimeToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            dateTimeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             dateTimeToolStripMenuItem.Text = "Date/Time";
             dateTimeToolStripMenuItem.Click += dateTimeToolStripMenuItem_Click;
             // 
@@ -129,7 +132,7 @@ namespace UoFiddler.Forms
             // 
             searchToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripTextBoxSearch });
             searchToolStripMenuItem.Name = "searchToolStripMenuItem";
-            searchToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            searchToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             searchToolStripMenuItem.Text = "Search";
             // 
             // toolStripTextBoxSearch
@@ -141,28 +144,28 @@ namespace UoFiddler.Forms
             // deleteToolStripMenuItem
             // 
             deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            deleteToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             deleteToolStripMenuItem.Text = "Delete";
             deleteToolStripMenuItem.Click += deleteToolStripMenuItem_Click;
             // 
             // undoToolStripMenuItem
             // 
             undoToolStripMenuItem.Name = "undoToolStripMenuItem";
-            undoToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            undoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             undoToolStripMenuItem.Text = "Undo";
             undoToolStripMenuItem.Click += undoToolStripMenuItem_Click;
             // 
             // replaceToolStripMenuItem
             // 
             replaceToolStripMenuItem.Name = "replaceToolStripMenuItem";
-            replaceToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            replaceToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             replaceToolStripMenuItem.Text = "Replace";
             replaceToolStripMenuItem.Click += replaceToolStripMenuItem_Click;
             // 
             // selectAllToolStripMenuItem
             // 
             selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
-            selectAllToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            selectAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             selectAllToolStripMenuItem.Text = "Select all";
             selectAllToolStripMenuItem.Click += selectAllToolStripMenuItem_Click;
             // 
@@ -442,7 +445,7 @@ namespace UoFiddler.Forms
             // 
             // toolStripMenuItem1
             // 
-            toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { loadToolStripMenuItem, saveToolStripMenuItem });
+            toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { loadToolStripMenuItem, saveToolStripMenuItem, PrintToolStripMenuItem });
             toolStripMenuItem1.Name = "toolStripMenuItem1";
             toolStripMenuItem1.Size = new System.Drawing.Size(46, 20);
             toolStripMenuItem1.Text = "Datei";
@@ -450,16 +453,34 @@ namespace UoFiddler.Forms
             // loadToolStripMenuItem
             // 
             loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            loadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             loadToolStripMenuItem.Text = "Load";
             loadToolStripMenuItem.Click += loadToolStripMenuItem_Click;
             // 
             // saveToolStripMenuItem
             // 
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             saveToolStripMenuItem.Text = "Save";
             saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
+            // 
+            // PrintToolStripMenuItem
+            // 
+            PrintToolStripMenuItem.Name = "PrintToolStripMenuItem";
+            PrintToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            PrintToolStripMenuItem.Text = "Print";
+            PrintToolStripMenuItem.Click += PrintToolStripMenuItem_Click;
+            // 
+            // printDialog
+            // 
+            printDialog.UseEXDialog = true;
+            // 
+            // copyToolStripMenuItem
+            // 
+            copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            copyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            copyToolStripMenuItem.Text = "Copy";
+            copyToolStripMenuItem.Click += copyToolStripMenuItem_Click;
             // 
             // NotepadForm
             // 
@@ -552,5 +573,8 @@ namespace UoFiddler.Forms
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem PrintToolStripMenuItem;
+        private System.Windows.Forms.PrintDialog printDialog;
+        private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
     }
 }
