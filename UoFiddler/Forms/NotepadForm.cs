@@ -23,6 +23,8 @@ using System.Xml;
 using System.IO;
 using System.Windows.Documents;
 using System.Drawing.Printing;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using Ultima;
 
 namespace UoFiddler.Forms
 {
@@ -45,6 +47,9 @@ namespace UoFiddler.Forms
         DateTimePicker dateTimePicker = new DateTimePicker();
 
         private bool isFirstInstance = true;
+
+        // Globale Variable, um das Formular zu speichern
+        private System.Windows.Forms.Form replaceForm = null;
 
         public NotepadForm()
         {
@@ -126,6 +131,9 @@ namespace UoFiddler.Forms
                     }
                 }
             }
+
+            listBoxLineNumbers.SelectionMode = System.Windows.Forms.SelectionMode.One;
+
         }
 
         #region Bold
@@ -453,27 +461,48 @@ namespace UoFiddler.Forms
         #region Line counter
         private void richTextBoxNotPad_TextChanged(object sender, EventArgs e)
         {
-            // Update line numbers as text changes
-            UpdateLineNumbers();
+            // Update line numbers as text changes only if checkBoxLines is checked
+            if (checkBoxLines.Checked)
+            {
+                UpdateLineNumbers();
+            }
         }
 
         private void richTextBoxNotPad_VScroll(object sender, EventArgs e)
         {
-            // Update line numbers as user scrolls
-            UpdateLineNumbers();
-        }
-
+            // Update line numbers as user scrolls only if checkBoxLines is checked
+            if (checkBoxLines.Checked)
+            {
+                UpdateLineNumbers();
+            }
+        }        
         private void UpdateLineNumbers()
         {
-            // Delete the current line numbers
-            listBoxLineNumbers.Items.Clear();
+            // Save the currently selected line number
+            int selectedIndex = listBoxLineNumbers.SelectedIndex;
 
-            // Add line numbers for each line in the text
-            for (int i = 1; i <= richTextBoxNotPad.Lines.Length; i++)
+            // Count the number of lines in the richTextBoxNotPad
+            int lineCount = richTextBoxNotPad.Text.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None).Length;
+
+            // Check if rows have been added
+            while (lineCount > listBoxLineNumbers.Items.Count)
             {
-                listBoxLineNumbers.Items.Add(i.ToString());
+                listBoxLineNumbers.Items.Add((listBoxLineNumbers.Items.Count + 1).ToString());
+            }
+
+            // Check whether rows have been removed
+            while (lineCount < listBoxLineNumbers.Items.Count)
+            {
+                listBoxLineNumbers.Items.RemoveAt(listBoxLineNumbers.Items.Count - 1);
+            }
+
+            // Restore the selected line number
+            if (selectedIndex < listBoxLineNumbers.Items.Count)
+            {
+                listBoxLineNumbers.SelectedIndex = selectedIndex;
             }
         }
+
         #endregion
 
         #region CheckBox Lines
@@ -493,7 +522,8 @@ namespace UoFiddler.Forms
         }
         #endregion
 
-        #region Status Line
+        #region Status Line     
+
         private void richTextBoxNotPad_SelectionChanged(object sender, EventArgs e)
         {
             // Calculate the current row and column
@@ -502,9 +532,19 @@ namespace UoFiddler.Forms
             int firstChar = richTextBoxNotPad.GetFirstCharIndexFromLine(line);
             int column = index - firstChar;
 
+            // Count the number of lines in the text
+            int lineCount = richTextBoxNotPad.Text.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None).Length;
+
             // Show the row and column in the status bar
-            toolStripStatusLabel1.Text = $"Line: {line + 1}, Split: {column + 1}";
+            toolStripStatusLabel1.Text = $"Line: {lineCount}, Split: {column + 1}";
+
+            // Synchronize listBoxLineNumbers with richTextBoxNotPad
+            if (listBoxLineNumbers.Items.Count > line)
+            {
+                listBoxLineNumbers.SelectedIndex = line;
+            }
         }
+
         private bool IsUtf8(string text)
         {
             // Check if the text is UTF-8
@@ -577,11 +617,21 @@ namespace UoFiddler.Forms
         }
         #endregion
 
-        #region Replace search
+        #region Replace search        
         private void replaceToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // Check if the form is already open
+            if (replaceForm != null)
+            {
+                // The form is already open, so do nothing
+                return;
+            }
             // Create a new form
-            System.Windows.Forms.Form replaceForm = new System.Windows.Forms.Form();
+            replaceForm = new System.Windows.Forms.Form();
+            replaceForm.TopMost = true;
+            replaceForm.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            replaceForm.MaximizeBox = false;
+
 
             // Create the controls
             System.Windows.Forms.Label lblSearch = new System.Windows.Forms.Label() { Text = "Search for:", Location = new System.Drawing.Point(10, 10) };
@@ -590,19 +640,28 @@ namespace UoFiddler.Forms
             System.Windows.Forms.Label lblReplace = new System.Windows.Forms.Label() { Text = "Replace by:", Location = new System.Drawing.Point(10, 60) };
             System.Windows.Forms.TextBox txtReplace = new System.Windows.Forms.TextBox() { Location = new System.Drawing.Point(10, 80) };
 
-            System.Windows.Forms.Button btnSearchNext = new System.Windows.Forms.Button() { Text = "keep looking", Location = new System.Drawing.Point(10, 110) };
+            System.Windows.Forms.Button btnSearchNext = new System.Windows.Forms.Button() { Text = "Search", Location = new System.Drawing.Point(10, 110) };
 
             System.Windows.Forms.Button btnReplaceOne = new System.Windows.Forms.Button() { Text = "Replace", Location = new System.Drawing.Point(100, 110) };
 
             System.Windows.Forms.Button btnReplaceAll = new System.Windows.Forms.Button() { Text = "Replace all", Location = new System.Drawing.Point(190, 110) };
 
-            System.Windows.Forms.Button btnCancel = new System.Windows.Forms.Button() { Text = "Cancel", Location = new System.Drawing.Point(280, 110) };
+            System.Windows.Forms.Button btnCancel = new System.Windows.Forms.Button() { Text = "Cancel", Location = new System.Drawing.Point(190, 140) };
 
-            System.Windows.Forms.CheckBox chkMatchCase = new System.Windows.Forms.CheckBox() { Text = "Pay attention to upper and lower case letters", Location = new System.Drawing.Point(10, 140) };
+            System.Windows.Forms.CheckBox chkMatchCase = new System.Windows.Forms.CheckBox() { Text = "up/lower", Location = new System.Drawing.Point(10, 140) };
 
             System.Windows.Forms.CheckBox chkWrapAround = new System.Windows.Forms.CheckBox() { Text = "Enclose", Location = new System.Drawing.Point(10, 160) };
 
-            // Add the controls to the form
+            // Create the text box
+            System.Windows.Forms.TextBox txtCount = new System.Windows.Forms.TextBox()
+            {
+                Location = new System.Drawing.Point(120, 80),
+                ReadOnly = true,
+                MaxLength = 3,
+                Width = 20 // 20 Pixel
+            };
+
+            // Adds the controls to the form
             replaceForm.Controls.AddRange(new System.Windows.Forms.Control[] {
                 lblSearch,
                 txtSearch,
@@ -613,26 +672,103 @@ namespace UoFiddler.Forms
                 btnReplaceAll,
                 btnCancel,
                 chkMatchCase,
-                chkWrapAround
+                chkWrapAround,
+                txtCount
             });
 
-
-            // Add event handlers for the buttons
+            // Adds the event handler for the buttons
             btnSearchNext.Click += (s, ev) =>
             {
-                string searchText = txtSearch.Text;
-                int index = richTextBoxNotPad.Text.IndexOf(searchText, chkMatchCase.Checked ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase);
-                if (index != -1)
+                if (richTextBoxNotPad.InvokeRequired)
                 {
-                    richTextBoxNotPad.Select(index, searchText.Length);
+                    richTextBoxNotPad.Invoke(new Action(() =>
+                    {
+                        string searchText = txtSearch.Text;
+                        int startIndex = richTextBoxNotPad.SelectionStart + richTextBoxNotPad.SelectionLength;
+                        int index = richTextBoxNotPad.Text.IndexOf(searchText, startIndex, chkMatchCase.Checked ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase);
+                        if (index != -1)
+                        {
+                            richTextBoxNotPad.Select(index, searchText.Length);
+                        }
+                        else
+                        {
+                            // If the search text was not found, set the starting index to 0 and start the search again
+                            index = richTextBoxNotPad.Text.IndexOf(searchText, 0, chkMatchCase.Checked ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase);
+                            if (index != -1)
+                            {
+                                richTextBoxNotPad.Select(index, searchText.Length);
+                            }
+                        }
+                    }));
                 }
+                else
+                {
+                    string searchText = txtSearch.Text;
+                    int startIndex = richTextBoxNotPad.SelectionStart + richTextBoxNotPad.SelectionLength;
+                    int index = richTextBoxNotPad.Text.IndexOf(searchText, startIndex, chkMatchCase.Checked ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase);
+                    if (index != -1)
+                    {
+                        richTextBoxNotPad.Select(index, searchText.Length);
+                    }
+                    else
+                    {
+                        // If the search text was not found, set the starting index to 0 and start the search again
+                        index = richTextBoxNotPad.Text.IndexOf(searchText, 0, chkMatchCase.Checked ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase);
+                        if (index != -1)
+                        {
+                            richTextBoxNotPad.Select(index, searchText.Length);
+                        }
+                    }
+                }
+                // Updates the textbox every time the search text or the text in the richTextBoxNotPad changes
+                txtSearch.TextChanged += (s, ev) => UpdateCount();
+                richTextBoxNotPad.TextChanged += (s, ev) => UpdateCount();
             };
+
+            // A method to update the textbox
+            void UpdateCount()
+            {
+                if (richTextBoxNotPad.InvokeRequired)
+                {
+                    richTextBoxNotPad.Invoke(new Action(() => txtCount.Text = CountOccurrences(richTextBoxNotPad.Text, txtSearch.Text).ToString()));
+                }
+                else
+                {
+                    txtCount.Text = CountOccurrences(richTextBoxNotPad.Text, txtSearch.Text).ToString();
+                }
+            }
+
+            // A method for counting the occurrences of a word in a text
+            int CountOccurrences(string text, string word)
+            {
+                int count = 0;
+                int startIndex = 0;
+                while ((startIndex = text.IndexOf(word, startIndex)) != -1)
+                {
+                    count++;
+                    startIndex += word.Length;
+                }
+                return count;
+            }
 
             btnReplaceOne.Click += (s, ev) =>
             {
-                if (richTextBoxNotPad.SelectionLength > 0)
+                if (richTextBoxNotPad.InvokeRequired)
                 {
-                    richTextBoxNotPad.SelectedText = txtReplace.Text;
+                    richTextBoxNotPad.Invoke(new Action(() =>
+                    {
+                        if (richTextBoxNotPad.SelectionLength > 0)
+                        {
+                            richTextBoxNotPad.SelectedText = txtReplace.Text;
+                        }
+                    }));
+                }
+                else
+                {
+                    if (richTextBoxNotPad.SelectionLength > 0)
+                    {
+                        richTextBoxNotPad.SelectedText = txtReplace.Text;
+                    }
                 }
             };
 
@@ -640,7 +776,14 @@ namespace UoFiddler.Forms
             {
                 string searchText = txtSearch.Text;
                 string replaceText = txtReplace.Text;
-                richTextBoxNotPad.Text = richTextBoxNotPad.Text.Replace(searchText, replaceText);
+                if (richTextBoxNotPad.InvokeRequired)
+                {
+                    richTextBoxNotPad.Invoke(new Action(() => richTextBoxNotPad.Text = richTextBoxNotPad.Text.Replace(searchText, replaceText)));
+                }
+                else
+                {
+                    richTextBoxNotPad.Text = richTextBoxNotPad.Text.Replace(searchText, replaceText);
+                }
             };
 
             btnCancel.Click += (s, ev) =>
@@ -648,9 +791,12 @@ namespace UoFiddler.Forms
                 replaceForm.Close();
             };
 
-            // View the form
+            // Adds an event handler to set the global variable to null when the form closes
+            replaceForm.FormClosed += (s, ev) => { replaceForm = null; };
+           
             replaceForm.Show();
         }
+
         #endregion
 
         #region Select All
@@ -920,6 +1066,25 @@ namespace UoFiddler.Forms
             // Copy all the text in the RichTextBox to the clipboard
             richTextBoxNotPad.SelectAll();
             richTextBoxNotPad.Copy();
+        }
+        #endregion
+
+        #region Mouse Click
+        private void listBoxLineNumbers_MouseClick(object sender, MouseEventArgs e)
+        {
+            // Check whether a line number has been selected
+            if (listBoxLineNumbers.SelectedIndex != -1)
+            {
+                // Get the selected line number
+                int lineNumber = listBoxLineNumbers.SelectedIndex;
+
+                // Jump to the corresponding line in richTextBoxNotPad
+                richTextBoxNotPad.SelectionStart = richTextBoxNotPad.GetFirstCharIndexFromLine(lineNumber);
+                richTextBoxNotPad.ScrollToCaret();
+
+                // Set the focus to richTextBoxNotPad
+                richTextBoxNotPad.Focus();
+            }
         }
         #endregion
     }

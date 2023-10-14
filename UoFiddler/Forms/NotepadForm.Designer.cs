@@ -51,6 +51,7 @@ namespace UoFiddler.Forms
             undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             replaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             btBold = new System.Windows.Forms.Button();
             cbFontSize = new System.Windows.Forms.ComboBox();
             noteId = new System.Windows.Forms.TextBox();
@@ -85,7 +86,6 @@ namespace UoFiddler.Forms
             saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             PrintToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             printDialog = new System.Windows.Forms.PrintDialog();
-            copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             contextMenuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             menuStrip1.SuspendLayout();
@@ -119,12 +119,12 @@ namespace UoFiddler.Forms
             // 
             contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { dateTimeToolStripMenuItem, searchToolStripMenuItem, deleteToolStripMenuItem, undoToolStripMenuItem, replaceToolStripMenuItem, selectAllToolStripMenuItem, copyToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new System.Drawing.Size(181, 180);
+            contextMenuStrip1.Size = new System.Drawing.Size(130, 158);
             // 
             // dateTimeToolStripMenuItem
             // 
             dateTimeToolStripMenuItem.Name = "dateTimeToolStripMenuItem";
-            dateTimeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            dateTimeToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             dateTimeToolStripMenuItem.Text = "Date/Time";
             dateTimeToolStripMenuItem.Click += dateTimeToolStripMenuItem_Click;
             // 
@@ -132,7 +132,7 @@ namespace UoFiddler.Forms
             // 
             searchToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripTextBoxSearch });
             searchToolStripMenuItem.Name = "searchToolStripMenuItem";
-            searchToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            searchToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             searchToolStripMenuItem.Text = "Search";
             // 
             // toolStripTextBoxSearch
@@ -144,30 +144,37 @@ namespace UoFiddler.Forms
             // deleteToolStripMenuItem
             // 
             deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            deleteToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             deleteToolStripMenuItem.Text = "Delete";
             deleteToolStripMenuItem.Click += deleteToolStripMenuItem_Click;
             // 
             // undoToolStripMenuItem
             // 
             undoToolStripMenuItem.Name = "undoToolStripMenuItem";
-            undoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            undoToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             undoToolStripMenuItem.Text = "Undo";
             undoToolStripMenuItem.Click += undoToolStripMenuItem_Click;
             // 
             // replaceToolStripMenuItem
             // 
             replaceToolStripMenuItem.Name = "replaceToolStripMenuItem";
-            replaceToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            replaceToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             replaceToolStripMenuItem.Text = "Replace";
             replaceToolStripMenuItem.Click += replaceToolStripMenuItem_Click;
             // 
             // selectAllToolStripMenuItem
             // 
             selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
-            selectAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            selectAllToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             selectAllToolStripMenuItem.Text = "Select all";
             selectAllToolStripMenuItem.Click += selectAllToolStripMenuItem_Click;
+            // 
+            // copyToolStripMenuItem
+            // 
+            copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            copyToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            copyToolStripMenuItem.Text = "Copy";
+            copyToolStripMenuItem.Click += copyToolStripMenuItem_Click;
             // 
             // btBold
             // 
@@ -294,6 +301,7 @@ namespace UoFiddler.Forms
             listBoxLineNumbers.Name = "listBoxLineNumbers";
             listBoxLineNumbers.Size = new System.Drawing.Size(45, 334);
             listBoxLineNumbers.TabIndex = 15;
+            listBoxLineNumbers.MouseClick += listBoxLineNumbers_MouseClick;
             listBoxLineNumbers.SelectedIndexChanged += richTextBoxNotPad_TextChanged;
             // 
             // statusStrip1
@@ -474,13 +482,6 @@ namespace UoFiddler.Forms
             // printDialog
             // 
             printDialog.UseEXDialog = true;
-            // 
-            // copyToolStripMenuItem
-            // 
-            copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            copyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            copyToolStripMenuItem.Text = "Copy";
-            copyToolStripMenuItem.Click += copyToolStripMenuItem_Click;
             // 
             // NotepadForm
             // 
