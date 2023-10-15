@@ -967,15 +967,15 @@ namespace UoFiddler.Forms
             // Set filters for the file types the user can save
             saveFileDialog.Filter = "Text files (*.txt)|*.txt|Rich Text Format (*.rtf)|*.rtf|C#-files (*.cs)|*.cs|XML-files (*.xml)|*.xml|SCP-files (*.scp)|*.scp|INI-files (*.ini)|*.ini|All files (*.*)|*.*";
 
-            // Zeigen Sie den Dialog an und überprüfen Sie, ob der Benutzer auf OK geklickt hat
+            // Display the dialog and check if the user clicked OK
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                // Speichern Sie den Inhalt der RichTextBox in der ausgewählten Datei
+                // Save the contents of the RichTextBox to the selected file
                 if (saveFileDialog.FilterIndex == 2) // RTF-Format
                 {
                     richTextBoxNotPad.SaveFile(saveFileDialog.FileName, RichTextBoxStreamType.RichText);
                 }
-                else // Alle anderen Formate
+                else // All other formats
                 {
                     richTextBoxNotPad.SaveFile(saveFileDialog.FileName, RichTextBoxStreamType.PlainText);
                 }

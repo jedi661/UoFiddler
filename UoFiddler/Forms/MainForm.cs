@@ -1301,5 +1301,102 @@ namespace UoFiddler.Forms
             }
         }
         #endregion
+
+        #region Notes
+        private void NotesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Creating a new form
+            Form notesForm = new Form()
+            {
+                Text = "Notes",
+                Size = new System.Drawing.Size(400, 300),
+                FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle,
+                MaximizeBox = false
+            };
+
+            // Creating a RichTextBox
+            RichTextBox rtxtNotes = new RichTextBox()
+            {
+                ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical,
+                Dock = System.Windows.Forms.DockStyle.Fill,
+                ReadOnly = true
+            };
+
+            // the currentNoteIndex variable
+            int currentNoteIndex = 0;
+
+            // A method to load the notes from the XML file
+            List<string> LoadNotesFromXml()
+            {
+                // The path to the XML file
+                string xmlFilePath = System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "NotepadMessage.xml");
+
+                // Creates a list to store the notes
+                List<string> notes = new List<string>();
+
+                try
+                {
+                    // Loads the XML document
+                    System.Xml.XmlDocument xmlDoc = new System.Xml.XmlDocument();
+                    xmlDoc.Load(xmlFilePath);
+
+                    // Loop through each "note" in the XML document
+                    foreach (System.Xml.XmlNode noteNode in xmlDoc.SelectNodes("/Notes/Note"))
+                    {
+                        // Extracting the RTF text from the "Note"
+                        string rtfText = noteNode.Attributes["rtfText"].Value;
+
+                        // Adds the RTF text to the list
+                        notes.Add(rtfText);
+                    }
+                }
+                catch (System.IO.FileNotFoundException)
+                {
+                    rtxtNotes.Text = "The XML file has not yet been created.";
+                }
+
+                // Returns the list of notes
+                return notes;
+            }
+
+            // Loads the notes and adds the first one to the RichTextBox
+            List<string> notes = LoadNotesFromXml();
+            if (notes.Count > 0)
+            {
+                rtxtNotes.Rtf = notes[currentNoteIndex];
+            }
+
+            // Creates buttons for scrolling
+            Button btnScrollUp = new Button() { Text = "Scroll Up", Dock = System.Windows.Forms.DockStyle.Top };
+            Button btnScrollDown = new Button() { Text = "Scroll Down", Dock = System.Windows.Forms.DockStyle.Bottom };
+
+            // Add event handlers for the buttons
+            btnScrollUp.Click += (s, ev) =>
+            {
+                if (currentNoteIndex > 0)
+                {
+                    currentNoteIndex--;
+                    rtxtNotes.Rtf = notes[currentNoteIndex];
+                }
+            };
+
+            btnScrollDown.Click += (s, ev) =>
+            {
+                if (currentNoteIndex < notes.Count - 1)
+                {
+                    currentNoteIndex++;
+                    rtxtNotes.Rtf = notes[currentNoteIndex];
+                }
+            };
+
+            // Adds the controls to the form
+            notesForm.Controls.Add(rtxtNotes);
+            notesForm.Controls.Add(btnScrollUp);
+            notesForm.Controls.Add(btnScrollDown);
+
+            // Displays the form
+            notesForm.Show();
+        }
+        #endregion
     }
 }
