@@ -10,7 +10,6 @@ Version : 4.11.24
 - Added a notepad that saves information into an XML file, serving as a reminder that can be edited later.
 - Added a Notes form in the main menu to display messages.
 
-
 Version : 4.11.23
 - Fixed an issue in Texturecutter regarding the input of hex addresses so that it works with and without the "#" symbol.
 - Added a checkbox that, when active, moves the input from one textbox to another.
