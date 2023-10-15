@@ -49,6 +49,7 @@ namespace UoFiddler.Forms
             toolStripComboBoxImage = new System.Windows.Forms.ToolStripComboBox();
             directoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             tempDirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            NotesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             StartTab = new System.Windows.Forms.TabPage();
             Versionlabel = new System.Windows.Forms.Label();
             MultisTab = new System.Windows.Forms.TabPage();
@@ -144,7 +145,6 @@ namespace UoFiddler.Forms
             toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             toolStripMenuItemLink3 = new System.Windows.Forms.ToolStripMenuItem();
-            NotesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             TabPanel.SuspendLayout();
             contextMenuStripMainForm.SuspendLayout();
             StartTab.SuspendLayout();
@@ -208,12 +208,12 @@ namespace UoFiddler.Forms
             // 
             contextMenuStripMainForm.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { unDockToolStripMenuItem, switchLogoImageToolStripMenuItem, directoryToolStripMenuItem, tempDirToolStripMenuItem, NotesToolStripMenuItem });
             contextMenuStripMainForm.Name = "contextMenuStrip1";
-            contextMenuStripMainForm.Size = new System.Drawing.Size(181, 136);
+            contextMenuStripMainForm.Size = new System.Drawing.Size(176, 114);
             // 
             // unDockToolStripMenuItem
             // 
             unDockToolStripMenuItem.Name = "unDockToolStripMenuItem";
-            unDockToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            unDockToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             unDockToolStripMenuItem.Text = "UnDock";
             unDockToolStripMenuItem.Click += OnClickUnDock;
             // 
@@ -222,7 +222,7 @@ namespace UoFiddler.Forms
             switchLogoImageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripComboBoxImage });
             switchLogoImageToolStripMenuItem.Image = Properties.Resources._32x32;
             switchLogoImageToolStripMenuItem.Name = "switchLogoImageToolStripMenuItem";
-            switchLogoImageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            switchLogoImageToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             switchLogoImageToolStripMenuItem.Text = "Switch Logo Image";
             // 
             // toolStripComboBoxImage
@@ -235,7 +235,7 @@ namespace UoFiddler.Forms
             // 
             directoryToolStripMenuItem.Image = Properties.Resources.Directory;
             directoryToolStripMenuItem.Name = "directoryToolStripMenuItem";
-            directoryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            directoryToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             directoryToolStripMenuItem.Text = "Open Directory";
             directoryToolStripMenuItem.ToolTipText = "Opens the directory in Explorer that was specified in Options.";
             directoryToolStripMenuItem.Click += directoryToolStripMenuItem_Click;
@@ -244,9 +244,17 @@ namespace UoFiddler.Forms
             // 
             tempDirToolStripMenuItem.Image = Properties.Resources.Directory;
             tempDirToolStripMenuItem.Name = "tempDirToolStripMenuItem";
-            tempDirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            tempDirToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             tempDirToolStripMenuItem.Text = "Temp Dir";
             tempDirToolStripMenuItem.Click += tempDirToolStripMenuItem_Click;
+            // 
+            // NotesToolStripMenuItem
+            // 
+            NotesToolStripMenuItem.Image = Properties.Resources.notepad;
+            NotesToolStripMenuItem.Name = "NotesToolStripMenuItem";
+            NotesToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            NotesToolStripMenuItem.Text = "Notes";
+            NotesToolStripMenuItem.Click += NotesToolStripMenuItem_Click;
             // 
             // StartTab
             // 
@@ -1167,13 +1175,6 @@ namespace UoFiddler.Forms
             toolStripMenuItemLink3.Size = new System.Drawing.Size(199, 22);
             toolStripMenuItemLink3.Text = "Servuo.com";
             toolStripMenuItemLink3.Click += toolStripMenuItemLink3_Click;
-            // 
-            // NotesToolStripMenuItem
-            // 
-            NotesToolStripMenuItem.Name = "NotesToolStripMenuItem";
-            NotesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            NotesToolStripMenuItem.Text = "Notes";
-            NotesToolStripMenuItem.Click += NotesToolStripMenuItem_Click;
             // 
             // MainForm
             // 
