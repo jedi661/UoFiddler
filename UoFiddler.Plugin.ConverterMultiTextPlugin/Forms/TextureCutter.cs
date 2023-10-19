@@ -3421,7 +3421,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
 
             // Create a bitmap to store the drawing
             Bitmap bitmap = null;
-            
+
             Stack<Bitmap> bitmapHistory = new Stack<Bitmap>();
             // Add the current bitmap to the gradient after you draw
             if (bitmap != null)
@@ -3440,7 +3440,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             {
                 Text = "Paint Box",
                 Size = new Size(900, 900),
-                KeyPreview = true                
+                KeyPreview = true
             };
 
             // Set the icon of the Form
