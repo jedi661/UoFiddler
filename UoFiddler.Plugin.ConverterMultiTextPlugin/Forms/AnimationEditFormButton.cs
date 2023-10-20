@@ -623,6 +623,9 @@ namespace UoFiddler.Controls.Forms
 
                 // Put the hexadecimal value of the color in panel color code
                 panelFarbcode.BackColor = color;
+
+                // Convert the color to a hexadecimal code and display it in the label
+                lbColorCode.Text = $"#{color.R:X2}{color.G:X2}{color.B:X2}";
             }
         }
         #endregion
@@ -765,5 +768,93 @@ namespace UoFiddler.Controls.Forms
             }
         }
         #endregion
+
+
+        /*private void imageFadeinToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Erstellen Sie eine Instanz von OpenFileDialog
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            // Eigenschaften des OpenFileDialog
+            openFileDialog1.Filter = "Image files (*.bmp;*.jpg;*.jpeg;*.gif;*.png)|*.bmp;*.jpg;*.jpeg;*.gif;*.png";
+            openFileDialog1.Title = "Bitte wählen Sie eine Bilddatei aus.";
+
+            // Zeigen Sie den Dialog an und prüfen Sie, ob der Benutzer auf OK geklickt hat
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                // Laden Sie das Bild
+                Image image = Image.FromFile(openFileDialog1.FileName);
+
+                // Passen Sie die Größe des Bildes an die Größe der PictureBox an
+                image = new Bitmap(image, new Size(118, 238));
+
+                // Fügen Sie das Bild zur AnimationPictureBox als Hintergrundbild hinzu
+                AnimationPictureBox.BackgroundImage = image;
+            }
+        }*/
+
+        private void imageFadeinToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Erstellen Sie eine Instanz von OpenFileDialog
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            // Eigenschaften des OpenFileDialog
+            openFileDialog1.Filter = "Image files (*.bmp;*.jpg;*.jpeg;*.gif;*.png)|*.bmp;*.jpg;*.jpeg;*.gif;*.png";
+            openFileDialog1.Title = "Bitte wählen Sie eine Bilddatei aus.";
+
+            // Zeigen Sie den Dialog an und prüfen Sie, ob der Benutzer auf OK geklickt hat
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                // Laden Sie das Bild
+                Image image = Image.FromFile(openFileDialog1.FileName);
+
+                // Passen Sie die Größe des Bildes an die Größe der PictureBox an
+                image = new Bitmap(image, new Size(118, 238));
+
+                // Fügen Sie das Bild zur AnimationPictureBox als Hintergrundbild hinzu
+                AnimationPictureBox.BackgroundImage = image;
+
+                // Überprüfen Sie, ob die Checkbox ShowAnimationPictureBox2 aktiviert ist
+                if (ShowAnimationPictureBox2.Checked)
+                {
+                    // Wenn die Checkbox aktiviert ist, fügen Sie das Bild auch zur AnimationPictureBox2 als Hintergrundbild hinzu
+                    AnimationPictureBox2.BackgroundImage = image;
+                }
+            }
+        }
+
+        private void ShowAnimationPictureBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            // Überprüfen Sie, ob die Checkbox aktiviert ist
+            if (ShowAnimationPictureBox2.Checked)
+            {
+                // Wenn die Checkbox aktiviert ist, setzen Sie das Hintergrundbild der AnimationPictureBox2 auf das gleiche Bild wie AnimationPictureBox
+                AnimationPictureBox2.BackgroundImage = AnimationPictureBox.BackgroundImage;
+            }
+            else
+            {
+                // Wenn die Checkbox deaktiviert ist, entfernen Sie das Hintergrundbild von AnimationPictureBox2
+                AnimationPictureBox2.BackgroundImage = null;
+            }
+        }
+
+
+        public static Image AdjustImageOpacity(Image image, double opacity)
+        {
+            Bitmap bmp = new Bitmap(image.Width, image.Height); // Erstellen Sie ein neues Bitmap mit denselben Abmessungen wie das Bild
+
+            using (Graphics g = Graphics.FromImage(bmp))
+            {
+                ColorMatrix matrix = new ColorMatrix();
+                matrix.Matrix33 = (float)opacity; // Ändern Sie den Alpha-Wert
+
+                ImageAttributes attributes = new ImageAttributes();
+                attributes.SetColorMatrix(matrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+
+                g.DrawImage(image, new Rectangle(0, 0, bmp.Width, bmp.Height), 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, attributes);
+            }
+
+            return bmp;
+        }
     }
 }

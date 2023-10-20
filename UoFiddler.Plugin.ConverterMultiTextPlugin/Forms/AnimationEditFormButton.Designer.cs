@@ -32,7 +32,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AnimationEditFormButton));
             contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
             loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            imageFadeinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             menuStrip1 = new System.Windows.Forms.MenuStrip();
             loadToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -79,6 +82,7 @@
             numericUpDownImageShow = new System.Windows.Forms.NumericUpDown();
             btPipette = new System.Windows.Forms.Button();
             panelDrawControl = new System.Windows.Forms.Panel();
+            lbColorCode = new System.Windows.Forms.Label();
             panelFarbCodeTB = new System.Windows.Forms.Panel();
             panelFarbcode = new System.Windows.Forms.Panel();
             labelDrawAll = new System.Windows.Forms.Label();
@@ -107,6 +111,8 @@
             tabPage2 = new System.Windows.Forms.TabPage();
             AnimationPictureBox2 = new System.Windows.Forms.PictureBox();
             comboBoxImageBackgrund = new System.Windows.Forms.ComboBox();
+            statusStrip1 = new System.Windows.Forms.StatusStrip();
+            ShowAnimationPictureBox2 = new System.Windows.Forms.CheckBox();
             contextMenuStrip1.SuspendLayout();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)selectablePictureBox1).BeginInit();
@@ -133,23 +139,43 @@
             // 
             // contextMenuStrip1
             // 
-            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { loadToolStripMenuItem, startToolStripMenuItem });
+            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { loadToolStripMenuItem, toolStripSeparator2, startToolStripMenuItem, toolStripSeparator1, imageFadeinToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new System.Drawing.Size(101, 48);
+            contextMenuStrip1.Size = new System.Drawing.Size(182, 82);
             // 
             // loadToolStripMenuItem
             // 
             loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            loadToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             loadToolStripMenuItem.Text = "Load";
+            loadToolStripMenuItem.ToolTipText = "Invite everyone an image";
             loadToolStripMenuItem.Click += loadToolStripMenuItem_Click;
+            // 
+            // toolStripSeparator2
+            // 
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new System.Drawing.Size(178, 6);
             // 
             // startToolStripMenuItem
             // 
             startToolStripMenuItem.Name = "startToolStripMenuItem";
-            startToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            startToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             startToolStripMenuItem.Text = "Start";
+            startToolStripMenuItem.ToolTipText = "Start Animation";
             startToolStripMenuItem.Click += startToolStripMenuItem_Click;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new System.Drawing.Size(178, 6);
+            // 
+            // imageFadeinToolStripMenuItem
+            // 
+            imageFadeinToolStripMenuItem.Name = "imageFadeinToolStripMenuItem";
+            imageFadeinToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            imageFadeinToolStripMenuItem.Text = "Image to Picturebox";
+            imageFadeinToolStripMenuItem.ToolTipText = "Load image to Background";
+            imageFadeinToolStripMenuItem.Click += imageFadeinToolStripMenuItem_Click;
             // 
             // openFileDialog1
             // 
@@ -443,7 +469,7 @@
             AnimationPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             AnimationPictureBox.Location = new System.Drawing.Point(387, 360);
             AnimationPictureBox.Name = "AnimationPictureBox";
-            AnimationPictureBox.Size = new System.Drawing.Size(118, 238);
+            AnimationPictureBox.Size = new System.Drawing.Size(176, 238);
             AnimationPictureBox.TabIndex = 36;
             AnimationPictureBox.TabStop = false;
             // 
@@ -458,9 +484,9 @@
             // 
             // tboxBrushSize
             // 
-            tboxBrushSize.Location = new System.Drawing.Point(162, 87);
+            tboxBrushSize.Location = new System.Drawing.Point(9, 58);
             tboxBrushSize.Name = "tboxBrushSize";
-            tboxBrushSize.Size = new System.Drawing.Size(49, 23);
+            tboxBrushSize.Size = new System.Drawing.Size(41, 23);
             tboxBrushSize.TabIndex = 38;
             // 
             // tboxColorCode
@@ -475,14 +501,14 @@
             // 
             btColordialog.Location = new System.Drawing.Point(162, 29);
             btColordialog.Name = "btColordialog";
-            btColordialog.Size = new System.Drawing.Size(46, 23);
+            btColordialog.Size = new System.Drawing.Size(56, 23);
             btColordialog.TabIndex = 40;
             btColordialog.Text = "Color";
             btColordialog.UseVisualStyleBackColor = true;
             // 
             // btDrawAllSelectableBox
             // 
-            btDrawAllSelectableBox.Location = new System.Drawing.Point(214, 29);
+            btDrawAllSelectableBox.Location = new System.Drawing.Point(224, 28);
             btDrawAllSelectableBox.Name = "btDrawAllSelectableBox";
             btDrawAllSelectableBox.Size = new System.Drawing.Size(59, 23);
             btDrawAllSelectableBox.TabIndex = 41;
@@ -591,6 +617,7 @@
             // 
             // panelDrawControl
             // 
+            panelDrawControl.Controls.Add(lbColorCode);
             panelDrawControl.Controls.Add(panelFarbCodeTB);
             panelDrawControl.Controls.Add(panelFarbcode);
             panelDrawControl.Controls.Add(btPipette);
@@ -604,8 +631,17 @@
             panelDrawControl.Controls.Add(numericUpDownBrushSize);
             panelDrawControl.Location = new System.Drawing.Point(6, 519);
             panelDrawControl.Name = "panelDrawControl";
-            panelDrawControl.Size = new System.Drawing.Size(375, 120);
+            panelDrawControl.Size = new System.Drawing.Size(375, 107);
             panelDrawControl.TabIndex = 46;
+            // 
+            // lbColorCode
+            // 
+            lbColorCode.AutoSize = true;
+            lbColorCode.Location = new System.Drawing.Point(224, 85);
+            lbColorCode.Name = "lbColorCode";
+            lbColorCode.Size = new System.Drawing.Size(64, 15);
+            lbColorCode.TabIndex = 51;
+            lbColorCode.Text = "ColorCode";
             // 
             // panelFarbCodeTB
             // 
@@ -618,7 +654,7 @@
             // 
             panelFarbcode.Location = new System.Drawing.Point(224, 58);
             panelFarbcode.Name = "panelFarbcode";
-            panelFarbcode.Size = new System.Drawing.Size(49, 23);
+            panelFarbcode.Size = new System.Drawing.Size(59, 23);
             panelFarbcode.TabIndex = 46;
             // 
             // labelDrawAll
@@ -895,7 +931,7 @@
             tabPage2.Location = new System.Drawing.Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            tabPage2.Size = new System.Drawing.Size(1253, 299);
+            tabPage2.Size = new System.Drawing.Size(1332, 299);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "tabPage2";
             tabPage2.UseVisualStyleBackColor = true;
@@ -903,9 +939,9 @@
             // AnimationPictureBox2
             // 
             AnimationPictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            AnimationPictureBox2.Location = new System.Drawing.Point(635, 360);
+            AnimationPictureBox2.Location = new System.Drawing.Point(691, 360);
             AnimationPictureBox2.Name = "AnimationPictureBox2";
-            AnimationPictureBox2.Size = new System.Drawing.Size(118, 238);
+            AnimationPictureBox2.Size = new System.Drawing.Size(176, 238);
             AnimationPictureBox2.TabIndex = 48;
             AnimationPictureBox2.TabStop = false;
             // 
@@ -913,11 +949,30 @@
             // 
             comboBoxImageBackgrund.FormattingEnabled = true;
             comboBoxImageBackgrund.Items.AddRange(new object[] { "Green", "Water", "Sand", "Street", "Forest", "Dirt", "Dungeon", "Cave", "Clear" });
-            comboBoxImageBackgrund.Location = new System.Drawing.Point(511, 360);
+            comboBoxImageBackgrund.Location = new System.Drawing.Point(568, 360);
             comboBoxImageBackgrund.Name = "comboBoxImageBackgrund";
             comboBoxImageBackgrund.Size = new System.Drawing.Size(118, 23);
             comboBoxImageBackgrund.TabIndex = 49;
             comboBoxImageBackgrund.SelectedIndexChanged += comboBoxImageBackgrund_SelectedIndexChanged;
+            // 
+            // statusStrip1
+            // 
+            statusStrip1.Location = new System.Drawing.Point(0, 629);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new System.Drawing.Size(1274, 22);
+            statusStrip1.TabIndex = 50;
+            statusStrip1.Text = "statusStrip1";
+            // 
+            // ShowAnimationPictureBox2
+            // 
+            ShowAnimationPictureBox2.AutoSize = true;
+            ShowAnimationPictureBox2.Location = new System.Drawing.Point(568, 389);
+            ShowAnimationPictureBox2.Name = "ShowAnimationPictureBox2";
+            ShowAnimationPictureBox2.Size = new System.Drawing.Size(83, 19);
+            ShowAnimationPictureBox2.TabIndex = 51;
+            ShowAnimationPictureBox2.Text = "Fade in =>";
+            ShowAnimationPictureBox2.UseVisualStyleBackColor = true;
+            ShowAnimationPictureBox2.CheckedChanged += ShowAnimationPictureBox2_CheckedChanged;
             // 
             // AnimationEditFormButton
             // 
@@ -925,6 +980,8 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1274, 651);
             ContextMenuStrip = contextMenuStrip1;
+            Controls.Add(ShowAnimationPictureBox2);
+            Controls.Add(statusStrip1);
             Controls.Add(comboBoxImageBackgrund);
             Controls.Add(AnimationPictureBox2);
             Controls.Add(tabControl1);
@@ -1051,5 +1108,11 @@
         private System.Windows.Forms.Button zoomInButton5;
         private System.Windows.Forms.Button zoomOutButton4;
         private System.Windows.Forms.Button zoomInButton4;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.Label lbColorCode;
+        private System.Windows.Forms.ToolStripMenuItem imageFadeinToolStripMenuItem;
+        private System.Windows.Forms.CheckBox ShowAnimationPictureBox2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
