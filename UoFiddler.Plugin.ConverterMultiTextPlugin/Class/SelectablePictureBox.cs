@@ -16,7 +16,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
         private Color drawingColor = Color.Black;
         private int brushSize = 1;
         private Bitmap[] drawingBitmaps = new Bitmap[10]; // An array of bitmaps containing 10 images
-        private int currentIndex = 0; // Definieren Sie currentIndex als Instanzvariable
+        private int currentIndex = 0; // Define currentIndex as an instance variable
         private Rectangle selectionRectangle; //Draws the rectangle
 
         public SelectablePictureBox()
@@ -552,7 +552,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
         }
         #endregion
 
-        #region
+        #region GetPixelColor
         public Color GetPixelColor(Point location)
         {
             if (this.Image != null && location.X < this.Image.Width && location.Y < this.Image.Height)

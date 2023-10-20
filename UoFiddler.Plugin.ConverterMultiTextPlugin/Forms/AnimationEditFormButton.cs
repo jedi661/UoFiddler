@@ -24,6 +24,18 @@ namespace UoFiddler.Controls.Forms
         CheckBox[] checks;
         private bool pipetteMode = false;
 
+        //Zoom
+        private int zoomLevel1 = 0;
+        private int zoomLevel2 = 0;
+        private int zoomLevel3 = 0;
+        private int zoomLevel4 = 0;
+        private int zoomLevel5 = 0;
+        private int zoomLevel6 = 0;
+        private int zoomLevel7 = 0;
+        private int zoomLevel8 = 0;
+        private int zoomLevel9 = 0;
+        private int zoomLevel10 = 0;
+
         public AnimationEditFormButton()
         {
             InitializeComponent();
@@ -69,6 +81,39 @@ namespace UoFiddler.Controls.Forms
             btColordialog.Click += (sender, e) => SelectColor();
 
             tboxColorCode.TextChanged += tboxColorCode_TextChanged;
+
+
+            // Zoom Tags
+            zoomInButton1.Tag = selectablePictureBox1;
+            zoomOutButton1.Tag = selectablePictureBox1;
+
+            zoomInButton2.Tag = selectablePictureBox2;
+            zoomOutButton2.Tag = selectablePictureBox2;
+
+            zoomInButton3.Tag = selectablePictureBox3;
+            zoomOutButton3.Tag = selectablePictureBox3;
+
+            zoomInButton4.Tag = selectablePictureBox4;
+            zoomOutButton4.Tag = selectablePictureBox4;
+
+            zoomInButton5.Tag = selectablePictureBox5;
+            zoomOutButton5.Tag = selectablePictureBox5;
+
+            zoomInButton6.Tag = selectablePictureBox6;
+            zoomOutButton6.Tag = selectablePictureBox6;
+
+            zoomInButton7.Tag = selectablePictureBox7;
+            zoomOutButton7.Tag = selectablePictureBox7;
+
+            zoomInButton8.Tag = selectablePictureBox8;
+            zoomOutButton8.Tag = selectablePictureBox8;
+
+            zoomInButton9.Tag = selectablePictureBox9;
+            zoomOutButton9.Tag = selectablePictureBox9;
+
+            zoomInButton10.Tag = selectablePictureBox10;
+            zoomOutButton10.Tag = selectablePictureBox10;
+
         }
         #region Time_Tick 
 
@@ -529,21 +574,21 @@ namespace UoFiddler.Controls.Forms
             {
                 if (pipetteMode)
                 {
-                    // Holen Sie die Farbe an der Position, an der der Benutzer geklickt hat
+                    // Get the color at the position where the user clicked
                     Color color = box.GetPixelColor(e.Location);
 
-                    // Setzen Sie den Hexadezimalwert der Farbe in tboxColorCode
+                    // Put the hexadecimal value of the color in tboxColorCode
                     tboxColorCode.Text = $"#{color.R:X2}{color.G:X2}{color.B:X2}";
 
-                    // Beenden Sie den Pipettenmodus
+                    // Exit pipette mode
                     pipetteMode = false;
 
-                    // Setzen Sie die Farbe des Buttons auf die Standardfarbe zurück
+                    // Reset the color of the button to the default color
                     btPipette.BackColor = SystemColors.Control;
                 }
                 else
                 {
-                    // Führen Sie hier Ihren normalen MouseClick-Code aus...
+                    // Run your normal MouseClick code here...
                 }
             }
         }
@@ -601,6 +646,122 @@ namespace UoFiddler.Controls.Forms
 
                 // Set the background color of panelColorCodeTB to the selected color
                 panelFarbCodeTB.BackColor = color;
+            }
+        }
+        #endregion
+
+        #region Zoom        
+
+        private void ZoomIn(object sender, EventArgs e)
+        {
+            if (sender is Button button && button.Tag is SelectablePictureBox pictureBox)
+            {
+                if (pictureBox == selectablePictureBox1)
+                {
+                    ChangeZoomLevel(pictureBox, ref zoomLevel1, true);
+                }
+                else if (pictureBox == selectablePictureBox2)
+                {
+                    ChangeZoomLevel(pictureBox, ref zoomLevel2, true);
+                }
+                else if (pictureBox == selectablePictureBox3)
+                {
+                    ChangeZoomLevel(pictureBox, ref zoomLevel3, true);
+                }
+                else if (pictureBox == selectablePictureBox4)
+                {
+                    ChangeZoomLevel(pictureBox, ref zoomLevel4, true);
+                }
+                else if (pictureBox == selectablePictureBox5)
+                {
+                    ChangeZoomLevel(pictureBox, ref zoomLevel5, true);
+                }
+                else if (pictureBox == selectablePictureBox6)
+                {
+                    ChangeZoomLevel(pictureBox, ref zoomLevel6, true);
+                }
+                else if (pictureBox == selectablePictureBox7)
+                {
+                    ChangeZoomLevel(pictureBox, ref zoomLevel7, true);
+                }
+                else if (pictureBox == selectablePictureBox8)
+                {
+                    ChangeZoomLevel(pictureBox, ref zoomLevel8, true);
+                }
+                else if (pictureBox == selectablePictureBox9)
+                {
+                    ChangeZoomLevel(pictureBox, ref zoomLevel9, true);
+                }
+                else if (pictureBox == selectablePictureBox10)
+                {
+                    ChangeZoomLevel(pictureBox, ref zoomLevel10, true);
+                }
+                // Add more conditions for all your PictureBoxes
+            }
+        }
+
+        private void ZoomOut(object sender, EventArgs e)
+        {
+            if (sender is Button button && button.Tag is SelectablePictureBox pictureBox)
+            {
+                if (pictureBox == selectablePictureBox1)
+                {
+                    ChangeZoomLevel(pictureBox, ref zoomLevel1, false);
+                }
+                else if (pictureBox == selectablePictureBox2)
+                {
+                    ChangeZoomLevel(pictureBox, ref zoomLevel2, false);
+                }
+                else if (pictureBox == selectablePictureBox3)
+                {
+                    ChangeZoomLevel(pictureBox, ref zoomLevel3, false);
+                }
+                else if (pictureBox == selectablePictureBox4)
+                {
+                    ChangeZoomLevel(pictureBox, ref zoomLevel4, false);
+                }
+                else if (pictureBox == selectablePictureBox5)
+                {
+                    ChangeZoomLevel(pictureBox, ref zoomLevel5, false);
+                }
+                else if (pictureBox == selectablePictureBox6)
+                {
+                    ChangeZoomLevel(pictureBox, ref zoomLevel6, false);
+                }
+                else if (pictureBox == selectablePictureBox7)
+                {
+                    ChangeZoomLevel(pictureBox, ref zoomLevel7, false);
+                }
+                else if (pictureBox == selectablePictureBox8)
+                {
+                    ChangeZoomLevel(pictureBox, ref zoomLevel8, false);
+                }
+                else if (pictureBox == selectablePictureBox9)
+                {
+                    ChangeZoomLevel(pictureBox, ref zoomLevel9, false);
+                }
+                else if (pictureBox == selectablePictureBox10)
+                {
+                    ChangeZoomLevel(pictureBox, ref zoomLevel10, false);
+                }
+                // Add more conditions for all your PictureBoxes
+            }
+        }
+
+        private void ChangeZoomLevel(SelectablePictureBox pictureBox, ref int zoomLevel, bool zoomIn)
+        {
+            if (pictureBox.Image != null)
+            {
+                if (zoomIn && zoomLevel < 2)
+                {
+                    pictureBox.Image = new Bitmap(pictureBox.Image, new Size(pictureBox.Image.Width * 2, pictureBox.Image.Height * 2));
+                    zoomLevel++;
+                }
+                else if (!zoomIn && zoomLevel > 0)
+                {
+                    pictureBox.Image = new Bitmap(pictureBox.Image, new Size(pictureBox.Image.Width / 2, pictureBox.Image.Height / 2));
+                    zoomLevel--;
+                }
             }
         }
         #endregion

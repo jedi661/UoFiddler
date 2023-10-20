@@ -84,6 +84,26 @@
             labelDrawAll = new System.Windows.Forms.Label();
             tabControl1 = new System.Windows.Forms.TabControl();
             tabPage1 = new System.Windows.Forms.TabPage();
+            zoomOutButton10 = new System.Windows.Forms.Button();
+            zoomInButton10 = new System.Windows.Forms.Button();
+            zoomOutButton9 = new System.Windows.Forms.Button();
+            zoomInButton9 = new System.Windows.Forms.Button();
+            zoomOutButton8 = new System.Windows.Forms.Button();
+            zoomInButton8 = new System.Windows.Forms.Button();
+            zoomOutButton7 = new System.Windows.Forms.Button();
+            zoomInButton7 = new System.Windows.Forms.Button();
+            zoomOutButton6 = new System.Windows.Forms.Button();
+            zoomInButton6 = new System.Windows.Forms.Button();
+            zoomOutButton5 = new System.Windows.Forms.Button();
+            zoomInButton5 = new System.Windows.Forms.Button();
+            zoomOutButton4 = new System.Windows.Forms.Button();
+            zoomInButton4 = new System.Windows.Forms.Button();
+            zoomOutButton3 = new System.Windows.Forms.Button();
+            zoomInButton3 = new System.Windows.Forms.Button();
+            zoomOutButton2 = new System.Windows.Forms.Button();
+            zoomInButton2 = new System.Windows.Forms.Button();
+            zoomOutButton1 = new System.Windows.Forms.Button();
+            zoomInButton1 = new System.Windows.Forms.Button();
             tabPage2 = new System.Windows.Forms.TabPage();
             AnimationPictureBox2 = new System.Windows.Forms.PictureBox();
             comboBoxImageBackgrund = new System.Windows.Forms.ComboBox();
@@ -622,6 +642,26 @@
             // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(zoomOutButton10);
+            tabPage1.Controls.Add(zoomInButton10);
+            tabPage1.Controls.Add(zoomOutButton9);
+            tabPage1.Controls.Add(zoomInButton9);
+            tabPage1.Controls.Add(zoomOutButton8);
+            tabPage1.Controls.Add(zoomInButton8);
+            tabPage1.Controls.Add(zoomOutButton7);
+            tabPage1.Controls.Add(zoomInButton7);
+            tabPage1.Controls.Add(zoomOutButton6);
+            tabPage1.Controls.Add(zoomInButton6);
+            tabPage1.Controls.Add(zoomOutButton5);
+            tabPage1.Controls.Add(zoomInButton5);
+            tabPage1.Controls.Add(zoomOutButton4);
+            tabPage1.Controls.Add(zoomInButton4);
+            tabPage1.Controls.Add(zoomOutButton3);
+            tabPage1.Controls.Add(zoomInButton3);
+            tabPage1.Controls.Add(zoomOutButton2);
+            tabPage1.Controls.Add(zoomInButton2);
+            tabPage1.Controls.Add(zoomOutButton1);
+            tabPage1.Controls.Add(zoomInButton1);
             tabPage1.Controls.Add(checkBox8);
             tabPage1.Controls.Add(checkBox1);
             tabPage1.Controls.Add(checkBox2);
@@ -649,6 +689,206 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Frame";
             tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // zoomOutButton10
+            // 
+            zoomOutButton10.Location = new System.Drawing.Point(1155, 270);
+            zoomOutButton10.Name = "zoomOutButton10";
+            zoomOutButton10.Size = new System.Drawing.Size(27, 23);
+            zoomOutButton10.TabIndex = 50;
+            zoomOutButton10.Text = "-";
+            zoomOutButton10.UseVisualStyleBackColor = true;
+            zoomOutButton10.Click += ZoomOut;
+            // 
+            // zoomInButton10
+            // 
+            zoomInButton10.Location = new System.Drawing.Point(1121, 270);
+            zoomInButton10.Name = "zoomInButton10";
+            zoomInButton10.Size = new System.Drawing.Size(27, 23);
+            zoomInButton10.TabIndex = 49;
+            zoomInButton10.Text = "+";
+            zoomInButton10.UseVisualStyleBackColor = true;
+            zoomInButton10.Click += ZoomIn;
+            // 
+            // zoomOutButton9
+            // 
+            zoomOutButton9.Location = new System.Drawing.Point(1031, 270);
+            zoomOutButton9.Name = "zoomOutButton9";
+            zoomOutButton9.Size = new System.Drawing.Size(27, 23);
+            zoomOutButton9.TabIndex = 48;
+            zoomOutButton9.Text = "-";
+            zoomOutButton9.UseVisualStyleBackColor = true;
+            zoomOutButton9.Click += ZoomOut;
+            // 
+            // zoomInButton9
+            // 
+            zoomInButton9.Location = new System.Drawing.Point(997, 270);
+            zoomInButton9.Name = "zoomInButton9";
+            zoomInButton9.Size = new System.Drawing.Size(27, 23);
+            zoomInButton9.TabIndex = 47;
+            zoomInButton9.Text = "+";
+            zoomInButton9.UseVisualStyleBackColor = true;
+            zoomInButton9.Click += ZoomIn;
+            // 
+            // zoomOutButton8
+            // 
+            zoomOutButton8.Location = new System.Drawing.Point(907, 270);
+            zoomOutButton8.Name = "zoomOutButton8";
+            zoomOutButton8.Size = new System.Drawing.Size(27, 23);
+            zoomOutButton8.TabIndex = 46;
+            zoomOutButton8.Text = "-";
+            zoomOutButton8.UseVisualStyleBackColor = true;
+            zoomOutButton8.Click += ZoomOut;
+            // 
+            // zoomInButton8
+            // 
+            zoomInButton8.Location = new System.Drawing.Point(873, 270);
+            zoomInButton8.Name = "zoomInButton8";
+            zoomInButton8.Size = new System.Drawing.Size(27, 23);
+            zoomInButton8.TabIndex = 45;
+            zoomInButton8.Text = "+";
+            zoomInButton8.UseVisualStyleBackColor = true;
+            zoomInButton8.Click += ZoomIn;
+            // 
+            // zoomOutButton7
+            // 
+            zoomOutButton7.Location = new System.Drawing.Point(783, 270);
+            zoomOutButton7.Name = "zoomOutButton7";
+            zoomOutButton7.Size = new System.Drawing.Size(27, 23);
+            zoomOutButton7.TabIndex = 44;
+            zoomOutButton7.Text = "-";
+            zoomOutButton7.UseVisualStyleBackColor = true;
+            zoomOutButton7.Click += ZoomOut;
+            // 
+            // zoomInButton7
+            // 
+            zoomInButton7.Location = new System.Drawing.Point(749, 270);
+            zoomInButton7.Name = "zoomInButton7";
+            zoomInButton7.Size = new System.Drawing.Size(27, 23);
+            zoomInButton7.TabIndex = 43;
+            zoomInButton7.Text = "+";
+            zoomInButton7.UseVisualStyleBackColor = true;
+            zoomInButton7.Click += ZoomIn;
+            // 
+            // zoomOutButton6
+            // 
+            zoomOutButton6.Location = new System.Drawing.Point(659, 270);
+            zoomOutButton6.Name = "zoomOutButton6";
+            zoomOutButton6.Size = new System.Drawing.Size(27, 23);
+            zoomOutButton6.TabIndex = 42;
+            zoomOutButton6.Text = "-";
+            zoomOutButton6.UseVisualStyleBackColor = true;
+            zoomOutButton6.Click += ZoomOut;
+            // 
+            // zoomInButton6
+            // 
+            zoomInButton6.Location = new System.Drawing.Point(625, 270);
+            zoomInButton6.Name = "zoomInButton6";
+            zoomInButton6.Size = new System.Drawing.Size(27, 23);
+            zoomInButton6.TabIndex = 41;
+            zoomInButton6.Text = "+";
+            zoomInButton6.UseVisualStyleBackColor = true;
+            zoomInButton6.Click += ZoomIn;
+            // 
+            // zoomOutButton5
+            // 
+            zoomOutButton5.Location = new System.Drawing.Point(535, 270);
+            zoomOutButton5.Name = "zoomOutButton5";
+            zoomOutButton5.Size = new System.Drawing.Size(27, 23);
+            zoomOutButton5.TabIndex = 40;
+            zoomOutButton5.Text = "-";
+            zoomOutButton5.UseVisualStyleBackColor = true;
+            zoomOutButton5.Click += ZoomOut;
+            // 
+            // zoomInButton5
+            // 
+            zoomInButton5.Location = new System.Drawing.Point(501, 270);
+            zoomInButton5.Name = "zoomInButton5";
+            zoomInButton5.Size = new System.Drawing.Size(27, 23);
+            zoomInButton5.TabIndex = 39;
+            zoomInButton5.Text = "+";
+            zoomInButton5.UseVisualStyleBackColor = true;
+            zoomInButton5.Click += ZoomIn;
+            // 
+            // zoomOutButton4
+            // 
+            zoomOutButton4.Location = new System.Drawing.Point(411, 270);
+            zoomOutButton4.Name = "zoomOutButton4";
+            zoomOutButton4.Size = new System.Drawing.Size(27, 23);
+            zoomOutButton4.TabIndex = 38;
+            zoomOutButton4.Text = "-";
+            zoomOutButton4.UseVisualStyleBackColor = true;
+            zoomOutButton4.Click += ZoomOut;
+            // 
+            // zoomInButton4
+            // 
+            zoomInButton4.Location = new System.Drawing.Point(377, 270);
+            zoomInButton4.Name = "zoomInButton4";
+            zoomInButton4.Size = new System.Drawing.Size(27, 23);
+            zoomInButton4.TabIndex = 37;
+            zoomInButton4.Text = "+";
+            zoomInButton4.UseVisualStyleBackColor = true;
+            zoomInButton4.Click += ZoomIn;
+            // 
+            // zoomOutButton3
+            // 
+            zoomOutButton3.Location = new System.Drawing.Point(288, 270);
+            zoomOutButton3.Name = "zoomOutButton3";
+            zoomOutButton3.Size = new System.Drawing.Size(27, 23);
+            zoomOutButton3.TabIndex = 36;
+            zoomOutButton3.Text = "-";
+            zoomOutButton3.UseVisualStyleBackColor = true;
+            zoomOutButton3.Click += ZoomOut;
+            // 
+            // zoomInButton3
+            // 
+            zoomInButton3.Location = new System.Drawing.Point(254, 270);
+            zoomInButton3.Name = "zoomInButton3";
+            zoomInButton3.Size = new System.Drawing.Size(27, 23);
+            zoomInButton3.TabIndex = 35;
+            zoomInButton3.Text = "+";
+            zoomInButton3.UseVisualStyleBackColor = true;
+            zoomInButton3.Click += ZoomIn;
+            // 
+            // zoomOutButton2
+            // 
+            zoomOutButton2.Location = new System.Drawing.Point(164, 270);
+            zoomOutButton2.Name = "zoomOutButton2";
+            zoomOutButton2.Size = new System.Drawing.Size(27, 23);
+            zoomOutButton2.TabIndex = 34;
+            zoomOutButton2.Text = "-";
+            zoomOutButton2.UseVisualStyleBackColor = true;
+            zoomOutButton2.Click += ZoomOut;
+            // 
+            // zoomInButton2
+            // 
+            zoomInButton2.Location = new System.Drawing.Point(130, 270);
+            zoomInButton2.Name = "zoomInButton2";
+            zoomInButton2.Size = new System.Drawing.Size(27, 23);
+            zoomInButton2.TabIndex = 33;
+            zoomInButton2.Text = "+";
+            zoomInButton2.UseVisualStyleBackColor = true;
+            zoomInButton2.Click += ZoomIn;
+            // 
+            // zoomOutButton1
+            // 
+            zoomOutButton1.Location = new System.Drawing.Point(39, 270);
+            zoomOutButton1.Name = "zoomOutButton1";
+            zoomOutButton1.Size = new System.Drawing.Size(27, 23);
+            zoomOutButton1.TabIndex = 32;
+            zoomOutButton1.Text = "-";
+            zoomOutButton1.UseVisualStyleBackColor = true;
+            zoomOutButton1.Click += ZoomOut;
+            // 
+            // zoomInButton1
+            // 
+            zoomInButton1.Location = new System.Drawing.Point(6, 270);
+            zoomInButton1.Name = "zoomInButton1";
+            zoomInButton1.Size = new System.Drawing.Size(27, 23);
+            zoomInButton1.TabIndex = 31;
+            zoomInButton1.Text = "+";
+            zoomInButton1.UseVisualStyleBackColor = true;
+            zoomInButton1.Click += ZoomIn;
             // 
             // tabPage2
             // 
@@ -697,7 +937,7 @@
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            MinimumSize = new System.Drawing.Size(1094, 582);
+            MinimumSize = new System.Drawing.Size(207, 582);
             Name = "AnimationEditFormButton";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             Text = "Animation  Edit";
@@ -791,5 +1031,25 @@
         private System.Windows.Forms.Button btPipette;
         private System.Windows.Forms.Panel panelFarbcode;
         private System.Windows.Forms.Panel panelFarbCodeTB;
+        private System.Windows.Forms.Button zoomOutButton1;
+        private System.Windows.Forms.Button zoomInButton1;
+        private System.Windows.Forms.Button zoomOutButton2;
+        private System.Windows.Forms.Button zoomInButton2;
+        private System.Windows.Forms.Button zoomOutButton3;
+        private System.Windows.Forms.Button zoomInButton3;
+        private System.Windows.Forms.Button zoomOutButton10;
+        private System.Windows.Forms.Button zoomInButton10;
+        private System.Windows.Forms.Button zoomOutButton9;
+        private System.Windows.Forms.Button zoomInButton9;
+        private System.Windows.Forms.Button zoomOutButton8;
+        private System.Windows.Forms.Button zoomInButton8;
+        private System.Windows.Forms.Button zoomOutButton7;
+        private System.Windows.Forms.Button zoomInButton7;
+        private System.Windows.Forms.Button zoomOutButton6;
+        private System.Windows.Forms.Button zoomInButton6;
+        private System.Windows.Forms.Button zoomOutButton5;
+        private System.Windows.Forms.Button zoomInButton5;
+        private System.Windows.Forms.Button zoomOutButton4;
+        private System.Windows.Forms.Button zoomInButton4;
     }
 }
