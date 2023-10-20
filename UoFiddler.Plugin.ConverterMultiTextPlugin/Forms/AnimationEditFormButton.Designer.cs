@@ -141,10 +141,11 @@
             // 
             contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { loadToolStripMenuItem, toolStripSeparator2, startToolStripMenuItem, toolStripSeparator1, imageFadeinToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new System.Drawing.Size(182, 82);
+            contextMenuStrip1.Size = new System.Drawing.Size(182, 104);
             // 
             // loadToolStripMenuItem
             // 
+            loadToolStripMenuItem.Image = UoFiddler.Plugin.ConverterMultiTextPlugin.Properties.Resources.import;
             loadToolStripMenuItem.Name = "loadToolStripMenuItem";
             loadToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             loadToolStripMenuItem.Text = "Load";
@@ -158,6 +159,7 @@
             // 
             // startToolStripMenuItem
             // 
+            startToolStripMenuItem.Image = UoFiddler.Plugin.ConverterMultiTextPlugin.Properties.Resources.Load;
             startToolStripMenuItem.Name = "startToolStripMenuItem";
             startToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             startToolStripMenuItem.Text = "Start";
@@ -171,6 +173,7 @@
             // 
             // imageFadeinToolStripMenuItem
             // 
+            imageFadeinToolStripMenuItem.Image = UoFiddler.Plugin.ConverterMultiTextPlugin.Properties.Resources.image_eine_maske_laden02;
             imageFadeinToolStripMenuItem.Name = "imageFadeinToolStripMenuItem";
             imageFadeinToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             imageFadeinToolStripMenuItem.Text = "Image to Picturebox";
@@ -931,7 +934,7 @@
             tabPage2.Location = new System.Drawing.Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            tabPage2.Size = new System.Drawing.Size(1332, 299);
+            tabPage2.Size = new System.Drawing.Size(1253, 299);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "tabPage2";
             tabPage2.UseVisualStyleBackColor = true;
