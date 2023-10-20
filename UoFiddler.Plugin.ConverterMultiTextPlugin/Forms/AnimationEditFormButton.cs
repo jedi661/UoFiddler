@@ -769,84 +769,64 @@ namespace UoFiddler.Controls.Forms
         }
         #endregion
 
-
-        /*private void imageFadeinToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            // Erstellen Sie eine Instanz von OpenFileDialog
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-
-            // Eigenschaften des OpenFileDialog
-            openFileDialog1.Filter = "Image files (*.bmp;*.jpg;*.jpeg;*.gif;*.png)|*.bmp;*.jpg;*.jpeg;*.gif;*.png";
-            openFileDialog1.Title = "Bitte wählen Sie eine Bilddatei aus.";
-
-            // Zeigen Sie den Dialog an und prüfen Sie, ob der Benutzer auf OK geklickt hat
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                // Laden Sie das Bild
-                Image image = Image.FromFile(openFileDialog1.FileName);
-
-                // Passen Sie die Größe des Bildes an die Größe der PictureBox an
-                image = new Bitmap(image, new Size(118, 238));
-
-                // Fügen Sie das Bild zur AnimationPictureBox als Hintergrundbild hinzu
-                AnimationPictureBox.BackgroundImage = image;
-            }
-        }*/
-
+        #region Background Image Loader
         private void imageFadeinToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Erstellen Sie eine Instanz von OpenFileDialog
+            // Create an instance of OpenFileDialog
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
-            // Eigenschaften des OpenFileDialog
+            // Properties of the OpenFileDialog
             openFileDialog1.Filter = "Image files (*.bmp;*.jpg;*.jpeg;*.gif;*.png)|*.bmp;*.jpg;*.jpeg;*.gif;*.png";
-            openFileDialog1.Title = "Bitte wählen Sie eine Bilddatei aus.";
+            openFileDialog1.Title = "Please select an image file.";
 
-            // Zeigen Sie den Dialog an und prüfen Sie, ob der Benutzer auf OK geklickt hat
+            // Display the dialog and verify that the user clicked OK
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                // Laden Sie das Bild
+                // Load the image
                 Image image = Image.FromFile(openFileDialog1.FileName);
 
-                // Passen Sie die Größe des Bildes an die Größe der PictureBox an
-                image = new Bitmap(image, new Size(118, 238));
+                // Adjust the size of the image to the size of the PictureBox
+                image = new Bitmap(image, new Size(176, 238));
 
-                // Fügen Sie das Bild zur AnimationPictureBox als Hintergrundbild hinzu
+                // Add the image to the AnimationPictureBox as a background image
                 AnimationPictureBox.BackgroundImage = image;
 
-                // Überprüfen Sie, ob die Checkbox ShowAnimationPictureBox2 aktiviert ist
+                // Check whether the ShowAnimationPictureBox2 checkbox is checked
                 if (ShowAnimationPictureBox2.Checked)
                 {
-                    // Wenn die Checkbox aktiviert ist, fügen Sie das Bild auch zur AnimationPictureBox2 als Hintergrundbild hinzu
+                    // If the checkbox is checked, also add the image to the AnimationPictureBox2 as a background image
                     AnimationPictureBox2.BackgroundImage = image;
                 }
             }
         }
+        #endregion
 
+        #region ShowAnimationPictureBox2 
         private void ShowAnimationPictureBox2_CheckedChanged(object sender, EventArgs e)
         {
-            // Überprüfen Sie, ob die Checkbox aktiviert ist
+            // Check whether the checkbox is activated
             if (ShowAnimationPictureBox2.Checked)
             {
-                // Wenn die Checkbox aktiviert ist, setzen Sie das Hintergrundbild der AnimationPictureBox2 auf das gleiche Bild wie AnimationPictureBox
+                // If the checkbox is checked, set the background image of AnimationPictureBox2 to the same image as AnimationPictureBox
                 AnimationPictureBox2.BackgroundImage = AnimationPictureBox.BackgroundImage;
             }
             else
             {
-                // Wenn die Checkbox deaktiviert ist, entfernen Sie das Hintergrundbild von AnimationPictureBox2
+                // If the checkbox is unchecked, remove the background image of AnimationPictureBox2
                 AnimationPictureBox2.BackgroundImage = null;
             }
         }
+        #endregion
 
-
+        //Not used yet
         public static Image AdjustImageOpacity(Image image, double opacity)
         {
-            Bitmap bmp = new Bitmap(image.Width, image.Height); // Erstellen Sie ein neues Bitmap mit denselben Abmessungen wie das Bild
+            Bitmap bmp = new Bitmap(image.Width, image.Height); // Create a new bitmap with the same dimensions as the image
 
             using (Graphics g = Graphics.FromImage(bmp))
             {
                 ColorMatrix matrix = new ColorMatrix();
-                matrix.Matrix33 = (float)opacity; // Ändern Sie den Alpha-Wert
+                matrix.Matrix33 = (float)opacity; // Change the alpha value
 
                 ImageAttributes attributes = new ImageAttributes();
                 attributes.SetColorMatrix(matrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
