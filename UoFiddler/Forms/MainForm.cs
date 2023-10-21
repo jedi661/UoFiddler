@@ -1173,7 +1173,7 @@ namespace UoFiddler.Forms
         {
             Process.Start(new ProcessStartInfo
             {
-                FileName = "https://discord.gg/XHXpbxgH8h",
+                FileName = "https://discord.com/invite/9zpXy43WWT",
                 UseShellExecute = true
             });
         }

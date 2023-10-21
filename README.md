@@ -11,6 +11,7 @@ Version : 4.11.24
 - Added a Notes form in the main menu to display messages.
 - Added a Animtionen Edit
 - Octokit 8.1.1
+- Discord Link fixed
 
 Version : 4.11.23
 - Fixed an issue in Texturecutter regarding the input of hex addresses so that it works with and without the "#" symbol.
