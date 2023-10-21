@@ -109,7 +109,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
 
                             if (drawingBitmaps[currentIndex] == null)
                             {
-                                MessageBox.Show("Fehler beim Kopieren des Bildes.");
+                                MessageBox.Show("Error copying image.");
                             }
                         }
                     }
@@ -230,7 +230,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
         }
         #endregion
 
-        #region DrawSelevtRectangleAndInsertImage
+        #region DrawSelevtRectangleAndInsertImage        
 
         private void DrawSelectionRectangleAndInsertImage()
         {
@@ -240,7 +240,22 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                Image insertedImage = Image.FromFile(openFileDialog.FileName);
+                Bitmap insertedImage = new Bitmap(Image.FromFile(openFileDialog.FileName));
+
+                // Loop through each pixel in the inserted image
+                for (int x = 0; x < insertedImage.Width; x++)
+                {
+                    for (int y = 0; y < insertedImage.Height; y++)
+                    {
+                        // Check the color of the pixel
+                        Color pixelColor = insertedImage.GetPixel(x, y);
+                        if (pixelColor.ToArgb() == Color.Black.ToArgb() || pixelColor.ToArgb() == Color.White.ToArgb())
+                        {
+                            // Set the pixel to transparent if it is #000000 or #ffffff
+                            insertedImage.SetPixel(x, y, Color.Transparent);
+                        }
+                    }
+                }
 
                 if (this.Image != null)
                 {
@@ -248,7 +263,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
 
                     using (Graphics g = Graphics.FromImage(bitmap))
                     {
-                        // Paste the image inside the selection rectangle
+                        // Paste the edited image into the selection rectangle
                         g.DrawImage(insertedImage, selectionRectangle);
                     }
 
@@ -256,6 +271,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
                 }
             }
         }
+
         #endregion
 
         #region OnPictureBoxSelected
@@ -564,5 +580,22 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
             return Color.Transparent;
         }
         #endregion
+
+        //Not active yet
+        public void DrawOnImage(Color color, Point location)
+        {
+            // Check if the color is #000000 or #ffffff
+            if (color.ToArgb() != Color.Black.ToArgb() && color.ToArgb() != Color.White.ToArgb())
+            {
+                // Draw on the image if the color is not #000000 or #ffffff
+                using (Graphics g = Graphics.FromImage(this.Image))
+                {
+                    using (Brush brush = new SolidBrush(color))
+                    {
+                        g.FillRectangle(brush, new Rectangle(location, new Size(1, 1)));
+                    }
+                }
+            }
+        }
     }
 }

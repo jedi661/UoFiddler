@@ -113,6 +113,19 @@
             comboBoxImageBackgrund = new System.Windows.Forms.ComboBox();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
             ShowAnimationPictureBox2 = new System.Windows.Forms.CheckBox();
+            panelAnimationPictureBox = new System.Windows.Forms.Panel();
+            numericUpDownHighAnimationPictureBox = new System.Windows.Forms.NumericUpDown();
+            panelAnimationPictureBox2 = new System.Windows.Forms.Panel();
+            numericUpDownSizeLineAnimationPictureBox = new System.Windows.Forms.NumericUpDown();
+            lbSize = new System.Windows.Forms.Label();
+            numericUpDownWidthAnimationPictureBox = new System.Windows.Forms.NumericUpDown();
+            numericUpDownSizeLine2AnimationPictureBox = new System.Windows.Forms.NumericUpDown();
+            lbHighWight = new System.Windows.Forms.Label();
+            colorDialogHeightandWidth = new System.Windows.Forms.ColorDialog();
+            numericUpDownColor = new System.Windows.Forms.NumericUpDown();
+            lbSize2 = new System.Windows.Forms.Label();
+            label1 = new System.Windows.Forms.Label();
+            checkBoxShowFrame = new System.Windows.Forms.CheckBox();
             contextMenuStrip1.SuspendLayout();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)selectablePictureBox1).BeginInit();
@@ -135,13 +148,20 @@
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)AnimationPictureBox2).BeginInit();
+            panelAnimationPictureBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownHighAnimationPictureBox).BeginInit();
+            panelAnimationPictureBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownSizeLineAnimationPictureBox).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownWidthAnimationPictureBox).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownSizeLine2AnimationPictureBox).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownColor).BeginInit();
             SuspendLayout();
             // 
             // contextMenuStrip1
             // 
             contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { loadToolStripMenuItem, toolStripSeparator2, startToolStripMenuItem, toolStripSeparator1, imageFadeinToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new System.Drawing.Size(182, 104);
+            contextMenuStrip1.Size = new System.Drawing.Size(182, 82);
             // 
             // loadToolStripMenuItem
             // 
@@ -446,7 +466,7 @@
             numericUpDownFrameDelay.Name = "numericUpDownFrameDelay";
             numericUpDownFrameDelay.Size = new System.Drawing.Size(41, 23);
             numericUpDownFrameDelay.TabIndex = 33;
-            numericUpDownFrameDelay.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            numericUpDownFrameDelay.Value = new decimal(new int[] { 4, 0, 0, 0 });
             // 
             // startAnimationButton
             // 
@@ -470,7 +490,7 @@
             // AnimationPictureBox
             // 
             AnimationPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            AnimationPictureBox.Location = new System.Drawing.Point(387, 360);
+            AnimationPictureBox.Location = new System.Drawing.Point(0, 0);
             AnimationPictureBox.Name = "AnimationPictureBox";
             AnimationPictureBox.Size = new System.Drawing.Size(176, 238);
             AnimationPictureBox.TabIndex = 36;
@@ -942,7 +962,7 @@
             // AnimationPictureBox2
             // 
             AnimationPictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            AnimationPictureBox2.Location = new System.Drawing.Point(691, 360);
+            AnimationPictureBox2.Location = new System.Drawing.Point(0, 0);
             AnimationPictureBox2.Name = "AnimationPictureBox2";
             AnimationPictureBox2.Size = new System.Drawing.Size(176, 238);
             AnimationPictureBox2.TabIndex = 48;
@@ -952,7 +972,7 @@
             // 
             comboBoxImageBackgrund.FormattingEnabled = true;
             comboBoxImageBackgrund.Items.AddRange(new object[] { "Green", "Water", "Sand", "Street", "Forest", "Dirt", "Dungeon", "Cave", "Clear" });
-            comboBoxImageBackgrund.Location = new System.Drawing.Point(568, 360);
+            comboBoxImageBackgrund.Location = new System.Drawing.Point(585, 372);
             comboBoxImageBackgrund.Name = "comboBoxImageBackgrund";
             comboBoxImageBackgrund.Size = new System.Drawing.Size(118, 23);
             comboBoxImageBackgrund.TabIndex = 49;
@@ -969,7 +989,7 @@
             // ShowAnimationPictureBox2
             // 
             ShowAnimationPictureBox2.AutoSize = true;
-            ShowAnimationPictureBox2.Location = new System.Drawing.Point(568, 389);
+            ShowAnimationPictureBox2.Location = new System.Drawing.Point(585, 401);
             ShowAnimationPictureBox2.Name = "ShowAnimationPictureBox2";
             ShowAnimationPictureBox2.Size = new System.Drawing.Size(83, 19);
             ShowAnimationPictureBox2.TabIndex = 51;
@@ -977,20 +997,132 @@
             ShowAnimationPictureBox2.UseVisualStyleBackColor = true;
             ShowAnimationPictureBox2.CheckedChanged += ShowAnimationPictureBox2_CheckedChanged;
             // 
+            // panelAnimationPictureBox
+            // 
+            panelAnimationPictureBox.Controls.Add(AnimationPictureBox);
+            panelAnimationPictureBox.Location = new System.Drawing.Point(395, 368);
+            panelAnimationPictureBox.Name = "panelAnimationPictureBox";
+            panelAnimationPictureBox.Size = new System.Drawing.Size(176, 238);
+            panelAnimationPictureBox.TabIndex = 52;
+            // 
+            // numericUpDownHighAnimationPictureBox
+            // 
+            numericUpDownHighAnimationPictureBox.Location = new System.Drawing.Point(582, 463);
+            numericUpDownHighAnimationPictureBox.Maximum = new decimal(new int[] { 238, 0, 0, 0 });
+            numericUpDownHighAnimationPictureBox.Name = "numericUpDownHighAnimationPictureBox";
+            numericUpDownHighAnimationPictureBox.Size = new System.Drawing.Size(44, 23);
+            numericUpDownHighAnimationPictureBox.TabIndex = 0;
+            // 
+            // panelAnimationPictureBox2
+            // 
+            panelAnimationPictureBox2.Controls.Add(AnimationPictureBox2);
+            panelAnimationPictureBox2.Location = new System.Drawing.Point(718, 368);
+            panelAnimationPictureBox2.Name = "panelAnimationPictureBox2";
+            panelAnimationPictureBox2.Size = new System.Drawing.Size(176, 238);
+            panelAnimationPictureBox2.TabIndex = 53;
+            // 
+            // numericUpDownSizeLineAnimationPictureBox
+            // 
+            numericUpDownSizeLineAnimationPictureBox.Location = new System.Drawing.Point(582, 511);
+            numericUpDownSizeLineAnimationPictureBox.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
+            numericUpDownSizeLineAnimationPictureBox.Name = "numericUpDownSizeLineAnimationPictureBox";
+            numericUpDownSizeLineAnimationPictureBox.Size = new System.Drawing.Size(42, 23);
+            numericUpDownSizeLineAnimationPictureBox.TabIndex = 54;
+            // 
+            // lbSize
+            // 
+            lbSize.AutoSize = true;
+            lbSize.Location = new System.Drawing.Point(585, 492);
+            lbSize.Name = "lbSize";
+            lbSize.Size = new System.Drawing.Size(33, 15);
+            lbSize.TabIndex = 55;
+            lbSize.Text = "Size :";
+            // 
+            // numericUpDownWidthAnimationPictureBox
+            // 
+            numericUpDownWidthAnimationPictureBox.Location = new System.Drawing.Point(665, 463);
+            numericUpDownWidthAnimationPictureBox.Maximum = new decimal(new int[] { 176, 0, 0, 0 });
+            numericUpDownWidthAnimationPictureBox.Name = "numericUpDownWidthAnimationPictureBox";
+            numericUpDownWidthAnimationPictureBox.Size = new System.Drawing.Size(44, 23);
+            numericUpDownWidthAnimationPictureBox.TabIndex = 56;
+            // 
+            // numericUpDownSizeLine2AnimationPictureBox
+            // 
+            numericUpDownSizeLine2AnimationPictureBox.Location = new System.Drawing.Point(667, 511);
+            numericUpDownSizeLine2AnimationPictureBox.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
+            numericUpDownSizeLine2AnimationPictureBox.Name = "numericUpDownSizeLine2AnimationPictureBox";
+            numericUpDownSizeLine2AnimationPictureBox.Size = new System.Drawing.Size(42, 23);
+            numericUpDownSizeLine2AnimationPictureBox.TabIndex = 57;
+            // 
+            // lbHighWight
+            // 
+            lbHighWight.AutoSize = true;
+            lbHighWight.Location = new System.Drawing.Point(588, 443);
+            lbHighWight.Name = "lbHighWight";
+            lbHighWight.Size = new System.Drawing.Size(105, 15);
+            lbHighWight.TabIndex = 58;
+            lbHighWight.Text = "Height and width :";
+            // 
+            // numericUpDownColor
+            // 
+            numericUpDownColor.Location = new System.Drawing.Point(626, 511);
+            numericUpDownColor.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
+            numericUpDownColor.Name = "numericUpDownColor";
+            numericUpDownColor.Size = new System.Drawing.Size(38, 23);
+            numericUpDownColor.TabIndex = 59;
+            // 
+            // lbSize2
+            // 
+            lbSize2.AutoSize = true;
+            lbSize2.Location = new System.Drawing.Point(669, 492);
+            lbSize2.Name = "lbSize2";
+            lbSize2.Size = new System.Drawing.Size(33, 15);
+            lbSize2.TabIndex = 60;
+            lbSize2.Text = "Size :";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(626, 492);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(42, 15);
+            label1.TabIndex = 61;
+            label1.Text = "Color :";
+            // 
+            // checkBoxShowFrame
+            // 
+            checkBoxShowFrame.AutoSize = true;
+            checkBoxShowFrame.Location = new System.Drawing.Point(585, 421);
+            checkBoxShowFrame.Name = "checkBoxShowFrame";
+            checkBoxShowFrame.Size = new System.Drawing.Size(95, 19);
+            checkBoxShowFrame.TabIndex = 62;
+            checkBoxShowFrame.Text = "Frame visible";
+            checkBoxShowFrame.UseVisualStyleBackColor = true;
+            // 
             // AnimationEditFormButton
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1274, 651);
             ContextMenuStrip = contextMenuStrip1;
+            Controls.Add(checkBoxShowFrame);
+            Controls.Add(label1);
+            Controls.Add(lbSize2);
+            Controls.Add(numericUpDownColor);
+            Controls.Add(lbHighWight);
+            Controls.Add(numericUpDownSizeLine2AnimationPictureBox);
+            Controls.Add(numericUpDownWidthAnimationPictureBox);
+            Controls.Add(lbSize);
+            Controls.Add(numericUpDownSizeLineAnimationPictureBox);
+            Controls.Add(panelAnimationPictureBox2);
+            Controls.Add(numericUpDownHighAnimationPictureBox);
+            Controls.Add(panelAnimationPictureBox);
             Controls.Add(ShowAnimationPictureBox2);
             Controls.Add(statusStrip1);
             Controls.Add(comboBoxImageBackgrund);
-            Controls.Add(AnimationPictureBox2);
             Controls.Add(tabControl1);
             Controls.Add(panelDrawControl);
             Controls.Add(panelAimationControl);
-            Controls.Add(AnimationPictureBox);
             Controls.Add(menuStrip1);
             DoubleBuffered = true;
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -1029,6 +1161,13 @@
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)AnimationPictureBox2).EndInit();
+            panelAnimationPictureBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)numericUpDownHighAnimationPictureBox).EndInit();
+            panelAnimationPictureBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)numericUpDownSizeLineAnimationPictureBox).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownWidthAnimationPictureBox).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownSizeLine2AnimationPictureBox).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownColor).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1117,5 +1256,18 @@
         private System.Windows.Forms.CheckBox ShowAnimationPictureBox2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.Panel panelAnimationPictureBox;
+        private System.Windows.Forms.NumericUpDown numericUpDownHighAnimationPictureBox;
+        private System.Windows.Forms.Panel panelAnimationPictureBox2;
+        private System.Windows.Forms.NumericUpDown numericUpDownSizeLineAnimationPictureBox;
+        private System.Windows.Forms.Label lbSize;
+        private System.Windows.Forms.NumericUpDown numericUpDownWidthAnimationPictureBox;
+        private System.Windows.Forms.NumericUpDown numericUpDownSizeLine2AnimationPictureBox;
+        private System.Windows.Forms.Label lbHighWight;
+        private System.Windows.Forms.ColorDialog colorDialogHeightandWidth;
+        private System.Windows.Forms.NumericUpDown numericUpDownColor;
+        private System.Windows.Forms.Label lbSize2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox checkBoxShowFrame;
     }
 }

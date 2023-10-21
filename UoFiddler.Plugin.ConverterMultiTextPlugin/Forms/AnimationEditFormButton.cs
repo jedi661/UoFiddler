@@ -10,6 +10,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 using Ultima;
 using UoFiddler.Controls.Classes;
 using UoFiddler.Plugin.ConverterMultiTextPlugin.Class;
@@ -23,6 +24,9 @@ namespace UoFiddler.Controls.Forms
         SelectablePictureBox[] boxes;
         CheckBox[] checks;
         private bool pipetteMode = false;
+
+        Label line = new Label();
+        Label vLine = new Label();
 
         //Zoom
         private int zoomLevel1 = 0;
@@ -114,8 +118,215 @@ namespace UoFiddler.Controls.Forms
             zoomInButton10.Tag = selectablePictureBox10;
             zoomOutButton10.Tag = selectablePictureBox10;
 
+
+            // Create a new Label control for the line
+            Label line = new Label();
+            Label vLine = new Label();
+
+            // Setzen Sie die Eigenschaften des Labels
+            line.BackColor = Color.Red; // The color of the line
+            line.Width = AnimationPictureBox.Width; // The height of the line
+            line.Visible = false; // The label is initially invisible
+
+            vLine.BackColor = Color.Red; // The color of the line
+            vLine.Height = AnimationPictureBox.Height; // The height of the line
+            vLine.Visible = false; // The label is initially invisible
+
+            // Add the label to the panelAnimationPictureBox
+            panelAnimationPictureBox.Controls.Add(line);
+            panelAnimationPictureBox.Controls.Add(vLine);
+            panelAnimationPictureBox.BackColor = Color.Transparent; // The panel is transparent
+
+            // A method to update the position and thickness of the line
+            void UpdateLine()
+            {
+                int y = (int)numericUpDownHighAnimationPictureBox.Value;
+                int thickness = (int)numericUpDownSizeLineAnimationPictureBox.Value;
+
+                line.Top = y; // The position of the line
+                line.Height = thickness; // The thickness of the line
+
+                // Set the color based on the value of the new NumericUpDown controls
+                if (numericUpDownColor.Value == 0)
+                {
+                    line.BackColor = Color.Red; // Red
+                }
+                else if (numericUpDownColor.Value == 1)
+                {
+                    line.BackColor = Color.Blue; // Blue
+                }
+                else if (numericUpDownColor.Value == 2)
+                {
+                    line.BackColor = Color.Green; // Green
+                }
+                else if (numericUpDownColor.Value == 3)
+                {
+                    line.BackColor = Color.Yellow; // Yellow
+                }
+                else if (numericUpDownColor.Value == 4)
+                {
+                    line.BackColor = Color.Black; // Black
+                }
+                else if (numericUpDownColor.Value == 5)
+                {
+                    line.BackColor = Color.White; // White
+                }
+                else if (numericUpDownColor.Value == 6)
+                {
+                    line.BackColor = Color.Orange; // Orange
+                }
+                else if (numericUpDownColor.Value == 7)
+                {
+                    line.BackColor = Color.Pink; // Pink
+                }
+                else if (numericUpDownColor.Value == 8)
+                {
+                    line.BackColor = Color.Turquoise; // Turquoise
+                }
+                else if (numericUpDownColor.Value == 9)
+                {
+                    line.BackColor = Color.Gray; // Gray
+                }
+                else if (numericUpDownColor.Value == 10)
+                {
+                    line.BackColor = Color.Gold; // Gold
+                }
+
+                line.Visible = thickness > 0; // Make sure the line is only visible when its thickness is greater than 0
+                line.BringToFront(); // Make sure the line is in front of the PictureBox
+            }
+
+            // A method to update the position and thickness of the line
+            void UpdateVLine()
+            {
+                int x = (int)numericUpDownWidthAnimationPictureBox.Value;
+                int thickness = (int)numericUpDownSizeLine2AnimationPictureBox.Value;
+
+                vLine.Left = x; // The position of the line
+                vLine.Width = thickness; // The width of the line
+
+                // Set the color based on the value of the new NumericUpDown controls
+                if (numericUpDownColor.Value == 0)
+                {
+                    vLine.BackColor = Color.Red; // Red
+                }
+                else if (numericUpDownColor.Value == 1)
+                {
+                    vLine.BackColor = Color.Blue; // Blue
+                }
+                else if (numericUpDownColor.Value == 2)
+                {
+                    line.BackColor = Color.Green; // Green
+                }
+                else if (numericUpDownColor.Value == 3)
+                {
+                    line.BackColor = Color.Yellow; // Yellow
+                }
+                else if (numericUpDownColor.Value == 4)
+                {
+                    line.BackColor = Color.Yellow; // Black
+                }
+                else if (numericUpDownColor.Value == 5)
+                {
+                    line.BackColor = Color.White; // White
+                }
+                else if (numericUpDownColor.Value == 6)
+                {
+                    line.BackColor = Color.Orange; // Orange
+                }
+                else if (numericUpDownColor.Value == 7)
+                {
+                    line.BackColor = Color.Pink; // Pink
+                }
+                else if (numericUpDownColor.Value == 8)
+                {
+                    line.BackColor = Color.Turquoise; // Turquoise
+                }
+                else if (numericUpDownColor.Value == 9)
+                {
+                    line.BackColor = Color.Gray; // Gray
+                }
+                else if (numericUpDownColor.Value == 10)
+                {
+                    line.BackColor = Color.Gold; // Gold
+                }
+
+                vLine.Visible = thickness > 0; // Make sure the line is only visible when its thickness is greater than 0
+                vLine.BringToFront(); // Make sure the line is in front of the PictureBox
+            }
+
+            // Call UpdateLine when the value of the NumericUpDown controls changes
+            numericUpDownHighAnimationPictureBox.ValueChanged += (s, e) => UpdateLine();
+            numericUpDownSizeLineAnimationPictureBox.ValueChanged += (s, e) => UpdateLine();
+            numericUpDownWidthAnimationPictureBox.ValueChanged += (s, e) => UpdateVLine();
+            numericUpDownSizeLine2AnimationPictureBox.ValueChanged += (s, e) => UpdateVLine();
+            numericUpDownColor.ValueChanged += (s, e) => { UpdateLine(); UpdateVLine(); UpdateColor(); };
+
+            void UpdateColor()
+            {
+                int colorValue = (int)numericUpDownColor.Value;
+                if (colorValue == 0)
+                {
+                    line.BackColor = Color.Red;
+                    vLine.BackColor = Color.Red;
+                }
+                else if (colorValue == 1)
+                {
+                    line.BackColor = Color.Blue;
+                    vLine.BackColor = Color.Blue;
+                }
+                else if (colorValue == 2)
+                {
+                    line.BackColor = Color.Green;
+                    vLine.BackColor = Color.Green;
+                }
+                else if (colorValue == 3)
+                {
+                    line.BackColor = Color.Yellow;
+                    vLine.BackColor = Color.Yellow;
+                }
+                else if (colorValue == 4)
+                {
+                    line.BackColor = Color.Black;
+                    vLine.BackColor = Color.Black;
+                }
+                else if (colorValue == 5)
+                {
+                    line.BackColor = Color.White;
+                    vLine.BackColor = Color.White;
+                }
+                else if (colorValue == 6)
+                {
+                    line.BackColor = Color.Orange;
+                    vLine.BackColor = Color.Orange;
+                }
+                else if (colorValue == 7)
+                {
+                    line.BackColor = Color.Pink;
+                    vLine.BackColor = Color.Pink;
+                }
+                else if (colorValue == 8)
+                {
+                    line.BackColor = Color.Turquoise;
+                    vLine.BackColor = Color.Turquoise;
+                }
+                else if (colorValue == 9)
+                {
+                    line.BackColor = Color.Gray;
+                    vLine.BackColor = Color.Gray;
+                }
+                else if (colorValue == 10)
+                {
+                    line.BackColor = Color.Gold;
+                    vLine.BackColor = Color.Gold;
+                }
+
+                // Update the line and vLine directly
+                line.Invalidate();
+                vLine.Invalidate();
+            }
         }
-        #region Time_Tick 
+        #region Time_Tick         
 
         private void timer_Tick(object sender, EventArgs e)
         {
@@ -124,6 +335,10 @@ namespace UoFiddler.Controls.Forms
             if (currentIndex >= boxes.Length)
                 currentIndex = (int)numericUpDownStartDelay.Value - 1; // Subtrahieren Sie 1 vom Wert von numericUpDownStartDelay
 
+            // Deklarieren Sie die Variablen außerhalb des if-Blocks
+            Bitmap imageBitmap = null;
+            Bitmap flippedImageBitmap = null;
+
             // Check if the current PictureBox has an image and is active
             if (boxes[currentIndex].Image != null && checks[currentIndex].Checked)
             {
@@ -131,7 +346,7 @@ namespace UoFiddler.Controls.Forms
                 if (boxes[currentIndex].Image != null)
                 {
                     // Get the image from the corresponding selectablePictureBox
-                    Bitmap imageBitmap = new Bitmap(boxes[currentIndex].Image);
+                    imageBitmap = new Bitmap(boxes[currentIndex].Image);
 
                     // Define the colors you want to make transparent
                     Color[] colorsToMakeTransparent = new Color[]
@@ -147,24 +362,42 @@ namespace UoFiddler.Controls.Forms
                         imageBitmap = MakeTransparent(imageBitmap, color);
                     }
 
-                    // Display the transparent bitmap in your PictureBox
-                    AnimationPictureBox.Image = imageBitmap;
-                    frameLabel.Text = (currentIndex + 1).ToString();
-
                     // Create a copy of the image and flip it
-                    Bitmap flippedImageBitmap = new Bitmap(imageBitmap);
+                    flippedImageBitmap = new Bitmap(imageBitmap);
                     flippedImageBitmap.RotateFlip(RotateFlipType.RotateNoneFlipX);
+                }
+            }
 
-                    // Display the flipped transparent bitmap in your second PictureBox
-                    AnimationPictureBox2.Image = flippedImageBitmap;
+            // Check the status of checkBoxShowFrame
+            if (checkBoxShowFrame.Checked || imageBitmap == null)
+            {
+                // If checkBoxShowFrame is enabled or there is no image, restore the original image without transparency
+                AnimationPictureBox.Image = boxes[currentIndex].Image;
+
+                // Check whether the image exists before creating a bitmap
+                if (boxes[currentIndex].Image != null)
+                {
+                    // Make a copy of the original image and mirror it
+                    Bitmap originalFlippedImage = new Bitmap(boxes[currentIndex].Image);
+                    originalFlippedImage.RotateFlip(RotateFlipType.RotateNoneFlipX);
+
+                    // Display the original mirrored image in your second PictureBox
+                    AnimationPictureBox2.Image = originalFlippedImage;
                 }
                 else
                 {
-                    // If there is no image in the PictureBox, set the images in the PictureBox controls to null
-                    AnimationPictureBox.Image = null;
                     AnimationPictureBox2.Image = null;
                 }
+                    
             }
+            else
+            {
+                // If checkBoxShowFrame is disabled, use the transparent image
+                AnimationPictureBox.Image = imageBitmap;
+                AnimationPictureBox2.Image = flippedImageBitmap;
+            }
+
+            frameLabel.Text = (currentIndex + 1).ToString();
         }
 
 
@@ -492,53 +725,61 @@ namespace UoFiddler.Controls.Forms
         }
         #endregion
 
-        #region NumericUpDownImageShow
+        #region NumericUpDownImageShow       
+
         private void numericUpDownImageShow_ValueChanged(object sender, EventArgs e)
         {
-            // Holen Sie den Index des aktuellen Bildes aus numericUpDownImageShow
+            // Get the index of the current image from numericUpDownImageShow
             int index = (int)numericUpDownImageShow.Value - 1;
 
-            // Überprüfen Sie, ob der Index gültig ist
+            // Check whether the index is valid
             if (index >= 0 && index < boxes.Length)
             {
-                // Überprüfen Sie, ob das Bild in der PictureBox existiert
+                // Check if the image exists in the PictureBox
                 if (boxes[index].Image != null)
                 {
-                    // Holen Sie das Bild aus der entsprechenden selectablePictureBox
+                    // Get the image from the corresponding selectablePictureBox
                     Bitmap imageBitmap = new Bitmap(boxes[index].Image);
 
-                    // Definieren Sie die Farben, die Sie transparent machen möchten
+                    // Define the colors you want to make transparent
                     Color[] colorsToMakeTransparent = new Color[]
                     {
-                Color.FromArgb(0, 0, 0),      // Schwarz
-                Color.FromArgb(255, 255, 255),// Weiß
-                Color.FromArgb(211, 211, 211) // Hellgrau (d3d3d3 in RGB)
+                        Color.FromArgb(0, 0, 0),      // Black
+                        Color.FromArgb(255, 255, 255),// White
+                        Color.FromArgb(211, 211, 211) // Light gray (d3d3d3 in RGB)
                     };
 
-                    // Machen Sie jede Farbe im Bild transparent
+                    // Make every color in the image transparent
                     foreach (Color color in colorsToMakeTransparent)
                     {
                         imageBitmap = MakeTransparent(imageBitmap, color);
                     }
 
-                    // Setzen Sie das transparente Bitmap als Bild für die PictureBox-Steuerelemente
+                    // Set the transparent bitmap as the image for the PictureBox controls
                     AnimationPictureBox.Image = imageBitmap;
-                    AnimationPictureBox2.Image = imageBitmap;
+
+                    // Make a copy of the image and flip it
+                    Bitmap flippedImageBitmap = new Bitmap(imageBitmap);
+                    flippedImageBitmap.RotateFlip(RotateFlipType.RotateNoneFlipX);
+
+                    // Set the mirrored bitmap as the image for the PictureBox controls
+                    AnimationPictureBox2.Image = flippedImageBitmap;
                 }
                 else
                 {
-                    // Wenn kein Bild in der PictureBox ist, setzen Sie die Bilder in den PictureBox-Steuerelementen auf null
+                    // If there is no image in the PictureBox, set the images in the PictureBox controls to null
                     AnimationPictureBox.Image = null;
                     AnimationPictureBox2.Image = null;
                 }
             }
             else
             {
-                // Wenn der Index ungültig ist (z.B. 0), löschen Sie die Bilder aus den PictureBox-Steuerelementen
+                // If the index is invalid (e.g. 0), delete the images from the PictureBox controls
                 AnimationPictureBox.Image = null;
                 AnimationPictureBox2.Image = null;
             }
         }
+
         #endregion
 
         #region Start Contextmenu
@@ -554,7 +795,7 @@ namespace UoFiddler.Controls.Forms
                 if (numericUpDownFrameDelay.Value > 0)
                 {
                     timer.Interval = 1000 / (int)numericUpDownFrameDelay.Value;
-                    // Setzen Sie currentIndex auf den Wert von numericUpDownStartDelay
+                    // Set currentIndex to the value of numericUpDownStartDelay
                     currentIndex = (int)numericUpDownStartDelay.Value;
                     timer.Start();
                 }
@@ -699,7 +940,6 @@ namespace UoFiddler.Controls.Forms
                 {
                     ChangeZoomLevel(pictureBox, ref zoomLevel10, true);
                 }
-                // Add more conditions for all your PictureBoxes
             }
         }
 
@@ -747,7 +987,6 @@ namespace UoFiddler.Controls.Forms
                 {
                     ChangeZoomLevel(pictureBox, ref zoomLevel10, false);
                 }
-                // Add more conditions for all your PictureBoxes
             }
         }
 
@@ -817,24 +1056,5 @@ namespace UoFiddler.Controls.Forms
             }
         }
         #endregion
-
-        //Not used yet
-        public static Image AdjustImageOpacity(Image image, double opacity)
-        {
-            Bitmap bmp = new Bitmap(image.Width, image.Height); // Create a new bitmap with the same dimensions as the image
-
-            using (Graphics g = Graphics.FromImage(bmp))
-            {
-                ColorMatrix matrix = new ColorMatrix();
-                matrix.Matrix33 = (float)opacity; // Change the alpha value
-
-                ImageAttributes attributes = new ImageAttributes();
-                attributes.SetColorMatrix(matrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
-
-                g.DrawImage(image, new Rectangle(0, 0, bmp.Width, bmp.Height), 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, attributes);
-            }
-
-            return bmp;
-        }
     }
 }
