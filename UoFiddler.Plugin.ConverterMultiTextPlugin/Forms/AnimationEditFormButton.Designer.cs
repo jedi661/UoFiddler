@@ -121,7 +121,6 @@
             numericUpDownWidthAnimationPictureBox = new System.Windows.Forms.NumericUpDown();
             numericUpDownSizeLine2AnimationPictureBox = new System.Windows.Forms.NumericUpDown();
             lbHighWight = new System.Windows.Forms.Label();
-            colorDialogHeightandWidth = new System.Windows.Forms.ColorDialog();
             numericUpDownColor = new System.Windows.Forms.NumericUpDown();
             lbSize2 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
@@ -1264,7 +1263,6 @@
         private System.Windows.Forms.NumericUpDown numericUpDownWidthAnimationPictureBox;
         private System.Windows.Forms.NumericUpDown numericUpDownSizeLine2AnimationPictureBox;
         private System.Windows.Forms.Label lbHighWight;
-        private System.Windows.Forms.ColorDialog colorDialogHeightandWidth;
         private System.Windows.Forms.NumericUpDown numericUpDownColor;
         private System.Windows.Forms.Label lbSize2;
         private System.Windows.Forms.Label label1;

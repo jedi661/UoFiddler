@@ -388,7 +388,7 @@ namespace UoFiddler.Controls.Forms
                 {
                     AnimationPictureBox2.Image = null;
                 }
-                    
+
             }
             else
             {

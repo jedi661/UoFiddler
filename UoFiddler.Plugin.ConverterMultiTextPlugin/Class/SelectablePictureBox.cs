@@ -18,24 +18,37 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
         private Bitmap[] drawingBitmaps = new Bitmap[10]; // An array of bitmaps containing 10 images
         private int currentIndex = 0; // Define currentIndex as an instance variable
         private Rectangle selectionRectangle; //Draws the rectangle
+        private bool canDraw = false; // Only drawing according to rectangle is allowed
 
         public SelectablePictureBox()
         {
             this.SetStyle(ControlStyles.Selectable | ControlStyles.UserMouse, true);
-            this.TabStop = true;
+            this.TabStop = true;            
 
             ContextMenuStrip contextMenu = new ContextMenuStrip();
-            ToolStripMenuItem loadItem = new ToolStripMenuItem("Load Image Drive");
-            ToolStripMenuItem pasteItem = new ToolStripMenuItem("Paste from clipboard");
+            ToolStripMenuItem loadItem = new ToolStripMenuItem("Load Image Drive"); // Loads the image
+            ToolStripMenuItem pasteItem = new ToolStripMenuItem("Paste from clipboard"); //Imports the image from clipbord
             ToolStripSeparator separator = new ToolStripSeparator();
-            ToolStripMenuItem saveItem = new ToolStripMenuItem("save Image Drive");
-            ToolStripMenuItem copyItem = new ToolStripMenuItem("Copy image Clipbord");
+            ToolStripMenuItem saveItem = new ToolStripMenuItem("save Image Drive"); // Save Image Drive
+            ToolStripMenuItem copyItem = new ToolStripMenuItem("Copy image Clipbord"); //copy image clipbord
+            ToolStripMenuItem selectionRectangleItemClipbord = new ToolStripMenuItem("Copy selection rectangle image"); //Copy rectangle image to clipbord
             ToolStripSeparator separator1 = new ToolStripSeparator();
-            ToolStripMenuItem clearItem = new ToolStripMenuItem("Empty Picturebox");
-            ToolStripMenuItem drawItem = new ToolStripMenuItem("Activate drawing");
-            ToolStripMenuItem mirrorItem = new ToolStripMenuItem("Mirror image");
-            ToolStripMenuItem selectionRectangleItem = new ToolStripMenuItem("selection rectangle");
+            ToolStripMenuItem clearItem = new ToolStripMenuItem("Empty Picturebox"); // Clear Pixturebox
+            ToolStripMenuItem drawItem = new ToolStripMenuItem("Activate drawing"); // Activate Mass Draw
+            ToolStripMenuItem mirrorItem = new ToolStripMenuItem("Mirror image"); // Mirror Image
+            ToolStripMenuItem selectionRectangleItem = new ToolStripMenuItem("selection rectangle"); //Invite rectangle image
             ToolStripSeparator separator2 = new ToolStripSeparator();
+
+            ToolTip toolTip = new ToolTip();
+            loadItem.ToolTipText = "Loads the selected image from the directory into the picture box";
+            pasteItem.ToolTipText = "Loads the image from clipbord into the picture box";
+            saveItem.ToolTipText = "Saves the image from the picture box in a directory";
+            copyItem.ToolTipText = "Copies the image to the clipbord";
+            selectionRectangleItemClipbord.ToolTipText = "Saves the image marked in rectangle to the clipbord";
+            clearItem.ToolTipText = "Empty the picture box";
+            drawItem.ToolTipText = "Enables the mass sign";
+            mirrorItem.ToolTipText = "Reflects the imported image";
+            selectionRectangleItem.ToolTipText = "Use ctrl to draw a rectangle and load the image there";
 
             // Adding a new option to select the active image
             ToolStripMenuItem selectItem = new ToolStripMenuItem("choose picture");
@@ -64,10 +77,11 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
             contextMenu.Items.Add(separator); //Separator
             contextMenu.Items.Add(saveItem);
             contextMenu.Items.Add(copyItem);
+            contextMenu.Items.Add(selectionRectangleItemClipbord);
             contextMenu.Items.Add(separator1);
             contextMenu.Items.Add(clearItem);
             contextMenu.Items.Add(drawItem);
-            contextMenu.Items.Add(selectionRectangleItem);
+            contextMenu.Items.Add(selectionRectangleItem);            
             contextMenu.Items.Add(mirrorItem);
             contextMenu.Items.Add(separator2);            
             contextMenu.Items.Add(selectItem);
@@ -76,6 +90,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
             loadItem.Click += (sender, e) => LoadImage();
             pasteItem.Click += (sender, e) => PasteImage();
             saveItem.Click += (sender, e) => SaveImage();
+            selectionRectangleItemClipbord.Click += (sender, e) => CopySelectionRectangleToClipboard();
             drawItem.Click += (sender, e) => isDrawing = !isDrawing;
             mirrorItem.Click += (sender, e) => MirrorImage();
             selectionRectangleItem.Click += (sender, e) => DrawSelectionRectangleAndInsertImage();
@@ -97,6 +112,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
                         isDrawing = false;
                         points.Clear();
                         points.Add(e.Location);
+                        canDraw = false;
                     }
                     else
                     {
@@ -120,16 +136,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
             {
                 if (e.Button == MouseButtons.Left)
                 {
-                    isDrawing = Control.ModifierKeys == Keys.Control;
-                }
-                points.Clear();
-            };
-
-
-            this.MouseUp += (sender, e) =>
-            {
-                if (e.Button == MouseButtons.Left)
-                {
                     if (Control.ModifierKeys == Keys.Control)
                     {
                         // Stop drawing the selection rectangle
@@ -141,11 +147,12 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
                     }
                 }
                 points.Clear();
+                canDraw = true;
             };
             
             this.MouseMove += (sender, e) =>
             {
-                if (isDrawing && Image != null && e.X < Image.Width && e.Y < Image.Height)
+                if (canDraw && isDrawing && Image != null && e.X < Image.Width && e.Y < Image.Height)
                 {
                     points.Add(e.Location);
 
@@ -571,7 +578,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
         #region GetPixelColor
         public Color GetPixelColor(Point location)
         {
-            if (this.Image != null && location.X < this.Image.Width && location.Y < this.Image.Height)
+            if (this.Image != null && location.X >= 0 && location.Y >= 0 && location.X < this.Image.Width && location.Y < this.Image.Height)
             {
                 // Create a bitmap from the image and get the color at the specified position
                 Bitmap bitmap = new Bitmap(this.Image);
@@ -579,6 +586,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
             }
             return Color.Transparent;
         }
+
         #endregion
 
         //Not active yet
@@ -595,6 +603,20 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
                         g.FillRectangle(brush, new Rectangle(location, new Size(1, 1)));
                     }
                 }
+            }
+        }
+
+        private void CopySelectionRectangleToClipboard()
+        {
+            if (this.Image != null)
+            {
+                Bitmap bitmap = new Bitmap(this.Image);
+                Bitmap croppedBitmap = bitmap.Clone(selectionRectangle, bitmap.PixelFormat);
+                Clipboard.SetImage(croppedBitmap);
+            }
+            else
+            {
+                MessageBox.Show("There is no image to copy.");
             }
         }
     }
