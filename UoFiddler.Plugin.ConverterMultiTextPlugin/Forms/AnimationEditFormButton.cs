@@ -86,7 +86,6 @@ namespace UoFiddler.Controls.Forms
 
             tboxColorCode.TextChanged += tboxColorCode_TextChanged;
 
-
             // Zoom Tags
             zoomInButton1.Tag = selectablePictureBox1;
             zoomOutButton1.Tag = selectablePictureBox1;

@@ -20,6 +20,10 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
         private Rectangle selectionRectangle; //Draws the rectangle
         private bool canDraw = false; // Only drawing according to rectangle is allowed
 
+        
+        private Stack<Bitmap> drawingStates = new Stack<Bitmap>(); // Create a stack to store drawing states
+        private Bitmap originalImage; // To save the original image
+
         public SelectablePictureBox()
         {
             this.SetStyle(ControlStyles.Selectable | ControlStyles.UserMouse, true);
@@ -34,7 +38,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
             ToolStripMenuItem selectionRectangleItemClipbord = new ToolStripMenuItem("Copy selection rectangle image"); //Copy rectangle image to clipbord
             ToolStripSeparator separator1 = new ToolStripSeparator();
             ToolStripMenuItem clearItem = new ToolStripMenuItem("Empty Picturebox"); // Clear Pixturebox
-            ToolStripMenuItem drawItem = new ToolStripMenuItem("Activate drawing"); // Activate Mass Draw
+            ToolStripMenuItem undoItem = new ToolStripMenuItem("Undo"); // undo
             ToolStripMenuItem mirrorItem = new ToolStripMenuItem("Mirror image"); // Mirror Image
             ToolStripMenuItem selectionRectangleItem = new ToolStripMenuItem("selection rectangle"); //Invite rectangle image
             ToolStripSeparator separator2 = new ToolStripSeparator();
@@ -46,9 +50,10 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
             copyItem.ToolTipText = "Copies the image to the clipbord";
             selectionRectangleItemClipbord.ToolTipText = "Saves the image marked in rectangle to the clipbord";
             clearItem.ToolTipText = "Empty the picture box";
-            drawItem.ToolTipText = "Enables the mass sign";
+            undoItem.ToolTipText = "Undo function";
             mirrorItem.ToolTipText = "Reflects the imported image";
             selectionRectangleItem.ToolTipText = "Use ctrl to draw a rectangle and load the image there";
+
 
             // Adding a new option to select the active image
             ToolStripMenuItem selectItem = new ToolStripMenuItem("choose picture");
@@ -59,19 +64,6 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
                 selectItem.DropDownItems.Add(item);
             }
 
-            drawItem.Click += (sender, e) =>
-            {
-                isDrawing = !isDrawing;
-                if (isDrawing)
-                {
-                    drawItem.Text = "Deactivate drawing";
-                }
-                else
-                {
-                    drawItem.Text = "Activate drawing";
-                }
-            };
-
             contextMenu.Items.Add(loadItem);
             contextMenu.Items.Add(pasteItem);
             contextMenu.Items.Add(separator); //Separator
@@ -80,7 +72,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
             contextMenu.Items.Add(selectionRectangleItemClipbord);
             contextMenu.Items.Add(separator1);
             contextMenu.Items.Add(clearItem);
-            contextMenu.Items.Add(drawItem);
+            contextMenu.Items.Add(undoItem);
             contextMenu.Items.Add(selectionRectangleItem);            
             contextMenu.Items.Add(mirrorItem);
             contextMenu.Items.Add(separator2);            
@@ -91,7 +83,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
             pasteItem.Click += (sender, e) => PasteImage();
             saveItem.Click += (sender, e) => SaveImage();
             selectionRectangleItemClipbord.Click += (sender, e) => CopySelectionRectangleToClipboard();
-            drawItem.Click += (sender, e) => isDrawing = !isDrawing;
+            undoItem.Click += (sender, e) => UndoDrawing(); 
             mirrorItem.Click += (sender, e) => MirrorImage();
             selectionRectangleItem.Click += (sender, e) => DrawSelectionRectangleAndInsertImage();
             copyItem.Click += (sender, e) => CopyImage();
@@ -101,6 +93,15 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
             this.ContextMenuStrip = contextMenu;
 
             //this.MouseClick += (sender, e) => LoadImage();                        
+
+            this.MouseDown += (sender, e) => {
+                if (canDraw && isDrawing && Image != null && e.X < Image.Width && e.Y < Image.Height)
+                {
+                    // Add the current state to the stack before drawing
+                    drawingStates.Push((Bitmap)drawingBitmaps[currentIndex].Clone());
+                }
+            };
+
 
             this.MouseDown += (sender, e) =>
             {
@@ -130,10 +131,9 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
                         }
                     }
                 }
-            };
+            };            
 
-            this.MouseUp += (sender, e) =>
-            {
+            this.MouseUp += (sender, e) => {
                 if (e.Button == MouseButtons.Left)
                 {
                     if (Control.ModifierKeys == Keys.Control)
@@ -144,16 +144,24 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
                     else
                     {
                         isDrawing = false;
+                        // Add the current state to the stack after drawing
+                        if (drawingBitmaps[currentIndex] != null)
+                        {
+                            drawingStates.Push((Bitmap)drawingBitmaps[currentIndex].Clone());
+                        }
                     }
                 }
                 points.Clear();
                 canDraw = true;
             };
-            
+
             this.MouseMove += (sender, e) =>
             {
                 if (canDraw && isDrawing && Image != null && e.X < Image.Width && e.Y < Image.Height)
                 {
+                    // Save the current drawing state before the drawing is modified
+                    drawingStates.Push((Bitmap)drawingBitmaps[currentIndex].Clone());
+
                     points.Add(e.Location);
 
                     if (drawingBitmaps[currentIndex] != null)
@@ -232,6 +240,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
             {
                 Image image = Image.FromFile(openFileDialog.FileName);
                 this.Image = image;
+                originalImage = new Bitmap(image); // Save the original image
                 drawingBitmaps[currentIndex] = new Bitmap(image.Width, image.Height);
             }
         }
@@ -617,6 +626,54 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
             else
             {
                 MessageBox.Show("There is no image to copy.");
+            }
+        }        
+
+        public void UndoDrawing()
+        {
+            // Make sure the currentIndex is within the valid range
+            if (currentIndex >= 0 && currentIndex < drawingBitmaps.Length)
+            {
+                // Check if there is a previous character state
+                if (drawingStates.Count > 0)
+                {
+                    // Reset the character state
+                    drawingBitmaps[currentIndex] = drawingStates.Pop();
+                    if (originalImage != null) // Check that originalImage is not null
+                    {
+                        Bitmap newImage = new Bitmap(originalImage);
+                        using (Graphics g = Graphics.FromImage(newImage))
+                        {
+                            g.DrawImage(drawingBitmaps[currentIndex], 0, 0);
+                        }
+                        this.Image = newImage;
+                    }
+                    else
+                    {
+                        // Handle the case when originalImage is null
+                    }
+                }
+                else
+                {
+                    // Handle the case when no previous character state exists
+                }
+            }
+            else
+            {
+                // Handle the case when the currentIndex is out of range
+            }
+        }
+
+        // Method to set the index of the SelectablePictureBox
+        public void SetCurrentIndex(int index)
+        {
+            if (index >= 0 && index < drawingBitmaps.Length)
+            {
+                currentIndex = index;
+            }
+            else
+            {
+                // Handle the case when the index passed is out of range
             }
         }
     }
