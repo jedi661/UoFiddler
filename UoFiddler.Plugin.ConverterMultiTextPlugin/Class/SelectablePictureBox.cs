@@ -38,7 +38,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
             ToolStripMenuItem selectionRectangleItemClipbord = new ToolStripMenuItem("Copy selection rectangle image"); //Copy rectangle image to clipbord
             ToolStripSeparator separator1 = new ToolStripSeparator();
             ToolStripMenuItem clearItem = new ToolStripMenuItem("Empty Picturebox"); // Clear Pixturebox
-            ToolStripMenuItem undoItem = new ToolStripMenuItem("Undo"); // undo
+            ToolStripMenuItem undoItem = new ToolStripMenuItem("Undo Images"); // undo
             ToolStripMenuItem mirrorItem = new ToolStripMenuItem("Mirror image"); // Mirror Image
             ToolStripMenuItem selectionRectangleItem = new ToolStripMenuItem("selection rectangle"); //Invite rectangle image
             ToolStripSeparator separator2 = new ToolStripSeparator();
@@ -50,7 +50,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
             copyItem.ToolTipText = "Copies the image to the clipbord";
             selectionRectangleItemClipbord.ToolTipText = "Saves the image marked in rectangle to the clipbord";
             clearItem.ToolTipText = "Empty the picture box";
-            undoItem.ToolTipText = "Undo function";
+            undoItem.ToolTipText = "Undo function for inserted images";
             mirrorItem.ToolTipText = "Reflects the imported image";
             selectionRectangleItem.ToolTipText = "Use ctrl to draw a rectangle and load the image there";
 
@@ -71,9 +71,9 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
             contextMenu.Items.Add(copyItem);
             contextMenu.Items.Add(selectionRectangleItemClipbord);
             contextMenu.Items.Add(separator1);
-            contextMenu.Items.Add(clearItem);
+            contextMenu.Items.Add(clearItem);            
+            contextMenu.Items.Add(selectionRectangleItem);
             contextMenu.Items.Add(undoItem);
-            contextMenu.Items.Add(selectionRectangleItem);            
             contextMenu.Items.Add(mirrorItem);
             contextMenu.Items.Add(separator2);            
             contextMenu.Items.Add(selectItem);
