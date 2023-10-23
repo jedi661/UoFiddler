@@ -39,6 +39,8 @@
             openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             menuStrip1 = new System.Windows.Forms.MenuStrip();
             loadToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            loadImageAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            loadSingleAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             checkBox1 = new System.Windows.Forms.CheckBox();
             checkBox2 = new System.Windows.Forms.CheckBox();
             checkBox3 = new System.Windows.Forms.CheckBox();
@@ -125,6 +127,7 @@
             lbSize2 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             checkBoxShowFrame = new System.Windows.Forms.CheckBox();
+            toolStripMenuItemLoadSingeAll = new System.Windows.Forms.ToolStripMenuItem();
             contextMenuStrip1.SuspendLayout();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)selectablePictureBox1).BeginInit();
@@ -158,16 +161,16 @@
             // 
             // contextMenuStrip1
             // 
-            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { loadToolStripMenuItem, toolStripSeparator2, startToolStripMenuItem, toolStripSeparator1, imageFadeinToolStripMenuItem });
+            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { loadToolStripMenuItem, toolStripMenuItemLoadSingeAll, toolStripSeparator2, startToolStripMenuItem, toolStripSeparator1, imageFadeinToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new System.Drawing.Size(182, 82);
+            contextMenuStrip1.Size = new System.Drawing.Size(182, 104);
             // 
             // loadToolStripMenuItem
             // 
             loadToolStripMenuItem.Image = UoFiddler.Plugin.ConverterMultiTextPlugin.Properties.Resources.import;
             loadToolStripMenuItem.Name = "loadToolStripMenuItem";
             loadToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            loadToolStripMenuItem.Text = "Load";
+            loadToolStripMenuItem.Text = "Load one All";
             loadToolStripMenuItem.ToolTipText = "Invite everyone an image";
             loadToolStripMenuItem.Click += loadToolStripMenuItem_Click;
             // 
@@ -214,10 +217,26 @@
             // 
             // loadToolStripMenuItem1
             // 
+            loadToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { loadImageAllToolStripMenuItem, loadSingleAllToolStripMenuItem });
             loadToolStripMenuItem1.Name = "loadToolStripMenuItem1";
-            loadToolStripMenuItem1.Size = new System.Drawing.Size(45, 20);
-            loadToolStripMenuItem1.Text = "Load";
-            loadToolStripMenuItem1.Click += loadToolStripMenuItem1_Click;
+            loadToolStripMenuItem1.Size = new System.Drawing.Size(50, 20);
+            loadToolStripMenuItem1.Text = "Menu";
+            // 
+            // loadImageAllToolStripMenuItem
+            // 
+            loadImageAllToolStripMenuItem.Image = UoFiddler.Plugin.ConverterMultiTextPlugin.Properties.Resources.import;
+            loadImageAllToolStripMenuItem.Name = "loadImageAllToolStripMenuItem";
+            loadImageAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            loadImageAllToolStripMenuItem.Text = "Load One Image All";
+            loadImageAllToolStripMenuItem.Click += loadToolStripMenuItem1_Click;
+            // 
+            // loadSingleAllToolStripMenuItem
+            // 
+            loadSingleAllToolStripMenuItem.Image = UoFiddler.Plugin.ConverterMultiTextPlugin.Properties.Resources.Border;
+            loadSingleAllToolStripMenuItem.Name = "loadSingleAllToolStripMenuItem";
+            loadSingleAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            loadSingleAllToolStripMenuItem.Text = "Load Single All";
+            loadSingleAllToolStripMenuItem.Click += loadToolStripMenuItemAllSingle_Click;
             // 
             // checkBox1
             // 
@@ -1098,6 +1117,14 @@
             checkBoxShowFrame.Text = "Frame visible";
             checkBoxShowFrame.UseVisualStyleBackColor = true;
             // 
+            // toolStripMenuItemLoadSingeAll
+            // 
+            toolStripMenuItemLoadSingeAll.Image = UoFiddler.Plugin.ConverterMultiTextPlugin.Properties.Resources.Border;
+            toolStripMenuItemLoadSingeAll.Name = "toolStripMenuItemLoadSingeAll";
+            toolStripMenuItemLoadSingeAll.Size = new System.Drawing.Size(181, 22);
+            toolStripMenuItemLoadSingeAll.Text = "Load Single All";
+            toolStripMenuItemLoadSingeAll.Click += loadToolStripMenuItemAllSingle_Click;
+            // 
             // AnimationEditFormButton
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1267,5 +1294,8 @@
         private System.Windows.Forms.Label lbSize2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox checkBoxShowFrame;
+        private System.Windows.Forms.ToolStripMenuItem loadSingleAllToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadImageAllToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemLoadSingeAll;
     }
 }

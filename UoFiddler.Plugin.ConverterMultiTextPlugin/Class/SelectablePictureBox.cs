@@ -90,48 +90,48 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
             clearItem.Click += (sender, e) => ClearImage();
 
 
-            this.ContextMenuStrip = contextMenu;
-
-            //this.MouseClick += (sender, e) => LoadImage();                        
-
-            this.MouseDown += (sender, e) => {
-                if (canDraw && isDrawing && Image != null && e.X < Image.Width && e.Y < Image.Height)
-                {
-                    // Add the current state to the stack before drawing
-                    drawingStates.Push((Bitmap)drawingBitmaps[currentIndex].Clone());
-                }
-            };
-
+            this.ContextMenuStrip = contextMenu;           
 
             this.MouseDown += (sender, e) =>
             {
-                if (e.Button == MouseButtons.Left)
+                if (canDraw && Image != null && e.X < Image.Width && e.Y < Image.Height)
                 {
-                    if (Control.ModifierKeys == Keys.Control)
+                    // Überprüfen Sie, ob drawingBitmaps[currentIndex] nicht null ist, bevor Sie darauf zugreifen
+                    if (drawingBitmaps[currentIndex] != null)
                     {
-                        // Start drawing the selection rectangle
-                        isDrawing = false;
-                        points.Clear();
-                        points.Add(e.Location);
-                        canDraw = false;
+                        // Add the current state to the stack before drawing
+                        drawingStates.Push((Bitmap)drawingBitmaps[currentIndex].Clone());
                     }
-                    else
-                    {
-                        isDrawing = true;
-                        points.Add(e.Location);
 
-                        if (drawingBitmaps[currentIndex] == null && Image != null)
+                    if (e.Button == MouseButtons.Left)
+                    {
+                        if (Control.ModifierKeys == Keys.Control)
                         {
-                            drawingBitmaps[currentIndex] = new Bitmap(Image);
+                            // Start drawing the selection rectangle
+                            isDrawing = false;
+                            points.Clear();
+                            points.Add(e.Location);
+                            canDraw = false;
+                        }
+                        else
+                        {
+                            isDrawing = true;
+                            points.Add(e.Location);
 
                             if (drawingBitmaps[currentIndex] == null)
                             {
-                                MessageBox.Show("Error copying image.");
+                                drawingBitmaps[currentIndex] = new Bitmap(Image);
+
+                                if (drawingBitmaps[currentIndex] == null)
+                                {
+                                    MessageBox.Show("Error copying image.");
+                                }
                             }
                         }
                     }
                 }
-            };            
+            };
+
 
             this.MouseUp += (sender, e) => {
                 if (e.Button == MouseButtons.Left)
@@ -160,7 +160,10 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
                 if (canDraw && isDrawing && Image != null && e.X < Image.Width && e.Y < Image.Height)
                 {
                     // Save the current drawing state before the drawing is modified
-                    drawingStates.Push((Bitmap)drawingBitmaps[currentIndex].Clone());
+                    if (drawingBitmaps[currentIndex] != null)  // Überprüfen Sie, ob drawingBitmaps[currentIndex] nicht null ist
+                    {
+                        drawingStates.Push((Bitmap)drawingBitmaps[currentIndex].Clone());
+                    }
 
                     points.Add(e.Location);
 
@@ -248,7 +251,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
 
         #region DrawSelevtRectangleAndInsertImage        
 
-        private void DrawSelectionRectangleAndInsertImage()
+        public void DrawSelectionRectangleAndInsertImage()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image files (*.bmp;*.jpg;*.jpeg;*.gif;*.png)|*.bmp;*.jpg;*.jpeg;*.gif;*.png";
@@ -331,15 +334,18 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
         #endregion
 
         #region Painting
+
         protected override void OnPaint(PaintEventArgs pe)
         {
             base.OnPaint(pe);
+
             if (this.Focused)
             {
                 var rc = this.ClientRectangle;
                 rc.Inflate(-2, -2);
                 ControlPaint.DrawFocusRectangle(pe.Graphics, rc);
             }
+
             if (drawingBitmaps[currentIndex] != null) // If a drawn image exists
             {
                 pe.Graphics.DrawImage(drawingBitmaps[currentIndex], 0, 0); // Draw the drawn picture
@@ -348,7 +354,18 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
             {
                 pe.Graphics.DrawImage(this.Image, 0, 0); // Draw the original image
             }
+
+            // Draw the selection rectangle
+            if (!isDrawing && Control.ModifierKeys == Keys.Control)
+            {
+                using (Pen pen = new Pen(Color.Yellow))
+                {
+                    pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+                    pe.Graphics.DrawRectangle(pen, selectionRectangle);
+                }
+            }
         }
+
         #endregion
 
         #region OnPreviewKeyDown
@@ -436,10 +453,11 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
         }
         #endregion
 
-        #region SaveImage
+        #region SaveImage        
+
         private void SaveImage()
         {
-            if (drawingBitmaps[currentIndex] != null)
+            if (DrawingBitmaps[CurrentIndex] != null)
             {
                 // Make a copy of the original image
                 Bitmap newImage = new Bitmap(Image);
@@ -447,12 +465,13 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
                 // Draw the drawn image on top of the original image
                 using (Graphics g = Graphics.FromImage(newImage))
                 {
-                    g.DrawImage(drawingBitmaps[currentIndex], 0, 0);
+                    g.DrawImage(DrawingBitmaps[CurrentIndex], 0, 0);
                 }
 
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
                 saveFileDialog.Filter = "Bitmap Image|*.bmp|JPEG Image|*.jpg|GIF Image|*.gif|PNG Image|*.png";
                 saveFileDialog.Title = "Please select a location to save the image.";
+
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     using (MemoryStream memory = new MemoryStream())
@@ -472,14 +491,18 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
                                 newImage.Save(memory, System.Drawing.Imaging.ImageFormat.Png);
                                 break;
                         }
-                        using (FileStream fs = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
+
+                        memory.Position = 0; // Reset the position of the stream
+
+                        using (FileStream fs = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write))
                         {
-                            memory.WriteTo(fs);
+                            memory.CopyTo(fs);
                         }
                     }
                 }
             }
         }
+
         #endregion
 
         #region paste Image
@@ -676,5 +699,55 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
                 // Handle the case when the index passed is out of range
             }
         }
+
+        #region Dispose
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+
+                // Release of bitmap objects
+                for (int i = 0; i < drawingBitmaps.Length; i++)
+                {
+                    if (drawingBitmaps[i] != null)
+                    {
+                        drawingBitmaps[i].Dispose();
+                        drawingBitmaps[i] = null;
+                    }
+                }
+
+                if (originalImage != null)
+                {
+                    originalImage.Dispose();
+                    originalImage = null;
+                }
+
+                // Perform further cleanup here if necessary
+            }
+
+            // Call the base class to call the base class's Dispose method
+            base.Dispose(disposing);
+        }
+        #endregion
+
+        #region Puplic for clases
+        public Bitmap[] DrawingBitmaps
+        {
+            get { return drawingBitmaps; }
+            set { drawingBitmaps = value; }
+        }
+
+        public int CurrentIndex
+        {
+            get { return currentIndex; }
+            set { currentIndex = value; }
+        }
+
+        public Bitmap OriginalImage
+        {
+            get { return originalImage; }
+            set { originalImage = value; }
+        }
+        #endregion
     }
 }

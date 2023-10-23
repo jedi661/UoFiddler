@@ -40,9 +40,12 @@ namespace UoFiddler.Controls.Forms
         private int zoomLevel9 = 0;
         private int zoomLevel10 = 0;
 
+        private SelectablePictureBox[] pictureBoxes;
+
         public AnimationEditFormButton()
         {
             InitializeComponent();
+
             Icon = Options.GetFiddlerIcon();
             this.KeyPreview = true; // Enable the key preview
 
@@ -323,6 +326,20 @@ namespace UoFiddler.Controls.Forms
                 // Update the line and vLine directly
                 line.Invalidate();
                 vLine.Invalidate();
+
+                // Initialize your pictureBoxes array with the appropriate instances
+                pictureBoxes = new SelectablePictureBox[10];
+
+                // Add the PictureBox instances to your form and initialize the indexes
+                for (int i = 0; i < pictureBoxes.Length; i++)
+                {
+                    pictureBoxes[i] = new SelectablePictureBox();
+                    Controls.Add(pictureBoxes[i]); // Add the PictureBox to the form.
+                    pictureBoxes[i].SetCurrentIndex(i + 1); // Set the index for each PictureBox
+                }
+
+                // Call the UndoDrawing method on all PictureBox instances
+                SelectablePictureBoxHelper.UndoDrawing(pictureBoxes);
             }
         }
         #region Time_Tick         
@@ -449,6 +466,12 @@ namespace UoFiddler.Controls.Forms
                     if (checks[i].Checked)
                     {
                         boxes[i].Image = image;
+                        if (boxes[i] is SelectablePictureBox)
+                        {
+                            SelectablePictureBox box = (SelectablePictureBox)boxes[i];
+                            box.OriginalImage = new Bitmap(image); // Save the original image
+                            box.DrawingBitmaps[box.CurrentIndex] = new Bitmap(image.Width, image.Height);
+                        }
                     }
                 }
             }
@@ -492,10 +515,69 @@ namespace UoFiddler.Controls.Forms
                     if (checks[i].Checked)
                     {
                         boxes[i].Image = image;
+                        if (boxes[i] is SelectablePictureBox)
+                        {
+                            SelectablePictureBox box = (SelectablePictureBox)boxes[i];
+                            box.OriginalImage = new Bitmap(image); // Save the original image
+                            box.DrawingBitmaps[box.CurrentIndex] = new Bitmap(image.Width, image.Height);
+                        }
                     }
                 }
             }
         }
+
+        private void loadToolStripMenuItemAllSingle_Click(object sender, EventArgs e)
+        {
+            // Array of selectablePictureBox and CheckBoxes
+            PictureBox[] boxes = { selectablePictureBox1, selectablePictureBox2, selectablePictureBox3, selectablePictureBox4, selectablePictureBox5, selectablePictureBox6, selectablePictureBox7, selectablePictureBox8, selectablePictureBox9, selectablePictureBox10 };
+            CheckBox[] checks = { checkBox1, checkBox2, checkBox3, checkBox4, checkBox5, checkBox6, checkBox7, checkBox8, checkBox9, checkBox10 };
+
+            // Create an instance of OpenFileDialog
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            // Properties of the OpenFileDialog
+            openFileDialog1.Filter = "Image files (*.bmp;*.jpg;*.jpeg;*.gif;*.png)|*.bmp;*.jpg;*.jpeg;*.gif;*.png";
+            openFileDialog1.Title = "Please select an image file.";
+
+            // Use a loop to load a separate image into each PictureBox
+            for (int i = 0; i < boxes.Length; i++)
+            {
+                // Check if the corresponding checkbox is checked
+                if (checks[i].Checked)
+                {
+                    // Displays the dialog and check if the user clicked OK
+                    if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                    {
+                        // Loads the image
+                        Image image = Image.FromFile(openFileDialog1.FileName);
+
+                        // Clear the PictureBox before loading the new image
+                        if (boxes[i] is SelectablePictureBox)
+                        {
+                            SelectablePictureBox box = (SelectablePictureBox)boxes[i];
+                            box.ClearImage();
+                        }
+
+                        // Load the image into the PictureBox
+                        boxes[i].Image = image;
+
+                        if (boxes[i] is SelectablePictureBox)
+                        {
+                            SelectablePictureBox box = (SelectablePictureBox)boxes[i];
+                            box.OriginalImage = new Bitmap(image); // Save the original image
+                            box.DrawingBitmaps[box.CurrentIndex] = new Bitmap(image.Width, image.Height);
+                        }
+                    }
+                    else
+                    {
+                        // If the user clicked Cancel in the dialog, break the loop
+                        break;
+                    }
+                }
+            }
+
+        }
+
         #endregion
         private void pictureBox_KeyDown(object sender, KeyEventArgs e)
         {
