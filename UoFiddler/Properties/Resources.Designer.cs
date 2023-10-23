@@ -313,6 +313,36 @@ namespace UoFiddler.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap UOFiddler10 {
+            get {
+                object obj = ResourceManager.GetObject("UOFiddler10", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap UOFiddler11 {
+            get {
+                object obj = ResourceManager.GetObject("UOFiddler11", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap UOFiddler12 {
+            get {
+                object obj = ResourceManager.GetObject("UOFiddler12", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap UOFiddler2 {
             get {
                 object obj = ResourceManager.GetObject("UOFiddler2", resourceCulture);
@@ -356,6 +386,36 @@ namespace UoFiddler.Properties {
         public static System.Drawing.Bitmap UOFiddler6 {
             get {
                 object obj = ResourceManager.GetObject("UOFiddler6", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap UOFiddler7 {
+            get {
+                object obj = ResourceManager.GetObject("UOFiddler7", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap UOFiddler8 {
+            get {
+                object obj = ResourceManager.GetObject("UOFiddler8", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap UOFiddler9 {
+            get {
+                object obj = ResourceManager.GetObject("UOFiddler9", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
