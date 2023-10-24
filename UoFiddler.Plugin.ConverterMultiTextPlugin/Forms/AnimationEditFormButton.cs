@@ -21,7 +21,7 @@ namespace UoFiddler.Controls.Forms
     {
 
         int currentIndex = 0; // The index of the current image
-        SelectablePictureBox[] boxes;
+        //SelectablePictureBox[] boxes;
         CheckBox[] checks;
         private bool pipetteMode = false;
 
@@ -41,6 +41,8 @@ namespace UoFiddler.Controls.Forms
         private int zoomLevel10 = 0;
 
         private SelectablePictureBox[] pictureBoxes;
+
+        public static SelectablePictureBox[] boxes = new SelectablePictureBox[10];
 
         public AnimationEditFormButton()
         {
@@ -576,6 +578,96 @@ namespace UoFiddler.Controls.Forms
                 }
             }
 
+        }
+
+        private void loadToolStripMenuItemAllSingleMirror_Click(object sender, EventArgs e)
+        {
+            // Array of selectablePictureBox and CheckBoxes
+            SelectablePictureBox[] boxes = { selectablePictureBox1, selectablePictureBox2, selectablePictureBox3, selectablePictureBox4, selectablePictureBox5, selectablePictureBox6, selectablePictureBox7, selectablePictureBox8, selectablePictureBox9, selectablePictureBox10 };
+            CheckBox[] checks = { checkBox1, checkBox2, checkBox3, checkBox4, checkBox5, checkBox6, checkBox7, checkBox8, checkBox9, checkBox10 };
+
+            // Create an instance of OpenFileDialog
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            // Properties of the OpenFileDialog
+            openFileDialog1.Filter = "Image files (*.bmp;*.jpg;*.jpeg;*.gif;*.png)|*.bmp;*.jpg;*.jpeg;*.gif;*.png";
+            openFileDialog1.Title = "Please select an image file.";
+
+            // Use a loop to load a separate image into each PictureBox
+            for (int i = 0; i < boxes.Length; i++)
+            {
+                // Check if the corresponding checkbox is checked
+                if (checks[i].Checked)
+                {
+                    // Displays the dialog and check if the user clicked OK
+                    if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                    {
+                        // Loads the image
+                        Image image = Image.FromFile(openFileDialog1.FileName);
+
+                        // Clear the PictureBox before loading the new image
+                        boxes[i].ClearImage();
+
+                        // Load the image into the PictureBox
+                        boxes[i].Image = image;
+                        boxes[i].OriginalImage = new Bitmap(image); // Save the original image
+                        boxes[i].DrawingBitmaps[boxes[i].CurrentIndex] = new Bitmap(image.Width, image.Height);
+
+                        // Mirror the image right after loading it
+                        boxes[i].MirrorImage();
+                    }
+                    else
+                    {
+                        // If the user clicked Cancel in the dialog, break the loop
+                        break;
+                    }
+                }
+            }
+
+        }
+
+        // Load image mirror all
+        private void loadOneImageAllMirrorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Array of selectablePictureBox and CheckBoxes
+            SelectablePictureBox[] boxes = { selectablePictureBox1, selectablePictureBox2, selectablePictureBox3, selectablePictureBox4, selectablePictureBox5, selectablePictureBox6, selectablePictureBox7, selectablePictureBox8, selectablePictureBox9, selectablePictureBox10 };
+            CheckBox[] checks = { checkBox1, checkBox2, checkBox3, checkBox4, checkBox5, checkBox6, checkBox7, checkBox8, checkBox9, checkBox10 };
+
+            // Create an instance of OpenFileDialog
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            // Properties of the OpenFileDialog
+            openFileDialog1.Filter = "Image files (*.bmp;*.jpg;*.jpeg;*.gif;*.png)|*.bmp;*.jpg;*.jpeg;*.gif;*.png";
+            openFileDialog1.Title = "Please select an image file.";
+
+            // Displays the dialog and check if the user clicked OK
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                // Loads the image
+                Image image = Image.FromFile(openFileDialog1.FileName);
+
+                // Clear all PictureBoxes before loading the new image
+                for (int i = 0; i < boxes.Length; i++)
+                {
+                    boxes[i].Image = null;
+                    boxes[i].ClearImage();
+                }
+
+                // Use a loop to load the image into the PictureBoxes,
+                // if the corresponding checkbox is activated
+                for (int i = 0; i < boxes.Length; i++)
+                {
+                    if (checks[i].Checked)
+                    {
+                        boxes[i].Image = image;
+                        boxes[i].OriginalImage = new Bitmap(image); // Save the original image
+                        boxes[i].DrawingBitmaps[boxes[i].CurrentIndex] = new Bitmap(image.Width, image.Height);
+
+                        // Mirror the image right after loading it                        
+                        boxes[i].MirrorAllImages();
+                    }
+                }
+            }
         }
 
         #endregion
@@ -1136,6 +1228,6 @@ namespace UoFiddler.Controls.Forms
                 AnimationPictureBox2.BackgroundImage = null;
             }
         }
-        #endregion
+        #endregion        
     }
 }

@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 using System.IO;
+using UoFiddler.Controls.Forms;
 
 namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
 {
-    internal class SelectablePictureBox : PictureBox
+    public class SelectablePictureBox : PictureBox
     {
         private bool isDrawing = false;
         private List<Point> points = new List<Point>();
@@ -20,7 +21,9 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
         private Rectangle selectionRectangle; //Draws the rectangle
         private bool canDraw = false; // Only drawing according to rectangle is allowed
 
-        
+        //public static AnimationEditFormButton AnimationEditForm;
+
+
         private Stack<Bitmap> drawingStates = new Stack<Bitmap>(); // Create a stack to store drawing states
         private Bitmap originalImage; // To save the original image
 
@@ -42,6 +45,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
             ToolStripMenuItem mirrorItem = new ToolStripMenuItem("Mirror image"); // Mirror Image
             ToolStripMenuItem selectionRectangleItem = new ToolStripMenuItem("selection rectangle"); //Invite rectangle image
             ToolStripSeparator separator2 = new ToolStripSeparator();
+            ToolStripMenuItem mirrorItemAll = new ToolStripMenuItem("Mirror image All");
 
             ToolTip toolTip = new ToolTip();
             loadItem.ToolTipText = "Loads the selected image from the directory into the picture box";
@@ -53,7 +57,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
             undoItem.ToolTipText = "Undo function for inserted images";
             mirrorItem.ToolTipText = "Reflects the imported image";
             selectionRectangleItem.ToolTipText = "Use ctrl to draw a rectangle and load the image there";
-
+            mirrorItemAll.ToolTipText = "Mirro all images";
 
             // Adding a new option to select the active image
             ToolStripMenuItem selectItem = new ToolStripMenuItem("choose picture");
@@ -75,6 +79,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
             contextMenu.Items.Add(selectionRectangleItem);
             contextMenu.Items.Add(undoItem);
             contextMenu.Items.Add(mirrorItem);
+            contextMenu.Items.Add(mirrorItemAll);
             contextMenu.Items.Add(separator2);            
             contextMenu.Items.Add(selectItem);
             
@@ -88,7 +93,15 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
             selectionRectangleItem.Click += (sender, e) => DrawSelectionRectangleAndInsertImage();
             copyItem.Click += (sender, e) => CopyImage();
             clearItem.Click += (sender, e) => ClearImage();
-
+            mirrorItemAll.Click += (sender, e) =>
+            {
+                // Stellen Sie sicher, dass Sie eine Instanz von SelectablePictureBox haben, auf der Sie die Methode aufrufen können.
+                SelectablePictureBox anyInstance = AnimationEditFormButton.boxes.FirstOrDefault(box => box != null);
+                if (anyInstance != null)
+                {
+                    anyInstance.MirrorAllImages();
+                }
+            };
 
             this.ContextMenuStrip = contextMenu;           
 
@@ -574,7 +587,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
         }
         #endregion
         #region Mirror 
-        private void MirrorImage()
+        public void MirrorImage()
         {
             if (this.Image != null)
             {
@@ -749,5 +762,42 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Class
             set { originalImage = value; }
         }
         #endregion
+
+        /*private void MirrorAllImages()
+        {
+            // Überprüfen Sie, ob das Array null ist
+            if (AnimationEditFormButton.Boxes == null)
+            {
+                MessageBox.Show("Boxes array is null.");
+                return;
+            }
+
+            // Zugriff auf das SelectablePictureBox-Array über die statische Eigenschaft
+            foreach (var pictureBox in AnimationEditFormButton.Boxes)
+            {
+                // Überprüfen Sie, ob das PictureBox-Objekt null ist
+                if (pictureBox == null)
+                {
+                    MessageBox.Show("A PictureBox in the array is null.");
+                    continue;
+                }
+
+                if (pictureBox.Image != null)
+                {
+                    pictureBox.MirrorImage();
+                }
+            }
+        }*/
+        public void MirrorAllImages()
+        {
+            foreach (var pictureBox in AnimationEditFormButton.boxes)
+            {
+                if (pictureBox != null && pictureBox.Image != null)
+                {
+                    pictureBox.MirrorImage();
+                }
+            }
+        }
+
     }
 }

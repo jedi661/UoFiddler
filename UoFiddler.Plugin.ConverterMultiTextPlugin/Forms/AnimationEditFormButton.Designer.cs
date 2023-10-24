@@ -32,6 +32,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AnimationEditFormButton));
             contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
             loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripMenuItemLoadSingeAll = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            loadOnImageAllMIrrorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            loadSingleAllMirrorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -41,6 +45,8 @@
             loadToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             loadImageAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             loadSingleAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            loadOneImageAllMirrorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             checkBox1 = new System.Windows.Forms.CheckBox();
             checkBox2 = new System.Windows.Forms.CheckBox();
             checkBox3 = new System.Windows.Forms.CheckBox();
@@ -127,7 +133,7 @@
             lbSize2 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             checkBoxShowFrame = new System.Windows.Forms.CheckBox();
-            toolStripMenuItemLoadSingeAll = new System.Windows.Forms.ToolStripMenuItem();
+            loadOneSingleAllMirorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             contextMenuStrip1.SuspendLayout();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)selectablePictureBox1).BeginInit();
@@ -161,29 +167,56 @@
             // 
             // contextMenuStrip1
             // 
-            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { loadToolStripMenuItem, toolStripMenuItemLoadSingeAll, toolStripSeparator2, startToolStripMenuItem, toolStripSeparator1, imageFadeinToolStripMenuItem });
+            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { loadToolStripMenuItem, toolStripMenuItemLoadSingeAll, toolStripSeparator4, loadOnImageAllMIrrorToolStripMenuItem, loadSingleAllMirrorToolStripMenuItem, toolStripSeparator2, startToolStripMenuItem, toolStripSeparator1, imageFadeinToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new System.Drawing.Size(182, 104);
+            contextMenuStrip1.Size = new System.Drawing.Size(213, 154);
             // 
             // loadToolStripMenuItem
             // 
             loadToolStripMenuItem.Image = UoFiddler.Plugin.ConverterMultiTextPlugin.Properties.Resources.import;
             loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            loadToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            loadToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             loadToolStripMenuItem.Text = "Load one All";
             loadToolStripMenuItem.ToolTipText = "Invite everyone an image";
             loadToolStripMenuItem.Click += loadToolStripMenuItem_Click;
             // 
+            // toolStripMenuItemLoadSingeAll
+            // 
+            toolStripMenuItemLoadSingeAll.Image = UoFiddler.Plugin.ConverterMultiTextPlugin.Properties.Resources.Border;
+            toolStripMenuItemLoadSingeAll.Name = "toolStripMenuItemLoadSingeAll";
+            toolStripMenuItemLoadSingeAll.Size = new System.Drawing.Size(212, 22);
+            toolStripMenuItemLoadSingeAll.Text = "Load Single All";
+            toolStripMenuItemLoadSingeAll.Click += loadToolStripMenuItemAllSingle_Click;
+            // 
+            // toolStripSeparator4
+            // 
+            toolStripSeparator4.Name = "toolStripSeparator4";
+            toolStripSeparator4.Size = new System.Drawing.Size(209, 6);
+            // 
+            // loadOnImageAllMIrrorToolStripMenuItem
+            // 
+            loadOnImageAllMIrrorToolStripMenuItem.Name = "loadOnImageAllMIrrorToolStripMenuItem";
+            loadOnImageAllMIrrorToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            loadOnImageAllMIrrorToolStripMenuItem.Text = "Load one Image All MIrror";
+            loadOnImageAllMIrrorToolStripMenuItem.Click += loadOneImageAllMirrorToolStripMenuItem_Click;
+            // 
+            // loadSingleAllMirrorToolStripMenuItem
+            // 
+            loadSingleAllMirrorToolStripMenuItem.Name = "loadSingleAllMirrorToolStripMenuItem";
+            loadSingleAllMirrorToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            loadSingleAllMirrorToolStripMenuItem.Text = "Load Single All Mirror";
+            loadSingleAllMirrorToolStripMenuItem.Click += loadToolStripMenuItemAllSingleMirror_Click;
+            // 
             // toolStripSeparator2
             // 
             toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new System.Drawing.Size(178, 6);
+            toolStripSeparator2.Size = new System.Drawing.Size(209, 6);
             // 
             // startToolStripMenuItem
             // 
             startToolStripMenuItem.Image = UoFiddler.Plugin.ConverterMultiTextPlugin.Properties.Resources.Load;
             startToolStripMenuItem.Name = "startToolStripMenuItem";
-            startToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            startToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             startToolStripMenuItem.Text = "Start";
             startToolStripMenuItem.ToolTipText = "Start Animation";
             startToolStripMenuItem.Click += startToolStripMenuItem_Click;
@@ -191,13 +224,13 @@
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new System.Drawing.Size(178, 6);
+            toolStripSeparator1.Size = new System.Drawing.Size(209, 6);
             // 
             // imageFadeinToolStripMenuItem
             // 
             imageFadeinToolStripMenuItem.Image = UoFiddler.Plugin.ConverterMultiTextPlugin.Properties.Resources.image_eine_maske_laden02;
             imageFadeinToolStripMenuItem.Name = "imageFadeinToolStripMenuItem";
-            imageFadeinToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            imageFadeinToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             imageFadeinToolStripMenuItem.Text = "Image to Picturebox";
             imageFadeinToolStripMenuItem.ToolTipText = "Load image to Background";
             imageFadeinToolStripMenuItem.Click += imageFadeinToolStripMenuItem_Click;
@@ -217,7 +250,7 @@
             // 
             // loadToolStripMenuItem1
             // 
-            loadToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { loadImageAllToolStripMenuItem, loadSingleAllToolStripMenuItem });
+            loadToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { loadImageAllToolStripMenuItem, loadSingleAllToolStripMenuItem, toolStripSeparator3, loadOneImageAllMirrorToolStripMenuItem, loadOneSingleAllMirorToolStripMenuItem });
             loadToolStripMenuItem1.Name = "loadToolStripMenuItem1";
             loadToolStripMenuItem1.Size = new System.Drawing.Size(50, 20);
             loadToolStripMenuItem1.Text = "Menu";
@@ -226,7 +259,7 @@
             // 
             loadImageAllToolStripMenuItem.Image = UoFiddler.Plugin.ConverterMultiTextPlugin.Properties.Resources.import;
             loadImageAllToolStripMenuItem.Name = "loadImageAllToolStripMenuItem";
-            loadImageAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            loadImageAllToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
             loadImageAllToolStripMenuItem.Text = "Load One Image All";
             loadImageAllToolStripMenuItem.Click += loadToolStripMenuItem1_Click;
             // 
@@ -234,9 +267,21 @@
             // 
             loadSingleAllToolStripMenuItem.Image = UoFiddler.Plugin.ConverterMultiTextPlugin.Properties.Resources.Border;
             loadSingleAllToolStripMenuItem.Name = "loadSingleAllToolStripMenuItem";
-            loadSingleAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            loadSingleAllToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
             loadSingleAllToolStripMenuItem.Text = "Load Single All";
             loadSingleAllToolStripMenuItem.Click += loadToolStripMenuItemAllSingle_Click;
+            // 
+            // toolStripSeparator3
+            // 
+            toolStripSeparator3.Name = "toolStripSeparator3";
+            toolStripSeparator3.Size = new System.Drawing.Size(211, 6);
+            // 
+            // loadOneImageAllMirrorToolStripMenuItem
+            // 
+            loadOneImageAllMirrorToolStripMenuItem.Name = "loadOneImageAllMirrorToolStripMenuItem";
+            loadOneImageAllMirrorToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            loadOneImageAllMirrorToolStripMenuItem.Text = "Load One Image All Mirror";
+            loadOneImageAllMirrorToolStripMenuItem.Click += loadOneImageAllMirrorToolStripMenuItem_Click;
             // 
             // checkBox1
             // 
@@ -361,8 +406,11 @@
             // selectablePictureBox1
             // 
             selectablePictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            selectablePictureBox1.CurrentIndex = 0;
+            selectablePictureBox1.DrawingBitmaps = new System.Drawing.Bitmap[] { null, null, null, null, null, null, null, null, null, null };
             selectablePictureBox1.Location = new System.Drawing.Point(6, 28);
             selectablePictureBox1.Name = "selectablePictureBox1";
+            selectablePictureBox1.OriginalImage = null;
             selectablePictureBox1.Size = new System.Drawing.Size(118, 238);
             selectablePictureBox1.TabIndex = 21;
             selectablePictureBox1.MouseClick += selectablePictureBox_MouseClick;
@@ -372,8 +420,11 @@
             // selectablePictureBox2
             // 
             selectablePictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            selectablePictureBox2.CurrentIndex = 0;
+            selectablePictureBox2.DrawingBitmaps = new System.Drawing.Bitmap[] { null, null, null, null, null, null, null, null, null, null };
             selectablePictureBox2.Location = new System.Drawing.Point(130, 28);
             selectablePictureBox2.Name = "selectablePictureBox2";
+            selectablePictureBox2.OriginalImage = null;
             selectablePictureBox2.Size = new System.Drawing.Size(118, 238);
             selectablePictureBox2.TabIndex = 22;
             selectablePictureBox2.MouseClick += selectablePictureBox_MouseClick;
@@ -383,8 +434,11 @@
             // selectablePictureBox3
             // 
             selectablePictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            selectablePictureBox3.CurrentIndex = 0;
+            selectablePictureBox3.DrawingBitmaps = new System.Drawing.Bitmap[] { null, null, null, null, null, null, null, null, null, null };
             selectablePictureBox3.Location = new System.Drawing.Point(254, 28);
             selectablePictureBox3.Name = "selectablePictureBox3";
+            selectablePictureBox3.OriginalImage = null;
             selectablePictureBox3.Size = new System.Drawing.Size(118, 238);
             selectablePictureBox3.TabIndex = 23;
             selectablePictureBox3.MouseClick += selectablePictureBox_MouseClick;
@@ -394,8 +448,11 @@
             // selectablePictureBox4
             // 
             selectablePictureBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            selectablePictureBox4.CurrentIndex = 0;
+            selectablePictureBox4.DrawingBitmaps = new System.Drawing.Bitmap[] { null, null, null, null, null, null, null, null, null, null };
             selectablePictureBox4.Location = new System.Drawing.Point(378, 28);
             selectablePictureBox4.Name = "selectablePictureBox4";
+            selectablePictureBox4.OriginalImage = null;
             selectablePictureBox4.Size = new System.Drawing.Size(118, 238);
             selectablePictureBox4.TabIndex = 24;
             selectablePictureBox4.MouseClick += selectablePictureBox_MouseClick;
@@ -405,8 +462,11 @@
             // selectablePictureBox5
             // 
             selectablePictureBox5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            selectablePictureBox5.CurrentIndex = 0;
+            selectablePictureBox5.DrawingBitmaps = new System.Drawing.Bitmap[] { null, null, null, null, null, null, null, null, null, null };
             selectablePictureBox5.Location = new System.Drawing.Point(501, 28);
             selectablePictureBox5.Name = "selectablePictureBox5";
+            selectablePictureBox5.OriginalImage = null;
             selectablePictureBox5.Size = new System.Drawing.Size(118, 238);
             selectablePictureBox5.TabIndex = 25;
             selectablePictureBox5.MouseClick += selectablePictureBox_MouseClick;
@@ -416,8 +476,11 @@
             // selectablePictureBox6
             // 
             selectablePictureBox6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            selectablePictureBox6.CurrentIndex = 0;
+            selectablePictureBox6.DrawingBitmaps = new System.Drawing.Bitmap[] { null, null, null, null, null, null, null, null, null, null };
             selectablePictureBox6.Location = new System.Drawing.Point(625, 28);
             selectablePictureBox6.Name = "selectablePictureBox6";
+            selectablePictureBox6.OriginalImage = null;
             selectablePictureBox6.Size = new System.Drawing.Size(118, 238);
             selectablePictureBox6.TabIndex = 26;
             selectablePictureBox6.MouseClick += selectablePictureBox_MouseClick;
@@ -427,8 +490,11 @@
             // selectablePictureBox7
             // 
             selectablePictureBox7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            selectablePictureBox7.CurrentIndex = 0;
+            selectablePictureBox7.DrawingBitmaps = new System.Drawing.Bitmap[] { null, null, null, null, null, null, null, null, null, null };
             selectablePictureBox7.Location = new System.Drawing.Point(749, 28);
             selectablePictureBox7.Name = "selectablePictureBox7";
+            selectablePictureBox7.OriginalImage = null;
             selectablePictureBox7.Size = new System.Drawing.Size(118, 238);
             selectablePictureBox7.TabIndex = 27;
             selectablePictureBox7.MouseClick += selectablePictureBox_MouseClick;
@@ -438,8 +504,11 @@
             // selectablePictureBox8
             // 
             selectablePictureBox8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            selectablePictureBox8.CurrentIndex = 0;
+            selectablePictureBox8.DrawingBitmaps = new System.Drawing.Bitmap[] { null, null, null, null, null, null, null, null, null, null };
             selectablePictureBox8.Location = new System.Drawing.Point(873, 28);
             selectablePictureBox8.Name = "selectablePictureBox8";
+            selectablePictureBox8.OriginalImage = null;
             selectablePictureBox8.Size = new System.Drawing.Size(118, 238);
             selectablePictureBox8.TabIndex = 28;
             selectablePictureBox8.MouseClick += selectablePictureBox_MouseClick;
@@ -449,8 +518,11 @@
             // selectablePictureBox9
             // 
             selectablePictureBox9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            selectablePictureBox9.CurrentIndex = 0;
+            selectablePictureBox9.DrawingBitmaps = new System.Drawing.Bitmap[] { null, null, null, null, null, null, null, null, null, null };
             selectablePictureBox9.Location = new System.Drawing.Point(997, 28);
             selectablePictureBox9.Name = "selectablePictureBox9";
+            selectablePictureBox9.OriginalImage = null;
             selectablePictureBox9.Size = new System.Drawing.Size(118, 238);
             selectablePictureBox9.TabIndex = 29;
             selectablePictureBox9.MouseClick += selectablePictureBox_MouseClick;
@@ -460,8 +532,11 @@
             // selectablePictureBox10
             // 
             selectablePictureBox10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            selectablePictureBox10.CurrentIndex = 0;
+            selectablePictureBox10.DrawingBitmaps = new System.Drawing.Bitmap[] { null, null, null, null, null, null, null, null, null, null };
             selectablePictureBox10.Location = new System.Drawing.Point(1121, 28);
             selectablePictureBox10.Name = "selectablePictureBox10";
+            selectablePictureBox10.OriginalImage = null;
             selectablePictureBox10.Size = new System.Drawing.Size(118, 238);
             selectablePictureBox10.TabIndex = 30;
             selectablePictureBox10.MouseClick += selectablePictureBox_MouseClick;
@@ -1117,13 +1192,12 @@
             checkBoxShowFrame.Text = "Frame visible";
             checkBoxShowFrame.UseVisualStyleBackColor = true;
             // 
-            // toolStripMenuItemLoadSingeAll
+            // loadOneSingleAllMirorToolStripMenuItem
             // 
-            toolStripMenuItemLoadSingeAll.Image = UoFiddler.Plugin.ConverterMultiTextPlugin.Properties.Resources.Border;
-            toolStripMenuItemLoadSingeAll.Name = "toolStripMenuItemLoadSingeAll";
-            toolStripMenuItemLoadSingeAll.Size = new System.Drawing.Size(181, 22);
-            toolStripMenuItemLoadSingeAll.Text = "Load Single All";
-            toolStripMenuItemLoadSingeAll.Click += loadToolStripMenuItemAllSingle_Click;
+            loadOneSingleAllMirorToolStripMenuItem.Name = "loadOneSingleAllMirorToolStripMenuItem";
+            loadOneSingleAllMirorToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            loadOneSingleAllMirorToolStripMenuItem.Text = "Load One Single All Miror";
+            loadOneSingleAllMirorToolStripMenuItem.Click += loadToolStripMenuItemAllSingleMirror_Click;
             // 
             // AnimationEditFormButton
             // 
@@ -1297,5 +1371,11 @@
         private System.Windows.Forms.ToolStripMenuItem loadSingleAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadImageAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemLoadSingeAll;
+        private System.Windows.Forms.ToolStripMenuItem loadOneImageAllMirrorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadOnImageAllMIrrorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripMenuItem loadSingleAllMirrorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem loadOneSingleAllMirorToolStripMenuItem;
     }
 }
