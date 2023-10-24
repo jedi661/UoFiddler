@@ -47,6 +47,7 @@
             loadSingleAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             loadOneImageAllMirrorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            loadOneSingleAllMirorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             checkBox1 = new System.Windows.Forms.CheckBox();
             checkBox2 = new System.Windows.Forms.CheckBox();
             checkBox3 = new System.Windows.Forms.CheckBox();
@@ -133,7 +134,6 @@
             lbSize2 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             checkBoxShowFrame = new System.Windows.Forms.CheckBox();
-            loadOneSingleAllMirorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             contextMenuStrip1.SuspendLayout();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)selectablePictureBox1).BeginInit();
@@ -169,7 +169,7 @@
             // 
             contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { loadToolStripMenuItem, toolStripMenuItemLoadSingeAll, toolStripSeparator4, loadOnImageAllMIrrorToolStripMenuItem, loadSingleAllMirrorToolStripMenuItem, toolStripSeparator2, startToolStripMenuItem, toolStripSeparator1, imageFadeinToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new System.Drawing.Size(213, 154);
+            contextMenuStrip1.Size = new System.Drawing.Size(213, 176);
             // 
             // loadToolStripMenuItem
             // 
@@ -195,6 +195,7 @@
             // 
             // loadOnImageAllMIrrorToolStripMenuItem
             // 
+            loadOnImageAllMIrrorToolStripMenuItem.Image = UoFiddler.Plugin.ConverterMultiTextPlugin.Properties.Resources.mirror_all_image;
             loadOnImageAllMIrrorToolStripMenuItem.Name = "loadOnImageAllMIrrorToolStripMenuItem";
             loadOnImageAllMIrrorToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             loadOnImageAllMIrrorToolStripMenuItem.Text = "Load one Image All MIrror";
@@ -202,6 +203,7 @@
             // 
             // loadSingleAllMirrorToolStripMenuItem
             // 
+            loadSingleAllMirrorToolStripMenuItem.Image = UoFiddler.Plugin.ConverterMultiTextPlugin.Properties.Resources.mirror_single_image;
             loadSingleAllMirrorToolStripMenuItem.Name = "loadSingleAllMirrorToolStripMenuItem";
             loadSingleAllMirrorToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             loadSingleAllMirrorToolStripMenuItem.Text = "Load Single All Mirror";
@@ -278,10 +280,19 @@
             // 
             // loadOneImageAllMirrorToolStripMenuItem
             // 
+            loadOneImageAllMirrorToolStripMenuItem.Image = UoFiddler.Plugin.ConverterMultiTextPlugin.Properties.Resources.mirror_all_image;
             loadOneImageAllMirrorToolStripMenuItem.Name = "loadOneImageAllMirrorToolStripMenuItem";
             loadOneImageAllMirrorToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
             loadOneImageAllMirrorToolStripMenuItem.Text = "Load One Image All Mirror";
             loadOneImageAllMirrorToolStripMenuItem.Click += loadOneImageAllMirrorToolStripMenuItem_Click;
+            // 
+            // loadOneSingleAllMirorToolStripMenuItem
+            // 
+            loadOneSingleAllMirorToolStripMenuItem.Image = UoFiddler.Plugin.ConverterMultiTextPlugin.Properties.Resources.mirror_single_image;
+            loadOneSingleAllMirorToolStripMenuItem.Name = "loadOneSingleAllMirorToolStripMenuItem";
+            loadOneSingleAllMirorToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            loadOneSingleAllMirorToolStripMenuItem.Text = "Load One Single All Miror";
+            loadOneSingleAllMirorToolStripMenuItem.Click += loadToolStripMenuItemAllSingleMirror_Click;
             // 
             // checkBox1
             // 
@@ -1191,13 +1202,6 @@
             checkBoxShowFrame.TabIndex = 62;
             checkBoxShowFrame.Text = "Frame visible";
             checkBoxShowFrame.UseVisualStyleBackColor = true;
-            // 
-            // loadOneSingleAllMirorToolStripMenuItem
-            // 
-            loadOneSingleAllMirorToolStripMenuItem.Name = "loadOneSingleAllMirorToolStripMenuItem";
-            loadOneSingleAllMirorToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
-            loadOneSingleAllMirorToolStripMenuItem.Text = "Load One Single All Miror";
-            loadOneSingleAllMirorToolStripMenuItem.Click += loadToolStripMenuItemAllSingleMirror_Click;
             // 
             // AnimationEditFormButton
             // 
