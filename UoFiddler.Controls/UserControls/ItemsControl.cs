@@ -1504,7 +1504,10 @@ namespace UoFiddler.Controls.UserControls
         private void searchByNameToolStripButton_Click(object sender, EventArgs e)
         {
             SearchName(searchByNameToolStripTextBox.Text, true);
+            // Update _reverseSearchIndex after forward search
+            _reverseSearchIndex = _itemList.IndexOf(SelectedGraphicId);
         }
+
         #endregion
 
         #region Select ID to Hex
@@ -1566,6 +1569,60 @@ namespace UoFiddler.Controls.UserControls
         {
             Art.ReplaceStatic(_selectedGraphicId, bitmap);
             ControlEvents.FireItemChangeEvent(this, _selectedGraphicId);
+        }
+        #endregion
+
+        #region reverse search
+
+        // Global variable to store the current index of the backward search        
+        private int _reverseSearchIndex = -1;
+
+        private void ReverseSearchByName(string name)
+        {
+            // Check if the name is empty
+            if (string.IsNullOrEmpty(name))
+            {
+                return;
+            }
+
+            // If _reverseSearchIndex is -1 or if a forward search was performed, initialize it with the last index in _itemList
+            if (_reverseSearchIndex == -1 || _reverseSearchIndex >= _itemList.Count)
+            {
+                _reverseSearchIndex = _itemList.Count - 1;
+            }
+
+            // Loop through the _itemList in reverse order starting at _reverseSearchIndex
+            for (int i = _reverseSearchIndex; i >= 0; i--)
+            {
+                // Get the item at the current position
+                var item = _itemList[i];
+
+                // Check whether the name of the item contains the name you are looking for (partial match)
+                if (TileData.ItemTable[item].Name.Contains(name, StringComparison.OrdinalIgnoreCase))
+                {
+                    // If yes, set SelectedGraphicId to the index of the found item and terminate the loop
+                    SelectedGraphicId = item;
+
+                    // Update _reverseSearchIndex for next search
+                    _reverseSearchIndex = i - 1;
+                    break;
+                }
+            }
+
+            // When the entire _itemList has been traversed, set _reverseSearchIndex back to -1
+            if (_reverseSearchIndex < 0)
+            {
+                _reverseSearchIndex = -1;
+            }
+        }
+
+        private void ReverseSearchToolStripButton_Click(object sender, EventArgs e)
+        {
+            // Get the name from the TextBox
+            string name = searchByNameToolStripTextBox.Text;
+
+            // Perform the reverse search
+            ReverseSearchByName(name);
         }
         #endregion
     }

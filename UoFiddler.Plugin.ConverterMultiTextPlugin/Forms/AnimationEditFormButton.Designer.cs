@@ -169,7 +169,7 @@
             // 
             contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { loadToolStripMenuItem, toolStripMenuItemLoadSingeAll, toolStripSeparator4, loadOnImageAllMIrrorToolStripMenuItem, loadSingleAllMirrorToolStripMenuItem, toolStripSeparator2, startToolStripMenuItem, toolStripSeparator1, imageFadeinToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new System.Drawing.Size(213, 176);
+            contextMenuStrip1.Size = new System.Drawing.Size(213, 154);
             // 
             // loadToolStripMenuItem
             // 

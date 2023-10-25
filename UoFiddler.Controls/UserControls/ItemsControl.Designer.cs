@@ -42,6 +42,7 @@ namespace UoFiddler.Controls.UserControls
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ItemsControl));
             splitContainer2 = new SplitContainer();
             DetailPictureBox = new PictureBox();
             DetailPictureBoxContextMenuStrip = new ContextMenuStrip(components);
@@ -89,6 +90,7 @@ namespace UoFiddler.Controls.UserControls
             toolStripLabel2 = new ToolStripLabel();
             searchByNameToolStripTextBox = new ToolStripTextBox();
             searchByNameToolStripButton = new ToolStripButton();
+            ReverseSearchToolStripButton = new ToolStripButton();
             SearchToolStripButton = new ToolStripButton();
             ProgressBar = new ToolStripProgressBar();
             PreloadItemsToolStripButton = new ToolStripButton();
@@ -223,7 +225,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             TileViewContextMenuStrip.Items.AddRange(new ToolStripItem[] { showFreeSlotsToolStripMenuItem, findNextFreeSlotToolStripMenuItem, ChangeBackgroundColorToolStripMenuItem, toolStripSeparator3, selectInTileDataTabToolStripMenuItem, selectInRadarColorTabToolStripMenuItem, SelectIDToHexToolStripMenuItem, selectInGumpsTabMaleToolStripMenuItem, selectInGumpsTabFemaleToolStripMenuItem, toolStripSeparator2, extractToolStripMenuItem, replaceToolStripMenuItem, replaceStartingFromToolStripMenuItem, removeToolStripMenuItem, insertAtToolStripMenuItem, imageSwapToolStripMenuItem, toolStripSeparator5, mirrorToolStripMenuItem, toolStripSeparator1, copyToolStripMenuItem, importToolStripclipboardMenuItem, toolStripSeparator4, saveToolStripMenuItem });
             TileViewContextMenuStrip.Name = "contextMenuStrip1";
-            TileViewContextMenuStrip.Size = new System.Drawing.Size(213, 452);
+            TileViewContextMenuStrip.Size = new System.Drawing.Size(213, 430);
             TileViewContextMenuStrip.Opening += TileViewContextMenuStrip_Opening;
             // 
             // showFreeSlotsToolStripMenuItem
@@ -495,7 +497,7 @@ namespace UoFiddler.Controls.UserControls
             // ToolStrip
             // 
             ToolStrip.GripStyle = ToolStripGripStyle.Hidden;
-            ToolStrip.Items.AddRange(new ToolStripItem[] { toolStripLabel1, searchByIdToolStripTextBox, toolStripLabel2, searchByNameToolStripTextBox, searchByNameToolStripButton, SearchToolStripButton, ProgressBar, PreloadItemsToolStripButton, MiscToolStripDropDownButton, toolStripButton1 });
+            ToolStrip.Items.AddRange(new ToolStripItem[] { toolStripLabel1, searchByIdToolStripTextBox, toolStripLabel2, searchByNameToolStripTextBox, searchByNameToolStripButton, ReverseSearchToolStripButton, SearchToolStripButton, ProgressBar, PreloadItemsToolStripButton, MiscToolStripDropDownButton, toolStripButton1 });
             ToolStrip.Location = new System.Drawing.Point(0, 0);
             ToolStrip.Name = "ToolStrip";
             ToolStrip.RenderMode = ToolStripRenderMode.System;
@@ -536,6 +538,16 @@ namespace UoFiddler.Controls.UserControls
             searchByNameToolStripButton.Size = new System.Drawing.Size(60, 25);
             searchByNameToolStripButton.Text = "Find next";
             searchByNameToolStripButton.Click += searchByNameToolStripButton_Click;
+            // 
+            // ReverseSearchToolStripButton
+            // 
+            ReverseSearchToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            ReverseSearchToolStripButton.Image = (System.Drawing.Image)resources.GetObject("ReverseSearchToolStripButton.Image");
+            ReverseSearchToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            ReverseSearchToolStripButton.Name = "ReverseSearchToolStripButton";
+            ReverseSearchToolStripButton.Size = new System.Drawing.Size(94, 25);
+            ReverseSearchToolStripButton.Text = "Previous Search";
+            ReverseSearchToolStripButton.Click += ReverseSearchToolStripButton_Click;
             // 
             // SearchToolStripButton
             // 
@@ -729,5 +741,6 @@ namespace UoFiddler.Controls.UserControls
         private ToolStripButton toolStripButton1;
         private ToolStripMenuItem SelectIDToHexToolStripMenuItem;
         private ToolStripMenuItem imageSwapToolStripMenuItem;
+        private ToolStripButton ReverseSearchToolStripButton;
     }
 }
