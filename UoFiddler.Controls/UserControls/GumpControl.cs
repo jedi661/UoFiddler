@@ -1171,7 +1171,7 @@ namespace UoFiddler.Controls.UserControls
             // Create a new shape
             Form form = new Form
             {
-                Width = 500,
+                Width = 300,
                 Height = 200,
                 Text = "Add ID name"
             };
