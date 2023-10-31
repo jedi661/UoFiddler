@@ -63,6 +63,7 @@ namespace UoFiddler.Controls.UserControls
             toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            addIDNamesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             topMenuToolStrip = new System.Windows.Forms.ToolStrip();
             IndexToolStripLabel = new System.Windows.Forms.ToolStripLabel();
             searchByIdToolStripTextBox = new System.Windows.Forms.ToolStripTextBox();
@@ -120,7 +121,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             listBox.ContextMenuStrip = contextMenuStrip;
             listBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            listBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            listBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             listBox.FormattingEnabled = true;
             listBox.IntegralHeight = false;
             listBox.ItemHeight = 60;
@@ -137,9 +138,9 @@ namespace UoFiddler.Controls.UserControls
             // 
             // contextMenuStrip
             // 
-            contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { extractImageToolStripMenuItem, toolStripSeparator2, AddShowAllFreeSlotsButton, findNextFreeSlotToolStripMenuItem, jumpToMaleFemale, replaceGumpToolStripMenuItem, removeToolStripMenuItem, insertToolStripMenuItem, toolStripMenuItem1, toolStripSeparator1, saveToolStripMenuItem, toolStripSeparator4, copyToolStripMenuItem, importToolStripMenuItem });
+            contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { extractImageToolStripMenuItem, toolStripSeparator2, AddShowAllFreeSlotsButton, findNextFreeSlotToolStripMenuItem, jumpToMaleFemale, replaceGumpToolStripMenuItem, removeToolStripMenuItem, insertToolStripMenuItem, toolStripMenuItem1, toolStripSeparator1, saveToolStripMenuItem, toolStripSeparator4, copyToolStripMenuItem, importToolStripMenuItem, addIDNamesToolStripMenuItem });
             contextMenuStrip.Name = "contextMenuStrip1";
-            contextMenuStrip.Size = new System.Drawing.Size(190, 264);
+            contextMenuStrip.Size = new System.Drawing.Size(190, 286);
             // 
             // extractImageToolStripMenuItem
             // 
@@ -295,6 +296,13 @@ namespace UoFiddler.Controls.UserControls
             importToolStripMenuItem.Text = "Import";
             importToolStripMenuItem.ToolTipText = "Paste graphic from clipboard.";
             importToolStripMenuItem.Click += importToolStripMenuItem_Click;
+            // 
+            // addIDNamesToolStripMenuItem
+            // 
+            addIDNamesToolStripMenuItem.Name = "addIDNamesToolStripMenuItem";
+            addIDNamesToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            addIDNamesToolStripMenuItem.Text = "Add ID Names";
+            addIDNamesToolStripMenuItem.Click += addIDNamesToolStripMenuItem_Click;
             // 
             // topMenuToolStrip
             // 
@@ -544,5 +552,6 @@ namespace UoFiddler.Controls.UserControls
         private System.Windows.Forms.ToolStripButton saveToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripMenuItem addIDNamesToolStripMenuItem;
     }
 }
