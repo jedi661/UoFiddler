@@ -427,6 +427,7 @@ namespace UoFiddler.Controls.UserControls
             toolStripButtonSoundMessage.Name = "toolStripButtonSoundMessage";
             toolStripButtonSoundMessage.Size = new System.Drawing.Size(23, 22);
             toolStripButtonSoundMessage.Text = "toolStripButton1";
+            toolStripButtonSoundMessage.ToolTipText = "Enable sound for specific methods and turn off the message.";
             toolStripButtonSoundMessage.Click += toolStripButtonSoundMessage_Click;
             // 
             // pictureBox
