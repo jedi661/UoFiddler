@@ -16,6 +16,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using Ultima;
@@ -798,8 +799,16 @@ namespace UoFiddler.Controls.UserControls
                 _refMarker.OnLoad(EventArgs.Empty);
             }
 
-            return _refMarker.listBox.Items.Cast<object>().Any(id => (int)id == gumpId);
+            return _refMarker.listBox.Items.Cast<object>().Any(id =>
+            {
+                if (int.TryParse(id.ToString(), out int intId))
+                {
+                    return intId == gumpId;
+                }
+                return false;
+            });
         }
+
         #endregion
 
         #region JumptoMaleFemale
@@ -1050,21 +1059,46 @@ namespace UoFiddler.Controls.UserControls
 
                         // Copy the graphic to the clipboard
                         Clipboard.SetImage(bmp24bit);
-                        MessageBox.Show("The image has been copied to the clipboard!");
+
+                        // Play sound if isSoundMessageActive is true
+                        if (isSoundMessageActive)
+                        {
+                            SoundPlayer player = new SoundPlayer();
+                            player.SoundLocation = "sound.wav";
+                            player.Play();
+                        }
+
+                        // Only show a message if isSoundMessageActive is false
+                        if (!isSoundMessageActive)
+                        {
+                            MessageBox.Show("The image has been copied to the clipboard!");
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("No image to copy!");
+                        // Only show a message if isSoundMessageActive is false
+                        if (!isSoundMessageActive)
+                        {
+                            MessageBox.Show("No image to copy!");
+                        }
                     }
                 }
                 else
                 {
-                    MessageBox.Show("No image to copy!");
+                    // Only show a message if isSoundMessageActive is false
+                    if (!isSoundMessageActive)
+                    {
+                        MessageBox.Show("No image to copy!");
+                    }
                 }
             }
             else
             {
-                MessageBox.Show("No image to copy!");
+                // Only show a message if isSoundMessageActive is false
+                if (!isSoundMessageActive)
+                {
+                    MessageBox.Show("No image to copy!");
+                }
             }
         }
         #endregion
@@ -1183,6 +1217,14 @@ namespace UoFiddler.Controls.UserControls
                 Width = 200,
                 Text = listBox.SelectedItem?.ToString().Split('-')[0].Trim() ?? "" //Set the text to the selected ID in the ListBox
             };
+            // Add an event handler to ignore non-numeric input
+            idTextBox.KeyPress += (sender, e) =>
+            {
+                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                {
+                    e.Handled = true;
+                }
+            };
             form.Controls.Add(idTextBox);
 
             // Create a TextBox for the name
@@ -1236,6 +1278,9 @@ namespace UoFiddler.Controls.UserControls
 
             form.Controls.Add(deleteButton);
 
+            // Select the nameTextBox when the form is shown
+            form.Shown += (sender, e) => nameTextBox.Select();
+
             // Display the shape
             form.ShowDialog();
         }
@@ -1270,6 +1315,34 @@ namespace UoFiddler.Controls.UserControls
 
             // Update the dictionary
             idNames[id] = name;
+        }
+        #endregion
+
+        #region Sound Button
+        private bool isSoundMessageActive = false;
+        private bool playCustomSound = false;
+        private SoundPlayer player = new SoundPlayer();
+
+        public void toolStripButtonSoundMessage_Click(object sender, EventArgs e)
+        {
+            // Toggle the state of isSoundMessageActive
+            isSoundMessageActive = !isSoundMessageActive;
+
+            // Change the background color of the button based on its state
+            if (isSoundMessageActive)
+            {
+                // Change the background color to blue when the button is active
+                toolStripButtonSoundMessage.BackColor = Color.Blue;
+
+                // Play sound
+                player.SoundLocation = "sound.wav";
+                player.Play();
+            }
+            else
+            {
+                // Change the background color to default when the button is not active
+                toolStripButtonSoundMessage.BackColor = default(Color);
+            }
         }
         #endregion
     }
