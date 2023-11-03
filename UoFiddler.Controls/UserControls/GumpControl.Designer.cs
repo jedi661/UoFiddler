@@ -123,7 +123,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             listBox.ContextMenuStrip = contextMenuStrip;
             listBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            listBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            listBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             listBox.FormattingEnabled = true;
             listBox.IntegralHeight = false;
             listBox.ItemHeight = 60;
@@ -142,7 +142,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { extractImageToolStripMenuItem, toolStripSeparator2, AddShowAllFreeSlotsButton, findNextFreeSlotToolStripMenuItem, jumpToMaleFemale, replaceGumpToolStripMenuItem, removeToolStripMenuItem, insertToolStripMenuItem, toolStripMenuItem1, toolStripSeparator1, saveToolStripMenuItem, toolStripSeparator4, copyToolStripMenuItem, importToolStripMenuItem, toolStripSeparator7, addIDNamesToolStripMenuItem });
             contextMenuStrip.Name = "contextMenuStrip1";
-            contextMenuStrip.Size = new System.Drawing.Size(190, 292);
+            contextMenuStrip.Size = new System.Drawing.Size(190, 314);
             // 
             // extractImageToolStripMenuItem
             // 
@@ -427,7 +427,6 @@ namespace UoFiddler.Controls.UserControls
             toolStripButtonSoundMessage.Name = "toolStripButtonSoundMessage";
             toolStripButtonSoundMessage.Size = new System.Drawing.Size(23, 22);
             toolStripButtonSoundMessage.Text = "toolStripButton1";
-            toolStripButtonSoundMessage.ToolTipText = "Enable sound for specific methods and turn off the message.";
             toolStripButtonSoundMessage.Click += toolStripButtonSoundMessage_Click;
             // 
             // pictureBox

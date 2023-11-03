@@ -1507,7 +1507,6 @@ namespace UoFiddler.Controls.UserControls
             // Update _reverseSearchIndex after forward search
             _reverseSearchIndex = _itemList.IndexOf(SelectedGraphicId);
         }
-
         #endregion
 
         #region Select ID to Hex

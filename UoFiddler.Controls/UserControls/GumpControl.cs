@@ -817,7 +817,8 @@ namespace UoFiddler.Controls.UserControls
         #endregion
 
         #region HasGumpId
-        public static bool HasGumpId(int gumpId)
+
+        public static bool HasGumpId(int gumpId) // HasGumpId is cross-class to identify items on Gumps with it.
         {
             if (!_refMarker._loaded)
             {
@@ -826,18 +827,30 @@ namespace UoFiddler.Controls.UserControls
 
             return _refMarker.listBox.Items.Cast<object>().Any(id =>
             {
-                if (int.TryParse(id.ToString(), out int intId))
+                if (int.TryParse(id.ToString().Split('-')[0].Trim(), out int intId))
                 {
                     return intId == gumpId;
                 }
                 return false;
             });
         }
+        // Old HasGumpID
+        /*public static bool HasGumpId(int gumpId)
+        {
+            if (!_refMarker._loaded)
+            {
+                _refMarker.OnLoad(EventArgs.Empty);
+            }
+
+            return _refMarker.listBox.Items.Cast<object>().Any(id => (int)id == gumpId);
+        }*/
 
         #endregion
 
         #region JumptoMaleFemale
-        private void JumpToMaleFemale_Click(object sender, EventArgs e)
+
+        // Old version
+        /*private void JumpToMaleFemale_Click(object sender, EventArgs e)
         {
             if (listBox.SelectedIndex == -1)
             {
@@ -848,6 +861,100 @@ namespace UoFiddler.Controls.UserControls
             gumpId = gumpId < 60000 ? (gumpId % 10000) + 60000 : (gumpId % 10000) + 50000;
 
             Select(gumpId);
+        }*/
+
+        // New Version
+        private void JumpToMaleFemale_Click(object sender, EventArgs e)
+        {
+            if (listBox.SelectedIndex == -1)
+            {
+                return;
+            }
+
+            string itemString = listBox.SelectedItem.ToString();
+            string idString = itemString.Split('-')[0].Trim();
+            int gumpId = int.Parse(idString);
+
+            gumpId = gumpId < 60000 ? (gumpId % 10000) + 60000 : (gumpId % 10000) + 50000;
+
+            // Find the new gumpId in the listBox
+            for (int i = 0; i < listBox.Items.Count; i++)
+            {
+                itemString = listBox.Items[i].ToString();
+                idString = itemString.Split('-')[0].Trim();
+                if (int.Parse(idString) == gumpId)
+                {
+                    listBox.SelectedIndex = i;
+                    break;
+                }
+            }
+        }
+
+        // all in one Disabled
+        // Here is a method that combines three functions but one of them is deactivated.
+        // I left the function there as an example: 'JumpToMaleFemale, HasGumpId, JumpToMaleFemaleInvalidate'
+        private void JumpToMaleFemale2_Click(object sender, EventArgs e)
+        {
+            if (listBox.SelectedIndex == -1)
+            {
+                return;
+            }
+
+            string itemString = listBox.SelectedItem.ToString();
+            string idString = itemString.Split('-')[0].Trim();
+            if (!int.TryParse(idString, out int gumpId))
+            {
+                MessageBox.Show("Invalid Gump ID format.");
+                return;
+            }
+
+            gumpId = gumpId < 60000 ? (gumpId % 10000) + 60000 : (gumpId % 10000) + 50000;
+
+            // Find the new gumpId in the listBox
+            for (int i = 0; i < listBox.Items.Count; i++)
+            {
+                itemString = listBox.Items[i].ToString();
+                idString = itemString.Split('-')[0].Trim();
+                if (int.TryParse(idString, out int newGumpId) && newGumpId == gumpId)
+                {
+                    listBox.SelectedIndex = i;
+                    break;
+                }
+            }
+
+            // Update the button text and enabled state
+            if (gumpId >= 50000)
+            {
+                if (gumpId >= 60000)
+                {
+                    jumpToMaleFemale.Text = "Jump to Male";
+                    jumpToMaleFemale.Enabled = listBox.Items.Cast<object>().Any(id =>
+                    {
+                        if (int.TryParse(id.ToString(), out int intId))
+                        {
+                            return intId == gumpId - 10000;
+                        }
+                        return false;
+                    });
+                }
+                else
+                {
+                    jumpToMaleFemale.Text = "Jump to Female";
+                    jumpToMaleFemale.Enabled = listBox.Items.Cast<object>().Any(id =>
+                    {
+                        if (int.TryParse(id.ToString(), out int intId))
+                        {
+                            return intId == gumpId + 10000;
+                        }
+                        return false;
+                    });
+                }
+            }
+            else
+            {
+                jumpToMaleFemale.Enabled = false;
+                jumpToMaleFemale.Text = "Jump to Male/Female";
+            }
         }
         #endregion
         private GumpSearchForm _showForm; // _showForm
