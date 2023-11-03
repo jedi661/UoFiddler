@@ -1484,5 +1484,46 @@ namespace UoFiddler.Controls.UserControls
             }
         }
         #endregion
+
+        #region Mark
+        private string lastSelectedId = "50320"; // Standardwert
+
+        private void listBox_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            // Speichern Sie den ausgewählten ID-Wert, wenn auf ein Element in der ListBox doppelgeklickt wird
+            string itemString = listBox.SelectedItem.ToString();
+            lastSelectedId = itemString.Split('-')[0].Trim();
+
+            if (isSoundMessageActive)
+            {
+                SoundPlayer player = new SoundPlayer();
+                player.SoundLocation = "sound.wav";
+                player.Play();
+            }
+        }
+
+        private void markToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < listBox.Items.Count; ++i)
+            {
+                string itemString = listBox.Items[i].ToString();
+                string idString = itemString.Split('-')[0].Trim();
+
+                if (idString == lastSelectedId)
+                {
+                    listBox.SelectedIndex = i;
+                    break;
+                }
+            }
+
+            if (isSoundMessageActive)
+            {
+                SoundPlayer player = new SoundPlayer();
+                player.SoundLocation = "sound.wav";
+                player.Play();
+            }
+        }
+
+        #endregion
     }
 }

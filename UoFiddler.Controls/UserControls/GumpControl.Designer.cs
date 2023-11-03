@@ -52,6 +52,7 @@ namespace UoFiddler.Controls.UserControls
             AddShowAllFreeSlotsButton = new System.Windows.Forms.ToolStripMenuItem();
             findNextFreeSlotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             jumpToMaleFemale = new System.Windows.Forms.ToolStripMenuItem();
+            markToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             replaceGumpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             insertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -88,6 +89,7 @@ namespace UoFiddler.Controls.UserControls
             Preload = new System.Windows.Forms.ToolStripButton();
             toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             PreLoader = new System.ComponentModel.BackgroundWorker();
+            toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -137,12 +139,13 @@ namespace UoFiddler.Controls.UserControls
             listBox.SelectedIndexChanged += ListBox_SelectedIndexChanged;
             listBox.KeyDown += GumpControl_KeyDown;
             listBox.KeyUp += Gump_KeyUp;
+            listBox.MouseDoubleClick += listBox_MouseDoubleClick;
             // 
             // contextMenuStrip
             // 
-            contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { extractImageToolStripMenuItem, toolStripSeparator2, AddShowAllFreeSlotsButton, findNextFreeSlotToolStripMenuItem, jumpToMaleFemale, replaceGumpToolStripMenuItem, removeToolStripMenuItem, insertToolStripMenuItem, toolStripMenuItem1, toolStripSeparator1, saveToolStripMenuItem, toolStripSeparator4, copyToolStripMenuItem, importToolStripMenuItem, toolStripSeparator7, addIDNamesToolStripMenuItem });
+            contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { extractImageToolStripMenuItem, toolStripSeparator2, AddShowAllFreeSlotsButton, findNextFreeSlotToolStripMenuItem, jumpToMaleFemale, markToolStripMenuItem, toolStripSeparator8, replaceGumpToolStripMenuItem, removeToolStripMenuItem, insertToolStripMenuItem, toolStripMenuItem1, toolStripSeparator1, saveToolStripMenuItem, toolStripSeparator4, copyToolStripMenuItem, importToolStripMenuItem, toolStripSeparator7, addIDNamesToolStripMenuItem });
             contextMenuStrip.Name = "contextMenuStrip1";
-            contextMenuStrip.Size = new System.Drawing.Size(190, 314);
+            contextMenuStrip.Size = new System.Drawing.Size(190, 342);
             // 
             // extractImageToolStripMenuItem
             // 
@@ -212,6 +215,14 @@ namespace UoFiddler.Controls.UserControls
             jumpToMaleFemale.Text = "Jump to Male/Female";
             jumpToMaleFemale.ToolTipText = "Jumps to the male or female position.";
             jumpToMaleFemale.Click += JumpToMaleFemale_Click;
+            // 
+            // markToolStripMenuItem
+            // 
+            markToolStripMenuItem.Image = Properties.Resources.mark_item;
+            markToolStripMenuItem.Name = "markToolStripMenuItem";
+            markToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            markToolStripMenuItem.Text = "Mark";
+            markToolStripMenuItem.Click += markToolStripMenuItem_Click;
             // 
             // replaceGumpToolStripMenuItem
             // 
@@ -499,6 +510,11 @@ namespace UoFiddler.Controls.UserControls
             PreLoader.ProgressChanged += PreLoaderProgressChanged;
             PreLoader.RunWorkerCompleted += PreLoaderCompleted;
             // 
+            // toolStripSeparator8
+            // 
+            toolStripSeparator8.Name = "toolStripSeparator8";
+            toolStripSeparator8.Size = new System.Drawing.Size(186, 6);
+            // 
             // GumpControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -573,5 +589,7 @@ namespace UoFiddler.Controls.UserControls
         private System.Windows.Forms.ToolStripMenuItem addIDNamesToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripButton toolStripButtonSoundMessage;
+        private System.Windows.Forms.ToolStripMenuItem markToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
     }
 }
