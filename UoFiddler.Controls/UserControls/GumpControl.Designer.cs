@@ -53,6 +53,7 @@ namespace UoFiddler.Controls.UserControls
             findNextFreeSlotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             jumpToMaleFemale = new System.Windows.Forms.ToolStripMenuItem();
             markToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             replaceGumpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             insertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -89,7 +90,6 @@ namespace UoFiddler.Controls.UserControls
             Preload = new System.Windows.Forms.ToolStripButton();
             toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             PreLoader = new System.ComponentModel.BackgroundWorker();
-            toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -222,7 +222,13 @@ namespace UoFiddler.Controls.UserControls
             markToolStripMenuItem.Name = "markToolStripMenuItem";
             markToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             markToolStripMenuItem.Text = "Mark";
+            markToolStripMenuItem.ToolTipText = "marks the gump";
             markToolStripMenuItem.Click += markToolStripMenuItem_Click;
+            // 
+            // toolStripSeparator8
+            // 
+            toolStripSeparator8.Name = "toolStripSeparator8";
+            toolStripSeparator8.Size = new System.Drawing.Size(186, 6);
             // 
             // replaceGumpToolStripMenuItem
             // 
@@ -509,11 +515,6 @@ namespace UoFiddler.Controls.UserControls
             PreLoader.DoWork += PreLoaderDoWork;
             PreLoader.ProgressChanged += PreLoaderProgressChanged;
             PreLoader.RunWorkerCompleted += PreLoaderCompleted;
-            // 
-            // toolStripSeparator8
-            // 
-            toolStripSeparator8.Name = "toolStripSeparator8";
-            toolStripSeparator8.Size = new System.Drawing.Size(186, 6);
             // 
             // GumpControl
             // 

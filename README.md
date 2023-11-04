@@ -9,7 +9,8 @@ Version : 4.11.25
 - New feature added: Names outsourced to Gumps and stored in an XML file, with custom formatting and editing based on ID.
 - Search function adjusted to include names as well.
 - Gumps Added sound button and disabled messages
-- Gumps Added a tagging function for IDs in the Gumps.- 
+- Gumps Added a tagging function for IDs in the Gumps.
+- Add a Scréenshoot Button Main Contextmenu.
 
 Version : 4.11.24
 - Added ItemControl a Built-in image swap function
