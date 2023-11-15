@@ -39,6 +39,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             BtnMultiOpen = new System.Windows.Forms.Button();
             btnSpeichernTxt = new System.Windows.Forms.Button();
             btnUmwandeln = new System.Windows.Forms.Button();
@@ -55,6 +56,15 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
             btMapMaker = new System.Windows.Forms.Button();
             btAnimationVDForm = new System.Windows.Forms.Button();
             btAnimationEditFormButton = new System.Windows.Forms.Button();
+            btBinaryCode = new System.Windows.Forms.Button();
+            checkBoxASCII = new System.Windows.Forms.CheckBox();
+            btMorseCode = new System.Windows.Forms.Button();
+            btclear = new System.Windows.Forms.Button();
+            contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
+            copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            importClipbordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // BtnMultiOpen
@@ -117,6 +127,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
             // 
             // textBox1
             // 
+            textBox1.ContextMenuStrip = contextMenuStrip1;
             textBox1.Location = new System.Drawing.Point(18, 21);
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
@@ -206,10 +217,81 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
             btAnimationEditFormButton.UseVisualStyleBackColor = true;
             btAnimationEditFormButton.Click += btAnimationEditFormButton_Click;
             // 
+            // btBinaryCode
+            // 
+            btBinaryCode.Location = new System.Drawing.Point(350, 70);
+            btBinaryCode.Name = "btBinaryCode";
+            btBinaryCode.Size = new System.Drawing.Size(92, 23);
+            btBinaryCode.TabIndex = 15;
+            btBinaryCode.Text = "Binary Code";
+            btBinaryCode.UseVisualStyleBackColor = true;
+            btBinaryCode.Click += btBinaryCode_Click;
+            // 
+            // checkBoxASCII
+            // 
+            checkBoxASCII.AutoSize = true;
+            checkBoxASCII.Location = new System.Drawing.Point(350, 164);
+            checkBoxASCII.Name = "checkBoxASCII";
+            checkBoxASCII.Size = new System.Drawing.Size(94, 19);
+            checkBoxASCII.TabIndex = 16;
+            checkBoxASCII.Text = "back original";
+            checkBoxASCII.UseVisualStyleBackColor = true;
+            // 
+            // btMorseCode
+            // 
+            btMorseCode.Location = new System.Drawing.Point(350, 99);
+            btMorseCode.Name = "btMorseCode";
+            btMorseCode.Size = new System.Drawing.Size(92, 23);
+            btMorseCode.TabIndex = 17;
+            btMorseCode.Text = "Morse code";
+            btMorseCode.UseVisualStyleBackColor = true;
+            btMorseCode.Click += btMorseCode_Click;
+            // 
+            // btclear
+            // 
+            btclear.Location = new System.Drawing.Point(295, 305);
+            btclear.Name = "btclear";
+            btclear.Size = new System.Drawing.Size(41, 23);
+            btclear.TabIndex = 18;
+            btclear.Text = "clear";
+            btclear.UseVisualStyleBackColor = true;
+            btclear.Click += btclear_Click;
+            // 
+            // contextMenuStrip1
+            // 
+            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { copyToolStripMenuItem, clearToolStripMenuItem, importClipbordToolStripMenuItem });
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new System.Drawing.Size(169, 70);
+            // 
+            // copyToolStripMenuItem
+            // 
+            copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            copyToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            copyToolStripMenuItem.Text = "Copy";
+            copyToolStripMenuItem.Click += btnCopyTBox2_Click;
+            // 
+            // clearToolStripMenuItem
+            // 
+            clearToolStripMenuItem.Name = "clearToolStripMenuItem";
+            clearToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            clearToolStripMenuItem.Text = "Clear";
+            clearToolStripMenuItem.Click += btclear_Click;
+            // 
+            // importClipbordToolStripMenuItem
+            // 
+            importClipbordToolStripMenuItem.Name = "importClipbordToolStripMenuItem";
+            importClipbordToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            importClipbordToolStripMenuItem.Text = "Import Clipboard ";
+            importClipbordToolStripMenuItem.Click += importClipboardToolStripMenuItem_Click;
+            // 
             // ConverterMultiTextControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(btclear);
+            Controls.Add(btMorseCode);
+            Controls.Add(checkBoxASCII);
+            Controls.Add(btBinaryCode);
             Controls.Add(btAnimationEditFormButton);
             Controls.Add(btAnimationVDForm);
             Controls.Add(btMapMaker);
@@ -229,6 +311,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Name = "ConverterMultiTextControl";
             Size = new System.Drawing.Size(790, 471);
+            contextMenuStrip1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -251,5 +334,13 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.UserControls
         private System.Windows.Forms.Button btMapMaker;
         private System.Windows.Forms.Button btAnimationVDForm;
         private System.Windows.Forms.Button btAnimationEditFormButton;
+        private System.Windows.Forms.Button btBinaryCode;
+        private System.Windows.Forms.CheckBox checkBoxASCII;
+        private System.Windows.Forms.Button btMorseCode;
+        private System.Windows.Forms.Button btclear;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importClipbordToolStripMenuItem;
     }
 }
