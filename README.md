@@ -7,6 +7,7 @@ UOFiddler based on Ultima SDK it's a tool to view and alter almost every UO 2D c
 ## Changelog
 Version : 4.11.26
 - Load Menu : Saves the last selected profile, reselecting it upon startup
+- Search Animation
 
 Version : 4.11.25
 - New feature added: Names outsourced to Gumps and stored in an XML file, with custom formatting and editing based on ID.
