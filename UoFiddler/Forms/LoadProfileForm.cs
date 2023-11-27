@@ -36,7 +36,9 @@ namespace UoFiddler.Forms
                 comboBoxBasedOn.Items.Add(name);
             }
 
-            comboBoxLoad.SelectedIndex = 0;
+            string lastSelectedProfile = Properties.Settings.Default.LastSelectedProfile; //Profile Load
+            int index = Array.IndexOf(_profiles, lastSelectedProfile);
+            comboBoxLoad.SelectedIndex = index != -1 ? index : 0;
             comboBoxBasedOn.SelectedIndex = 0;
         }
 
@@ -57,6 +59,8 @@ namespace UoFiddler.Forms
         private void OnClickLoad(object sender, EventArgs e)
         {
             LoadSelectedProfile();
+            Properties.Settings.Default.LastSelectedProfile = _profiles[comboBoxLoad.SelectedIndex];
+            Properties.Settings.Default.Save(); //Profile Save Propeties
         }
 
         private void LoadSelectedProfile()
