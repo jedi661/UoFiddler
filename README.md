@@ -6,7 +6,6 @@ UOFiddler based on Ultima SDK it's a tool to view and alter almost every UO 2D c
 
 ## Changelog
 Version : 4.11.26
-- Save Last Profile 
 - Load Menu : Saves the last selected profile, reselecting it upon startup
 
 Version : 4.11.25
