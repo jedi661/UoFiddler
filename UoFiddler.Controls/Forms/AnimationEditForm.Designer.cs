@@ -363,14 +363,14 @@
             // toolStripTextBoxSearch
             // 
             toolStripTextBoxSearch.Name = "toolStripTextBoxSearch";
-            toolStripTextBoxSearch.Size = new System.Drawing.Size(100, 25);
+            toolStripTextBoxSearch.Size = new System.Drawing.Size(100, 23);
             toolStripTextBoxSearch.ToolTipText = "Search Animation";
             toolStripTextBoxSearch.TextChanged += toolStripTextBoxSearch_TextChanged;
             // 
             // ProgressBar
             // 
             ProgressBar.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-            ProgressBar.Location = new System.Drawing.Point(577, 628);
+            ProgressBar.Location = new System.Drawing.Point(576, 628);
             ProgressBar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             ProgressBar.Name = "ProgressBar";
             ProgressBar.Size = new System.Drawing.Size(197, 20);
@@ -930,7 +930,7 @@
             AnimationEditPage.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             AnimationEditPage.Name = "AnimationEditPage";
             AnimationEditPage.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            AnimationEditPage.Size = new System.Drawing.Size(833, 601);
+            AnimationEditPage.Size = new System.Drawing.Size(919, 601);
             AnimationEditPage.TabIndex = 1;
             AnimationEditPage.Text = "Preview/Edit";
             AnimationEditPage.UseVisualStyleBackColor = true;
@@ -951,7 +951,7 @@
             AnimationTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             AnimationTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             AnimationTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            AnimationTableLayoutPanel.Size = new System.Drawing.Size(825, 595);
+            AnimationTableLayoutPanel.Size = new System.Drawing.Size(911, 595);
             AnimationTableLayoutPanel.TabIndex = 21;
             // 
             // AnimationEditToolStrip
@@ -963,7 +963,7 @@
             AnimationEditToolStrip.Location = new System.Drawing.Point(0, 570);
             AnimationEditToolStrip.Name = "AnimationEditToolStrip";
             AnimationEditToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            AnimationEditToolStrip.Size = new System.Drawing.Size(825, 25);
+            AnimationEditToolStrip.Size = new System.Drawing.Size(911, 25);
             AnimationEditToolStrip.TabIndex = 11;
             AnimationEditToolStrip.Text = "X";
             // 
@@ -1036,7 +1036,7 @@
             AnimationPictureBox.Location = new System.Drawing.Point(4, 3);
             AnimationPictureBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             AnimationPictureBox.Name = "AnimationPictureBox";
-            AnimationPictureBox.Size = new System.Drawing.Size(619, 560);
+            AnimationPictureBox.Size = new System.Drawing.Size(705, 560);
             AnimationPictureBox.TabIndex = 1;
             AnimationPictureBox.TabStop = false;
             AnimationPictureBox.SizeChanged += AnimationPictureBox_OnSizeChanged;
@@ -1052,7 +1052,7 @@
             EditSidePanel.Controls.Add(ReferencialPointGroupBox);
             EditSidePanel.Controls.Add(CoordinatesGroupBox);
             EditSidePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            EditSidePanel.Location = new System.Drawing.Point(631, 3);
+            EditSidePanel.Location = new System.Drawing.Point(717, 3);
             EditSidePanel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             EditSidePanel.Name = "EditSidePanel";
             EditSidePanel.Size = new System.Drawing.Size(190, 560);
@@ -1377,7 +1377,7 @@
             // 
             DirectionTrackBar.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
             DirectionTrackBar.AutoSize = false;
-            DirectionTrackBar.Location = new System.Drawing.Point(781, 626);
+            DirectionTrackBar.Location = new System.Drawing.Point(780, 626);
             DirectionTrackBar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             DirectionTrackBar.Maximum = 4;
             DirectionTrackBar.Name = "DirectionTrackBar";

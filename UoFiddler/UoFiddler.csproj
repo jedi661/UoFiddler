@@ -197,6 +197,12 @@
 	  <None Update="Sound.wav">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
+	  <None Update="UOFiddlerHelp\FileFormatsEnglisch.html">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="UOFiddlerHelp\FileFormatsGerman.html">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
 	  <None Update="UOFiddlerHelp\images\animationsfindnew.webp">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>

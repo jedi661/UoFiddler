@@ -1,11 +1,11 @@
 ﻿// /***************************************************************************
 //  *
-//  * $Author: Turley
+//  * $Author: Nikodemus
 //  * 
-//  * "THE BEER-WARE LICENSE"
+//  * "THE WINE-WARE LICENSE"
 //  * As long as you retain this notice you can do whatever you want with 
 //  * this stuff. If we meet some day, and you think this stuff is worth it,
-//  * you can buy me a beer in return.
+//  * you can buy me a Wine in return.
 //  *
 //  ***************************************************************************/
 
@@ -37,6 +37,8 @@ namespace UoFiddler.Forms
             InitializeAsync();
         }
 
+        public string FileName { get; set; }
+
         private async void InitializeAsync()
         {
             // Get the path to the %LOCALAPPDATA% directory
@@ -47,8 +49,17 @@ namespace UoFiddler.Forms
             var env = await CoreWebView2Environment.CreateAsync(userDataFolder: userDataFolder);
             // Ensure that the CoreWebView2 runtime is initialized and use the specified CoreWebView2Environment instance
             await webView2.EnsureCoreWebView2Async(env);
-            // Navigate to the UOFiddler.htm file in the UOFiddlerHelp folder in the current directory
-            webView2.CoreWebView2.Navigate($"file:///{Path.Combine(Environment.CurrentDirectory, "UOFiddlerHelp", "UOFiddler.htm")}");
+            // Navigate to the specified file in the UOFiddlerHelp folder in the current directory
+            webView2.CoreWebView2.Navigate($"file:///{Path.Combine(Environment.CurrentDirectory, "UOFiddlerHelp", FileName)}");
+        }
+
+        private async void toolStripButtonSuche_Click(object sender, EventArgs e)
+        {
+            string searchText = toolStripTextBoxSearch.Text;
+            if (!string.IsNullOrEmpty(searchText))
+            {
+                await webView2.CoreWebView2.ExecuteScriptAsync($"window.find('{searchText}')");
+            }
         }
     }
 }
