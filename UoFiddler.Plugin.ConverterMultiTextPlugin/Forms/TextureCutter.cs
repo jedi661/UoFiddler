@@ -21,7 +21,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
 {
     public partial class TextureCutter : Form
     {
-        private Point originalImageLocation;
+        private Point originalImageLocation = new Point(0, 0); //Determines the position in the picture box
         private Bitmap resizedImage;
         private bool isPickingColor = false;
 
@@ -40,8 +40,8 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
         private Point startPoint;
         private Rectangle cropArea;
         private bool isDragging = false;
-        private bool showGrid2 = false;
-        private Rectangle selectedRectangle; // The selected range.
+        // private bool showGrid2 = false; // no value assigned yet
+        // private Rectangle selectedRectangle; // The selected range.
         private List<Point> points = new List<Point>();
 
         public TextureCutter()
@@ -2835,7 +2835,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
             }
         }
 
-        private bool shouldDrawRectangle = false; //??
+        //private bool shouldDrawRectangle = false; //??
 
         /*private void pictureBox1_MouseDown2(object sender, MouseEventArgs e)
         {

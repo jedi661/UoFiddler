@@ -1,4 +1,4 @@
-Version : 4.11.27 #XG1
+Version : 4.12.0 #XG1
 - Update to net8.
 
 Version : 4.11.26 #XG1

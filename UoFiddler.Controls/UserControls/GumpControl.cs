@@ -1459,7 +1459,7 @@ namespace UoFiddler.Controls.UserControls
 
         #region Sound Button
         private bool isSoundMessageActive = false;
-        private bool playCustomSound = false;
+        private bool playCustomSound = false; // no value assigned yet
         private SoundPlayer player = new SoundPlayer();
 
         public void toolStripButtonSoundMessage_Click(object sender, EventArgs e)

@@ -25,7 +25,7 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
     public partial class DecriptClientForm : Form
     {
         private static string m_ClientFileLocation = AppDomain.CurrentDomain.BaseDirectory; // App's working directory
-        string CLIENT = "client.exe";  // Name of un-decrypted client file
+        //string CLIENT = "client.exe";  // Name of un-decrypted client file
         private static byte[] bytes;    // Byte array client's read into
         public static long FileSize;    // Length of the client read into the byte arra
 
@@ -287,6 +287,11 @@ namespace UoFiddler.Plugin.ConverterMultiTextPlugin.Forms
                     0x52, 0x65, 0x73, 0x65, 0x72, 0x76, 0x65, 0x64, 0x2E};
 
             int MessagePos = -1, MessagePosOld = -1, MessagePos09 = -1;
+
+            lbMessagePos.Text = "MessagePos: " + MessagePos;
+            lbMessagePosOld.Text = "MessagePosOld: " + MessagePosOld;
+            lbMessagePos09.Text = "MessagePos09: " + MessagePos09;
+
 
             // ***** Start to search for LOGIN ENCRYPTION... *****
             // magic x90 encryption signature: 81 f9 00 00 01 00 0f 8f
