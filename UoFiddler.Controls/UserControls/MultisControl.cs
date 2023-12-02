@@ -635,6 +635,7 @@ namespace UoFiddler.Controls.UserControls
             ExportAllMultis(ImageFormat.Png, _useTransparencyForPng ? Color.Transparent : _backgroundImageColor);
         }
 
+        #region ExportAllMulti
         private void ExportAllMultis(ImageFormat imageFormat, Color backgroundColor)
         {
             string fileExtension = Utils.GetFileExtensionFor(imageFormat);
@@ -672,7 +673,9 @@ namespace UoFiddler.Controls.UserControls
                     MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
             }
         }
+        #endregion
 
+        #region OnClick_SaveAllText
         private void OnClick_SaveAllText(object sender, EventArgs e)
         {
             using (FolderBrowserDialog dialog = new FolderBrowserDialog())
@@ -705,7 +708,9 @@ namespace UoFiddler.Controls.UserControls
                     MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
             }
         }
+        #endregion
 
+        #region OnClick_SaveAllUOA
         private void OnClick_SaveAllUOA(object sender, EventArgs e)
         {
             using (FolderBrowserDialog dialog = new FolderBrowserDialog())
@@ -738,7 +743,9 @@ namespace UoFiddler.Controls.UserControls
                     MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
             }
         }
+        #endregion
 
+        #region OnClick_SaveAllWSC
         private void OnClick_SaveAllWSC(object sender, EventArgs e)
         {
             using (FolderBrowserDialog dialog = new FolderBrowserDialog())
@@ -771,7 +778,9 @@ namespace UoFiddler.Controls.UserControls
                     MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
             }
         }
+        #endregion
 
+        #region OnClick_SaveAllCSV
         private void OnClick_SaveAllCSV(object sender, EventArgs e)
         {
             using (FolderBrowserDialog dialog = new FolderBrowserDialog())
@@ -804,7 +813,9 @@ namespace UoFiddler.Controls.UserControls
                     MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
             }
         }
+        #endregion
 
+        #region OnClick_SaveAllUox3
         private void OnClick_SaveAllUox3(object sender, EventArgs e)
         {
             using (FolderBrowserDialog dialog = new FolderBrowserDialog())
@@ -837,7 +848,9 @@ namespace UoFiddler.Controls.UserControls
                     MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
             }
         }
+        #endregion
 
+        #region OnExportCsvFile
         private void OnExportCsvFile(object sender, EventArgs e)
         {
             if (TreeViewMulti.SelectedNode == null)
@@ -859,7 +872,9 @@ namespace UoFiddler.Controls.UserControls
             MessageBox.Show($"Multi saved to {fileName}", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information,
                 MessageBoxDefaultButton.Button1);
         }
+        #endregion
 
+        #region OnExportUox3File
         private void OnExportUox3File(object sender, EventArgs e)
         {
             if (TreeViewMulti.SelectedNode == null)
@@ -881,7 +896,9 @@ namespace UoFiddler.Controls.UserControls
             MessageBox.Show($"Multi saved to {fileName}", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information,
                 MessageBoxDefaultButton.Button1);
         }
+        #endregion
 
+        #region ChangeBackgroundColorToolStripMenuItem
         private void ChangeBackgroundColorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (colorDialog.ShowDialog() != DialogResult.OK)
@@ -892,11 +909,14 @@ namespace UoFiddler.Controls.UserControls
             _backgroundImageColor = colorDialog.Color;
             MultiPictureBox.BackColor = _backgroundImageColor;
         }
+        #endregion
 
+        #region UseTransparencyForPNGToolStripMenuItem
         private void UseTransparencyForPNGToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
         {
             _useTransparencyForPng = UseTransparencyForPNGToolStripMenuItem.Checked;
         }
+        #endregion
 
         #region Edit
 
