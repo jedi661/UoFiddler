@@ -24,6 +24,9 @@
 		<TreatWarningsAsErrors>False</TreatWarningsAsErrors>
 	</PropertyGroup>
 	<ItemGroup>
+		<Compile Update="ConverterMultiTextPluginBase.cs">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Compile>
 		<Compile Update="Forms\AdminToolForm.cs" />
 		<Compile Update="Forms\AdminToolForm.Designer.cs">
 			<DependentUpon>AdminToolForm.cs</DependentUpon>
