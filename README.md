@@ -4,6 +4,9 @@
 
 UOFiddler based on Ultima SDK it's a tool to view and alter almost every UO 2D client file. Source code is released under the Beerware license.
 
+Version : 4.11.27
+- Update to net8.
+
 ## Changelog
 Version : 4.11.26
 - Load Menu : Saves the last selected profile, reselecting it upon startup
