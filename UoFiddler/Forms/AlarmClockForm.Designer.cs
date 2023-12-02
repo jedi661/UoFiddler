@@ -113,9 +113,9 @@ namespace UoFiddler.Forms
             // 
             // snoozeButton
             // 
-            snoozeButton.Location = new System.Drawing.Point(91, 86);
+            snoozeButton.Location = new System.Drawing.Point(81, 86);
             snoozeButton.Name = "snoozeButton";
-            snoozeButton.Size = new System.Drawing.Size(51, 23);
+            snoozeButton.Size = new System.Drawing.Size(61, 23);
             snoozeButton.TabIndex = 6;
             snoozeButton.Text = "5 min";
             snoozeButton.UseVisualStyleBackColor = true;
