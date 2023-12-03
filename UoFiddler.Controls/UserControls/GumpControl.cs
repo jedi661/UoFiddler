@@ -1592,5 +1592,19 @@ namespace UoFiddler.Controls.UserControls
             }
         }
         #endregion
+
+        #region PreviewKeyDown
+
+        private void listBox_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Next:  // PageDown
+                case Keys.Prior: // PageUp
+                    e.IsInputKey = true;
+                    break;
+            }
+        }
+        #endregion
     }
 }
