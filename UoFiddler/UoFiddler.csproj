@@ -198,6 +198,9 @@
 	  <None Update="Sound.wav">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
+	  <None Update="UOFiddlerHelp\Animations.html">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
 	  <None Update="UOFiddlerHelp\FileFormatsEnglisch.html">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>

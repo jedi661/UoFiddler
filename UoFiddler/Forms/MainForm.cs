@@ -1062,6 +1062,17 @@ namespace UoFiddler.Forms
         }
         #endregion
 
+        #region Animation Html
+        private void animationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (HelpDokuForm helpDokuForm = new HelpDokuForm())
+            {
+                helpDokuForm.FileName = "Animations.html";
+                helpDokuForm.ShowDialog();
+            }
+        }
+        #endregion
+
         #region About
         private void ToolStripMenuItemAbout_Click(object sender, EventArgs e)
         {
@@ -1474,6 +1485,6 @@ namespace UoFiddler.Forms
                 Clipboard.SetImage(bmp);
             }
         }
-        #endregion
+        #endregion        
     }
 }
