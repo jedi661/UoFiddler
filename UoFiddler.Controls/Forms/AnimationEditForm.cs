@@ -195,7 +195,8 @@ namespace UoFiddler.Controls.Forms
                                 continue;
                             }
 
-                            node.ForeColor = Color.Red;
+                            // If checkBoxIDBlue is checked, set the color to Blue. Otherwise, set it to Red.
+                            node.ForeColor = checkBoxIDBlue.Checked ? Color.Blue : Color.Red;
                         }
 
                         nodes[i] = node;

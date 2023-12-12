@@ -150,6 +150,7 @@
             ExportAllToVDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripStatusLabelVDAminInfo = new System.Windows.Forms.ToolStripStatusLabel();
             AnimationTimer = new System.Windows.Forms.Timer(components);
+            checkBoxIDBlue = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)MainSplitContainer).BeginInit();
             MainSplitContainer.Panel1.SuspendLayout();
             MainSplitContainer.Panel2.SuspendLayout();
@@ -363,14 +364,14 @@
             // toolStripTextBoxSearch
             // 
             toolStripTextBoxSearch.Name = "toolStripTextBoxSearch";
-            toolStripTextBoxSearch.Size = new System.Drawing.Size(100, 23);
+            toolStripTextBoxSearch.Size = new System.Drawing.Size(100, 25);
             toolStripTextBoxSearch.ToolTipText = "Search Animation";
             toolStripTextBoxSearch.TextChanged += toolStripTextBoxSearch_TextChanged;
             // 
             // ProgressBar
             // 
             ProgressBar.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-            ProgressBar.Location = new System.Drawing.Point(576, 628);
+            ProgressBar.Location = new System.Drawing.Point(575, 628);
             ProgressBar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             ProgressBar.Name = "ProgressBar";
             ProgressBar.Size = new System.Drawing.Size(197, 20);
@@ -391,6 +392,7 @@
             // 
             // FramePage
             // 
+            FramePage.Controls.Add(checkBoxIDBlue);
             FramePage.Controls.Add(ApplyButton);
             FramePage.Controls.Add(ColorBlueLabel);
             FramePage.Controls.Add(numericUpDown8);
@@ -1294,7 +1296,7 @@
             // SaveCoordinatesLabel5
             // 
             SaveCoordinatesLabel5.AutoSize = true;
-            SaveCoordinatesLabel5.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            SaveCoordinatesLabel5.Font = new System.Drawing.Font("Consolas", 8.25F);
             SaveCoordinatesLabel5.Location = new System.Drawing.Point(7, 114);
             SaveCoordinatesLabel5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             SaveCoordinatesLabel5.Name = "SaveCoordinatesLabel5";
@@ -1305,7 +1307,7 @@
             // SaveCoordinatesLabel4
             // 
             SaveCoordinatesLabel4.AutoSize = true;
-            SaveCoordinatesLabel4.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            SaveCoordinatesLabel4.Font = new System.Drawing.Font("Consolas", 8.25F);
             SaveCoordinatesLabel4.Location = new System.Drawing.Point(7, 97);
             SaveCoordinatesLabel4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             SaveCoordinatesLabel4.Name = "SaveCoordinatesLabel4";
@@ -1316,7 +1318,7 @@
             // SaveCoordinatesLabel3
             // 
             SaveCoordinatesLabel3.AutoSize = true;
-            SaveCoordinatesLabel3.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            SaveCoordinatesLabel3.Font = new System.Drawing.Font("Consolas", 8.25F);
             SaveCoordinatesLabel3.Location = new System.Drawing.Point(7, 80);
             SaveCoordinatesLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             SaveCoordinatesLabel3.Name = "SaveCoordinatesLabel3";
@@ -1327,7 +1329,7 @@
             // SaveCoordinatesLabel2
             // 
             SaveCoordinatesLabel2.AutoSize = true;
-            SaveCoordinatesLabel2.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            SaveCoordinatesLabel2.Font = new System.Drawing.Font("Consolas", 8.25F);
             SaveCoordinatesLabel2.Location = new System.Drawing.Point(7, 62);
             SaveCoordinatesLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             SaveCoordinatesLabel2.Name = "SaveCoordinatesLabel2";
@@ -1338,7 +1340,7 @@
             // SaveCoordinatesLabel1
             // 
             SaveCoordinatesLabel1.AutoSize = true;
-            SaveCoordinatesLabel1.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            SaveCoordinatesLabel1.Font = new System.Drawing.Font("Consolas", 8.25F);
             SaveCoordinatesLabel1.Location = new System.Drawing.Point(7, 45);
             SaveCoordinatesLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             SaveCoordinatesLabel1.Name = "SaveCoordinatesLabel1";
@@ -1377,7 +1379,7 @@
             // 
             DirectionTrackBar.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
             DirectionTrackBar.AutoSize = false;
-            DirectionTrackBar.Location = new System.Drawing.Point(780, 626);
+            DirectionTrackBar.Location = new System.Drawing.Point(779, 626);
             DirectionTrackBar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             DirectionTrackBar.Maximum = 4;
             DirectionTrackBar.Name = "DirectionTrackBar";
@@ -1438,6 +1440,18 @@
             // AnimationTimer
             // 
             AnimationTimer.Tick += AnimationTimer_Tick;
+            // 
+            // checkBoxIDBlue
+            // 
+            checkBoxIDBlue.AutoSize = true;
+            checkBoxIDBlue.Checked = true;
+            checkBoxIDBlue.CheckState = System.Windows.Forms.CheckState.Checked;
+            checkBoxIDBlue.Location = new System.Drawing.Point(682, 5);
+            checkBoxIDBlue.Name = "checkBoxIDBlue";
+            checkBoxIDBlue.Size = new System.Drawing.Size(49, 19);
+            checkBoxIDBlue.TabIndex = 26;
+            checkBoxIDBlue.Text = "Blue";
+            checkBoxIDBlue.UseVisualStyleBackColor = true;
             // 
             // AnimationEditForm
             // 
@@ -1625,5 +1639,6 @@
         private System.Windows.Forms.ToolStripMenuItem showToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelVDAminInfo;
         private System.Windows.Forms.ToolStripTextBox toolStripTextBoxSearch;
+        private System.Windows.Forms.CheckBox checkBoxIDBlue;
     }
 }
