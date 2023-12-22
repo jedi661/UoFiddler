@@ -1098,6 +1098,12 @@ namespace UoFiddler.Controls.UserControls
             {
                 _scrolling = true;
             }
+            // Check if the Ctrl+F3 key combination has been pressed
+            else if (e.Control && e.KeyCode == Keys.F3)
+            {
+                // Call the searchByNameToolStripButton_Click method
+                searchByNameToolStripButton_Click(sender, e);
+            }
         }
 
         private void ItemsTileView_KeyUp(object sender, KeyEventArgs e)
