@@ -8,8 +8,8 @@ Version : 4.12.1
 - Implemented copying multiple graphics to the clipboard with Ctrl+X
 - Add Strg+F3 Search
 - Add ParticelGreyHueShadow and ParticelGreyHue CheckBox into TextureCutter
-- Add Items ParticelGreyHueShadow
-- Add Items ParticelGreyHueShadow Colord Dialog
+- Add Items ParticelGrayHueShadow
+- Add Items ParticelGrayHueShadow Colord Dialog
 - Add Checkbox ParticelGray
 
 Version : 4.12.0
