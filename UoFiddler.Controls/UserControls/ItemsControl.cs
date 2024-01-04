@@ -1681,6 +1681,7 @@ namespace UoFiddler.Controls.UserControls
         }
         #endregion
 
+        #region Paricle Gray Shadow
         private void particleGraylToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Überprüfen, ob ein Bild vorhanden ist
@@ -1782,7 +1783,7 @@ namespace UoFiddler.Controls.UserControls
                 particleGraylToolStripMenuItem_Click(null, null);
             }
         }
-
+        #endregion
 
         #region Particle Gray ColorDialog
         private Color selectedColor = Color.Blue; // Standardfarbe
