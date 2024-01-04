@@ -44,9 +44,13 @@ namespace UoFiddler.Controls.UserControls
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ItemsControl));
             splitContainer2 = new SplitContainer();
+            chkApplyColorChange = new CheckBox();
             DetailPictureBox = new PictureBox();
             DetailPictureBoxContextMenuStrip = new ContextMenuStrip(components);
             changeBackgroundColorToolStripMenuItemDetail = new ToolStripMenuItem();
+            toolStripSeparator6 = new ToolStripSeparator();
+            particleGraylToolStripMenuItem = new ToolStripMenuItem();
+            particleGrayColorToolStripMenuItem = new ToolStripMenuItem();
             DetailTextBox = new RichTextBox();
             splitContainer1 = new SplitContainer();
             ItemsTileView = new TileView.TileViewControl();
@@ -128,6 +132,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             // splitContainer2.Panel1
             // 
+            splitContainer2.Panel1.Controls.Add(chkApplyColorChange);
             splitContainer2.Panel1.Controls.Add(DetailPictureBox);
             // 
             // splitContainer2.Panel2
@@ -137,6 +142,17 @@ namespace UoFiddler.Controls.UserControls
             splitContainer2.SplitterDistance = 196;
             splitContainer2.SplitterWidth = 5;
             splitContainer2.TabIndex = 0;
+            // 
+            // chkApplyColorChange
+            // 
+            chkApplyColorChange.AutoSize = true;
+            chkApplyColorChange.Location = new System.Drawing.Point(4, 6);
+            chkApplyColorChange.Name = "chkApplyColorChange";
+            chkApplyColorChange.Size = new System.Drawing.Size(98, 19);
+            chkApplyColorChange.TabIndex = 1;
+            chkApplyColorChange.Text = "Particele Gray";
+            chkApplyColorChange.UseVisualStyleBackColor = true;
+            chkApplyColorChange.CheckedChanged += chkApplyColorChange_CheckedChanged;
             // 
             // DetailPictureBox
             // 
@@ -151,16 +167,41 @@ namespace UoFiddler.Controls.UserControls
             // 
             // DetailPictureBoxContextMenuStrip
             // 
-            DetailPictureBoxContextMenuStrip.Items.AddRange(new ToolStripItem[] { changeBackgroundColorToolStripMenuItemDetail });
+            DetailPictureBoxContextMenuStrip.Items.AddRange(new ToolStripItem[] { changeBackgroundColorToolStripMenuItemDetail, toolStripSeparator6, particleGraylToolStripMenuItem, particleGrayColorToolStripMenuItem });
             DetailPictureBoxContextMenuStrip.Name = "contextMenuStrip2";
-            DetailPictureBoxContextMenuStrip.Size = new System.Drawing.Size(213, 26);
+            DetailPictureBoxContextMenuStrip.Size = new System.Drawing.Size(213, 98);
             // 
             // changeBackgroundColorToolStripMenuItemDetail
             // 
+            changeBackgroundColorToolStripMenuItemDetail.Image = Properties.Resources.colordialog_background;
             changeBackgroundColorToolStripMenuItemDetail.Name = "changeBackgroundColorToolStripMenuItemDetail";
             changeBackgroundColorToolStripMenuItemDetail.Size = new System.Drawing.Size(212, 22);
             changeBackgroundColorToolStripMenuItemDetail.Text = "Change background color";
+            changeBackgroundColorToolStripMenuItemDetail.ToolTipText = "Color Dialog for Background Display";
             changeBackgroundColorToolStripMenuItemDetail.Click += ChangeBackgroundColorToolStripMenuItemDetail_Click;
+            // 
+            // toolStripSeparator6
+            // 
+            toolStripSeparator6.Name = "toolStripSeparator6";
+            toolStripSeparator6.Size = new System.Drawing.Size(209, 6);
+            // 
+            // particleGraylToolStripMenuItem
+            // 
+            particleGraylToolStripMenuItem.Image = Properties.Resources.particle_gray_hue;
+            particleGraylToolStripMenuItem.Name = "particleGraylToolStripMenuItem";
+            particleGraylToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            particleGraylToolStripMenuItem.Text = "Particle Gray";
+            particleGraylToolStripMenuItem.ToolTipText = "Displays the colors that can be used for in-game coloring.";
+            particleGraylToolStripMenuItem.Click += particleGraylToolStripMenuItem_Click;
+            // 
+            // particleGrayColorToolStripMenuItem
+            // 
+            particleGrayColorToolStripMenuItem.Image = Properties.Resources.colordialog;
+            particleGrayColorToolStripMenuItem.Name = "particleGrayColorToolStripMenuItem";
+            particleGrayColorToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            particleGrayColorToolStripMenuItem.Text = "Particle Gray Color";
+            particleGrayColorToolStripMenuItem.ToolTipText = "Color Dialog for Particle Gray";
+            particleGrayColorToolStripMenuItem.Click += particleGrayColorToolStripMenuItem_Click;
             // 
             // DetailTextBox
             // 
@@ -225,7 +266,7 @@ namespace UoFiddler.Controls.UserControls
             // 
             TileViewContextMenuStrip.Items.AddRange(new ToolStripItem[] { showFreeSlotsToolStripMenuItem, findNextFreeSlotToolStripMenuItem, ChangeBackgroundColorToolStripMenuItem, toolStripSeparator3, selectInTileDataTabToolStripMenuItem, selectInRadarColorTabToolStripMenuItem, SelectIDToHexToolStripMenuItem, selectInGumpsTabMaleToolStripMenuItem, selectInGumpsTabFemaleToolStripMenuItem, toolStripSeparator2, extractToolStripMenuItem, replaceToolStripMenuItem, replaceStartingFromToolStripMenuItem, removeToolStripMenuItem, insertAtToolStripMenuItem, imageSwapToolStripMenuItem, toolStripSeparator5, mirrorToolStripMenuItem, toolStripSeparator1, copyToolStripMenuItem, importToolStripclipboardMenuItem, toolStripSeparator4, saveToolStripMenuItem });
             TileViewContextMenuStrip.Name = "contextMenuStrip1";
-            TileViewContextMenuStrip.Size = new System.Drawing.Size(213, 452);
+            TileViewContextMenuStrip.Size = new System.Drawing.Size(213, 430);
             TileViewContextMenuStrip.Opening += TileViewContextMenuStrip_Opening;
             // 
             // showFreeSlotsToolStripMenuItem
@@ -663,6 +704,7 @@ namespace UoFiddler.Controls.UserControls
             Size = new System.Drawing.Size(758, 400);
             Load += OnLoad;
             splitContainer2.Panel1.ResumeLayout(false);
+            splitContainer2.Panel1.PerformLayout();
             splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer2).EndInit();
             splitContainer2.ResumeLayout(false);
@@ -743,5 +785,9 @@ namespace UoFiddler.Controls.UserControls
         private ToolStripMenuItem imageSwapToolStripMenuItem;
         private ToolStripButton ReverseSearchToolStripButton;
         private ToolStripMenuItem selectInGumpsTabMaleToolStripMenuItem;
+        private ToolStripMenuItem particleGraylToolStripMenuItem;
+        private CheckBox chkApplyColorChange;
+        private ToolStripMenuItem particleGrayColorToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator6;
     }
 }
