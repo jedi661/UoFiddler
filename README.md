@@ -10,7 +10,7 @@ Version : 4.12.1
 - Add ParticelGreyHueShadow and ParticelGreyHue CheckBox into TextureCutter
 - Add Items ParticelGreyHueShadow
 - Add Items ParticelGreyHueShadow Colord Dialog
-- Add Checkbox ParticelGrey
+- Add Checkbox ParticelGray
 
 Version : 4.12.0
 - Update to net8.
