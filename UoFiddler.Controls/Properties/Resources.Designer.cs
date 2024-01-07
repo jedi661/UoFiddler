@@ -233,6 +233,26 @@ namespace UoFiddler.Controls.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap diamand_ {
+            get {
+                object obj = ResourceManager.GetObject("diamand-", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap draw_rhombus {
+            get {
+                object obj = ResourceManager.GetObject("draw-rhombus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap Edit {
             get {
                 object obj = ResourceManager.GetObject("Edit", resourceCulture);
@@ -516,6 +536,16 @@ namespace UoFiddler.Controls.Properties {
         public static System.Drawing.Bitmap particle_gray_hue {
             get {
                 object obj = ResourceManager.GetObject("particle-gray-hue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap rasterpink_png {
+            get {
+                object obj = ResourceManager.GetObject("rasterpink_png", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -51,6 +51,12 @@ namespace UoFiddler.Controls.UserControls
             toolStripSeparator6 = new ToolStripSeparator();
             particleGraylToolStripMenuItem = new ToolStripMenuItem();
             particleGrayColorToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator7 = new ToolStripSeparator();
+            drawRhombusToolStripMenuItem = new ToolStripMenuItem();
+            gridPictureToolStripMenuItem = new ToolStripMenuItem();
+            SelectColorToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator8 = new ToolStripSeparator();
+            copyClipboardToolStripMenuItem = new ToolStripMenuItem();
             DetailTextBox = new RichTextBox();
             splitContainer1 = new SplitContainer();
             ItemsTileView = new TileView.TileViewControl();
@@ -162,14 +168,15 @@ namespace UoFiddler.Controls.UserControls
             DetailPictureBox.Margin = new Padding(4, 3, 4, 3);
             DetailPictureBox.Name = "DetailPictureBox";
             DetailPictureBox.Size = new System.Drawing.Size(194, 196);
+            DetailPictureBox.SizeMode = PictureBoxSizeMode.CenterImage;
             DetailPictureBox.TabIndex = 0;
             DetailPictureBox.TabStop = false;
             // 
             // DetailPictureBoxContextMenuStrip
             // 
-            DetailPictureBoxContextMenuStrip.Items.AddRange(new ToolStripItem[] { changeBackgroundColorToolStripMenuItemDetail, toolStripSeparator6, particleGraylToolStripMenuItem, particleGrayColorToolStripMenuItem });
+            DetailPictureBoxContextMenuStrip.Items.AddRange(new ToolStripItem[] { changeBackgroundColorToolStripMenuItemDetail, toolStripSeparator6, particleGraylToolStripMenuItem, particleGrayColorToolStripMenuItem, toolStripSeparator7, drawRhombusToolStripMenuItem, gridPictureToolStripMenuItem, SelectColorToolStripMenuItem, toolStripSeparator8, copyClipboardToolStripMenuItem });
             DetailPictureBoxContextMenuStrip.Name = "contextMenuStrip2";
-            DetailPictureBoxContextMenuStrip.Size = new System.Drawing.Size(213, 98);
+            DetailPictureBoxContextMenuStrip.Size = new System.Drawing.Size(213, 176);
             // 
             // changeBackgroundColorToolStripMenuItemDetail
             // 
@@ -202,6 +209,52 @@ namespace UoFiddler.Controls.UserControls
             particleGrayColorToolStripMenuItem.Text = "Particle Gray Color";
             particleGrayColorToolStripMenuItem.ToolTipText = "Color Dialog for Particle Gray";
             particleGrayColorToolStripMenuItem.Click += particleGrayColorToolStripMenuItem_Click;
+            // 
+            // toolStripSeparator7
+            // 
+            toolStripSeparator7.Name = "toolStripSeparator7";
+            toolStripSeparator7.Size = new System.Drawing.Size(209, 6);
+            // 
+            // drawRhombusToolStripMenuItem
+            // 
+            drawRhombusToolStripMenuItem.Image = Properties.Resources.diamand_;
+            drawRhombusToolStripMenuItem.Name = "drawRhombusToolStripMenuItem";
+            drawRhombusToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            drawRhombusToolStripMenuItem.Text = "Draw Rhombus";
+            drawRhombusToolStripMenuItem.ToolTipText = "Draws a diamond shape on the image.";
+            drawRhombusToolStripMenuItem.Click += drawRhombusToolStripMenuItem_Click;
+            // 
+            // gridPictureToolStripMenuItem
+            // 
+            gridPictureToolStripMenuItem.Image = Properties.Resources.draw_rhombus;
+            gridPictureToolStripMenuItem.Name = "gridPictureToolStripMenuItem";
+            gridPictureToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            gridPictureToolStripMenuItem.Text = "Grid Picture";
+            gridPictureToolStripMenuItem.ToolTipText = "Create the grid picture.";
+            gridPictureToolStripMenuItem.Click += gridPictureToolStripMenuItem_Click;
+            // 
+            // SelectColorToolStripMenuItem
+            // 
+            SelectColorToolStripMenuItem.Image = Properties.Resources.Color;
+            SelectColorToolStripMenuItem.Name = "SelectColorToolStripMenuItem";
+            SelectColorToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            SelectColorToolStripMenuItem.Text = "Grid Color";
+            SelectColorToolStripMenuItem.ToolTipText = "Change the color of the grid.";
+            SelectColorToolStripMenuItem.Click += SelectColorToolStripMenuItem_Click;
+            // 
+            // toolStripSeparator8
+            // 
+            toolStripSeparator8.Name = "toolStripSeparator8";
+            toolStripSeparator8.Size = new System.Drawing.Size(209, 6);
+            // 
+            // copyClipboardToolStripMenuItem
+            // 
+            copyClipboardToolStripMenuItem.Image = Properties.Resources.Copy;
+            copyClipboardToolStripMenuItem.Name = "copyClipboardToolStripMenuItem";
+            copyClipboardToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            copyClipboardToolStripMenuItem.Text = "Copy Clipboard";
+            copyClipboardToolStripMenuItem.ToolTipText = "Copy the image to the clipboard.";
+            copyClipboardToolStripMenuItem.Click += copyClipboardToolStripMenuItem_Click;
             // 
             // DetailTextBox
             // 
@@ -789,5 +842,11 @@ namespace UoFiddler.Controls.UserControls
         private CheckBox chkApplyColorChange;
         private ToolStripMenuItem particleGrayColorToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator6;
+        private ToolStripSeparator toolStripSeparator7;
+        private ToolStripMenuItem drawRhombusToolStripMenuItem;
+        private ToolStripMenuItem gridPictureToolStripMenuItem;
+        private ToolStripMenuItem SelectColorToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator8;
+        private ToolStripMenuItem copyClipboardToolStripMenuItem;
     }
 }

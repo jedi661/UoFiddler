@@ -169,6 +169,12 @@
   <data name="Delete05" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Delete05.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="diamand-" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\diamand-.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="draw-rhombus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\draw-rhombus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -255,6 +261,9 @@
   </data>
   <data name="particle-gray-hue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\particle-gray-hue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="rasterpink_png" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\rasterpink_png.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="reload" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\reload.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

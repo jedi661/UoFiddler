@@ -11,6 +11,10 @@ Version : 4.12.1
 - Add Items ParticelGrayHueShadow
 - Add Items ParticelGrayHueShadow Colord Dialog
 - Add Checkbox ParticelGray
+- Add Items Rhombus
+- Add Items Grid Image
+- Add Items Grid Color
+- Add Items Copy Clipboard - DetailPictureBox
 
 Version : 4.12.0
 - Update to net8.
