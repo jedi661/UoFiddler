@@ -243,6 +243,16 @@ namespace UoFiddler.Controls.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap disk_load_image {
+            get {
+                object obj = ResourceManager.GetObject("disk-load-image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap draw_rhombus {
             get {
                 object obj = ResourceManager.GetObject("draw-rhombus", resourceCulture);
@@ -803,6 +813,16 @@ namespace UoFiddler.Controls.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap texture_form_tiles {
+            get {
+                object obj = ResourceManager.GetObject("texture-form-tiles", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap tokuno_map {
             get {
                 object obj = ResourceManager.GetObject("tokuno-map", resourceCulture);
@@ -836,6 +856,36 @@ namespace UoFiddler.Controls.Properties {
         public static System.Drawing.Bitmap Zeichnen {
             get {
                 object obj = ResourceManager.GetObject("Zeichnen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap zoom_image_into_tile {
+            get {
+                object obj = ResourceManager.GetObject("zoom-image-into-tile", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap zoom_image_into_tile_1_ {
+            get {
+                object obj = ResourceManager.GetObject("zoom-image-into-tile(1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap zoom_image_into_tile_2_ {
+            get {
+                object obj = ResourceManager.GetObject("zoom-image-into-tile(2)", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
