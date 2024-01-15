@@ -49,6 +49,7 @@ namespace UoFiddler.Controls.Forms
             importToPrewiewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            mirrorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             btBackward = new System.Windows.Forms.Button();
             btForward = new System.Windows.Forms.Button();
             lbTextureSize = new System.Windows.Forms.Label();
@@ -81,7 +82,7 @@ namespace UoFiddler.Controls.Forms
             tbColorSet = new System.Windows.Forms.TextBox();
             btColorDialog = new System.Windows.Forms.Button();
             btCopyColorCode = new System.Windows.Forms.Button();
-            mirrorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)pictureBoxTexture).BeginInit();
             contextMenuStripTexturen.SuspendLayout();
             panelTexture.SuspendLayout();
@@ -102,9 +103,9 @@ namespace UoFiddler.Controls.Forms
             // 
             // contextMenuStripTexturen
             // 
-            contextMenuStripTexturen.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { clipboardToolStripMenuItem, importToolStripMenuItem, toolStripSeparator1, importToPrewiewToolStripMenuItem, toolStripSeparator2, saveToolStripMenuItem, mirrorToolStripMenuItem });
+            contextMenuStripTexturen.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { clipboardToolStripMenuItem, importToolStripMenuItem, toolStripSeparator1, importToPrewiewToolStripMenuItem, toolStripSeparator2, mirrorToolStripMenuItem, toolStripSeparator3, saveToolStripMenuItem });
             contextMenuStripTexturen.Name = "contextMenuStripTexturen";
-            contextMenuStripTexturen.Size = new System.Drawing.Size(181, 148);
+            contextMenuStripTexturen.Size = new System.Drawing.Size(181, 154);
             // 
             // clipboardToolStripMenuItem
             // 
@@ -151,6 +152,15 @@ namespace UoFiddler.Controls.Forms
             saveToolStripMenuItem.Text = "Save";
             saveToolStripMenuItem.ToolTipText = "Save the image to the target directory.";
             saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
+            // 
+            // mirrorToolStripMenuItem
+            // 
+            mirrorToolStripMenuItem.Image = Properties.Resources.Mirror;
+            mirrorToolStripMenuItem.Name = "mirrorToolStripMenuItem";
+            mirrorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            mirrorToolStripMenuItem.Text = "Mirror";
+            mirrorToolStripMenuItem.ToolTipText = "Mirror Image";
+            mirrorToolStripMenuItem.Click += mirrorToolStripMenuItem_Click;
             // 
             // btBackward
             // 
@@ -483,13 +493,10 @@ namespace UoFiddler.Controls.Forms
             btCopyColorCode.UseVisualStyleBackColor = true;
             btCopyColorCode.Click += btCopyColorCode_Click;
             // 
-            // mirrorToolStripMenuItem
+            // toolStripSeparator3
             // 
-            mirrorToolStripMenuItem.Name = "mirrorToolStripMenuItem";
-            mirrorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            mirrorToolStripMenuItem.Text = "Mirror";
-            mirrorToolStripMenuItem.ToolTipText = "Mirror Image";
-            mirrorToolStripMenuItem.Click += mirrorToolStripMenuItem_Click;
+            toolStripSeparator3.Name = "toolStripSeparator3";
+            toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
             // 
             // TextureWindowForm
             // 
@@ -566,5 +573,6 @@ namespace UoFiddler.Controls.Forms
         private System.Windows.Forms.Button btImageRight;
         private System.Windows.Forms.Button btImageLeft;
         private System.Windows.Forms.ToolStripMenuItem mirrorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
     }
 }
