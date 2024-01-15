@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using UoFiddler.Controls.UserControls;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrayNotify;
 
 namespace UoFiddler.Controls.Forms
 {
@@ -814,6 +815,30 @@ namespace UoFiddler.Controls.Forms
             else
             {
                 MessageBox.Show("There is no image to mirror.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        #endregion
+
+        #region btBackground
+        private int _clickCount = 0;
+        private void btBackground_Click(object sender, EventArgs e)
+        {
+            _clickCount++;
+
+            switch (_clickCount % 3)
+            {
+                case 0: // Default color
+                    pictureBoxPreview.BackColor = SystemColors.Control;
+                    btBackground.Text = "Standard"; // Insert the original name of the button here
+                    break;
+                case 1: // Black
+                    pictureBoxPreview.BackColor = Color.Black;
+                    btBackground.Text = "Black";
+                    break;
+                case 2: // White
+                    pictureBoxPreview.BackColor = Color.White;
+                    btBackground.Text = "White";
+                    break;
             }
         }
         #endregion
