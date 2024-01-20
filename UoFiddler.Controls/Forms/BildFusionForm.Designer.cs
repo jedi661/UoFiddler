@@ -45,10 +45,17 @@ namespace UoFiddler.Controls.Forms
             pictureBox256x256 = new System.Windows.Forms.PictureBox();
             comboBoxRubberStamp = new System.Windows.Forms.ComboBox();
             panelPixturebox = new System.Windows.Forms.Panel();
+            panel1 = new System.Windows.Forms.Panel();
+            btCutTexture = new System.Windows.Forms.Button();
+            btLoadForeground = new System.Windows.Forms.Button();
+            btLoadTexture = new System.Windows.Forms.Button();
+            BtTextureCut = new System.Windows.Forms.Button();
             lb256x256 = new System.Windows.Forms.Label();
             lb128x128 = new System.Windows.Forms.Label();
             lb64x64 = new System.Windows.Forms.Label();
+            btClipboard = new System.Windows.Forms.Button();
             panelMenu = new System.Windows.Forms.Panel();
+            btDirSaveOrder = new System.Windows.Forms.Button();
             btViewLoadBackground = new System.Windows.Forms.Button();
             lb2to1Load = new System.Windows.Forms.Label();
             lbSingleLoad = new System.Windows.Forms.Label();
@@ -83,14 +90,18 @@ namespace UoFiddler.Controls.Forms
             lbNr = new System.Windows.Forms.Label();
             lbColors = new System.Windows.Forms.Label();
             lbFading = new System.Windows.Forms.Label();
-            btDirSaveOrder = new System.Windows.Forms.Button();
+            trackBarSharp = new System.Windows.Forms.TrackBar();
+            lbSharp = new System.Windows.Forms.Label();
+            label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox64x64).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox128x128).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox256x256).BeginInit();
             panelPixturebox.SuspendLayout();
+            panel1.SuspendLayout();
             panelMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)trackBarFading).BeginInit();
             ((System.ComponentModel.ISupportInitialize)trackBarColor).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)trackBarSharp).BeginInit();
             SuspendLayout();
             // 
             // pictureBox64x64
@@ -137,6 +148,8 @@ namespace UoFiddler.Controls.Forms
             // panelPixturebox
             // 
             panelPixturebox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            panelPixturebox.Controls.Add(panel1);
+            panelPixturebox.Controls.Add(BtTextureCut);
             panelPixturebox.Controls.Add(lb256x256);
             panelPixturebox.Controls.Add(lb128x128);
             panelPixturebox.Controls.Add(lb64x64);
@@ -145,8 +158,59 @@ namespace UoFiddler.Controls.Forms
             panelPixturebox.Controls.Add(pictureBox128x128);
             panelPixturebox.Location = new System.Drawing.Point(236, 79);
             panelPixturebox.Name = "panelPixturebox";
-            panelPixturebox.Size = new System.Drawing.Size(552, 343);
+            panelPixturebox.Size = new System.Drawing.Size(552, 385);
             panelPixturebox.TabIndex = 6;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(label2);
+            panel1.Controls.Add(btCutTexture);
+            panel1.Controls.Add(btLoadForeground);
+            panel1.Controls.Add(btLoadTexture);
+            panel1.Location = new System.Drawing.Point(6, 232);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(134, 148);
+            panel1.TabIndex = 10;
+            // 
+            // btCutTexture
+            // 
+            btCutTexture.Location = new System.Drawing.Point(9, 119);
+            btCutTexture.Name = "btCutTexture";
+            btCutTexture.Size = new System.Drawing.Size(111, 23);
+            btCutTexture.TabIndex = 7;
+            btCutTexture.Text = "Make Texture";
+            btCutTexture.UseVisualStyleBackColor = true;
+            btCutTexture.Click += btCutTexture_Click;
+            // 
+            // btLoadForeground
+            // 
+            btLoadForeground.Location = new System.Drawing.Point(9, 90);
+            btLoadForeground.Name = "btLoadForeground";
+            btLoadForeground.Size = new System.Drawing.Size(111, 23);
+            btLoadForeground.TabIndex = 9;
+            btLoadForeground.Text = "Load Foreground";
+            btLoadForeground.UseVisualStyleBackColor = true;
+            btLoadForeground.Click += btLoadForeground_Click;
+            // 
+            // btLoadTexture
+            // 
+            btLoadTexture.Location = new System.Drawing.Point(9, 61);
+            btLoadTexture.Name = "btLoadTexture";
+            btLoadTexture.Size = new System.Drawing.Size(111, 23);
+            btLoadTexture.TabIndex = 8;
+            btLoadTexture.Text = "Load Backend";
+            btLoadTexture.UseVisualStyleBackColor = true;
+            btLoadTexture.Click += btLoadTexture_Click;
+            // 
+            // BtTextureCut
+            // 
+            BtTextureCut.Location = new System.Drawing.Point(17, 203);
+            BtTextureCut.Name = "BtTextureCut";
+            BtTextureCut.Size = new System.Drawing.Size(111, 23);
+            BtTextureCut.TabIndex = 6;
+            BtTextureCut.Text = "3 x Cut Texture";
+            BtTextureCut.UseVisualStyleBackColor = true;
+            BtTextureCut.Click += BtTextureCut_Click;
             // 
             // lb256x256
             // 
@@ -175,9 +239,20 @@ namespace UoFiddler.Controls.Forms
             lb64x64.TabIndex = 3;
             lb64x64.Text = "64x64";
             // 
+            // btClipboard
+            // 
+            btClipboard.Location = new System.Drawing.Point(11, 417);
+            btClipboard.Name = "btClipboard";
+            btClipboard.Size = new System.Drawing.Size(84, 23);
+            btClipboard.TabIndex = 6;
+            btClipboard.Text = "Clipboard";
+            btClipboard.UseVisualStyleBackColor = true;
+            btClipboard.Click += btClipboard_Click;
+            // 
             // panelMenu
             // 
             panelMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            panelMenu.Controls.Add(btClipboard);
             panelMenu.Controls.Add(btDirSaveOrder);
             panelMenu.Controls.Add(btViewLoadBackground);
             panelMenu.Controls.Add(lb2to1Load);
@@ -210,8 +285,18 @@ namespace UoFiddler.Controls.Forms
             panelMenu.Controls.Add(comboBoxRubberStamp);
             panelMenu.Location = new System.Drawing.Point(12, 12);
             panelMenu.Name = "panelMenu";
-            panelMenu.Size = new System.Drawing.Size(218, 410);
+            panelMenu.Size = new System.Drawing.Size(218, 452);
             panelMenu.TabIndex = 7;
+            // 
+            // btDirSaveOrder
+            // 
+            btDirSaveOrder.Location = new System.Drawing.Point(108, 418);
+            btDirSaveOrder.Name = "btDirSaveOrder";
+            btDirSaveOrder.Size = new System.Drawing.Size(46, 23);
+            btDirSaveOrder.TabIndex = 33;
+            btDirSaveOrder.Text = "Dir";
+            btDirSaveOrder.UseVisualStyleBackColor = true;
+            btDirSaveOrder.Click += btDirSaveOrder_Click;
             // 
             // btViewLoadBackground
             // 
@@ -280,7 +365,7 @@ namespace UoFiddler.Controls.Forms
             // 
             // btMirror
             // 
-            btMirror.Location = new System.Drawing.Point(11, 375);
+            btMirror.Location = new System.Drawing.Point(11, 388);
             btMirror.Name = "btMirror";
             btMirror.Size = new System.Drawing.Size(84, 23);
             btMirror.TabIndex = 23;
@@ -466,7 +551,7 @@ namespace UoFiddler.Controls.Forms
             // 
             // btSave64x64
             // 
-            btSave64x64.Location = new System.Drawing.Point(160, 375);
+            btSave64x64.Location = new System.Drawing.Point(160, 417);
             btSave64x64.Name = "btSave64x64";
             btSave64x64.Size = new System.Drawing.Size(43, 23);
             btSave64x64.TabIndex = 3;
@@ -542,21 +627,43 @@ namespace UoFiddler.Controls.Forms
             lbFading.TabIndex = 13;
             lbFading.Text = "Fading :";
             // 
-            // btDirSaveOrder
+            // trackBarSharp
             // 
-            btDirSaveOrder.Location = new System.Drawing.Point(108, 376);
-            btDirSaveOrder.Name = "btDirSaveOrder";
-            btDirSaveOrder.Size = new System.Drawing.Size(46, 23);
-            btDirSaveOrder.TabIndex = 33;
-            btDirSaveOrder.Text = "Dir";
-            btDirSaveOrder.UseVisualStyleBackColor = true;
-            btDirSaveOrder.Click += btDirSaveOrder_Click;
+            trackBarSharp.Location = new System.Drawing.Point(495, 17);
+            trackBarSharp.Maximum = 255;
+            trackBarSharp.Minimum = 1;
+            trackBarSharp.Name = "trackBarSharp";
+            trackBarSharp.Size = new System.Drawing.Size(104, 45);
+            trackBarSharp.TabIndex = 14;
+            trackBarSharp.TickStyle = System.Windows.Forms.TickStyle.Both;
+            trackBarSharp.Value = 1;
+            trackBarSharp.Scroll += trackBarSharp_ValueChanged;
+            // 
+            // lbSharp
+            // 
+            lbSharp.AutoSize = true;
+            lbSharp.Location = new System.Drawing.Point(495, 4);
+            lbSharp.Name = "lbSharp";
+            lbSharp.Size = new System.Drawing.Size(43, 15);
+            lbSharp.TabIndex = 15;
+            lbSharp.Text = "Sharp :";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(9, 13);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(118, 45);
+            label2.TabIndex = 10;
+            label2.Text = "White is transparent, \r\nand black represents \r\nthe transition.";
             // 
             // BildFusionForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(794, 434);
+            ClientSize = new System.Drawing.Size(794, 476);
+            Controls.Add(lbSharp);
+            Controls.Add(trackBarSharp);
             Controls.Add(lbFading);
             Controls.Add(lbColors);
             Controls.Add(lbNr);
@@ -574,10 +681,13 @@ namespace UoFiddler.Controls.Forms
             ((System.ComponentModel.ISupportInitialize)pictureBox256x256).EndInit();
             panelPixturebox.ResumeLayout(false);
             panelPixturebox.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             panelMenu.ResumeLayout(false);
             panelMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)trackBarFading).EndInit();
             ((System.ComponentModel.ISupportInitialize)trackBarColor).EndInit();
+            ((System.ComponentModel.ISupportInitialize)trackBarSharp).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -628,5 +738,14 @@ namespace UoFiddler.Controls.Forms
         private System.Windows.Forms.Label lb2to1Load;
         private System.Windows.Forms.Button btViewLoadBackground;
         private System.Windows.Forms.Button btDirSaveOrder;
+        private System.Windows.Forms.Button btClipboard;
+        private System.Windows.Forms.TrackBar trackBarSharp;
+        private System.Windows.Forms.Label lbSharp;
+        private System.Windows.Forms.Button BtTextureCut;
+        private System.Windows.Forms.Button btCutTexture;
+        private System.Windows.Forms.Button btLoadTexture;
+        private System.Windows.Forms.Button btLoadForeground;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label2;
     }
 }

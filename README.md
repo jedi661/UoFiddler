@@ -4,6 +4,10 @@
 
 UOFiddler based on Ultima SDK it's a tool to view and alter almost every UO 2D client file. Source code is released under the Beerware license.
 
+Version : 4.12.2
+- BildFusion Add Sharp , Clipboard, Texture Cut.
+- Make Texture, White is transparent, and black represents the transition.
+
 Version : 4.12.1
 - Implemented copying multiple graphics to the clipboard with Ctrl+X
 - Add Strg+F3 Search
