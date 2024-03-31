@@ -1760,7 +1760,7 @@ namespace UoFiddler.Controls.UserControls
             {
                 // Handling the case when there is no image...
                 // MessageBox.Show("No image was selected. Please select an image first.");
-            }            
+            }
         }
 
         private void chkApplyColorChange_CheckedChanged(object sender, EventArgs e)
@@ -1970,6 +1970,18 @@ namespace UoFiddler.Controls.UserControls
             }
 
             return bmp;
+        }
+        #endregion
+
+        #region TileViewContextMenuStrip_Closing
+        private void TileViewContextMenuStrip_Closing(object sender, ToolStripDropDownClosingEventArgs e)
+        {
+            // Check if any items are selected in the ItemsTileView
+            if (ItemsTileView.SelectedIndices.Count > 0)
+            {
+                // Set the focus to the first selected item
+                ItemsTileView.FocusIndex = ItemsTileView.SelectedIndices[0];
+            }
         }
         #endregion
     }
